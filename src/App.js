@@ -14,6 +14,7 @@ class App extends Component {
       <div>
       <Switch>
       <Route exact path="/" component={TragelPage} />
+      <Route exact path="/trip" component={Home} />
       <Route path="/first" component = {SubPage} />
       <Route path="/travel" component = {TragelPage}/>
       <Route path="/bottom" component = {Bottom} />
