@@ -4,14 +4,19 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "classname": "0.0.0",
+    "classnames": "^2.2.5",
     "fly": "^2.0.6",
+    "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.1",
     "react-dom": "^15.6.1",
+    "react-password-strength": "^2.0.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.10",
+    "react-toastify": "^1.7.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "validator": "^8.0.0"
@@ -21,5 +26,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "proxy": "http://localhost:3030"
 }

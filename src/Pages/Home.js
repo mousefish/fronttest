@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router'
-import SinUp from './SinUpForm'
-import {connect} from 'react-redux'
-import {userSignupRequest} from '../Actions/signupAction'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 class Home extends Component
 {
@@ -13,16 +11,21 @@ class Home extends Component
     this.state =
     {
       redirect :  false,
-      user: ''
+      user: '',
+      users: []
     }
   }
   onClick(e)
   {
-   this.setState(
-     {
-     redirect : true
-   }
-   )
+  // this.setState(
+    // {
+     //redirect : true
+   //}
+   //)
+   e.preventDefault();
+     axios.get('/users',).then(function(response){console.log('response',response.data);
+     this.setState({users: response.data});
+   }.bind(this));
 
   }
 
@@ -38,6 +41,9 @@ class Home extends Component
 
   render()
   {
+  const  listusers = this.state.users.map((data,i) =>{
+  return <li key={i}>{data.username}</li>
+});
     const {userSignupRequest} = this.props;
     const dataArray = this.props.data;
     return(
@@ -55,26 +61,19 @@ class Home extends Component
 </div>
 <button onClick={this.onClick.bind(this)} className="btn btn-primary">Transfer cash</button>
 </form>
-<SinUp userSignupRequest = {userSignupRequest} data = {dataArray}/>
+
+<ol>
+{listusers}
+</ol>
+
 </div>
     )
 
   }
 
 }
-Home.propTypes =
-{
- userSignupRequest: PropTypes.func.isRequired,
- data: PropTypes.array
- }
-
-function mapStateToProps(state)
-{
-  return{
-    data: state.getTestData.data
-  }
-}
 
 
 
-export default connect(mapStateToProps, {userSignupRequest})(Home);
+
+export default Home;
