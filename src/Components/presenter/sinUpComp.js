@@ -60,7 +60,7 @@ passwordChange(state)
       {
           console.log(response);
           toast.success("注册成功", options)
-          this.context.router.history.push('/');
+          //this.context.router.history.push('/');
       }
     ,(error)=>{
         toast.error("注册失败,请稍后再试", options)

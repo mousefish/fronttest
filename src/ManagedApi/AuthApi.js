@@ -8,7 +8,8 @@
 */
 
 //development setting, only when dev backend is available
-export default 
+export default
 {
-  SinUp: "/users/sinup "
+  SinUp: "/users/sinup ",
+  Login: "/users/login"
 }

@@ -55,3 +55,25 @@ export function sinUpValidation(data)
    isValid : isEmpty(errors)
  }
 }
+
+
+export function loginValidation(data)
+{
+  let errors={};
+
+ if(Validator.isEmpty(data.username))
+ {
+   errors.username = "this field is required";
+ }
+
+ if(Validator.isEmpty(data.password))
+ {
+   errors.password = "this field is required";
+ }
+
+
+ return{
+   errors,
+   isValid : isEmpty(errors)
+ }
+}
