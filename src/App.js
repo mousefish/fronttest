@@ -25,7 +25,7 @@ class App extends Component {
       <Route exact path="/trip" component={Home} />
       <Route exact path="/test" component={Travel} />
       <Route exact path="/tr/test" component={MyUploader}/>
-      <Route exact path="/maintest" component={CheckAuth(TestMain)} />
+      <Route exact path="/maintest" component={TestMain} />
     {/*unit test used below, production will check env.production to disable*/}
       <Route path="/unitsinuptest" component = {UnitSinupPage} />
       <Route path="/login" component = {LoginForm} />
