@@ -3710,7 +3710,9 @@ tbody .md-table-row--hover {
     background: rgba(245, 0, 87, 0.9); } }
 
 a:hover {
-  color: #e91e63; }
+  color: #e91e63;
+  text-decoration: none; }
 
 a:focus {
-  color: #e91e63; }
+  color: #e91e63;
+  text-decoration: none; }
