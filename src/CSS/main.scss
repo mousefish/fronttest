@@ -1,0 +1,16 @@
+@import 'globals';
+
+
+$md-bottom-navigation-max-width: 568px;
+$md-bottom-navigation-z-index: 3000;
+
+@include react-md-everything;
+
+
+a:hover{
+    color: $md-primary-color;
+}
+
+a:focus{
+    color: $md-primary-color;
+}
