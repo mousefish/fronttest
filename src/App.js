@@ -22,7 +22,7 @@ class App extends Component {
       <BrowserRouter>
       <div>
       <Switch>
-      <Route exact path="/" component={Travel} />
+      <Route exact path="/" component={TestMaterial} />
       <Route exact path="/trip" component={Home} />
       <Route exact path="/test" component={Travel} />
       <Route exact path="/tr/test" component={MyUploader}/>
