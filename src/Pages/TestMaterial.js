@@ -56,7 +56,7 @@ class TestMaterial extends Component
       return(
         <div>
         <div style={{maxWidth: 800, margin: 'auto',marginBottom:98}}>
-        <div style={{marginBottom:0, height:'10%'}}>
+        <div style={{marginBottom:10, height:'10%'}}>
         <BannerSlider />
         </div>
         <NowPlayingCard />
