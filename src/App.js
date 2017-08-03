@@ -11,6 +11,7 @@ import Travel from './Pages/Travel'
 import LoginForm from './Components/container/LoginForm'
 import TestMain from './Pages/TestMain'
 import CheckAuth from './Utlity/checkAuth'
+import TestMaterial from './Pages/TestMaterial'
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
       <Route exact path="/test" component={Travel} />
       <Route exact path="/tr/test" component={MyUploader}/>
       <Route exact path="/maintest" component={TestMain} />
+      <Route exact path="/testmaterial" component={TestMaterial} />
     {/*unit test used below, production will check env.production to disable*/}
       <Route path="/unitsinuptest" component = {UnitSinupPage} />
       <Route path="/login" component = {LoginForm} />

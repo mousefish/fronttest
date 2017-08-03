@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import { findDOMNode } from 'react-dom';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
 import BottomNavigation from 'react-md/lib/BottomNavigations';
 import '../CSS/main.css'
 import {Link} from 'react-router-dom'
@@ -24,6 +22,9 @@ const links = [{
   label: 'Favorites',
   iconChildren: 'favorite',
 }, {
+  label: 'Favorites',
+  iconChildren: 'favorite',
+},{
   label: 'Nearby',
   iconChildren: 'place',
 }];

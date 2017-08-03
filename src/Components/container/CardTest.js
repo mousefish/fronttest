@@ -7,7 +7,6 @@ import Media, { MediaOverlay } from 'react-md/lib/Media';
 import Avatar from 'react-md/lib/Avatars';
 import Button from 'react-md/lib/Buttons';
 
-
 const ExpandableMediaCard = () => (
   <div>
   <Card style={{ maxWidth: 700, marginBottom:20 }} className="md-block-centered">

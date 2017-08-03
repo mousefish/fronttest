@@ -1,10 +1,20 @@
 @import 'globals';
 
 
+@include react-md-colors-hover();
+@include react-md-accessibility;
+@include react-md-colors();
+@include react-md-overlays();
+@include react-md-buttons();
+
 $md-bottom-navigation-max-width: 568px;
 $md-bottom-navigation-z-index: 3000;
 
-@include react-md-everything;
+@include react-md-bottom-navigations-nav(false);
+
+@include react-md-bottom-navigations(false, true);
+
+@include react-md-theme-bottom-navigations-colored($md-white-base,$md-white-base,$md-bottom-navigation-shifting-ink-color);
 
 
 a:hover{
