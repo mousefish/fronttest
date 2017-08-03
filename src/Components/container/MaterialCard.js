@@ -94,92 +94,106 @@ class  NowPlayingCard extends Component
          </CardActions>
 </Card>
 
-      <Card className={classes.card}>
-      <div className={classes.cover}>
-        <img style={{width:'100%', height:'100%', objectFit:'fill'}} src={travel} alt="aa" />
-      </div>
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography type="headline">主题在这里</Typography>
-            <Typography type="subheading" color="secondary" style={{display:'inline-flex'}}>
-              发起人
-            </Typography><Chip label="美食达人" className={classes.chip} />
-            <Typography type="body1">
-              这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩,  这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩...
-            </Typography>
-            <br />
+<Card className={classes.card}>
+  <CardHeader
+    avatar={
+      <Avatar aria-label="Recipe" className={classes.avatar}>
+        W
+      </Avatar>
+    }
+    title="旧金山周边十日游"
+    subheader="出发日期: 2018-09-30"
+  />
+  <Typography type="headline" style={{float:'right', marginTop:-55, marginRight: 20}}>999元</Typography>
+  <CardMedia >
+    <img style={{width: '100%'}} src={travel} alt="Contemplative Reptile" />
+  </CardMedia>
+  <CardContent>
+    <Chip label="美食达人" className={classes.chip} /> <Chip label="完美导游" className={classes.chip} />
+    <Typography component="p" style={{marginTop:5}}>
+     这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩,  这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩...
+    </Typography>
+  </CardContent>
+  <CardActions disableActionSpacing>
+    <IconButton aria-label="Add to favorites">
+      <FavoriteIcon />
+    </IconButton>
+    <IconButton aria-label="Share">
+      <ShareIcon />
+    </IconButton>
+     <div className={classes.flexGrow} />
+     <Button raised color={green} className={classes.button}>
+ 详情
+</Button>
+    </CardActions>
+</Card>
+<Card className={classes.card}>
+  <CardHeader
+    avatar={
+      <Avatar aria-label="Recipe" className={classes.avatar}>
+        W
+      </Avatar>
+    }
+    title="旧金山周边十日游"
+    subheader="出发日期: 2018-09-30"
+  />
+  <Typography type="headline" style={{float:'right', marginTop:-55, marginRight: 20}}>999元</Typography>
+  <CardMedia >
+    <img style={{width: '100%'}} src={travel} alt="Contemplative Reptile" />
+  </CardMedia>
+  <CardContent>
+    <Chip label="美食达人" className={classes.chip} /> <Chip label="完美导游" className={classes.chip} />
+    <Typography component="p" style={{marginTop:5}}>
+     这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩,  这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩...
+    </Typography>
+  </CardContent>
+  <CardActions disableActionSpacing>
+    <IconButton aria-label="Add to favorites">
+      <FavoriteIcon />
+    </IconButton>
+    <IconButton aria-label="Share">
+      <ShareIcon />
+    </IconButton>
+     <div className={classes.flexGrow} />
+     <Button raised color={green} className={classes.button}>
+ 详情
+</Button>
+    </CardActions>
+</Card>
 
-            <Typography type="body2">
-              出发日期: 2019-01-01
-            </Typography>
-            <Typography type="body2">
-              价格: 999
-            </Typography>
-            <Button raised color={green} className={classes.button}>
-        详情
-      </Button>
-          </CardContent>
-        </div>
-
-      </Card>
-
-      <Card className={classes.card}>
-      <div className={classes.cover}>
-        <img style={{width:'100%', height:'100%', objectFit:'fill'}} src={travel} alt="aa" />
-      </div>
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography type="headline">主题在这里</Typography>
-            <Typography type="subheading" color="secondary" style={{display:'inline-flex'}}>
-              发起人
-            </Typography><Chip label="美食达人" className={classes.chip} />
-            <Typography type="body1">
-              这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩,  这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩...
-            </Typography>
-            <br />
-
-            <Typography type="body2">
-              出发日期: 2019-01-01
-            </Typography>
-            <Typography type="body2">
-              价格: 999
-            </Typography>
-            <Button raised color={green} className={classes.button}>
-        详情
-      </Button>
-          </CardContent>
-        </div>
-
-      </Card>
-
-      <Card className={classes.card}>
-      <div className={classes.cover}>
-        <img style={{width:'100%', height:'100%', objectFit:'fill'}} src={travel} alt="aa" />
-      </div>
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography type="headline">主题在这里</Typography>
-            <Typography type="subheading" color="secondary" style={{display:'inline-flex'}}>
-              发起人
-            </Typography><Chip label="美食达人" className={classes.chip} />
-            <Typography type="body1">
-              这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩,  这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩...
-            </Typography>
-            <br />
-
-            <Typography type="body2">
-              出发日期: 2019-01-01
-            </Typography>
-            <Typography type="body2">
-              价格: 999
-            </Typography>
-            <Button raised color={green} className={classes.button}>
-        详情
-      </Button>
-          </CardContent>
-        </div>
-
-      </Card>
+<Card className={classes.card}>
+  <CardHeader
+    avatar={
+      <Avatar aria-label="Recipe" className={classes.avatar}>
+        W
+      </Avatar>
+    }
+    title="旧金山周边十日游"
+    subheader="出发日期: 2018-09-30"
+  />
+  <Typography type="headline" style={{float:'right', marginTop:-55, marginRight: 20}}>999元</Typography>
+  <CardMedia >
+    <img style={{width: '100%'}} src={travel} alt="Contemplative Reptile" />
+  </CardMedia>
+  <CardContent>
+    <Chip label="美食达人" className={classes.chip} /> <Chip label="完美导游" className={classes.chip} />
+    <Typography component="p" style={{marginTop:5}}>
+     这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩,  这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩...
+    </Typography>
+  </CardContent>
+  <CardActions disableActionSpacing>
+    <IconButton aria-label="Add to favorites">
+      <FavoriteIcon />
+    </IconButton>
+    <IconButton aria-label="Share">
+      <ShareIcon />
+    </IconButton>
+     <div className={classes.flexGrow} />
+     <Button raised color={green} className={classes.button}>
+ 详情
+</Button>
+    </CardActions>
+</Card>
     </div>
   );
 }
