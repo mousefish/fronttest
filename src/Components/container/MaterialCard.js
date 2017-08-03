@@ -17,7 +17,7 @@ const styleSheet = createStyleSheet({
     width: "100%",
     marginBottom: 10,
     margin: 'auto',
-    display: 'flex'
+    display: 'inline'
   },
   details: {
     display: 'flex',
@@ -27,7 +27,7 @@ const styleSheet = createStyleSheet({
     flex: '0 1 auto',
   },
   cover: {
-    width: '50%',
+    width: '100%',
     height: '100%',
     display: "inline-block",
     paddingTop:20
