@@ -10,6 +10,9 @@ import WebFontLoader from 'webfontloader';
 import BannerSlider from '../Components/container/mainBannerSlider'
 
 import NowPlayingCard from '../Components/container/MaterialCard'
+import SearchBar from '../Components/container/searchBar'
+import TabSelect from '../Components/container/tabSelect'
+import {Page} from 'framework7-react'
 
 WebFontLoader.load({
   google: {
@@ -54,12 +57,18 @@ class TestMaterial extends Component
     render(){
        const classes = this.props.classes;
       return(
+        <Page name='home'>
         <div>
         <div style={{maxWidth: 800, margin: 'auto',marginBottom:98}}>
+        <SearchBar />
         <div style={{marginBottom:10, height:'10%'}}>
         <BannerSlider />
+
         </div>
+        <TabSelect />
+        <div style={{overflow: 'auto'}}>
         <NowPlayingCard />
+        </div>
         </div>
         <div className={classes.root}>
                 <BottomNavigation value={this.state.value} onChange={this.handleChange.bind(this)} showLabels>
@@ -70,6 +79,7 @@ class TestMaterial extends Component
                 </BottomNavigation>
               </div>
         </div>
+        </Page>
       )
     }
 }

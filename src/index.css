@@ -2,5 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  overflow: auto
-}
+  overflow: auto; }
+
+.framework7-root {
+  overflow: auto; }

@@ -72,14 +72,14 @@ componentDidMount()
 <div>
      <Carousel controls={false} onSelect={this.onSelect.bind(this)} activeIndex={this.state.activeIndex}>
    <Carousel.Item>
-     <div style={{height:300, width:"100%",backgroundColor:"skyblue"}}/>
+     <div style={{height:200, width:"100%",backgroundColor:"skyblue"}}/>
      <Carousel.Caption>
        <h3>第一张页面</h3>
        <p>需要写文字在这吗.</p>
      </Carousel.Caption>
    </Carousel.Item>
    <Carousel.Item>
-      <div style={{height: 300, width:"100%",backgroundColor:"aqua"}}/>
+      <div style={{height: 200, width:"100%",backgroundColor:"aqua"}}/>
      <Carousel.Caption>
        <h3>第二张页面</h3>
        <p>需要写文字在这吗.</p>

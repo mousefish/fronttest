@@ -12,6 +12,8 @@ import LoginForm from './Components/container/LoginForm'
 import TestMain from './Pages/TestMain'
 import CheckAuth from './Utlity/checkAuth'
 import TestMaterial from './Pages/TestMaterial'
+import 'framework7/dist/css/framework7.ios.min.css';
+import 'framework7/dist/css/framework7.ios.colors.min.css';
 
 class App extends Component {
 
