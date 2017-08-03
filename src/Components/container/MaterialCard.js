@@ -30,7 +30,7 @@ const styleSheet = createStyleSheet({
     width: '100%',
     height: '100%',
     display: "inline-block",
-    paddingTop:20
+    paddingTop: 10
   },
   playIcon: {
     height: 38,
