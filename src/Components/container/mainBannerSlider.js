@@ -86,7 +86,7 @@ componentDidMount()
      </Carousel.Caption>
    </Carousel.Item>
    <Carousel.Item>
-     <div style={{height: 300, width:"100%",backgroundColor:"lightpink"}}/>
+     <div style={{height: 200, width:"100%",backgroundColor:"lightpink"}}/>
      <Carousel.Caption>
        <h3>第三张页面</h3>
        <p>需要写文字在这吗.</p>
