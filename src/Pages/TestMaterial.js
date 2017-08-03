@@ -57,8 +57,9 @@ class TestMaterial extends Component
     render(){
        const classes = this.props.classes;
       return(
-        <Page name='home'>
+
         <div>
+          <Page name='home'>
         <div style={{maxWidth: 800, margin: 'auto',marginBottom:98}}>
         <SearchBar />
         <div style={{marginBottom:10, height:'10%'}}>
@@ -70,6 +71,7 @@ class TestMaterial extends Component
         <NowPlayingCard />
         </div>
         </div>
+          </Page>
         <div className={classes.root}>
                 <BottomNavigation value={this.state.value} onChange={this.handleChange.bind(this)} showLabels>
                   <BottomNavigationButton classes={{icon: classes.icon}} label="发现" icon={<Home />} />
@@ -79,7 +81,7 @@ class TestMaterial extends Component
                 </BottomNavigation>
               </div>
         </div>
-        </Page>
+
       )
     }
 }
