@@ -27,9 +27,10 @@ const styleSheet = createStyleSheet({
     flex: '0 1 auto',
   },
   cover: {
-    width: 210,
-    height: 156,
-    display: "inline-block"
+    width: '50%',
+    height: '100%',
+    display: "inline-block",
+    paddingTop:20
   },
   playIcon: {
     height: 38,
