@@ -12,8 +12,9 @@ import LoginForm from './Components/container/LoginForm'
 import TestMain from './Pages/TestMain'
 import CheckAuth from './Utlity/checkAuth'
 import TestMaterial from './Pages/TestMaterial'
-import 'framework7/dist/css/framework7.ios.min.css';
-import 'framework7/dist/css/framework7.ios.colors.min.css';
+import 'framework7/dist/css/framework7.material.min.css';
+import 'framework7/dist/css/framework7.material.colors.min.css';
+import HomePageNew from './Pages/HomePageNew'
 
 class App extends Component {
 
@@ -30,6 +31,7 @@ class App extends Component {
       <Route exact path="/tr/test" component={MyUploader}/>
       <Route exact path="/maintest" component={TestMain} />
       <Route exact path="/testmaterial" component={TestMaterial} />
+        <Route exact path="/home" component={HomePageNew} />
     {/*unit test used below, production will check env.production to disable*/}
       <Route path="/unitsinuptest" component = {UnitSinupPage} />
       <Route path="/login" component = {LoginForm} />

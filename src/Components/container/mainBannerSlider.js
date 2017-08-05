@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Carousel from 'react-bootstrap/lib/Carousel'
 import Swipe from 'react-swipe-component';
+import {Button} from 'framework7-react'
+
 class BannerSlider extends Component
 {
 
@@ -93,6 +95,7 @@ componentDidMount()
      </Carousel.Caption>
    </Carousel.Item>
  </Carousel>
+ <Button closePopup={true}>close</Button>
  </div>
 </Swipe>
    )

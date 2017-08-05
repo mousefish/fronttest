@@ -1,20 +1,9 @@
 @import 'globals';
 
+$md-picker-inline-z-index: 10800;
+$md-dialog-overlay-z-index: 10800;
 
-@include react-md-colors-hover();
-@include react-md-accessibility;
-@include react-md-colors();
-@include react-md-overlays();
-@include react-md-buttons();
-
-$md-bottom-navigation-max-width: 568px;
-$md-bottom-navigation-z-index: 3000;
-
-@include react-md-bottom-navigations-nav(false);
-
-@include react-md-bottom-navigations(false, true);
-
-@include react-md-theme-bottom-navigations-colored($md-white-base,$md-white-base,$md-bottom-navigation-shifting-ink-color);
+@include react-md-everything
 
 
 a:hover{
@@ -25,4 +14,10 @@ a:hover{
 a:focus{
     color: $md-primary-color;
     text-decoration: none;
+}
+
+
+.u-title-h1
+{
+  color:  $md-primary-color;
 }

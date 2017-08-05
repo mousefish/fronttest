@@ -15,12 +15,13 @@ import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-
 import Avatar from 'material-ui/Avatar';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
+import TouchRipple from 'material-ui/internal/TouchRipple'
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import Divider from 'material-ui/Divider';
 
 const styleSheet = createStyleSheet({
   card: {
     width: "100%",
-    marginBottom: 10,
-    margin: 'auto',
 
   },
   details: {
@@ -51,49 +52,48 @@ const styleSheet = createStyleSheet({
    backgroundColor: green[700],
    color: 'white'
  },
+ padding:
+ {
+   paddingTop: 0
+ },
  flexGrow: { flex: '1 1 auto' },
 });
-class  NowPlayingCard extends Component
+class  HotMaterialCard extends Component
 {
   render(){
   const classes = this.props.classes;
 
   return (
     <div>
-     <Card className={classes.card}>
-       <CardHeader
-         avatar={
-           <Avatar aria-label="Recipe" className={classes.avatar}>
-             W
-           </Avatar>
-         }
-         title="旧金山周边十日游"
-         subheader="出发日期: 2018-09-30"
-       />
-       <Typography type="headline" style={{float:'right', marginTop:-55, marginRight: 20}}>999元</Typography>
-       <CardMedia >
-         <img style={{width: '100%'}} src={travel} alt="Contemplative Reptile" />
-       </CardMedia>
-       <CardContent>
-         <Chip label="美食达人" className={classes.chip} /> <Chip label="完美导游" className={classes.chip} />
-         <Typography component="p" style={{marginTop:5}}>
-          这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩,  这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩...
-         </Typography>
-       </CardContent>
-       <CardActions disableActionSpacing>
-         <IconButton aria-label="Add to favorites">
-           <FavoriteIcon />
-         </IconButton>
-         <IconButton aria-label="Share">
-           <ShareIcon />
-         </IconButton>
-          <div className={classes.flexGrow} />
-          <Button raised color={green} className={classes.button}>
-      详情
-    </Button>
-         </CardActions>
-</Card>
+ <List className={classes.padding}>
+ <ListItem button>
+ <Avatar aria-label="Recipe" className={classes.avatar}>
+   W
+ </Avatar>
+ <ListItemText primary="旧金山周边十日游" secondary="出发日期: 2018-09-30" />
+  <Typography type="headline" style={{float:'right', marginRight: 10}}>999元</Typography>
+</ListItem>
 
+<Divider />
+
+<ListItem button>
+<Avatar aria-label="Recipe" className={classes.avatar}>
+  W
+</Avatar>
+<ListItemText primary="旧金山周边十日游" secondary="出发日期: 2018-09-30" />
+ <Typography type="headline" style={{float:'right', marginRight: 10}}>999元</Typography>
+</ListItem>
+
+<Divider />
+
+<ListItem button>
+<Avatar aria-label="Recipe" className={classes.avatar}>
+  W
+</Avatar>
+<ListItemText primary="旧金山周边十日游" secondary="出发日期: 2018-09-30" />
+ <Typography type="headline" style={{float:'right', marginRight: 10}}>999元</Typography>
+</ListItem>
+</List>
 
     </div>
   );
@@ -101,4 +101,4 @@ class  NowPlayingCard extends Component
 }
 
 
-export default withStyles(styleSheet)(NowPlayingCard);
+export default withStyles(styleSheet)(HotMaterialCard);

@@ -33,7 +33,7 @@ store.dispatch(setAuthUser(jwtDecode(localStorage.jwtToken)))
 //render to root
 ReactDOM.render(
   <Provider store={store}>
-   <Framework7App themeType="ios">
+   <Framework7App themeType="material">
    <div style={{overflow: 'auto'}}>
   <App />
   </div>

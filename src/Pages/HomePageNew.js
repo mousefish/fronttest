@@ -15,7 +15,10 @@ import TabSelect from '../Components/container/tabSelect'
 import {Page} from 'framework7-react'
 import {Popup, Button} from 'framework7-react'
 import PopupSearch from '../Components/container/popupSearch'
-import DatePicker from 'react-md/lib/Pickers/DatePickerContainer';
+import Typography from 'material-ui/Typography';
+import TLogo from '../Assets/Images/logo.jpg'
+import HotTab from '../Components/container/hotTab'
+import HotMaterialCard from '../Components/container/hotMaterialCard'
 
 
 WebFontLoader.load({
@@ -37,7 +40,7 @@ const styleSheet = createStyleSheet({
   }
 });
 
-class TestMaterial extends Component
+class HomePageNew extends Component
 {
   constructor()
   {
@@ -69,17 +72,32 @@ class TestMaterial extends Component
 <Popup tabletFullscreen style={{zIndex:10600}}>
   <PopupSearch />
 </Popup>
-        <div style={{maxWidth: 800, margin: 'auto',marginBottom:98}}>
-        <SearchBar />
+        <div style={{maxWidth: 800, margin: 'auto',marginBottom:98, marginLeft:10, marginRight:10, marginTop:20}}>
+        <img src={TLogo} style={{float:'left',marginRight:5, width:50, height:50, marginTop: -10}} /><Typography type="headline" className="u-title-h1" gutterBottom style={{marginBottom: 30,marginTop:10}}>
+   <div style={{display:'inline', color: '#ff2d55'}}>携U行 </div><div style={{fontSize: 17, display:'inline'}}>我们一起去旅行</div>
+  </Typography>
         <div style={{marginBottom:10, height:'10%'}}>
-        <BannerSlider />
-
         <Button style={{textAlign: 'left', paddingLeft: 20}} color='gray' big={true} raised={true} iconMaterial={'search'} openPopup={true}>搜索</Button>
         </div>
-        <TabSelect />
-        <div style={{overflow: 'auto'}}>
-        <NowPlayingCard />
-        </div>
+
+
+                <Typography type="headline" className="u-title-h1" gutterBottom style={{marginBottom: 10,marginTop:30}}>
+                    本月首推
+                    </Typography>
+                    <NowPlayingCard />
+
+        <Typography type="headline" className="u-title-h1" gutterBottom style={{marginBottom: 10,marginTop:30}}>
+            本月热门
+            </Typography>
+            <HotTab />
+            <HotMaterialCard />
+            <Button>查看更多</Button>
+
+            <Typography type="headline" className="u-title-h1" gutterBottom style={{marginBottom: 10,marginTop:30}}>
+                猜你喜欢
+                </Typography>
+                <HotMaterialCard />
+                <Button>查看更多</Button>
         </div>
           </Page>
         <div className={classes.root}>
@@ -97,4 +115,4 @@ class TestMaterial extends Component
 }
 
 
-export default withStyles(styleSheet)(TestMaterial)
+export default withStyles(styleSheet)(HomePageNew)
