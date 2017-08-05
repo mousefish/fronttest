@@ -71,7 +71,7 @@ class  HotMaterialCard extends Component
    W
  </Avatar>
  <ListItemText primary="旧金山周边十日游" secondary="出发日期: 2018-09-30" />
-  <Typography type="headline" style={{float:'right', marginRight: 10}}>999元</Typography>
+  <Typography type="body1" style={{float:'right', marginRight: 10}}>999元</Typography>
 </ListItem>
 
 <Divider />
@@ -81,7 +81,7 @@ class  HotMaterialCard extends Component
   W
 </Avatar>
 <ListItemText primary="旧金山周边十日游" secondary="出发日期: 2018-09-30" />
- <Typography type="headline" style={{float:'right', marginRight: 10}}>999元</Typography>
+ <Typography type="body1" style={{float:'right', marginRight: 10}}>999元</Typography>
 </ListItem>
 
 <Divider />
@@ -91,7 +91,7 @@ class  HotMaterialCard extends Component
   W
 </Avatar>
 <ListItemText primary="旧金山周边十日游" secondary="出发日期: 2018-09-30" />
- <Typography type="headline" style={{float:'right', marginRight: 10}}>999元</Typography>
+ <Typography type="body1" style={{float:'right', marginRight: 10}}>999元</Typography>
 </ListItem>
 </List>
 
