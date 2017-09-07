@@ -40,10 +40,13 @@ const styleSheet = createStyleSheet({
     bottom: 0,
     inlineHeight: 1,
     position: 'fixed',
-    zIndex: 1000
+    zIndex: 1000,
   },
   icon:{
     display:'block'
+  },
+  broot:{
+    minWidth: 60
   }
 });
 WebFontLoader.load({
@@ -117,11 +120,11 @@ this.context.router.history.push('/story');
     </Page>
     <div className={classes.root}>
             <BottomNavigation value={this.state.value} onChange={this.handleChange.bind(this)} showLabels>
-              <BottomNavigationButton classes={{icon: classes.icon}} label="找活动" icon={<LocationSearch />}><Link></Link></BottomNavigationButton>
-            <BottomNavigationButton classes={{icon: classes.icon}} label="心愿单" icon={<Favorite />} ></BottomNavigationButton>
-              <BottomNavigationButton classes={{icon: classes.icon}} label="故事" icon={<Toys />} />
-              <BottomNavigationButton classes={{icon: classes.icon}} label="消息" icon={<ChatBubbleOutline />} />
-                  <BottomNavigationButton classes={{icon: classes.icon}} label="我" icon={<Person />} />
+              <BottomNavigationButton style={{marginLeft: 5}} classes={{icon: classes.icon, root: classes.broot}} label="找活动" icon={<LocationSearch />}></BottomNavigationButton>
+            <BottomNavigationButton classes={{icon: classes.icon, root: classes.broot}} label="心愿单" icon={<Favorite />} ></BottomNavigationButton>
+              <BottomNavigationButton classes={{icon: classes.icon, root: classes.broot}} label="故事" icon={<Toys />} />
+              <BottomNavigationButton classes={{icon: classes.icon, root: classes.broot}} label="消息" icon={<ChatBubbleOutline />} />
+                  <BottomNavigationButton classes={{icon: classes.icon, root: classes.broot}} label="我" icon={<Person />} />
             </BottomNavigation>
           </div>
 
