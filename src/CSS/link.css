@@ -1,0 +1,5 @@
+a.active, a.active-state {
+  > i, i:before {
+      color:red !important;
+  }
+}

@@ -13,7 +13,7 @@ import NowPlayingCard from '../Components/container/MaterialCard'
 import SearchBar from '../Components/container/searchBar'
 import TabSelect from '../Components/container/tabSelect'
 import {Page} from 'framework7-react'
-import {Popup, Button, Link,Navbar, View,Toolbar, Tab, ContentBlock,Tabs} from 'framework7-react'
+import {Popup, Button, Link,Navbar, View,Toolbar} from 'framework7-react'
 import PopupSearch from '../Components/container/popupSearch'
 import Typography from 'material-ui/Typography';
 import TLogo from '../Assets/Images/logo.jpg'
@@ -21,7 +21,6 @@ import HotTab from '../Components/container/hotTab'
 import HotMaterialCard from '../Components/container/hotMaterialCard'
 import RButton from 'material-ui/Button';
 import {getFramework7} from '../index';
-import FPageHome from './FPageHome'
 
 WebFontLoader.load({
   google: {
@@ -42,7 +41,7 @@ const styleSheet = createStyleSheet({
   }
 });
 
-class HomePageNew extends Component
+class FPageHome extends Component
 {
   constructor()
   {
@@ -52,21 +51,21 @@ class HomePageNew extends Component
     popup: false
   };
   }
-  handleChange = (event, value) => {
-   this.setState({ value });
-   if(value==0)
-   {
-     getFramework7().mainView.router.loadPage('/tabbar/');
-   }
-   else if(value==1)
-   {
-     getFramework7().mainView.router.loadPage('/tabbar/tab-2');
-   }
-   else
-   {
-     getFramework7().mainView.router.loadPage('/tabbar/tab-3');
-   }
- };
+
+  componentWillMount()
+  {
+    console.log("component will mount")
+  }
+
+componentWillUnmount()
+{
+  console.log("component will unmount")
+}
+
+  componentDidMount()
+  {
+      console.log("component did mount")
+  }
 
  clicklink()
  {
@@ -80,19 +79,30 @@ class HomePageNew extends Component
       return(
 
         <div>
-        <Popup tabletFullscreen style={{zIndex:10600}}>
-          <PopupSearch />
-        </Popup>
-          <Page name='home' style={{position:'fixed'}} infiniteScroll={90} infiniteScrollDistance={100} dataDistance={100} pullToRefresh>
+        <img src={TLogo} style={{float:'left',marginRight:5, width:50, height:50, marginTop: -10}} /><Typography type="headline" className="u-title-h1" gutterBottom style={{marginBottom: 30,marginTop:10}}>
+   <div style={{display:'inline', color: '#ff2d55'}}>携U行 </div><div style={{fontSize: 17, display:'inline'}}>我们一起去旅行</div>
+  </Typography>
+        <div style={{marginBottom:10, height:'10%'}}>
+        <Button style={{textAlign: 'left', paddingLeft: 20}} color='gray' big={true} raised={true} iconMaterial={'search'} openPopup={true}>搜索</Button>
+        </div>
 
-          <Tabs>
-        <Tab routeTabId="tab1" id="tab1" />
-        <Tab routeTabId="tab1" id="tab2" />
-        <Tab routeTabId="tab1" id="tab3" />
-        </Tabs>
+                <Typography type="headline" className="u-title-h1" gutterBottom style={{marginBottom: 10,marginTop:30}}>
+                    本月首推
+                    </Typography>
+                    <NowPlayingCard />
 
-              </Page>
+        <Typography type="headline" className="u-title-h1" gutterBottom style={{marginBottom: 10,marginTop:30}}>
+            本月热门
+            </Typography>
+            <HotTab />
+            <HotMaterialCard />
+        <Link onClick={this.clicklink}>查看更多</Link>
 
+            <Typography type="headline" className="u-title-h1" gutterBottom style={{marginBottom: 10,marginTop:30}}>
+                猜你喜欢
+                </Typography>
+                <HotMaterialCard />
+                <Button>查看更多</Button>
         </div>
 
       )
@@ -100,4 +110,4 @@ class HomePageNew extends Component
 }
 
 
-export default withStyles(styleSheet)(HomePageNew)
+export default withStyles(styleSheet)(FPageHome)

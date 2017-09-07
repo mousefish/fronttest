@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import Tabs, { Tab } from 'material-ui/Tabs';
 
-class HotTab extends Component {
+class StoryTab extends Component {
   state = {
     index: 0,
   };
@@ -20,13 +20,13 @@ class HotTab extends Component {
           textColor="primary"
           onChange={this.handleChange}
         >
-          <Tab label="本月推荐" />
-          <Tab label="最新活动" />
-          <Tab label="附近活动" />
+          <Tab label="金牌老司机" />
+          <Tab label="男司机" />
+            <Tab label="女司机" />
         </Tabs>
       </Paper>
     );
   }
 }
 
-export default HotTab;
+export default StoryTab;

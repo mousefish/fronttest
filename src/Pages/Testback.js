@@ -30,7 +30,7 @@ const links = [{
 }];
 
 
-class TestMain extends Component{
+class Testback extends Component{
 
   constructor(props) {
       super(props);
@@ -41,9 +41,8 @@ class TestMain extends Component{
 
     clicklink()
     {
-      console.log(getFramework7().mainView.router);
-     getFramework7().mainView.router.back();
-       //getFramework7().mainView.router.loadPage('/');
+      console.log(getFramework7());
+      getFramework7().mainView.router.back();
     }
 
   _setPage(page) {
@@ -54,9 +53,8 @@ class TestMain extends Component{
       const page = this.state.page;
       return(
 <div>
-<Page name="test" style={{position:'fixed'}} noTabbar>
+<Page name="testback" style={{position:'fixed'}}>
 <Link onClick={this.clicklink}>Go Back</Link>
-<Link href='/testback/'>Go Forward</Link>
     {page==0 && <ExpandableMediaCard />}
       {page==1 && <Button flat primary label="按钮正常,测试按钮阿测试按钮">chat_bubble_outline</Button>}
       {page==2 &&   <Paper style={{width:300,height:300, marginTop: 50, marginLeft:50}} zDepth={5} >paper测试哦 </Paper>}
@@ -73,4 +71,4 @@ class TestMain extends Component{
 }
 
 
-export default TestMain
+export default Testback

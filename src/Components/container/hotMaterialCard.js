@@ -17,7 +17,9 @@ import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
 import TouchRipple from 'material-ui/internal/TouchRipple'
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import {Page} from 'framework7-react'
 import Divider from 'material-ui/Divider';
+import {Media} from 'react-md';
 
 const styleSheet = createStyleSheet({
   card: {
@@ -65,8 +67,12 @@ class  HotMaterialCard extends Component
 
   return (
     <div>
- <List className={classes.padding}>
+ <List className="md-paper md-paper--2" style={{paddingTop: 0}}>
+
  <ListItem button>
+ <Media aspectRatio="16-9">
+   <img style={{width: '100%'}} src={travel} alt="Contemplative Reptile" />
+ </Media>
  <Avatar aria-label="Recipe" className={classes.avatar}>
    W
  </Avatar>
@@ -94,7 +100,6 @@ class  HotMaterialCard extends Component
  <Typography type="body1" style={{float:'right', marginRight: 10}}>999元</Typography>
 </ListItem>
 </List>
-
     </div>
   );
 }
