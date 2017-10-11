@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import '../CSS/main.css'
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import Home from 'material-ui-icons/Home';
 import Flight from 'material-ui-icons/Flight';
@@ -36,7 +36,7 @@ WebFontLoader.load({
   },
 });
 
-const styleSheet = createStyleSheet({
+const styleSheet =({
   root:{
     width: "100%",
     bottom: 0,
@@ -152,7 +152,7 @@ class TripMain extends Component
 <Icon material="search"></Icon>
 </Fab>
           </Page>
-      
+
         </div>
 
       )

@@ -15,7 +15,7 @@ import 'framework7/dist/css/framework7.material.min.css';
 import 'framework7/dist/css/framework7.material.colors.min.css';
 import HomePageNew from './Pages/HomePageNew'
 import {View, Views, Pages, Page, Navbar,Toolbar, Tabs, Tab} from 'framework7-react'
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import Home from 'material-ui-icons/Home';
 import Flight from 'material-ui-icons/Flight';
@@ -34,7 +34,7 @@ import ChatBubbleOutline from 'material-ui-icons/ChatBubbleOutline';
 import PropTypes from 'prop-types'
 import {withRouter} from 'react-router-dom'
 
-const styleSheet = createStyleSheet({
+const styleSheet = ({
   root:{
     width: "100%",
     bottom: 0,
@@ -91,6 +91,21 @@ this.context.router.history.push('/story');
 
   render() {
     const classes = this.props.classes;
+    const path= this.context.router.route.location.pathname;
+    let value = 0;
+  if(path=='/')
+  {
+    value = 0
+  }
+  else if(path=='/wish')
+  {
+    value=1
+  }
+  else if(path=='/story')
+  {
+    value=2
+  }
+  value = this.state.value>0? this.state.value: value;
     {this.testdir.bind(this)};
     return (
       <div>
@@ -119,7 +134,7 @@ this.context.router.history.push('/story');
 
     </Page>
     <div className={classes.root}>
-            <BottomNavigation value={this.state.value} onChange={this.handleChange.bind(this)} showLabels>
+            <BottomNavigation value={value} onChange={this.handleChange.bind(this)} showLabels>
               <BottomNavigationButton style={{marginLeft: 5}} classes={{icon: classes.icon, root: classes.broot}} label="找活动" icon={<LocationSearch />}></BottomNavigationButton>
             <BottomNavigationButton classes={{icon: classes.icon, root: classes.broot}} label="心愿单" icon={<Favorite />} ></BottomNavigationButton>
               <BottomNavigationButton classes={{icon: classes.icon, root: classes.broot}} label="故事" icon={<Toys />} />

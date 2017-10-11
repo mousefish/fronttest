@@ -1,6 +1,6 @@
 import React ,{Component}from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
 import SkipPreviousIcon from 'material-ui-icons/SkipPrevious';
@@ -16,7 +16,7 @@ import Avatar from 'material-ui/Avatar';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
 
-const styleSheet = createStyleSheet({
+const styleSheet = ({
   card: {
     width: "100%",
     marginBottom: 10,
