@@ -9,7 +9,7 @@ class SinUpForm extends Component {
   render() {
     const { userSinupRequest } = this.props;
     return (
-      <div className="row" style={{flexDirection:'column'}}>
+      <div className="column" style={{flexDirection:'column', alignItem:'center', justifyContent:'center'}}>
         <div className="col-md-4 col-md-offset-4">
           <h2 style={{ textAlign: "center" }}>Register</h2>
           <SinUpComp userSinupRequest={userSinupRequest} />
