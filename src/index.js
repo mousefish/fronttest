@@ -22,6 +22,10 @@ import Tab2Content from './Pages/tab2content'
 import Tab3Content from './Pages/tab3content'
 //this componet is used for redux fire fox debug, if chrome need to have other configuration,
 //development only, disable it in production
+
+// import materialize css library
+import 'materialize-css/dist/css/materialize.min.css';
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //create redux store in root
 const store = createStore(

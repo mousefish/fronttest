@@ -27,7 +27,7 @@ export const logout = () => dispatch => {
   dispatch(setAuthUser({}));
 };
 
-export const userSinupRequest = userData => dispatch => {
+export const userSignupRequest = userData => dispatch => {
   axios.post(AuthApi.SinUp, userData);
 };
 

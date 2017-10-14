@@ -5,8 +5,10 @@
 //  reducer  reducer
 
 import {combineReducers} from 'redux';
-import UserAuth from '../Reducers/UserAuth'
+import UserAuth from '../Reducers/UserAuth';
+import { reducer as reduxForm } from 'redux-form';
 
 export default combineReducers({
-      UserAuth
+      UserAuth,
+      form: reduxForm
 });
