@@ -195,7 +195,6 @@ class ListCard extends Component {
   render() {
 
     const classes = this.props.classes;
-
     return (
       <div>
         <List style={{ paddingTop: 0 }}>
