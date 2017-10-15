@@ -18,20 +18,27 @@ class SignUpComp extends Component {
   submitForm(values) {
     const { username, email, password } = values;
     // console.log('username',username);
-    this.props.userSignupRequest({ username, email, password });
+    this.props.userSignupRequest({ username, email, password }, this.props.history);
   }
 
 // Use this function to avoid list elements with duplicate properties
   renderFields() {
-    return FIELDS.map(({ label, name }) => (
+    return FIELDS.map(({ label, name, type }) => (
       <Field
         key={name}
         name={name}
-        type="text"
+        type={type}
         component={RegisterField}
         label={label}
       />
     ));
+  }
+
+ // Use this function to show the error message from backend
+  renderErrorMsg(){
+    if(this.props.errorMsg){
+      return (<div className='alert alert-danger'>{this.props.errorMsg}</div>)
+    }
   }
 
   render() {
@@ -39,6 +46,7 @@ class SignUpComp extends Component {
       <div>
         <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
           {this.renderFields()}
+          {this.renderErrorMsg()}
           <button type="submit" className="btn waves-effect waves-light">Register</button>
         </form>
       </div>
@@ -77,6 +85,10 @@ const validate = values => {
   return errors;
 };
 
+const mapStateToProps = (state) =>{
+  return { errorMsg: state.UserAuth.error}
+}
+
 SignUpComp.propType = {
   userSignUpRequest: PropTypes.func.isRequired
 };
@@ -98,4 +110,4 @@ SignUpComp = reduxForm({
   validate
 })(SignUpComp);
 
-export default (SignUpComp = connect(null, actions)(SignUpComp));
+export default (SignUpComp = connect(mapStateToProps, actions)(SignUpComp));
