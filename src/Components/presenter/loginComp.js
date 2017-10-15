@@ -1,76 +1,96 @@
-import React, {Component} from 'react'
-import classnames from 'classnames'
-import  {loginValidation} from '../../Utlity/commonValidation'
+import React, {Component} from 'react';
+import classnames from 'classnames';
+import  {loginValidation} from '../../Utlity/commonValidation';
+import { connect } from 'react-redux';
+import { reduxForm, Field } from "redux-form";
+import * as actions from "../../Actions";
+import RegisterField from "./RegisterField";
 
-class LoginComp extends  Component{
-    constructor(){
-      super();
-      this.state={
-        username: '',
-        password: '',
-        errors:{},
-        isLoading: false
-      }
+
+class LoginComp extends Component{
+  // Pass the 3 values to action creator
+
+  submitForm(values) {
+    const { username, password } = values;
+    // console.log('username',username);
+    this.props.userLogin({ username, password }, this.props.history);
+  }
+
+  renderFields() {
+     return([
+      <Field
+        key="Username"
+        name="username"
+        type="text"
+        component={RegisterField}
+        label="Username"
+      />,
+
+      <Field
+        key="Password"
+        name="Password"
+        type="password"
+        component={RegisterField}
+        label="Password"
+      />
+      ])
+
+  }
+
+ // Use this function to show the error message from backend
+  renderErrorMsg(){
+    if(this.props.errorMsg){
+      return (<div className='alert alert-danger'>{this.props.errorMsg}</div>)
     }
-
-isValid(){
-  const {errors, isValid} = loginValidation(this.state)
-  if(!isValid)
-  {
-          this.setState({errors})
-  }
-  return isValid;
   }
 
-
-onChange(e)
-{
-  this.setState({
-    [e.target.name]: e.target.value
-  })
-}
-
-onSubmit(e)
-{
-  e.preventDefault();
-  this.setState({errors:''});
-  if(this.isValid())
-  {
-     this.setState({isLoading:true});
-      this.props.userLogin(this.state).then(
-        (res)=>{},
-        (err)=>{ this.setState({errors:err.response.data.errors, isLoading: false})}
-      );
-  }
-
-}
-
-
-  render(){
-    const {errors, username, password, isLoading} = this.state;
-    return(
-          <div>
-          <form onSubmit={this.onSubmit.bind(this)}>
-          {errors.form&&<div className="alert alert-danger">{errors.form}</div>}
-          <div className={classnames("form-group",{"has-error": this.state.errors.username})}>
-            <label className="control-label">Username</label>
-              <input type="text" id="username" name="username" onChange={this.onChange.bind(this)} placeholder="" className="form-control" />
-          </div>
-          {this.state.errors.username && <span className="help-block">{this.state.errors.username}</span>}
-
-          <div className={classnames("form-group",{"has-error": this.state.errors.password})}>
-            <label className="control-label">Password</label>
-              <input type="password" id="password" name="password" onChange={this.onChange.bind(this)} placeholder="" className="form-control" />
-          </div>
-          {this.state.errors.password && <span className="help-block">{this.state.errors.password}</span>}
-          <div className="form-group">
-              <button className="btn btn-success" disable={isLoading}>Login</button>
-          </div>
-          </form>
-          </div>
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
+          {this.renderFields()}
+          {this.renderErrorMsg()}
+          <button type="submit" className="btn waves-effect waves-light">Login</button>
+        </form>
+      </div>
     );
   }
 }
 
+// redux form validation: values are by default passed to the function.
+// If errors list is empty, there are no errors to show up, otherwise, the errors will show up.
 
-export default LoginComp
+const validate = values => {
+  // console.log(values);
+  const errors = {};
+  if (!values.username) {
+    errors.username = "Username required.";
+  }
+  if (!values.email) {
+    errors.email = "Email required.";
+  } else if (
+    !/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+      values.email
+    )
+  ) {
+    errors.email = "Invalid email address";
+  }
+  if (!values.password) {
+    errors.password = "Password required.";
+  }
+
+  return errors;
+
+}
+
+const mapStateToProps = (state) =>{
+    return { errorMsg: state.UserAuth.error}
+}
+
+
+LoginComp = reduxForm({
+  form: "loginform",
+  validate
+})(LoginComp);
+
+export default (LoginComp = connect(mapStateToProps, actions)(LoginComp));
