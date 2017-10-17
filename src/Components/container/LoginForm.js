@@ -22,6 +22,7 @@ Logout(e)
       <div className="col-md-4 col-md-offset-4">
       <LoginComp userLogin = {userLogin}/>
       </div>
+
       {isAuthenticated && <button onClick={this.Logout.bind(this)} className="btn btn-success">Logout</button>}
       </div>
     )
