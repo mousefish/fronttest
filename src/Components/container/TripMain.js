@@ -16,7 +16,7 @@ import ListCard from "../Components/container/ListCard";
 import SearchBar from "../Components/container/searchBar";
 import TabSelect from "../Components/container/tabSelect";
 import { Page } from "framework7-react";
-import { Popup, Button, Fab, Icon } from "framework7-react";
+import { Popup, Button, Icon } from "framework7-react";
 import PopupSearch from "../Components/container/popupSearch";
 import Typography from "material-ui/Typography";
 import TLogo from "../Assets/Images/logo.jpg";
@@ -32,6 +32,7 @@ import Favorite from "material-ui-icons/FavoriteBorder";
 import Toys from "material-ui-icons/Toys";
 import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 
+import SideButton from './sideButton';
 
 WebFontLoader.load({
   google: {
@@ -74,87 +75,16 @@ class TripMain extends Component {
     this.setState({ inlineValue: e.target.value });
   }
 
-  show_popup() {
-    this.setState({ popup: true });
-  }
-
-  close_popup() {
-    this.setState({ popup: false });
-  }
-
   render() {
     const classes = this.props.classes;
     const location = ["北京", "河南", "山西"];
     return (
       <div>
         <Page name="home">
-          <Popup
-            tabletFullscreen
-            style={{ zIndex: 10600 }}
-            opened={this.state.popup}
-          >
-            <div>
-              <Button
-                onClick={this.close_popup.bind(this)}
-                color="black"
-                big={true}
-                iconMaterial={"clear"}
-                style={{ width: "10%" }}
-              />
-              <div style={{ marginLeft: 30, marginTop: 30 }}>
-                <Autocomplete
-                  style={{
-                    marginRight: 30,
-                    width: 300,
-                    display: "block",
-                    marginBottom: 30
-                  }}
-                  id="location list"
-                  label="请输入目的地,城市,国家"
-                  className="md-cell md-cell--4"
-                  data={location}
-                />
-                <DatePicker
-                  style={{ width: 300 }}
-                  icon={null}
-                  id="appointment"
-                  label="选择出发时间"
-                  className="md-cell"
-                />
-                <fieldset
-                  onChange={this.handleInlineChange.bind(this)}
-                  style={{ marginTop: 43, marginLeft: -8 }}
-                >
-                  <Radio
-                    id="inlineRadio1"
-                    inline
-                    name="inlineRadios"
-                    value="A"
-                    label="导游活动"
-                    checked={this.state.inlineValue === "A"}
-                  />
-                  <Radio
-                    id="inlineRadio2"
-                    inline
-                    name="inlineRadios"
-                    value="B"
-                    label="游客需求"
-                    checked={this.state.inlineValue === "B"}
-                  />
-                </fieldset>
-                <Button
-                  big={true}
-                  raised={true}
-                  style={{ width: 300, marginTop: 30 }}
-                  closePopup={true}
-                  bg="pink"
-                  color="white"
-                >
-                  搜索
-                </Button>
-              </div>
-            </div>
-          </Popup>
+          <PopupSearch
+            popup={this.state.popup}
+            close_popup={() => this.setState({ popup: false })}
+          />
           <div
             style={{
               maxWidth: 800,
@@ -186,36 +116,10 @@ class TripMain extends Component {
             </Typography>
             <Divider style={{ backgroundColor: "#3d9fe7", height: 2 }} />
             <HotTab />
-            <ListCard  />
+            <ListCard />
           </div>
 
-
-          <Fab
-            color="pink"
-            style={{
-              bottom: 110,
-              width: 40,
-              height: 40,
-              right: 30,
-              backgroundColor: "#3d9fe7"
-            }}
-          >
-            <Icon icon="icon-plus" />
-          </Fab>
-
-          <Fab
-            color="pink"
-            style={{
-              bottom: 60,
-              width: 40,
-              height: 40,
-              right: 30,
-              backgroundColor: "#16c53d"
-            }}
-            onClick={this.show_popup.bind(this)}
-          >
-            <Icon material="search" />
-          </Fab>
+           <SideButton onBtnClick={()=>{ this.setState({ popup: true })}} />
         </Page>
       </div>
     );
