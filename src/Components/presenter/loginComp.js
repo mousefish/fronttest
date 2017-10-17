@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
-import classnames from 'classnames';
-import  {loginValidation} from '../../Utlity/commonValidation';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import classnames from "classnames";
+import { loginValidation } from "../../Utlity/commonValidation";
+import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import * as actions from "../../Actions";
 import RegisterField from "./RegisterField";
 
-
-class LoginComp extends Component{
+class LoginComp extends Component {
   // Pass the 3 values to action creator
 
   submitForm(values) {
@@ -17,7 +16,7 @@ class LoginComp extends Component{
   }
 
   renderFields() {
-     return([
+    return [
       <Field
         key="Username"
         name="username"
@@ -33,14 +32,13 @@ class LoginComp extends Component{
         component={RegisterField}
         label="Password"
       />
-      ])
-
+    ];
   }
 
- // Use this function to show the error message from backend
-  renderErrorMsg(){
-    if(this.props.errorMsg){
-      return (<div className='alert alert-danger'>{this.props.errorMsg}</div>)
+  // Use this function to show the error message from backend
+  renderErrorMsg() {
+    if (this.props.errorMsg) {
+      return <div className="alert alert-danger">{this.props.errorMsg}</div>;
     }
   }
 
@@ -50,7 +48,9 @@ class LoginComp extends Component{
         <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
           {this.renderFields()}
           {this.renderErrorMsg()}
-          <button type="submit" className="btn waves-effect waves-light">Login</button>
+          <button type="submit" className="btn waves-effect waves-light">
+            Login
+          </button>
         </form>
       </div>
     );
@@ -80,13 +80,11 @@ const validate = values => {
   }
 
   return errors;
+};
 
-}
-
-const mapStateToProps = (state) =>{
-    return { errorMsg: state.UserAuth.error}
-}
-
+const mapStateToProps = state => {
+  return { errorMsg: state.UserAuth.error };
+};
 
 LoginComp = reduxForm({
   form: "loginform",
