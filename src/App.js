@@ -38,6 +38,7 @@ import { getFramework7 } from "./index";
 import TripMain from "./Pages/TripMain";
 import WishMain from "./Pages/WishMain";
 import StoryMain from "./Pages/StoryMain";
+import MyAccount from  "./Pages/MyAccount";
 import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
 import Toys from "material-ui-icons/Toys";
@@ -134,6 +135,7 @@ class App extends Component {
                     <Route exact path="/home" component={TripMain} />
                     <Route exact path="/wish" component={WishMain} />
                     <Route exact path="/story" component={StoryMain} />
+                    <Route exact path="/my" component={MyAccount} />
                     {/*unit test used below, production will check env.production to disable*/}
                     <Route path="/unitsinuptest" component={UnitSinupPage} />
                     <Route path="/login" component={LoginForm} />

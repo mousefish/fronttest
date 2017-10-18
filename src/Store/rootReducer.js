@@ -7,8 +7,11 @@
 import {combineReducers} from 'redux';
 import UserAuth from '../Reducers/UserAuth';
 import { reducer as reduxForm } from 'redux-form';
+import historyDataReducer from '../Reducers/historyDataReducer';
 
 export default combineReducers({
       UserAuth,
-      form: reduxForm
+      historyData:historyDataReducer,
+      form: reduxForm,
+
 });
