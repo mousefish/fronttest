@@ -26,7 +26,7 @@ export const logout = () => dispatch => {
   localStorage.removeItem("jwtToken");
   setAuthorizationToken(false);
   // dispatch(setAuthUser({ type: SET_AUTH}));
-  return { type: DEAUTH_USER};
+  return { type: DEAUTH_USER };
 };
 
 
