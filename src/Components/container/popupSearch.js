@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import popupSearchField from "./popupSearchField";
 import popupSearchDateField from "./popupSearchDateField";
-
+import * as actions from "../../Actions";
+import HistorySearch from './HistorySearch';
 
 class PopupSearch extends Component {
   renderFields() {
@@ -18,6 +19,7 @@ class PopupSearch extends Component {
         type="text"
         component={popupSearchField}
         placeholder="关键字搜索"
+        icon="search"
       />,
 
       <Field
@@ -26,6 +28,7 @@ class PopupSearch extends Component {
         type="text"
         component={popupSearchField}
         placeholder="成都"
+        icon="location_city"
       />,
 
 
@@ -45,6 +48,7 @@ class PopupSearch extends Component {
           type="number"
           component={popupSearchField}
           placeholder="最小预算"
+          icon="attach_money"
         />
 
         <Field
@@ -53,29 +57,36 @@ class PopupSearch extends Component {
           type="number"
           component={popupSearchField}
           placeholder="最大预算"
+          icon="attach_money"
         />
       </div>
     ];
   }
 
-  submitForm() {}
+
+  submitForm(values) {
+    const {keyword, cityname, departdate, minbudget, maxbudget} = values
+    this.props.sendSearchData({keyword, cityname, departdate, minbudget, maxbudget})
+  }
   onCancel() {
 
   }
   render() {
+
     return (
       <Popup
         tabletFullscreen
-        style={{ zIndex: 10600 }}
+        style={{ zIndex: 10600}}
         opened={this.props.popup}
       >
+
         <div>
           <div
             style={{
               display: "flex",
               alignItem: "center",
               justifyContent: "space-between",
-              backgroundColor: "blue"
+              backgroundColor: "#039be5"
             }}
           >
             <Button
@@ -83,9 +94,9 @@ class PopupSearch extends Component {
               color="black"
               big={true}
               iconMaterial={"clear"}
-              style={{ width: "10%" }}
+              style={{ width: "10%", color:"#fff" }}
             />
-            <p>搜索</p>
+            <span style={{color: "#fff", padding:"12px"}}>搜索</span>
           </div>
 
           <div style={{ padding: "20px" }}>
@@ -95,10 +106,13 @@ class PopupSearch extends Component {
               {this.renderFields()}
 
               <div style={{display:'flex'}}>
-                <button className="light-blue" style={{flex:'1'}} type='submit'>搜索</button>
-                <button className="light-pink" style={{flex:'1'}} onClick={this.onCancel}>取消</button>
+                <button className="red accent-4" style={{flex:'1'}} onClick={this.onCancel}>取消</button>
+                <button className="light-blue accent-4" style={{flex:'1'}} type='submit'>搜索</button>
               </div>
             </form>
+
+            <HistorySearch />
+
           </div>
         </div>
       </Popup>
@@ -106,8 +120,18 @@ class PopupSearch extends Component {
   }
 }
 
+const validate = values => {
+  // console.log(values);
+  const errors = {};
+
+  if (!values.cityname) {
+    errors.email = "City name required";
+  }
+
+  return errors;
+};
 PopupSearch = reduxForm({
   form: "popupSearchForm"
 })(PopupSearch);
 
-export default (PopupSearch = connect(null, null)(PopupSearch));
+export default (PopupSearch = connect(null, actions)(PopupSearch));

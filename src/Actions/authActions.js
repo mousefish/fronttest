@@ -58,6 +58,20 @@ export const userLogin = userData => async dispatch => {
   }
 };
 
+
+export const sendSearchData = data =>{
+    console.log('traveldata', data);
+    // request to APIs
+
+
+    // temp
+    return {
+        type:'AUTH_USER',
+        payload:data
+
+    }
+}
+
 export const authError = err => {
   return {
     type: AUTH_ERROR,
