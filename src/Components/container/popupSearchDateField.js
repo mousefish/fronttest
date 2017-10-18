@@ -2,14 +2,16 @@ import React from "react";
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import moment from 'moment';
 import momentLocaliser from 'react-widgets-moment';
-import 'react-widgets/dist/css/react-widgets.css'
+import 'react-widgets/dist/css/react-widgets.css';
 
-export default ({ format, input, placeholder, value, showTime, meta: { error, touched } }) => {
+// .rw-widget-container{background-color:#fff;
+// rw-select-bordered{border-right:#ccc 1px solid;border-left:
+export default ({ format, input, placeholder, meta: { error, touched } }) => {
 
   momentLocaliser(moment);
 
     return (
-        <div>
+        <div style={{border:'none'}}>
             <DateTimePicker
                 {...input}
                 onChange={input.onChange}
