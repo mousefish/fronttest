@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import * as actions from '../Actions';
-import { connect } from 'react-redux';
-
+import * as actions from "../Actions";
+import { connect } from "react-redux";
 
 class MyAccount extends Component {
-
-    onBtnClick(){
+    onBtnClick() {
         this.props.logout();
     }
 
@@ -13,8 +11,8 @@ class MyAccount extends Component {
         return (
             <div
                 style={{
-                    display:'flex',
-                    flexDirection:'column',
+                    display: "flex",
+                    flexDirection: "column",
                     maxWidth: 800,
                     margin: "auto",
                     marginBottom: 98,
@@ -23,18 +21,27 @@ class MyAccount extends Component {
                     marginTop: 20
                 }}
             >
-                <h5 style={{ textAlign: "center" }}>我的事项</h5>
+                <div>
+                    <i
+                        className="material-icons medium left"
+                        onClick={() => this.props.history.push("/")}
+                    >
+                        keyboard_arrow_left
+                    </i>
+                    <h5 style={{ marginLeft: "140px" }}>我的事项</h5>
+                </div>
+
                 <div>
                     <div
                         style={{
                             display: "flex",
                             justifyContent: "space-between",
-                            border:'1px solid #e0e0e0'
+                            border: "1px solid #e0e0e0"
                         }}
                     >
-                        <div style={{ display: "flex", padding:'10px' }}>
+                        <div style={{ display: "flex", padding: "10px" }}>
                             <img src="https://placeholdit.co//i/80x80?&text=portrait" />
-                            <span style={{marginLeft:'20px'}}>
+                            <span style={{ marginLeft: "20px" }}>
                                 <p>用户名称</p>
                                 <p>登录账号</p>
                             </span>
@@ -45,7 +52,7 @@ class MyAccount extends Component {
                                 flexDirection: "column",
                                 alignItem: "center",
                                 justifyContent: "center",
-                                paddingRight:'10px'
+                                paddingRight: "10px"
                             }}
                         >
                             <img src="https://placeholdit.co//i/50x50?&text=QR" />
@@ -53,7 +60,7 @@ class MyAccount extends Component {
                     </div>
                 </div>
                 <div>
-                    <ul className="collection" style={{marginBottom:'2'}}>
+                    <ul className="collection" style={{ marginBottom: "2" }}>
                         <li className="collection-item">我的朋友圈</li>
                         <li className="collection-item">我的收藏</li>
                         <li className="collection-item">我的活动 | 需求</li>
@@ -63,7 +70,13 @@ class MyAccount extends Component {
                         <li className="collection-item">版本更新</li>
                     </ul>
                 </div>
-                <button className='red lighten-1 white-text' style={{marginTop:'0'}} onClick={this.onBtnClick.bind(this)}>退出账户</button>
+                <button
+                    className="red lighten-1 white-text"
+                    style={{ marginTop: "0" }}
+                    onClick={this.onBtnClick.bind(this)}
+                >
+                    退出账户
+                </button>
             </div>
         );
     }
