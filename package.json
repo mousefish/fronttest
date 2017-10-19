@@ -37,7 +37,6 @@
     "react-toastify": "^1.7.0",
     "react-transition-group": "^1.2.0",
     "react-widgets": "^4.0.2",
-    "react-widgets-globalize": "^4.0.2",
     "react-widgets-moment": "^4.0.2",
     "redux": "^3.7.2",
     "redux-form": "^7.1.1",
