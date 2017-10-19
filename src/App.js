@@ -32,6 +32,8 @@ import Home from "material-ui-icons/Home";
 import Flight from "material-ui-icons/Flight";
 import Message from "material-ui-icons/Message";
 import Person from "material-ui-icons/Person";
+import AddCircle from 'material-ui-icons/AddCircle';
+
 import WebFontLoader from "webfontloader";
 import Tab1Content from "./Pages/tab1content";
 import { getFramework7 } from "./index";
@@ -40,6 +42,9 @@ import WishMain from "./Pages/WishMain";
 import StoryMain from "./Pages/StoryMain";
 import MyAccount from "./Pages/MyAccount";
 import MyMessage from "./Pages/MyMessage";
+import Discovery from "./Pages/Discovery";
+import MyRoute from "./Pages/MyRoute";
+import AddRoute from "./Pages/AddRoute";
 
 import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
@@ -70,7 +75,6 @@ WebFontLoader.load({
 });
 
 class App extends Component {
-
   static propTypes = {
     router: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
@@ -79,32 +83,121 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      value: 0,
+      main_value: 0,
+      my_value: 0,
       popup: false
     };
   }
 
-  handleChange(event, value) {
-    this.setState({ value });
-    if (value == 0) {
+  handleMainChange(event, main_value) {
+    this.setState({ main_value });
+    if (main_value == 0) {
       this.props.history.push("/");
-    } else if (value == 1) {
+    } else if (main_value == 1) {
       this.props.history.push("/wish");
-    } else if (value == 2){
+    } else if (main_value == 2) {
       this.props.history.push("/story");
-    } else if (value == 3){
+    } else if (main_value == 3) {
       this.props.history.push("/message");
-    }
-    else if (value == 4){
+    } else if (main_value == 4) {
       this.props.history.push("/my");
-
     }
-  };
+  }
 
+  handleSubChange(event, sub_value) {
+    this.setState({ sub_value });
+    if (sub_value == 0) {
+      this.props.history.push("/discovery");
+    }else if (sub_value == 1) {
+      this.props.history.push("/myRoute");
+    } else if (sub_value == 2) {
+      this.props.history.push("/addRoute");
+    } else if (sub_value == 3) {
+      this.props.history.push("/message");
+    } else if (sub_value == 4) {
+      this.props.history.push("/my");
+    }
+  }
   testdir() {
     console.log("change dir");
     alert("change dir");
     //   getFramework7().mainView.router.loadPage('/home/');
+  }
+
+  renderBottomNav() {
+    const main_value = this.state.main_value;
+    const sub_value = this.state.sub_value;
+    const classes = this.props.classes;
+    if (this.props.location.pathname == "/my") {
+      return (
+        <BottomNavigation
+          value={sub_value}
+          onChange={this.handleSubChange.bind(this)}
+          showLabels
+        >
+          <BottomNavigationButton
+            style={{ marginLeft: 5 }}
+            classes={{ icon: classes.icon, root: classes.broot }}
+            label="发现"
+            icon={<Home />}
+          />
+          <BottomNavigationButton
+            classes={{ icon: classes.icon, root: classes.broot }}
+            label="行程"
+            icon={<Flight />}
+          />
+          <BottomNavigationButton
+            classes={{ icon: classes.icon, root: classes.broot }}
+
+            icon={<AddCircle />}
+          />
+          <BottomNavigationButton
+            classes={{ icon: classes.icon, root: classes.broot }}
+            label="消息"
+            icon={<Message />}
+          />
+          <BottomNavigationButton
+            classes={{ icon: classes.icon, root: classes.broot }}
+            label="我的"
+            icon={<Person />}
+          />
+        </BottomNavigation>
+      );
+    }
+    return (
+      <BottomNavigation
+        value={main_value}
+        onChange={this.handleMainChange.bind(this)}
+        showLabels
+      >
+        <BottomNavigationButton
+          style={{ marginLeft: 5 }}
+          classes={{ icon: classes.icon, root: classes.broot }}
+          label="找活动"
+          icon={<LocationSearch />}
+        />
+        <BottomNavigationButton
+          classes={{ icon: classes.icon, root: classes.broot }}
+          label="心愿单"
+          icon={<Favorite />}
+        />
+        <BottomNavigationButton
+          classes={{ icon: classes.icon, root: classes.broot }}
+          label="故事"
+          icon={<Toys />}
+        />
+        <BottomNavigationButton
+          classes={{ icon: classes.icon, root: classes.broot }}
+          label="消息"
+          icon={<ChatBubbleOutline />}
+        />
+        <BottomNavigationButton
+          classes={{ icon: classes.icon, root: classes.broot }}
+          label="我"
+          icon={<Person />}
+        />
+      </BottomNavigation>
+    );
   }
 
   render() {
@@ -137,6 +230,11 @@ class App extends Component {
                     <Route exact path="/story" component={StoryMain} />
                     <Route exact path="/my" component={MyAccount} />
                     <Route exact path="/message" component={MyMessage} />
+                    <Route exact path="/discovery" component={Discovery} />
+                    <Route exact path="/myRoute" component={MyRoute} />
+                    <Route exact path="/addRoute" component={AddRoute} />
+
+
                     {/*unit test used below, production will check env.production to disable*/}
                     <Route path="/unitsinuptest" component={UnitSinupPage} />
                     <Route path="/login" component={LoginForm} />
@@ -145,40 +243,7 @@ class App extends Component {
                 </div>
                 <ToastContainer />
               </Page>
-              <div className={classes.root}>
-                <BottomNavigation
-                  value={value}
-                  onChange={this.handleChange.bind(this)}
-                  showLabels
-                >
-                  <BottomNavigationButton
-                    style={{ marginLeft: 5 }}
-                    classes={{ icon: classes.icon, root: classes.broot }}
-                    label="找活动"
-                    icon={<LocationSearch />}
-                  />
-                  <BottomNavigationButton
-                    classes={{ icon: classes.icon, root: classes.broot }}
-                    label="心愿单"
-                    icon={<Favorite />}
-                  />
-                  <BottomNavigationButton
-                    classes={{ icon: classes.icon, root: classes.broot }}
-                    label="故事"
-                    icon={<Toys />}
-                  />
-                  <BottomNavigationButton
-                    classes={{ icon: classes.icon, root: classes.broot }}
-                    label="消息"
-                    icon={<ChatBubbleOutline />}
-                  />
-                  <BottomNavigationButton
-                    classes={{ icon: classes.icon, root: classes.broot }}
-                    label="我"
-                    icon={<Person />}
-                  />
-                </BottomNavigation>
-              </div>
+              <div className={classes.root}>{this.renderBottomNav()}</div>
             </Pages>
           </View>
         </Views>
