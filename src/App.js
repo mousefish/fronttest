@@ -38,7 +38,9 @@ import { getFramework7 } from "./index";
 import TripMain from "./Pages/TripMain";
 import WishMain from "./Pages/WishMain";
 import StoryMain from "./Pages/StoryMain";
-import MyAccount from  "./Pages/MyAccount";
+import MyAccount from "./Pages/MyAccount";
+import MyMessage from "./Pages/MyMessage";
+
 import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
 import Toys from "material-ui-icons/Toys";
@@ -82,14 +84,20 @@ class App extends Component {
     };
   }
 
-  handleChange = (event, value) => {
+  handleChange(event, value) {
     this.setState({ value });
     if (value == 0) {
       this.props.history.push("/");
     } else if (value == 1) {
       this.props.history.push("/wish");
-    } else {
+    } else if (value == 2){
       this.props.history.push("/story");
+    } else if (value == 3){
+      this.props.history.push("/message");
+    }
+    else if (value == 4){
+      this.props.history.push("/my");
+
     }
   };
 
@@ -102,15 +110,7 @@ class App extends Component {
   render() {
     const classes = this.props.classes;
     const path = this.props.location.pathname;
-    let value = 0;
-    if (path == "/") {
-      value = 0;
-    } else if (path == "/wish") {
-      value = 1;
-    } else if (path == "/story") {
-      value = 2;
-    }
-    value = this.state.value > 0 ? this.state.value : value;
+    const value = this.state.value > 0 ? this.state.value : value;
     {
       this.testdir.bind(this);
     }
@@ -136,6 +136,7 @@ class App extends Component {
                     <Route exact path="/wish" component={WishMain} />
                     <Route exact path="/story" component={StoryMain} />
                     <Route exact path="/my" component={MyAccount} />
+                    <Route exact path="/message" component={MyMessage} />
                     {/*unit test used below, production will check env.production to disable*/}
                     <Route path="/unitsinuptest" component={UnitSinupPage} />
                     <Route path="/login" component={LoginForm} />

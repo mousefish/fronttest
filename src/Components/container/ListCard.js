@@ -65,7 +65,6 @@ const styleSheet = {
 class ListCard extends Component {
 
   renderItems(){
-      console.log('hello!!!!', this.props);
       return dummyData.map((item)=>{
         return (
           <ListItem button style={{ padding: 1 }}>
