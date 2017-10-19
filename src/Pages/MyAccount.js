@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as actions from '../Actions';
 import { connect } from 'react-redux';
 
+
 class MyAccount extends Component {
 
     onBtnClick(){
