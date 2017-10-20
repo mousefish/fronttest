@@ -7,8 +7,11 @@ import FileInput from "./FileInput";
 import * as actions from "../Actions";
 
 class AddRoute extends Component {
+
     onCancel() {}
+
     submitForm(values) {
+        console.log('values', values)
         const {
             location,
             budget,
@@ -19,9 +22,11 @@ class AddRoute extends Component {
             event_intro,
             notes,
             img1,
-            img2
+            img2,
+            img3,
+            img4
         } = values;
-        // console.log('username',username);
+
         this.props.addRoute({
             location,
             budget,
@@ -31,7 +36,8 @@ class AddRoute extends Component {
             service,
             event_intro,
             notes,
-            images: [img1[0].name, img2[0].name]
+            images:{img1, img2, img3, img4}
+
         });
     }
 
@@ -157,6 +163,16 @@ class AddRoute extends Component {
 
 const validate = values => {
     const errors = {};
+    FIELDS.forEach((item)=>{
+        if (!values[item.name]){
+            return errors[item.name]="Value required"
+        }
+    })
+
+    if (!values.img1){
+        return errors.img1='Image required'
+    }
+
 
     return errors;
 };
