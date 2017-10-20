@@ -169,9 +169,9 @@ const validate = values => {
         }
     })
 
-    if (!values.img1){
-        return errors.img1='Image required'
-    }
+    // if (!values.img1){
+    //     return errors.img1='Image required'
+    // }
 
 
     return errors;

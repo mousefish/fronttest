@@ -60,7 +60,7 @@ class MyAccount extends Component {
                     </div>
                 </div>
                 <div>
-                    <ul className="collection" style={{ marginBottom: "2" }}>
+                    <ul className="collection" style={{ marginBottom: "2px" }}>
                         <li className="collection-item">我的朋友圈</li>
                         <li className="collection-item">我的收藏</li>
                         <li className="collection-item">我的活动 | 需求</li>
