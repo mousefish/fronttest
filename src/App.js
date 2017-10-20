@@ -128,7 +128,7 @@ class App extends Component {
     const main_value = this.state.main_value;
     const sub_value = this.state.sub_value;
     const classes = this.props.classes;
-    if (this.props.location.pathname == "/my") {
+    if (this.props.location.pathname == "/my" || this.props.location.pathname == '/myRoute') {
       return (
         <BottomNavigation
           value={sub_value}
