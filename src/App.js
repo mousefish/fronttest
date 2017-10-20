@@ -164,6 +164,10 @@ class App extends Component {
         </BottomNavigation>
       );
     }
+
+    if (this.props.location.pathname == "/addRoute") {
+      return
+    }
     return (
       <BottomNavigation
         value={main_value}
