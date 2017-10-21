@@ -54,12 +54,19 @@ class MyRoute extends Component {
                     </a>
                 </div>
 
-                <div style={{padding:'5px 5px 0 5px', borderBottom:"1px solid #e0e0e0"}}>
+                <div style={{display:'flex', justifyContent:'space-between', padding:'5px 5px 0 5px', borderBottom:"1px solid #e0e0e0"}}>
                     <ul style={{lineHeight:'2'}}>
                      <li>主题</li>
                      <li>发起人</li>
                      <li>价格 | 地点 | 过期日期</li>
                     </ul>
+                    <i
+                        className="material-icons large right"
+
+                    >
+                        keyboard_arrow_right
+                    </i>
+
                 </div>
 
                 <div style={{textAlign:'center', padding:'2px'}}>
