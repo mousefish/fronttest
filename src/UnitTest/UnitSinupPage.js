@@ -1,6 +1,6 @@
 //unit test for sinup component
 import React, {Component} from 'react';
-import SinUpForm  from '../Components/container/sinUpForm'
+import SignUpForm  from '../Components/container/signUpForm';
 
 class UnitSinupPage extends Component
 {
@@ -8,7 +8,7 @@ class UnitSinupPage extends Component
   {
     return(
   <div>
-      <SinUpForm />
+      <SignUpForm />
  </div>
     )
 

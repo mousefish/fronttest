@@ -1,0 +1,30 @@
+[
+    {
+        "attendence": "2 / 3 满",
+        "expiration": "3天截止",
+        "theme": "成都IFS一日游",
+        "price": "$200",
+        "date": "2017/02/03",
+        "service":["包吃", "专车接送","shopping折扣"]
+    },
+
+     {
+        "attendence": "2 / 3 满",
+        "expiration": "3天截止",
+        "theme": "成都IFS一日游",
+        "price": "$200",
+        "date": "2017/02/03",
+        "service":["包吃", "专车接送","shopping折扣"]
+    },
+
+
+     {
+        "attendence": "2 / 3 满",
+        "expiration": "3天截止",
+        "theme": "成都IFS一日游",
+        "price": "$200",
+        "date": "2017/02/03",
+        "service":["包吃", "专车接送","shopping折扣"]
+    }
+
+]
