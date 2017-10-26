@@ -3,15 +3,15 @@ import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import AddRouteField from "./AddRouteField";
 import FIELDS from "./routeFormFields";
+import popupSearchDateField from "../Components/container/popupSearchDateField";
 import FileInput from "./FileInput";
 import * as actions from "../Actions";
 
 class AddRoute extends Component {
-
     onCancel() {}
 
     submitForm(values) {
-        console.log('values', values)
+        console.log("values", values);
         const {
             location,
             budget,
@@ -36,21 +36,36 @@ class AddRoute extends Component {
             service,
             event_intro,
             notes,
-            images:{img1, img2, img3, img4}
-
+            images: { img1, img2, img3, img4 }
         });
     }
 
     renderFields() {
-        return FIELDS.map(({ label, name }) => (
-            <Field
-                key={name}
-                name={name}
-                type="text"
-                component={AddRouteField}
-                label={label}
-            />
-        ));
+        return FIELDS.map(({ label, name }) => {
+            if (name == "date") {
+                return (
+                    [<label>出发日期和时间</label>,
+                    <Field
+                        key="dapartdate"
+                        name="departdate"
+                        type="text"
+                        component={popupSearchDateField}
+                    />]
+                );
+            } else {
+                return (
+                    <div>
+                    <Field
+                        key={name}
+                        name={name}
+                        type="text"
+                        component={AddRouteField}
+                        label={label}
+                    />
+                    </div>
+                );
+            }
+        });
     }
     render() {
         return (
@@ -163,16 +178,15 @@ class AddRoute extends Component {
 
 const validate = values => {
     const errors = {};
-    FIELDS.forEach((item)=>{
-        if (!values[item.name]){
-            return errors[item.name]="Value required"
+    FIELDS.forEach(item => {
+        if (!values[item.name]) {
+            return (errors[item.name] = "Value required");
         }
-    })
+    });
 
     // if (!values.img1){
     //     return errors.img1='Image required'
     // }
-
 
     return errors;
 };
