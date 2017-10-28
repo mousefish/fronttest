@@ -11,17 +11,20 @@ import { toast } from "react-toastify";
 import { reduxForm, Field } from "redux-form";
 import RegisterField from "./RegisterField";
 import FIELDS from "./formFields";
+import TLogo from "../../Assets/Images/logo.jpg";
 
 class SignUpComp extends Component {
-
   // Pass the 3 values to action creator
   submitForm(values) {
     const { username, email, password } = values;
     // console.log('username',username);
-    this.props.userSignupRequest({ username, email, password }, this.props.history);
+    this.props.userSignupRequest(
+      { username, email, password },
+      this.props.history
+    );
   }
 
-// Use this function to avoid list elements with duplicate properties
+  // Use this function to avoid list elements with duplicate properties
   renderFields() {
     return FIELDS.map(({ label, name, type }) => (
       <Field
@@ -34,20 +37,44 @@ class SignUpComp extends Component {
     ));
   }
 
- // Use this function to show the error message from backend
-  renderErrorMsg(){
-    if(this.props.errorMsg){
-      return (<div className='alert alert-danger'>{this.props.errorMsg}</div>)
+  // Use this function to show the error message from backend
+  renderErrorMsg() {
+    if (this.props.errorMsg) {
+      return <div className="alert alert-danger">{this.props.errorMsg}</div>;
     }
   }
 
   render() {
     return (
-      <div>
+      <div
+        style={{
+          maxWidth: 800,
+          margin: "auto",
+          marginLeft: 5,
+          marginRight: 5,
+          marginTop: 20
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            marginBottom: "20px"
+          }}
+        >
+          <img
+            src={TLogo}
+            style={{
+              width: 100,
+              height: 100
+            }}
+          />
+        </div>
         <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
           {this.renderFields()}
           {this.renderErrorMsg()}
-          <button type="submit" className="btn waves-effect waves-light">Register</button>
+          <button type="submit" className="btn waves-effect waves-light">
+            Register
+          </button>
         </form>
       </div>
     );
@@ -85,9 +112,9 @@ const validate = values => {
   return errors;
 };
 
-const mapStateToProps = (state) =>{
-  return { errorMsg: state.UserAuth.error}
-}
+const mapStateToProps = state => {
+  return { errorMsg: state.UserAuth.error };
+};
 
 SignUpComp.propType = {
   userSignUpRequest: PropTypes.func.isRequired

@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import * as actions from "../../Actions";
 import RegisterField from "./RegisterField";
+import TLogo from "../../Assets/Images/logo.jpg";
+import { Link } from 'react-router-dom';
 
 class LoginComp extends Component {
   // Pass the 3 values to action creator
@@ -17,21 +19,21 @@ class LoginComp extends Component {
 
   renderFields() {
     return [
-      <Field
-        key="Username"
-        name="username"
-        type="text"
-        component={RegisterField}
-        label="Username"
-      />,
+        <Field
+          key="Username"
+          name="username"
+          type="text"
+          component={RegisterField}
+          label="Username"
+        />,
 
-      <Field
-        key="Password"
-        name="Password"
-        type="password"
-        component={RegisterField}
-        label="Password"
-      />
+        <Field
+          key="Password"
+          name="password"
+          type="password"
+          component={RegisterField}
+          label="Password"
+        />
     ];
   }
 
@@ -44,7 +46,29 @@ class LoginComp extends Component {
 
   render() {
     return (
-      <div>
+      <div
+        style={{
+          maxWidth: 800,
+          margin: "auto",
+          marginLeft: 5,
+          marginRight: 5,
+          marginTop: 20
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            marginBottom: "20px"
+          }}
+        >
+          <img
+            src={TLogo}
+            style={{
+              width: 100,
+              height: 100
+            }}
+          />
+        </div>
         <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
           {this.renderFields()}
           {this.renderErrorMsg()}
@@ -52,6 +76,7 @@ class LoginComp extends Component {
             Login
           </button>
         </form>
+        <p>New user? <Link to='/unitsinuptest'>Register here</Link></p>
       </div>
     );
   }
@@ -65,15 +90,6 @@ const validate = values => {
   const errors = {};
   if (!values.username) {
     errors.username = "Username required.";
-  }
-  if (!values.email) {
-    errors.email = "Email required.";
-  } else if (
-    !/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-      values.email
-    )
-  ) {
-    errors.email = "Invalid email address";
   }
   if (!values.password) {
     errors.password = "Password required.";
