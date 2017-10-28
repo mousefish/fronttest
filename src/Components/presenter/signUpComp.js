@@ -12,6 +12,7 @@ import { reduxForm, Field } from "redux-form";
 import RegisterField from "./RegisterField";
 import FIELDS from "./formFields";
 import TLogo from "../../Assets/Images/logo.jpg";
+import { Link } from "react-router-dom";
 
 class SignUpComp extends Component {
   // Pass the 3 values to action creator
@@ -61,13 +62,14 @@ class SignUpComp extends Component {
             marginBottom: "20px"
           }}
         >
-          <img
+          <Link to='/'><img
             src={TLogo}
             style={{
               width: 100,
               height: 100
             }}
           />
+          </Link>
         </div>
         <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
           {this.renderFields()}

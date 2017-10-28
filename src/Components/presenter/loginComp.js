@@ -62,13 +62,14 @@ class LoginComp extends Component {
             marginBottom: "20px"
           }}
         >
-          <img
+          <Link to='/'><img
             src={TLogo}
             style={{
               width: 100,
               height: 100
             }}
           />
+          </Link>
         </div>
         <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
           {this.renderFields()}
