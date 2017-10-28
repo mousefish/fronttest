@@ -240,7 +240,7 @@ class App extends Component {
 
 
                     {/*unit test used below, production will check env.production to disable*/}
-                    <Route path="/unitsinuptest" component={UnitSinupPage} />
+                    <Route path="/signup" component={UnitSinupPage} />
                     <Route path="/login" component={LoginForm} />
                     <Route component={PageNotFound} />
                   </Switch>

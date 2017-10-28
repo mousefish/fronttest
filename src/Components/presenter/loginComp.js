@@ -6,7 +6,7 @@ import { reduxForm, Field } from "redux-form";
 import * as actions from "../../Actions";
 import RegisterField from "./RegisterField";
 import TLogo from "../../Assets/Images/logo.jpg";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class LoginComp extends Component {
   // Pass the 3 values to action creator
@@ -19,21 +19,21 @@ class LoginComp extends Component {
 
   renderFields() {
     return [
-        <Field
-          key="Username"
-          name="username"
-          type="text"
-          component={RegisterField}
-          label="Username"
-        />,
+      <Field
+        key="Username"
+        name="username"
+        type="text"
+        component={RegisterField}
+        label="Username"
+      />,
 
-        <Field
-          key="Password"
-          name="password"
-          type="password"
-          component={RegisterField}
-          label="Password"
-        />
+      <Field
+        key="Password"
+        name="password"
+        type="password"
+        component={RegisterField}
+        label="Password"
+      />
     ];
   }
 
@@ -52,7 +52,8 @@ class LoginComp extends Component {
           margin: "auto",
           marginLeft: 5,
           marginRight: 5,
-          marginTop: 20
+          marginTop: 20,
+          position: "relative"
         }}
       >
         <div
@@ -76,7 +77,12 @@ class LoginComp extends Component {
             Login
           </button>
         </form>
-        <p>New user? <Link to='/unitsinuptest'>Register here</Link></p>
+        <p>
+          New user? <Link to="/signup">Register here</Link>
+        </p>
+        <span style={{ position: "absolute", right: "0", bottom: "100px" }}>
+          <a href="#">Forgot?</a>
+        </span>
       </div>
     );
   }
