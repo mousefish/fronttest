@@ -6,14 +6,12 @@ import FIELDS from "./routeFormFields";
 import popupSearchDateField from "../Components/container/popupSearchDateField";
 import FileInput from "./FileInput";
 import * as actions from "../Actions";
-import { formValueSelector } from 'redux-form';
+
 
 class AddRoute extends Component {
     onCancel() {}
 
     submitForm(values) {
-
-        // console.log('formValues', c);
 
         console.log("values", values);
         const {
@@ -85,7 +83,6 @@ class AddRoute extends Component {
                     marginTop: 20
                 }}
             >
-            <div>{this.props.location}</div>
                 <div>
                     <i
                         className="material-icons medium left"
@@ -124,7 +121,9 @@ class AddRoute extends Component {
                 </div>
 
                 <form
-                    onSubmit={this.props.handleSubmit(this.props.onSubmitForm)}
+                    onSubmit={this.props.handleSubmit(
+                        this.submitForm.bind(this)
+                    )}
                 >
                     {this.renderFields()}
 
@@ -199,4 +198,4 @@ AddRoute = reduxForm({
     validate
 })(AddRoute);
 
-export default (AddRoute = connect(mapStateToProps, actions)(AddRoute));
+export default (AddRoute = connect(null, actions)(AddRoute));

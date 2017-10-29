@@ -45,7 +45,6 @@ import MyMessage from "./Pages/MyMessage";
 import Discovery from "./Pages/Discovery";
 import MyRoute from "./Pages/MyRoute";
 import AddRoute from "./Pages/AddRoute";
-import AddRouteReview from "./Pages/AddRouteReview";
 
 import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
@@ -243,7 +242,6 @@ class App extends Component {
                     {/*unit test used below, production will check env.production to disable*/}
                     <Route path="/signup" component={UnitSinupPage} />
                     <Route path="/login" component={LoginForm} />
-                    <Route path='/review' component={AddRouteReview} />
                     <Route component={PageNotFound} />
                   </Switch>
                 </div>
