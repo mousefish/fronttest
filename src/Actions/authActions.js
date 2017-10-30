@@ -30,29 +30,37 @@ export const logout = () => dispatch => {
 };
 
 
-export const userSignupRequest = userData => async (dispatch, history) => {
+export const userSignupRequest = (userData,history) => (dispatch) => {
 
   try {
+    // Need backend APIs to implement the following code (add async)
     // console.log('userdata', userData)
-    const res = await axios.post(AuthApi.SinUp, userData);
-    dispatch({ type: AUTH_USER });
-    localStorage.setItem("jwtToken", res.data.token);
+    // const res = await axios.post(AuthApi.SinUp, userData);
+    // dispatch({ type: AUTH_USER });
+    // localStorage.setItem("jwtToken", res.data.token);
+
+    dispatch({type:AUTH_USER});
     // Not sure where to redirect yet...
-    history.push("/wish");
+    history.push('/my');
   } catch(err){
     dispatch(authError('Email already in use!'));
   }
 };
 
-export const userLogin = userData => async dispatch => {
+export const userLogin = (userData, history) => dispatch => {
 
   try {
-    const res = await axios.post(AuthApi.Login, userData);
-    const token = res.data.token;
-    localStorage.setItem("jwtToken", token);
-    setAuthorizationToken(token);
-    console.log(jwtDecode(token));
-    dispatch(setAuthUser(jwtDecode(token)));
+    // Need backend APIs to implement the following code (add async)
+    // const res = await axios.post(AuthApi.Login, userData);
+    // const token = res.data.token;
+    // localStorage.setItem("jwtToken", token);
+    // setAuthorizationToken(token);
+    // console.log(jwtDecode(token));
+    // dispatch(setAuthUser(jwtDecode(token)));
+    dispatch({type:AUTH_USER});
+    // Not sure where to redirect yet...
+    history.push('/my');
+
   } catch (err) {
     dispatch(authError("Bad request!"));
   }

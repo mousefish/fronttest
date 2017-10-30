@@ -13,6 +13,7 @@ import RegisterField from "./RegisterField";
 import FIELDS from "./formFields";
 import TLogo from "../../Assets/Images/logo.jpg";
 import { Link } from "react-router-dom";
+import { withRouter } from 'react-router';
 
 class SignUpComp extends Component {
   // Pass the 3 values to action creator
@@ -139,4 +140,4 @@ SignUpComp = reduxForm({
   validate
 })(SignUpComp);
 
-export default (SignUpComp = connect(mapStateToProps, actions)(SignUpComp));
+export default (SignUpComp = connect(mapStateToProps, actions)(withRouter(SignUpComp)));

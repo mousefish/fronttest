@@ -45,6 +45,7 @@ import MyMessage from "./Pages/MyMessage";
 import Discovery from "./Pages/Discovery";
 import MyRoute from "./Pages/MyRoute";
 import AddRoute from "./Pages/AddRoute";
+import RequireAuth from './HOC/RequireAuth'
 
 import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
@@ -232,7 +233,7 @@ class App extends Component {
                     <Route exact path="/home" component={TripMain} />
                     <Route exact path="/wish" component={WishMain} />
                     <Route exact path="/story" component={StoryMain} />
-                    <Route exact path="/my" component={MyAccount} />
+                    <Route exact path="/my" component={RequireAuth(MyAccount)} />
                     <Route exact path="/message" component={MyMessage} />
                     <Route exact path="/discovery" component={Discovery} />
                     <Route exact path="/myRoute" component={MyRoute} />

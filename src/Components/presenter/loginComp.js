@@ -7,13 +7,14 @@ import * as actions from "../../Actions";
 import RegisterField from "./RegisterField";
 import TLogo from "../../Assets/Images/logo.jpg";
 import { Link } from "react-router-dom";
+import { withRouter } from 'react-router';
 
 class LoginComp extends Component {
   // Pass the 3 values to action creator
 
   submitForm(values) {
     const { username, password } = values;
-    // console.log('username',username);
+    console.log('history',this.props);
     this.props.userLogin({ username, password }, this.props.history);
   }
 
@@ -114,4 +115,4 @@ LoginComp = reduxForm({
   validate
 })(LoginComp);
 
-export default (LoginComp = connect(mapStateToProps, actions)(LoginComp));
+export default (LoginComp = connect(mapStateToProps, actions)(withRouter(LoginComp)));
