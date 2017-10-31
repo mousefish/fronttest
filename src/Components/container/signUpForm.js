@@ -13,7 +13,6 @@ class SignUpForm extends Component {
     return (
       <div className="column" style={{flexDirection:'column', alignItem:'center', justifyContent:'center'}}>
         <div className="col-md-4 col-md-offset-4">
-          <h2 style={{ textAlign: "center" }}>Register</h2>
           <SignUpComp userSignupRequest={userSignupRequest} />
         </div>
       </div>

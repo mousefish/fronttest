@@ -7,7 +7,7 @@ import App from './App';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {createStore, applyMiddleware, compose} from 'redux'
-import rootReducer from './Store/rootReducer'
+import reducers from './Reducers'
 import {BrowserRouter} from 'react-router-dom'
 import setAuthorizationToken from './Utlity/setAuthorizationToken'
 import jwtDecode from 'jwt-decode'
@@ -28,12 +28,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //create redux store in root
-const store = createStore(
-rootReducer,
-composeEnhancers(
-applyMiddleware(thunk),
-)
-);
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 if(localStorage.jwtToken)
 {

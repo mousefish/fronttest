@@ -18,13 +18,14 @@ Logout(e)
     const {isAuthenticated} = this.props.auth;
     const {userLogin} = this.props;
     return(
-      <div className="row">
-      <div className="col-md-4 col-md-offset-4">
+     <div className="column" style={{flexDirection:'column', alignItem:'center', justifyContent:'center'}}>
+        <div className="col-md-4 col-md-offset-4">
       <LoginComp userLogin = {userLogin}/>
       </div>
 
       {isAuthenticated && <button onClick={this.Logout.bind(this)} className="btn btn-success">Logout</button>}
       </div>
+
     )
   }
 }
