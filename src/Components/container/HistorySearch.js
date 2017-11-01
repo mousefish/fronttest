@@ -17,7 +17,7 @@ class HistorySearch extends Component {
                         style={{
                             display: "inline-block",
                             width: "50%",
-                            marginBottom: "20px"
+                            marginBottom: "20px",
                         }}
                     >
                         <i
@@ -35,16 +35,16 @@ class HistorySearch extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{display:'flex', flexDirection:'column', alignItem:'center'}}>
                 <p
                     style={{
                         marginBottom: "40px",
-                        textDecoration: "underline"
+                        textDecoration: "underline",
                     }}
                 >
                     历史搜索
                 </p>
-                <ul style={{ marginBottom: "40px" }}>{this.renderItems()}</ul>
+                <ul style={{ marginBottom: "20px" }}>{this.renderItems()}</ul>
                 <button onClick={this.clearHistory.bind(this)}>
                     清除搜索历史<i className="material-icons right">delete</i>
                 </button>
