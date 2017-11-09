@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import * as actions from "../../Actions";
 import RegisterField from "./RegisterField";
+import RegisterPasswordField from "./RegisterPasswordField";
+
 import TLogo from "../../Assets/Images/logo.jpg";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
@@ -32,7 +34,7 @@ class LoginComp extends Component {
         key="Password"
         name="password"
         type="password"
-        component={RegisterField}
+        component={RegisterPasswordField}
         label="Password"
       />
     ];
