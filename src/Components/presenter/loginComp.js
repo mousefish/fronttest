@@ -35,6 +35,7 @@ class LoginComp extends Component {
         component={RegisterField}
         label="Password"
       />
+
     ];
   }
 
@@ -82,9 +83,6 @@ class LoginComp extends Component {
         <p>
           New user? <Link to="/signup">Register here</Link>
         </p>
-        <span style={{ position: "absolute", right: "0", bottom: "100px" }}>
-          <a href="#">Forgot?</a>
-        </span>
       </div>
     );
   }
