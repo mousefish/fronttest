@@ -42,12 +42,9 @@ class HistorySearch extends Component {
                         textDecoration: "underline",
                     }}
                 >
-                    历史搜索
+                    热门搜索
                 </p>
                 <ul style={{ marginBottom: "20px" }}>{this.renderItems()}</ul>
-                <button onClick={this.clearHistory.bind(this)}>
-                    清除搜索历史<i className="material-icons right">delete</i>
-                </button>
             </div>
         );
     }
