@@ -131,7 +131,8 @@ const validate = values => {
   return errors;
 };
 PopupSearch = reduxForm({
-  form: "popupSearchForm"
+  form: "popupSearchForm",
+  validate
 })(PopupSearch);
 
 export default (PopupSearch = connect(null, actions)(PopupSearch));

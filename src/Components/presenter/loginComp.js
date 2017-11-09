@@ -5,16 +5,18 @@ import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import * as actions from "../../Actions";
 import RegisterField from "./RegisterField";
+import RegisterPasswordField from "./RegisterPasswordField";
+
 import TLogo from "../../Assets/Images/logo.jpg";
 import { Link } from "react-router-dom";
-import { withRouter } from 'react-router';
+import { withRouter } from "react-router";
 
 class LoginComp extends Component {
   // Pass the 3 values to action creator
 
   submitForm(values) {
     const { username, password } = values;
-    console.log('history',this.props);
+    console.log("history", this.props);
     this.props.userLogin({ username, password }, this.props.history);
   }
 
@@ -32,7 +34,7 @@ class LoginComp extends Component {
         key="Password"
         name="password"
         type="password"
-        component={RegisterField}
+        component={RegisterPasswordField}
         label="Password"
       />
     ];
@@ -63,28 +65,35 @@ class LoginComp extends Component {
             marginBottom: "20px"
           }}
         >
-          <Link to='/'><img
-            src={TLogo}
-            style={{
-              width: 100,
-              height: 100
-            }}
-          />
+          <Link to="/">
+            <img
+              src={TLogo}
+              style={{
+                width: 100,
+                height: 100
+              }}
+            />
           </Link>
         </div>
         <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
           {this.renderFields()}
           {this.renderErrorMsg()}
-          <button type="submit" className="btn waves-effect waves-light">
-            Login
-          </button>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              marginTop:'50px'
+            }}
+          >
+            <button type="submit" className="btn waves-effect waves-light">
+              Login
+            </button>
+            <p>
+              New user? <Link to="/signup">Register here</Link>
+            </p>
+          </div>
         </form>
-        <p>
-          New user? <Link to="/signup">Register here</Link>
-        </p>
-        <span style={{ position: "absolute", right: "0", bottom: "100px" }}>
-          <a href="#">Forgot?</a>
-        </span>
       </div>
     );
   }
@@ -115,4 +124,6 @@ LoginComp = reduxForm({
   validate
 })(LoginComp);
 
-export default (LoginComp = connect(mapStateToProps, actions)(withRouter(LoginComp)));
+export default (LoginComp = connect(mapStateToProps, actions)(
+  withRouter(LoginComp)
+));

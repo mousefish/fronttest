@@ -12,6 +12,11 @@ export default ({ input, label, meta: { error, touched } }) => {
                     style={{ marginBottom: "5px" }}
                     placeholder={label}
                 />
+                <span
+                    style={{ position: "absolute", bottom: "10px", right: "0" }}
+                >
+                    <a href="#">Forgot?</a>
+                </span>
             </div>
             <div className="red-text" style={{ marginBottom: "20px" }}>
                 {touched && error}
