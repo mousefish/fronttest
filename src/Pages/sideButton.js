@@ -10,7 +10,8 @@ class SideButton extends Component {
       <Fab
         color="pink"
         style={{
-          bottom: 110,
+          position:'fixed',
+          bottom: 140,
           width: 40,
           height: 40,
           right: 30,
@@ -23,7 +24,8 @@ class SideButton extends Component {
       <Fab
         color="pink"
         style={{
-          bottom: 60,
+          position:'fixed',
+          bottom: 90,
           width: 40,
           height: 40,
           right: 30,
