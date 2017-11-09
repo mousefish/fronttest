@@ -6,9 +6,18 @@ import React from "react";
 export default ({ input, placeholder, icon, meta: { error, touched } }) => {
     return (
         <div>
-          <div style={{display:'flex'}}>
-           <i className="material-icons" style={{lineHeight:'3', fontSize:'20px'}}>{icon}</i>
-            <input {...input} style={{ marginBottom: "5px"}} placeholder={placeholder} />
+            <div style={{ display: "flex" }}>
+                <i
+                    className="material-icons"
+                    style={{ lineHeight: "1.8", fontSize: "20px" }}
+                >
+                    {icon}
+                </i>
+                <input
+                    {...input}
+                    placeholder={placeholder}
+                    style={{ height:'25px'}}
+                />
             </div>
             <div className="red-text" style={{ marginBottom: "20px" }}>
                 {touched && error}
