@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import Tabs, { Tab } from 'material-ui/Tabs';
+import { withStyles } from 'material-ui/styles';
+
 
 class WishTab extends Component {
   state = {
-    index: 0,
+    value: 0,
   };
 
-  handleChange = (event, index) => {
-    this.setState({ index });
+  handleChange = (event, value) => {
+    this.setState({ value });
   };
 
   render() {
     return (
       <Paper>
         <Tabs
-          index={this.state.index}
+          value={this.state.value}
           indicatorColor="primary"
           textColor="primary"
           onChange={this.handleChange}

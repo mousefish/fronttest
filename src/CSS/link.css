@@ -1,5 +1,2 @@
-a.active, a.active-state {
-  > i, i:before {
-      color:red !important;
-  }
-}
+a.active > i, a.active i:before, a.active-state > i, a.active-state i:before {
+  color: red !important; }
