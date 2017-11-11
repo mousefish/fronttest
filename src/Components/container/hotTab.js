@@ -15,7 +15,7 @@ class HotTab extends Component {
     return (
       <Paper>
         <Tabs
-          index={this.state.index}
+          value={this.state.index}
           indicatorColor="primary"
           textColor="primary"
           onChange={this.handleChange}

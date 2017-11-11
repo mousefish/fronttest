@@ -87,11 +87,9 @@ class TripMain extends Component {
           />
           <div
             style={{
-              maxWidth: 800,
+              width:'95%',
               margin: "auto",
               marginBottom: 98,
-              marginLeft: 5,
-              marginRight: 5,
               marginTop: 20
             }}
           >
