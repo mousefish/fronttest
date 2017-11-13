@@ -24,7 +24,7 @@ import Tab3Content from './Pages/tab3content'
 //development only, disable it in production
 
 // import materialize css library
-// import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/css/materialize.min.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //create redux store in root
