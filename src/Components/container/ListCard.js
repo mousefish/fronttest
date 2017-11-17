@@ -36,6 +36,13 @@ const styleSheet = {
     display: "flex",
     flexDirection: "row"
   },
+
+  dateDetails:{
+    textDecoration: "underline",
+    display: "inline",
+    color: "purple"
+  },
+
   content: {
     flex: "0 1 auto"
   },
@@ -59,7 +66,7 @@ const styleSheet = {
     backgroundColor: green[700],
     color: "white"
   },
-  avatar: { float: "right", width: 50, height: 50 },
+  avatar: { float: "right", width: 50, height: 50,},
   flexGrow: { flex: "1 1 auto" }
 };
 
@@ -76,12 +83,12 @@ class ListCard extends Component {
                     component="p"
                     style={{
                       marginTop: 140,
-                      marginLeft: "75%",
+                      marginLeft: "80%",
                       position: "absolute",
                       backgroundColor: "white",
                       padding: 3,
                       width: 72,
-                      textAlign: "center"
+                      textAlign: "center",
                     }}
                   >
                     {item.attendence}
@@ -91,7 +98,7 @@ class ListCard extends Component {
                     style={{
                       marginTop: 180,
                       position: "absolute",
-                      marginLeft: "75%",
+                      marginLeft: "80%",
                       backgroundColor: "white",
                       padding: 3,
                       width: 72,
@@ -114,7 +121,9 @@ class ListCard extends Component {
                     style={{
                       overflowWrap: "break-word",
                       fontSize: 20,
-                      marginBottom: 5
+                      marginBottom: 5,
+                      paddingLeft:'0'
+
                     }}
                   >
                     {item.theme}
@@ -126,7 +135,8 @@ class ListCard extends Component {
                       textAlign: "right",
                       fontSize: 20,
                       marginBottom: 5,
-                      marginLeft: -5
+                      marginLeft: -5,
+                      paddingRight:'0'
                     }}
                   >
                     {item.price}
@@ -139,7 +149,8 @@ class ListCard extends Component {
                       overflowWrap: "break-word",
                       verticalAlign: "center",
                       fontSize: 13,
-                      lineHeight: 2
+                      lineHeight: 2,
+                      paddingLeft:'0'
                     }}
                   >
                     <Schedule style={{ width: 13, height: 13 }} />{" "}
@@ -148,34 +159,22 @@ class ListCard extends Component {
                     </div>{" "}
                     出发<br />
                     <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
+                      style={styleSheet.dateDetails}
                     >
                       {item.service[0]}
                     </div>{" "}
                     <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
+                      style={styleSheet.dateDetails}
                     >
                       {item.service[1]}
                     </div>{" "}
                     <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
+                      style={styleSheet.dateDetails}
                     >
                       {item.service[2]}
                     </div>
                   </div>
-                  <div className="col-xs-4" style={{ float: "right" }}>
+                  <div className="col-xs-4" style={{ paddingRight:'0' }}>
                     {" "}
                     <Avatar aria-label="Recipe" className={this.props.classes.avatar}>
                       W
