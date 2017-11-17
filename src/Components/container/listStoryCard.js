@@ -28,7 +28,8 @@ const styleSheet = {
   card: {
     width: "100%",
     marginBottom: 1,
-    margin: "auto"
+    margin: "auto",
+    boxShadow:'none'
   },
   details: {
     display: "flex",

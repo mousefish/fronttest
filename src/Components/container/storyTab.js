@@ -13,7 +13,7 @@ class StoryTab extends Component {
 
   render() {
     return (
-      <Paper>
+      <Paper style={{boxShadow:'none', marginBottom:'10px'}}>
         <Tabs
           value={this.state.index}
           indicatorColor="primary"

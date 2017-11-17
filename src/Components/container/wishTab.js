@@ -15,7 +15,7 @@ class WishTab extends Component {
 
   render() {
     return (
-      <Paper>
+      <Paper style={{boxShadow:'none', marginBottom:'10px'}}>
         <Tabs
           value={this.state.value}
           indicatorColor="primary"
