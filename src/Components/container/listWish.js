@@ -31,7 +31,7 @@ const styleSheet = {
   card: {
     width: "100%",
     marginBottom: 1,
-    margin: "auto"
+    margin: "auto",
   },
   details: {
     display: "flex",
@@ -67,8 +67,8 @@ class ListWish extends Component {
   renderItems() {
     return dummyWishData.map((item) => {
       return (
-        <ListItem button style={{ padding: 1, paddingBottom: -3 }}>
-          <div className="md-paper md-paper--2" style={{ width: "100%" }}>
+        <ListItem button style={{ padding: 1, paddingBottom: -3, boxShadow:'none' }}>
+          <div className="md-paper md-paper--2" style={{ width: "100%", boxShadow:'none' }}>
             <div
               className="col-xs-12"
               style={{
