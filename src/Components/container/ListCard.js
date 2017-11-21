@@ -115,42 +115,26 @@ class ListCard extends Component {
                 </div>
               </CardMedia>
               <CardContent>
-                <div className="row">
+                <div style={{
+                  display:'flex',
+                  justifyContent:'space-between',
+                  marginBottom:'10px',
+                  fontSize:'20px'
+                }}>
                   <div
-                    className="col-xs-8"
-                    style={{
-                      overflowWrap: "break-word",
-                      fontSize: 20,
-                      marginBottom: 5,
-                      paddingLeft:'0'
-
-                    }}
                   >
                     {item.theme}
                   </div>
                   <div
-                    className="col-xs-4"
-                    style={{
-                      overflowWrap: "break-word",
-                      textAlign: "right",
-                      fontSize: 20,
-                      marginBottom: 5,
-                      marginLeft: -5,
-                      paddingRight:'0'
-                    }}
                   >
                     {item.price}
                   </div>
                 </div>
-                <div className="row">
+                <div style={{display:'flex', justifyContent:'space-between'}}>
                   <div
-                    className="col-xs-8"
                     style={{
-                      overflowWrap: "break-word",
-                      verticalAlign: "center",
                       fontSize: 13,
                       lineHeight: 2,
-                      paddingLeft:'0'
                     }}
                   >
                     <Schedule style={{ width: 13, height: 13 }} />{" "}
@@ -174,7 +158,7 @@ class ListCard extends Component {
                       {item.service[2]}
                     </div>
                   </div>
-                  <div className="col-xs-4" style={{ paddingRight:'0' }}>
+                  <div>
                     {" "}
                     <Avatar aria-label="Recipe" className={this.props.classes.avatar}>
                       W
