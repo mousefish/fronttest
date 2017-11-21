@@ -68,7 +68,12 @@ class ListWish extends Component {
     return dummyWishData.map((item) => {
       return (
         <ListItem button style={{ padding: 1, paddingBottom: -3, boxShadow:'none' }}>
-          <div style={{ width: "100%", boxShadow:'none' }}>
+          <div style={{
+            width: "100%",
+            display:'flex',
+            flexDirection:'column'
+
+             }}>
             <div
               style={{
                 fontSize: 18,
@@ -113,7 +118,7 @@ class ListWish extends Component {
               }}
             >
               <AttachMoney
-                style={{ width: 15, height: 15, lineHeight: 15, verticalAlign: "middle" }}
+                style={{ width: 15, height: 15, verticalAlign: "middle" }}
               />{" "}
               {item.budget}/天
             </div>
@@ -124,9 +129,8 @@ class ListWish extends Component {
                 fontSize: 15,
                 lineHeight: 1.9,
                 textAlign: "center",
-                marginLeft: 20,
                 backgroundColor: "#1d86c9",
-                marginBottom: 5
+                marginBottom: 5,
               }}
             >
               接单{item.responses}人
