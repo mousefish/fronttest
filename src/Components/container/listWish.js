@@ -69,10 +69,7 @@ class ListWish extends Component {
       return (
         <ListItem button style={{ padding: 1, paddingBottom: -3, boxShadow:'none' }}>
           <div style={{
-            width: "100%",
-            display:'flex',
-            flexDirection:'column'
-
+            width: "100%"
              }}>
             <div
               style={{
@@ -88,13 +85,12 @@ class ListWish extends Component {
 
             <div
               style={{
-                verticalAlign: "center",
                 fontSize: 15,
                 lineHeight: 1.9
               }}
             >
               <Schedule
-                style={{ width: 16, height: 16, verticalAlign: "middle" }}
+                style={{ width: 16, height: 16, verticalAlign: "-2px" }}
               />{" "}
               {item.date} 出发
             </div>
@@ -106,7 +102,7 @@ class ListWish extends Component {
               }}
             >
               <LocationOn
-                style={{ width: 15, height: 15, verticalAlign: "middle" }}
+                style={{ width: 15, height: 15, verticalAlign: "-1px" }}
               />{" "}
               {item.destination}
             </div>
@@ -118,7 +114,7 @@ class ListWish extends Component {
               }}
             >
               <AttachMoney
-                style={{ width: 15, height: 15, verticalAlign: "middle" }}
+                style={{ width: 15, height: 15, verticalAlign: "-2px" }}
               />{" "}
               {item.budget}/天
             </div>
