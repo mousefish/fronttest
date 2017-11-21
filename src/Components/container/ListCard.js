@@ -115,7 +115,12 @@ class ListCard extends Component {
                 </div>
               </CardMedia>
               <CardContent>
-                <div style={{display:'flex', justifyContent:'space-between', marginBottom:'10px', fontSize:'20px'}}>
+                <div style={{
+                  display:'flex',
+                  justifyContent:'space-between',
+                  marginBottom:'10px',
+                  fontSize:'20px'
+                }}>
                   <div
                   >
                     {item.theme}
@@ -127,7 +132,6 @@ class ListCard extends Component {
                 </div>
                 <div style={{display:'flex', justifyContent:'space-between'}}>
                   <div
-
                     style={{
                       fontSize: 13,
                       lineHeight: 2,

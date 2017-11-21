@@ -68,11 +68,9 @@ class ListWish extends Component {
     return dummyWishData.map((item) => {
       return (
         <ListItem button style={{ padding: 1, paddingBottom: -3, boxShadow:'none' }}>
-          <div className="md-paper md-paper--2" style={{ width: "100%", boxShadow:'none' }}>
+          <div style={{ width: "100%", boxShadow:'none' }}>
             <div
-              className="col-xs-12"
               style={{
-                overflowWrap: "break-word",
                 fontSize: 18,
                 marginBottom: 5,
                 marginTop: 10
@@ -84,9 +82,7 @@ class ListWish extends Component {
             </div>
 
             <div
-              className="col-xs-12"
               style={{
-                overflowWrap: "break-word",
                 verticalAlign: "center",
                 fontSize: 15,
                 lineHeight: 1.9
@@ -99,10 +95,7 @@ class ListWish extends Component {
             </div>
 
             <div
-              className="col-xs-12"
               style={{
-                overflowWrap: "break-word",
-                verticalAlign: "center",
                 fontSize: 15,
                 lineHeight: 1.9
               }}
@@ -114,26 +107,20 @@ class ListWish extends Component {
             </div>
 
             <div
-              className="col-xs-12"
               style={{
-                overflowWrap: "break-word",
-                verticalAlign: "center",
                 fontSize: 15,
                 lineHeight: 1.9
               }}
             >
               <AttachMoney
-                style={{ width: 15, height: 15, verticalAlign: "middle" }}
+                style={{ width: 15, height: 15, lineHeight: 15, verticalAlign: "middle" }}
               />{" "}
               {item.budget}/天
             </div>
 
             <div
-              className="col-xs-11 md-paper--1"
               style={{
                 color: "white",
-                overflowWrap: "break-word",
-                verticalAlign: "center",
                 fontSize: 15,
                 lineHeight: 1.9,
                 textAlign: "center",

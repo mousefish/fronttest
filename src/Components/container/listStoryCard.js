@@ -24,12 +24,14 @@ import Person from "material-ui-icons/Person";
 import StarBorder from "material-ui-icons/StarBorder";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 import LocationOn from "material-ui-icons/LocationOn";
+import dummyStoryData from './dummyStoryData.json';
+
 const styleSheet = {
   card: {
     width: "100%",
     marginBottom: 1,
     margin: "auto",
-    boxShadow:'none'
+    boxShadow: "none"
   },
   details: {
     display: "flex",
@@ -62,325 +64,114 @@ const styleSheet = {
   flexGrow: { flex: "1 1 auto" }
 };
 class ListStoryCard extends Component {
+  renderItems(){
+    return dummyStoryData.map((item)=>{
+      return (
+         <ListItem button style={{ padding: 1 }}>
+            <Card className={this.props.classes.card}>
+              <CardMedia>
+                <div style={{ position: "relative" }}>
+                  <Typography
+                    component="p"
+                    style={{
+                      marginTop: 180,
+                      position: "absolute",
+                      marginLeft: "80%",
+                      backgroundColor: "white",
+                      padding: 3,
+                      width: 72,
+                      textAlign: "center"
+                    }}
+                  >
+                    官方认证
+                  </Typography>
+                  <img
+                    style={{ height: 220, width: "100%" }}
+                    src={travel}
+                    alt="Contemplative Reptile"
+                  />
+                </div>
+              </CardMedia>
+              <CardContent>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      fontSize: 13,
+                      lineHeight: 1.8
+                    }}
+                  >
+                    <div>
+                      <Person style={{ width: 13, height: 13 }} />{" "}
+                      {item.intro}<br />
+                      <StarBorder style={{ width: 13, height: 13 }} />
+                      <div
+                        style={{
+                          textDecoration: "underline",
+                          display: "inline",
+                          color: "purple"
+                        }}
+                      >
+                        {item.title1}
+                      </div>{" "}
+                      <div
+                        style={{
+                          textDecoration: "underline",
+                          display: "inline",
+                          color: "purple"
+                        }}
+                      >
+                        {item.title2}
+                      </div>{" "}
+                      <div
+                        style={{
+                          textDecoration: "underline",
+                          display: "inline",
+                          color: "purple"
+                        }}
+                      >
+                        {item.title3}
+                      </div>
+                    </div>
+                    <div>
+                    {" "}
+                    <Avatar aria-label="Recipe" className={this.props.classes.avatar}>
+                      W
+                    </Avatar>
+                  </div>
+                  </div>
+
+
+                <div style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      fontSize: 13,
+                      lineHeight: 1.8,
+                      marginBottom: 5,
+                    }}>
+                  <div
+                  >
+                    <LocationOn style={{ width: 13, height: 13 }} />美国,纳帕
+                  </div>
+                  <div
+                  >
+                    {item.name}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </ListItem>
+          )
+    })
+  }
   render() {
     const classes = this.props.classes;
 
     return (
       <div>
         <List style={{ paddingTop: 0 }}>
-          <ListItem button style={{ padding: 1 }}>
-            <Card className={classes.card}>
-              <CardMedia>
-                <div style={{ position: "relative" }}>
-                  <Typography
-                    component="p"
-                    style={{
-                      marginTop: 180,
-                      position: "absolute",
-                      marginLeft: "80%",
-                      backgroundColor: "white",
-                      padding: 3,
-                      width: 72,
-                      textAlign: "center",
-
-                    }}
-                  >
-                    官方认证
-                  </Typography>
-                  <img
-                    style={{ height: 220, width: "100%" }}
-                    src={travel}
-                    alt="Contemplative Reptile"
-                  />
-                </div>
-              </CardMedia>
-              <CardContent>
-                <div className="row">
-                  <div
-                    className="col-xs-8"
-                    style={{
-                      overflowWrap: "break-word",
-                      verticalAlign: "center",
-                      fontSize: 13,
-                      lineHeight: 1.8,
-                      paddingLeft:'0'
-
-                    }}
-                  >
-                    <Person style={{ width: 13, height: 13 }} /> 自我介绍自我介绍自我介绍..<br />
-                    <StarBorder style={{ width: 13, height: 13 }} />
-                    <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
-                    >
-                      红酒
-                    </div>{" "}
-                    <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
-                    >
-                      设计师
-                    </div>{" "}
-                    <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
-                    >
-                      冒险家
-                    </div>
-                  </div>
-                  <div className="col-xs-4" style={{ paddingRight:'0' }}>
-                    {" "}
-                    <Avatar aria-label="Recipe" className={classes.avatar}>
-                      W
-                    </Avatar>
-                  </div>
-                </div>
-                <div className="row">
-                  <div
-                    className="col-xs-8"
-                    style={{
-                      overflowWrap: "break-word",
-                      fontSize: 13,
-                      marginBottom: 5,
-                      paddingLeft:'0'
-                    }}
-                  >
-                    <LocationOn style={{ width: 13, height: 13 }} />美国,纳帕
-                  </div>
-                  <div
-                    className="col-xs-4"
-                    style={{
-                      overflowWrap: "break-word",
-                      textAlign: "right",
-                      fontSize: 13,
-                      marginBottom: 5,
-                      marginLeft: -5,
-                      paddingRight:'0'
-                    }}
-                  >
-                    Joe Chen
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </ListItem>
-
-          <ListItem button style={{ padding: 1 }}>
-            <Card className={classes.card}>
-              <CardMedia>
-                <div style={{ position: "relative" }}>
-                  <Typography
-                    component="p"
-                    style={{
-                      marginTop: 180,
-                      position: "absolute",
-                      marginLeft: "80%",
-                      backgroundColor: "white",
-                      padding: 3,
-                      width: 72,
-                      textAlign: "center"
-                    }}
-                  >
-                    官方认证
-                  </Typography>
-                  <img
-                    style={{ height: 220, width: "100%" }}
-                    src={travel}
-                    alt="Contemplative Reptile"
-                  />
-                </div>
-              </CardMedia>
-              <CardContent>
-                <div className="row">
-                  <div
-                    className="col-xs-8"
-                    style={{
-                      overflowWrap: "break-word",
-                      verticalAlign: "center",
-                      fontSize: 13,
-                      lineHeight: 1.8,
-                      paddingLeft:'0'
-                    }}
-                  >
-                    <Person style={{ width: 13, height: 13 }} /> 自我介绍自我介绍自我介绍..<br />
-                    <StarBorder style={{ width: 13, height: 13 }} />
-                    <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
-                    >
-                      红酒
-                    </div>{" "}
-                    <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
-                    >
-                      设计师
-                    </div>{" "}
-                    <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
-                    >
-                      冒险家
-                    </div>
-                  </div>
-                  <div className="col-xs-4" style={{ paddingRight:'0' }}>
-                    {" "}
-                    <Avatar aria-label="Recipe" className={classes.avatar}>
-                      W
-                    </Avatar>
-                  </div>
-                </div>
-                <div className="row">
-                  <div
-                    className="col-xs-8"
-                    style={{
-                      overflowWrap: "break-word",
-                      fontSize: 13,
-                      marginBottom: 5,
-                      paddingLeft:'0'
-                    }}
-                  >
-                    <LocationOn style={{ width: 13, height: 13 }} />美国,纳帕
-                  </div>
-                  <div
-                    className="col-xs-4"
-                    style={{
-                      overflowWrap: "break-word",
-                      textAlign: "right",
-                      fontSize: 13,
-                      marginBottom: 5,
-                      marginLeft: -5,
-                      paddingRight:'0'
-                    }}
-                  >
-                    Joe Chen
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </ListItem>
-
-          <ListItem button style={{ padding: 1 }}>
-            <Card className={classes.card}>
-              <CardMedia>
-                <div style={{ position: "relative" }}>
-                  <Typography
-                    component="p"
-                    style={{
-                      marginTop: 180,
-                      position: "absolute",
-                      marginLeft: "80%",
-                      backgroundColor: "white",
-                      padding: 3,
-                      width: 72,
-                      textAlign: "center"
-                    }}
-                  >
-                    官方认证
-                  </Typography>
-                  <img
-                    style={{ height: 220, width: "100%" }}
-                    src={travel}
-                    alt="Contemplative Reptile"
-                  />
-                </div>
-              </CardMedia>
-              <CardContent>
-                <div className="row">
-                  <div
-                    className="col-xs-8"
-                    style={{
-                      overflowWrap: "break-word",
-                      verticalAlign: "center",
-                      fontSize: 13,
-                      lineHeight: 1.8,
-                      paddingLeft:'0'
-                    }}
-                  >
-                    <Person style={{ width: 13, height: 13 }} /> 自我介绍自我介绍自我介绍..<br />
-                    <StarBorder style={{ width: 13, height: 13 }} />
-                    <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
-                    >
-                      红酒
-                    </div>{" "}
-                    <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
-                    >
-                      设计师
-                    </div>{" "}
-                    <div
-                      style={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        color: "purple"
-                      }}
-                    >
-                      冒险家
-                    </div>
-                  </div>
-                  <div className="col-xs-4" style={{ paddingRight:'0' }}>
-                    {" "}
-                    <Avatar aria-label="Recipe" className={classes.avatar}>
-                      W
-                    </Avatar>
-                  </div>
-                </div>
-                <div className="row">
-                  <div
-                    className="col-xs-8"
-                    style={{
-                      overflowWrap: "break-word",
-                      fontSize: 13,
-                      marginBottom: 5,
-                      paddingLeft:'0'
-                    }}
-                  >
-                    <LocationOn style={{ width: 13, height: 13 }} />美国,纳帕
-                  </div>
-                  <div
-                    className="col-xs-4"
-                    style={{
-                      overflowWrap: "break-word",
-                      textAlign: "right",
-                      fontSize: 13,
-                      marginBottom: 5,
-                      marginLeft: -5,
-                      paddingRight:'0'
-                    }}
-                  >
-                    Joe Chen
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </ListItem>
+          {this.renderItems()}
         </List>
       </div>
     );
