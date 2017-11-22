@@ -33,42 +33,16 @@ const styleSheet = {
     marginBottom: 1,
     margin: "auto",
   },
-  details: {
-    display: "flex",
-    flexDirection: "row"
-  },
-  content: {
-    flex: "0 1 auto"
-  },
-  cover: {
-    width: "100%",
-    height: "100%",
-    display: "inline-block",
-    paddingTop: 10
-  },
-  playIcon: {
-    height: 38,
-    width: 38
-  },
-  chip: {
-    height: 22,
-    display: "inline-flex",
-    backgroundColor: "accent"
-  },
-  button: {
-    float: "right",
-    backgroundColor: green[700],
-    color: "white"
-  },
-  avatar: { float: "right", width: 50, height: 50 },
-  flexGrow: { flex: "1 1 auto" }
+
 };
 class ListWish extends Component {
   renderItems() {
     return dummyWishData.map((item) => {
       return (
-        <ListItem button style={{ padding: 1, paddingBottom: -3, boxShadow:'none' }}>
-          <div style={{ width: "100%", boxShadow:'none' }}>
+        <ListItem style={{ padding: 1, paddingBottom: -3, boxShadow:'none' }}>
+          <div style={{
+            width: "100%"
+             }}>
             <div
               style={{
                 fontSize: 18,
@@ -83,13 +57,12 @@ class ListWish extends Component {
 
             <div
               style={{
-                verticalAlign: "center",
                 fontSize: 15,
                 lineHeight: 1.9
               }}
             >
               <Schedule
-                style={{ width: 16, height: 16, verticalAlign: "middle" }}
+                style={{ width: 16, height: 16, verticalAlign: "-2px" }}
               />{" "}
               {item.date} 出发
             </div>
@@ -101,7 +74,7 @@ class ListWish extends Component {
               }}
             >
               <LocationOn
-                style={{ width: 15, height: 15, verticalAlign: "middle" }}
+                style={{ width: 15, height: 15, verticalAlign: "-1px" }}
               />{" "}
               {item.destination}
             </div>
@@ -113,7 +86,7 @@ class ListWish extends Component {
               }}
             >
               <AttachMoney
-                style={{ width: 15, height: 15, lineHeight: 15, verticalAlign: "middle" }}
+                style={{ width: 15, height: 15, verticalAlign: "-2px" }}
               />{" "}
               {item.budget}/天
             </div>
@@ -124,9 +97,8 @@ class ListWish extends Component {
                 fontSize: 15,
                 lineHeight: 1.9,
                 textAlign: "center",
-                marginLeft: 20,
                 backgroundColor: "#1d86c9",
-                marginBottom: 5
+                marginBottom: 5,
               }}
             >
               接单{item.responses}人

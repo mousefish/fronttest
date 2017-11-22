@@ -43,31 +43,6 @@ const styleSheet = {
     color: "purple"
   },
 
-  content: {
-    flex: "0 1 auto"
-  },
-  cover: {
-    width: "100%",
-    height: "100%",
-    display: "inline-block",
-    paddingTop: 10
-  },
-  playIcon: {
-    height: 38,
-    width: 38
-  },
-  chip: {
-    height: 22,
-    display: "inline-flex",
-    backgroundColor: "accent"
-  },
-  button: {
-    float: "right",
-    backgroundColor: green[700],
-    color: "white"
-  },
-  avatar: { float: "right", width: 50, height: 50,},
-  flexGrow: { flex: "1 1 auto" }
 };
 
 class ListCard extends Component {
@@ -75,7 +50,7 @@ class ListCard extends Component {
   renderItems(){
       return dummyData.map((item)=>{
         return (
-          <ListItem button style={{ padding: 1 }}>
+          <ListItem>
             <Card className={this.props.classes.card}>
               <CardMedia>
                 <div style={{ position: "relative" }}>
@@ -137,23 +112,23 @@ class ListCard extends Component {
                       lineHeight: 2,
                     }}
                   >
-                    <Schedule style={{ width: 13, height: 13 }} />{" "}
+                    <Schedule style={{ width: 13, height: 13, verticalAlign:'-1' }} />{" "}
                     <div style={{ display: "inline", color: "#3d9fe7" }}>
                       {item.date}
                     </div>{" "}
                     出发<br />
                     <div
-                      style={styleSheet.dateDetails}
+                      className={this.props.classes.dateDetails}
                     >
                       {item.service[0]}
                     </div>{" "}
                     <div
-                      style={styleSheet.dateDetails}
+                      className={this.props.classes.dateDetails}
                     >
                       {item.service[1]}
                     </div>{" "}
                     <div
-                      style={styleSheet.dateDetails}
+                      className={this.props.classes.dateDetails}
                     >
                       {item.service[2]}
                     </div>

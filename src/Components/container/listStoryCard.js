@@ -33,35 +33,7 @@ const styleSheet = {
     margin: "auto",
     boxShadow: "none"
   },
-  details: {
-    display: "flex",
-    flexDirection: "row"
-  },
-  content: {
-    flex: "0 1 auto"
-  },
-  cover: {
-    width: "100%",
-    height: "100%",
-    display: "inline-block",
-    paddingTop: 10
-  },
-  playIcon: {
-    height: 38,
-    width: 38
-  },
-  chip: {
-    height: 22,
-    display: "inline-flex",
-    backgroundColor: "accent"
-  },
-  button: {
-    float: "right",
-    backgroundColor: green[700],
-    color: "white"
-  },
-  avatar: { float: "right", width: 50, height: 50 },
-  flexGrow: { flex: "1 1 auto" }
+
 };
 class ListStoryCard extends Component {
   renderItems(){
@@ -136,7 +108,7 @@ class ListStoryCard extends Component {
                     </div>
                     <div>
                     {" "}
-                    <Avatar aria-label="Recipe" className={this.props.classes.avatar}>
+                    <Avatar aria-label="Recipe">
                       W
                     </Avatar>
                   </div>
