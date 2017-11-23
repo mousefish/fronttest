@@ -92,30 +92,30 @@ class App extends Component {
 
   handleMainChange(event, main_value) {
     this.setState({ main_value });
-    if (main_value == 0) {
+    if (main_value === 0) {
       this.props.history.push("/");
-    } else if (main_value == 1) {
+    } else if (main_value === 1) {
       this.props.history.push("/wish");
-    } else if (main_value == 2) {
+    } else if (main_value === 2) {
       this.props.history.push("/story");
-    } else if (main_value == 3) {
+    } else if (main_value === 3) {
       this.props.history.push("/message");
-    } else if (main_value == 4) {
+    } else if (main_value === 4) {
       this.props.history.push("/my");
     }
   }
 
   handleSubChange(event, sub_value) {
     this.setState({ sub_value });
-    if (sub_value == 0) {
+    if (sub_value === 0) {
       this.props.history.push("/discovery");
-    }else if (sub_value == 1) {
+    }else if (sub_value === 1) {
       this.props.history.push("/myRoute");
-    } else if (sub_value == 2) {
+    } else if (sub_value === 2) {
       this.props.history.push("/addRoute");
-    } else if (sub_value == 3) {
+    } else if (sub_value === 3) {
       this.props.history.push("/message");
-    } else if (sub_value == 4) {
+    } else if (sub_value === 4) {
       this.props.history.push("/my");
     }
   }
