@@ -1,17 +1,8 @@
 import React,{Component} from 'react'
 import '../CSS/main.css'
 import { withStyles } from 'material-ui/styles';
-import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
-import Home from 'material-ui-icons/Home';
-import Flight from 'material-ui-icons/Flight';
-import Message from 'material-ui-icons/Message';
-import Person from 'material-ui-icons/Person';
-import WebFontLoader from 'webfontloader';
-import BannerSlider from '../Components/container/mainBannerSlider'
 
-import NowPlayingCard from '../Components/container/MaterialCard'
-import SearchBar from '../Components/container/searchBar'
-import TabSelect from '../Components/container/tabSelect'
+import WebFontLoader from 'webfontloader';
 import {Page} from 'framework7-react'
 import {Popup, Button, Link,Navbar, View,Toolbar, Tab, ContentBlock,Tabs} from 'framework7-react'
 import PopupSearch from '../Components/container/popupSearch'
