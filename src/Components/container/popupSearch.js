@@ -91,7 +91,7 @@ class PopupSearch extends Component {
           >
             <Button
               onClick={this.props.close_popup}
-              color="black"
+              color="white"
               big={true}
               iconMaterial={"clear"}
               style={{ width: "10%", color:"#fff" }}
