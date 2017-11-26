@@ -60,6 +60,16 @@ const styleSheet = {
 };
 
 class ListCard extends Component {
+
+  renderStar(nums) {
+    const icon = this.props.classes.icon;
+
+    var starWrapper = [];
+    for (let i = 0; i < nums; i++) {
+      starWrapper.push(<Star className={icon} />);
+    }
+    return starWrapper;
+  }
   renderItems() {
     const classes = this.props.classes;
     return dummyData.map(item => {
@@ -116,10 +126,7 @@ class ListCard extends Component {
                 &nbsp;{item.price}
               </div>
               <div style={{ float: "right" }}>
-                <Star className={classes.icon} />
-                <Star className={classes.icon} />
-                <Star className={classes.icon} />
-                <Star className={classes.icon} />
+                {this.renderStar(item.stars)}
                 &nbsp;{item.comments}
               </div>
               <div style={{ clear: "both" }} />
