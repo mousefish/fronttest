@@ -7,7 +7,14 @@ import SkipPreviousIcon from "material-ui-icons/SkipPrevious";
 import PlayArrowIcon from "material-ui-icons/PlayArrow";
 import SkipNextIcon from "material-ui-icons/SkipNext";
 import Schedule from "material-ui-icons/Schedule";
-import travel from "../../Assets/Images/travel.jpg";
+import LocationOn from "material-ui-icons/LocationOn";
+import MonetizationOn from "material-ui-icons/MonetizationOn";
+import FavoriteBorder from "material-ui-icons/FavoriteBorder";
+import LocalOffer from "material-ui-icons/LocalOffer";
+import Star from "material-ui-icons/Star";
+import Person from "material-ui-icons/Person";
+
+import travel from "../../Assets/Images/sichuan.jpg";
 import Chip from "material-ui/Chip";
 import Button from "material-ui/Button";
 import { green } from "material-ui/colors";
@@ -19,148 +26,132 @@ import Card, {
   CardActions
 } from "material-ui/Card";
 import Avatar from "material-ui/Avatar";
+import blue from "material-ui/colors/blue";
 import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 
-import dummyData from './dummyTravelData.json';
+import dummyData from "./dummyTravelData.json";
 
 const styleSheet = {
   card: {
     width: "100%",
-    marginBottom: 1,
+    marginBottom: 30,
     margin: "auto",
-    boxShadow:'none',
+    boxShadow: "none",
+    border: "1px solid #f2f2f2",
+    position: "relative"
   },
 
-  details: {
-    display: "flex",
-    flexDirection: "row"
+  media: {
+    height: 204,
+    position: "relative"
   },
 
-  dateDetails:{
-    textDecoration: "underline",
-    display: "inline",
-    color: "purple"
+  avatar: {
+    backgroundColor: blue[500]
   },
 
+  icon: {
+    width: 15,
+    height: 15,
+    verticalAlign: "-2px"
+  }
 };
 
 class ListCard extends Component {
+  renderItems() {
+    const classes = this.props.classes;
+    return dummyData.map(item => {
+      return (
+        <Card className={classes.card}>
+          <CardHeader
+            avatar={
+              <Avatar aria-label="tour guide" className={classes.avatar}>
+                C
+              </Avatar>
+            }
+            title={item.name}
+            subheader={item.title}
+          />
+          <CardMedia className={classes.media} image={travel} title="travel">
+            <span
+              style={{
+                position: "absolute",
+                right: "10",
+                top: "10",
+                color: "#fff"
+              }}
+            >
+              <LocationOn
+                className={classes.icon}
+                style={{ color: "#fff" }}
+              />{" "}
+              中国 成都
+            </span>
+            <span
+              style={{
+                position: "absolute",
+                bottom: 0,
+                width: "100%",
+                height: "15%",
+                padding: 5,
+                color: "#fff",
+                backgroundColor: "rgba(0,0,0,0.6)"
+              }}
+            >
+              {item.theme}
+            </span>
+          </CardMedia>
+          <CardContent>
+            <div
+              style={{
+                marginBottom: 10
+              }}
+            >
+              <div style={{ float: "left" }}>
+                <MonetizationOn
+                  style={{ width: 15, height: 15, verticalAlign: "-2px" }}
+                />{" "}
+                &nbsp;{item.price}
+              </div>
+              <div style={{ float: "right" }}>
+                <Star className={classes.icon} />
+                <Star className={classes.icon} />
+                <Star className={classes.icon} />
+                <Star className={classes.icon} />
+                &nbsp;{item.comments}
+              </div>
+              <div style={{ clear: "both" }} />
+            </div>
 
-  renderItems(){
-      return dummyData.map((item)=>{
-        return (
-          <ListItem style={{paddingLeft:0, paddingRight:0}}>
-            <Card className={this.props.classes.card}>
-              <CardMedia>
-                <div style={{ position: "relative" }}>
-                  <Typography
-                    component="p"
-                    style={{
-                      marginTop: 140,
-                      marginLeft: "80%",
-                      position: "absolute",
-                      backgroundColor: "white",
-                      paddingHorizontal: 3,
-                      width: 72,
-                      textAlign: "center",
-                    }}
-                  >
-                    {item.attendence}
-                  </Typography>
-                  <Typography
-                    component="p"
-                    style={{
-                      marginTop: 180,
-                      position: "absolute",
-                      marginLeft: "80%",
-                      backgroundColor: "white",
-                      paddingHorizontal: 3,
-                      width: 72,
-                      textAlign: "center"
-                    }}
-                  >
-                    {item.expiration}
-                  </Typography>
-                  <img
-                    style={{ height: 220, width: "100%" }}
-                    src={travel}
-                    alt="Contemplative Reptile"
-                  />
-                </div>
-              </CardMedia>
-              <CardContent>
-                <div style={{
-                  display:'flex',
-                  justifyContent:'space-between',
-                  marginBottom:'10px',
-                  fontSize:'20px'
-                }}>
-                  <div
-                  >
-                    {item.theme}
-                  </div>
-                  <div
-                  >
-                    {item.price}
-                  </div>
-                </div>
-                <div style={{display:'flex', justifyContent:'space-between'}}>
-                  <div
-                    style={{
-                      fontSize: 13,
-                      lineHeight: 2,
-                    }}
-                  >
-                    <Schedule style={{ width: 13, height: 13, verticalAlign:'-1' }} />{" "}
-                    <div style={{ display: "inline", color: "#3d9fe7" }}>
-                      {item.date}
-                    </div>{" "}
-                    出发<br />
-                    <div
-                      className={this.props.classes.dateDetails}
-                    >
-                      {item.service[0]}
-                    </div>{" "}
-                    <div
-                      className={this.props.classes.dateDetails}
-                    >
-                      {item.service[1]}
-                    </div>{" "}
-                    <div
-                      className={this.props.classes.dateDetails}
-                    >
-                      {item.service[2]}
-                    </div>
-                  </div>
-                  <div>
-                    {" "}
-                    <Avatar aria-label="Recipe" className={this.props.classes.avatar}>
-                      W
-                    </Avatar>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </ListItem>
+            <div style={{ marginBottom: 10 }}>
+              <span style={{ marginRight: 10 }}>
+                <LocalOffer className={classes.icon} />
+                &nbsp;{item.service[0]}
+              </span>
+              <span>
+                <LocalOffer className={classes.icon} />
+                &nbsp;{item.service[1]}
+              </span>
+            </div>
+          </CardContent>
 
-        )
-
-      });
-
-    }
+          <CardActions disableActionSpacing>
+            <IconButton aria-label="Add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            <IconButton aria-label="Share">
+              <ShareIcon />
+            </IconButton>
+          </CardActions>
+        </Card>
+      );
+    });
+  }
 
   render() {
-
-    const classes = this.props.classes;
-    return (
-
-        <List style={{ borderTop: "2px solid #b3b3b3"}}>
-          {this.renderItems()}
-        </List>
-
-    );
+    return <List>{this.renderItems()}</List>;
   }
 }
 
