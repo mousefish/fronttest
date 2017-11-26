@@ -17,7 +17,6 @@ import {Popup, Button, Link,Navbar, View,Toolbar} from 'framework7-react'
 import PopupSearch from '../Components/container/popupSearch'
 import Typography from 'material-ui/Typography';
 import TLogo from '../Assets/Images/logo.jpg'
-import HotTab from '../Components/container/hotTab'
 import HotMaterialCard from '../Components/container/hotMaterialCard'
 import RButton from 'material-ui/Button';
 import {getFramework7} from '../index';
@@ -94,7 +93,7 @@ componentWillUnmount()
         <Typography type="headline" className="u-title-h1" gutterBottom style={{marginBottom: 10,marginTop:30}}>
             本月热门
             </Typography>
-            <HotTab />
+
             <HotMaterialCard />
         <Link onClick={this.clicklink}>查看更多</Link>
 

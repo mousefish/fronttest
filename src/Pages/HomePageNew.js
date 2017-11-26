@@ -7,8 +7,6 @@ import {Page} from 'framework7-react'
 import {Popup, Button, Link,Navbar, View,Toolbar, Tab, ContentBlock,Tabs} from 'framework7-react'
 import PopupSearch from '../Components/container/popupSearch'
 import Typography from 'material-ui/Typography';
-import TLogo from '../Assets/Images/logo.jpg'
-import HotTab from '../Components/container/hotTab'
 import HotMaterialCard from '../Components/container/hotMaterialCard'
 import RButton from 'material-ui/Button';
 import {getFramework7} from '../index';

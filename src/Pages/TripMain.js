@@ -20,7 +20,6 @@ import { Popup, Button, Fab, Icon } from "framework7-react";
 import PopupSearch from "../Components/container/popupSearch";
 import Typography from "material-ui/Typography";
 import TLogo from "../Assets/Images/logo.jpg";
-import HotTab from "../Components/container/hotTab";
 import HotMaterialCard from "../Components/container/hotMaterialCard";
 import Divider from "material-ui/Divider";
 import Autocomplete from "react-md/lib/Autocompletes";
@@ -76,7 +75,6 @@ class TripMain extends Component {
 
   render() {
     const classes = this.props.classes;
-    const location = ["北京", "河南", "山西"];
     return (
       <div>
         <Page name="home">
@@ -86,38 +84,51 @@ class TripMain extends Component {
           />
           <div
             style={{
-              width:'95%',
+              width: "90%",
               margin: "auto",
               marginBottom: 98,
-              marginTop: 20
+              marginTop: 20,
             }}
           >
-            <img
-              src={TLogo}
+            <div style={{ textAlign: "center", padding: "10px 0" }}>
+              <img
+                src={TLogo}
+                style={{
+                  width: 80,
+                  height: 80
+                }}
+              />
+              <span
+                style={{
+                  marginLeft: "6vw",
+                  color: "#666666",
+                  fontWeight: "bold",
+                  fontSize: 40,
+                  verticalAlign: -14
+                }}
+              >
+                携U行
+              </span>
+            </div>
+
+            <h6
               style={{
-                float: "left",
-                marginRight: 5,
-                width: 50,
-                height: 50,
-                marginTop: -10
+                color: "#666666",
+                textAlign: "center",
+                paddingBottom: 15
               }}
-            />
-            <Typography
-              type="headline"
-              className="u-title-h1"
-              gutterBottom
-              style={{ marginBottom: 20, marginTop: 10 }}
             >
-              <div style={{ display: "inline", color: "#ff2d55" }}>携U行 </div>
-              <div style={{ fontSize: 17, display: "inline" }}>我们一起去旅行</div>
-            </Typography>
-            <Divider style={{ backgroundColor: "#3d9fe7", height: 2 }} />
-            <HotTab />
+              这是一个有深度的旅游服务平台
+            </h6>
+
             <ListCard />
           </div>
 
-          <SideButton onBtnClick={()=>{ this.setState({ popup: true })}} />
-
+          <SideButton
+            onBtnClick={() => {
+              this.setState({ popup: true });
+            }}
+          />
         </Page>
       </div>
     );
