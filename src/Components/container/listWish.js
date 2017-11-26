@@ -113,7 +113,7 @@ class ListWish extends Component {
 
     return (
       <div>
-        <List style={{ paddingTop: 0 }}>{this.renderItems()}</List>
+        <List style={{ borderTop: "2px solid #b3b3b3"}}>{this.renderItems()}</List>
       </div>
     );
   }

@@ -19,7 +19,7 @@ import { Page } from "framework7-react";
 import { Popup, Button, Fab, Icon } from "framework7-react";
 import PopupSearch from "../Components/container/popupSearch";
 import Typography from "material-ui/Typography";
-import TLogo from "../Assets/Images/logo.jpg";
+
 import HotMaterialCard from "../Components/container/hotMaterialCard";
 import Divider from "material-ui/Divider";
 import Autocomplete from "react-md/lib/Autocompletes";
@@ -31,6 +31,7 @@ import Favorite from "material-ui-icons/FavoriteBorder";
 import Toys from "material-ui-icons/Toys";
 import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 import SideButton from "./sideButton";
+import Header from "../Components/presenter/header";
 
 WebFontLoader.load({
   google: {
@@ -39,15 +40,11 @@ WebFontLoader.load({
 });
 
 const styleSheet = {
-  root: {
-    width: "100%",
-    bottom: 0,
-    inlineHeight: 1,
-    position: "fixed",
-    zIndex: 1000
-  },
-  icon: {
-    display: "block"
+  wrapper: {
+    width: "90%",
+    margin: "auto",
+    marginBottom: 98,
+    marginTop: 20
   }
 };
 
@@ -82,44 +79,8 @@ class TripMain extends Component {
             popup={this.state.popup}
             close_popup={() => this.setState({ popup: false })}
           />
-          <div
-            style={{
-              width: "90%",
-              margin: "auto",
-              marginBottom: 98,
-              marginTop: 20,
-            }}
-          >
-            <div style={{ textAlign: "center", padding: "10px 0" }}>
-              <img
-                src={TLogo}
-                style={{
-                  width: 80,
-                  height: 80
-                }}
-              />
-              <span
-                style={{
-                  marginLeft: "6vw",
-                  color: "#666666",
-                  fontWeight: "bold",
-                  fontSize: 40,
-                  verticalAlign: -14
-                }}
-              >
-                携U行
-              </span>
-            </div>
-
-            <h6
-              style={{
-                color: "#666666",
-                textAlign: "center",
-                paddingBottom: 15
-              }}
-            >
-              这是一个有深度的旅游服务平台
-            </h6>
+          <div className={classes.wrapper}>
+            <Header description="这是一个有深度的旅游服务平台" />
 
             <ListCard />
           </div>
