@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography';
 import SkipPreviousIcon from 'material-ui-icons/SkipPrevious';
 import PlayArrowIcon from 'material-ui-icons/PlayArrow';
 import SkipNextIcon from 'material-ui-icons/SkipNext';
-import travel from '../../Assets/Images/travel.jpg'
+import travel from '../../Assets/Images/sichuan.jpg'
 import Chip from 'material-ui/Chip';
 import Button from 'material-ui/Button';
 import { green } from 'material-ui/colors';
