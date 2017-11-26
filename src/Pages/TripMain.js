@@ -19,8 +19,7 @@ import { Page } from "framework7-react";
 import { Popup, Button, Fab, Icon } from "framework7-react";
 import PopupSearch from "../Components/container/popupSearch";
 import Typography from "material-ui/Typography";
-import TLogo from "../Assets/Images/logo.jpg";
-import HotTab from "../Components/container/hotTab";
+
 import HotMaterialCard from "../Components/container/hotMaterialCard";
 import Divider from "material-ui/Divider";
 import Autocomplete from "react-md/lib/Autocompletes";
@@ -32,6 +31,7 @@ import Favorite from "material-ui-icons/FavoriteBorder";
 import Toys from "material-ui-icons/Toys";
 import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 import SideButton from "./sideButton";
+import Header from "../Components/presenter/header";
 
 WebFontLoader.load({
   google: {
@@ -40,15 +40,11 @@ WebFontLoader.load({
 });
 
 const styleSheet = {
-  root: {
-    width: "100%",
-    bottom: 0,
-    inlineHeight: 1,
-    position: "fixed",
-    zIndex: 1000
-  },
-  icon: {
-    display: "block"
+  wrapper: {
+    width: "90%",
+    margin: "auto",
+    marginBottom: 98,
+    marginTop: 20
   }
 };
 
@@ -76,7 +72,6 @@ class TripMain extends Component {
 
   render() {
     const classes = this.props.classes;
-    const location = ["北京", "河南", "山西"];
     return (
       <div>
         <Page name="home">
@@ -84,40 +79,17 @@ class TripMain extends Component {
             popup={this.state.popup}
             close_popup={() => this.setState({ popup: false })}
           />
-          <div
-            style={{
-              width:'95%',
-              margin: "auto",
-              marginBottom: 98,
-              marginTop: 20
-            }}
-          >
-            <img
-              src={TLogo}
-              style={{
-                float: "left",
-                marginRight: 5,
-                width: 50,
-                height: 50,
-                marginTop: -10
-              }}
-            />
-            <Typography
-              type="headline"
-              className="u-title-h1"
-              gutterBottom
-              style={{ marginBottom: 20, marginTop: 10 }}
-            >
-              <div style={{ display: "inline", color: "#ff2d55" }}>携U行 </div>
-              <div style={{ fontSize: 17, display: "inline" }}>我们一起去旅行</div>
-            </Typography>
-            <Divider style={{ backgroundColor: "#3d9fe7", height: 2 }} />
-            <HotTab />
+          <div className={classes.wrapper}>
+            <Header description="这是一个有深度的旅游服务平台" />
+
             <ListCard />
           </div>
 
-          <SideButton onBtnClick={()=>{ this.setState({ popup: true })}} />
-
+          <SideButton
+            onBtnClick={() => {
+              this.setState({ popup: true });
+            }}
+          />
         </Page>
       </div>
     );

@@ -30,8 +30,9 @@ const styleSheet = {
     width: "100%",
     marginBottom: 1,
     margin: "auto",
-    boxShadow:'none'
+    boxShadow:'none',
   },
+
   details: {
     display: "flex",
     flexDirection: "row"
@@ -50,7 +51,7 @@ class ListCard extends Component {
   renderItems(){
       return dummyData.map((item)=>{
         return (
-          <ListItem>
+          <ListItem style={{paddingLeft:0, paddingRight:0}}>
             <Card className={this.props.classes.card}>
               <CardMedia>
                 <div style={{ position: "relative" }}>
@@ -61,7 +62,7 @@ class ListCard extends Component {
                       marginLeft: "80%",
                       position: "absolute",
                       backgroundColor: "white",
-                      padding: 3,
+                      paddingHorizontal: 3,
                       width: 72,
                       textAlign: "center",
                     }}
@@ -75,7 +76,7 @@ class ListCard extends Component {
                       position: "absolute",
                       marginLeft: "80%",
                       backgroundColor: "white",
-                      padding: 3,
+                      paddingHorizontal: 3,
                       width: 72,
                       textAlign: "center"
                     }}
@@ -154,11 +155,11 @@ class ListCard extends Component {
 
     const classes = this.props.classes;
     return (
-      <div>
-        <List style={{ paddingTop: 0 }}>
+
+        <List style={{ borderTop: "2px solid #b3b3b3"}}>
           {this.renderItems()}
         </List>
-      </div>
+
     );
   }
 }

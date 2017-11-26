@@ -16,11 +16,10 @@ import ListWish from "../Components/container/listWish";
 import SearchBar from "../Components/container/searchBar";
 import TabSelect from "../Components/container/tabSelect";
 import { Page } from "framework7-react";
-import { Popup, Button,Fab,Icon } from "framework7-react";
+import { Popup, Button, Fab, Icon } from "framework7-react";
 import PopupSearch from "../Components/container/popupSearch";
 import Typography from "material-ui/Typography";
-import TLogo from "../Assets/Images/logo.jpg";
-import WishTab from "../Components/container/wishTab";
+
 import HotMaterialCard from "../Components/container/hotMaterialCard";
 import Divider from "material-ui/Divider";
 import Autocomplete from "react-md/lib/Autocompletes";
@@ -31,7 +30,8 @@ import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
 import Toys from "material-ui-icons/Toys";
 import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
-import SideButton from './sideButton';
+import SideButton from "./sideButton";
+import Header from "../Components/presenter/header";
 
 WebFontLoader.load({
   google: {
@@ -40,19 +40,13 @@ WebFontLoader.load({
 });
 
 const styleSheet = {
-  root: {
-    width: "100%",
-    bottom: 0,
-    inlineHeight: 1,
-    position: "fixed",
-    zIndex: 1000
-  },
-  icon: {
-    display: "block"
+  wrapper: {
+    width: "90%",
+    margin: "auto",
+    marginBottom: 98,
+    marginTop: 20
   }
 };
-
-
 
 class WishMain extends Component {
   constructor() {
@@ -76,51 +70,27 @@ class WishMain extends Component {
     this.setState({ inlineValue: e.target.value });
   }
 
-
   render() {
     const classes = this.props.classes;
-    const location = ["北京", "河南", "山西"];
     return (
       <div>
         <Page name="home">
           <PopupSearch
             popup={this.state.popup}
-            close_popup={ ()=> this.setState({ popup: false })}
+            close_popup={() => this.setState({ popup: false })}
           />
 
-          <div
-            style={{
-              width:'95%',
-              margin: "auto",
-              marginBottom: 98,
-              marginTop: 20
-            }}
-          >
-            <img
-              src={TLogo}
-              style={{
-                float: "left",
-                marginRight: 5,
-                width: 50,
-                height: 50,
-                marginTop: -10
-              }}
-            />
-            <Typography
-              type="headline"
-              className="u-title-h1"
-              gutterBottom
-              style={{ marginBottom: 20, marginTop: 10 }}
-            >
-              <div style={{ display: "inline", color: "#ff2d55" }}>携U行 </div>
-              <div style={{ fontSize: 17, display: "inline" }}>我想要去哪儿玩呢</div>
-            </Typography>
-            <Divider style={{ backgroundColor: "#3d9fe7", height: 2 }} />
-            <WishTab />
+          <div className={classes.wrapper}>
+            <Header description="为您提供高质量的旅途，带您行天下" />
+
             <ListWish />
           </div>
 
-          <SideButton onBtnClick={()=>{ this.setState({ popup: true })}} />
+          <SideButton
+            onBtnClick={() => {
+              this.setState({ popup: true });
+            }}
+          />
         </Page>
       </div>
     );
