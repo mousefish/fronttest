@@ -44,12 +44,8 @@ const styleSheet = {
   },
 
   media: {
-    height: 204,
+    height: 224,
     position: "relative"
-  },
-
-  avatar: {
-    backgroundColor: blue[500]
   },
 
   icon: {
@@ -60,7 +56,6 @@ const styleSheet = {
 };
 
 class ListCard extends Component {
-
   renderStar(nums) {
     const icon = this.props.classes.icon;
 
@@ -70,20 +65,12 @@ class ListCard extends Component {
     }
     return starWrapper;
   }
+
   renderItems() {
     const classes = this.props.classes;
     return dummyData.map(item => {
       return (
         <Card className={classes.card}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="tour guide" className={classes.avatar}>
-                C
-              </Avatar>
-            }
-            title={item.name}
-            subheader={item.title}
-          />
           <CardMedia className={classes.media} image={travel} title="travel">
             <span
               style={{
@@ -104,8 +91,8 @@ class ListCard extends Component {
                 position: "absolute",
                 bottom: 0,
                 width: "100%",
-                height: "15%",
-                padding: 5,
+                height: "12%",
+                padding: 4,
                 color: "#fff",
                 backgroundColor: "rgba(0,0,0,0.6)"
               }}
@@ -120,10 +107,7 @@ class ListCard extends Component {
               }}
             >
               <div style={{ float: "left" }}>
-                <MonetizationOn
-                  style={{ width: 15, height: 15, verticalAlign: "-2px" }}
-                />{" "}
-                &nbsp;{item.price}
+                <MonetizationOn className={classes.icon} /> &nbsp;{item.price}
               </div>
               <div style={{ float: "right" }}>
                 {this.renderStar(item.stars)}
@@ -131,9 +115,12 @@ class ListCard extends Component {
               </div>
               <div style={{ clear: "both" }} />
             </div>
-
-            <div style={{ marginBottom: 10 }}>
-              <span style={{ marginRight: 10 }}>
+            <div style={{ marginBottom: 6 }}>
+              <Person className={classes.icon} />
+              &nbsp;{item.name}
+            </div>
+            <div>
+              <span style={{ marginRight: 6 }}>
                 <LocalOffer className={classes.icon} />
                 &nbsp;{item.service[0]}
               </span>
