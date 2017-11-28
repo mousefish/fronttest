@@ -7,6 +7,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import MyUploader from "./Pages/TestPages";
 import Travel from "./Pages/Travel";
+import LogInSignUp from './Pages/logInSignUp';
+
 import LoginForm from "./Components/container/LoginForm";
 import TestMain from "./Pages/TestMain";
 import CheckAuth from "./Utlity/checkAuth";
@@ -238,9 +240,10 @@ class App extends Component {
                     <Route exact path="/discovery" component={Discovery} />
                     <Route exact path="/myRoute" component={MyRoute} />
                     <Route exact path="/addRoute" component={AddRoute} />
-
+                    <Route exact path="/logInSignUp" component={LogInSignUp} />
 
                     {/*unit test used below, production will check env.production to disable*/}
+
                     <Route path="/signup" component={UnitSinupPage} />
                     <Route path="/login" component={LoginForm} />
                     <Route component={PageNotFound} />
