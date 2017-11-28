@@ -30,7 +30,8 @@ const styles = {
 
     button: {
         width: "60%",
-        marginBottom: 20
+        marginBottom: 20,
+        boxShadow:'none'
     }
 };
 
