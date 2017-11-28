@@ -10,14 +10,14 @@ export default ComposedComponent => {
         componentWillMount() {
             if (!this.props.isAuthenticated) {
                 console.log('Authenticated?', this.props.isAuthenticated);
-                this.context.router.history.push("/login");
+                this.context.router.history.push("/logInSignUp");
             }
         }
 
         componentWillUpdate(nextProps) {
             if (!nextProps.isAuthenticated) {
                 console.log(this.props.isAuthenticated)
-                this.context.router.history.push("/login");
+                this.context.router.history.push("/logInSignUp");
             }
         }
         render() {
