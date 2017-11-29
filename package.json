@@ -41,6 +41,7 @@
     "react-widgets-moment": "^4.0.2",
     "redux": "^3.7.2",
     "redux-form": "^7.1.1",
+    "redux-form-material-ui": "^4.3.1",
     "redux-thunk": "^2.2.0",
     "validator": "^8.0.0",
     "webfontloader": "^1.6.27"

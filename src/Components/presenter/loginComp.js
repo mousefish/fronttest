@@ -4,7 +4,7 @@ import { loginValidation } from "../../Utlity/commonValidation";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import * as actions from "../../Actions";
-import RegisterField from "./RegisterField";
+import renderField from "./renderField";
 import RegisterPasswordField from "./RegisterPasswordField";
 
 import TLogo from "../../Assets/Images/logo.jpg";
@@ -26,7 +26,7 @@ class LoginComp extends Component {
         key="Username"
         name="username"
         type="text"
-        component={RegisterField}
+        component={renderField}
         label="Username"
       />,
 

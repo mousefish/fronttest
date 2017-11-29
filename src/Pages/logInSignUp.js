@@ -17,6 +17,7 @@ const styles = {
     imageWrapper: {
         width: "100%",
         maxWidth: "100%",
+        filter:'grayscale(40%)'
     },
 
     paddingUpper:{
