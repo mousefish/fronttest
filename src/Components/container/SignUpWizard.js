@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from "../../Actions";
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import WizardFirst from '../presenter/wizardFirst';
 import WizardSecond from '../presenter/wizardSecond';
@@ -10,6 +13,7 @@ class SignUpWizard extends Component {
     super(props);
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       page: 1
     };
@@ -22,6 +26,13 @@ class SignUpWizard extends Component {
     this.setState({ page: this.state.page - 1 });
   }
 
+  handleSubmit(values){
+    console.log(values);
+    this.props.userSignupRequest(
+      values,
+      this.props.history
+    );
+  }
   render() {
     const { onSubmit } = this.props;
     const { page } = this.state;
@@ -37,7 +48,7 @@ class SignUpWizard extends Component {
         {page === 3 && (
           <WizardThird
             previousPage={this.previousPage}
-            onSubmit={onSubmit}
+            onSubmit={this.handleSubmit}
           />
         )}
       </div>
@@ -49,5 +60,5 @@ SignUpWizard.propTypes = {
   onSubmit: PropTypes.func.isRequired
 }
 
-export default SignUpWizard;
+export default connect(null, actions)(withRouter(SignUpWizard));
 

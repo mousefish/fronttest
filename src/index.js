@@ -6,20 +6,20 @@ import './index.css';
 import App from './App';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-import {createStore, applyMiddleware, compose} from 'redux'
-import reducers from './Reducers'
-import {BrowserRouter} from 'react-router-dom'
-import setAuthorizationToken from './Utlity/setAuthorizationToken'
+import {createStore, applyMiddleware, compose} from 'redux';
+import reducers from './Reducers';
+import {BrowserRouter} from 'react-router-dom';
+import setAuthorizationToken from './Utlity/setAuthorizationToken';
 import jwtDecode from 'jwt-decode'
-import {setAuthUser} from './Actions/authActions'
-import {Framework7App} from 'framework7-react'
-import routerManage from './Router/routerManage'
-import HomePageNew from './Pages/HomePageNew'
-import TestMain from './Pages/TestMain'
-import TabNav from './Pages/TabNav'
-import Tab1Content from './Pages/tab1content'
-import Tab2Content from './Pages/tab2content'
-import Tab3Content from './Pages/tab3content'
+import {setAuthUser} from './Actions/authActions';
+import {Framework7App} from 'framework7-react';
+
+import HomePageNew from './Pages/HomePageNew';
+import TestMain from './Pages/TestMain';
+import TabNav from './Pages/TabNav';
+
+
+
 //this componet is used for redux fire fox debug, if chrome need to have other configuration,
 //development only, disable it in production
 
@@ -43,11 +43,13 @@ let framework7;
 //render to root
 ReactDOM.render(
   <Provider store={store}>
+
    <Framework7App onFramework7Init={f7 => framework7 = f7}   themeType="material">
      <BrowserRouter>
   <App />
   </BrowserRouter>
  </Framework7App>
+
   </Provider>
 , document.getElementById('root'));
 //registerServiceWorker();

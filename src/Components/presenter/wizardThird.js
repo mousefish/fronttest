@@ -1,57 +1,87 @@
 import React from 'react';
+import { withStyles } from 'material-ui/styles';
 import { Field, reduxForm } from "redux-form";
 import validate from "./validate";
-import renderField from "./renderField";
+import  Button  from 'material-ui/Button';
+
+import {
+  AutoComplete,
+  Checkbox,
+  DatePicker,
+  TimePicker,
+  RadioGroup,
+  SelectField,
+  Slider,
+  TextField
+} from "redux-form-material-ui";
+
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+});
 
 const wizardThird = props => {
+  const { classes } = props;
   const { handleSubmit, pristine, previousPage, submitting } = props;
 
   return (
     <form onSubmit={handleSubmit}>
+     <div>
       <Field
         name="school"
         type="text"
-        component={renderField}
+        component={TextField}
         label="毕业院校"
       />
+    </div>
+    <div>
       <Field
         name="major"
         type="text"
-        component={renderField}
+        component={TextField}
         label="毕业专业"
       />
+      </div>
+      <div>
       <Field
         name="language"
         type="text"
-        component={renderField}
+        component={TextField}
         label="语言能力"
       />
+      </div>
+      <div>
       <Field
         name="hobby"
         type="text"
-        component={renderField}
+        component={TextField}
         label="爱好"
       />
+      </div>
+      <div>
       <Field
         name="personality"
         type="text"
-        component={renderField}
+        component={TextField}
         label="性格"
       />
+      </div>
       <div>
-        <button type="button" className="previous" onClick={previousPage}>
+        <Button color="primary" className={classes.button} onClick={previousPage}>
           Previous
-        </button>
-        <button type="submit" disabled={pristine || submitting}>
-          Submit
-        </button>
+        </Button>
+        <Button type="submit" color="primary" raised className={classes.button} disabled={pristine || submitting}>
+           提交
+        </Button>
       </div>
     </form>
   )
 }
 export default reduxForm({
-  form: 'wizard', //Form name is same
+  form: 'wizard',
   destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
+  forceUnregisterOnUnmount: true,
   validate
-})(wizardThird)
+})(withStyles(styles)(wizardThird))

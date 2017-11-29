@@ -18,7 +18,6 @@ import TabSelect from "../Components/container/tabSelect";
 import { Page } from "framework7-react";
 import { Popup, Button, Fab, Icon } from "framework7-react";
 import PopupSearch from "../Components/container/popupSearch";
-import Typography from "material-ui/Typography";
 
 import HotMaterialCard from "../Components/container/hotMaterialCard";
 import Divider from "material-ui/Divider";

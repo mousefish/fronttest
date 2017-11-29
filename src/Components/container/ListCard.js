@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import IconButton from "material-ui/IconButton";
-import Typography from "material-ui/Typography";
 import SkipPreviousIcon from "material-ui-icons/SkipPrevious";
 import PlayArrowIcon from "material-ui-icons/PlayArrow";
 import SkipNextIcon from "material-ui-icons/SkipNext";
@@ -16,8 +15,8 @@ import Person from "material-ui-icons/Person";
 
 import travel from "../../Assets/Images/sichuan.jpg";
 import Chip from "material-ui/Chip";
-import Button from "material-ui/Button";
-import { green } from "material-ui/colors";
+
+
 import classnames from "classnames";
 import Card, {
   CardHeader,
@@ -26,7 +25,7 @@ import Card, {
   CardActions
 } from "material-ui/Card";
 import Avatar from "material-ui/Avatar";
-import blue from "material-ui/colors/blue";
+
 import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";

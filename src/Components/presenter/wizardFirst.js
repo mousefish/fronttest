@@ -1,52 +1,54 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import validate from './validate';
+import React from "react";
+import { Field, reduxForm } from "redux-form";
+import validate from "./validate";
 
-import renderField from './renderField';
-import {
-  AutoComplete,
-  Checkbox,
-  DatePicker,
-  TimePicker,
-  RadioButtonGroup,
-  SelectField,
-  Slider,
-  TextField,
-  Toggle,
-} from 'redux-form-material-ui';
+import renderField from "./renderField";
+import { TextField } from "redux-form-material-ui";
+
+import  Button  from 'material-ui/Button';
+import { withStyles } from 'material-ui/styles';
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+});
 
 const wizardFirst = props => {
+  const { classes } = props;
   const { handleSubmit } = props;
+
   return (
     <form onSubmit={handleSubmit}>
-      <Field
-        name="email"
-        type="text"
-        component={TextField}
-        label="输入邮箱地址"
-      />
-
-
-      <Field
-        name="password"
-        type="password"
-        component={TextField}
-        label="输入密码 - 六位数"
-      />
-
+      <div>
+        <Field
+          name="email"
+          component={TextField}
+          label="输入邮箱地址"
+        />
+      </div>
+      <div>
+        <Field
+          name="password"
+          component={TextField}
+          label="输入密码 - 六位数"
+        />
+      </div>
 
       <div>
-        <button type="submit" className="next">
+
+
+         <Button type="submit" color="primary" raised className={classes.button}>
           下一步
-        </button>
+        </Button>
       </div>
     </form>
-  )
-}
+  );
+};
 
 export default reduxForm({
-  form: 'wizard',
+  form: "wizard",
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
-})(wizardFirst)
+})(withStyles(styles)(wizardFirst));

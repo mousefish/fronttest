@@ -38,8 +38,14 @@ const validate = values => {
     errors.password = "密码长度为六位";
   }
 
-  if (Number.isNaN(Number(values.age))) {
-    errors.age = "请输入有效数字";
+  if (Number.isNaN(values.age) || Number(values.age) <= 0) {
+    errors.age = "请输入有效年龄";
+  }else if(Number(values.age) < 18){
+    errors.age = '您必须满18岁';
+  }
+
+  if(Number(values.yearOfLiving) <= 0){
+    errors.yearOfLiving = "请输入有效年限";
   }
 
   return errors;

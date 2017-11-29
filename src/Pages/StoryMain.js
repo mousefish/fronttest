@@ -18,7 +18,7 @@ import TabSelect from "../Components/container/tabSelect";
 import { Page } from "framework7-react";
 import { Popup, Button, Fab, Icon } from "framework7-react";
 import PopupSearch from "../Components/container/popupSearch";
-import Typography from "material-ui/Typography";
+
 import TLogo from "../Assets/Images/logo.jpg";
 import StoryTab from "../Components/container/storyTab";
 import HotMaterialCard from "../Components/container/hotMaterialCard";
@@ -103,7 +103,7 @@ class StoryMain extends Component {
                 marginTop: -10
               }}
             />
-            <Typography
+            <div
               type="headline"
               className="u-title-h1"
               gutterBottom
@@ -111,7 +111,7 @@ class StoryMain extends Component {
             >
               <div style={{ display: "inline", color: "#ff2d55" }}>携U行 </div>
               <div style={{ fontSize: 17, display: "inline" }}>我有故事,你有酒吗?</div>
-            </Typography>
+            </div>
             <Divider style={{ backgroundColor: "#3d9fe7", height: 2 }} />
             <StoryTab />
             <ListStoryCard />
