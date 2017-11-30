@@ -81,7 +81,7 @@ const loginSignUp = props => {
             </Link>
 
             <footer style={{ paddingLeft: 10 }}>
-                注册代表已经同意<a>服务条款</a>，<a>隐私政策</a>，<a>免责声明</a>，<a>保障计划条款</a>，<a>使用政策须知</a>
+                注册代表已经同意<Link to='/'>服务条款</Link>，<Link to='/'>隐私政策</Link>，<Link to='/'>免责声明</Link>，<Link to='/'>保障计划条款</Link>，<Link to='/'>使用政策须知</Link>
             </footer>
         </div>
     );
