@@ -7,6 +7,7 @@ import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { withStyles } from "material-ui/styles";
 import { LinearProgress } from "material-ui/Progress";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   progress: {
@@ -67,7 +68,9 @@ class wizardFirst extends Component {
     return (
       <form className={classes.wrapper} onSubmit={handleSubmit}>
         <div className={classes.header}>
+          <Link to='/loginSignUp'>
           <KeyboardArrowLeft style={{ float: "left" }} />
+          </Link>
           <h4 className={classes.text}>创建新账户</h4>
         </div>
         <div className={classes.formWrapper}>
