@@ -90,6 +90,7 @@ class wizardFirst extends Component {
         <div className={classes.formWrapper} style={{marginBottom:20}}>
           <Field
             name="password"
+            type='password'
             component={TextField}
             className={classes.formInner}
             label="输入密码 - 六位数"

@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import * as actions from "../../Actions";
 import { withRouter } from "react-router";
 
+
 const styles = theme => ({
   progress: {
     width: "95%",
@@ -60,10 +61,11 @@ const styles = theme => ({
 
   hint:{
     position:'absolute',
-    right:0,
-    bottom:16,
+    right:6,
+    bottom: 10,
     fontSize:10,
-    color:'grey'
+    color:'grey',
+    zIndex:1000
   },
 
   hintColor:{
@@ -73,6 +75,9 @@ const styles = theme => ({
 });
 
 class LoginForm extends Component {
+  constructor(props){
+    super(props)
+  }
   state = {
     completed: 100
   };
@@ -123,6 +128,7 @@ class LoginForm extends Component {
         <div className={classes.formWrapper} style={{ marginBottom: 20 }}>
           <Field
             name="password"
+            type='password'
             component={TextField}
             className={classes.formInner}
             label="输入密码 - 六位数"

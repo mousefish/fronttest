@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import { FormControlLabel} from 'material-ui/Form';
+import { FormControlLabel } from "material-ui/Form";
 
 
 const styles = theme => ({
@@ -111,8 +111,9 @@ class wizardSecond extends Component {
             component={RadioGroup}
             className={classes.radioInner}
           >
-          <FormControlLabel value="male" control={<Radio />} label="男" />
-          <FormControlLabel value="female" control={<Radio />} label="女" />
+            <FormControlLabel value="male" control={<Radio />} label="男" />
+            <FormControlLabel value="female" control={<Radio />} label="女" />
+            <FormControlLabel value="other" control={<Radio />} label="其他" />
           </Field>
           <Field name="sex" component={renderError} />
         </div>
