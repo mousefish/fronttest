@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import IconButton from "material-ui/IconButton";
-import Typography from "material-ui/Typography";
+
 import SkipPreviousIcon from "material-ui-icons/SkipPrevious";
 import PlayArrowIcon from "material-ui-icons/PlayArrow";
 import SkipNextIcon from "material-ui-icons/SkipNext";
 import Schedule from "material-ui-icons/Schedule";
 import travel from "../../Assets/Images/sichuan.jpg";
 import Chip from "material-ui/Chip";
-import Button from "material-ui/Button";
-import { green } from "material-ui/colors";
+
+
 import classnames from "classnames";
 import Card, {
   CardHeader,
@@ -39,11 +39,11 @@ class ListStoryCard extends Component {
   renderItems(){
     return dummyStoryData.map((item)=>{
       return (
-         <ListItem button style={{ padding: 1 }}>
+         <ListItem style={{ padding: 1 }}>
             <Card className={this.props.classes.card}>
               <CardMedia>
                 <div style={{ position: "relative" }}>
-                  <Typography
+                  <div
                     component="p"
                     style={{
                       marginTop: 180,
@@ -56,7 +56,7 @@ class ListStoryCard extends Component {
                     }}
                   >
                     官方认证
-                  </Typography>
+                  </div>
                   <img
                     style={{ height: 220, width: "100%" }}
                     src={travel}

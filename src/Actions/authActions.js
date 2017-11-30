@@ -22,11 +22,12 @@ export const setAuthUser = user => {
   type: SET_AUTH, user;
 };
 
-export const logout = () => dispatch => {
+export const logout = (history) => dispatch => {
   localStorage.removeItem("jwtToken");
   setAuthorizationToken(false);
   // dispatch(setAuthUser({ type: SET_AUTH}));
-  return { type: DEAUTH_USER };
+  dispatch({ type: DEAUTH_USER });
+  history.push('/');
 };
 
 
@@ -77,13 +78,13 @@ export const sendSearchData = data =>{
         type:'AUTH_USER',
         payload:data
 
-    }
-}
+    };
+};
 
 export const authError = err => {
   return {
     type: AUTH_ERROR,
     payload: err
-  }
-}
+  };
+};
 

@@ -1,16 +1,16 @@
 import React,{Component} from 'react'
 import '../CSS/main.css'
-import { withStyles } from 'material-ui/styles';
+// import { withStyles } from 'material-ui/styles';
 
 import WebFontLoader from 'webfontloader';
 import {Page} from 'framework7-react'
 import {Popup, Button, Link,Navbar, View,Toolbar, Tab, ContentBlock,Tabs} from 'framework7-react'
 import PopupSearch from '../Components/container/popupSearch'
-import Typography from 'material-ui/Typography';
+
 import HotMaterialCard from '../Components/container/hotMaterialCard'
-import RButton from 'material-ui/Button';
+// import RButton from 'material-ui/Button';
 import {getFramework7} from '../index';
-import FPageHome from './FPageHome'
+
 
 WebFontLoader.load({
   google: {
@@ -89,4 +89,5 @@ class HomePageNew extends Component
 }
 
 
-export default withStyles(styleSheet)(HomePageNew)
+export default HomePageNew
+// export default withStyles(styleSheet)(HomePageNew)

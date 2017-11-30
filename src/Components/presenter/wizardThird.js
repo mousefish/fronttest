@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
-import validate from "../presenter/validate";
-import { TextField } from "redux-form-material-ui";
-import Button from "material-ui/Button";
-import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { withStyles } from "material-ui/styles";
+import { Field, reduxForm } from "redux-form";
+import validate from "./validate";
+import Button from "material-ui/Button";
+
+import { TextField } from "redux-form-material-ui";
+
+import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { LinearProgress } from "material-ui/Progress";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import * as actions from "../../Actions";
-import { withRouter } from "react-router";
 
 const styles = theme => ({
   progress: {
@@ -31,7 +30,7 @@ const styles = theme => ({
     marginTop: 20,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "center"
     // border:'1px solid green'
   },
 
@@ -39,9 +38,15 @@ const styles = theme => ({
     width: "90%",
     margin: "auto",
     textAlign: "center",
-    padding: "10px 0",
-    position:'relative',
+    padding: "10px 0"
     // border:'1px solid red'
+  },
+
+  radioInner: {
+    width: "95%",
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "space-around"
   },
 
   formInner: {
@@ -56,53 +61,27 @@ const styles = theme => ({
   },
   text: {
     fontWeight: "bold"
-  },
-
-  hint:{
-    position:'absolute',
-    right:0,
-    bottom:16,
-    fontSize:10,
-    color:'grey'
-  },
-
-  hintColor:{
-    color:'grey'
   }
-
 });
 
-class LoginForm extends Component {
+class wizardThird extends Component {
   state = {
     completed: 100
   };
 
-  submitForm(values) {
-    console.log(values);
-    this.props.userLogin(values, this.props.history);
-  }
-
-  // Use this function to show the error message from backend
-  renderErrorMsg() {
-    if (this.props.errorMsg) {
-      return <div className="alert alert-danger">{this.props.errorMsg}</div>;
-    }
-  }
-
   render() {
     const { classes } = this.props;
-    const { handleSubmit } = this.props;
+    const { handleSubmit, pristine, previousPage, submitting } = this.props;
 
     return (
-      <form
-        className={classes.wrapper}
-        onSubmit={handleSubmit(this.submitForm.bind(this))}
-      >
+      <form className={classes.wrapper} onSubmit={handleSubmit}>
         <div className={classes.header}>
-          <Link to="/loginSignUp">
-            <KeyboardArrowLeft style={{ float: "left", color: "grey" }} />
-          </Link>
-          <h4 className={classes.text}>登陆账户</h4>
+          <KeyboardArrowLeft
+            style={{ float: "left", color: "grey" }}
+            onClick={previousPage}
+          />
+
+          <h4 className={classes.text}>其他信息</h4>
         </div>
         <div className={classes.formWrapper}>
           <LinearProgress
@@ -112,24 +91,52 @@ class LoginForm extends Component {
           />
         </div>
         <div className={classes.formWrapper}>
-          <span className={classes.hint}><a className={classes.hintColor}>忘记邮箱？</a></span>
           <Field
-            name="email"
-            component={TextField}
             className={classes.formInner}
-            label="输入邮箱地址"
+            name="school"
+            type="text"
+            component={TextField}
+            label="毕业院校"
           />
         </div>
-        <div className={classes.formWrapper} style={{ marginBottom: 20 }}>
+        <div className={classes.formWrapper}>
           <Field
-            name="password"
-            component={TextField}
             className={classes.formInner}
-            label="输入密码 - 六位数"
+            name="major"
+            type="text"
+            component={TextField}
+            label="毕业专业"
           />
-          <span className={classes.hint}><a className={classes.hintColor}>忘记密码？</a></span>
+        </div>
+        <div className={classes.formWrapper}>
+          <Field
+            className={classes.formInner}
+            name="language"
+            type="text"
+            component={TextField}
+            label="语言能力"
+          />
         </div>
 
+        <div className={classes.formWrapper}>
+          <Field
+            className={classes.formInner}
+            name="hobby"
+            type="text"
+            component={TextField}
+            label="爱好"
+          />
+        </div>
+
+        <div className={classes.formWrapper}>
+          <Field
+            className={classes.formInner}
+            name="personality"
+            type="text"
+            component={TextField}
+            label="性格"
+          />
+        </div>
         <div className={classes.formWrapper}>
           <Button
             type="submit"
@@ -137,24 +144,16 @@ class LoginForm extends Component {
             raised
             className={classes.button}
           >
-            点击登陆
+            提交
           </Button>
         </div>
-        {this.renderErrorMsg}
       </form>
     );
   }
 }
-
-const mapStateToProps = state => {
-  return { errorMsg: state.UserAuth.error };
-};
-
-LoginForm = reduxForm({
-  form: "loginForm",
+export default reduxForm({
+  form: "wizard",
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
-})(withStyles(styles)(LoginForm));
-
-export default (LoginForm = connect(mapStateToProps, actions)(withRouter(LoginForm)))
+})(withStyles(styles)(wizardThird));

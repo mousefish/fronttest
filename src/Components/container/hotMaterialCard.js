@@ -1,15 +1,14 @@
 import React ,{Component}from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+// import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
-import Typography from 'material-ui/Typography';
+
 import SkipPreviousIcon from 'material-ui-icons/SkipPrevious';
 import PlayArrowIcon from 'material-ui-icons/PlayArrow';
 import SkipNextIcon from 'material-ui-icons/SkipNext';
 import travel from '../../Assets/Images/sichuan.jpg'
 import Chip from 'material-ui/Chip';
-import Button from 'material-ui/Button';
-import { green } from 'material-ui/colors';
+
 import classnames from 'classnames';
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
@@ -51,7 +50,7 @@ const styleSheet = ({
   button:
   {
    float: 'right',
-   backgroundColor: green[700],
+
    color: 'white'
  },
  padding:
@@ -69,7 +68,7 @@ class  HotMaterialCard extends Component
     <div>
  <List className="md-paper md-paper--2" style={{paddingTop: 0}}>
 
- <ListItem button>
+ <ListItem>
  <Media aspectRatio="16-9">
    <img style={{width: '100%'}} src={travel} alt="Contemplative Reptile" />
  </Media>
@@ -77,27 +76,27 @@ class  HotMaterialCard extends Component
    W
  </Avatar>
  <ListItemText primary="旧金山周边十日游" secondary="出发日期: 2018-09-30" />
-  <Typography type="body1" style={{float:'right', marginRight: 10}}>999元</Typography>
+  <div type="body1" style={{float:'right', marginRight: 10}}>999元</div>
 </ListItem>
 
 <Divider />
 
-<ListItem button>
+<ListItem>
 <Avatar aria-label="Recipe" className={classes.avatar}>
   W
 </Avatar>
 <ListItemText primary="旧金山周边十日游" secondary="出发日期: 2018-09-30" />
- <Typography type="body1" style={{float:'right', marginRight: 10}}>999元</Typography>
+ <div type="body1" style={{float:'right', marginRight: 10}}>999元</div>
 </ListItem>
 
 <Divider />
 
-<ListItem button>
+<ListItem>
 <Avatar aria-label="Recipe" className={classes.avatar}>
   W
 </Avatar>
 <ListItemText primary="旧金山周边十日游" secondary="出发日期: 2018-09-30" />
- <Typography type="body1" style={{float:'right', marginRight: 10}}>999元</Typography>
+ <div type="body1" style={{float:'right', marginRight: 10}}>999元</div>
 </ListItem>
 </List>
     </div>
@@ -105,5 +104,5 @@ class  HotMaterialCard extends Component
 }
 }
 
-
-export default withStyles(styleSheet)(HotMaterialCard);
+export default HotMaterialCard;
+// export default withStyles(styleSheet)(HotMaterialCard);

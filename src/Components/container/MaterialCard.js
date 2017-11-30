@@ -2,14 +2,14 @@ import React ,{Component}from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
-import Typography from 'material-ui/Typography';
+
 import SkipPreviousIcon from 'material-ui-icons/SkipPrevious';
 import PlayArrowIcon from 'material-ui-icons/PlayArrow';
 import SkipNextIcon from 'material-ui-icons/SkipNext';
 import travel from '../../Assets/Images/sichuan.jpg'
 import Chip from 'material-ui/Chip';
-import Button from 'material-ui/Button';
-import { green } from 'material-ui/colors';
+
+
 import classnames from 'classnames';
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
@@ -48,7 +48,6 @@ const styleSheet = ({
   button:
   {
    float: 'right',
-   backgroundColor: green[700],
    color: 'white'
  },
  flexGrow: { flex: '1 1 auto' },
@@ -70,15 +69,15 @@ class  NowPlayingCard extends Component
          title="旧金山周边十日游"
          subheader="出发日期: 2018-09-30"
        />
-       <Typography type="headline" style={{float:'right', marginTop:-55, marginRight: 20}}>999元</Typography>
+       <div type="headline" style={{float:'right', marginTop:-55, marginRight: 20}}>999元</div>
        <CardMedia >
          <img style={{width: '100%'}} src={travel} alt="Contemplative Reptile" />
        </CardMedia>
        <CardContent>
          <Chip label="美食达人" className={classes.chip} /> <Chip label="完美导游" className={classes.chip} />
-         <Typography component="p" style={{marginTop:5}}>
+         <div component="p" style={{marginTop:5}}>
           这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩,  这里是简介,这里是简介,这里是简介,我要去玩阿,我要去哪玩,来这玩...
-         </Typography>
+         </div>
        </CardContent>
        <CardActions disableActionSpacing>
          <IconButton aria-label="Add to favorites">
@@ -88,9 +87,9 @@ class  NowPlayingCard extends Component
            <ShareIcon />
          </IconButton>
           <div className={classes.flexGrow} />
-          <Button raised color={green} className={classes.button}>
+          <button className={classes.button}>
       详情
-    </Button>
+    </button>
          </CardActions>
 </Card>
 

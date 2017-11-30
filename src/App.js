@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import TragelMainPage from "./Pages/TravelMainPage";
 import PageNotFound from "./Pages/404Page";
-import UnitSinupPage from "./UnitTest/UnitSinupPage";
+import SignUpWizard from "./Components/container/SignUpWizard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import MyUploader from "./Pages/TestPages";
-import Travel from "./Pages/Travel";
+
 import LogInSignUp from './Pages/logInSignUp';
 
 import LoginForm from "./Components/container/LoginForm";
@@ -224,7 +224,6 @@ class App extends Component {
                   <Switch>
                     <Route exact path="/" component={TripMain} />
                     <Route exact path="/trip" component={Home} />
-                    <Route exact path="/test" component={Travel} />
                     <Route exact path="/tr/test" component={MyUploader} />
                     <Route exact path="/maintest" component={TestMain} />
                     <Route
@@ -244,7 +243,7 @@ class App extends Component {
 
                     {/*unit test used below, production will check env.production to disable*/}
 
-                    <Route path="/signup" component={UnitSinupPage} />
+                    <Route path="/signup" component={SignUpWizard} />
                     <Route path="/login" component={LoginForm} />
                     <Route component={PageNotFound} />
                   </Switch>

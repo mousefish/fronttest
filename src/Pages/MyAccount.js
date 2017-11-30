@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import * as actions from "../Actions";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router';
 
 class MyAccount extends Component {
     onBtnClick() {
-        this.props.logout();
+        this.props.logout(this.props.history);
     }
 
     render() {
