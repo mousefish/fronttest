@@ -56,9 +56,14 @@ class SignUpWizard extends Component {
   }
 }
 
+
 SignUpWizard.propTypes = {
   onSubmit: PropTypes.func.isRequired
 }
 
-export default connect(null, actions)(withRouter(SignUpWizard));
+const mapStateToProps = state => {
+  return { errorMsg: state.UserAuth.error };
+}
+
+export default connect(mapStateToProps, actions)(withRouter(SignUpWizard));
 

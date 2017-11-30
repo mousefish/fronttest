@@ -2,7 +2,7 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import validate from "./validate";
 
-import { Radio } from "material-ui/Radio";
+import Radio from "material-ui/Radio";
 
 import {
   AutoComplete,
@@ -15,17 +15,21 @@ import {
   TextField
 } from "redux-form-material-ui";
 
-import  Button  from 'material-ui/Button';
-import { withStyles } from 'material-ui/styles';
+import Button from "material-ui/Button";
+import { withStyles } from "material-ui/styles";
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
 const renderError = ({ meta: { touched, error } }) =>
-  touched && error ? <span>{error}</span> : false;
+  touched && error ? (
+    <span style={{ color: "red", fontSize: "12px" }}>{error}</span>
+  ) : (
+    false
+  );
 
 const wizardSecond = props => {
   const { handleSubmit, previousPage } = props;
@@ -36,7 +40,11 @@ const wizardSecond = props => {
         <Field name="username" type="text" component={TextField} label="用户名" />
       </div>
       <div>
-        <Field name="sex" type="text" component={TextField} label="性别" />
+        <Field name="sex" component={RadioGroup}>
+          <Radio value='male' label="male" />
+          <Radio value='female' label="female" />
+        </Field>
+        <Field name="sex" component={renderError} />
       </div>
 
       <div>
@@ -61,7 +69,7 @@ const wizardSecond = props => {
         <button type="button" className="previous" onClick={previousPage}>
           Previous
         </button>
-       <Button type="submit" color="primary" raised className={classes.button}>
+        <Button type="submit" color="primary" raised className={classes.button}>
           下一步
         </Button>
       </div>
