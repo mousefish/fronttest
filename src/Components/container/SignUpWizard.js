@@ -33,6 +33,14 @@ class SignUpWizard extends Component {
       this.props.history
     );
   }
+
+   // Use this function to show the error message from backend
+  renderErrorMsg() {
+    if (this.props.errorMsg) {
+      return <div className="alert alert-danger">{this.props.errorMsg}</div>;
+    }
+  }
+
   render() {
     const { onSubmit } = this.props;
     const { page } = this.state;
@@ -51,6 +59,8 @@ class SignUpWizard extends Component {
             onSubmit={this.handleSubmit}
           />
         )}
+
+        {this.renderErrorMsg()}
       </div>
     )
   }

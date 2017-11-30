@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import validate from "./validate";
-import renderField from "./renderField";
 import { TextField } from "redux-form-material-ui";
 import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";

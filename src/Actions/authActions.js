@@ -78,13 +78,13 @@ export const sendSearchData = data =>{
         type:'AUTH_USER',
         payload:data
 
-    }
-}
+    };
+};
 
 export const authError = err => {
   return {
     type: AUTH_ERROR,
     payload: err
-  }
-}
+  };
+};
 
