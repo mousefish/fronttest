@@ -112,7 +112,7 @@ class LoginForm extends Component {
           />
         </div>
         <div className={classes.formWrapper}>
-          <span className={classes.hint}><a className={classes.hintColor}>忘记邮箱？</a></span>
+          <span className={classes.hint}><Link to='/' className={classes.hintColor}>忘记邮箱？</Link></span>
           <Field
             name="email"
             component={TextField}
@@ -127,7 +127,7 @@ class LoginForm extends Component {
             className={classes.formInner}
             label="输入密码 - 六位数"
           />
-          <span className={classes.hint}><a className={classes.hintColor}>忘记密码？</a></span>
+          <span className={classes.hint}><Link to='/' className={classes.hintColor}>忘记密码？</Link></span>
         </div>
 
         <div className={classes.formWrapper}>
