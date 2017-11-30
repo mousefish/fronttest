@@ -11,19 +11,19 @@ import { Link } from "react-router-dom";
 
 const styles = theme => ({
   progress: {
-    width: "90%",
+    width: "95%",
     margin: "auto"
   },
 
   button: {
     margin: theme.spacing.unit,
-    width: "90%",
+    width: "95%",
     padding: 20,
     fontSize: 16
   },
 
   wrapper: {
-    width: "95%",
+    width: "90%",
     margin: "auto",
     marginBottom: 98,
     marginTop: 20,
@@ -42,7 +42,7 @@ const styles = theme => ({
   },
 
   formInner: {
-    width: "90%"
+    width: "95%"
   },
 
   header: {
@@ -69,7 +69,7 @@ class wizardFirst extends Component {
       <form className={classes.wrapper} onSubmit={handleSubmit}>
         <div className={classes.header}>
           <Link to='/loginSignUp'>
-          <KeyboardArrowLeft style={{ float: "left" }} />
+          <KeyboardArrowLeft style={{ float: "left", color:'grey'}} />
           </Link>
           <h4 className={classes.text}>创建新账户</h4>
         </div>
@@ -88,7 +88,7 @@ class wizardFirst extends Component {
             label="输入邮箱地址"
           />
         </div>
-        <div className={classes.formWrapper}>
+        <div className={classes.formWrapper} style={{marginBottom:20}}>
           <Field
             name="password"
             component={TextField}
