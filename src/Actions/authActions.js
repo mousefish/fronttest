@@ -68,7 +68,7 @@ export const userLogin = (userData, history) => dispatch => {
 };
 
 
-export const sendSearchData = (searchData)=> dispatch =>{
+export const sendSearchData = (searchData, cb)=> dispatch =>{
     console.log('searchData', searchData);
     // request to APIs
     // temp
@@ -76,8 +76,7 @@ export const sendSearchData = (searchData)=> dispatch =>{
         type:AUTH_USER
     });
 
-
-
+    cb();
 };
 
 export const authError = err => {

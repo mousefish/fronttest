@@ -61,7 +61,7 @@ class PopupSearch extends Component {
 
   submitForm(values) {
     // console.log("values:", values);
-    this.props.sendSearchData(values);
+    this.props.sendSearchData(values, this.props.handleRequestClose);
   }
 
   render() {

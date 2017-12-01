@@ -98,7 +98,7 @@ class TripMain extends Component {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <PopupSearch/>
+          <PopupSearch handleRequestClose={this.handleRequestClose}/>
         </Dialog>
         <div className={classes.wrapper}>
           <Header description="这是一个有深度的旅游服务平台" />
