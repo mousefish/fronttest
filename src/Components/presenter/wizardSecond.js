@@ -10,6 +10,7 @@ import { withStyles } from "material-ui/styles";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { FormControlLabel } from "material-ui/Form";
 
+
 const styles = theme => ({
   progress: {
     width: "95%",
@@ -105,7 +106,7 @@ class wizardSecond extends Component {
           />
         </div>
         <div className={classes.formWrapper}>
-          <Field
+        <Field
             name="sex"
             component={RadioGroup}
             className={classes.radioInner}
