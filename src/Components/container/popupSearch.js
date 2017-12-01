@@ -1,138 +1,103 @@
 import React, { Component } from "react";
-import { Popup, Button } from "framework7-react";
-import Autocomplete from "react-md/lib/Autocompletes";
-// import DatePicker from "react-md/lib/Pickers/DatePickerContainer";
-// import Radio from "react-md/lib/SelectionControls/Radio";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
-import popupSearchField from "./popupSearchField";
+import Button from "material-ui/Button";
+import popupSearchTextField from "./popupSearchTextField";
 import popupSearchDateField from "./popupSearchDateField";
+import popupSearchMultiServices from "./popupSearchMultiServices";
 import * as actions from "../../Actions";
-import HistorySearch from './HistorySearch';
+import HistorySearch from "./HistorySearch";
+import { withStyles } from "material-ui/styles";
+
+
+const styles = theme => ({
+  wrapper: {
+    width: "90%",
+    marginTop: 20,
+    margin: "auto"
+  },
+
+  sectionWrapper: {
+    textAlign: "center",
+    marginBottom: 35
+  },
+
+  button: {
+    margin: theme.spacing.unit,
+    marginTop: 30,
+    width: "95%",
+    padding: 20,
+    fontSize: 16
+  }
+});
 
 class PopupSearch extends Component {
-  renderFields() {
+  renderFields(classes) {
     return [
       <Field
-        key="keyword"
-        name="keyword"
+        name="location"
         type="text"
-        component={popupSearchField}
-        placeholder="关键字搜索"
-        icon="search"
+        component={popupSearchTextField}
+        placeholder="你想去的国家和城市"
       />,
 
       <Field
-        key="cityname"
-        name="cityname"
+        key="dapartdate"
+        name="departdate"
         type="text"
-        component={popupSearchField}
-        placeholder="成都"
-        icon="location_city"
+        component={popupSearchDateField}
+        placeholder="出发日期和时间"
       />,
 
-
-        <Field
-          key="dapartdate"
-          name="departdate"
-          type="text"
-          component={ popupSearchDateField }
-          placeholder="出发日期和时间"
-
-        />,
-
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Field
-          key="minbudget"
-          name="minbudget"
-          type="number"
-          component={popupSearchField}
-          placeholder="最小预算"
-          icon="attach_money"
-        />
-
-        <Field
-          key="maxbudget"
-          name="maxbudget"
-          type="number"
-          component={popupSearchField}
-          placeholder="最大预算"
-          icon="attach_money"
-        />
-      </div>
+      <Field
+        key="finishdate"
+        name="finishdate"
+        type="text"
+        component={popupSearchDateField}
+        placeholder="结束日期和时间"
+      />
     ];
   }
 
-
   submitForm(values) {
-    const {keyword, cityname, departdate, minbudget, maxbudget} = values
-    this.props.sendSearchData({keyword, cityname, departdate, minbudget, maxbudget})
+    // console.log("values:", values);
+    this.props.sendSearchData(values, this.props.handleRequestClose);
   }
-  onCancel() {
 
-  }
   render() {
+    const classes = this.props.classes;
+    const { handleSubmit } = this.props;
 
     return (
-      <Popup
-        tabletFullscreen
-        style={{ zIndex: 10600}}
-        opened={this.props.popup}
+      <form
+        className={classes.wrapper}
+        onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
-
-        <div>
-          <div
-            style={{
-              display: "flex",
-              alignItem: "center",
-              justifyContent: "space-between",
-              backgroundColor: "#039be5"
-            }}
-          >
-            <Button
-              onClick={this.props.close_popup}
-              color="white"
-              big={true}
-              iconMaterial={"clear"}
-              style={{ width: "10%", color:"#fff" }}
-            />
-            <span style={{color: "#fff", padding:"12px"}}>搜索</span>
-          </div>
-
-          <div style={{ padding: "20px" }}>
-            <form
-              onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}
-            >
-              {this.renderFields()}
-
-              <div style={{display:'flex'}}>
-                <button className="red accent-4" style={{flex:'1'}} onClick={this.onCancel}>取消</button>
-                <button className="light-blue accent-4" style={{flex:'1'}} type='submit'>搜索</button>
-              </div>
-            </form>
-
-            <HistorySearch />
-
-          </div>
+        <div className={classes.sectionWrapper}>
+          {this.renderFields(classes)}
         </div>
-      </Popup>
+
+        <div className={classes.sectionWrapper}>
+          <h4 style={{ fontWeight: "bold" }}>向导服务</h4>
+          <Field
+            name="services"
+            component={popupSearchMultiServices}
+            data={["徒步旅行", "汽车接送", "购物打折"]}
+          />
+        </div>
+
+        <HistorySearch />
+
+        <Button type="submit" color="primary" raised className={classes.button}>
+          搜索
+        </Button>
+      </form>
     );
   }
 }
 
-const validate = values => {
-  // console.log(values);
-  const errors = {};
-
-  if (!values.cityname) {
-    errors.email = "City name required";
-  }
-
-  return errors;
-};
 PopupSearch = reduxForm({
-  form: "popupSearchForm",
-  validate
-})(PopupSearch);
+  form: "PopupSearchForm"
+})(withStyles(styles)(PopupSearch));
 
 export default (PopupSearch = connect(null, actions)(PopupSearch));

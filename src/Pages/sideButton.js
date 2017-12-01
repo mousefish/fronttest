@@ -1,45 +1,43 @@
-import React, {Component} from "react";
-import { Fab, Icon } from "framework7-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
+import AddIcon from 'material-ui-icons/Add';
+import SearchIcon from 'material-ui-icons/Search';
 
 
-class SideButton extends Component {
-  render(){
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  buttonWrapper:{
+    position:'fixed',
+    right:'10%',
+    bottom:'10%',
+    zIndex:'1000'
+  }
+});
 
-    return (
-      <div>
-      <Fab
-        color="pink"
-        style={{
-          position:'fixed',
-          bottom: 140,
-          width: 40,
-          height: 40,
-          right: 30,
-          backgroundColor: "#3d9fe7"
-        }}
-      >
-        <Icon icon="icon-plus" />
-      </Fab>
-
-      <Fab
-        color="pink"
-        style={{
-          position:'fixed',
-          bottom: 90,
-          width: 40,
-          height: 40,
-          right: 30,
-          backgroundColor: "#16c53d"
-        }}
-        onClick={this.props.onBtnClick}
-      >
-        <Icon material="search" />
-      </Fab>
+function sideButton(props) {
+  const { classes } = props;
+  return (
+    <div className={classes.buttonWrapper}>
+     <div>
+      <Button onClick={props.onClick} fab color="primary" aria-label="search" className={classes.button}>
+        <SearchIcon />
+      </Button>
       </div>
-    )
-
+      <div>
+      <Button fab color="accent" aria-label="add" className={classes.button}>
+        <AddIcon />
+      </Button>
+      </div>
+    </div>
+  );
 }
 
-}
+sideButton.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
-export default SideButton;
+export default withStyles(styles)(sideButton);
