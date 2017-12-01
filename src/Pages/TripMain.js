@@ -16,7 +16,7 @@ import ListCard from "../Components/container/ListCard";
 import SearchBar from "../Components/container/searchBar";
 import TabSelect from "../Components/container/tabSelect";
 
-import PopupSearch from "../Components/container/popupSearch";
+import PopupSearch from "../Components/container/PopupSearch";
 
 import HotMaterialCard from "../Components/container/hotMaterialCard";
 import Divider from "material-ui/Divider";
@@ -98,7 +98,7 @@ class TripMain extends Component {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <popupSearch />
+          <PopupSearch/>
         </Dialog>
         <div className={classes.wrapper}>
           <Header description="这是一个有深度的旅游服务平台" />

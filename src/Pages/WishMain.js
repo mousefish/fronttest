@@ -16,7 +16,7 @@ import SearchBar from "../Components/container/searchBar";
 import TabSelect from "../Components/container/tabSelect";
 
 
-import PopupSearch from "../Components/container/popupSearch";
+import PopupSearch from "../Components/container/PopupSearch";
 
 import HotMaterialCard from "../Components/container/hotMaterialCard";
 import Divider from "material-ui/Divider";

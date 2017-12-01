@@ -15,7 +15,7 @@ export default ({ format, input, placeholder, meta: { error, touched } }) => {
   momentLocaliser(moment);
 
     return (
-        <div style={{border:'none'}}>
+        <div style={{marginBottom:20, border:'1px solid #3f51b5'}}>
             <DateTimePicker
                 {...input}
                 onChange={input.onChange}
@@ -24,9 +24,6 @@ export default ({ format, input, placeholder, meta: { error, touched } }) => {
                 time={true}
                 placeholder={placeholder}
             />
-            <div className="red-text" style={{ marginBottom: "20px" }}>
-                {touched && error}
-            </div>
         </div>
     );
 };

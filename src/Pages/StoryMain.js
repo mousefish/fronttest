@@ -17,7 +17,7 @@ import SearchBar from "../Components/container/searchBar";
 import TabSelect from "../Components/container/tabSelect";
 
 
-import PopupSearch from "../Components/container/popupSearch";
+import PopupSearch from "../Components/container/PopupSearch";
 
 import TLogo from "../Assets/Images/logo.jpg";
 import StoryTab from "../Components/container/storyTab";
