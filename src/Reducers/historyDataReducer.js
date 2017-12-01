@@ -1,10 +1,22 @@
-const INIT_STATE = [{ location: "成都", time: "2017/11/20" },{ location: "蓬莱", time: "2017/11/21" }];
+import { CLEAR_HISTORY_DATA, FETCH_HISTORY_DATA } from "../Actions/types";
 
-export default (state = INIT_STATE, action) => {
+// dummy initial state:
+const date = new Date();
+const localTime = date.toLocaleDateString();
+const INITIAL_STATE = [
+    { location: "成都", searchTime: localTime },
+    { location: "三亚", searchTime: localTime }
+];
+
+export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case "EMPTY_HISTORY_DATA":
-            return [];
+        case FETCH_HISTORY_DATA:
+            // return action.payload;
+            // temp
+            return INITIAL_STATE;
+        case CLEAR_HISTORY_DATA:
+            return action.payload;
     }
 
-    return state;
+    return INITIAL_STATE;
 };

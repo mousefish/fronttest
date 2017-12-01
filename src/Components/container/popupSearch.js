@@ -8,7 +8,7 @@ import popupSearchMultiServices from "./popupSearchMultiServices";
 import * as actions from "../../Actions";
 import HistorySearch from "./HistorySearch";
 import { withStyles } from "material-ui/styles";
-
+import { withRouter } from "react-router";
 
 const styles = theme => ({
   wrapper: {
@@ -61,7 +61,7 @@ class PopupSearch extends Component {
 
   submitForm(values) {
     // console.log("values:", values);
-    this.props.sendSearchData(values, this.props.handleRequestClose);
+    this.props.submitSearchData(values, this.props.history);
   }
 
   render() {
@@ -100,4 +100,4 @@ PopupSearch = reduxForm({
   form: "PopupSearchForm"
 })(withStyles(styles)(PopupSearch));
 
-export default (PopupSearch = connect(null, actions)(PopupSearch));
+export default (PopupSearch = connect(null, actions)(withRouter(PopupSearch)));
