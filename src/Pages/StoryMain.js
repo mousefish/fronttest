@@ -9,14 +9,14 @@ import Flight from "material-ui-icons/Flight";
 import Message from "material-ui-icons/Message";
 import Person from "material-ui-icons/Person";
 import WebFontLoader from "webfontloader";
-import BannerSlider from "../Components/container/mainBannerSlider";
+
 
 import NowPlayingCard from "../Components/container/MaterialCard";
 import ListStoryCard from "../Components/container/listStoryCard";
 import SearchBar from "../Components/container/searchBar";
 import TabSelect from "../Components/container/tabSelect";
-import { Page } from "framework7-react";
-import { Popup, Button, Fab, Icon } from "framework7-react";
+
+
 import PopupSearch from "../Components/container/popupSearch";
 
 import TLogo from "../Assets/Images/logo.jpg";
@@ -80,7 +80,7 @@ class StoryMain extends Component {
     const location = ["北京", "河南", "山西"];
     return (
       <div>
-        <Page name="home">
+
           <PopupSearch
             popup={this.state.popup}
             close_popup={ ()=> this.setState({ popup: false })}
@@ -118,7 +118,7 @@ class StoryMain extends Component {
           </div>
 
           <SideButton onBtnClick={()=>{ this.setState({ popup: true })}} />
-        </Page>
+
       </div>
     );
   }

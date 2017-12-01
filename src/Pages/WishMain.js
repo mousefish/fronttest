@@ -9,14 +9,13 @@ import Flight from "material-ui-icons/Flight";
 import Message from "material-ui-icons/Message";
 import Person from "material-ui-icons/Person";
 import WebFontLoader from "webfontloader";
-import BannerSlider from "../Components/container/mainBannerSlider";
 
 import NowPlayingCard from "../Components/container/MaterialCard";
 import ListWish from "../Components/container/listWish";
 import SearchBar from "../Components/container/searchBar";
 import TabSelect from "../Components/container/tabSelect";
-import { Page } from "framework7-react";
-import { Popup, Button, Fab, Icon } from "framework7-react";
+
+
 import PopupSearch from "../Components/container/popupSearch";
 
 import HotMaterialCard from "../Components/container/hotMaterialCard";
@@ -73,7 +72,7 @@ class WishMain extends Component {
     const classes = this.props.classes;
     return (
       <div>
-        <Page name="home">
+
           <PopupSearch
             popup={this.state.popup}
             close_popup={() => this.setState({ popup: false })}
@@ -90,7 +89,7 @@ class WishMain extends Component {
               this.setState({ popup: true });
             }}
           />
-        </Page>
+
       </div>
     );
   }

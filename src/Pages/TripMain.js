@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import "../CSS/main.css";
+import PropTypes from "prop-types";
+
 import { withStyles } from "material-ui/styles";
 import BottomNavigation, {
   BottomNavigationButton
@@ -9,16 +10,13 @@ import Flight from "material-ui-icons/Flight";
 import Message from "material-ui-icons/Message";
 import Person from "material-ui-icons/Person";
 import WebFontLoader from "webfontloader";
-import BannerSlider from "../Components/container/mainBannerSlider";
 
 import NowPlayingCard from "../Components/container/MaterialCard";
 import ListCard from "../Components/container/ListCard";
 import SearchBar from "../Components/container/searchBar";
 import TabSelect from "../Components/container/tabSelect";
-import { Page } from "framework7-react";
-import { Popup, Button, Fab, Icon } from "framework7-react";
-import PopupSearch from "../Components/container/popupSearch";
 
+import PopupSearch from "../Components/container/popupSearch";
 
 import HotMaterialCard from "../Components/container/hotMaterialCard";
 import Divider from "material-ui/Divider";
@@ -32,6 +30,15 @@ import Toys from "material-ui-icons/Toys";
 import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 import SideButton from "./sideButton";
 import Header from "../Components/presenter/header";
+import Slide from "material-ui/transitions/Slide";
+import AppBar from "material-ui/AppBar";
+import Dialog from "material-ui/Dialog";
+import Button from "material-ui/Button";
+
+import Toolbar from "material-ui/Toolbar";
+import IconButton from "material-ui/IconButton";
+import Typography from "material-ui/Typography";
+import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
 WebFontLoader.load({
   google: {
@@ -39,61 +46,71 @@ WebFontLoader.load({
   }
 });
 
-const styleSheet = {
+const styles = {
   wrapper: {
     width: "90%",
     margin: "auto",
     marginBottom: 98,
     marginTop: 20
-  }
+  },
+
+  appBar: {
+    position: "relative"
+  },
 };
 
-class TripMain extends Component {
-  constructor() {
-    super();
-    this.state = {
-      value: 0,
-      popup: false
-    };
-  }
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-  onSwipeLeftListener() {
-    console.log("left");
-  }
-  onSwipeRightListener() {
-    console.log("right");
-  }
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 
-  handleInlineChange(e) {
-    this.setState({ inlineValue: e.target.value });
-  }
+class TripMain extends Component {
+  state = {
+    open: false
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleRequestClose = () => {
+    this.setState({ open: false });
+  };
 
   render() {
     const classes = this.props.classes;
     return (
-      <div>
-        <Page name="home">
-          <PopupSearch
-            popup={this.state.popup}
-            close_popup={() => this.setState({ popup: false })}
-          />
-          <div className={classes.wrapper}>
-            <Header description="这是一个有深度的旅游服务平台" />
-
-            <ListCard />
-          </div>
-
-          <SideButton
-            onBtnClick={() => {
-              this.setState({ popup: true });
-            }}
-          />
-        </Page>
+      <div style={{ position: "relative" }}>
+        <SideButton onClick={this.handleClickOpen} />
+        <Dialog
+          fullScreen
+          open={this.state.open}
+          onRequestClose={this.handleRequestClose}
+          transition={Transition}
+        >
+          <AppBar className={classes.appBar}>
+            <Toolbar>
+              <IconButton
+                color="contrast"
+                onClick={this.handleRequestClose}
+                aria-label="Close"
+              >
+                <KeyboardArrowLeft />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <popupSearch />
+        </Dialog>
+        <div className={classes.wrapper}>
+          <Header description="这是一个有深度的旅游服务平台" />
+          <ListCard />
+        </div>
       </div>
     );
   }
 }
 
-export default withStyles(styleSheet)(TripMain);
+TripMain.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(TripMain);

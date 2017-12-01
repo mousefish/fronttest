@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import TragelMainPage from "./Pages/TravelMainPage";
+
 import PageNotFound from "./Pages/404Page";
 import SignUpWizard from "./Components/container/SignUpWizard";
 import { ToastContainer } from "react-toastify";
@@ -10,22 +10,8 @@ import MyUploader from "./Pages/TestPages";
 import LogInSignUp from './Pages/logInSignUp';
 
 import LoginForm from "./Components/container/LoginForm";
-import TestMain from "./Pages/TestMain";
 import CheckAuth from "./Utlity/checkAuth";
-import TestMaterial from "./Pages/TestMaterial";
-import "framework7/dist/css/framework7.material.min.css";
-import "framework7/dist/css/framework7.material.colors.min.css";
-import HomePageNew from "./Pages/HomePageNew";
-import {
-  View,
-  Views,
-  Pages,
-  Page,
-  Navbar,
-  Toolbar,
-  Tabs,
-  Tab
-} from "framework7-react";
+
 import { withStyles } from "material-ui/styles";
 import BottomNavigation, {
   BottomNavigationButton
@@ -216,21 +202,12 @@ class App extends Component {
     }
     return (
       <div>
-        <Views>
-          <View id="main-view" main>
-            <Pages>
-              <Page style={{ position: "fixed" }}>
+
                 <div>
                   <Switch>
                     <Route exact path="/" component={TripMain} />
                     <Route exact path="/trip" component={Home} />
                     <Route exact path="/tr/test" component={MyUploader} />
-                    <Route exact path="/maintest" component={TestMain} />
-                    <Route
-                      exact
-                      path="/testmaterial"
-                      component={TestMaterial}
-                    />
                     <Route exact path="/home" component={TripMain} />
                     <Route exact path="/wish" component={WishMain} />
                     <Route exact path="/story" component={StoryMain} />
@@ -249,11 +226,9 @@ class App extends Component {
                   </Switch>
                 </div>
                 <ToastContainer />
-              </Page>
+
               <div className={classes.root}>{this.renderBottomNav()}</div>
-            </Pages>
-          </View>
-        </Views>
+
       </div>
     );
   }
