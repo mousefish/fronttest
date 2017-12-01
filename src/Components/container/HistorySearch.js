@@ -5,8 +5,12 @@ import { connect } from "react-redux";
 
 class HistorySearch extends Component {
 
+    componentWillMount(){
+        this.props.fetchHistoryData();
+    }
+
     clearHistory() {
-        this.props.emptyHistorySearchData();
+        this.props.clearHistoryData();
     }
 
     renderItems() {
@@ -22,7 +26,7 @@ class HistorySearch extends Component {
                     }}
                 >
                     <div>{item.location}</div>
-                    <div>{item.time}</div>
+                    <div>{item.searchTime}</div>
                 </div>
             );
         });
@@ -58,7 +62,7 @@ class HistorySearch extends Component {
 
 const mapStateToProps = state => {
     return {
-        historyData: state.historyData
+        historyData: state.HistoryDataReducer
     };
 };
 export default connect(mapStateToProps, actions)(HistorySearch);

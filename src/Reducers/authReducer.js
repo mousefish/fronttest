@@ -1,5 +1,5 @@
-import {SET_AUTH, AUTH_ERROR, AUTH_USER, DEAUTH_USER } from '../Actions/types'
-import {isEmpty} from 'lodash'
+import {SET_AUTH, AUTH_ERROR, AUTH_USER, DEAUTH_USER } from '../Actions/types';
+import {isEmpty} from 'lodash';
 
 const initState={
   isAuthenticated: false,
@@ -34,6 +34,7 @@ export default (state = initState, action = {}) => {
         isAuthenticated: !isEmpty(action.user),
         user: action.user
       };
+
     default:
       return state;
   }

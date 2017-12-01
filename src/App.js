@@ -10,6 +10,8 @@ import MyUploader from "./Pages/TestPages";
 import LogInSignUp from './Pages/logInSignUp';
 
 import LoginForm from "./Components/container/LoginForm";
+import SeachResult from "./Components/container/searchResult";
+
 import CheckAuth from "./Utlity/checkAuth";
 
 import { withStyles } from "material-ui/styles";
@@ -217,6 +219,7 @@ class App extends Component {
                     <Route exact path="/myRoute" component={MyRoute} />
                     <Route exact path="/addRoute" component={AddRoute} />
                     <Route exact path="/logInSignUp" component={LogInSignUp} />
+                    <Route exact path="/searchResult" component={SeachResult} />
 
                     {/*unit test used below, production will check env.production to disable*/}
 

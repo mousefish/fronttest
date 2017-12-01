@@ -5,12 +5,15 @@
 //  reducer  reducer
 
 import {combineReducers} from 'redux';
-import UserAuth from './UserAuth';
+import UserAuth from './authReducer';
 import { reducer as formReducer } from 'redux-form';
-import historyDataReducer from './historyDataReducer';
+import SearchDataReducer from './searchDataReducer';
+import HistoryDataReducer from './historyDataReducer';
+
 
 export default combineReducers({
       UserAuth,
-      historyData:historyDataReducer,
+      HistoryDataReducer,
+      SearchDataReducer,
       form: formReducer,
 });

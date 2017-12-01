@@ -1,3 +1,4 @@
 export * from './authActions';
-export * from './historySearchAction';
-export * from './routeActions';
+export * from './searchDataActions';
+export * from './historyDataActions';
+export * from './activityActions';
