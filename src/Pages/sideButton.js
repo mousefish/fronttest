@@ -7,9 +7,14 @@ import SearchIcon from 'material-ui-icons/Search';
 
 
 const styles = theme => ({
+  root:{
+    margin: theme.spacing.unit,
+    backgroundColor:'#43A047'
+  },
   button: {
     margin: theme.spacing.unit,
   },
+
   buttonWrapper:{
     position:'fixed',
     right:'10%',
@@ -28,7 +33,7 @@ function sideButton(props) {
       </Button>
       </div>
       <div>
-      <Button fab color="accent" aria-label="add" className={classes.button}>
+      <Button fab color="accent" aria-label="add" className={classes.root}>
         <AddIcon />
       </Button>
       </div>

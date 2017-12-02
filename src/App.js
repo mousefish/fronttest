@@ -25,7 +25,6 @@ import Person from "material-ui-icons/Person";
 import AddCircle from 'material-ui-icons/AddCircle';
 
 import WebFontLoader from "webfontloader";
-import Tab1Content from "./Pages/tab1content";
 import { getFramework7 } from "./index";
 import TripMain from "./Pages/TripMain";
 import WishMain from "./Pages/WishMain";
