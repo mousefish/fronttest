@@ -16,7 +16,6 @@ import Person from "material-ui-icons/Person";
 import travel from "../../Assets/Images/sichuan.jpg";
 import Chip from "material-ui/Chip";
 
-
 import classnames from "classnames";
 import Card, {
   CardHeader,
@@ -29,8 +28,6 @@ import Avatar from "material-ui/Avatar";
 import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
-
-import dummyData from "./dummyTravelData.json";
 
 const styleSheet = {
   card: {
@@ -55,6 +52,20 @@ const styleSheet = {
 };
 
 class ListCard extends Component {
+
+  renderService(services) {
+    const icon = this.props.classes.icon;
+
+    return services.map(service => {
+      return (
+        <span style={{ marginRight: 6 }}>
+          <LocalOffer className={icon} />
+          &nbsp;{service}
+        </span>
+      );
+    });
+  }
+
   renderStar(nums) {
     const icon = this.props.classes.icon;
 
@@ -67,7 +78,7 @@ class ListCard extends Component {
 
   renderItems() {
     const classes = this.props.classes;
-    return dummyData.map(item => {
+    return this.props.dummyData.map(item => {
       return (
         <Card className={classes.card}>
           <CardMedia className={classes.media} image={travel} title="travel">
@@ -118,16 +129,7 @@ class ListCard extends Component {
               <Person className={classes.icon} />
               &nbsp;{item.name}
             </div>
-            <div>
-              <span style={{ marginRight: 6 }}>
-                <LocalOffer className={classes.icon} />
-                &nbsp;{item.service[0]}
-              </span>
-              <span>
-                <LocalOffer className={classes.icon} />
-                &nbsp;{item.service[1]}
-              </span>
-            </div>
+            <div>{this.renderService(item.service)}</div>
           </CardContent>
 
           <CardActions disableActionSpacing>

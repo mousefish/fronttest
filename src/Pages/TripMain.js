@@ -40,6 +40,8 @@ import IconButton from "material-ui/IconButton";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
+import dummyData from "../Components/container/dummyTravelData.json";
+
 WebFontLoader.load({
   google: {
     families: ["Roboto:300,400,500,700", "Material Icons"]
@@ -102,7 +104,7 @@ class TripMain extends Component {
         </Dialog>
         <div className={classes.wrapper}>
           <Header description="这是一个有深度的旅游服务平台" />
-          <ListCard />
+          <ListCard dummyData={dummyData}/>
         </div>
       </div>
     );
