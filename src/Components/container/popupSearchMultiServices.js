@@ -11,7 +11,7 @@ export default ({ input, data, valueField, textField }) => {
             data={data}
             valueField={valueField}
             textField={textField}
-            style={{border:'1px solid #3f51b5'}}
+            style={{borderBottom:'1px solid #3f51b5'}}
         />
     );
 };

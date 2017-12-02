@@ -10,7 +10,7 @@ import MyUploader from "./Pages/TestPages";
 import LogInSignUp from './Pages/logInSignUp';
 
 import LoginForm from "./Components/container/LoginForm";
-import SeachResult from "./Components/container/searchResult";
+import SeachResult from "./Components/container/SearchResult";
 
 import CheckAuth from "./Utlity/checkAuth";
 
@@ -25,17 +25,15 @@ import Person from "material-ui-icons/Person";
 import AddCircle from 'material-ui-icons/AddCircle';
 
 import WebFontLoader from "webfontloader";
-import Tab1Content from "./Pages/tab1content";
 import { getFramework7 } from "./index";
 import TripMain from "./Pages/TripMain";
 import WishMain from "./Pages/WishMain";
-import StoryMain from "./Pages/StoryMain";
 import MyAccount from "./Pages/MyAccount";
 import MyMessage from "./Pages/MyMessage";
 import Discovery from "./Pages/Discovery";
 import MyRoute from "./Pages/MyRoute";
 import AddRoute from "./Pages/AddRoute";
-import RequireAuth from './HOC/RequireAuth'
+import RequireAuth from './HOC/RequireAuth';
 
 import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
@@ -87,10 +85,8 @@ class App extends Component {
     } else if (main_value === 1) {
       this.props.history.push("/wish");
     } else if (main_value === 2) {
-      this.props.history.push("/story");
-    } else if (main_value === 3) {
       this.props.history.push("/message");
-    } else if (main_value === 4) {
+    } else if (main_value === 3) {
       this.props.history.push("/my");
     }
   }
@@ -178,11 +174,6 @@ class App extends Component {
         />
         <BottomNavigationButton
           classes={{ icon: classes.icon, root: classes.broot }}
-          label="故事"
-          icon={<Toys />}
-        />
-        <BottomNavigationButton
-          classes={{ icon: classes.icon, root: classes.broot }}
           label="消息"
           icon={<ChatBubbleOutline />}
         />
@@ -212,7 +203,6 @@ class App extends Component {
                     <Route exact path="/tr/test" component={MyUploader} />
                     <Route exact path="/home" component={TripMain} />
                     <Route exact path="/wish" component={WishMain} />
-                    <Route exact path="/story" component={StoryMain} />
                     <Route exact path="/my" component={RequireAuth(MyAccount)} />
                     <Route exact path="/message" component={MyMessage} />
                     <Route exact path="/discovery" component={Discovery} />

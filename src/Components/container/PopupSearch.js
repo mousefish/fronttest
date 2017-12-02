@@ -61,7 +61,11 @@ class PopupSearch extends Component {
 
   submitForm(values) {
     // console.log("values:", values);
-    this.props.submitSearchData(values, this.props.history);
+    this.props.submitSearchData(
+      values,
+      this.props.history,
+      this.props.handleRequestClose
+    );
   }
 
   render() {
@@ -99,5 +103,6 @@ class PopupSearch extends Component {
 PopupSearch = reduxForm({
   form: "PopupSearchForm"
 })(withStyles(styles)(PopupSearch));
+
 
 export default (PopupSearch = connect(null, actions)(withRouter(PopupSearch)));
