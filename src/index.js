@@ -19,6 +19,8 @@ import { setAuthUser } from "./Actions/authActions";
 // import materialize css library
 // import 'materialize-css/dist/css/materialize.min.css';
 
+import "./CSS/main.css";
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //create redux store in root
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));

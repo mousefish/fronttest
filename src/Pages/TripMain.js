@@ -1,46 +1,22 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actions from "../Actions";
 import PropTypes from "prop-types";
-
 import { withStyles } from "material-ui/styles";
-import BottomNavigation, {
-  BottomNavigationButton
-} from "material-ui/BottomNavigation";
-import Home from "material-ui-icons/Home";
-import Flight from "material-ui-icons/Flight";
-import Message from "material-ui-icons/Message";
-import Person from "material-ui-icons/Person";
 import WebFontLoader from "webfontloader";
-
-import NowPlayingCard from "../Components/container/MaterialCard";
 import ListCard from "../Components/container/ListCard";
-import SearchBar from "../Components/container/searchBar";
-import TabSelect from "../Components/container/tabSelect";
-
 import PopupSearch from "../Components/container/PopupSearch";
-
-import HotMaterialCard from "../Components/container/hotMaterialCard";
-import Divider from "material-ui/Divider";
-import Autocomplete from "react-md/lib/Autocompletes";
-import DatePicker from "react-md/lib/Pickers/DatePickerContainer";
-import Radio from "react-md/lib/SelectionControls/Radio";
-
-import LocationSearch from "material-ui-icons/LocationSearching";
-import Favorite from "material-ui-icons/FavoriteBorder";
-import Toys from "material-ui-icons/Toys";
-import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 import SideButton from "./sideButton";
 import Header from "../Components/presenter/header";
 import Slide from "material-ui/transitions/Slide";
 import AppBar from "material-ui/AppBar";
 import Dialog from "material-ui/Dialog";
 import Button from "material-ui/Button";
-
 import Toolbar from "material-ui/Toolbar";
 import IconButton from "material-ui/IconButton";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
-import dummyData from "../Components/container/dummyTravelData.json";
 
 WebFontLoader.load({
   google: {
@@ -52,13 +28,13 @@ const styles = {
   wrapper: {
     width: "90%",
     margin: "auto",
-    marginBottom: 98,
+    marginBottom: 50,
     marginTop: 20
   },
 
   appBar: {
     position: "relative"
-  },
+  }
 };
 
 function Transition(props) {
@@ -69,6 +45,10 @@ class TripMain extends Component {
   state = {
     open: false
   };
+
+  componentWillMount() {
+    this.props.fetchMainData();
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -100,11 +80,11 @@ class TripMain extends Component {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <PopupSearch handleRequestClose={this.handleRequestClose}/>
+          <PopupSearch handleRequestClose={this.handleRequestClose} />
         </Dialog>
         <div className={classes.wrapper}>
           <Header description="这是一个有深度的旅游服务平台" />
-          <ListCard dummyData={dummyData}/>
+          <ListCard dummyData={this.props.mainData} />
         </div>
       </div>
     );
@@ -115,4 +95,8 @@ TripMain.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TripMain);
+const mapStateToProps = state => {
+  return { mainData: state.MainDataReducer };
+};
+
+export default connect(mapStateToProps, actions)(withStyles(styles)(TripMain));

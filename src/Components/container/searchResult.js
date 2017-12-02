@@ -8,24 +8,25 @@ import AppBar from "material-ui/AppBar";
 import Dialog from "material-ui/Dialog";
 import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
-
 import Toolbar from "material-ui/Toolbar";
 import IconButton from "material-ui/IconButton";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PopupSearch from "./PopupSearch";
 
-const styles = {
-  wrapper: {
-    width: "90%",
-    margin: "auto",
-    marginBottom: 98,
-    marginTop: 20
-  },
 
-  appBar: {
-    position: "relative"
-  },
+
+const styles = {
+    wrapper: {
+        width: "90%",
+        margin: "auto",
+        marginBottom: 50,
+        marginTop: 20
+    },
+
+    appBar: {
+        position: "relative"
+    }
 };
 function Transition(props) {
     return <Slide direction="up" {...props} />;

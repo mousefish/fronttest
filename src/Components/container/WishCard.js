@@ -7,9 +7,10 @@ import MonetizationOn from "material-ui-icons/MonetizationOn";
 
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
-import Person from "material-ui-icons/Person";
+import EventAvailable from "material-ui-icons/EventAvailable";
+import Group from "material-ui-icons/Group";
 
-import travel from "../../Assets/Images/sichuan.jpg";
+import wish from "../../Assets/Images/wish.jpg";
 
 import Card, {
   CardHeader,
@@ -45,8 +46,7 @@ const styleSheet = {
   }
 };
 
-class ListCard extends Component {
-
+class WishCard extends Component {
   renderService(services) {
     const icon = this.props.classes.icon;
 
@@ -75,7 +75,7 @@ class ListCard extends Component {
     return this.props.dummyData.map(item => {
       return (
         <Card className={classes.card}>
-          <CardMedia className={classes.media} image={travel} title="travel">
+          <CardMedia className={classes.media} image={wish} title="wish">
             <span
               style={{
                 position: "absolute",
@@ -83,13 +83,7 @@ class ListCard extends Component {
                 top: "10",
                 color: "#fff"
               }}
-            >
-              <LocationOn
-                className={classes.icon}
-                style={{ color: "#fff" }}
-              />{" "}
-              中国 成都
-            </span>
+            />
             <span
               style={{
                 position: "absolute",
@@ -107,33 +101,29 @@ class ListCard extends Component {
           <CardContent>
             <div
               style={{
-                marginBottom: 10
+                marginBottom: 6
               }}
             >
               <div style={{ float: "left" }}>
-                <MonetizationOn className={classes.icon} /> &nbsp;{item.price}
+                <LocationOn className={classes.icon} /> {item.location}
               </div>
               <div style={{ float: "right" }}>
-                {this.renderStar(item.stars)}
-                &nbsp;{item.comments}
+                <MonetizationOn className={classes.icon} /> &nbsp;{item.price}
               </div>
               <div style={{ clear: "both" }} />
             </div>
+
             <div style={{ marginBottom: 6 }}>
-              <Person className={classes.icon} />
-              &nbsp;{item.name}
+              <div style={{ float: "left" }}>
+                <EventAvailable className={classes.icon} />&nbsp;{item.date}
+              </div>
+              <div style={{ float: "right" }}>
+                <Group className={classes.icon} />&nbsp;组团 : {item.grouping}
+              </div>
+              <div style={{ clear: "both" }} />
             </div>
             <div>{this.renderService(item.service)}</div>
           </CardContent>
-
-          <CardActions disableActionSpacing>
-            <IconButton aria-label="Add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="Share">
-              <ShareIcon />
-            </IconButton>
-          </CardActions>
         </Card>
       );
     });
@@ -144,4 +134,4 @@ class ListCard extends Component {
   }
 }
 
-export default withStyles(styleSheet)(ListCard);
+export default withStyles(styleSheet)(WishCard);
