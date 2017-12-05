@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import _ from 'lodash';
 import { withStyles } from "material-ui/styles";
 import IconButton from "material-ui/IconButton";
 import LocationOn from "material-ui-icons/LocationOn";
@@ -72,9 +73,9 @@ class ListCard extends Component {
 
   renderItems() {
     const classes = this.props.classes;
-    return this.props.dummyData.map(item => {
+    return _.map(this.props.dummyData, item => {
       return (
-        <Card className={classes.card}>
+        <Card className={classes.card} key={item.id}>
           <CardMedia className={classes.media} image={travel} title="travel">
             <span
               style={{

@@ -8,8 +8,7 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
         width: "95%",
-        padding: 20,
-        fontSize: 16
+        padding: 15,
     },
 
     wrapper: {

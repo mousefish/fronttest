@@ -1,8 +1,10 @@
 import { FETCH_MAIN_DATA } from "../Actions/types";
 
 // Dummy initial state
-const INITIAL_STATE = [
+const INITIAL_STATE = {
+    '001':
     {
+        id:'001',
         name: "陈嘉熙",
         title: "情感作家",
         theme: "骨灰级成都吃货地图",
@@ -13,7 +15,8 @@ const INITIAL_STATE = [
         stars: 4
     },
 
-    {
+    '002':{
+        id:'002',
         name: "陈嘉熙",
         title: "情感作家",
         theme: "骨灰级吃货地图",
@@ -24,7 +27,7 @@ const INITIAL_STATE = [
         stars: 4
     },
 
-    {
+    '003':{
         name: "陈嘉熙",
         title: "情感作家",
         theme: "骨灰级吃货地图",
@@ -34,11 +37,12 @@ const INITIAL_STATE = [
         comments: "13",
         stars: 4
     }
-];
+};
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case FETCH_MAIN_DATA:
+        // return { [action.payload.data.id]:action.payload.data, ...state };
             return state;
     }
 
