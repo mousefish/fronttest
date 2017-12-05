@@ -14,7 +14,7 @@ const INITIAL_STATE = {
             theme: "成都吃货一日游，麻辣香锅，糖葫芦...",
             location: "中国 成都",
             price: "RMB 200",
-            service: ["徒步向导", "购物打折"],
+            service: ["徒步向导", "购物打折",'胡同巷子'],
             grouping: '2/3'
        },
 
@@ -24,7 +24,7 @@ const INITIAL_STATE = {
             theme: "三亚沙滩一日游，海鲜，阳光",
             location: "中国 三亚",
             price: "RMB 400",
-            service: ["徒步向导", "购物打折"],
+            service: ["徒步向导", "购物打折",'海鲜大排档'],
             grouping: '1/3'
        }
 };

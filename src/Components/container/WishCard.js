@@ -101,6 +101,7 @@ class WishCard extends Component {
   }
 
   renderItems(classes) {
+    const dummyData= this.props.dummyData;
     return _.map(this.props.dummyData, item => {
       return (
         <div>
@@ -123,12 +124,13 @@ class WishCard extends Component {
             </AppBar>
             <WishDetails
               id={this.state.id}
-              theme={this.props.dummyData[this.state.id].theme}
-              grouping={this.props.dummyData[this.state.id].grouping}
-              price={this.props.dummyData[this.state.id].price}
-              location={this.props.dummyData[this.state.id].location}
-              service={this.props.dummyData[this.state.id].service}
-              date={this.props.dummyData[this.state.id].date}
+              theme={dummyData[this.state.id].theme}
+              grouping={dummyData[this.state.id].grouping}
+              price={dummyData[this.state.id].price}
+              location={dummyData[this.state.id].location}
+              service={dummyData[this.state.id].service}
+              date={dummyData[this.state.id].date}
+              serives={dummyData[this.state.id].services}
               wish={wish}
             />
           </Dialog>
