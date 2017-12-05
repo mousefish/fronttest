@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import IconButton from "material-ui/IconButton";
@@ -11,6 +12,7 @@ import EventAvailable from "material-ui-icons/EventAvailable";
 import Group from "material-ui-icons/Group";
 
 import wish from "../../Assets/Images/wish.jpg";
+import WishDetails from "./WishDetails";
 
 import Card, {
   CardHeader,
@@ -23,8 +25,15 @@ import Avatar from "material-ui/Avatar";
 import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
+import Slide from "material-ui/transitions/Slide";
+import AppBar from "material-ui/AppBar";
+import Dialog from "material-ui/Dialog";
+import Button from "material-ui/Button";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
+import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
-const styleSheet = {
+const style = {
   card: {
     width: "100%",
     marginBottom: 30,
@@ -46,7 +55,24 @@ const styleSheet = {
   }
 };
 
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
+
 class WishCard extends Component {
+  state = {
+    open: false,
+    id: "001"
+  };
+
+  handleClickOpen = id => {
+    this.setState({ open: true, id: id });
+  };
+
+  handleRequestClose = () => {
+    this.setState({ open: false });
+  };
+
   renderService(services) {
     const icon = this.props.classes.icon;
 
@@ -60,6 +86,10 @@ class WishCard extends Component {
     });
   }
 
+  renderWishDetails() {
+    return <WishDetails />;
+  }
+
   renderStar(nums) {
     const icon = this.props.classes.icon;
 
@@ -70,68 +100,105 @@ class WishCard extends Component {
     return starWrapper;
   }
 
-  renderItems() {
-    const classes = this.props.classes;
-    return this.props.dummyData.map(item => {
+  renderItems(classes) {
+    return _.map(this.props.dummyData, item => {
       return (
-        <Card className={classes.card}>
-          <CardMedia className={classes.media} image={wish} title="wish">
-            <span
-              style={{
-                position: "absolute",
-                right: "10",
-                top: "10",
-                color: "#fff"
-              }}
+        <div>
+          <Dialog
+            fullScreen
+            open={this.state.open}
+            onRequestClose={this.handleRequestClose}
+            transition={Transition}
+          >
+            <AppBar className={classes.appBar}>
+              <Toolbar>
+                <IconButton
+                  color="contrast"
+                  onClick={this.handleRequestClose}
+                  aria-label="Close"
+                >
+                  <KeyboardArrowLeft />
+                </IconButton>
+              </Toolbar>
+            </AppBar>
+            <WishDetails
+              id={this.state.id}
+              theme={this.props.dummyData[this.state.id].theme}
+              grouping={this.props.dummyData[this.state.id].grouping}
+              price={this.props.dummyData[this.state.id].price}
+              location={this.props.dummyData[this.state.id].location}
+              service={this.props.dummyData[this.state.id].service}
+              date={this.props.dummyData[this.state.id].date}
+              wish={wish}
             />
-            <span
-              style={{
-                position: "absolute",
-                bottom: 0,
-                width: "100%",
-                height: "12%",
-                padding: 4,
-                color: "#fff",
-                backgroundColor: "rgba(0,0,0,0.6)"
-              }}
-            >
-              {item.theme}
-            </span>
-          </CardMedia>
-          <CardContent>
-            <div
-              style={{
-                marginBottom: 6
-              }}
-            >
-              <div style={{ float: "left" }}>
-                <LocationOn className={classes.icon} /> {item.location}
-              </div>
-              <div style={{ float: "right" }}>
-                <MonetizationOn className={classes.icon} /> &nbsp;{item.price}
-              </div>
-              <div style={{ clear: "both" }} />
-            </div>
+          </Dialog>
 
-            <div style={{ marginBottom: 6 }}>
-              <div style={{ float: "left" }}>
-                <EventAvailable className={classes.icon} />&nbsp;{item.date}
+          <Card
+            className={classes.card}
+            key={item.id}
+            onClick={() => {
+              this.handleClickOpen(item.id);
+            }}
+          >
+            <CardMedia className={classes.media} image={wish} title="wish">
+              <span
+                style={{
+                  position: "absolute",
+                  right: "10",
+                  top: "10",
+                  color: "#fff"
+                }}
+              />
+              <span
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  width: "100%",
+                  height: "12%",
+                  padding: 4,
+                  color: "#fff",
+                  backgroundColor: "rgba(0,0,0,0.6)"
+                }}
+              >
+                {item.theme}
+              </span>
+            </CardMedia>
+            <CardContent>
+              <div
+                style={{
+                  marginBottom: 6
+                }}
+              >
+                <div style={{ float: "left" }}>
+                  <LocationOn className={classes.icon} /> {item.location}
+                </div>
+                <div style={{ float: "right" }}>
+                  <MonetizationOn className={classes.icon} /> &nbsp;{item.price}
+                </div>
+                <div style={{ clear: "both" }} />
               </div>
-              <div style={{ float: "right" }}>
-                <Group className={classes.icon} />&nbsp;组团 : {item.grouping}
+
+              <div style={{ marginBottom: 6 }}>
+                <div style={{ float: "left" }}>
+                  <EventAvailable className={classes.icon} />&nbsp;{item.date}
+                </div>
+                <div style={{ float: "right" }}>
+                  <Group className={classes.icon} />&nbsp;组团 : {item.grouping}
+                </div>
+                <div style={{ clear: "both" }} />
               </div>
-              <div style={{ clear: "both" }} />
-            </div>
-            <div>{this.renderService(item.service)}</div>
-          </CardContent>
-        </Card>
+              <div>{this.renderService(item.service)}</div>
+            </CardContent>
+          </Card>
+        </div>
       );
     });
   }
 
   render() {
-    return <List>{this.renderItems()}</List>;
+    const classes = this.props.classes;
+    return <List>{this.renderItems(classes)}</List>;
   }
 }
 
-export default withStyles(styleSheet)(WishCard);
+export default withStyles(style)(WishCard);
