@@ -26,7 +26,7 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     marginTop: 30,
     width: "95%",
-    padding: 20,
+    padding: 15,
     fontSize: 16
   }
 });
