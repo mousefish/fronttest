@@ -36,7 +36,14 @@ const style = theme => ({
         marginBottom: 6
     },
 
-    innerBox: {
+    innerBoxMoney: {
+        display: "flex",
+        flexDirection: "row nowrap",
+        justifyContent: "center",
+        marginBottom: 6
+    },
+
+    innerBoxService: {
         display: "flex",
         flexDirection: "row nowrap",
         justifyContent: "space-between",
@@ -138,8 +145,8 @@ class WishDetails extends Component {
                                     className={classes.icon}
                                 />&nbsp;{this.props.date}
                             </div>
-                            <div className={classes.innerBox}>
-                                <div>
+                            <div className={classes.innerBoxMoney}>
+                                <div style={{marginRight:20}}>
                                     <MonetizationOn
                                         className={classes.icon}
                                     />{" "}
@@ -150,7 +157,7 @@ class WishDetails extends Component {
                                     {this.props.grouping}
                                 </div>
                             </div>
-                            <div className={classes.innerBox}>
+                            <div className={classes.innerBoxService}>
                                 {this.renderService(this.props.service)}
                             </div>
                         </div>

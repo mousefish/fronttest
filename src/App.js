@@ -28,6 +28,7 @@ import WebFontLoader from "webfontloader";
 import { getFramework7 } from "./index";
 import TripMain from "./Pages/TripMain";
 import WishMain from "./Pages/WishMain";
+
 import MyAccount from "./Pages/MyAccount";
 import MyMessage from "./Pages/MyMessage";
 import Discovery from "./Pages/Discovery";

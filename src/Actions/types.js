@@ -8,3 +8,4 @@ export const CLEAR_HISTORY_DATA = 'clear_history_data';
 export const ADD_ACTIVITY = 'add_activity';
 export const FETCH_MAIN_DATA = 'fetch_main_data';
 export const FETCH_WISH_DATA = 'fetch_wish_data';
+export const FETCH_PROFILE_DATA = 'fetch_profile_data';

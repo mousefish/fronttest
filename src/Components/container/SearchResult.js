@@ -68,7 +68,6 @@ class SearchResult extends Component {
                     </AppBar>
                     <PopupSearch handleRequestClose={this.handleRequestClose} />
                 </Dialog>
-                <div>您搜索的地方是: {this.props.searchResult[0].location}</div>
                 <ListCard dummyData={this.props.searchResult} />
             </div>
         );
@@ -76,6 +75,7 @@ class SearchResult extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state.SearchDataReducer)
     return { searchResult: state.SearchDataReducer };
 };
 
