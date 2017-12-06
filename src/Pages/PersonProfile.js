@@ -10,6 +10,14 @@ import deepOrange from "material-ui/colors/deepOrange";
 import sichuan from "../Assets/Images/sichuan.jpg";
 import pic from "../Assets/Images/profile.jpg";
 import Button from "material-ui/Button";
+import IconButton from "material-ui/IconButton";
+import Slide from "material-ui/transitions/Slide";
+import AppBar from "material-ui/AppBar";
+import Dialog from "material-ui/Dialog";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
+import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+import PersonProfileDetails from "../Components/container/PersonProfileDetails";
 
 const styles = theme => ({
     wrapper: {
@@ -68,10 +76,29 @@ const styles = theme => ({
         margin: theme.spacing.unit,
         width: "95%",
         padding: 15
+    },
+    flex: {
+        flex: 1
     }
 });
 
+function Transition(props) {
+    return <Slide direction="up" {...props} />;
+}
+
 class PersonProfile extends Component {
+    state = {
+        open: false
+    };
+
+    handleClickOpen = name => {
+        this.setState({ open: true });
+    };
+
+    handleRequestClose = () => {
+        this.setState({ open: false });
+    };
+
     renderService(services) {
         const icon = this.props.classes.icon;
 
@@ -98,43 +125,77 @@ class PersonProfile extends Component {
         const classes = this.props.classes;
         const profile = this.props.profileData;
         return (
-            <div className={classes.wrapper}>
-                <div className={classes.imageWrapper}>
-                    <img className={classes.image} src={sichuan} />
-                    <Avatar
-                        alt="profile pic"
-                        src={pic}
-                        className={classNames(
-                            classes.avatar,
-                            classes.bigAvatar
-                        )}
-                    />
-                </div>
-                <div className={classes.innerWrapper}>
-                    <h4
-                        className={classes.space}
-                        style={{ fontWeight: "bold" }}
-                    >
-                        {profile.name}
-                    </h4>
-                    <div className={classes.space}>
-                        <LocationOn className={classes.icon} />
-                        {profile.location}
+            <div>
+                <Dialog
+                    fullScreen
+                    open={this.state.open}
+                    onRequestClose={this.handleRequestClose}
+                    transition={Transition}
+                >
+                    <AppBar className={classes.appBar}>
+                        <Toolbar>
+                            <IconButton
+                                color="contrast"
+                                onClick={this.handleRequestClose}
+                                aria-label="Close"
+                            >
+                                <KeyboardArrowLeft />
+                            </IconButton>
+                            <Typography
+                                type="title"
+                                color="inherit"
+                                className={classes.flex}
+                            >
+                                {profile.name}的资料
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
+                    <PersonProfileDetails profile={profile} />
+                </Dialog>
+
+                <div className={classes.wrapper}>
+                    <div className={classes.imageWrapper}>
+                        <img className={classes.image} src={sichuan} />
+                        <Avatar
+                            alt="profile pic"
+                            src={pic}
+                            className={classNames(
+                                classes.avatar,
+                                classes.bigAvatar
+                            )}
+                        />
                     </div>
-                    <div className={classes.space}>
-                        {this.renderStar(profile.stars)}
-                        {profile.comments}
+                    <div className={classes.innerWrapper}>
+                        <h4
+                            className={classes.space}
+                            style={{ fontWeight: "bold" }}
+                        >
+                            {profile.name}
+                        </h4>
+                        <div className={classes.space}>
+                            <LocationOn className={classes.icon} />
+                            {profile.location}
+                        </div>
+                        <div className={classes.space}>
+                            {this.renderStar(profile.stars)}
+                            {profile.comments}
+                        </div>
+                        <div className={classes.serviceWrapper}>
+                            {this.renderService(profile.service)}
+                        </div>
+                        <Button
+                            color="primary"
+                            raised
+                            className={classes.button}
+                            onClick={this.handleClickOpen}
+                        >
+                            更多我的资料哦
+                        </Button>
+                        <h2>我在这座城市的故事</h2>
+                        <Button color="primary" raised className={classes.root}>
+                            一起参与吧
+                        </Button>
                     </div>
-                    <div className={classes.serviceWrapper}>
-                        {this.renderService(profile.service)}
-                    </div>
-                    <Button color="primary" raised className={classes.button}>
-                        更多我的资料哦
-                    </Button>
-                    <h2>我在这座城市的故事</h2>
-                    <Button color="primary" raised className={classes.root}>
-                        一起参与吧
-                    </Button>
                 </div>
             </div>
         );
