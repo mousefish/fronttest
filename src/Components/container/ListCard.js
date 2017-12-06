@@ -54,7 +54,12 @@ const styleSheet = {
   icon: {
     width: 15,
     height: 15,
-    verticalAlign: "-2px"
+    verticalAlign: "-2px",
+  },
+
+  link: {
+    cursor:'pointer',
+    color:'#337ab7'
   }
 };
 
@@ -138,7 +143,7 @@ class ListCard extends Component {
                   className={classes.icon}
                   style={{ color: "#fff" }}
                 />{" "}
-                中国 成都
+                {item.location}
               </span>
               <span
                 style={{
@@ -171,7 +176,8 @@ class ListCard extends Component {
               </div>
 
               <div
-                style={{ marginBottom: 6 }}
+                style={{ marginBottom: 10 }}
+                className={classes.link}
                 onClick={()=>this.handleClickOpen(item.name)}
               >
                 <Person className={classes.icon} />
