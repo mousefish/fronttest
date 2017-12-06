@@ -40,7 +40,8 @@ const style = {
     margin: "auto",
     boxShadow: "none",
     border: "1px solid #f2f2f2",
-    position: "relative"
+    position: "relative",
+    cursor:'pointer'
   },
 
   media: {

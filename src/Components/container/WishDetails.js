@@ -28,7 +28,7 @@ const style = theme => ({
         width: "90%",
         margin: "auto",
         marginBottom: 50,
-        marginTop: 60
+        marginTop: 80
     },
 
     innerWrapper: {
