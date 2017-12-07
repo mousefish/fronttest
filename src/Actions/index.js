@@ -5,3 +5,4 @@ export * from './activityActions';
 export * from './mainDataActions';
 export * from './wishDataActions';
 export * from './profileDataActions';
+export * from './storyDataActions';

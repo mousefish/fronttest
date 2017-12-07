@@ -28,6 +28,8 @@ import WebFontLoader from "webfontloader";
 import { getFramework7 } from "./index";
 import TripMain from "./Pages/TripMain";
 import WishMain from "./Pages/WishMain";
+import Story from "./Pages/Story";
+import FriendComments from "./Pages/FriendComments";
 
 import MyAccount from "./Pages/MyAccount";
 import MyMessage from "./Pages/MyMessage";
@@ -211,6 +213,8 @@ class App extends Component {
                     <Route exact path="/addRoute" component={AddRoute} />
                     <Route exact path="/logInSignUp" component={LogInSignUp} />
                     <Route exact path="/searchResult" component={SeachResult} />
+                    <Route exact path="/story" component={Story} />
+                    <Route exact path="/friendComments" component={FriendComments} />
 
                     {/*unit test used below, production will check env.production to disable*/}
 

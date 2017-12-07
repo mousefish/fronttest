@@ -12,6 +12,7 @@ import HistoryDataReducer from './historyDataReducer';
 import MainDataReducer from './mainDataReducer';
 import WishDataReducer from './wishDataReducer';
 import ProfileDataReducer from './profileDataReducer';
+import StoryDataReducer from './storyDataReducer';
 
 
 export default combineReducers({
@@ -21,5 +22,6 @@ export default combineReducers({
       MainDataReducer,
       WishDataReducer,
       ProfileDataReducer,
+      StoryDataReducer,
       form: formReducer,
 });

@@ -42,7 +42,7 @@ const styles = theme => ({
 
     button: {
         width: "100%",
-        padding: 20,
+        padding: 15,
         fontSize: 16
     }
 });
