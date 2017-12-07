@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
 import gallery from "../Assets/Images/gallery.jpg";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
     wrapper: {
@@ -34,7 +35,6 @@ const styles = theme => ({
         maxHeight: "100%"
     },
     link: {
-        cursor: "pointer",
         color: "#337ab7"
     },
     fade: {
@@ -84,7 +84,7 @@ class Story extends Component {
                                 isExpanded: !prevState.isExpanded
                             }))}
                     >
-                        {this.state.isExpanded? '收回内容':'展开全部内容'}
+                        {this.state.isExpanded ? "收回内容" : "展开全部内容"}
                     </Button>
                 </div>
                 <div className={classes.innerWrapper}>
@@ -128,7 +128,7 @@ class Story extends Component {
                     </div>
                 </div>
                 <div className={classes.innerWrapper}>
-                    <h2 className={classes.link}>来看看小伙伴对我的评价吧</h2>
+                    <Link to='/friendComments'><h2 className={classes.link}>来看看小伙伴对我的评价吧</h2></Link>
                 </div>
             </div>
         );
