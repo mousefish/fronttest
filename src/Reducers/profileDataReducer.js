@@ -8,7 +8,6 @@ const INITIAL_STATE =
     id: "001",
     name: "陈嘉熙",
     sex:'女孩',
-    horoscope:'天秤',
     hometown:'成都',
     city:'成都',
     yearOfLiving:12,

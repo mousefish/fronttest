@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
 import Avatar from "material-ui/Avatar";
@@ -18,6 +19,8 @@ import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PersonProfileDetails from "../Components/container/PersonProfileDetails";
+
+import * as actions from '../Actions';
 
 const styles = theme => ({
     wrapper: {
@@ -79,7 +82,12 @@ const styles = theme => ({
     },
     flex: {
         flex: 1
-    }
+    },
+
+    link: {
+    cursor:'pointer',
+    color:'#337ab7'
+  }
 });
 
 function Transition(props) {
@@ -98,6 +106,11 @@ class PersonProfile extends Component {
     handleRequestClose = () => {
         this.setState({ open: false });
     };
+
+
+    openMyStory(data){
+      this.props.fetchStoryData(data, this.props.history)
+    }
 
     renderService(services) {
         const icon = this.props.classes.icon;
@@ -191,7 +204,7 @@ class PersonProfile extends Component {
                         >
                             更多我的资料哦
                         </Button>
-                        <h2>我在这座城市的故事</h2>
+                        <h2 className={classes.link} onClick={()=>{this.openMyStory(profile.name)}}>我在这座城市的故事</h2>
                         <Button color="primary" raised className={classes.root}>
                             一起参与吧
                         </Button>
@@ -208,4 +221,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(PersonProfile));
+export default connect(mapStateToProps, actions)(withRouter(withStyles(styles)(PersonProfile)));
