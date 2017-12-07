@@ -10,7 +10,7 @@ const styles = theme => ({
         margin: "auto",
         marginTop: 20,
         marginBottom: 50,
-        textAlign: "center",
+        textAlign: "center"
     },
     innerWrapper: {
         marginBottom: 20
@@ -36,19 +36,55 @@ const styles = theme => ({
     link: {
         cursor: "pointer",
         color: "#337ab7"
+    },
+    fade: {
+        overflow: "hidden",
+        position: "relative",
+        height: "3.6em"
+    },
+    fadeHelper: {
+        textAlign: "right",
+        position: "absolute",
+        bottom: 0,
+        right: 0,
+        width: "70%",
+        height: "1.2em",
+        background:
+            "linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)"
     }
 });
 
 class Story extends Component {
+    state = {
+        isExpanded: false
+    };
+
     render() {
         const classes = this.props.classes;
         return (
             <div className={classes.wrapper}>
                 <div className={classes.innerWrapper}>
                     <h2>我在这座城市的故事</h2>
-                    <p>{this.props.storyData.myStory}</p>
-                    <Button color="primary" raised className={classes.button}>
-                        查看全部内容
+                    <div className={this.state.isExpanded ? "" : classes.fade}>
+                        <p style={{ textAlign: "left" }}>
+                            {this.props.storyData.myStory}
+                        </p>
+                        <span
+                            className={
+                                this.state.isExpanded ? "" : classes.fadeHelper
+                            }
+                        />
+                    </div>
+                    <Button
+                        color="primary"
+                        raised
+                        className={classes.button}
+                        onClick={() =>
+                            this.setState(prevState => ({
+                                isExpanded: !prevState.isExpanded
+                            }))}
+                    >
+                        {this.state.isExpanded? '收回内容':'展开全部内容'}
                     </Button>
                 </div>
                 <div className={classes.innerWrapper}>
