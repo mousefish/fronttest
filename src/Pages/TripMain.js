@@ -62,7 +62,7 @@ class TripMain extends Component {
     const classes = this.props.classes;
     return (
       <div style={{ position: "relative" }}>
-        <SideButton onClick={this.handleClickOpen} />
+        <SideButton onClick={this.handleClickOpen} URI='/' />
         <Dialog
           fullScreen
           open={this.state.open}

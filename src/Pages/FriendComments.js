@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
 import Button from "material-ui/Button";

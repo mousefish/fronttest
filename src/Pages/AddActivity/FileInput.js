@@ -40,7 +40,7 @@ class FileInput extends React.Component {
           }}
         >
           <img
-            style={{ height: "100px", width: "100%" }}
+            style={{ height: "100px", width:100 }}
             src={this.state.src}
           />
         </Dropzone>

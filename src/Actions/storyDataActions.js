@@ -2,7 +2,7 @@
 import { FETCH_STORY_DATA } from './types';
 
 
-export const fetchStoryData = (data, history) => dispatch =>{
+export const fetchStoryData = (data) => dispatch =>{
 
     // backend API:
     // const res = await axios.get('/api/storyData');
@@ -16,7 +16,5 @@ export const fetchStoryData = (data, history) => dispatch =>{
     dispatch({
         type: FETCH_STORY_DATA
     });
-
-    history.push('/story');
 
 };

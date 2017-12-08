@@ -35,7 +35,7 @@ import MyAccount from "./Pages/MyAccount";
 import MyMessage from "./Pages/MyMessage";
 import Discovery from "./Pages/Discovery";
 import MyRoute from "./Pages/MyRoute";
-import AddRoute from "./Pages/AddRoute";
+import AddActivity from "./Pages/AddActivity/AddActivity";
 import RequireAuth from './HOC/RequireAuth';
 
 import LocationSearch from "material-ui-icons/LocationSearching";
@@ -94,20 +94,7 @@ class App extends Component {
     }
   }
 
-  handleSubChange(event, sub_value) {
-    this.setState({ sub_value });
-    if (sub_value === 0) {
-      this.props.history.push("/discovery");
-    }else if (sub_value === 1) {
-      this.props.history.push("/myRoute");
-    } else if (sub_value === 2) {
-      this.props.history.push("/addRoute");
-    } else if (sub_value === 3) {
-      this.props.history.push("/message");
-    } else if (sub_value === 4) {
-      this.props.history.push("/my");
-    }
-  }
+
   testdir() {
     console.log("change dir");
     alert("change dir");
@@ -118,46 +105,7 @@ class App extends Component {
     const main_value = this.state.main_value;
     const sub_value = this.state.sub_value;
     const classes = this.props.classes;
-    if (this.props.location.pathname == "/my" || this.props.location.pathname == '/myRoute') {
-      return (
-        <BottomNavigation
-          value={sub_value}
-          onChange={this.handleSubChange.bind(this)}
-          showLabels
-        >
-          <BottomNavigationButton
-            style={{ marginLeft: 5 }}
-            classes={{ icon: classes.icon, root: classes.broot }}
-            label="发现"
-            icon={<Home />}
-          />
-          <BottomNavigationButton
-            classes={{ icon: classes.icon, root: classes.broot }}
-            label="行程"
-            icon={<Flight />}
-          />
-          <BottomNavigationButton
-            classes={{ icon: classes.icon, root: classes.broot }}
 
-            icon={<AddCircle />}
-          />
-          <BottomNavigationButton
-            classes={{ icon: classes.icon, root: classes.broot }}
-            label="消息"
-            icon={<Message />}
-          />
-          <BottomNavigationButton
-            classes={{ icon: classes.icon, root: classes.broot }}
-            label="我的"
-            icon={<Person />}
-          />
-        </BottomNavigation>
-      );
-    }
-
-    if (this.props.location.pathname == "/addRoute") {
-      return
-    }
     return (
       <BottomNavigation
         value={main_value}
@@ -210,7 +158,7 @@ class App extends Component {
                     <Route exact path="/message" component={MyMessage} />
                     <Route exact path="/discovery" component={Discovery} />
                     <Route exact path="/myRoute" component={MyRoute} />
-                    <Route exact path="/addRoute" component={AddRoute} />
+                    <Route exact path="/addActivity" component={AddActivity} />
                     <Route exact path="/logInSignUp" component={LogInSignUp} />
                     <Route exact path="/searchResult" component={SeachResult} />
                     <Route exact path="/story" component={Story} />

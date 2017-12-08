@@ -134,8 +134,8 @@ class ListCard extends Component {
               <span
                 style={{
                   position: "absolute",
-                  right: "10",
-                  top: "10",
+                  right: 10,
+                  top: 10,
                   color: "#fff"
                 }}
               >
