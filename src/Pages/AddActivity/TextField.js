@@ -11,11 +11,14 @@ export default ({ input, placeholder, icon, meta: { error, touched } }) => {
                 className="rw-widget"
             >
                 <div className="rw-widget-picker rw-widget-container">
-                    <input
+                    <textarea
+                        style={{padding:10}}
                         className="rw-widget-input rw-input"
                         role="combobox"
-                        {...input}
                         placeholder={placeholder}
+                        rows="10"
+                        cols="50"
+                        {...input}
                     />
                 </div>
             </div>

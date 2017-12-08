@@ -1,10 +1,21 @@
-import { ADD_ACTIVITY } from './types';
+import { AUTH_USER } from './types';
 
-export const addActivity = (data) => {
+export const submitActivityData = (data, history) => dispatch=> {
     // console.log('add route data', data);
-    return {
-        type: ADD_ACTIVITY,
-        payload: data
-    };
+
+    // request to API
+    // const res = await axios.post('/api/searchData', searchData);
+     // dispatch({
+    //     type: AUTH_USER
+    // });
+
+    // temp
+
+    history.push('/');
+    dispatch({
+        type: AUTH_USER,
+    });
+
+
 
 };

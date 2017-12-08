@@ -35,7 +35,7 @@ import MyAccount from "./Pages/MyAccount";
 import MyMessage from "./Pages/MyMessage";
 import Discovery from "./Pages/Discovery";
 import MyRoute from "./Pages/MyRoute";
-import AddRoute from "./Pages/AddRoute";
+import AddActivity from "./Pages/AddActivity/AddActivity";
 import RequireAuth from './HOC/RequireAuth';
 
 import LocationSearch from "material-ui-icons/LocationSearching";
@@ -101,7 +101,7 @@ class App extends Component {
     }else if (sub_value === 1) {
       this.props.history.push("/myRoute");
     } else if (sub_value === 2) {
-      this.props.history.push("/addRoute");
+      this.props.history.push("/addActivity");
     } else if (sub_value === 3) {
       this.props.history.push("/message");
     } else if (sub_value === 4) {
@@ -155,7 +155,7 @@ class App extends Component {
       );
     }
 
-    if (this.props.location.pathname == "/addRoute") {
+    if (this.props.location.pathname == "/addActivity") {
       return
     }
     return (
@@ -210,7 +210,7 @@ class App extends Component {
                     <Route exact path="/message" component={MyMessage} />
                     <Route exact path="/discovery" component={Discovery} />
                     <Route exact path="/myRoute" component={MyRoute} />
-                    <Route exact path="/addRoute" component={AddRoute} />
+                    <Route exact path="/addActivity" component={AddActivity} />
                     <Route exact path="/logInSignUp" component={LogInSignUp} />
                     <Route exact path="/searchResult" component={SeachResult} />
                     <Route exact path="/story" component={Story} />
