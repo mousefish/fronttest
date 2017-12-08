@@ -1,86 +1,86 @@
 import React, { Component } from "react";
-import * as actions from "../Actions";
+// import * as actions from "../Actions";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router';
+import { withStyles } from "material-ui/styles";
+import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
+import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
-class MyAccount extends Component {
-    onBtnClick() {
-        this.props.logout(this.props.history);
+const styles = theme => ({
+    wrapper: {
+        width: "90%",
+        margin: "auto",
+        marginBottom: 50,
+        marginTop: 20
+    },
+
+    header: {
+        width: "100%",
+        height: "20%",
+        textAlign: "center",
+        padding: 10,
+        fontWeight: "bold"
+    },
+
+    subHeader: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        borderTop: "1px solid grey",
+        padding: 20
+    },
+
+    subHeaderRight: {
+        marginLeft: 20,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center"
+    },
+
+    list: {
+        listStyle: "none",
+        padding:0,
+    },
+
+    ele: {
+        lineHeight: 2,
+        paddingLeft:20,
+        borderTop: "1px solid grey"
     }
-
+});
+class MyAccount extends Component {
+    renderEle(classes) {
+        let eles = ["我的活动 | 需求", "我的收藏", "我的好友", "系统设置", "关于我们", "版本更新"];
+        return eles.map((ele, index, eles) => {
+            return <li className={classes.ele}>{eles[index]}</li>;
+        });
+    }
     render() {
+        const { classes } = this.props;
         return (
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    maxWidth: 800,
-                    margin: "auto",
-                    marginBottom: 98,
-                    marginLeft: 5,
-                    marginRight: 5,
-                    marginTop: 20
-                }}
-            >
-                <div>
-                    <i
-                        className="material-icons medium left"
-                        onClick={() => this.props.history.push("/")}
-                    >
-                        keyboard_arrow_left
-                    </i>
-                    <h5 style={{ marginLeft: "140px" }}>我的事项</h5>
+            <div className={classes.wrapper}>
+                <div className={classes.header}>
+                    <Link to='/'><KeyboardArrowLeft
+                        style={{ float: "left", color: "grey" }}
+                    /></Link>
+                    <h4 style={{ fontWeight: "bold" }}>我的事项</h4>
                 </div>
 
-                <div>
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            border: "1px solid #e0e0e0"
-                        }}
-                    >
-                        <div style={{ display: "flex", padding: "10px" }}>
-                            <img src="https://placeholdit.co//i/80x80?&text=portrait" />
-                            <span style={{ marginLeft: "20px" }}>
-                                <p>用户名称</p>
-                                <p>登录账号</p>
-                            </span>
-                        </div>
-                        <div
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItem: "center",
-                                justifyContent: "center",
-                                paddingRight: "10px"
-                            }}
-                        >
-                            <img src="https://placeholdit.co//i/50x50?&text=QR" />
-                        </div>
+                <div className={classes.subHeader}>
+                    <div>
+                        <img src="https://placeholdit.co//i/80x80?&text=portrait" />
+                    </div>
+                    <div className={classes.subHeaderRight}>
+                        <p>陈嘉熙</p>
+                        <p>完善个人资料(75%)</p>
                     </div>
                 </div>
+
                 <div>
-                    <ul className="collection" style={{ marginBottom: "2px" }}>
-                        <li className="collection-item">我的朋友圈</li>
-                        <li className="collection-item">我的收藏</li>
-                        <li className="collection-item">我的活动 | 需求</li>
-                        <li className="collection-item">我的账单</li>
-                        <li className="collection-item">关于我们</li>
-                        <li className="collection-item">用户反馈</li>
-                        <li className="collection-item">版本更新</li>
-                    </ul>
+                    <ul className={classes.list}>{this.renderEle(classes)}</ul>
                 </div>
-                <button
-                    className="red lighten-1 white-text"
-                    style={{ marginTop: "0" }}
-                    onClick={this.onBtnClick.bind(this)}
-                >
-                    退出账户
-                </button>
             </div>
         );
     }
 }
 
-export default connect(null, actions)(MyAccount);
+export default connect(null, null)(withStyles(styles)(MyAccount));
