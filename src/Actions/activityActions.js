@@ -10,7 +10,6 @@ export const submitActivityData = (data, history) => dispatch=> {
     // });
 
     // temp
-
     history.push('/');
     dispatch({
         type: AUTH_USER,
