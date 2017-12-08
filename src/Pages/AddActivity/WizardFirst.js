@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { withStyles } from "material-ui/styles";
+import { withRouter } from "react-router";
 import Button from "material-ui/Button";
 import popupSearchTextField from "../../Components/container/popupSearchTextField";
 import popupSearchDateField from "../../Components/container/popupSearchDateField";
 import popupSearchMultiServices from "../../Components/container/popupSearchMultiServices";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import validate from './validate';
+import validate from "./validate";
 
 const styles = theme => ({
     wrapper: {
@@ -39,10 +40,14 @@ const styles = theme => ({
 });
 
 class WizardFirst extends Component {
+    goBack() {
+        this.props.history.goBack();
+    }
+
     renderFields(classes) {
         return [
             <Field
-                key='location'
+                key="location"
                 name="location"
                 type="text"
                 component={popupSearchTextField}
@@ -80,32 +85,43 @@ class WizardFirst extends Component {
         const { handleSubmit } = this.props;
 
         return (
-            <div className={classes.wrapper} >
-            <h4 className={classes.header}>新的活动</h4>
-            <form onSubmit={handleSubmit}>
-                <div className={classes.sectionWrapper}>
-                    {this.renderFields(classes)}
-                </div>
-
-                <div className={classes.sectionWrapper}>
-                    <h4 style={{ fontWeight: "bold", textAlign:'center' }}>向导服务</h4>
-                    <Field
-                        key="services"
-                        name="services"
-                        component={popupSearchMultiServices}
-                        data={["徒步旅行", "汽车接送", "购物打折"]}
-                    />
-                </div>
-
-                <Button
-                    type="submit"
-                    color="primary"
-                    raised
-                    className={classes.button}
+            <div className={classes.wrapper}>
+                <div
+                    className={classes.header}
+                    onClick={this.goBack.bind(this)}
                 >
-                    下一步
-                </Button>
-            </form>
+                    <KeyboardArrowLeft
+                        style={{ float: "left", color: "grey" }}
+                    />
+
+                    <h4 style={{ fontWeight: "bold" }}>发布新活动</h4>
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className={classes.sectionWrapper}>
+                        {this.renderFields(classes)}
+                    </div>
+
+                    <div className={classes.sectionWrapper}>
+                        <h4 style={{ fontWeight: "bold", textAlign: "center" }}>
+                            向导服务
+                        </h4>
+                        <Field
+                            key="services"
+                            name="services"
+                            component={popupSearchMultiServices}
+                            data={["徒步旅行", "汽车接送", "购物打折"]}
+                        />
+                    </div>
+
+                    <Button
+                        type="submit"
+                        color="primary"
+                        raised
+                        className={classes.button}
+                    >
+                        下一步
+                    </Button>
+                </form>
             </div>
         );
     }
@@ -116,4 +132,4 @@ export default reduxForm({
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
     validate
-})(withStyles(styles)(WizardFirst));
+})(withRouter(withStyles(styles)(WizardFirst)));
