@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import * as actions from "../../Actions";
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import WizardFirst from '../presenter/wizardFirst';
-import WizardSecond from '../presenter/wizardSecond';
-import WizardThird from '../presenter/wizardThird';
+import WizardFirst from '../presenter/WizardFirst';
+import WizardSecond from '../presenter/WizardSecond';
+import WizardThird from '../presenter/WizardThird';
 
 
 class SignUpWizard extends Component {
