@@ -47,6 +47,10 @@ const styles = theme => ({
         borderTop: "1px solid grey"
     }
 });
+
+
+
+
 class MyAccount extends Component {
     renderEle(classes) {
         let eles = ["我的活动 | 需求", "我的收藏", "我的好友", "系统设置", "关于我们", "版本更新"];

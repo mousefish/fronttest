@@ -1,8 +1,10 @@
-import React from "react";
+import React from 'react';
 import { Link } from "react-router-dom";
-import bg from "../Assets/Images/bg.jpg";
 import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
+import classNames from "classnames";
+import bg from "../Assets/Images/bg.jpg";
+
 
 const styles = theme => ({
     button: {
@@ -14,7 +16,7 @@ const styles = theme => ({
     wrapper: {
         width: "90%",
         margin: "auto",
-        marginBottom: 70,
+        marginBottom: 50,
         marginTop: 20,
         display: "flex",
         flexDirection: "column",
@@ -25,19 +27,16 @@ const styles = theme => ({
     imageWrapper: {
         width: "100%",
         maxWidth: "100%",
-    },
-
-    paddingUpper: {
-        padding: "50px 20% 0 0"
-    },
-
-    paddingLower: {
-        padding: "0 0 50px 20%"
+        maxHeight:'50%'
     },
 
     buttonWrapper: {
         width: "80%",
-        marginBottom: 20
+        marginBottom: 20,
+    },
+
+    space: {
+        marginTop:50
     },
 
     button: {
@@ -47,23 +46,19 @@ const styles = theme => ({
     }
 });
 
-const loginSignUp = props => {
+const ActivityDemandPanel = props => {
     const { classes } = props;
     return (
         <div className={classes.wrapper}>
             <img src={bg} alt="chengdu" className={classes.imageWrapper} />
-
-            <h2 className={classes.paddingUpper}>带你深入体验</h2>
-            <h2 className={classes.paddingLower}>当地风土人情</h2>
-
-            <Link to="/login" className={classes.buttonWrapper}>
+            <Link to="/addActivity" className={classNames(classes.buttonWrapper, classes.space)}>
                 <Button
                     type="submit"
                     color="primary"
                     raised
                     className={classes.button}
                 >
-                    登陆已有账户
+                    发布新活动
                 </Button>
             </Link>
 
@@ -74,15 +69,12 @@ const loginSignUp = props => {
                     raised
                     className={classes.button}
                 >
-                    创建新账户
+                    发布新需求
                 </Button>
             </Link>
 
-            <footer style={{ paddingLeft: 10 }}>
-                注册代表已经同意<Link to='/'>服务条款</Link>，<Link to='/'>隐私政策</Link>，<Link to='/'>免责声明</Link>，<Link to='/'>保障计划条款</Link>，<Link to='/'>使用政策须知</Link>
-            </footer>
         </div>
     );
 };
 
-export default withStyles(styles)(loginSignUp);
+export default withStyles(styles)(ActivityDemandPanel);

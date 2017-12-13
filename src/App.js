@@ -37,6 +37,7 @@ import Discovery from "./Pages/Discovery";
 import MyRoute from "./Pages/MyRoute";
 import AddActivity from "./Pages/AddActivity/AddActivity";
 import RequireAuth from './HOC/RequireAuth';
+import ActivityDemandPanel from './Pages/ActivityDemandPanel';
 
 import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
@@ -163,7 +164,7 @@ class App extends Component {
                     <Route exact path="/searchResult" component={SeachResult} />
                     <Route exact path="/story" component={Story} />
                     <Route exact path="/friendComments" component={FriendComments} />
-
+                    <Route exact path='/activityDemand'component={ActivityDemandPanel}/>
                     {/*unit test used below, production will check env.production to disable*/}
 
                     <Route path="/signup" component={SignUpWizard} />
