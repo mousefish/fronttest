@@ -40,7 +40,7 @@ function sideButton(props) {
       </div>
       <div>
         <Link
-          to="/addActivity"
+          to="/activityDemand"
         >
           <Button fab color="accent" aria-label="add" className={classes.root}>
             <AddIcon />
