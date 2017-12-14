@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import * as actions from "../../Actions";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
@@ -17,8 +17,7 @@ const styles = theme => ({
         margin: "auto",
         marginBottom: 50,
         marginTop: 20
-    },
-
+    }
 });
 
 class AddActivity extends Component {
@@ -39,27 +38,35 @@ class AddActivity extends Component {
         this.setState({ page: this.state.page - 1 });
     }
 
-    handleSubmit(values){
-    console.log(values);
-    this.props.submitActivityData(
-      values,
-      this.props.history
-    );
-  }
-
-// Use this function to show the error message from backend
-  renderErrorMsg() {
-    if (this.props.errorMsg) {
-      return <div>{this.props.errorMsg}</div>;
+    handleSubmit(values) {
+        console.log(values);
+        this.props.submitActivityData(values, this.props.history);
     }
-  }
+
+    // Use this function to show the error message from backend
+    renderErrorMsg() {
+        if (this.props.errorMsg) {
+            return <div>{this.props.errorMsg}</div>;
+        }
+    }
 
     render() {
         const { onSubmit } = this.props;
         const { page } = this.state;
         return (
             <div>
-                {page === 1 && <WizardFirst onSubmit={this.nextPage} />}
+                {page === 1 && (
+                    <WizardFirst
+                        onSubmit={this.nextPage}
+                        title={
+                            this.props.location.state.isActivity ? (
+                                "发布新活动"
+                            ) : (
+                                "发布新需求"
+                            )
+                        }
+                    />
+                )}
                 {page === 2 && (
                     <WizardSecond
                         previousPage={this.previousPage}
@@ -72,20 +79,18 @@ class AddActivity extends Component {
                         onSubmit={this.handleSubmit}
                     />
                 )}
-                 {this.renderErrorMsg()}
+                {this.renderErrorMsg()}
             </div>
         );
     }
 }
 
-
 const mapStateToProps = state => {
-  return { errorMsg: state.UserAuth.error };
-}
+    return { errorMsg: state.UserAuth.error };
+};
 
 AddActivity.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-}
-
+    onSubmit: PropTypes.func.isRequired
+};
 
 export default connect(mapStateToProps, actions)(withRouter(AddActivity));
