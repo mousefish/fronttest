@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
 import bg from "../Assets/Images/bg.jpg";
-
+import AddActivity from "./AddActivity/AddActivity";
 
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
         width: "95%",
-        padding: 15,
+        padding: 15
     },
 
     wrapper: {
@@ -27,16 +27,16 @@ const styles = theme => ({
     imageWrapper: {
         width: "100%",
         maxWidth: "100%",
-        maxHeight:'50%'
+        maxHeight: "50%"
     },
 
     buttonWrapper: {
         width: "80%",
-        marginBottom: 20,
+        marginBottom: 20
     },
 
     space: {
-        marginTop:50
+        marginTop: 50
     },
 
     button: {
@@ -46,35 +46,52 @@ const styles = theme => ({
     }
 });
 
-const ActivityDemandPanel = props => {
-    const { classes } = props;
-    return (
-        <div className={classes.wrapper}>
-            <img src={bg} alt="chengdu" className={classes.imageWrapper} />
-            <Link to="/addActivity" className={classNames(classes.buttonWrapper, classes.space)}>
-                <Button
-                    type="submit"
-                    color="primary"
-                    raised
-                    className={classes.button}
-                >
-                    发布新活动
-                </Button>
-            </Link>
+class ActivityDemandPanel extends Component {
+    state = {
+        isActivity: true
+    };
+    render() {
+        const { classes } = this.props;
 
-            <Link to="/signup" className={classes.buttonWrapper}>
-                <Button
-                    type="submit"
-                    color="primary"
-                    raised
-                    className={classes.button}
+        return (
+            <div className={classes.wrapper}>
+                <img src={bg} alt="chengdu" className={classes.imageWrapper} />
+                <Link
+                    to={{
+                        pathname: "/addActivity",
+                        state: { isActivity: true }
+                    }}
+                    className={classNames(classes.buttonWrapper, classes.space)}
                 >
-                    发布新需求
-                </Button>
-            </Link>
+                    <Button
+                        type="submit"
+                        color="primary"
+                        raised
+                        className={classes.button}
+                    >
+                        发布新活动
+                    </Button>
+                </Link>
 
-        </div>
-    );
-};
+                <Link
+                    to={{
+                        pathname: "/addActivity",
+                        state: { isActivity: false }
+                    }}
+                    className={classes.buttonWrapper}
+                >
+                    <Button
+                        type="submit"
+                        color="primary"
+                        raised
+                        className={classes.button}
+                    >
+                        发布新需求
+                    </Button>
+                </Link>
+            </div>
+        );
+    }
+}
 
 export default withStyles(styles)(ActivityDemandPanel);

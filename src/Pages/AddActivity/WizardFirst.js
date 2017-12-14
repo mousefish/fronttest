@@ -94,7 +94,7 @@ class WizardFirst extends Component {
                         style={{ float: "left", color: "grey" }}
                     />
 
-                    <h4 style={{ fontWeight: "bold" }}>发布新活动</h4>
+                    <h4 style={{ fontWeight: "bold" }}>{this.props.title}</h4>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className={classes.sectionWrapper}>
