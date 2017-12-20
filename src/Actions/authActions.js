@@ -1,8 +1,6 @@
-import axios from 'axios';
-import AuthApi from '../ManagedApi/AuthApi';
-import setAuthorizationToken from '../Utlity/setAuthorizationToken';
-import jwtDecode from 'jwt-decode';
-import {SET_AUTH, AUTH_USER, AUTH_ERROR, DEAUTH_USER} from './types';
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+import { AUTH_USER, AUTH_ERROR, DEAUTH_USER } from "./types";
 /*export function userSinupRequest(userData)
 {
   return dispatch =>{
@@ -17,58 +15,45 @@ import {SET_AUTH, AUTH_USER, AUTH_ERROR, DEAUTH_USER} from './types';
 
 }*/
 
-// What's this for?
-export const setAuthUser = user => {
-  type: SET_AUTH, user;
-};
 
-export const logout = (history) => dispatch => {
+
+export const logout = history => dispatch => {
   localStorage.removeItem("jwtToken");
-  setAuthorizationToken(false);
-  // dispatch(setAuthUser({ type: SET_AUTH}));
   dispatch({ type: DEAUTH_USER });
-  history.push('/');
+  history.push("/");
 };
 
-
-export const userSignupRequest = (userData,history) => (dispatch) => {
-
+export const userSignupRequest = (userData, history) => async dispatch => {
   try {
     // Need backend APIs to implement the following code (add async)
     // console.log('userdata', userData)
-    // const res = await axios.post(AuthApi.SinUp, userData);
+
     // dispatch({ type: AUTH_USER });
     // localStorage.setItem("jwtToken", res.data.token);
 
-    dispatch({type:AUTH_USER});
+    dispatch({ type: AUTH_USER });
     // Not sure where to redirect yet...
-    history.push('/my');
-  } catch(err){
-    dispatch(authError('Email already in use!'));
+    history.push("/my");
+  } catch (err) {
+    dispatch(authError("Email already in use!"));
   }
 };
 
-export const userLogin = (userData, history) => dispatch => {
-
+export const userLogin = (userData, history) => async dispatch => {
   try {
     // Need backend APIs to implement the following code (add async)
-    // const res = await axios.post(AuthApi.Login, userData);
-    // const token = res.data.token;
-    // localStorage.setItem("jwtToken", token);
-    // setAuthorizationToken(token);
-    // console.log(jwtDecode(token));
-    // dispatch(setAuthUser(jwtDecode(token)));
-    dispatch({type:AUTH_USER});
-    // Not sure where to redirect yet...
-    history.push('/my');
-
+    const res = await axios.post("http://localhost:8000/api/login", userData);
+    if (res.data.token) {
+      localStorage.setItem("jwtToken", res.data.token);
+      dispatch({ type: AUTH_USER });
+      history.push("/my");
+    }else{
+      dispatch(authError(res.data.error));
+    }
   } catch (err) {
-    dispatch(authError("Bad request!"));
+    dispatch(authError(err.message));
   }
 };
-
-
-
 
 export const authError = err => {
   return {
@@ -76,4 +61,3 @@ export const authError = err => {
     payload: err
   };
 };
-

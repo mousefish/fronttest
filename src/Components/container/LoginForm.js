@@ -87,12 +87,6 @@ class LoginForm extends Component {
     this.props.userLogin(values, this.props.history);
   }
 
-  // Use this function to show the error message from backend
-  renderErrorMsg() {
-    if (this.props.errorMsg) {
-      return <div className="alert alert-danger">{this.props.errorMsg}</div>;
-    }
-  }
 
   render() {
     const { classes } = this.props;
@@ -146,13 +140,14 @@ class LoginForm extends Component {
             点击登陆
           </Button>
         </div>
-        {this.renderErrorMsg}
+        <div style={{color:'red'}}>{this.props.errorMsg}</div>
       </form>
     );
   }
 }
 
 const mapStateToProps = state => {
+
   return { errorMsg: state.UserAuth.error };
 };
 
