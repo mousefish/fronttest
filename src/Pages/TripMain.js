@@ -26,7 +26,8 @@ WebFontLoader.load({
 
 const styles = {
   wrapper: {
-    width: "90%",
+    width: '95vw',
+    maxWidth:600,
     margin: "auto",
     marginBottom: 50,
     marginTop: 20
