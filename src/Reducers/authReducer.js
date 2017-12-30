@@ -28,13 +28,6 @@ export default (state = initState, action = {}) => {
          isAuthenticated: false,
     };
 
-// Does DEAUTH_USER fulfil the purpose of SET_AUTH?
-    case SET_AUTH:
-      return {
-        isAuthenticated: !isEmpty(action.user),
-        user: action.user
-      };
-
     default:
       return state;
   }

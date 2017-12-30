@@ -25,7 +25,8 @@ import * as actions from "../Actions";
 
 const styles = theme => ({
     wrapper: {
-        width: "90%",
+        width: '95vw',
+        maxWidth:600,
         margin: "auto",
         marginBottom: 50,
         marginTop: 60

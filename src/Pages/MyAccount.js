@@ -8,7 +8,8 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
 const styles = theme => ({
     wrapper: {
-        width: "90%",
+        width: '95vw',
+        maxWidth:600,
         margin: "auto",
         marginBottom: 50,
         marginTop: 20
