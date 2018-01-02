@@ -5,7 +5,7 @@ import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-
+import * as actions from '../Actions';
 const styles = theme => ({
     wrapper: {
         width: '95vw',
@@ -82,10 +82,11 @@ class MyAccount extends Component {
 
                 <div>
                     <ul className={classes.list}>{this.renderEle(classes)}</ul>
+                    <button onClick={()=>this.props.logout(this.props.history)}>推出账户(temp for testing)</button>
                 </div>
             </div>
         );
     }
 }
 
-export default connect(null, null)(withStyles(styles)(MyAccount));
+export default connect(null, actions)(withStyles(styles)(withRouter(MyAccount)));

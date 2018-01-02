@@ -1,20 +1,18 @@
-import { AUTH_USER } from './types';
+import axios from "axios";
+import { ADD_ACTIVITY_DATA } from './types';
 
-export const submitActivityData = (data, history) => dispatch=> {
-    // console.log('add route data', data);
-
+const ROOT_URL = "http://localhost:8000";
+export const submitActivityData = (data, history) => async dispatch=> {
+    console.log('activity data', data);
     // request to API
-    // const res = await axios.post('/api/searchData', searchData);
-     // dispatch({
-    //     type: AUTH_USER
-    // });
-
-    // temp
-    history.push('/');
-    dispatch({
-        type: AUTH_USER,
+    const res = await axios.post(`${ROOT_URL}/api/addActivity`, data, {
+        headers:{
+            authorization:localStorage.getItem("jwtToken")
+        }
     });
-
-
+     dispatch({
+        type: ADD_ACTIVITY_DATA,
+        payload:res.data
+    });
 
 };
