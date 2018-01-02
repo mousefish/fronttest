@@ -20,7 +20,7 @@ class FileInput extends React.Component {
   }
   render() {
     const { input: { value }, touched, error } = this.props;
-    console.log(value);
+    console.log('value', typeof value);
 
     return (
       <div>

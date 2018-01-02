@@ -11,3 +11,5 @@ export const FETCH_WISH_DATA = 'fetch_wish_data';
 export const FETCH_PROFILE_DATA = 'fetch_profile_data';
 export const FETCH_STORY_DATA = 'fetch_story_data';
 export const FETCH_ACTIVITY_DATA = 'fetch_activity_data';
+export const ADD_ACTIVITY_DATA = 'add_activity_data';
+

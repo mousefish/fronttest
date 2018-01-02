@@ -2,7 +2,7 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { AUTH_USER, AUTH_ERROR, DEAUTH_USER } from "./types";
 
-const ROOT_URL = "http://localhost:8000";
+const ROOT_URL = "http://localhost:8000/api";
 
 export const logout = history => dispatch => {
   localStorage.removeItem("jwtToken");
@@ -14,7 +14,7 @@ export const userSignupRequest = (userData, history) => async dispatch => {
   try {
     // Need backend APIs to implement the following code (add async)
     // console.log('userdata', userData)
-    const res = await axios.post(`${ROOT_URL}/signin`, userData);
+    const res = await axios.post(`${ROOT_URL}/signup`, userData);
     if (res.data.token) {
       localStorage.setItem("jwtToken", res.data.token);
       dispatch({ type: AUTH_USER });

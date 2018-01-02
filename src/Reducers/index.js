@@ -13,7 +13,7 @@ import MainDataReducer from './mainDataReducer';
 import WishDataReducer from './wishDataReducer';
 import ProfileDataReducer from './profileDataReducer';
 import StoryDataReducer from './storyDataReducer';
-
+import activityDataReducer from './activityDataReducer';
 
 export default combineReducers({
       UserAuth,
@@ -23,5 +23,6 @@ export default combineReducers({
       WishDataReducer,
       ProfileDataReducer,
       StoryDataReducer,
+      activityDataReducer,
       form: formReducer,
 });

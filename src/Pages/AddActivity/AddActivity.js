@@ -39,8 +39,24 @@ class AddActivity extends Component {
     }
 
     handleSubmit(values) {
-        console.log(values);
-        this.props.submitActivityData(values, this.props.history);
+        const images = [];
+        for(let i = 1 ; i <= 8; i ++){
+            if(values['img'+i]){
+                images.push(values['img'+i]);
+            }
+        }
+        let { location,departdate,finishdate, budget,services,story } = values;
+        console.log("images",images);
+        const modifiedValues={
+            location,
+            departdate,
+            finishdate,
+            budget,
+            services,
+            story,
+            images
+        };
+        this.props.submitActivityData(modifiedValues, this.props.history);
     }
 
     // Use this function to show the error message from backend
