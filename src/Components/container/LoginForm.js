@@ -147,8 +147,8 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = state => {
-
-  return { errorMsg: state.UserAuth.error };
+  console.log('state', state.UserAuth)
+  return { errorMsg: state.UserAuth.error.loginErr || state.UserAuth.error.error };
 };
 
 LoginForm = reduxForm({

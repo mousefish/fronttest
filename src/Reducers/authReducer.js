@@ -4,7 +4,7 @@ import {isEmpty} from 'lodash';
 const initState={
   isAuthenticated: false,
   user: {},
-  error: ""
+  error: {}
 };
 
 export default (state = initState, action = {}) => {
@@ -13,7 +13,7 @@ export default (state = initState, action = {}) => {
       return {
         ...state,
         isAuthenticated: true,
-        error:""
+        error:{}
       };
     case AUTH_ERROR:
        return {

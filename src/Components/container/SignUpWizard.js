@@ -68,7 +68,7 @@ SignUpWizard.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { errorMsg: state.UserAuth.error };
+  return { errorMsg: state.UserAuth.error.signupErr || state.UserAuth.error.error};
 };
 
 export default connect(mapStateToProps, actions)(withRouter(SignUpWizard));
