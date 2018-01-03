@@ -74,13 +74,6 @@ class AddActivity extends Component {
                 {page === 1 && (
                     <WizardFirst
                         onSubmit={this.nextPage}
-                        title={
-                            this.props.location.state.isActivity ? (
-                                "发布新活动"
-                            ) : (
-                                "发布新需求"
-                            )
-                        }
                     />
                 )}
                 {page === 2 && (
@@ -101,9 +94,9 @@ class AddActivity extends Component {
     }
 }
 
-// const mapStateToProps = state => {
-//     return { errorMsg: state.UserAuth.error };
-// };
+const mapStateToProps = state => {
+    return { errorMsg: state.activityDataReducer.error };
+};
 
 AddActivity.propTypes = {
     onSubmit: PropTypes.func.isRequired

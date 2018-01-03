@@ -5,6 +5,7 @@ import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
 import bg from "../Assets/Images/bg.jpg";
 import AddActivity from "./AddActivity/AddActivity";
+import AddDemand from "./AddDemand/AddDemand";
 
 const styles = theme => ({
     button: {
@@ -47,9 +48,7 @@ const styles = theme => ({
 });
 
 class ActivityDemandPanel extends Component {
-    state = {
-        isActivity: true
-    };
+
     render() {
         const { classes } = this.props;
 
@@ -57,10 +56,7 @@ class ActivityDemandPanel extends Component {
             <div className={classes.wrapper}>
                 <img src={bg} alt="chengdu" className={classes.imageWrapper} />
                 <Link
-                    to={{
-                        pathname: "/addActivity",
-                        state: { isActivity: true }
-                    }}
+                    to="/addActivity"
                     className={classNames(classes.buttonWrapper, classes.space)}
                 >
                     <Button
@@ -74,10 +70,7 @@ class ActivityDemandPanel extends Component {
                 </Link>
 
                 <Link
-                    to={{
-                        pathname: "/addActivity",
-                        state: { isActivity: false }
-                    }}
+                    to="/addDemand"
                     className={classes.buttonWrapper}
                 >
                     <Button
