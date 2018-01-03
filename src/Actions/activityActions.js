@@ -14,5 +14,4 @@ export const submitActivityData = (data, history) => async dispatch=> {
         type: ADD_ACTIVITY_DATA,
         payload:res.data
     });
-
 };

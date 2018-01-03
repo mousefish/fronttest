@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import * as actions from "../../Actions";
-import { withRouter } from 'react-router';
-import PropTypes from 'prop-types';
-import WizardFirst from '../presenter/WizardFirst';
-import WizardSecond from '../presenter/WizardSecond';
-import WizardThird from '../presenter/WizardThird';
-
+import { withRouter } from "react-router";
+import PropTypes from "prop-types";
+import WizardFirst from "../presenter/WizardFirst";
+import WizardSecond from "../presenter/WizardSecond";
+import WizardThird from "../presenter/WizardThird";
 
 class SignUpWizard extends Component {
   constructor(props) {
@@ -26,18 +25,17 @@ class SignUpWizard extends Component {
     this.setState({ page: this.state.page - 1 });
   }
 
-  handleSubmit(values){
+  handleSubmit(values) {
     console.log(values);
-    this.props.userSignupRequest(
-      values,
-      this.props.history
-    );
+    this.props.userSignupRequest(values, this.props.history);
   }
 
-   // Use this function to show the error message from backend
+  // Use this function to show the error message from backend
   renderErrorMsg() {
     if (this.props.errorMsg) {
-      return <div className="alert alert-danger">{this.props.errorMsg}</div>;
+      return (
+        <div style={{ width: "100%", color: "red", textAlign:'center' }}>{this.props.errorMsg}</div>
+      );
     }
   }
 
@@ -59,21 +57,18 @@ class SignUpWizard extends Component {
             onSubmit={this.handleSubmit}
           />
         )}
-
         {this.renderErrorMsg()}
       </div>
-    )
+    );
   }
 }
 
-
 SignUpWizard.propTypes = {
   onSubmit: PropTypes.func.isRequired
-}
+};
 
 const mapStateToProps = state => {
-  return { errorMsg: state.UserAuth.error };
-}
+  return { errorMsg: state.UserAuth.error.signupErr || state.UserAuth.error.error};
+};
 
 export default connect(mapStateToProps, actions)(withRouter(SignUpWizard));
-

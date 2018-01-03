@@ -26,7 +26,7 @@ const styles = theme => ({
   wrapper: {
     width: "90%",
     margin: "auto",
-    marginBottom: 98,
+
     marginTop: 20,
     display: "flex",
     flexDirection: "column",

@@ -20,10 +20,10 @@ export const userSignupRequest = (userData, history) => async dispatch => {
       dispatch({ type: AUTH_USER });
       history.push("/my");
     } else {
-      dispatch(authError(res.data.error));
+      dispatch(authError({signupErr:res.data.error}));
     }
   } catch (err) {
-    dispatch(authError(err.message));
+    dispatch(authError({signupErr:err.message}));
   }
 };
 
@@ -36,16 +36,16 @@ export const userLogin = (userData, history) => async dispatch => {
       dispatch({ type: AUTH_USER });
       history.push("/my");
     } else {
-      dispatch(authError(res.data.error));
+      dispatch(authError({loginErr:res.data.error}));
     }
   } catch (err) {
-    dispatch(authError(err.message));
+    dispatch(authError({loginErr:err.message}));
   }
 };
 
-export const authError = err => {
+export const authError = errObj => {
   return {
     type: AUTH_ERROR,
-    payload: err
+    payload: errObj
   };
 };
