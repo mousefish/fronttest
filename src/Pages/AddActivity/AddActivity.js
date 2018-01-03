@@ -95,18 +95,18 @@ class AddActivity extends Component {
                         onSubmit={this.handleSubmit}
                     />
                 )}
-                {this.renderErrorMsg()}
+                // {this.renderErrorMsg()}
             </div>
         );
     }
 }
 
-const mapStateToProps = state => {
-    return { errorMsg: state.UserAuth.error };
-};
+// const mapStateToProps = state => {
+//     return { errorMsg: state.UserAuth.error };
+// };
 
 AddActivity.propTypes = {
     onSubmit: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, actions)(withRouter(AddActivity));
+export default connect(null, actions)(withRouter(AddActivity));
