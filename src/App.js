@@ -36,10 +36,10 @@ import MyMessage from "./Pages/MyMessage";
 import Discovery from "./Pages/Discovery";
 import MyRoute from "./Pages/MyRoute";
 import AddActivity from "./Pages/AddActivity/AddActivity";
-import AddDemand from "./Pages/AddDemand/AddDemand";
+import AddWish from "./Pages/AddWish/AddWish";
 
 import RequireAuth from './HOC/RequireAuth';
-import ActivityDemandPanel from './Pages/ActivityDemandPanel';
+import ActivityWishPanel from './Pages/ActivityWishPanel';
 
 import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
@@ -162,13 +162,13 @@ class App extends Component {
                     <Route exact path="/discovery" component={Discovery} />
                     <Route exact path="/myRoute" component={MyRoute} />
                     <Route exact path="/addActivity" component={RequireAuth(AddActivity)} />
-                    <Route exact path="/addDemand" component={RequireAuth(AddDemand)} />
+                    <Route exact path="/addWish" component={RequireAuth(AddWish)} />
 
                     <Route exact path="/logInSignUp" component={LogInSignUp} />
                     <Route exact path="/searchResult" component={SeachResult} />
                     <Route exact path="/story" component={Story} />
                     <Route exact path="/friendComments" component={FriendComments} />
-                    <Route exact path='/activityDemand'component={ActivityDemandPanel}/>
+                    <Route exact path='/activityWish'component={ActivityWishPanel}/>
                     {/*unit test used below, production will check env.production to disable*/}
 
                     <Route path="/signup" component={SignUpWizard} />

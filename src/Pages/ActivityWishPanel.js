@@ -5,7 +5,7 @@ import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
 import bg from "../Assets/Images/bg.jpg";
 import AddActivity from "./AddActivity/AddActivity";
-import AddDemand from "./AddDemand/AddDemand";
+import AddWish from "./AddWish/AddWish";
 
 const styles = theme => ({
     button: {
@@ -47,7 +47,7 @@ const styles = theme => ({
     }
 });
 
-class ActivityDemandPanel extends Component {
+class ActivityWishPanel extends Component {
 
     render() {
         const { classes } = this.props;
@@ -87,4 +87,4 @@ class ActivityDemandPanel extends Component {
     }
 }
 
-export default withStyles(styles)(ActivityDemandPanel);
+export default withStyles(styles)(ActivityWishPanel);

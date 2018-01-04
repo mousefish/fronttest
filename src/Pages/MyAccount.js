@@ -54,7 +54,7 @@ const styles = theme => ({
 
 class MyAccount extends Component {
     renderEle(classes) {
-        let eles = ["我的活动 | 需求", "我的收藏", "我的好友", "系统设置", "关于我们", "版本更新"];
+        let eles = ["我的活动 | 愿望", "我的收藏", "我的好友", "系统设置", "关于我们", "版本更新"];
         return eles.map((ele, index, eles) => {
             return <li className={classes.ele}>{eles[index]}</li>;
         });
