@@ -15,8 +15,9 @@ export const submitActivityData = (data, history) => async dispatch => {
             payload: res.data
         });
     } catch (err) {
-        activityErr(err);
+        dispatch(activityErr(err));
     }
+
 };
 
 export const activityErr = err => {

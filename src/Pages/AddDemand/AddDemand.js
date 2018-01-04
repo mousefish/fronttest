@@ -46,8 +46,15 @@ class AddDemand extends Component {
     goBack() {
         this.props.history.goBack();
     }
-    handleSubmit(value){
+    submitForm(value){
+        console.log('demand value', value);
         this.props.submitDemandData(value, this.props.history);
+    }
+
+    renderErrorMsg() {
+        if (this.props.msg) {
+            return <div>{this.props.msg}</div>;
+        }
     }
 
     renderFields(classes) {
@@ -102,7 +109,7 @@ class AddDemand extends Component {
 
                     <h4 style={{ fontWeight: "bold" }}>发布新需求</h4>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
                     <div className={classes.sectionWrapper}>
                         {this.renderFields(classes)}
                     </div>
@@ -128,13 +135,14 @@ class AddDemand extends Component {
                         提交
                     </Button>
                 </form>
+             {this.renderErrorMsg()}
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
-    return { errorMsg: state.demandDataReducer.error };
+    return { msg: state.demandDataReducer.message };
 };
 
 AddDemand = reduxForm({

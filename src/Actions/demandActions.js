@@ -15,7 +15,7 @@ export const submitDemandData = (data, history) => async dispatch => {
             payload: res.data
         });
     } catch (err) {
-        demandErr(err);
+        dispatch(demandErr(err));
     }
 };
 

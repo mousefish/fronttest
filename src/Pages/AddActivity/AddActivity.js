@@ -46,7 +46,6 @@ class AddActivity extends Component {
             }
         }
         let { location,departdate,finishdate, budget,services,story } = values;
-        console.log("images",images);
         const modifiedValues={
             location,
             departdate,
@@ -61,8 +60,8 @@ class AddActivity extends Component {
 
     // Use this function to show the error message from backend
     renderErrorMsg() {
-        if (this.props.errorMsg) {
-            return <div>{this.props.errorMsg}</div>;
+        if (this.props.msg) {
+            return <div style={{textAlign:"center"}}>{this.props.msg}</div>;
         }
     }
 
@@ -88,18 +87,20 @@ class AddActivity extends Component {
                         onSubmit={this.handleSubmit}
                     />
                 )}
-                // {this.renderErrorMsg()}
+                {this.renderErrorMsg()}
             </div>
         );
     }
 }
 
+
 const mapStateToProps = state => {
-    return { errorMsg: state.activityDataReducer.error };
+    console.log('msg',state.activityDataReducer.message)
+    return { msg: state.activityDataReducer.message };
 };
 
 AddActivity.propTypes = {
     onSubmit: PropTypes.func.isRequired
 };
 
-export default connect(null, actions)(withRouter(AddActivity));
+export default connect(mapStateToProps, actions)(withRouter(AddActivity));

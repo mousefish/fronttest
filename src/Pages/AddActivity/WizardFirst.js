@@ -51,6 +51,13 @@ class WizardFirst extends Component {
                 name="location"
                 type="text"
                 component={popupSearchTextField}
+                placeholder="活动的主题(例：骨灰级成都吃货地图)"
+            />,
+            <Field
+                key="location"
+                name="location"
+                type="text"
+                component={popupSearchTextField}
                 placeholder="活动所在的国家和城市"
             />,
 

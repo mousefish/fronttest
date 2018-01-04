@@ -6,9 +6,9 @@ const INITIAL_STATE = {error:""};
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ADD_DEMAND_DATA:
-            return { [action.payload.id]: action.payload, ...state };
+            return { ...state, message:action.payload };
         case DEMAND_ERROR:
-            return {...state, error:action.payload}
+            return { ...state, error:action.payload }
     }
     return state;
 };
