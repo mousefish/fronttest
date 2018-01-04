@@ -36,6 +36,8 @@ import MyMessage from "./Pages/MyMessage";
 import Discovery from "./Pages/Discovery";
 import MyRoute from "./Pages/MyRoute";
 import AddActivity from "./Pages/AddActivity/AddActivity";
+import AddDemand from "./Pages/AddDemand/AddDemand";
+
 import RequireAuth from './HOC/RequireAuth';
 import ActivityDemandPanel from './Pages/ActivityDemandPanel';
 
@@ -159,7 +161,9 @@ class App extends Component {
                     <Route exact path="/message" component={MyMessage} />
                     <Route exact path="/discovery" component={Discovery} />
                     <Route exact path="/myRoute" component={MyRoute} />
-                    <Route exact path="/addActivity" component={AddActivity} />
+                    <Route exact path="/addActivity" component={RequireAuth(AddActivity)} />
+                    <Route exact path="/addDemand" component={RequireAuth(AddDemand)} />
+
                     <Route exact path="/logInSignUp" component={LogInSignUp} />
                     <Route exact path="/searchResult" component={SeachResult} />
                     <Route exact path="/story" component={Story} />

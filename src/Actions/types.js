@@ -12,4 +12,6 @@ export const FETCH_PROFILE_DATA = 'fetch_profile_data';
 export const FETCH_STORY_DATA = 'fetch_story_data';
 export const FETCH_ACTIVITY_DATA = 'fetch_activity_data';
 export const ADD_ACTIVITY_DATA = 'add_activity_data';
-
+export const ACTIVITY_ERROR = 'activity_error';
+export const ADD_DEMAND_DATA = 'add_demand_data';
+export const DEMAND_ERROR = "demand_error";

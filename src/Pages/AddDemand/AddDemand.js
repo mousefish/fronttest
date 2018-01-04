@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
+import { connect } from 'react-redux';
 import Button from "material-ui/Button";
 import popupSearchTextField from "../../Components/container/popupSearchTextField";
 import popupSearchDateField from "../../Components/container/popupSearchDateField";
 import popupSearchMultiServices from "../../Components/container/popupSearchMultiServices";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "./validate";
+import * as actions from '../../Actions';
+
 
 const styles = theme => ({
     wrapper: {
@@ -39,9 +42,19 @@ const styles = theme => ({
     }
 });
 
-class WizardFirst extends Component {
+class AddDemand extends Component {
     goBack() {
         this.props.history.goBack();
+    }
+    submitForm(value){
+        console.log('demand value', value);
+        this.props.submitDemandData(value, this.props.history);
+    }
+
+    renderErrorMsg() {
+        if (this.props.msg) {
+            return <div>{this.props.msg}</div>;
+        }
     }
 
     renderFields(classes) {
@@ -51,14 +64,7 @@ class WizardFirst extends Component {
                 name="location"
                 type="text"
                 component={popupSearchTextField}
-                placeholder="活动的主题(例：骨灰级成都吃货地图)"
-            />,
-            <Field
-                key="location"
-                name="location"
-                type="text"
-                component={popupSearchTextField}
-                placeholder="活动所在的国家和城市"
+                placeholder="你想去的国家和城市"
             />,
 
             <Field
@@ -82,7 +88,7 @@ class WizardFirst extends Component {
                 name="budget"
                 type="text"
                 component={popupSearchTextField}
-                placeholder="活动费用/人"
+                placeholder="你的需求预算/人"
             />
         ];
     }
@@ -101,16 +107,16 @@ class WizardFirst extends Component {
                         style={{ float: "left", color: "grey" }}
                     />
 
-                    <h4 style={{ fontWeight: "bold" }}>发布新活动</h4>
+                    <h4 style={{ fontWeight: "bold" }}>发布新需求</h4>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
                     <div className={classes.sectionWrapper}>
                         {this.renderFields(classes)}
                     </div>
 
                     <div className={classes.sectionWrapper}>
                         <h4 style={{ fontWeight: "bold", textAlign: "center" }}>
-                            你可以提供的向导服务
+                            你需要的向导服务
                         </h4>
                         <Field
                             key="services"
@@ -126,17 +132,24 @@ class WizardFirst extends Component {
                         raised
                         className={classes.button}
                     >
-                        下一步
+                        提交
                     </Button>
                 </form>
+             {this.renderErrorMsg()}
             </div>
         );
     }
 }
 
-export default reduxForm({
-    form: "wizard",
-    destroyOnUnmount: false,
-    forceUnregisterOnUnmount: true,
-    validate
-})(withRouter(withStyles(styles)(WizardFirst)));
+const mapStateToProps = state => {
+    return { msg: state.demandDataReducer.message };
+};
+
+AddDemand = reduxForm({
+  form: "AddDemand",
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true,
+  validate
+})(withStyles(styles)(AddDemand));
+
+export default (AddDemand = connect(mapStateToProps, actions)(withRouter(AddDemand)))
