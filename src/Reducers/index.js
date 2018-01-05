@@ -14,7 +14,7 @@ import WishDataReducer from './wishDataReducer';
 import ProfileDataReducer from './profileDataReducer';
 import StoryDataReducer from './storyDataReducer';
 import activityDataReducer from './activityDataReducer';
-import demandDataReducer from './demandDataReducer';
+import wishDataReducer from './wishDataReducer';
 
 export default combineReducers({
       UserAuth,
@@ -25,6 +25,6 @@ export default combineReducers({
       ProfileDataReducer,
       StoryDataReducer,
       activityDataReducer,
-      demandDataReducer,
+      wishDataReducer,
       form: formReducer,
 });

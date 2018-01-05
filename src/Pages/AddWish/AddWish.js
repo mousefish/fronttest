@@ -42,13 +42,13 @@ const styles = theme => ({
     }
 });
 
-class AddDemand extends Component {
+class AddWish extends Component {
     goBack() {
         this.props.history.goBack();
     }
     submitForm(value){
-        console.log('demand value', value);
-        this.props.submitDemandData(value, this.props.history);
+        console.log('wish value', value);
+        this.props.submitWishData(value, this.props.history);
     }
 
     renderErrorMsg() {
@@ -142,14 +142,14 @@ class AddDemand extends Component {
 }
 
 const mapStateToProps = state => {
-    return { msg: state.demandDataReducer.message };
+    return { msg: state.wishDataReducer.message };
 };
 
-AddDemand = reduxForm({
-  form: "AddDemand",
+AddWish = reduxForm({
+  form: "AddWish",
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
-})(withStyles(styles)(AddDemand));
+})(withStyles(styles)(AddWish));
 
-export default (AddDemand = connect(mapStateToProps, actions)(withRouter(AddDemand)))
+export default (AddWish = connect(mapStateToProps, actions)(withRouter(AddWish)))
