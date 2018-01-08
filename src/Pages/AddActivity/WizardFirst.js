@@ -47,8 +47,8 @@ class WizardFirst extends Component {
     renderFields(classes) {
         return [
             <Field
-                key="location"
-                name="location"
+                key="theme"
+                name="theme"
                 type="text"
                 component={popupSearchTextField}
                 placeholder="活动的主题(例：骨灰级成都吃货地图)"

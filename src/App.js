@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-
 import PageNotFound from "./Pages/404Page";
 import SignUpWizard from "./Components/container/SignUpWizard";
 import { ToastContainer } from "react-toastify";
@@ -168,7 +167,7 @@ class App extends Component {
                     <Route exact path="/searchResult" component={SeachResult} />
                     <Route exact path="/story" component={Story} />
                     <Route exact path="/friendComments" component={FriendComments} />
-                    <Route exact path='/activityWish'component={ActivityWishPanel}/>
+                    <Route exact path="/activityWish" component={ActivityWishPanel}/>
                     {/*unit test used below, production will check env.production to disable*/}
 
                     <Route path="/signup" component={SignUpWizard} />

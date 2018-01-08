@@ -10,11 +10,10 @@ import { reducer as formReducer } from 'redux-form';
 import SearchDataReducer from './searchDataReducer';
 import HistoryDataReducer from './historyDataReducer';
 import MainDataReducer from './mainDataReducer';
-import WishDataReducer from './wishDataReducer';
 import ProfileDataReducer from './profileDataReducer';
 import StoryDataReducer from './storyDataReducer';
-import activityDataReducer from './activityDataReducer';
-import wishDataReducer from './wishDataReducer';
+import ActivityDataReducer from './activityDataReducer';
+import WishDataReducer from './wishDataReducer';
 
 export default combineReducers({
       UserAuth,
@@ -24,7 +23,7 @@ export default combineReducers({
       WishDataReducer,
       ProfileDataReducer,
       StoryDataReducer,
-      activityDataReducer,
-      wishDataReducer,
+      ActivityDataReducer,
+      WishDataReducer,
       form: formReducer,
 });

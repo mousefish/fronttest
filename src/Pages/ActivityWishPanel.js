@@ -70,7 +70,7 @@ class ActivityWishPanel extends Component {
                 </Link>
 
                 <Link
-                    to="/addDemand"
+                    to="/addWish"
                     className={classes.buttonWrapper}
                 >
                     <Button
@@ -79,7 +79,7 @@ class ActivityWishPanel extends Component {
                         raised
                         className={classes.button}
                     >
-                        发布新需求
+                        发布新愿望
                     </Button>
                 </Link>
             </div>

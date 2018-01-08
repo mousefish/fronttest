@@ -47,8 +47,8 @@ class TripMain extends Component {
     open: false
   };
 
-  componentWillMount() {
-    this.props.fetchMainData();
+  componentDidMount() {
+    this.props.fetchActivityData();
   }
 
   handleClickOpen = () => {
@@ -85,7 +85,7 @@ class TripMain extends Component {
         </Dialog>
         <div className={classes.wrapper}>
           <Header description="这是一个有深度的旅游服务平台" />
-          <ListCard dummyData={this.props.mainData} />
+          <ListCard dummyData={this.props.activityData} />
         </div>
       </div>
     );
@@ -97,7 +97,9 @@ TripMain.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { mainData: state.MainDataReducer };
+  setTimeout(()=>{console.log("reducer",state.ActivityDataReducer)}, 5000)
+
+  return { activityData: state.ActivityDataReducer };
 };
 
 export default connect(mapStateToProps, actions)(withStyles(styles)(TripMain));

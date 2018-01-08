@@ -108,6 +108,7 @@ class ListCard extends Component {
   renderItems() {
     const classes = this.props.classes;
     return _.map(this.props.dummyData, item => {
+      console.log("this.props.dummyData", this.props.dummyData)
       return (
         <div>
           <Dialog
