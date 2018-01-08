@@ -11,6 +11,9 @@ import MonetizationOn from "material-ui-icons/MonetizationOn";
 
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
+import StarBorder from "material-ui-icons/StarBorder";
+import StarHalf from "material-ui-icons/StarHalf";
+
 import Person from "material-ui-icons/Person";
 
 import travel from "../../Assets/Images/sichuan.jpg";
@@ -34,7 +37,7 @@ import Button from "material-ui/Button";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import PersonProfile from '../../Pages/PersonProfile';
+import PersonProfile from "../../Pages/PersonProfile";
 
 const styleSheet = {
   card: {
@@ -54,12 +57,12 @@ const styleSheet = {
   icon: {
     width: 15,
     height: 15,
-    verticalAlign: "-2px",
+    verticalAlign: "-2px"
   },
 
   link: {
-    cursor:'pointer',
-    color:'#337ab7'
+    cursor: "pointer",
+    color: "#337ab7"
   }
 };
 
@@ -67,10 +70,9 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-
 class ListCard extends Component {
   state = {
-    open: false,
+    open: false
   };
 
   handleClickOpen = name => {
@@ -97,18 +99,25 @@ class ListCard extends Component {
 
   renderStar(nums) {
     const icon = this.props.classes.icon;
+    const starWrapper = [];
 
-    var starWrapper = [];
-    for (let i = 0; i < nums; i++) {
-      starWrapper.push(<Star className={icon} />);
+    for (let i = 0; i < 5; i++) {
+      if (nums - i > 0 && nums - i < 1) {
+        starWrapper[i] = <StarHalf className={icon} />;
+      } else if (i < nums) {
+        starWrapper[i] = <Star className={icon} />;
+      } else {
+        starWrapper[i] = <StarBorder className={icon} />;
+      }
     }
+
     return starWrapper;
   }
 
   renderItems() {
     const classes = this.props.classes;
-    return _.map(this.props.dummyData, item => {
-      console.log("this.props.dummyData", this.props.dummyData)
+    const { activityData } = this.props;
+    return activityData.map(item => {
       return (
         <div>
           <Dialog
@@ -128,7 +137,7 @@ class ListCard extends Component {
                 </IconButton>
               </Toolbar>
             </AppBar>
-           <PersonProfile />
+            <PersonProfile />
           </Dialog>
           <Card className={classes.card} key={item.id}>
             <CardMedia className={classes.media} image={travel} title="travel">
@@ -157,7 +166,7 @@ class ListCard extends Component {
                   backgroundColor: "rgba(0,0,0,0.6)"
                 }}
               >
-                {item.theme}
+                {item.theme ? item.theme : "城市深度游"}
               </span>
             </CardMedia>
             <CardContent>
@@ -167,11 +176,10 @@ class ListCard extends Component {
                 }}
               >
                 <div style={{ float: "left" }}>
-                  <MonetizationOn className={classes.icon} /> &nbsp;{item.price}
+                  <MonetizationOn className={classes.icon} /> &nbsp;{item.budget}
                 </div>
                 <div style={{ float: "right" }}>
                   {this.renderStar(item.stars)}
-                  &nbsp;{item.comments}
                 </div>
                 <div style={{ clear: "both" }} />
               </div>
@@ -179,13 +187,13 @@ class ListCard extends Component {
               <div
                 style={{ marginBottom: 10 }}
                 className={classes.link}
-                onClick={()=>this.handleClickOpen(item.name)}
+                onClick={() => this.handleClickOpen(item.name)}
               >
                 <Person className={classes.icon} />
-                &nbsp;{item.name}
+                &nbsp;{item.username}
               </div>
 
-              <div>{this.renderService(item.service)}</div>
+              <div>{this.renderService(item.services)}</div>
             </CardContent>
 
             <CardActions disableActionSpacing>

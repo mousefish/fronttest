@@ -47,6 +47,9 @@ import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
+// import { connect } from "react-redux";
+// import * as actions from "./Actions";
+
 const styleSheet = {
   root: {
     width: "100%",
@@ -82,6 +85,10 @@ class App extends Component {
       popup: false
     };
   }
+
+  // componentDidMount() {
+  //   this.props.fetchActivityData();
+  // }
 
   handleMainChange(event, main_value) {
     this.setState({ main_value });
@@ -183,5 +190,6 @@ class App extends Component {
     );
   }
 }
-
 export default withStyles(styleSheet)(withRouter(App));
+
+// export default withStyles(styleSheet)(withRouter(connect(null, actions)(App)));

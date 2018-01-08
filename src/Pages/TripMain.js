@@ -59,8 +59,18 @@ class TripMain extends Component {
     this.setState({ open: false });
   };
 
+  renderContent(activityData){
+     if(!activityData){
+       return <div>Loading..</div>
+     }else{
+       return <ListCard activityData={activityData} />
+     }
+  }
+
   render() {
     const classes = this.props.classes;
+    const { activityData } = this.props;
+
     return (
       <div style={{ position: "relative" }}>
         <SideButton onClick={this.handleClickOpen} URI='/' />
@@ -85,10 +95,11 @@ class TripMain extends Component {
         </Dialog>
         <div className={classes.wrapper}>
           <Header description="这是一个有深度的旅游服务平台" />
-          <ListCard dummyData={this.props.activityData} />
+          <div>{this.renderContent(activityData)}</div>
         </div>
       </div>
     );
+
   }
 }
 
@@ -97,9 +108,8 @@ TripMain.propTypes = {
 };
 
 const mapStateToProps = state => {
-  setTimeout(()=>{console.log("reducer",state.ActivityDataReducer)}, 5000)
-
-  return { activityData: state.ActivityDataReducer };
+  console.log("reducer", state.ActivityDataReducer.activity)
+  return { activityData: state.ActivityDataReducer.activity };
 };
 
-export default connect(mapStateToProps, actions)(withStyles(styles)(TripMain));
+export default connect(mapStateToProps,actions)(withStyles(styles)(TripMain));
