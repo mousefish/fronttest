@@ -43,7 +43,6 @@ export const submitActivityData = (data, history) => async dispatch => {
 };
 
 export const submitLikes = itemId => async dispatch => {
-    console.log("itemId", itemId);
     try {
         const res = await axios.post(`${ROOT_URL}/api/clickLikes/${itemId}`, {}, {
             headers: {

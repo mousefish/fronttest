@@ -72,7 +72,7 @@ function Transition(props) {
 
 class ListCard extends Component {
   state = {
-    open: false
+    open: false,
   };
 
   handleClickOpen = name => {
@@ -86,7 +86,6 @@ class ListCard extends Component {
 
   renderService(services) {
     const icon = this.props.classes.icon;
-
     return services.map(service => {
       return (
         <span style={{ marginRight: 6 }}>
@@ -118,121 +117,120 @@ class ListCard extends Component {
     this.props.submitLikes(itemId);
   }
 
+  renderLikes(item, activityId, numOfLikes){
+     if(item.id == activityId){
+       return <span>{numOfLikes}</span>
+     }else{
+      return <span>{item.likes}</span>
+     }
+  }
+
   renderItems() {
     const classes = this.props.classes;
-    const { activityData } = this.props;
-
-    return _.map(
-      activityData,
-      (item) => {
-        return (
-          <div>
-            <Dialog
-              fullScreen
-              open={this.state.open}
-              onRequestClose={this.handleRequestClose}
-              transition={Transition}
-            >
-              <AppBar className={classes.appBar}>
-                <Toolbar>
-                  <IconButton
-                    color="contrast"
-                    onClick={this.handleRequestClose}
-                    aria-label="Close"
-                  >
-                    <KeyboardArrowLeft />
-                  </IconButton>
-                </Toolbar>
-              </AppBar>
-              <PersonProfile />
-            </Dialog>
-            <Card className={classes.card} key={item.id}>
-              <CardMedia
-                className={classes.media}
-                image={travel}
-                title="travel"
-              >
-                <span
-                  style={{
-                    position: "absolute",
-                    right: 10,
-                    top: 10,
-                    color: "#fff"
-                  }}
-                >
-                  <LocationOn
-                    className={classes.icon}
-                    style={{ color: "#fff" }}
-                  />{" "}
-                  {item.location}
-                </span>
-                <span
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    width: "100%",
-                    height: "12%",
-                    padding: 4,
-                    color: "#fff",
-                    backgroundColor: "rgba(0,0,0,0.6)"
-                  }}
-                >
-                  {item.theme ? item.theme : "城市深度游"}
-                </span>
-              </CardMedia>
-              <CardContent>
-                <div
-                  style={{
-                    marginBottom: 10
-                  }}
-                >
-                  <div style={{ float: "left" }}>
-                    <MonetizationOn className={classes.icon} /> &nbsp;{item.budget}
-                  </div>
-                  <div style={{ float: "right" }}>
-                    {this.renderStar(item.stars)}
-                  </div>
-                  <div style={{ clear: "both" }} />
-                </div>
-
-                <div
-                  style={{ marginBottom: 10 }}
-                  className={classes.link}
-
-                >
-                  <Person className={classes.icon} />
-                  &nbsp;{item.username}
-                </div>
-
-                <div>{this.renderService(item.services)}</div>
-              </CardContent>
-
-              <CardActions disableActionSpacing>
+    const { activityData, likes } = this.props;
+    const activityId = Object.keys(likes)[0]
+    const numOfLikes = Object.values(likes)[0]
+    return _.map(activityData, item => {
+      return (
+        <div>
+          <Dialog
+            fullScreen
+            open={this.state.open}
+            onRequestClose={this.handleRequestClose}
+            transition={Transition}
+          >
+            <AppBar className={classes.appBar}>
+              <Toolbar>
                 <IconButton
-                  aria-label="Add to favorites"
-                  onClick={() => {
-                    this.handleLikes(item.id);
-                  }}
+                  color="contrast"
+                  onClick={this.handleRequestClose}
+                  aria-label="Close"
                 >
-                  <FavoriteIcon />
-                  <span>{item.likes}</span>
+                  <KeyboardArrowLeft />
                 </IconButton>
-                <IconButton aria-label="Share">
-                  <ShareIcon />
-                </IconButton>
-              </CardActions>
-            </Card>
-          </div>
-        );
-      })
+              </Toolbar>
+            </AppBar>
+            <PersonProfile />
+          </Dialog>
+          <Card className={classes.card} key={item.id}>
+            <CardMedia className={classes.media} image={travel} title="travel">
+              <span
+                style={{
+                  position: "absolute",
+                  right: 10,
+                  top: 10,
+                  color: "#fff"
+                }}
+              >
+                <LocationOn
+                  className={classes.icon}
+                  style={{ color: "#fff" }}
+                />{" "}
+                {item.location}
+              </span>
+              <span
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  width: "100%",
+                  height: "12%",
+                  padding: 4,
+                  color: "#fff",
+                  backgroundColor: "rgba(0,0,0,0.6)"
+                }}
+              >
+                {item.theme}
+              </span>
+            </CardMedia>
+            <CardContent>
+              <div
+                style={{
+                  marginBottom: 10
+                }}
+              >
+                <div style={{ float: "left" }}>
+                  <MonetizationOn className={classes.icon} /> &nbsp;{item.budget}
+                </div>
+                <div style={{ float: "right" }}>
+                  {this.renderStar(item.stars)}
+                </div>
+                <div style={{ clear: "both" }} />
+              </div>
 
+              <div style={{ marginBottom: 10 }} className={classes.link}>
+                <Person className={classes.icon} />
+                &nbsp;{item.username}
+              </div>
 
+              <div>{this.renderService(item.services)}</div>
+            </CardContent>
+
+            <CardActions disableActionSpacing>
+              <IconButton
+                aria-label="Add to favorites"
+                onClick={() => {
+                  this.handleLikes(item.id);
+                }}
+              >
+                <FavoriteIcon />
+                <span>{this.renderLikes(item, activityId, numOfLikes)}</span>
+              </IconButton>
+              <IconButton aria-label="Share">
+                <ShareIcon />
+              </IconButton>
+            </CardActions>
+          </Card>
+        </div>
+      );
+    });
   }
 
   render() {
     return <List>{this.renderItems()}</List>;
   }
 }
-
+const mapStateToProps = (state) => {
+  return { likes: state.ActivityDataReducer.likes };
+};
 
 export default connect(null, actions)(withStyles(styleSheet)(ListCard));

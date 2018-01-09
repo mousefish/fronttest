@@ -59,18 +59,18 @@ class TripMain extends Component {
     this.setState({ open: false });
   };
 
-  renderContent(activityData){
+  renderContent(activityData, likes){
      if(!activityData){
        return <div>Loading..</div>
      }else{
-       return <ListCard activityData={activityData} />
+       return <ListCard activityData={activityData} likes={likes}/>
      }
   }
 
   render() {
     const classes = this.props.classes;
     const { activityData } = this.props;
-
+    const { likes } = this.props;
     return (
       <div style={{ position: "relative" }}>
         <SideButton onClick={this.handleClickOpen} URI='/' />
@@ -95,7 +95,7 @@ class TripMain extends Component {
         </Dialog>
         <div className={classes.wrapper}>
           <Header description="这是一个有深度的旅游服务平台" />
-          <div>{this.renderContent(activityData)}</div>
+          <div>{this.renderContent(activityData, likes)}</div>
         </div>
       </div>
     );
@@ -107,9 +107,10 @@ TripMain.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
-  console.log("activity reducer", state.ActivityDataReducer[ownProps.match.params.id])
-  return { activityData: state.ActivityDataReducer[ownProps.match.params.id] };
+const mapStateToProps = (state,) => {
+  return { activityData: state.ActivityDataReducer.all,
+           likes: state.ActivityDataReducer.likes
+         };
 };
 
 export default connect(mapStateToProps,actions)(withStyles(styles)(TripMain));
