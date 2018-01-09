@@ -107,9 +107,9 @@ TripMain.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-  console.log("reducer", state.ActivityDataReducer.activity)
-  return { activityData: state.ActivityDataReducer.activity };
+const mapStateToProps = (state, ownProps) => {
+  console.log("activity reducer", state.ActivityDataReducer[ownProps.match.params.id])
+  return { activityData: state.ActivityDataReducer[ownProps.match.params.id] };
 };
 
 export default connect(mapStateToProps,actions)(withStyles(styles)(TripMain));

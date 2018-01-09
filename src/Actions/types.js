@@ -15,3 +15,4 @@ export const ADD_ACTIVITY_DATA = 'add_activity_data';
 export const ACTIVITY_ERROR = 'activity_error';
 export const ADD_WISH_DATA = 'add_wish_data';
 export const WISH_ERROR = "wish_error";
+export const HANDLE_LIKES = "handle_likes";
