@@ -59,11 +59,11 @@ class TripMain extends Component {
     this.setState({ open: false });
   };
 
-  renderContent(activityData, likes){
+  renderContent(activityData){
      if(!activityData){
        return <div>Loading..</div>
      }else{
-       return <ListCard activityData={activityData} likes={likes}/>
+       return <ListCard activityData={activityData} />
      }
   }
 
@@ -95,7 +95,7 @@ class TripMain extends Component {
         </Dialog>
         <div className={classes.wrapper}>
           <Header description="这是一个有深度的旅游服务平台" />
-          <div>{this.renderContent(activityData, likes)}</div>
+          <div>{this.renderContent(activityData)}</div>
         </div>
       </div>
     );
@@ -109,7 +109,6 @@ TripMain.propTypes = {
 
 const mapStateToProps = (state) => {
   return { activityData: state.ActivityReducer.all,
-           likes: state.ActivityReducer.likes
          };
 };
 

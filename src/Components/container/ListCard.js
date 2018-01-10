@@ -236,5 +236,9 @@ class ListCard extends Component {
   }
 }
 
-
-export default connect(null, actions)(withStyles(styleSheet)(ListCard));
+const mapStateToProps = (state) => {
+  return {
+           likes: state.ActivityReducer.likes
+         };
+};
+export default connect(mapStateToProps, actions)(withStyles(styleSheet)(ListCard));
