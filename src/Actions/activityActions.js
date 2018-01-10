@@ -3,18 +3,15 @@ import {
     ADD_ACTIVITY_DATA,
     FETCH_ACTIVITY_DATA,
     ACTIVITY_ERROR,
-    HANDLE_LIKES
+    HANDLE_LIKES,
+    FETCH_ONE_ACTIVITY
 } from "./types";
 
 const ROOT_URL = "http://localhost:8000";
 
 export const fetchActivityData = () => async dispatch => {
     try {
-        const res = await axios.get(`${ROOT_URL}/api/fetchActivity`, {
-            headers: {
-                authorization: localStorage.getItem("jwtToken")
-            }
-        });
+        const res = await axios.get(`${ROOT_URL}/api/fetchActivity`);
         dispatch({
             type: FETCH_ACTIVITY_DATA,
             payload: res.data
@@ -23,9 +20,18 @@ export const fetchActivityData = () => async dispatch => {
         dispatch(activityErr(err));
     }
 };
-
+export const fetchOneActivity =(activityId)=>async dispatch=>{
+      try {
+        const res = await axios.get(`${ROOT_URL}/api/activity/${activityId}`);
+        dispatch({
+            type: FETCH_ONE_ACTIVITY,
+            payload: res.data
+        });
+      } catch (err) {
+        dispatch(activityErr(err));
+    }
+};
 export const submitActivityData = (data, history) => async dispatch => {
-    console.log("activity data", data);
     try {
         const res = await axios.post(`${ROOT_URL}/api/addActivity`, data, {
             headers: {

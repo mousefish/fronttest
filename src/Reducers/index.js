@@ -9,8 +9,7 @@ import UserAuth from './authReducer';
 import { reducer as formReducer } from 'redux-form';
 import SearchDataReducer from './searchDataReducer';
 import HistoryDataReducer from './historyDataReducer';
-import MainDataReducer from './mainDataReducer';
-import ProfileDataReducer from './profileDataReducer';
+import UserReducer from './userReducer';
 import StoryDataReducer from './storyDataReducer';
 import ActivityDataReducer from './activityDataReducer';
 import WishDataReducer from './wishDataReducer';
@@ -19,9 +18,8 @@ export default combineReducers({
       UserAuth,
       HistoryDataReducer,
       SearchDataReducer,
-      MainDataReducer,
       WishDataReducer,
-      ProfileDataReducer,
+      UserReducer,
       StoryDataReducer,
       ActivityDataReducer,
       WishDataReducer,

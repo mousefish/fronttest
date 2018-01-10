@@ -36,6 +36,8 @@ import Discovery from "./Pages/Discovery";
 import MyRoute from "./Pages/MyRoute";
 import AddActivity from "./Pages/AddActivity/AddActivity";
 import AddWish from "./Pages/AddWish/AddWish";
+import Activity from "./Pages/Activity";
+import PersonProfile from "./Pages/PersonProfile";
 
 import RequireAuth from './HOC/RequireAuth';
 import ActivityWishPanel from './Pages/ActivityWishPanel';
@@ -172,9 +174,12 @@ class App extends Component {
 
                     <Route exact path="/logInSignUp" component={LogInSignUp} />
                     <Route exact path="/searchResult" component={SeachResult} />
-                    <Route exact path="/story" component={Story} />
+                    <Route exact path="/story/:userId" component={Story} />
                     <Route exact path="/friendComments" component={FriendComments} />
                     <Route exact path="/activityWish" component={ActivityWishPanel}/>
+                    <Route exact path="/activity/:activityId" component={Activity} />
+                    <Route exact path="/user/:userId" component={PersonProfile} />
+
                     {/*unit test used below, production will check env.production to disable*/}
 
                     <Route path="/signup" component={SignUpWizard} />

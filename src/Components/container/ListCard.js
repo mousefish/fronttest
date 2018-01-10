@@ -38,6 +38,7 @@ import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PersonProfile from "../../Pages/PersonProfile";
+import { Link } from "react-router-dom";
 
 const styleSheet = {
   card: {
@@ -46,7 +47,8 @@ const styleSheet = {
     margin: "auto",
     boxShadow: "none",
     border: "1px solid #f2f2f2",
-    position: "relative"
+    position: "relative",
+    color:"#000"
   },
 
   media: {
@@ -60,10 +62,10 @@ const styleSheet = {
     verticalAlign: "-2px"
   },
 
-  link: {
-    cursor: "pointer",
-    color: "#337ab7"
+  unlink: {
+    textDecoration:"none",
   }
+
 };
 
 function Transition(props) {
@@ -113,7 +115,9 @@ class ListCard extends Component {
     return starWrapper;
   }
 
-  handleLikes(itemId) {
+  handleLikes(event, itemId) {
+    event.preventDefault()
+    event.stopPropagation()
     this.props.submitLikes(itemId);
   }
 
@@ -152,6 +156,7 @@ class ListCard extends Component {
             </AppBar>
             <PersonProfile />
           </Dialog>
+          <Link to={`/activity/${item.id}`} className={classes.unlink}>
           <Card className={classes.card} key={item.id}>
             <CardMedia className={classes.media} image={travel} title="travel">
               <span
@@ -208,18 +213,19 @@ class ListCard extends Component {
             <CardActions disableActionSpacing>
               <IconButton
                 aria-label="Add to favorites"
-                onClick={() => {
-                  this.handleLikes(item.id);
+                onClick={(event) => {
+                  this.handleLikes(event, item.id);
                 }}
               >
                 <FavoriteIcon />
-                <span>{this.renderLikes(item, activityId, numOfLikes)}</span>
+                {this.renderLikes(item, activityId, numOfLikes)}
               </IconButton>
               <IconButton aria-label="Share">
                 <ShareIcon />
               </IconButton>
             </CardActions>
           </Card>
+          </Link>
         </div>
       );
     });

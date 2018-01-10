@@ -107,7 +107,7 @@ TripMain.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state,) => {
+const mapStateToProps = (state) => {
   return { activityData: state.ActivityDataReducer.all,
            likes: state.ActivityDataReducer.likes
          };

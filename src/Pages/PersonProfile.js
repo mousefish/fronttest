@@ -109,9 +109,11 @@ class PersonProfile extends Component {
         this.setState({ open: false });
     };
 
-    openMyStory(data) {
-        this.props.fetchStoryData(data);
+    componentWillMount(){
+        const userId = this.props.match.params.userId
+        this.props.fetchUser(userId)
     }
+
 
     renderService(services) {
         const icon = this.props.classes.icon;
@@ -137,7 +139,11 @@ class PersonProfile extends Component {
 
     render() {
         const classes = this.props.classes;
-        const profile = this.props.profileData;
+        const { user } = this.props;
+        if(!user){
+            return <div>loading</div>
+        }
+
         return (
             <div>
                 <Dialog
@@ -160,11 +166,11 @@ class PersonProfile extends Component {
                                 color="inherit"
                                 className={classes.flex}
                             >
-                                {profile.name}的资料
+                                {user.username}的资料
                             </Typography>
                         </Toolbar>
                     </AppBar>
-                    <PersonProfileDetails profile={profile} />
+                    <PersonProfileDetails profile={user} />
                 </Dialog>
 
                 <div className={classes.wrapper}>
@@ -184,18 +190,18 @@ class PersonProfile extends Component {
                             className={classes.space}
                             style={{ fontWeight: "bold" }}
                         >
-                            {profile.name}
+                            {user.username}
                         </h4>
                         <div className={classes.space}>
                             <LocationOn className={classes.icon} />
-                            {profile.location}
+                             {user.city}
                         </div>
                         <div className={classes.space}>
-                            {this.renderStar(profile.stars)}
-                            {profile.comments}
+
+
                         </div>
                         <div className={classes.serviceWrapper}>
-                            {this.renderService(profile.service)}
+
                         </div>
                         <Button
                             color="primary"
@@ -205,12 +211,9 @@ class PersonProfile extends Component {
                         >
                             更多我的资料哦
                         </Button>
-                        <Link to='/story'>
+                        <Link to={`/story/${user.id}`}>
                             <h2
                                 className={classes.link}
-                                onClick={() => {
-                                    this.openMyStory(profile.name);
-                                }}
                             >
                                 我在这座城市的故事
                             </h2>
@@ -227,7 +230,7 @@ class PersonProfile extends Component {
 
 const mapStateToProps = state => {
     return {
-        profileData: state.ProfileDataReducer
+        user: state.UserReducer
     };
 };
 
