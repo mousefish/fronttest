@@ -108,8 +108,8 @@ TripMain.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return { activityData: state.ActivityDataReducer.all,
-           likes: state.ActivityDataReducer.likes
+  return { activityData: state.ActivityReducer.all,
+           likes: state.ActivityReducer.likes
          };
 };
 

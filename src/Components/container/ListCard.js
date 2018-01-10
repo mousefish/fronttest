@@ -235,8 +235,6 @@ class ListCard extends Component {
     return <List>{this.renderItems()}</List>;
   }
 }
-const mapStateToProps = (state) => {
-  return { likes: state.ActivityDataReducer.likes };
-};
+
 
 export default connect(null, actions)(withStyles(styleSheet)(ListCard));

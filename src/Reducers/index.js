@@ -11,7 +11,7 @@ import SearchDataReducer from './searchDataReducer';
 import HistoryDataReducer from './historyDataReducer';
 import UserReducer from './userReducer';
 import StoryDataReducer from './storyDataReducer';
-import ActivityDataReducer from './activityDataReducer';
+import ActivityReducer from './activityReducer';
 import WishDataReducer from './wishDataReducer';
 import RatingReducer from './ratingReducer';
 
@@ -23,7 +23,7 @@ export default combineReducers({
       UserReducer,
       RatingReducer,
       StoryDataReducer,
-      ActivityDataReducer,
+      ActivityReducer,
       WishDataReducer,
       form: formReducer,
 });

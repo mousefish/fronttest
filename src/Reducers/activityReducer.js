@@ -3,7 +3,7 @@ import {
     FETCH_ACTIVITY_DATA,
     ACTIVITY_ERROR,
     HANDLE_LIKES,
-    FETCH_ONE_ACTIVITY
+    FETCH_ONE_ACTIVITY,
 } from "../Actions/types";
 
 
@@ -20,7 +20,7 @@ export default (state = INITIAL_STATE, action) => {
         case HANDLE_LIKES:
             return { ...state, likes: action.payload };
         case FETCH_ONE_ACTIVITY:
-            return { ...state, activity: action.payload}
+            return { ...state, activity: action.payload};
     }
 
     return state;

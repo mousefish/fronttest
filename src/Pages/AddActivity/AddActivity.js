@@ -96,8 +96,8 @@ class AddActivity extends Component {
 
 
 const mapStateToProps = state => {
-    console.log('msg',state.ActivityDataReducer.message)
-    return { msg: state.ActivityDataReducer.message };
+    console.log('msg',state.ActivityReducer.message)
+    return { msg: state.ActivityReducer.message };
 };
 
 AddActivity.propTypes = {
