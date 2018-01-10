@@ -4,7 +4,7 @@ import * as actions from "../Actions";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import WebFontLoader from "webfontloader";
-import ListCard from "../Components/container/ListCard";
+import ActivityIndex from "../Components/container/ActivityIndex";
 import PopupSearch from "../Components/container/PopupSearch";
 import SideButton from "./sideButton";
 import Header from "../Components/presenter/header";
@@ -63,7 +63,7 @@ class TripMain extends Component {
      if(!activityData){
        return <div>Loading..</div>
      }else{
-       return <ListCard activityData={activityData} />
+       return <ActivityIndex activityData={activityData} />
      }
   }
 

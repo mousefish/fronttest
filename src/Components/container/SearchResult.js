@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ListCard from "./ListCard";
+import ActivityIndex from "./ActivityIndex";
 import SideButton from "../../Pages/sideButton";
 import Header from "../presenter/header";
 import Slide from "material-ui/transitions/Slide";
@@ -68,7 +68,7 @@ class SearchResult extends Component {
                     </AppBar>
                     <PopupSearch handleRequestClose={this.handleRequestClose} />
                 </Dialog>
-                <ListCard dummyData={this.props.searchResult} />
+                <ActivityIndex dummyData={this.props.searchResult} />
             </div>
         );
     }
