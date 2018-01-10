@@ -5,7 +5,7 @@ import {
     HANDLE_LIKES,
     FETCH_ONE_ACTIVITY
 } from "../Actions/types";
-import _ from "lodash";
+
 
 const INITIAL_STATE = { all: [], message: "", error: "", likes: {} };
 

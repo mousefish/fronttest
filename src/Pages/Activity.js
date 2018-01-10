@@ -34,6 +34,8 @@ class Activity extends Component {
             stars: []
         }
     };
+
+
     componentWillMount() {
         const activityId = this.props.match.params.activityId;
         this.props.fetchOneActivity(activityId);
@@ -46,16 +48,17 @@ class Activity extends Component {
         }
 
         this.setState({
-            stars: starContainer,
+            stars: starContainer
         });
     }
-
 
     updateStars(index) {
         const starContainer = [];
         for (let i = 0; i < 5; i++) {
             if (i <= index) {
-                starContainer.push(<Star onClick={() => this.updateStars(i)} />);
+                starContainer.push(
+                    <Star onClick={() => this.updateStars(i)} />
+                );
             } else {
                 starContainer.push(
                     <StarBorder onClick={() => this.updateStars(i)} />
@@ -64,15 +67,24 @@ class Activity extends Component {
         }
         this.setState({
             stars: starContainer,
-            numOfStars:index + 1
+            numOfStars: index + 1
         });
+    }
 
+    sendRating(event, value, activityId) {
+        event.preventDefault();
+        const { numOfStars, feedback } = value;
+        const data = { numOfStars, feedback, activityId };
+        // data: {numOfStars: 3, feedback: "ilove", activityId: 1}
 
+        this.props.sendRating(data)
     }
 
     render() {
         const { classes } = this.props;
         const { activity } = this.props;
+        const { message } = this.props;
+
         if (!activity) {
             return <div>loading</div>;
         }
@@ -91,7 +103,7 @@ class Activity extends Component {
                 <div style={{ marginTop: 30 }}>
                     <form>
                         <div>{this.state.stars}</div>
-                         <div>Stars you give: {this.state.numOfStars}</div>
+                        <div>Stars you give: {this.state.numOfStars}</div>
                         <TextField
                             id="textarea"
                             label="tell us what you think"
@@ -99,7 +111,20 @@ class Activity extends Component {
                             multiline
                             className={classes.textField}
                             margin="normal"
+                            onChange={event => {
+                                this.setState({ feedback: event.target.value });
+                            }}
                         />
+                        <div>Feedback you gave: {this.state.feedback}</div>
+                        <button
+                            onClick={ event => {
+                                this.sendRating = this.sendRating.bind(this);
+                                this.sendRating(event, this.state, activity.id);
+                            }}
+                        >
+                            提交
+                        </button>
+                        <div>{message}</div>
                     </form>
                 </div>
             </div>
@@ -108,7 +133,8 @@ class Activity extends Component {
 }
 
 const mapStateToProps = state => {
-    return { activity: state.ActivityDataReducer.activity };
+    return { activity: state.ActivityDataReducer.activity,
+             message: state.RatingReducer.message };
 };
 
 export default connect(mapStateToProps, actions)(withStyles(styles)(Activity));

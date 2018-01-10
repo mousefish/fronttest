@@ -4,5 +4,6 @@ export * from './historyDataActions';
 export * from './activityActions';
 export * from './wishActions';
 export * from './userActions';
-export * from './storyDataActions';
+export * from './ratingActions';
+
 

@@ -13,6 +13,7 @@ import UserReducer from './userReducer';
 import StoryDataReducer from './storyDataReducer';
 import ActivityDataReducer from './activityDataReducer';
 import WishDataReducer from './wishDataReducer';
+import RatingReducer from './ratingReducer';
 
 export default combineReducers({
       UserAuth,
@@ -20,6 +21,7 @@ export default combineReducers({
       SearchDataReducer,
       WishDataReducer,
       UserReducer,
+      RatingReducer,
       StoryDataReducer,
       ActivityDataReducer,
       WishDataReducer,

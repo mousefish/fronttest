@@ -19,3 +19,4 @@ export const HANDLE_LIKES = "handle_likes";
 export const FETCH_ONE_ACTIVITY = "fetch_one_activity";
 
 export const FETCH_PROFILE_DATA = 'fetch_profile_data';
+export const ADD_RATING_DATA = 'add_rating_data';
