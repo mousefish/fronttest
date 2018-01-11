@@ -14,7 +14,6 @@ class RatingSummary extends Component {
         if(!summary) {
            return <div>loading</div>
         }
-        console.log("summary", summary);
         return <div>共{summary.numOfRater}人 平均{summary.averageScore}星</div>
     }
 

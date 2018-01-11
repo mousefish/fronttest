@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_RATING_DATA, RATING_ERROR, FETCH_RATING_DATA, OVERALL_RATING } from "./types";
+import { ADD_RATING_DATA, RATING_ERROR, FETCH_RATING_DATA, FETCH_OVERALL_RATING } from "./types";
 
 const ROOT_URL = "http://localhost:8000";
 
@@ -34,7 +34,7 @@ export const fetchRatings = (activityId) => async dispatch => {
 export const fetchRatingSummary=(activityId)=> async dispatch=>{
     const res = await axios.get(`${ROOT_URL}/api/fetchRatingSummary/${activityId}`)
     dispatch({
-       type:OVERALL_RATING,
+       type:FETCH_OVERALL_RATING,
        payload:res.data
     });
 

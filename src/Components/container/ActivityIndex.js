@@ -39,6 +39,7 @@ import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PersonProfile from "../../Pages/PersonProfile";
 import { Link } from "react-router-dom";
+import RatingSummary from "../../Pages/RatingSummary";
 
 const styleSheet = {
   card: {
@@ -72,7 +73,7 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-class ListCard extends Component {
+class ActivityIndex extends Component {
   state = {
     open: false,
   };
@@ -98,14 +99,14 @@ class ListCard extends Component {
     });
   }
 
-  renderStar(nums) {
+  renderStar(num) {
     const icon = this.props.classes.icon;
     const starWrapper = [];
 
     for (let i = 0; i < 5; i++) {
-      if (nums - i > 0 && nums - i < 1) {
+      if (num - i > 0 && num - i < 1) {
         starWrapper[i] = <StarHalf className={icon} />;
-      } else if (i < nums) {
+      } else if (i < num) {
         starWrapper[i] = <Star className={icon} />;
       } else {
         starWrapper[i] = <StarBorder className={icon} />;
@@ -120,6 +121,7 @@ class ListCard extends Component {
     event.stopPropagation()
     this.props.submitLikes(itemId);
   }
+
 
   renderItems() {
     const classes = this.props.classes;
@@ -189,7 +191,8 @@ class ListCard extends Component {
                   <MonetizationOn className={classes.icon} /> &nbsp;{item.budget}
                 </div>
                 <div style={{ float: "right" }}>
-                  {this.renderStar(item.stars)}
+                   {this.renderStar(item.averageScore)}星
+                   &nbsp;{item.numOfRater} 人评价
                 </div>
                 <div style={{ clear: "both" }} />
               </div>
@@ -228,4 +231,4 @@ class ListCard extends Component {
   }
 }
 
-export default connect(null, actions)(withStyles(styleSheet)(ListCard));
+export default connect(null, actions)(withStyles(styleSheet)(ActivityIndex));

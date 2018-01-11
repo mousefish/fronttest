@@ -17,6 +17,7 @@ import IconButton from "material-ui/IconButton";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
+
 WebFontLoader.load({
   google: {
     families: ["Roboto:300,400,500,700", "Material Icons"]
@@ -25,8 +26,8 @@ WebFontLoader.load({
 
 const styles = {
   wrapper: {
-    width: "95vw",
-    maxWidth: 600,
+    width: '95vw',
+    maxWidth:600,
     margin: "auto",
     marginBottom: 50,
     marginTop: 20
@@ -58,12 +59,12 @@ class TripMain extends Component {
     this.setState({ open: false });
   };
 
-  renderContent(activityData) {
-    if (!activityData) {
-      return <div>Loading..</div>;
-    } else {
-      return <ActivityIndex activityData={activityData} />;
-    }
+  renderContent(activityData){
+     if(!activityData){
+       return <div>Loading..</div>
+     }else{
+       return <ActivityIndex activityData={activityData} />
+     }
   }
 
   render() {
@@ -72,7 +73,7 @@ class TripMain extends Component {
     const { likes } = this.props;
     return (
       <div style={{ position: "relative" }}>
-        <SideButton onClick={this.handleClickOpen} URI="/" />
+        <SideButton onClick={this.handleClickOpen} URI='/' />
         <Dialog
           fullScreen
           open={this.state.open}
@@ -98,6 +99,7 @@ class TripMain extends Component {
         </div>
       </div>
     );
+
   }
 }
 
@@ -105,11 +107,9 @@ TripMain.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-  console.log("FETCH REDUCER", state.ActivityReducer.all);
-  return {
-    activityData: state.ActivityReducer.all
-  };
+const mapStateToProps = (state) => {
+  return { activityData: state.ActivityReducer.all,
+         };
 };
 
-export default connect(mapStateToProps, actions)(withStyles(styles)(TripMain));
+export default connect(mapStateToProps,actions)(withStyles(styles)(TripMain));
