@@ -18,7 +18,15 @@ export default (state = INITIAL_STATE, action) => {
         case ACTIVITY_ERROR:
             return { ...state, error: action.payload };
         case HANDLE_LIKES:
-            return { ...state, likes: action.payload };
+             const activityId = Object.keys(action.payload)[0]
+             const numOfLikes = Object.values(action.payload)[0]
+             const newAll = state.all.map((activity)=>{
+                 if(activity.id == activityId){
+                    activity.likes = numOfLikes;
+                 }
+                 return activity;
+             })
+             return {...state, all: newAll};
         case FETCH_ONE_ACTIVITY:
             return { ...state, activity: action.payload};
     }

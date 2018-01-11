@@ -121,19 +121,11 @@ class ListCard extends Component {
     this.props.submitLikes(itemId);
   }
 
-  renderLikes(item, activityId, numOfLikes){
-     if(item.id == activityId){
-       return <span>{numOfLikes}</span>
-     }else{
-      return <span>{item.likes}</span>
-     }
-  }
-
   renderItems() {
     const classes = this.props.classes;
-    const { activityData, likes } = this.props;
-    const activityId = Object.keys(likes)[0]
-    const numOfLikes = Object.values(likes)[0]
+    const { activityData } = this.props;
+    // const activityId = Object.keys(likes)[0]
+    // const numOfLikes = Object.values(likes)[0]
     return _.map(activityData, item => {
       return (
         <div>
@@ -218,7 +210,7 @@ class ListCard extends Component {
                 }}
               >
                 <FavoriteIcon />
-                {this.renderLikes(item, activityId, numOfLikes)}
+                {item.likes}
               </IconButton>
               <IconButton aria-label="Share">
                 <ShareIcon />
@@ -236,9 +228,4 @@ class ListCard extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-           likes: state.ActivityReducer.likes
-         };
-};
-export default connect(mapStateToProps, actions)(withStyles(styleSheet)(ListCard));
+export default connect(null, actions)(withStyles(styleSheet)(ListCard));
