@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-
 import PageNotFound from "./Pages/404Page";
 import SignUpWizard from "./Components/container/SignUpWizard";
 import { ToastContainer } from "react-toastify";
@@ -22,10 +21,10 @@ import Home from "material-ui-icons/Home";
 import Flight from "material-ui-icons/Flight";
 import Message from "material-ui-icons/Message";
 import Person from "material-ui-icons/Person";
-import AddCircle from 'material-ui-icons/AddCircle';
+
 
 import WebFontLoader from "webfontloader";
-import { getFramework7 } from "./index";
+
 import TripMain from "./Pages/TripMain";
 import WishMain from "./Pages/WishMain";
 import Story from "./Pages/Story";
@@ -37,6 +36,8 @@ import Discovery from "./Pages/Discovery";
 import MyRoute from "./Pages/MyRoute";
 import AddActivity from "./Pages/AddActivity/AddActivity";
 import AddWish from "./Pages/AddWish/AddWish";
+import Activity from "./Pages/Activity";
+import PersonProfile from "./Pages/PersonProfile";
 
 import RequireAuth from './HOC/RequireAuth';
 import ActivityWishPanel from './Pages/ActivityWishPanel';
@@ -47,6 +48,9 @@ import Toys from "material-ui-icons/Toys";
 import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+
+// import { connect } from "react-redux";
+// import * as actions from "./Actions";
 
 const styleSheet = {
   root: {
@@ -71,7 +75,7 @@ WebFontLoader.load({
 
 class App extends Component {
   static propTypes = {
-    router: PropTypes.object.isRequired,
+    // router: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
   };
 
@@ -83,6 +87,10 @@ class App extends Component {
       popup: false
     };
   }
+
+  // componentDidMount() {
+  //   this.props.fetchActivityData();
+  // }
 
   handleMainChange(event, main_value) {
     this.setState({ main_value });
@@ -166,9 +174,12 @@ class App extends Component {
 
                     <Route exact path="/logInSignUp" component={LogInSignUp} />
                     <Route exact path="/searchResult" component={SeachResult} />
-                    <Route exact path="/story" component={Story} />
+                    <Route exact path="/story/:userId" component={Story} />
                     <Route exact path="/friendComments" component={FriendComments} />
-                    <Route exact path='/activityWish'component={ActivityWishPanel}/>
+                    <Route exact path="/activityWish" component={ActivityWishPanel}/>
+                    <Route exact path="/activity/:activityId" component={Activity} />
+                    <Route exact path="/user/:userId" component={PersonProfile} />
+
                     {/*unit test used below, production will check env.production to disable*/}
 
                     <Route path="/signup" component={SignUpWizard} />
@@ -184,5 +195,6 @@ class App extends Component {
     );
   }
 }
-
 export default withStyles(styleSheet)(withRouter(App));
+
+// export default withStyles(styleSheet)(withRouter(connect(null, actions)(App)));

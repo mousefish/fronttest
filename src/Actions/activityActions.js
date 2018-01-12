@@ -1,9 +1,37 @@
 import axios from "axios";
-import { ADD_ACTIVITY_DATA, ACTIVITY_ERROR } from "./types";
+import {
+    ADD_ACTIVITY_DATA,
+    FETCH_ACTIVITY_DATA,
+    ACTIVITY_ERROR,
+    HANDLE_LIKES,
+    FETCH_ONE_ACTIVITY
+} from "./types";
 
 const ROOT_URL = "http://localhost:8000";
+
+export const fetchActivityData = () => async dispatch => {
+    try {
+        const res = await axios.get(`${ROOT_URL}/api/fetchActivity`);
+        dispatch({
+            type: FETCH_ACTIVITY_DATA,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch(activityErr(err));
+    }
+};
+export const fetchOneActivity =(activityId)=>async dispatch=>{
+      try {
+        const res = await axios.get(`${ROOT_URL}/api/activity/${activityId}`);
+        dispatch({
+            type: FETCH_ONE_ACTIVITY,
+            payload: res.data
+        });
+      } catch (err) {
+        dispatch(activityErr(err));
+    }
+};
 export const submitActivityData = (data, history) => async dispatch => {
-    console.log("activity data", data);
     try {
         const res = await axios.post(`${ROOT_URL}/api/addActivity`, data, {
             headers: {
@@ -14,10 +42,26 @@ export const submitActivityData = (data, history) => async dispatch => {
             type: ADD_ACTIVITY_DATA,
             payload: res.data
         });
+        // history.push("/");
     } catch (err) {
         dispatch(activityErr(err));
     }
+};
 
+export const submitLikes = itemId => async dispatch => {
+    try {
+        const res = await axios.post(`${ROOT_URL}/api/clickLikes/${itemId}`, {}, {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
+        dispatch({
+            type: HANDLE_LIKES,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch(activityErr(err));
+    }
 };
 
 export const activityErr = err => {

@@ -88,7 +88,7 @@ class AddWish extends Component {
                 name="budget"
                 type="text"
                 component={popupSearchTextField}
-                placeholder="你的需求预算/人"
+                placeholder="你的愿望预算/人"
             />
         ];
     }
@@ -107,7 +107,7 @@ class AddWish extends Component {
                         style={{ float: "left", color: "grey" }}
                     />
 
-                    <h4 style={{ fontWeight: "bold" }}>发布新需求</h4>
+                    <h4 style={{ fontWeight: "bold" }}>发布新愿望</h4>
                 </div>
                 <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
                     <div className={classes.sectionWrapper}>
@@ -142,7 +142,8 @@ class AddWish extends Component {
 }
 
 const mapStateToProps = state => {
-    return { msg: state.wishDataReducer.message };
+    console.log()
+    return { msg: state.WishReducer.message };
 };
 
 AddWish = reduxForm({

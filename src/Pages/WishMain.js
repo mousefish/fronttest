@@ -3,7 +3,7 @@ import { withStyles } from "material-ui/styles";
 import { connect } from 'react-redux';
 import * as actions from '../Actions';
 import WebFontLoader from "webfontloader";
-import WishCard from "../Components/container/WishCard";
+import WishIndex from "../Components/container/WishIndex";
 import PopupSearch from "../Components/container/PopupSearch";
 import SideButton from "./sideButton";
 import Header from "../Components/presenter/header";
@@ -41,7 +41,6 @@ function Transition(props) {
 }
 
 class WishMain extends Component {
-
   componentWillMount(){
     this.props.fetchWishData();
   }
@@ -58,8 +57,16 @@ class WishMain extends Component {
     this.setState({ open: false });
   };
 
+  renderContent(wishes){
+    if(!wishes){
+      return <div>loading..</div>
+    }
+
+    return <WishIndex wishes={wishes} />
+  }
   render() {
-    const classes = this.props.classes;
+    const { classes } = this.props;
+    const { wishes } = this.props;
     return (
       <div style={{ position: "relative" }}>
         <SideButton onClick={this.handleClickOpen} />
@@ -84,7 +91,7 @@ class WishMain extends Component {
         </Dialog>
          <div className={classes.wrapper}>
           <Header description="这是一个有深度的旅游服务平台" />
-           <WishCard dummyData={this.props.wishData} />
+           {this.renderContent(wishes)}
         </div>
       </div>
     );
@@ -92,7 +99,8 @@ class WishMain extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { wishData: state.WishDataReducer}
+  console.log("wishes", state.WishReducer.all);
+  return { wishes: state.WishReducer.all}
 
 }
 

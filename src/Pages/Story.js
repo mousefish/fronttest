@@ -4,6 +4,7 @@ import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
 import gallery from "../Assets/Images/gallery.jpg";
 import { Link } from "react-router-dom";
+import * as actions from "../Actions";
 
 const styles = theme => ({
     wrapper: {
@@ -59,15 +60,25 @@ class Story extends Component {
         isExpanded: false
     };
 
+    componentWillMount(){
+        const userId = this.props.match.params.userId;
+        this.props.fetchUser(userId);
+    }
+
     render() {
         const classes = this.props.classes;
+        const { user } = this.props;
+        if(!user){
+            return <div>loading</div>
+        }
+
         return (
             <div className={classes.wrapper}>
                 <div className={classes.innerWrapper}>
                     <h2>我在这座城市的故事</h2>
                     <div className={this.state.isExpanded ? "" : classes.fade}>
-                        <p style={{ textAlign: "left" }}>
-                            {this.props.storyData.myStory}
+                        <p style={{ textAlign: "center" }}>
+                          {user.mail}
                         </p>
                         <span
                             className={
@@ -137,7 +148,7 @@ class Story extends Component {
 
 const mapStateToProps = state => {
     return {
-        storyData: state.StoryDataReducer
+        user: state.UserReducer
     };
 };
-export default connect(mapStateToProps)(withStyles(styles)(Story));
+export default connect(mapStateToProps, actions)(withStyles(styles)(Story));

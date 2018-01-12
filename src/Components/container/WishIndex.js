@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import _ from "lodash";
+import { connect } from "react-redux";
+import * as actions from "../../Actions";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import IconButton from "material-ui/IconButton";
 import LocationOn from "material-ui-icons/LocationOn";
 import MonetizationOn from "material-ui-icons/MonetizationOn";
 
+
 import LocalOffer from "material-ui-icons/LocalOffer";
-import Star from "material-ui-icons/Star";
 import EventAvailable from "material-ui-icons/EventAvailable";
 import Group from "material-ui-icons/Group";
 
-import wish from "../../Assets/Images/wish.jpg";
+import img from "../../Assets/Images/wish.jpg";
 import WishDetails from "./WishDetails";
 
 import Card, {
@@ -41,7 +42,7 @@ const style = {
     boxShadow: "none",
     border: "1px solid #f2f2f2",
     position: "relative",
-    cursor:'pointer'
+    cursor: "pointer"
   },
 
   media: {
@@ -60,11 +61,12 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-class WishCard extends Component {
+class WishIndex extends Component {
   state = {
     open: false,
     id: "001"
   };
+
 
   handleClickOpen = id => {
     this.setState({ open: true, id: id });
@@ -74,12 +76,18 @@ class WishCard extends Component {
     this.setState({ open: false });
   };
 
+  handleLikes(event, wishId){
+      event.preventDefault();
+      event.stopPropagation();
+     this.props.sendWishLike(wishId);
+  }
+
   renderService(services) {
     const icon = this.props.classes.icon;
 
     return services.map(service => {
       return (
-        <span style={{ marginRight: 6 }}>
+        <span style={{ marginRight: 6 }} key={service}>
           <LocalOffer className={icon} />
           &nbsp;{service}
         </span>
@@ -87,25 +95,16 @@ class WishCard extends Component {
     });
   }
 
-  renderWishDetails() {
-    return <WishDetails />;
-  }
-
-  renderStar(nums) {
-    const icon = this.props.classes.icon;
-
-    var starWrapper = [];
-    for (let i = 0; i < nums; i++) {
-      starWrapper.push(<Star className={icon} />);
+  renderItems() {
+    const { classes } = this.props;
+    const { wishes } = this.props;
+    if (!wishes) {
+      return <div>loading...</div>;
     }
-    return starWrapper;
-  }
 
-  renderItems(classes) {
-    const dummyData= this.props.dummyData;
-    return _.map(this.props.dummyData, item => {
+    return wishes.map(wish => {
       return (
-        <div>
+        <div key={wish.id}>
           <Dialog
             fullScreen
             open={this.state.open}
@@ -123,48 +122,24 @@ class WishCard extends Component {
                 </IconButton>
               </Toolbar>
             </AppBar>
-            <WishDetails
-              id={this.state.id}
-              theme={dummyData[this.state.id].theme}
-              grouping={dummyData[this.state.id].grouping}
-              price={dummyData[this.state.id].price}
-              location={dummyData[this.state.id].location}
-              service={dummyData[this.state.id].service}
-              date={dummyData[this.state.id].date}
-              serives={dummyData[this.state.id].services}
-              wish={wish}
-            />
           </Dialog>
 
           <Card
             className={classes.card}
-            key={item.id}
+            key={wish.id}
             onClick={() => {
-              this.handleClickOpen(item.id);
+              this.handleClickOpen(wish.id);
             }}
           >
-            <CardMedia className={classes.media} image={wish} title="wish">
+            <CardMedia className={classes.media} image={img} title="wish">
               <span
                 style={{
                   position: "absolute",
-                  right: "10",
-                  top: "10",
+                  right: 10,
+                  top: 10,
                   color: "#fff"
                 }}
               />
-              <span
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  width: "100%",
-                  height: "12%",
-                  padding: 4,
-                  color: "#fff",
-                  backgroundColor: "rgba(0,0,0,0.6)"
-                }}
-              >
-                {item.theme}
-              </span>
             </CardMedia>
             <CardContent>
               <div
@@ -173,25 +148,40 @@ class WishCard extends Component {
                 }}
               >
                 <div style={{ float: "left" }}>
-                  <LocationOn className={classes.icon} /> {item.location}
+                  <LocationOn className={classes.icon} /> {wish.location}
                 </div>
                 <div style={{ float: "right" }}>
-                  <MonetizationOn className={classes.icon} /> &nbsp;{item.price}
+                  <MonetizationOn className={classes.icon} /> &nbsp;{wish.budget}
                 </div>
                 <div style={{ clear: "both" }} />
               </div>
 
               <div style={{ marginBottom: 6 }}>
                 <div style={{ float: "left" }}>
-                  <EventAvailable className={classes.icon} />&nbsp;{item.date}
+                  <EventAvailable className={classes.icon} />&nbsp;出发日期：{wish.departdate}
                 </div>
                 <div style={{ float: "right" }}>
-                  <Group className={classes.icon} />&nbsp;组团 : {item.grouping}
+                  <Group className={classes.icon} />&nbsp;结束日期：{" "}
+                  {wish.finishdate}
                 </div>
                 <div style={{ clear: "both" }} />
               </div>
-              <div>{this.renderService(item.service)}</div>
+              <div>{this.renderService(wish.services)}</div>
             </CardContent>
+            <CardActions disableActionSpacing>
+              <IconButton
+                aria-label="Add to favorites"
+                onClick={event => {
+                  this.handleLikes(event, wish.id);
+                }}
+              >
+                <FavoriteIcon />
+                {wish.likes}
+              </IconButton>
+              <IconButton aria-label="Share">
+                <ShareIcon />
+              </IconButton>
+            </CardActions>
           </Card>
         </div>
       );
@@ -199,9 +189,8 @@ class WishCard extends Component {
   }
 
   render() {
-    const classes = this.props.classes;
-    return <List>{this.renderItems(classes)}</List>;
+    return <List>{this.renderItems()}</List>;
   }
 }
 
-export default withStyles(style)(WishCard);
+export default connect(null, actions)(withStyles(style)(WishIndex));

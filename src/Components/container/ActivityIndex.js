@@ -11,6 +11,9 @@ import MonetizationOn from "material-ui-icons/MonetizationOn";
 
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
+import StarBorder from "material-ui-icons/StarBorder";
+import StarHalf from "material-ui-icons/StarHalf";
+
 import Person from "material-ui-icons/Person";
 
 import travel from "../../Assets/Images/sichuan.jpg";
@@ -34,7 +37,9 @@ import Button from "material-ui/Button";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import PersonProfile from '../../Pages/PersonProfile';
+import PersonProfile from "../../Pages/PersonProfile";
+import { Link } from "react-router-dom";
+import RatingSummary from "../../Pages/RatingSummary";
 
 const styleSheet = {
   card: {
@@ -43,7 +48,8 @@ const styleSheet = {
     margin: "auto",
     boxShadow: "none",
     border: "1px solid #f2f2f2",
-    position: "relative"
+    position: "relative",
+    color: "#000"
   },
 
   media: {
@@ -54,12 +60,11 @@ const styleSheet = {
   icon: {
     width: 15,
     height: 15,
-    verticalAlign: "-2px",
+    verticalAlign: "-2px"
   },
 
-  link: {
-    cursor:'pointer',
-    color:'#337ab7'
+  unlink: {
+    textDecoration: "none"
   }
 };
 
@@ -67,10 +72,9 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-
-class ListCard extends Component {
+class ActivityIndex extends Component {
   state = {
-    open: false,
+    open: false
   };
 
   handleClickOpen = name => {
@@ -84,10 +88,9 @@ class ListCard extends Component {
 
   renderService(services) {
     const icon = this.props.classes.icon;
-
     return services.map(service => {
       return (
-        <span style={{ marginRight: 6 }}>
+        <span style={{ marginRight: 6 }} key={service}>
           <LocalOffer className={icon} />
           &nbsp;{service}
         </span>
@@ -95,41 +98,41 @@ class ListCard extends Component {
     });
   }
 
-  renderStar(nums) {
+  renderStar(num) {
     const icon = this.props.classes.icon;
+    const starWrapper = [];
 
-    var starWrapper = [];
-    for (let i = 0; i < nums; i++) {
-      starWrapper.push(<Star className={icon} />);
+    for (let i = 0; i < 5; i++) {
+      if (num - i > 0 && num - i < 1) {
+        starWrapper[i] = <StarHalf key={i} className={icon} />;
+      } else if (i < num) {
+        starWrapper[i] = <Star key={i} className={icon} />;
+      } else {
+        starWrapper[i] = <StarBorder key={i} className={icon} />;
+      }
     }
+
     return starWrapper;
+  }
+
+  handleLikes(event, itemId) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.props.submitLikes(itemId);
   }
 
   renderItems() {
     const classes = this.props.classes;
-    return _.map(this.props.dummyData, item => {
+    const { activityData } = this.props;
+
+    return _.map(activityData, item => {
       return (
-        <div>
-          <Dialog
-            fullScreen
-            open={this.state.open}
-            onRequestClose={this.handleRequestClose}
-            transition={Transition}
-          >
-            <AppBar className={classes.appBar}>
-              <Toolbar>
-                <IconButton
-                  color="contrast"
-                  onClick={this.handleRequestClose}
-                  aria-label="Close"
-                >
-                  <KeyboardArrowLeft />
-                </IconButton>
-              </Toolbar>
-            </AppBar>
-           <PersonProfile />
-          </Dialog>
-          <Card className={classes.card} key={item.id}>
+        <Link
+          to={`/activity/${item.id}`}
+          className={classes.unlink}
+          key={item.id}
+        >
+          <Card className={classes.card}>
             <CardMedia className={classes.media} image={travel} title="travel">
               <span
                 style={{
@@ -166,37 +169,39 @@ class ListCard extends Component {
                 }}
               >
                 <div style={{ float: "left" }}>
-                  <MonetizationOn className={classes.icon} /> &nbsp;{item.price}
+                  <MonetizationOn className={classes.icon} /> &nbsp;{item.budget}
                 </div>
                 <div style={{ float: "right" }}>
-                  {this.renderStar(item.stars)}
-                  &nbsp;{item.comments}
+                  {this.renderStar(item.averageScore)}星 &nbsp;{item.numOfRater}{" "}
+                  人评价
                 </div>
                 <div style={{ clear: "both" }} />
               </div>
 
-              <div
-                style={{ marginBottom: 10 }}
-                className={classes.link}
-                onClick={()=>this.handleClickOpen(item.name)}
-              >
+              <div style={{ marginBottom: 10 }} className={classes.link}>
                 <Person className={classes.icon} />
-                &nbsp;{item.name}
+                &nbsp;{item.username}
               </div>
 
-              <div>{this.renderService(item.service)}</div>
+              <div>{this.renderService(item.services)}</div>
             </CardContent>
 
             <CardActions disableActionSpacing>
-              <IconButton aria-label="Add to favorites">
+              <IconButton
+                aria-label="Add to favorites"
+                onClick={event => {
+                  this.handleLikes(event, item.id);
+                }}
+              >
                 <FavoriteIcon />
+                {item.likes}
               </IconButton>
               <IconButton aria-label="Share">
                 <ShareIcon />
               </IconButton>
             </CardActions>
           </Card>
-        </div>
+        </Link>
       );
     });
   }
@@ -206,4 +211,4 @@ class ListCard extends Component {
   }
 }
 
-export default connect(null, actions)(withStyles(styleSheet)(ListCard));
+export default connect(null, actions)(withStyles(styleSheet)(ActivityIndex));

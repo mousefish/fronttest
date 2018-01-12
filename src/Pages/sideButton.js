@@ -39,9 +39,7 @@ function sideButton(props) {
         </Button>
       </div>
       <div>
-        <Link
-          to="/activityDemand"
-        >
+        <Link to="/activityWish">
           <Button fab color="accent" aria-label="add" className={classes.root}>
             <AddIcon />
           </Button>

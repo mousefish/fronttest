@@ -4,7 +4,7 @@ import * as actions from "../Actions";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import WebFontLoader from "webfontloader";
-import ListCard from "../Components/container/ListCard";
+import ActivityIndex from "../Components/container/ActivityIndex";
 import PopupSearch from "../Components/container/PopupSearch";
 import SideButton from "./sideButton";
 import Header from "../Components/presenter/header";
@@ -47,8 +47,8 @@ class TripMain extends Component {
     open: false
   };
 
-  componentWillMount() {
-    this.props.fetchMainData();
+  componentDidMount() {
+    this.props.fetchActivityData();
   }
 
   handleClickOpen = () => {
@@ -59,8 +59,18 @@ class TripMain extends Component {
     this.setState({ open: false });
   };
 
+  renderContent(activityData){
+     if(!activityData){
+       return <div>Loading..</div>
+     }else{
+       return <ActivityIndex activityData={activityData} />
+     }
+  }
+
   render() {
     const classes = this.props.classes;
+    const { activityData } = this.props;
+    const { likes } = this.props;
     return (
       <div style={{ position: "relative" }}>
         <SideButton onClick={this.handleClickOpen} URI='/' />
@@ -85,10 +95,11 @@ class TripMain extends Component {
         </Dialog>
         <div className={classes.wrapper}>
           <Header description="这是一个有深度的旅游服务平台" />
-          <ListCard dummyData={this.props.mainData} />
+          <div>{this.renderContent(activityData)}</div>
         </div>
       </div>
     );
+
   }
 }
 
@@ -96,8 +107,9 @@ TripMain.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-  return { mainData: state.MainDataReducer };
+const mapStateToProps = (state) => {
+  return { activityData: state.ActivityReducer.all,
+         };
 };
 
-export default connect(mapStateToProps, actions)(withStyles(styles)(TripMain));
+export default connect(mapStateToProps,actions)(withStyles(styles)(TripMain));

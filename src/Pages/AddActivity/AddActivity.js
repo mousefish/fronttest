@@ -45,8 +45,9 @@ class AddActivity extends Component {
                 images.push(values['img'+i]);
             }
         }
-        let { location,departdate,finishdate, budget,services,story } = values;
+        let { theme, location,departdate,finishdate, budget,services,story } = values;
         const modifiedValues={
+            theme,
             location,
             departdate,
             finishdate,
@@ -95,8 +96,8 @@ class AddActivity extends Component {
 
 
 const mapStateToProps = state => {
-    console.log('msg',state.activityDataReducer.message)
-    return { msg: state.activityDataReducer.message };
+    console.log('msg',state.ActivityReducer.message)
+    return { msg: state.ActivityReducer.message };
 };
 
 AddActivity.propTypes = {
