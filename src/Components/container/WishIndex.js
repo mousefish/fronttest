@@ -7,7 +7,6 @@ import IconButton from "material-ui/IconButton";
 import LocationOn from "material-ui-icons/LocationOn";
 import MonetizationOn from "material-ui-icons/MonetizationOn";
 
-
 import LocalOffer from "material-ui-icons/LocalOffer";
 import EventAvailable from "material-ui-icons/EventAvailable";
 import Group from "material-ui-icons/Group";
@@ -64,22 +63,34 @@ function Transition(props) {
 class WishIndex extends Component {
   state = {
     open: false,
-    id: "001"
+    id: 0,
+    location:"",
+    departdate:"",
+    finishdate:"",
+    budget:0,
+    services:[]
   };
 
-
-  handleClickOpen = id => {
-    this.setState({ open: true, id: id });
+  handleClickOpen = (id, location, departdate,finishdate,budget,services) => {
+    this.setState({
+      open: true,
+      id,
+      location,
+      departdate,
+      finishdate,
+      budget,
+      services
+       });
   };
 
   handleRequestClose = () => {
     this.setState({ open: false });
   };
 
-  handleLikes(event, wishId){
-      event.preventDefault();
-      event.stopPropagation();
-     this.props.sendWishLike(wishId);
+  handleLikes(event, wishId) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.props.sendWishLike(wishId);
   }
 
   renderService(services) {
@@ -122,13 +133,21 @@ class WishIndex extends Component {
                 </IconButton>
               </Toolbar>
             </AppBar>
+            <WishDetails
+              id={this.state.id}
+              location={this.state.location}
+              departdate={this.state.departdate}
+              finishdate={this.state.finishdate}
+              budget={this.state.budget}
+              services={this.state.services}
+            />
           </Dialog>
 
           <Card
             className={classes.card}
             key={wish.id}
             onClick={() => {
-              this.handleClickOpen(wish.id);
+              this.handleClickOpen(wish.id, wish.location, wish.departdate,wish.finishdate,wish.budget,wish.services);
             }}
           >
             <CardMedia className={classes.media} image={img} title="wish">
@@ -157,14 +176,13 @@ class WishIndex extends Component {
               </div>
 
               <div style={{ marginBottom: 6 }}>
-                <div style={{ float: "left" }}>
+                <div>
                   <EventAvailable className={classes.icon} />&nbsp;出发日期：{wish.departdate}
                 </div>
-                <div style={{ float: "right" }}>
+                <div>
                   <Group className={classes.icon} />&nbsp;结束日期：{" "}
                   {wish.finishdate}
                 </div>
-                <div style={{ clear: "both" }} />
               </div>
               <div>{this.renderService(wish.services)}</div>
             </CardContent>

@@ -5,7 +5,7 @@ import { withStyles } from "material-ui/styles";
 import IconButton from "material-ui/IconButton";
 import LocationOn from "material-ui-icons/LocationOn";
 import MonetizationOn from "material-ui-icons/MonetizationOn";
-
+import img from "../../Assets/Images/wish.jpg";
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
 import EventAvailable from "material-ui-icons/EventAvailable";
@@ -46,7 +46,7 @@ const style = theme => ({
     innerBoxService: {
         display: "flex",
         flexDirection: "row nowrap",
-        justifyContent: "space-between",
+        justifyContent: "center",
         marginBottom: 6
     },
 
@@ -92,7 +92,7 @@ class WishDetails extends Component {
 
         return services.map(service => {
             return (
-                <span style={{ marginRight: 6 }}>
+                <span style={{ marginRight: 6 }} key={service}>
                     <LocalOffer className={icon} />
                     &nbsp;{service}
                 </span>
@@ -101,21 +101,21 @@ class WishDetails extends Component {
     }
 
     render() {
-        const classes = this.props.classes;
+        const { classes } = this.props;
         return (
             <div className={classes.wrapper}>
                 {" "}
                 <Card className={classes.card} key={this.props.id}>
                     <CardMedia
                         className={classes.media}
-                        image={this.props.wish}
+                        image={img}
                         title="wish"
                     >
                         <span
                             style={{
                                 position: "absolute",
-                                right: "10",
-                                top: "10",
+                                right: 10,
+                                top: 10,
                                 color: "#fff"
                             }}
                         />
@@ -130,7 +130,7 @@ class WishDetails extends Component {
                                 backgroundColor: "rgba(0,0,0,0.6)"
                             }}
                         >
-                            {this.props.theme}
+                           placeholder
                         </span>
                     </CardMedia>
                     <CardContent>
@@ -143,22 +143,22 @@ class WishDetails extends Component {
                             <div className={classes.innerWrapper}>
                                 <EventAvailable
                                     className={classes.icon}
-                                />&nbsp;{this.props.date}
+                                />&nbsp;{this.props.departdate}
                             </div>
                             <div className={classes.innerBoxMoney}>
                                 <div style={{marginRight:20}}>
                                     <MonetizationOn
                                         className={classes.icon}
                                     />{" "}
-                                    &nbsp;{this.props.price}
+                                    &nbsp;{this.props.budget}
                                 </div>
                                 <div>
-                                    <Group className={classes.icon} />&nbsp;组团 :{" "}
-                                    {this.props.grouping}
+                                    <Group className={classes.icon} />&nbsp;
+                                    {this.props.finishdate}
                                 </div>
                             </div>
                             <div className={classes.innerBoxService}>
-                                {this.renderService(this.props.service)}
+                                {this.renderService(this.props.services)}
                             </div>
                         </div>
                     </CardContent>
