@@ -1,9 +1,3 @@
-//store unit, combine all the reducers in the store
-//
-//         store
-//         /\
-//  reducer  reducer
-
 import {combineReducers} from 'redux';
 import UserAuth from './authReducer';
 import { reducer as formReducer } from 'redux-form';
@@ -12,18 +6,17 @@ import HistoryDataReducer from './historyDataReducer';
 import UserReducer from './userReducer';
 import StoryDataReducer from './storyDataReducer';
 import ActivityReducer from './activityReducer';
-import WishDataReducer from './wishDataReducer';
+import WishReducer from './wishReducer';
 import RatingReducer from './ratingReducer';
 
 export default combineReducers({
       UserAuth,
       HistoryDataReducer,
       SearchDataReducer,
-      WishDataReducer,
       UserReducer,
       RatingReducer,
       StoryDataReducer,
       ActivityReducer,
-      WishDataReducer,
+      WishReducer,
       form: formReducer,
 });

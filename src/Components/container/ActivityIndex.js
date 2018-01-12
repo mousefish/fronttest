@@ -49,7 +49,7 @@ const styleSheet = {
     boxShadow: "none",
     border: "1px solid #f2f2f2",
     position: "relative",
-    color:"#000"
+    color: "#000"
   },
 
   media: {
@@ -64,9 +64,8 @@ const styleSheet = {
   },
 
   unlink: {
-    textDecoration:"none",
+    textDecoration: "none"
   }
-
 };
 
 function Transition(props) {
@@ -75,7 +74,7 @@ function Transition(props) {
 
 class ActivityIndex extends Component {
   state = {
-    open: false,
+    open: false
   };
 
   handleClickOpen = name => {
@@ -91,7 +90,7 @@ class ActivityIndex extends Component {
     const icon = this.props.classes.icon;
     return services.map(service => {
       return (
-        <span style={{ marginRight: 6 }}>
+        <span style={{ marginRight: 6 }} key={service}>
           <LocalOffer className={icon} />
           &nbsp;{service}
         </span>
@@ -105,11 +104,11 @@ class ActivityIndex extends Component {
 
     for (let i = 0; i < 5; i++) {
       if (num - i > 0 && num - i < 1) {
-        starWrapper[i] = <StarHalf className={icon} />;
+        starWrapper[i] = <StarHalf key={i} className={icon} />;
       } else if (i < num) {
-        starWrapper[i] = <Star className={icon} />;
+        starWrapper[i] = <Star key={i} className={icon} />;
       } else {
-        starWrapper[i] = <StarBorder className={icon} />;
+        starWrapper[i] = <StarBorder key={i} className={icon} />;
       }
     }
 
@@ -117,41 +116,23 @@ class ActivityIndex extends Component {
   }
 
   handleLikes(event, itemId) {
-    event.preventDefault()
-    event.stopPropagation()
+    event.preventDefault();
+    event.stopPropagation();
     this.props.submitLikes(itemId);
   }
-
 
   renderItems() {
     const classes = this.props.classes;
     const { activityData } = this.props;
-    // const activityId = Object.keys(likes)[0]
-    // const numOfLikes = Object.values(likes)[0]
+
     return _.map(activityData, item => {
       return (
-        <div>
-          <Dialog
-            fullScreen
-            open={this.state.open}
-            onRequestClose={this.handleRequestClose}
-            transition={Transition}
-          >
-            <AppBar className={classes.appBar}>
-              <Toolbar>
-                <IconButton
-                  color="contrast"
-                  onClick={this.handleRequestClose}
-                  aria-label="Close"
-                >
-                  <KeyboardArrowLeft />
-                </IconButton>
-              </Toolbar>
-            </AppBar>
-            <PersonProfile />
-          </Dialog>
-          <Link to={`/activity/${item.id}`} className={classes.unlink}>
-          <Card className={classes.card} key={item.id}>
+        <Link
+          to={`/activity/${item.id}`}
+          className={classes.unlink}
+          key={item.id}
+        >
+          <Card className={classes.card}>
             <CardMedia className={classes.media} image={travel} title="travel">
               <span
                 style={{
@@ -191,8 +172,8 @@ class ActivityIndex extends Component {
                   <MonetizationOn className={classes.icon} /> &nbsp;{item.budget}
                 </div>
                 <div style={{ float: "right" }}>
-                   {this.renderStar(item.averageScore)}星
-                   &nbsp;{item.numOfRater} 人评价
+                  {this.renderStar(item.averageScore)}星 &nbsp;{item.numOfRater}{" "}
+                  人评价
                 </div>
                 <div style={{ clear: "both" }} />
               </div>
@@ -208,7 +189,7 @@ class ActivityIndex extends Component {
             <CardActions disableActionSpacing>
               <IconButton
                 aria-label="Add to favorites"
-                onClick={(event) => {
+                onClick={event => {
                   this.handleLikes(event, item.id);
                 }}
               >
@@ -220,8 +201,7 @@ class ActivityIndex extends Component {
               </IconButton>
             </CardActions>
           </Card>
-          </Link>
-        </div>
+        </Link>
       );
     });
   }

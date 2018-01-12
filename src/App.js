@@ -21,10 +21,10 @@ import Home from "material-ui-icons/Home";
 import Flight from "material-ui-icons/Flight";
 import Message from "material-ui-icons/Message";
 import Person from "material-ui-icons/Person";
-import AddCircle from 'material-ui-icons/AddCircle';
+
 
 import WebFontLoader from "webfontloader";
-import { getFramework7 } from "./index";
+
 import TripMain from "./Pages/TripMain";
 import WishMain from "./Pages/WishMain";
 import Story from "./Pages/Story";
@@ -75,7 +75,7 @@ WebFontLoader.load({
 
 class App extends Component {
   static propTypes = {
-    router: PropTypes.object.isRequired,
+    // router: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
   };
 
