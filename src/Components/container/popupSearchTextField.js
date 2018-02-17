@@ -7,11 +7,11 @@ export default ({ input, placeholder, icon, meta: { error, touched } }) => {
     return (
         <div>
             <div
-                style={{ marginBottom: 10, border: "1px solid #3f51b5" }}
+                style={{ marginBottom: 10 }}
                 className="rw-widget"
             >
                 <div className="rw-widget-picker rw-widget-container">
-                    <input
+                    <textarea
                         className="rw-widget-input rw-input"
                         role="combobox"
                         {...input}

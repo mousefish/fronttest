@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import Button from "material-ui/Button";
-import popupSearchTextField from "./popupSearchTextField";
-import popupSearchDateField from "./popupSearchDateField";
+import autocompleteField from "./autocompleteField";
+// import popupSearchTextField from './popupSearchTextField'
 import popupSearchMultiServices from "./popupSearchMultiServices";
 import * as actions from "../../Actions";
 import HistorySearch from "./HistorySearch";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
+
+
 
 const styles = theme => ({
   wrapper: {
@@ -28,39 +30,16 @@ const styles = theme => ({
     width: "95%",
     padding: 15,
     fontSize: 16
+  },
+  autocomplete:{
+    border:'1px solid red'
   }
 });
 
 class PopupSearch extends Component {
-  renderFields(classes) {
-    return [
-      <Field
-        name="location"
-        type="text"
-        component={popupSearchTextField}
-        placeholder="你想去的国家和城市"
-      />,
-
-      <Field
-        key="dapartdate"
-        name="departdate"
-        type="text"
-        component={popupSearchDateField}
-        placeholder="出发日期和时间"
-      />,
-
-      <Field
-        key="finishdate"
-        name="finishdate"
-        type="text"
-        component={popupSearchDateField}
-        placeholder="结束日期和时间"
-      />
-    ];
-  }
 
   submitForm(values) {
-    // console.log("values:", values);
+    console.log("values:", values);
     this.props.submitSearchData(
       values,
       this.props.history,
@@ -78,7 +57,14 @@ class PopupSearch extends Component {
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
         <div className={classes.sectionWrapper}>
-          {this.renderFields(classes)}
+          <Field
+            name="location"
+            type='text'
+            placehoder='选择一个城市'
+            component={autocompleteField}
+            props={this.props}
+
+        />
         </div>
 
         <div className={classes.sectionWrapper}>
