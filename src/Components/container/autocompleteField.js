@@ -9,12 +9,11 @@ import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import data from './data';
 
-const citys = data.provinces[0].citys
-console.log('citys',citys);
+const provinces = data.provinces;
+console.log('provinces', provinces)
 
-function renderInput(inputProps) {
+const renderInput = (inputProps)=>{
   const { InputProps, classes, ref, ...other } = inputProps;
-  console.log('inputProps', inputProps)
   return (
     <TextField
       {...other}
@@ -29,50 +28,52 @@ function renderInput(inputProps) {
   );
 }
 
-function renderCity(params) {
+const renderCity =(params)=>{
   const { city, index, itemProps, highlightedIndex, selectedItem } = params;
   const isHighlighted = highlightedIndex === index;
-  const isSelected = selectedItem === city.citysName;
+  const isSelected = selectedItem === city;
 
   return (
     <MenuItem
       {...itemProps}
-      key={city.citysName}
+      key={city}
       selected={isHighlighted}
       component="div"
       style={{
         fontWeight: isSelected ? 500 : 400,
       }}
     >
-      {city.citysName}
+      {city}
     </MenuItem>
   );
 }
 
-function getCitys(inputValue) {
-  let count = 0;
-
-  return citys.filter(city => {
-    const keep =
-      (!inputValue || city.citysName.toLowerCase().includes(inputValue.toLowerCase())) &&
-      count < 5;
-
-    if (keep) {
-      count += 1;
+const getCitys = (inputValue)=>{
+   let result = []
+   for(let i = 0 ; i < provinces.length ; i++){
+    let province = provinces[i]
+    let provinceName = province.provinceName
+    for(let j = 0 ; j < province.citys.length ; j++){
+       let city = province.citys[j]
+       if(!inputValue || city.citysName.toLowerCase().includes(inputValue.toLowerCase())){
+            result.push(city.citysName+' '+provinceName)
+            if(result.length == 5){
+                return result
+            }
+         }
     }
 
-    return keep;
-  });
+  };
+
+  return result
 }
 
 const autocompleteField= (props) =>{
   const { classes } = props;
   return (
-   <Downshift
-     onChange={selectedItem => props.input.onChange(selectedItem.cityName) }>
+   <Downshift>
       {({ getInputProps, getItemProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
         <div className={classes.container}>
-
           {renderInput({
             fullWidth: true,
             classes,
@@ -88,7 +89,7 @@ const autocompleteField= (props) =>{
                 renderCity({
                   city,
                   index,
-                  itemProps: getItemProps({ item: city.citysName }),
+                  itemProps: getItemProps({ item: city }),
                   highlightedIndex,
                   selectedItem,
                 }),
