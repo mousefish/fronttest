@@ -1,18 +1,21 @@
 import React from "react";
 import Multiselect from "react-widgets/lib/Multiselect";
-import "react-widgets/dist/css/react-widgets.css";
+import { withStyles } from "material-ui/styles";
 
-export default ({ input, data, valueField, textField, meta: { error, touched } }) => {
+const styles = theme => ({
+
+});
+const popupSearchMultiServices = ({ classes, input, data, valueField, textField, meta: { error, touched } }) => {
     return (
         <div>
             <Multiselect
+                style={{borderBottom:'2px solid lightgrey'}}
                 {...input}
                 onBlur={() => input.onBlur()}
-                value={input.value || []} // requires value to be an array
+                value={input.value || []}
                 data={data}
                 valueField={valueField}
                 textField={textField}
-                style={{ border: "1px solid #3f51b5" }}
             />
             <div style={{ marginTop: 10, color: "red" }}>
                 {touched && error}
@@ -20,3 +23,5 @@ export default ({ input, data, valueField, textField, meta: { error, touched } }
         </div>
     );
 };
+
+export default withStyles(styles)(popupSearchMultiServices)

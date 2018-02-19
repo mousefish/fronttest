@@ -78,7 +78,7 @@ const autocompleteField= (props) =>{
             fullWidth: true,
             classes,
             InputProps: getInputProps({
-              placeholder: 'Search a city',
+              placeholder: '输入城市，按提示列表选择',
               id:'integration-downshift',
             }),
             ...props.input
