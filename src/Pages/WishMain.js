@@ -23,14 +23,6 @@ WebFontLoader.load({
 });
 
 const styles = {
-  wrapper: {
-    width: '95vw',
-    maxWidth:600,
-    margin: "auto",
-    marginBottom: 50,
-    marginTop: 20
-  },
-
   appBar: {
     position: "relative"
   }
@@ -89,7 +81,7 @@ class WishMain extends Component {
           </AppBar>
           <PopupSearch handleRequestClose={this.handleRequestClose} />
         </Dialog>
-         <div className={classes.wrapper}>
+         <div className="wrapper">
           <Header description="这是一个有深度的旅游服务平台" />
            {this.renderContent(wishes)}
         </div>

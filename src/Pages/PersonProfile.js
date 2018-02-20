@@ -24,18 +24,6 @@ import PersonProfileDetails from "../Components/container/PersonProfileDetails";
 import * as actions from "../Actions";
 
 const styles = theme => ({
-    wrapper: {
-        width: '95vw',
-        maxWidth:600,
-        margin: "auto",
-        marginBottom: 50,
-        marginTop: 60
-    },
-
-    imageWrapper: {
-        position: "relative"
-    },
-
     image: {
         width: "100%",
         maxWidth: "100%",
@@ -59,12 +47,6 @@ const styles = theme => ({
         textAlign: "center"
     },
 
-    serviceWrapper: {
-        display: "flex",
-        flexDirection: "row nowrap",
-        justifyContent: "space-around",
-        marginBottom: 20
-    },
     space: {
         marginBottom: 10
     },
@@ -75,8 +57,14 @@ const styles = theme => ({
     },
     button: {
         margin: theme.spacing.unit,
-        marginBottom: 20
+        width: "95%"
     },
+
+    smallButton: {
+        margin: theme.spacing.unit,
+        width: "55%"
+    },
+
     root: {
         margin: theme.spacing.unit,
         width: "95%",
@@ -109,11 +97,10 @@ class PersonProfile extends Component {
         this.setState({ open: false });
     };
 
-    componentWillMount(){
-        const userId = this.props.match.params.userId
-        this.props.fetchUser(userId)
+    componentWillMount() {
+        const userId = this.props.match.params.userId;
+        this.props.fetchUser(userId);
     }
-
 
     renderService(services) {
         const icon = this.props.classes.icon;
@@ -140,12 +127,12 @@ class PersonProfile extends Component {
     render() {
         const classes = this.props.classes;
         const { user } = this.props;
-        if(!user){
-            return <div>loading</div>
+        if (!user) {
+            return <div>loading</div>;
         }
 
         return (
-            <div>
+            <div className="wrapper">
                 <Dialog
                     fullScreen
                     open={this.state.open}
@@ -159,7 +146,7 @@ class PersonProfile extends Component {
                                 onClick={this.handleRequestClose}
                                 aria-label="Close"
                             >
-                                <KeyboardArrowLeft />
+                                <KeyboardArrowLeft className='arrow'/>
                             </IconButton>
                             <Typography
                                 type="title"
@@ -173,8 +160,9 @@ class PersonProfile extends Component {
                     <PersonProfileDetails profile={user} />
                 </Dialog>
 
-                <div className={classes.wrapper}>
-                    <div className={classes.imageWrapper}>
+
+                <div>
+                    <div className="image-wrapper">
                         <img className={classes.image} src={sichuan} />
                         <Avatar
                             alt="profile pic"
@@ -185,7 +173,7 @@ class PersonProfile extends Component {
                             )}
                         />
                     </div>
-                    <div className={classes.innerWrapper}>
+                    <div className="flex-inner-wrapper customized-align">
                         <h4
                             className={classes.space}
                             style={{ fontWeight: "bold" }}
@@ -194,31 +182,32 @@ class PersonProfile extends Component {
                         </h4>
                         <div className={classes.space}>
                             <LocationOn className={classes.icon} />
-                             {user.city}
+                            {user.city}
                         </div>
-                        <div className={classes.space}>
+                        <div className={classes.space} />
 
-
-                        </div>
-                        <div className={classes.serviceWrapper}>
-
-                        </div>
                         <Button
                             color="primary"
                             raised
-                            className={classes.button}
+                            className={classes.smallButton}
+                            id='btn'
                             onClick={this.handleClickOpen}
                         >
                             更多我的资料哦
                         </Button>
+                    </div>
+                    <div className="flex-inner-wrapper customized-align">
                         <Link to={`/story/${user.id}`}>
-                            <h2
-                                className={classes.link}
-                            >
-                                我在这座城市的故事
-                            </h2>
+                            <h2 className={classes.link}>我在这座城市的故事</h2>
                         </Link>
-                        <Button color="primary" raised className={classes.root}>
+                    </div>
+                    <div className="flex-inner-wrapper customized-align">
+                        <Button
+                            color="primary"
+                            raised
+                            className={classes.button}
+                            id="btn"
+                        >
                             一起参与吧
                         </Button>
                     </div>

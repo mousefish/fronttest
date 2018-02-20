@@ -41,36 +41,28 @@ import PersonProfile from "../../Pages/PersonProfile";
 import { Link } from "react-router-dom";
 import RatingSummary from "../../Pages/RatingSummary";
 
-const styleSheet = {
-  card: {
-    width: "100%",
-    marginBottom: 30,
-    margin: "auto",
-    boxShadow: "none",
-    border: "1px solid #f2f2f2",
-    position: "relative",
-    color: "#000"
-  },
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 
+const styles = {
+  appBar: {
+    position: 'relative',
+  },
+  flex: {
+    flex: 1,
+  },
   media: {
-    height: 224,
-    position: "relative"
+  height: 224,
+  position: 'relative',
   },
 
   icon: {
     width: 15,
     height: 15,
     verticalAlign: "-2px"
-  },
-
-  unlink: {
-    textDecoration: "none"
   }
 };
-
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
 
 class ActivityIndex extends Component {
   state = {
@@ -129,10 +121,10 @@ class ActivityIndex extends Component {
       return (
         <Link
           to={`/activity/${item.id}`}
-          className={classes.unlink}
+          className="unlink"
           key={item.id}
         >
-          <Card className={classes.card}>
+          <Card className="card">
             <CardMedia className={classes.media} image={travel} title="travel">
               <span
                 style={{
@@ -211,4 +203,4 @@ class ActivityIndex extends Component {
   }
 }
 
-export default connect(null, actions)(withStyles(styleSheet)(ActivityIndex));
+export default connect(null, actions)(withStyles(styles)(ActivityIndex));

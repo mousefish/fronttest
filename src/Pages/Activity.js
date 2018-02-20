@@ -1,24 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
-import { withStyles } from "material-ui/styles";
 import * as actions from "../Actions";
 import RatingForm from "./RatingForm";
 import RatingIndex from "./RatingIndex";
 import RatingSummary from "./RatingSummary";
 
-
-const styles = theme => ({
-    wrapper: {
-        width: "95vw",
-        maxWidth: 600,
-        margin: "auto",
-        marginBottom: 50,
-        marginTop: 20
-    },
-
-});
 
 class Activity extends Component {
     componentWillMount() {
@@ -27,19 +14,15 @@ class Activity extends Component {
     }
 
     render() {
-        const { classes } = this.props;
-        const { activity } = this.props;
-        const { message } = this.props;
-        const { ratings } = this.props;
+        const { activity, message, ratings, } = this.props;
 
         if (!activity) {
             return <div>loading</div>;
         }
 
         return (
-            <div className={classes.wrapper}>
+            <div className="wrapper">
                 This is Activity <span>{activity.id} (add style later)</span>
-
                 <ul>
                     <li>{activity.theme}</li>
                     <li>{activity.location}</li>
@@ -62,4 +45,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, actions)(withStyles(styles)(Activity));
+export default connect(mapStateToProps, actions)(Activity);

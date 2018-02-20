@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 
 const styles = {
-    wrapper: {
-        width: "90%",
-        margin: "auto",
-        marginBottom: 50,
-        marginTop: 80
-    },
     lists: {
         listStyle: "none",
         padding: 0,
@@ -68,7 +62,7 @@ class PersonProfileDetails extends Component {
         );
     }
     render() {
-        return <div style={styles.wrapper}>{this.renderItem()}</div>;
+        return <div className="wrapper">{this.renderItem()}</div>;
     }
 }
 

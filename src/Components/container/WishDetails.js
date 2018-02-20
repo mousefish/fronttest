@@ -24,12 +24,7 @@ import ShareIcon from "material-ui-icons/Share";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 
 const style = theme => ({
-    wrapper: {
-        width: "90%",
-        margin: "auto",
-        marginBottom: 50,
-        marginTop: 80
-    },
+
 
     innerWrapper: {
         textAlign: "center",
@@ -103,8 +98,8 @@ class WishDetails extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div className={classes.wrapper}>
-                {" "}
+            <div className="wrapper">
+                !!!NEEDS REDESIGN!!!
                 <Card className={classes.card} key={this.props.id}>
                     <CardMedia
                         className={classes.media}

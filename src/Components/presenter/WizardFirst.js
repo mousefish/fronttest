@@ -17,39 +17,12 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
     width: "95%",
-    padding: 20,
-    fontSize: 16
-  },
-
-  wrapper: {
-    width: "90%",
-    margin: "auto",
-    marginBottom: 98,
-    marginTop: 20,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-    // border:'1px solid green'
-  },
-
-  formWrapper: {
-    width: "90%",
-    margin: "auto",
-    textAlign: "center",
-    padding: "10px 0"
-    // border:'1px solid red'
   },
 
   formInner: {
     width: "95%"
   },
 
-  header: {
-    width: "100%",
-    height: "20%",
-    textAlign: "center",
-    padding: 10
-  },
   text: {
     fontWeight: "bold"
   }
@@ -65,21 +38,21 @@ class wizardFirst extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <form className={classes.wrapper} onSubmit={handleSubmit}>
-        <div className={classes.header}>
+      <form className="wrapper" onSubmit={handleSubmit}>
+        <div className="wizard-header">
           <Link to='/loginSignUp'>
-          <KeyboardArrowLeft style={{ float: "left", color:'grey'}} />
+          <KeyboardArrowLeft className='arrow'/>
           </Link>
           <h4 className={classes.text}>创建新账户</h4>
         </div>
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <LinearProgress
             className={classes.progress}
             mode="determinate"
             value={this.state.completed}
           />
         </div>
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             name="email"
             component={TextField}
@@ -87,7 +60,7 @@ class wizardFirst extends Component {
             label="输入邮箱地址"
           />
         </div>
-        <div className={classes.formWrapper} style={{marginBottom:20}}>
+        <div className="flex-form-wrapper" style={{marginBottom:20}}>
           <Field
             name="password"
             type='password'
@@ -97,12 +70,13 @@ class wizardFirst extends Component {
           />
         </div>
 
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Button
             type="submit"
             color="primary"
             raised
             className={classes.button}
+            id='btn'
           >
             点击注册
           </Button>

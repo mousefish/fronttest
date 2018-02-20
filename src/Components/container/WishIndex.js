@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../Actions";
-import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
+import PropTypes from "prop-types";
 import IconButton from "material-ui/IconButton";
 import LocationOn from "material-ui-icons/LocationOn";
 import MonetizationOn from "material-ui-icons/MonetizationOn";
@@ -33,32 +33,28 @@ import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
-const style = {
-  card: {
-    width: "100%",
-    marginBottom: 30,
-    margin: "auto",
-    boxShadow: "none",
-    border: "1px solid #f2f2f2",
-    position: "relative",
-    cursor: "pointer"
-  },
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 
+
+const styles = {
+  appBar: {
+    position: 'relative',
+  },
+  flex: {
+    flex: 1,
+  },
   media: {
-    height: 224,
-    position: "relative"
+  height: 224,
+  position: 'relative',
   },
-
   icon: {
     width: 15,
     height: 15,
     verticalAlign: "-2px"
   }
 };
-
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
 
 class WishIndex extends Component {
   state = {
@@ -144,7 +140,7 @@ class WishIndex extends Component {
           </Dialog>
 
           <Card
-            className={classes.card}
+            className="card"
             key={wish.id}
             onClick={() => {
               this.handleClickOpen(wish.id, wish.location, wish.departdate,wish.finishdate,wish.budget,wish.services);
@@ -211,4 +207,4 @@ class WishIndex extends Component {
   }
 }
 
-export default connect(null, actions)(withStyles(style)(WishIndex));
+export default connect(null, actions)(withStyles(styles)(WishIndex));

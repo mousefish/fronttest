@@ -17,13 +17,6 @@ import PopupSearch from "./PopupSearch";
 
 
 const styles = {
-    wrapper: {
-        width: "90%",
-        margin: "auto",
-        marginBottom: 50,
-        marginTop: 20
-    },
-
     appBar: {
         position: "relative"
     }
@@ -45,9 +38,9 @@ class SearchResult extends Component {
         this.setState({ open: false });
     };
     render() {
-        const classes = this.props.classes;
+        const { classes } = this.props;
         return (
-            <div style={styles.wrapper}>
+            <div className="wrapper">
                 <SideButton onClick={this.handleClickOpen} />
                 <Dialog
                     fullScreen

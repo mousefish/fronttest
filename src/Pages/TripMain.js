@@ -25,14 +25,6 @@ WebFontLoader.load({
 });
 
 const styles = {
-  wrapper: {
-    width: '95vw',
-    maxWidth:600,
-    margin: "auto",
-    marginBottom: 50,
-    marginTop: 20
-  },
-
   appBar: {
     position: "relative"
   }
@@ -72,7 +64,7 @@ class TripMain extends Component {
     const { activityData } = this.props;
     const { likes } = this.props;
     return (
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative"}}>
         <SideButton onClick={this.handleClickOpen} URI='/' />
         <Dialog
           fullScreen
@@ -93,7 +85,7 @@ class TripMain extends Component {
           </AppBar>
           <PopupSearch handleRequestClose={this.handleRequestClose} />
         </Dialog>
-        <div className={classes.wrapper}>
+        <div className="wrapper">
           <Header description="这是一个有深度的旅游服务平台" />
           <div>{this.renderContent(activityData)}</div>
         </div>

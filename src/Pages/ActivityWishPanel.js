@@ -10,78 +10,41 @@ import AddWish from "./AddWish/AddWish";
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
-        width: "95%",
-        padding: 15
-    },
-
-    wrapper: {
-        width: "90%",
-        margin: "auto",
-        marginBottom: 50,
-        marginTop: 20,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-around",
-        alignItems: "center"
-    },
-
-    imageWrapper: {
-        width: "100%",
-        maxWidth: "100%",
-        maxHeight: "50%"
-    },
-
-    buttonWrapper: {
-        width: "80%",
-        marginBottom: 20
-    },
-
-    space: {
-        marginTop: 50
-    },
-
-    button: {
-        width: "100%",
-        padding: 15,
-        fontSize: 16
+        width: "95%"
     }
 });
 
 class ActivityWishPanel extends Component {
-
     render() {
         const { classes } = this.props;
 
         return (
-            <div className={classes.wrapper}>
-                <img src={bg} alt="chengdu" className={classes.imageWrapper} />
-                <Link
-                    to="/addActivity"
-                    className={classNames(classes.buttonWrapper, classes.space)}
-                >
-                    <Button
-                        type="submit"
-                        color="primary"
-                        raised
-                        className={classes.button}
-                    >
-                        发布新活动
-                    </Button>
-                </Link>
-
-                <Link
-                    to="/addWish"
-                    className={classes.buttonWrapper}
-                >
-                    <Button
-                        type="submit"
-                        color="primary"
-                        raised
-                        className={classes.button}
-                    >
-                        发布新愿望
-                    </Button>
-                </Link>
+            <div className="wrapper">
+                <div className="flex-inner-wrapper fixed-height">
+                    <img src={bg} alt="chengdu" className="image-wrapper" />
+                </div>
+                <div className="flex-inner-wrapper">
+                    <Link to="/addActivity">
+                        <Button
+                            color="primary"
+                            raised
+                            className={classes.button}
+                            id="btn"
+                        >
+                            发布新活动
+                        </Button>
+                    </Link>
+                    <Link to="/addWish">
+                        <Button
+                            color="primary"
+                            raised
+                            className={classes.button}
+                            id="btn"
+                        >
+                            发布新愿望
+                        </Button>
+                    </Link>
+                </div>
             </div>
         );
     }

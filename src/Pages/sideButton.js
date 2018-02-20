@@ -17,7 +17,7 @@ const styles = theme => ({
 
   buttonWrapper: {
     position: "fixed",
-    right: "10%",
+    right: "2%",
     bottom: "10%",
     zIndex: "1000"
   }
