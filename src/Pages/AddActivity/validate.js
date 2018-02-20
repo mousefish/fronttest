@@ -1,6 +1,7 @@
 const validate = values => {
   const errors = {};
   const names = [
+    "theme",
     "location",
     "departdate",
     "finishdate",
@@ -18,6 +19,9 @@ const validate = values => {
   if (values.story && values.story.length >= 300) {
     errors.story = "字数不能超过300";
   }
+
+  let budget = parseInt(values.budget);
+  if(Number.isNaN(budget)){errors.budget = "请输入数字!"}
 
   return errors;
 };

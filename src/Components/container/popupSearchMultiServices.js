@@ -17,7 +17,7 @@ const popupSearchMultiServices = ({ classes, input, data, valueField, textField,
                 valueField={valueField}
                 textField={textField}
             />
-            <div style={{ marginTop: 10, color: "red" }}>
+            <div className="input-error">
                 {touched && error}
             </div>
         </div>

@@ -7,25 +7,6 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from './validate';
 
 const styles = theme => ({
-    wrapper: {
-        width: "90%",
-        margin: "auto",
-        marginBottom: 50,
-        marginTop: 20
-    },
-
-    sectionWrapper: {
-        textAlign: "center",
-        marginBottom: 35
-    },
-
-    header: {
-        width: "100%",
-        height: "20%",
-        textAlign: "center",
-        padding: 10,
-        fontWeight: "bold"
-    },
 
     imageWrapper:{
         display: "flex",
@@ -38,10 +19,7 @@ const styles = theme => ({
 
     button: {
         margin: theme.spacing.unit,
-        marginTop: 30,
         width: "95%",
-        padding: 15,
-        fontSize: 16
     }
 });
 
@@ -51,10 +29,10 @@ class WizardThird extends Component {
         const { handleSubmit, pristine, previousPage, submitting } = this.props;
         const { classes } = this.props;
         return (
-            <div className={classes.wrapper}>
-                <div className={classes.header}>
+            <div className="wrapper">
+                <div className="wizard-header">
                     <KeyboardArrowLeft
-                        style={{ float: "left", color: "grey" }}
+                        className="arrow"
                         onClick={previousPage}
                     />
 
@@ -110,6 +88,7 @@ class WizardThird extends Component {
                         color="primary"
                         raised
                         className={classes.button}
+                        id='btn'
                     >
                         提交
                     </Button>

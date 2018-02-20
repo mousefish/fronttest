@@ -19,10 +19,6 @@ const styles = theme => ({
     width: "95%",
   },
 
-  formInner: {
-    width: "95%"
-  },
-
   text: {
     fontWeight: "bold"
   }
@@ -56,7 +52,7 @@ class wizardFirst extends Component {
           <Field
             name="email"
             component={TextField}
-            className={classes.formInner}
+            className="text-field"
             label="输入邮箱地址"
           />
         </div>
@@ -65,7 +61,7 @@ class wizardFirst extends Component {
             name="password"
             type='password'
             component={TextField}
-            className={classes.formInner}
+            className="text-field"
             label="输入密码 - 六位数"
           />
         </div>
@@ -75,7 +71,7 @@ class wizardFirst extends Component {
             type="submit"
             color="primary"
             raised
-            className={classes.button}
+            className="text-field"
             id='btn'
           >
             点击注册

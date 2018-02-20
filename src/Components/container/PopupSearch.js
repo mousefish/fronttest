@@ -41,7 +41,7 @@ class PopupSearch extends Component {
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
         <div className="flex-inner-wrapper">
-          <h4 style={{ fontWeight: "bold", textAlign:'center'}}>输入城市</h4>
+          <h4 className="category-title">输入城市</h4>
           <Field
             name="location"
             type="text"
@@ -52,7 +52,7 @@ class PopupSearch extends Component {
         </div>
 
         <div className="flex-inner-wrapper">
-          <h4 style={{ fontWeight: "bold", textAlign:'center'}}>向导服务</h4>
+          <h4 className="category-title">向导服务</h4>
           <Field
             name="services"
             component={popupSearchMultiServices}

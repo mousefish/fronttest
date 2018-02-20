@@ -14,7 +14,7 @@ export default ({ format, input, placeholder, meta: { error, touched } }) => {
 
     return (
         <div>
-            <div style={{ marginBottom: 10, border: "1px solid #3f51b5" }}>
+            <div style={{ marginBottom: 15, borderBottom: "1px solid lightgrey" }}>
                 <DateTimePicker
                     {...input}
                     onChange={input.onChange}
@@ -24,7 +24,7 @@ export default ({ format, input, placeholder, meta: { error, touched } }) => {
                     placeholder={placeholder}
                 />
             </div>
-            <div style={{ marginBottom: 10, color: "red" }}>
+            <div className='input-error'>
                 {touched && error}
             </div>
         </div>

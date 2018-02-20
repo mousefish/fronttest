@@ -22,10 +22,6 @@ const styles = theme => ({
     width: "95%"
   },
 
-  formInner: {
-    width: "95%"
-  },
-
   text: {
     fontWeight: "bold"
   },
@@ -88,7 +84,7 @@ class LoginForm extends Component {
           <Field
             name="email"
             component={TextField}
-            className={classes.formInner}
+            className="text-field"
             label="输入邮箱地址"
           />
         </div>
@@ -97,7 +93,7 @@ class LoginForm extends Component {
             name="password"
             type="password"
             component={TextField}
-            className={classes.formInner}
+            className="text-field"
             label="输入密码 - 六位数"
           />
           <span className={classes.hint}>

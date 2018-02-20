@@ -56,6 +56,8 @@ class AddActivity extends Component {
             story,
             images
         };
+
+        console.log('value',modifiedValues);
         this.props.submitActivityData(modifiedValues, this.props.history);
     }
 

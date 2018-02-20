@@ -92,3 +92,16 @@ header .title .name {
 
 .gallery {
   margin: 10px 0; }
+
+.text-field {
+  width: 95%; }
+
+.category-title {
+  font-weight: bold;
+  text-align: center; }
+
+.input-error {
+  margin-top: 6px;
+  color: red;
+  font-size: 11px;
+  text-align: left; }

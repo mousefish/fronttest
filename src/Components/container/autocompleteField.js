@@ -1,18 +1,17 @@
 import React from "react";
-import "react-widgets/dist/css/react-widgets.css";
-import Paper from 'material-ui/Paper';
-import { MenuItem } from 'material-ui/Menu';
-import Downshift from 'downshift';
 
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import data from '../../data/data';
+import Paper from "material-ui/Paper";
+import { MenuItem } from "material-ui/Menu";
+import Downshift from "downshift";
+
+import PropTypes from "prop-types";
+import { withStyles } from "material-ui/styles";
+import TextField from "material-ui/TextField";
+import data from "../../data/data";
 
 const provinces = data.provinces;
-console.log('provinces', provinces)
 
-const renderInput = (inputProps)=>{
+const renderInput = inputProps => {
   const { InputProps, classes, ref, ...other } = inputProps;
   return (
     <TextField
@@ -20,15 +19,15 @@ const renderInput = (inputProps)=>{
       inputRef={ref}
       InputProps={{
         classes: {
-          input: classes.input,
+          input: classes.input
         },
-        ...InputProps,
+        ...InputProps
       }}
     />
   );
-}
+};
 
-const renderCity =(params)=>{
+const renderCity = params => {
   const { city, index, itemProps, highlightedIndex, selectedItem } = params;
   const isHighlighted = highlightedIndex === index;
   const isSelected = selectedItem === city;
@@ -40,46 +39,55 @@ const renderCity =(params)=>{
       selected={isHighlighted}
       component="div"
       style={{
-        fontWeight: isSelected ? 500 : 400,
+        fontWeight: isSelected ? 500 : 400
       }}
     >
       {city}
     </MenuItem>
   );
-}
+};
 
-const getCitys = (inputValue)=>{
-   let result = []
-   for(let i = 0 ; i < provinces.length ; i++){
-    let province = provinces[i]
-    let provinceName = province.provinceName
-    for(let j = 0 ; j < province.citys.length ; j++){
-       let city = province.citys[j]
-       if(!inputValue || city.citysName.toLowerCase().includes(inputValue.toLowerCase())){
-            result.push(city.citysName+' '+provinceName)
-            if(result.length == 5){
-                return result
-            }
-         }
+const getCitys = inputValue => {
+  let result = [];
+  for (let i = 0; i < provinces.length; i++) {
+    let province = provinces[i];
+    let provinceName = province.provinceName;
+    for (let j = 0; j < province.citys.length; j++) {
+      let city = province.citys[j];
+      if (
+        !inputValue ||
+        city.citysName.toLowerCase().includes(inputValue.toLowerCase())
+      ) {
+        result.push(city.citysName + " " + provinceName);
+        if (result.length == 5) {
+          return result;
+        }
+      }
     }
+  }
 
-  };
+  return result;
+};
 
-  return result
-}
-
-const autocompleteField= (props) =>{
+const autocompleteField = props => {
   const { classes } = props;
   return (
-   <Downshift>
-      {({ getInputProps, getItemProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
+    <Downshift>
+      {({
+        getInputProps,
+        getItemProps,
+        isOpen,
+        inputValue,
+        selectedItem,
+        highlightedIndex
+      }) => (
         <div className={classes.container}>
           {renderInput({
             fullWidth: true,
             classes,
             InputProps: getInputProps({
-              placeholder: '输入城市，按提示列表选择',
-              id:'integration-downshift',
+              placeholder: "输入城市，按提示列表选择",
+              id: "integration-downshift"
             }),
             ...props.input
           })}
@@ -91,16 +99,19 @@ const autocompleteField= (props) =>{
                   index,
                   itemProps: getItemProps({ item: city }),
                   highlightedIndex,
-                  selectedItem,
-                }),
+                  selectedItem
+                })
               )}
             </Paper>
           ) : null}
+
+          <div className="input-error">
+            {props.meta.touched && props.meta.error}
+          </div>
         </div>
       )}
     </Downshift>
   );
-}
-
+};
 
 export default autocompleteField;
