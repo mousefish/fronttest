@@ -35,6 +35,9 @@ class WizardSecond extends Component {
                         key="story"
                         name="story"
                         component={TextField}
+                        id="multiline-flexible"
+                        multiline
+                        rowsMax="4"
                         placeholder="我在这里生活了10年......"
                         className='text-field'
                     />

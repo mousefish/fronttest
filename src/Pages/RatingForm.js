@@ -78,7 +78,7 @@ class RatingForm extends Component {
         const { activityId } = this.props;
         const { message } = this.props;
         return (
-            <div className="flex-inner-wrapper" style={{ marginBottom: 20 }}>
+            <div className="flex-inner-wrapper">
                 <h3 className="category-title">在此发表评论</h3>
                 <form>
                     <div>{this.state.stars}</div>
