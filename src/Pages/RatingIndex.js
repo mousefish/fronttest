@@ -16,6 +16,7 @@ import Star from "material-ui-icons/Star";
 class RatingIndex extends Component {
     componentDidMount() {
         const { activityId } = this.props;
+        console.log('what up', activityId)
         this.props.fetchRatings(activityId);
     }
 

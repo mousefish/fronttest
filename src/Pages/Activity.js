@@ -13,16 +13,15 @@ class Activity extends Component {
     }
 
     render() {
+        const activityId = this.props.match.params.activityId;
         const { activity, message, ratings } = this.props;
-
         if (!activity) {
             return <div>loading</div>;
         }
-
         return (
             <div className="wrapper">
                 <div className="flex-inner-wrapper">
-                    <RatingSummary activityId={activity.id} />
+                    <RatingSummary activityId={activityId} />
                     <ul className="activity-info">
                         <li className="activity">
                             <div>活动主题： </div>
@@ -57,9 +56,8 @@ class Activity extends Component {
                     </ul>
                 </div>
 
-                <RatingForm activityId={activity.id} />
-
-                <RatingIndex activityId={activity.id} />
+                <RatingForm activityId={activityId} />
+                <RatingIndex activityId={activityId} />
             </div>
         );
     }
