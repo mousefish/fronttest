@@ -21,16 +21,18 @@ const styles = theme => ({
 
     button: {
         margin: theme.spacing.unit,
-        width: "55%"
+        width: "45%",
+        padding:10,
+        fontSize:14
     }
 });
 class RatingForm extends Component {
     state = {
-        value: {
             numOfStars: 0,
             feedback: "",
-            stars: []
-        }
+            stars: [],
+            message:""
+
     };
 
     componentWillMount() {
@@ -63,12 +65,18 @@ class RatingForm extends Component {
             stars: starContainer,
             numOfStars: index + 1
         });
+
     }
 
-    sendRating(event, value, activityId) {
+    sendRating(event, activityId) {
         event.preventDefault();
-        const { numOfStars, feedback } = value;
+        const { numOfStars, feedback } = this.state;
+        if(numOfStars === 0){
+           this.setState({ message: "请提供星评和评论"})
+           return
+        }
         const data = { numOfStars, feedback, activityId };
+        this.setState({ message: ""})
         // data: {numOfStars: 3, feedback: "ilove", activityId: 1}
         this.props.sendRating(data);
     }
@@ -84,7 +92,7 @@ class RatingForm extends Component {
                     <div>{this.state.stars}</div>
                     <TextField
                         id="textarea"
-                        label="写下你的评价"
+                        label="写下你的评论"
                         placeholder="Placeholder"
                         multiline
                         className={classes.textField}
@@ -97,14 +105,13 @@ class RatingForm extends Component {
                         className={classes.button}
                         color="primary"
                         raised
-                        id="btn"
                         onClick={event => {
-                            this.sendRating(event, this.state, activityId);
+                            this.sendRating(event, activityId);
                         }}
                     >
-                        提交
+                        提交评论
                     </Button>
-                    <div className="input-error">{message}</div>
+                    <div className="input-error" >{message || this.state.message}</div>
                 </form>
             </div>
         );
