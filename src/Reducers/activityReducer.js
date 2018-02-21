@@ -28,7 +28,7 @@ export default (state = INITIAL_STATE, action) => {
              })
              return {...state, all: newAll};
         case FETCH_ONE_ACTIVITY:
-            return { ...state, activity: action.payload};
+            return { ...state, activity: action.payload, message:""};
     }
 
     return state;

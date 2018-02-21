@@ -5,6 +5,7 @@ import * as actions from "../Actions";
 import RatingForm from "./RatingForm";
 import RatingIndex from "./RatingIndex";
 import RatingSummary from "./RatingSummary";
+import Button from "material-ui/Button";
 
 class Activity extends Component {
     componentWillMount() {
@@ -35,17 +36,23 @@ class Activity extends Component {
                             <div>活动开始时间：</div>
                             <div>{activity.departdate}</div>
                         </li>
-                        <li className="activity" style={{marginBottom:10}}>
+                        <li className="activity" style={{ marginBottom: 10 }}>
                             <div>活动结束时间</div>
                             <div>{activity.finishdate}</div>
                         </li>
-                        <li style={{marginBottom:10}}>
+                        <li style={{ marginBottom: 10 }}>
                             <h4 className="category-title">
                                 我在{activity.location.split(" ")[0]}的故事
                             </h4>
                             <div>{activity.story}</div>
                         </li>
-                        <li style={{ textAlign: "center", marginBottom:10, fontSize:'1.2rem' }}>
+                        <li
+                            style={{
+                                textAlign: "center",
+                                marginBottom: 10,
+                                fontSize: "1.2rem"
+                            }}
+                        >
                             <Link
                                 to={`/user/${activity.userId}`}
                                 className="unlink"

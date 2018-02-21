@@ -32,11 +32,20 @@ import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 
 import Slide from "material-ui/transitions/Slide";
 import AppBar from "material-ui/AppBar";
-import Dialog from "material-ui/Dialog";
+
 import Button from "material-ui/Button";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  withMobileDialog
+} from "material-ui/Dialog";
+
 import PersonProfile from "../../Pages/PersonProfile";
 import { Link } from "react-router-dom";
 import RatingSummary from "../../Pages/RatingSummary";
@@ -46,21 +55,25 @@ function Transition(props) {
 }
 
 const styles = {
-  appBar: {
-    position: 'relative',
-  },
+
   flex: {
-    flex: 1,
+    flex: 1
   },
   media: {
-  height: 224,
-  position: 'relative',
+    height: 224,
+    position: "relative"
   },
 
   icon: {
     width: 15,
     height: 15,
     verticalAlign: "-2px"
+  },
+  right:{
+    marginRight:30
+  },
+  bottom:{
+    marginBottom:10
   }
 };
 
@@ -69,12 +82,8 @@ class ActivityIndex extends Component {
     open: false
   };
 
-  handleClickOpen = name => {
-    this.setState({ open: true });
-    this.props.fetchProfileData(name);
-  };
 
-  handleRequestClose = () => {
+  handleClose = () => {
     this.setState({ open: false });
   };
 
@@ -110,7 +119,15 @@ class ActivityIndex extends Component {
   handleLikes(event, itemId) {
     event.preventDefault();
     event.stopPropagation();
-    this.props.submitLikes(itemId);
+
+    if (!localStorage.getItem("jwtToken")) {
+      this.setState({
+        open: true
+      });
+    }else{
+       this.props.submitLikes(itemId);
+    }
+
   }
 
   renderItems() {
@@ -119,11 +136,7 @@ class ActivityIndex extends Component {
 
     return _.map(activityData, item => {
       return (
-        <Link
-          to={`/activity/${item.id}`}
-          className="unlink"
-          key={item.id}
-        >
+        <Link to={`/activity/${item.id}`} className="unlink" key={item.id}>
           <Card className="card">
             <CardMedia className={classes.media} image={travel} title="travel">
               <span
@@ -199,7 +212,43 @@ class ActivityIndex extends Component {
   }
 
   render() {
-    return <List>{this.renderItems()}</List>;
+    const { fullScreen, classes } = this.props;
+
+    return (
+      <List>
+        <Dialog
+          fullScreen={fullScreen}
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="responsive-dialog-title"
+        >
+          <DialogTitle id="responsive-dialog-title">{"请登录"}</DialogTitle>
+          <DialogContent>
+            <div className={classes.bottom}>
+            <Link to="/login" className={classes.right}>
+              <Button color="primary" raised>
+                登陆已有账户
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button color="primary" raised>
+                创建新账户
+              </Button>
+            </Link>
+            </div>
+            <DialogContentText>
+              注册代表已经同意<Link to="/">服务条款</Link>，<Link to="/">隐私政策</Link>，<Link to="/">免责声明</Link>，<Link to="/">保障计划条款</Link>，<Link to="/">使用政策须知</Link>。
+              </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              稍后再说
+            </Button>
+          </DialogActions>
+        </Dialog>
+        {this.renderItems()}
+      </List>
+    );
   }
 }
 
