@@ -18,7 +18,7 @@ export const userSignupRequest = (userData, history) => async dispatch => {
     if (res.data.token) {
       localStorage.setItem("jwtToken", res.data.token);
       dispatch({ type: AUTH_USER });
-      history.push("/my");
+      history.goBack();
     } else {
       dispatch(authError({signupErr:res.data.error}));
     }
@@ -34,7 +34,7 @@ export const userLogin = (userData, history) => async dispatch => {
     if (res.data.token) {
       localStorage.setItem("jwtToken", res.data.token);
       dispatch({ type: AUTH_USER });
-      history.push("/my");
+      history.goBack();
     } else {
       dispatch(authError({loginErr:res.data.error}));
     }
