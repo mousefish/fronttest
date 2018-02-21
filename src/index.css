@@ -39,7 +39,9 @@ header .title .name {
   color: #000; }
 
 .unlink {
-  text-decoration: none; }
+  text-decoration: none;
+  cursor: pointer;
+  color: #337ab7; }
 
 .wrapper {
   width: 95vw;
@@ -105,3 +107,20 @@ header .title .name {
   color: red;
   font-size: 11px;
   text-align: left; }
+
+.activity-info {
+  padding: 0;
+  list-style: none; }
+
+.number-emphasized {
+  font-size: 2rem;
+  font-weight: bolder; }
+
+.activity {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between; }
+
+.comment {
+  border-bottom: 1px solid lightgrey;
+  padding: 10px; }
