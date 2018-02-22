@@ -11,7 +11,7 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { TextField } from "redux-form-material-ui";
 import validate from "./validate";
 import * as actions from '../../Actions';
-
+import services from "../../data/services";
 
 const styles = theme => ({
     button: {
@@ -114,7 +114,7 @@ class AddWish extends Component {
                             key="services"
                             name="services"
                             component={popupSearchMultiServices}
-                            data={["徒步旅行", "汽车接送", "购物打折"]}
+                            data={services}
                         />
                     </div>
 

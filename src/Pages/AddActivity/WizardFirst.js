@@ -9,6 +9,7 @@ import AutocompleteField from "../../Components/container/AutocompleteField";
 import { TextField } from "redux-form-material-ui";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "./validate";
+import services from "../../data/services";
 
 const styles = theme => ({
     button: {
@@ -104,7 +105,7 @@ class WizardFirst extends Component {
                             key="services"
                             name="services"
                             component={popupSearchMultiServices}
-                            data={["徒步旅行", "汽车接送", "购物打折"]}
+                            data={services}
                         />
                     </div>
 

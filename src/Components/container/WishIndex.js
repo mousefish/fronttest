@@ -54,28 +54,27 @@ const styles = theme => ({
   },
   details: {
     display: "flex",
-    flexFlow:'row nowrap',
-    justifyContent:'space-between',
+    flexFlow: "row nowrap",
+    justifyContent: "space-between",
     padding: 0
   },
   content: {
     flex: "1 0 auto",
-    paddingTop: 10,
-    paddingBottom: 5
+    paddingTop: 10
   },
   cover: {
     width: 10,
     height: 10
   },
 
-  firstline:{
-   display:"flex",
-   justifyContent:'space-between'
+  firstline: {
+    display: "flex",
+    justifyContent: "space-between"
   },
 
   right: {
     fontSize: "1.5rem",
-    fontWeight: "bold",
+    fontWeight: "bold"
   }
 });
 
@@ -103,23 +102,20 @@ class WishIndex extends Component {
     return wishes.map(wish => {
       return (
         <Link to={`/wish/${wish.id}`} className="unlink">
-        <div key={wish.id}>
           <Card className="card" key={wish.id}>
             <div className={classes.details}>
               <CardContent className={classes.content}>
-              <div className={classes.firstline}>
-                <h4 style={{ fontWeight: "bold" }}>{wish.location}</h4>
-                <div className={classes.right}>{wish.budget} 元/人</div>
+                <div className={classes.firstline}>
+                  <h4 style={{ fontWeight: "bold" }}>{wish.location}</h4>
+                  <div className={classes.right}>{wish.budget} 元/人</div>
                 </div>
                 <h6>
                   <AccessTime className={classes.icon} /> {wish.departdate} 出发
                 </h6>
                 <h6>{this.renderService(wish.services)}</h6>
               </CardContent>
-
             </div>
           </Card>
-        </div>
         </Link>
       );
     });

@@ -7,7 +7,7 @@ import Downshift from "downshift";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
-import data from "../../data/data";
+import data from "../../data/cities";
 
 const provinces = data.provinces;
 

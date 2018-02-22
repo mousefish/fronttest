@@ -17,7 +17,8 @@ const validate = values => {
     "language",
     "hobby",
     "personality",
-    "category"
+    "category",
+    "location"
   ];
 
   names.forEach(name => {
