@@ -24,9 +24,10 @@ class Activity extends Component {
         return (
             <div className="wrapper">
                 <div className="wizard-header">
-                    <Link to="/">
-                        <KeyboardArrowLeft className="arrow" />
-                    </Link>
+                    <KeyboardArrowLeft
+                        className="arrow"
+                        onClick={()=>this.props.history.goBack()}
+                    />
                 </div>
                 <div className="flex-inner-wrapper">
                     <RatingSummary activityId={activityId} />

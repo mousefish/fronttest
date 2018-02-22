@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import * as actions from "../../Actions";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
-import { Link } from "react-router-dom";
 import IconButton from "material-ui/IconButton";
 import LocationOn from "material-ui-icons/LocationOn";
 
@@ -71,9 +70,10 @@ class WishDetails extends Component {
         return (
             <div className="wrapper">
                 <div className="wizard-header">
-                    <Link to="/wish">
-                        <KeyboardArrowLeft className="arrow" />
-                    </Link>
+                    <KeyboardArrowLeft
+                        className="arrow"
+                        onClick={()=>this.props.history.goBack()}
+                    />
                 </div>
                 <div className={classes.buttonSet}>NEEDS REDESIGN</div>
                 <div>{wish.id}</div>
