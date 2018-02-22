@@ -6,6 +6,8 @@ import RatingForm from "./RatingForm";
 import RatingIndex from "./RatingIndex";
 import RatingSummary from "./RatingSummary";
 import Button from "material-ui/Button";
+import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+
 
 class Activity extends Component {
     componentWillMount() {
@@ -21,6 +23,11 @@ class Activity extends Component {
         }
         return (
             <div className="wrapper">
+                <div className="wizard-header">
+                    <Link to="/">
+                        <KeyboardArrowLeft className="arrow" />
+                    </Link>
+                </div>
                 <div className="flex-inner-wrapper">
                     <RatingSummary activityId={activityId} />
                     <ul className="activity-info">

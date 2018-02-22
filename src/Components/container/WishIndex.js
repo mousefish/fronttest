@@ -26,6 +26,7 @@ import Button from "material-ui/Button";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+import { Link } from "react-router-dom";
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -49,83 +50,36 @@ const styles = theme => ({
   },
 
   card: {
-    display: "flex",
-
+    display: "flex"
   },
   details: {
     display: "flex",
-    padding:0
+    flexFlow:'row nowrap',
+    justifyContent:'space-between',
+    padding: 0
   },
   content: {
     flex: "1 0 auto",
-      paddingTop:10,
-      paddingBottom:5
+    paddingTop: 10,
+    paddingBottom: 5
   },
   cover: {
     width: 10,
     height: 10
   },
+
+  firstline:{
+   display:"flex",
+   justifyContent:'space-between'
+  },
+
   right: {
-    display: "flex",
-    flexFlow: "column",
-    justifyContent: "center",
-    paddingRight: "20px",
     fontSize: "1.5rem",
     fontWeight: "bold",
   }
 });
 
 class WishIndex extends Component {
-  state = {
-    open: false,
-    id: 0,
-    location: "",
-    departdate: "",
-    finishdate: "",
-    budget: 0,
-    services: [],
-    checked: []
-  };
-
-  handleClickOpen = (
-    id,
-    location,
-    departdate,
-    finishdate,
-    budget,
-    services
-  ) => {
-    this.setState({
-      open: true,
-      id,
-      location,
-      departdate,
-      finishdate,
-      budget,
-      services
-    });
-  };
-
-  handleRequestClose = () => {
-    this.setState({ open: false });
-  };
-
-  handleToggle = value => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    this.setState({
-      checked: newChecked
-    });
-  };
-
   renderService(services) {
     const icon = this.props.classes.icon;
 
@@ -148,61 +102,25 @@ class WishIndex extends Component {
 
     return wishes.map(wish => {
       return (
+        <Link to={`/wish/${wish.id}`} className="unlink">
         <div key={wish.id}>
-          <Dialog
-            fullScreen
-            open={this.state.open}
-            onRequestClose={this.handleRequestClose}
-            transition={Transition}
-          >
-            <AppBar className={classes.appBar}>
-              <Toolbar>
-                <IconButton
-                  color="contrast"
-                  onClick={this.handleRequestClose}
-                  aria-label="Close"
-                >
-                  <KeyboardArrowLeft />
-                </IconButton>
-              </Toolbar>
-            </AppBar>
-            <Wish
-              id={this.state.id}
-              location={this.state.location}
-              departdate={this.state.departdate}
-              finishdate={this.state.finishdate}
-              budget={this.state.budget}
-              services={this.state.services}
-            />
-          </Dialog>
-
-          <Card
-            className="card"
-            key={wish.id}
-            onClick={() => {
-              this.handleClickOpen(
-                wish.id,
-                wish.location,
-                wish.departdate,
-                wish.finishdate,
-                wish.budget,
-                wish.services
-              );
-            }}
-          >
+          <Card className="card" key={wish.id}>
             <div className={classes.details}>
               <CardContent className={classes.content}>
+              <div className={classes.firstline}>
                 <h4 style={{ fontWeight: "bold" }}>{wish.location}</h4>
-
+                <div className={classes.right}>{wish.budget} 元/人</div>
+                </div>
                 <h6>
                   <AccessTime className={classes.icon} /> {wish.departdate} 出发
                 </h6>
                 <h6>{this.renderService(wish.services)}</h6>
               </CardContent>
-              <div className={classes.right}>{wish.budget} 元/人</div>
+
             </div>
           </Card>
         </div>
+        </Link>
       );
     });
   }
