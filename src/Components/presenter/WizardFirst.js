@@ -7,6 +7,7 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { withStyles } from "material-ui/styles";
 import { LinearProgress } from "material-ui/Progress";
 import { Link } from "react-router-dom";
+import PasswordSetVisibility from './PasswordSetVisibility';
 
 const styles = theme => ({
   progress: {
@@ -60,7 +61,7 @@ class wizardFirst extends Component {
           <Field
             name="password"
             type='password'
-            component={TextField}
+            component={PasswordSetVisibility}
             className="text-field"
             label="输入密码 - 六位数"
           />

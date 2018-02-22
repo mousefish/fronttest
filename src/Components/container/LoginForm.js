@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../Actions";
 import { withRouter } from "react-router";
+import PasswordSetVisibility from '../presenter/PasswordSetVisibility';
 
 const styles = theme => ({
   progress: {
@@ -49,8 +50,8 @@ class LoginForm extends Component {
   };
 
   submitForm(values) {
-    console.log(values);
-    this.props.userLogin(values, this.props.history);
+    console.log("loginin", values);
+    // this.props.userLogin(values, this.props.history);
   }
 
   render() {
@@ -92,9 +93,10 @@ class LoginForm extends Component {
           <Field
             name="password"
             type="password"
-            component={TextField}
+            component={PasswordSetVisibility}
             className="text-field"
             label="输入密码 - 六位数"
+            props={this.props}
           />
           <span className={classes.hint}>
             <Link to="/" className={classes.hintColor}>
