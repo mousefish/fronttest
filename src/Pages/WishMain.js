@@ -91,7 +91,6 @@ class WishMain extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("wishes", state.WishReducer.all);
   return { wishes: state.WishReducer.all}
 
 }

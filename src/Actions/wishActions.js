@@ -14,6 +14,7 @@ export const submitWishData = (data, history) => async dispatch => {
             type: ADD_WISH_DATA,
             payload: res.data
         });
+        history.push("/wish");
     } catch (err) {
         dispatch(wishErr(err));
     }

@@ -43,6 +43,8 @@ export const submitActivityData = (data, history) => async dispatch => {
             payload: res.data
         });
 
+        history.push("/");
+
     } catch (err) {
         dispatch(activityErr(err));
     }

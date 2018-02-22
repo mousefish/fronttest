@@ -3,7 +3,6 @@ import { Field, reduxForm } from "redux-form";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
 import Button from "material-ui/Button";
-import popupSearchTextField from "../../Components/container/popupSearchTextField";
 import popupSearchDateField from "../../Components/container/popupSearchDateField";
 import popupSearchMultiServices from "../../Components/container/popupSearchMultiServices";
 import AutocompleteField from "../../Components/container/AutocompleteField";

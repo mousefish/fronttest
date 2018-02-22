@@ -9,7 +9,7 @@ export default (state = INITIAL_STATE, action) => {
         case ADD_WISH_DATA:
             return { ...state, message: action.payload };
         case FETCH_WISH_DATA:
-            return { ...state, all: action.payload }
+            return { ...state, all: action.payload,message:"" }
         case HANDLE_WISH_LIKES:
              const wishId = Object.keys(action.payload)[0];
              const numOfLikes = Object.values(action.payload)[0];

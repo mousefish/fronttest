@@ -4,35 +4,16 @@ import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
 import { connect } from 'react-redux';
 import Button from "material-ui/Button";
-import popupSearchTextField from "../../Components/container/popupSearchTextField";
+import AutocompleteField from "../../Components/container/AutocompleteField";
 import popupSearchDateField from "../../Components/container/popupSearchDateField";
 import popupSearchMultiServices from "../../Components/container/popupSearchMultiServices";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+import { TextField } from "redux-form-material-ui";
 import validate from "./validate";
 import * as actions from '../../Actions';
 
 
 const styles = theme => ({
-    wrapper: {
-        width: "90%",
-        margin: "auto",
-        marginBottom: 50,
-        marginTop: 20
-    },
-
-    header: {
-        width: "100%",
-        height: "20%",
-        textAlign: "center",
-        padding: 10,
-        fontWeight: "bold"
-    },
-
-    sectionWrapper: {
-        // textAlign: "center",
-        marginBottom: 35
-    },
-
     button: {
         margin: theme.spacing.unit,
         marginTop: 30,
@@ -47,7 +28,6 @@ class AddWish extends Component {
         this.props.history.goBack();
     }
     submitForm(value){
-        console.log('wish value', value);
         this.props.submitWishData(value, this.props.history);
     }
 
@@ -59,37 +39,48 @@ class AddWish extends Component {
 
     renderFields(classes) {
         return [
-            <Field
-                key="location"
-                name="location"
-                type="text"
-                component={popupSearchTextField}
-                placeholder="你想去的国家和城市"
-            />,
+           <div className="flex-form-wrapper" style={{ width: "95%" }}>
+                <Field
+                    key="location"
+                    name="location"
+                    type="text"
+                    component={AutocompleteField}
+                    className="text-field"
+                    placeholder="你想去的城市"
+                    props={this.props}
+                />
+            </div>,
+            <div className="flex-form-wrapper">
+                <Field
+                    key="budget"
+                    name="budget"
+                    type="text"
+                    component={TextField}
+                    className="text-field"
+                    placeholder="你的预算/人"
+                />
+            </div>,
 
-            <Field
-                key="dapartdate"
-                name="departdate"
-                type="text"
-                component={popupSearchDateField}
-                placeholder="出发日期和时间"
-            />,
+            <div className="flex-form-wrapper" style={{ width: "95%" }}>
+                <h4 className="category-title">
+                    你的行程时间
+                </h4>
+                <Field
+                    key="dapartdate"
+                    name="departdate"
+                    type="text"
+                    component={popupSearchDateField}
+                    placeholder="出发日期和时间"
+                />
 
-            <Field
-                key="finishdate"
-                name="finishdate"
-                type="text"
-                component={popupSearchDateField}
-                placeholder="结束日期和时间"
-            />,
-
-            <Field
-                key="budget"
-                name="budget"
-                type="text"
-                component={popupSearchTextField}
-                placeholder="你的愿望预算/人"
-            />
+                <Field
+                    key="finishdate"
+                    name="finishdate"
+                    type="text"
+                    component={popupSearchDateField}
+                    placeholder="结束日期和时间"
+                />
+            </div>
         ];
     }
 
@@ -98,24 +89,25 @@ class AddWish extends Component {
         const { handleSubmit } = this.props;
 
         return (
-            <div className={classes.wrapper}>
+            <div className="wrapper">
                 <div
-                    className={classes.header}
+                    className="wizard-header"
                     onClick={this.goBack.bind(this)}
                 >
                     <KeyboardArrowLeft
-                        style={{ float: "left", color: "grey" }}
+                        className="arrow"
                     />
 
-                    <h4 style={{ fontWeight: "bold" }}>发布新愿望</h4>
+                    <h4 className="category-title">发布新愿望</h4>
                 </div>
                 <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
-                    <div className={classes.sectionWrapper}>
-                        {this.renderFields(classes)}
-                    </div>
+                    <div>{this.renderFields(classes)}</div>
 
-                    <div className={classes.sectionWrapper}>
-                        <h4 style={{ fontWeight: "bold", textAlign: "center" }}>
+                    <div
+                        className="flex-form-wrapper"
+                        style={{ width: "95%" }}
+                    >
+                        <h4 className="category-title">
                             你需要的向导服务
                         </h4>
                         <Field
@@ -131,18 +123,18 @@ class AddWish extends Component {
                         color="primary"
                         raised
                         className={classes.button}
+                        id="btn"
                     >
                         提交
                     </Button>
                 </form>
-             {this.renderErrorMsg()}
+             <div className="input-success">{this.props.msg}</div>
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
-    console.log()
     return { msg: state.WishReducer.message };
 };
 

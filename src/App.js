@@ -30,6 +30,8 @@ import WishMain from "./Pages/WishMain";
 import Story from "./Pages/Story";
 import FriendComments from "./Pages/FriendComments";
 
+import Wish from "./Components/container/Wish";
+
 import MyAccount from "./Pages/MyAccount";
 import MyMessage from "./Pages/MyMessage";
 import Discovery from "./Pages/Discovery";
@@ -178,6 +180,8 @@ class App extends Component {
                     <Route exact path="/friendComments" component={FriendComments} />
                     <Route exact path="/activityWish" component={ActivityWishPanel}/>
                     <Route exact path="/activity/:activityId" component={Activity} />
+                    <Route exact path="/wish/:wishId" component={Wish} />
+
                     <Route exact path="/user/:userId" component={PersonProfile} />
 
                     {/*unit test used below, production will check env.production to disable*/}

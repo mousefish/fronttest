@@ -12,17 +12,39 @@ import { withRouter } from "react-router";
 import { MenuItem } from "material-ui/Menu";
 import { Select } from "redux-form-material-ui";
 import classNames from "classnames";
+import validate from "../presenter/validate";
+import Radio from "material-ui/Radio";
+import { RadioGroup, TextField } from "redux-form-material-ui";
+import { FormControlLabel } from "material-ui/Form";
 
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
+    width: "95%"
+  },
+  radioInner: {
+    width: "95%",
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "space-around"
+  },
+
+  formInner: {
+    width: "95%"
+  },
+
+  text: {
+    fontWeight: "bold"
   }
 });
 
+const renderError = ({ meta: { touched, error } }) =>
+  touched && error ? (
+    <span style={{ color: "red", fontSize: "12px" }}>{error}</span>
+  ) : (
+    false
+  );
 class PopupSearch extends Component {
-  state = {
-    name: []
-  };
   submitForm(values) {
     console.log("values:", values);
     this.props.submitSearchData(
@@ -40,8 +62,7 @@ class PopupSearch extends Component {
         className="wrapper"
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
-        <div className="flex-inner-wrapper">
-          <h4 className="category-title">输入城市</h4>
+        <div className="flex-form-wrapper">
           <Field
             name="location"
             type="text"
@@ -51,18 +72,18 @@ class PopupSearch extends Component {
           />
         </div>
 
-        <div className="flex-inner-wrapper">
-          <h4 className="category-title">向导服务</h4>
+        <div className="flex-form-wrapper">
           <Field
-            name="services"
-            component={popupSearchMultiServices}
-            data={["徒步旅行", "汽车接送", "购物打折"]}
-          />
+            name="category"
+            component={RadioGroup}
+            className={classes.radioInner}
+          >
+            <FormControlLabel value="activity" control={<Radio />} label="活动" />
+            <FormControlLabel value="wish" control={<Radio />} label="愿望" />
+          </Field>
+          <Field name="category" component={renderError} />
         </div>
-        <div className="flex-inner-wrapper">
-          <HistorySearch />
-        </div>
-        <div className="flex-inner-wrapper">
+        <div className="flex-form-wrapper">
           <Button
             type="submit"
             color="primary"
@@ -73,13 +94,20 @@ class PopupSearch extends Component {
             搜索
           </Button>
         </div>
+
+        <div className="flex-form-wrapper">
+          <HistorySearch />
+        </div>
       </form>
     );
   }
 }
 
 PopupSearch = reduxForm({
-  form: "PopupSearchForm"
+  form: "PopupSearchForm",
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true,
+  validate
 })(withStyles(styles)(PopupSearch));
 
 export default (PopupSearch = connect(null, actions)(withRouter(PopupSearch)));

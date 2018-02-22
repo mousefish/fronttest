@@ -6,13 +6,9 @@ import PropTypes from "prop-types";
 import IconButton from "material-ui/IconButton";
 import LocationOn from "material-ui-icons/LocationOn";
 import MonetizationOn from "material-ui-icons/MonetizationOn";
-
+import AccessTime from "material-ui-icons/AccessTime";
 import LocalOffer from "material-ui-icons/LocalOffer";
-import EventAvailable from "material-ui-icons/EventAvailable";
-import Group from "material-ui-icons/Group";
-
-import img from "../../Assets/Images/wish.jpg";
-import WishDetails from "./WishDetails";
+import Wish from "./Wish";
 
 import Card, {
   CardHeader,
@@ -22,8 +18,6 @@ import Card, {
 } from "material-ui/Card";
 import Avatar from "material-ui/Avatar";
 
-import FavoriteIcon from "material-ui-icons/Favorite";
-import ShareIcon from "material-ui-icons/Share";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 import Slide from "material-ui/transitions/Slide";
 import AppBar from "material-ui/AppBar";
@@ -37,37 +31,70 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-
-const styles = {
+const styles = theme => ({
   appBar: {
-    position: 'relative',
+    position: "relative"
   },
   flex: {
-    flex: 1,
+    flex: 1
   },
   media: {
-  height: 224,
-  position: 'relative',
+    height: 224,
+    position: "relative"
   },
   icon: {
     width: 15,
     height: 15,
     verticalAlign: "-2px"
+  },
+
+  card: {
+    display: "flex",
+
+  },
+  details: {
+    display: "flex",
+    padding:0
+  },
+  content: {
+    flex: "1 0 auto",
+      paddingTop:10,
+      paddingBottom:5
+  },
+  cover: {
+    width: 10,
+    height: 10
+  },
+  right: {
+    display: "flex",
+    flexFlow: "column",
+    justifyContent: "center",
+    paddingRight: "20px",
+    fontSize: "1.5rem",
+    fontWeight: "bold",
   }
-};
+});
 
 class WishIndex extends Component {
   state = {
     open: false,
     id: 0,
-    location:"",
-    departdate:"",
-    finishdate:"",
-    budget:0,
-    services:[]
+    location: "",
+    departdate: "",
+    finishdate: "",
+    budget: 0,
+    services: [],
+    checked: []
   };
 
-  handleClickOpen = (id, location, departdate,finishdate,budget,services) => {
+  handleClickOpen = (
+    id,
+    location,
+    departdate,
+    finishdate,
+    budget,
+    services
+  ) => {
     this.setState({
       open: true,
       id,
@@ -76,18 +103,28 @@ class WishIndex extends Component {
       finishdate,
       budget,
       services
-       });
+    });
   };
 
   handleRequestClose = () => {
     this.setState({ open: false });
   };
 
-  handleLikes(event, wishId) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.props.sendWishLike(wishId);
-  }
+  handleToggle = value => () => {
+    const { checked } = this.state;
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    this.setState({
+      checked: newChecked
+    });
+  };
 
   renderService(services) {
     const icon = this.props.classes.icon;
@@ -103,7 +140,7 @@ class WishIndex extends Component {
   }
 
   renderItems() {
-    const { classes } = this.props;
+    const { classes, theme } = this.props;
     const { wishes } = this.props;
     if (!wishes) {
       return <div>loading...</div>;
@@ -129,7 +166,7 @@ class WishIndex extends Component {
                 </IconButton>
               </Toolbar>
             </AppBar>
-            <WishDetails
+            <Wish
               id={this.state.id}
               location={this.state.location}
               departdate={this.state.departdate}
@@ -143,59 +180,27 @@ class WishIndex extends Component {
             className="card"
             key={wish.id}
             onClick={() => {
-              this.handleClickOpen(wish.id, wish.location, wish.departdate,wish.finishdate,wish.budget,wish.services);
+              this.handleClickOpen(
+                wish.id,
+                wish.location,
+                wish.departdate,
+                wish.finishdate,
+                wish.budget,
+                wish.services
+              );
             }}
           >
-            <CardMedia className={classes.media} image={img} title="wish">
-              <span
-                style={{
-                  position: "absolute",
-                  right: 10,
-                  top: 10,
-                  color: "#fff"
-                }}
-              />
-            </CardMedia>
-            <CardContent>
-              <div
-                style={{
-                  marginBottom: 6
-                }}
-              >
-                <div style={{ float: "left" }}>
-                  <LocationOn className={classes.icon} /> {wish.location}
-                </div>
-                <div style={{ float: "right" }}>
-                  <MonetizationOn className={classes.icon} /> &nbsp;{wish.budget}
-                </div>
-                <div style={{ clear: "both" }} />
-              </div>
+            <div className={classes.details}>
+              <CardContent className={classes.content}>
+                <h4 style={{ fontWeight: "bold" }}>{wish.location}</h4>
 
-              <div style={{ marginBottom: 6 }}>
-                <div>
-                  <EventAvailable className={classes.icon} />&nbsp;出发日期：{wish.departdate}
-                </div>
-                <div>
-                  <Group className={classes.icon} />&nbsp;结束日期：{" "}
-                  {wish.finishdate}
-                </div>
-              </div>
-              <div>{this.renderService(wish.services)}</div>
-            </CardContent>
-            <CardActions disableActionSpacing>
-              <IconButton
-                aria-label="Add to favorites"
-                onClick={event => {
-                  this.handleLikes(event, wish.id);
-                }}
-              >
-                <FavoriteIcon />
-                {wish.likes}
-              </IconButton>
-              <IconButton aria-label="Share">
-                <ShareIcon />
-              </IconButton>
-            </CardActions>
+                <h6>
+                  <AccessTime className={classes.icon} /> {wish.departdate} 出发
+                </h6>
+                <h6>{this.renderService(wish.services)}</h6>
+              </CardContent>
+              <div className={classes.right}>{wish.budget} 元/人</div>
+            </div>
           </Card>
         </div>
       );
@@ -207,4 +212,6 @@ class WishIndex extends Component {
   }
 }
 
-export default connect(null, actions)(withStyles(styles)(WishIndex));
+export default connect(null, actions)(
+  withStyles(styles, { withTheme: true })(WishIndex)
+);
