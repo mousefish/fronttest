@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ActivityIndex from "./ActivityIndex";
 import SideButton from "../../Pages/sideButton";
 import Header from "../presenter/header";
 import Slide from "material-ui/transitions/Slide";
 import AppBar from "material-ui/AppBar";
 import Dialog from "material-ui/Dialog";
-import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
 import Toolbar from "material-ui/Toolbar";
 import IconButton from "material-ui/IconButton";
-import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PopupSearch from "./PopupSearch";
 import { Link } from "react-router-dom";
@@ -46,7 +43,7 @@ class SearchResult extends Component {
   renderSearchResult(searchResult) {
     let result = [];
     result.push(
-      <div className="wizard-header">
+      <div className="wizard-header" key="header">
         <KeyboardArrowLeft
           className="arrow"
           onClick={() => this.props.history.goBack()}
@@ -54,19 +51,27 @@ class SearchResult extends Component {
       </div>
     );
     if (!searchResult[0]) {
-      result.push(<div>尚未有搜索结果</div>);
-      return result
+      result.push(<div key="no">尚未有搜索结果</div>);
+      return result;
     }
 
-    result.push(<div>共计 {searchResult[0].counter} 个结果</div>);
+    result.push(<div key="counter">共计 {searchResult[0].counter} 个结果</div>);
     if (searchResult[0].category === "activity") {
       searchResult.forEach(item => {
-        result.push(<Link to={`/activity/${item.id}`}>{item.theme}</Link>);
+        result.push(
+          <Link to={`/activity/${item.id}`} key={item.id}>
+            {item.theme}
+          </Link>
+        );
       });
     }
     if (searchResult[0].category === "wish") {
       searchResult.forEach(item => {
-        result.push(<Link to={`/wish/${item.id}`}>{item.location}</Link>);
+        result.push(
+          <Link to={`/wish/${item.id}`} key={item.id}>
+            {item.location}
+          </Link>
+        );
       });
     }
 

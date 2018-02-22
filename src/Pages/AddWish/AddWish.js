@@ -6,12 +6,14 @@ import { connect } from 'react-redux';
 import Button from "material-ui/Button";
 import AutocompleteField from "../../Components/container/AutocompleteField";
 import popupSearchDateField from "../../Components/container/popupSearchDateField";
+
 import popupSearchMultiServices from "../../Components/container/popupSearchMultiServices";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { TextField } from "redux-form-material-ui";
-import validate from "./validate";
+import validate from "../../Utility/validate";
 import * as actions from '../../Actions';
 import services from "../../data/services";
+
 
 const styles = theme => ({
     button: {
@@ -28,6 +30,7 @@ class AddWish extends Component {
         this.props.history.goBack();
     }
     submitForm(value){
+        console.log('wish value', value);
         this.props.submitWishData(value, this.props.history);
     }
 
@@ -39,7 +42,7 @@ class AddWish extends Component {
 
     renderFields(classes) {
         return [
-           <div className="flex-form-wrapper" style={{ width: "95%" }}>
+           <div key="location" className="flex-form-wrapper" style={{ width: "95%" }}>
                 <Field
                     key="location"
                     name="location"
@@ -50,7 +53,7 @@ class AddWish extends Component {
                     props={this.props}
                 />
             </div>,
-            <div className="flex-form-wrapper">
+            <div key="budget" className="flex-form-wrapper">
                 <Field
                     key="budget"
                     name="budget"
@@ -61,7 +64,7 @@ class AddWish extends Component {
                 />
             </div>,
 
-            <div className="flex-form-wrapper" style={{ width: "95%" }}>
+            <div key="date" className="flex-form-wrapper" style={{ width: "95%" }}>
                 <h4 className="category-title">
                     你的行程时间
                 </h4>
@@ -79,6 +82,7 @@ class AddWish extends Component {
                     type="text"
                     component={popupSearchDateField}
                     placeholder="结束日期和时间"
+
                 />
             </div>
         ];

@@ -1,10 +1,8 @@
-import {SET_AUTH, AUTH_ERROR, AUTH_USER, DEAUTH_USER } from '../Actions/types';
-import {isEmpty} from 'lodash';
+import { AUTH_ERROR, AUTH_USER, DEAUTH_USER } from '../Actions/types';
 
 const initState={
   isAuthenticated: false,
-  user: {},
-  error: {}
+  error: ""
 };
 
 export default (state = initState, action = {}) => {
@@ -13,7 +11,7 @@ export default (state = initState, action = {}) => {
       return {
         ...state,
         isAuthenticated: true,
-        error:{}
+        error:""
       };
     case AUTH_ERROR:
        return {

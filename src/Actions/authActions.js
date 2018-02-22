@@ -12,40 +12,38 @@ export const logout = history => dispatch => {
 
 export const userSignupRequest = (userData, history) => async dispatch => {
   try {
-    // Need backend APIs to implement the following code (add async)
-    // console.log('userdata', userData)
     const res = await axios.post(`${ROOT_URL}/signup`, userData);
     if (res.data.token) {
       localStorage.setItem("jwtToken", res.data.token);
       dispatch({ type: AUTH_USER });
       history.goBack();
     } else {
-      dispatch(authError({signupErr:res.data.error}));
+
+      dispatch(authError(res.data));
     }
   } catch (err) {
-    dispatch(authError({signupErr:err.message}));
+
+    dispatch(authError(err));
   }
 };
 
 export const userLogin = (userData, history) => async dispatch => {
   try {
-    // Need backend APIs to implement the following code (add async)
-    const res = await axios.post(`${ROOT_URL}/login`, userData);
-    if (res.data.token) {
+      const res = await axios.post(`${ROOT_URL}/login`, userData);
       localStorage.setItem("jwtToken", res.data.token);
       dispatch({ type: AUTH_USER });
       history.goBack();
-    } else {
-      dispatch(authError({loginErr:res.data.error}));
-    }
+
   } catch (err) {
-    dispatch(authError({loginErr:err.message}));
+    // err is an Object - Error: Request failed with status code 401.
+    // err.message - string
+    dispatch(authError("邮箱或者密码不正确！"));
   }
 };
 
-export const authError = errObj => {
+export const authError = err => {
   return {
     type: AUTH_ERROR,
-    payload: errObj
+    payload: err
   };
 };

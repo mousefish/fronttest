@@ -31,6 +31,7 @@ class AddActivity extends Component {
     }
 
     handleSubmit(values) {
+       console.log('value', values);
         const images = [];
         for(let i = 1 ; i <= 8; i ++){
             if(values['img'+i]){
@@ -49,7 +50,7 @@ class AddActivity extends Component {
             images
         };
 
-        console.log('value',modifiedValues);
+
         this.props.submitActivityData(modifiedValues, this.props.history);
     }
 
@@ -93,8 +94,8 @@ const mapStateToProps = state => {
     return { msg: state.ActivityReducer.message };
 };
 
-AddActivity.propTypes = {
-    onSubmit: PropTypes.func.isRequired
-};
+// AddActivity.propTypes = {
+//     onSubmit: PropTypes.func.isRequired
+// };
 
 export default connect(mapStateToProps, actions)(withRouter(AddActivity));

@@ -18,7 +18,6 @@ const validate = values => {
   if (values.story && values.story.length >= 300) {
     errors.story = "字数不能超过300";
   }
-
   return errors;
 };
 

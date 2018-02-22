@@ -99,35 +99,35 @@ class Story extends Component {
                         <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
-                                alt="image in my gallery"
+                                alt=""
                                 className="image-wrapper"
                             />
                         </div>
                         <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
-                                alt="image in my gallery"
+                                alt=""
                                 className="image-wrapper"
                             />
                         </div>
                         <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
-                                alt="image in my gallery"
+                                alt=""
                                 className="image-wrapper"
                             />
                         </div>
                         <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
-                                alt="image in my gallery"
+                                alt=""
                                 className="image-wrapper"
                             />
                         </div>
                         <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
-                                alt="image in my gallery"
+                                alt=""
                                 className="image-wrapper"
                             />
                         </div>

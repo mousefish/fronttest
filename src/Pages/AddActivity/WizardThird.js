@@ -82,7 +82,6 @@ class WizardThird extends Component {
                             className={classes.image}
                         />
                     </div>
-
                     <Button
                         type="submit"
                         color="primary"

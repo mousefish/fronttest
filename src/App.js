@@ -1,31 +1,28 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import PageNotFound from "./Pages/404Page";
 import SignUpWizard from "./Components/container/SignUpWizard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import MyUploader from "./Pages/TestPages";
 
-import LogInSignUp from './Pages/logInSignUp';
+import LogInSignUp from "./Pages/logInSignUp";
 
 import LoginForm from "./Components/container/LoginForm";
 import SeachResult from "./Components/container/SearchResult";
-
-import CheckAuth from "./Utlity/checkAuth";
 
 import { withStyles } from "material-ui/styles";
 import BottomNavigation, {
   BottomNavigationButton
 } from "material-ui/BottomNavigation";
 import Home from "material-ui-icons/Home";
-import Flight from "material-ui-icons/Flight";
-import Message from "material-ui-icons/Message";
-import Person from "material-ui-icons/Person";
 
+import Person from "material-ui-icons/Person";
 
 import WebFontLoader from "webfontloader";
 
 import TripMain from "./Pages/TripMain";
+
 import WishMain from "./Pages/WishMain";
 import Story from "./Pages/Story";
 import FriendComments from "./Pages/FriendComments";
@@ -41,12 +38,12 @@ import AddWish from "./Pages/AddWish/AddWish";
 import Activity from "./Pages/Activity";
 import PersonProfile from "./Pages/PersonProfile";
 
-import RequireAuth from './HOC/RequireAuth';
-import ActivityWishPanel from './Pages/ActivityWishPanel';
+import RequireAuth from "./HOC/RequireAuth";
+import ActivityWishPanel from "./Pages/ActivityWishPanel";
 
 import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
-import Toys from "material-ui-icons/Toys";
+
 import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
@@ -107,7 +104,6 @@ class App extends Component {
     }
   }
 
-
   testdir() {
     console.log("change dir");
     alert("change dir");
@@ -116,7 +112,6 @@ class App extends Component {
 
   renderBottomNav() {
     const main_value = this.state.main_value;
-    const sub_value = this.state.sub_value;
     const classes = this.props.classes;
 
     return (
@@ -152,49 +147,49 @@ class App extends Component {
 
   render() {
     const classes = this.props.classes;
-    const path = this.props.location.pathname;
-    const value = this.state.value > 0 ? this.state.value : value;
+    let value = this.state.value > 0 ? this.state.value : value;
     {
       this.testdir.bind(this);
     }
     return (
       <div>
+        <div>
+          <Switch>
+            <Route exact path="/" component={TripMain} />
+            <Route exact path="/trip" component={Home} />
+            <Route exact path="/tr/test" component={MyUploader} />
+            <Route exact path="/home" component={TripMain} />
+            <Route exact path="/wish" component={WishMain} />
+            <Route exact path="/my" component={RequireAuth(MyAccount)} />
+            <Route exact path="/message" component={MyMessage} />
+            <Route exact path="/discovery" component={Discovery} />
+            <Route exact path="/myRoute" component={MyRoute} />
+            <Route
+              exact
+              path="/addActivity"
+              component={RequireAuth(AddActivity)}
+            />
+            <Route exact path="/addWish" component={RequireAuth(AddWish)} />
 
-                <div>
-                  <Switch>
-                    <Route exact path="/" component={TripMain} />
-                    <Route exact path="/trip" component={Home} />
-                    <Route exact path="/tr/test" component={MyUploader} />
-                    <Route exact path="/home" component={TripMain} />
-                    <Route exact path="/wish" component={WishMain} />
-                    <Route exact path="/my" component={RequireAuth(MyAccount)} />
-                    <Route exact path="/message" component={MyMessage} />
-                    <Route exact path="/discovery" component={Discovery} />
-                    <Route exact path="/myRoute" component={MyRoute} />
-                    <Route exact path="/addActivity" component={RequireAuth(AddActivity)} />
-                    <Route exact path="/addWish" component={RequireAuth(AddWish)} />
+            <Route exact path="/logInSignUp" component={LogInSignUp} />
+            <Route exact path="/searchResult" component={SeachResult} />
+            <Route exact path="/story/:userId" component={Story} />
+            <Route exact path="/friendComments" component={FriendComments} />
+            <Route exact path="/activityWish" component={ActivityWishPanel} />
+            <Route exact path="/activity/:activityId" component={Activity} />
+            <Route exact path="/wish/:wishId" component={Wish} />
 
-                    <Route exact path="/logInSignUp" component={LogInSignUp} />
-                    <Route exact path="/searchResult" component={SeachResult} />
-                    <Route exact path="/story/:userId" component={Story} />
-                    <Route exact path="/friendComments" component={FriendComments} />
-                    <Route exact path="/activityWish" component={ActivityWishPanel}/>
-                    <Route exact path="/activity/:activityId" component={Activity} />
-                    <Route exact path="/wish/:wishId" component={Wish} />
+            <Route exact path="/user/:userId" component={PersonProfile} />
 
-                    <Route exact path="/user/:userId" component={PersonProfile} />
+            {/*unit test used below, production will check env.production to disable*/}
 
-                    {/*unit test used below, production will check env.production to disable*/}
-
-                    <Route path="/signup" component={SignUpWizard} />
-                    <Route path="/login" component={LoginForm} />
-                    <Route component={PageNotFound} />
-                  </Switch>
-                </div>
-                <ToastContainer />
-
-              <div className={classes.root}>{this.renderBottomNav()}</div>
-
+            <Route path="/signup" component={SignUpWizard} />
+            <Route path="/login" component={LoginForm} />
+            <Route component={PageNotFound} />
+          </Switch>
+        </div>
+        <ToastContainer />
+        <div className={classes.root}>{this.renderBottomNav()}</div>
       </div>
     );
   }

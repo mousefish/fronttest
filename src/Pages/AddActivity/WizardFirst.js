@@ -25,7 +25,7 @@ class WizardFirst extends Component {
 
     renderFields(classes) {
         return [
-            <div className="flex-form-wrapper">
+            <div className="flex-form-wrapper" key="theme">
                 <Field
                     key="theme"
                     name="theme"
@@ -35,7 +35,7 @@ class WizardFirst extends Component {
                     placeholder="活动的主题(例：骨灰级成都吃货地图)"
                 />
             </div>,
-            <div className="flex-form-wrapper" style={{ width: "95%" }}>
+            <div className="flex-form-wrapper" style={{ width: "95%" }} key="location">
                 <Field
                     key="location"
                     name="location"
@@ -46,7 +46,7 @@ class WizardFirst extends Component {
                     props={this.props}
                 />
             </div>,
-            <div className="flex-form-wrapper">
+            <div className="flex-form-wrapper" key="budget">
                 <Field
                     key="budget"
                     name="budget"
@@ -57,7 +57,7 @@ class WizardFirst extends Component {
                 />
             </div>,
 
-            <div className="flex-form-wrapper" style={{ width: "95%" }}>
+            <div className="flex-form-wrapper" style={{ width: "95%" }} key="date">
                 <h4 className="category-title">
                     你的活动时间
                 </h4>

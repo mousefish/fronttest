@@ -63,9 +63,9 @@ class SignUpWizard extends Component {
   }
 }
 
-SignUpWizard.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-};
+// SignUpWizard.propTypes = {
+//   onSubmit: PropTypes.func.isRequired
+// };
 
 const mapStateToProps = state => {
   return { errorMsg: state.UserAuth.error.signupErr || state.UserAuth.error.error};

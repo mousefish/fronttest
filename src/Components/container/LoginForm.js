@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
-import validate from "../presenter/validate";
+import validate from "../../Utility/validate";
 import { TextField } from "redux-form-material-ui";
 import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../Actions";
 import { withRouter } from "react-router";
-import PasswordSetVisibility from '../presenter/PasswordSetVisibility';
+import PasswordSetVisibility from "../presenter/PasswordSetVisibility";
 
 const styles = theme => ({
   progress: {
@@ -42,16 +42,13 @@ const styles = theme => ({
 });
 
 class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-  }
   state = {
     completed: 100
   };
 
   submitForm(values) {
     console.log("loginin", values);
-    // this.props.userLogin(values, this.props.history);
+    this.props.userLogin(values, this.props.history);
   }
 
   render() {
@@ -116,7 +113,9 @@ class LoginForm extends Component {
             点击登陆
           </Button>
         </div>
-        <div style={{ color: "red" }}>{this.props.errorMsg}</div>
+        <div className="input-error" style={{ textAlign: "center" }}>
+          {this.props.errorMessage}
+        </div>
       </form>
     );
   }
@@ -124,7 +123,7 @@ class LoginForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    errorMsg: state.UserAuth.error.loginErr || state.UserAuth.error.error
+    errorMessage: state.UserAuth.error
   };
 };
 

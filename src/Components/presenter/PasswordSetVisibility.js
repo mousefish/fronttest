@@ -7,7 +7,7 @@ import VisibilityOff from "material-ui-icons/VisibilityOff";
 
 
 
-class InputAdornments extends React.Component {
+class InputAdornments extends Component {
     state = {
         showPassword: false
     };
@@ -20,8 +20,9 @@ class InputAdornments extends React.Component {
     };
 
     render() {
-
+        const {input, meta:{touched, error}} = this.props;
         return (
+           <div>
             <Input
                 style={{width:"95%"}}
                 {...this.props.input}
@@ -42,6 +43,10 @@ class InputAdornments extends React.Component {
                     </InputAdornment>
                 }
             />
+            <div className="input-error" style={{marginLeft:10}}>
+                {touched && error}
+            </div>
+          </div>
         );
     }
 }
