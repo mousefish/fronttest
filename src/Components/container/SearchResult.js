@@ -30,7 +30,7 @@ class SearchResult extends Component {
     componentWillMount(){
         // slice(1) to remove the first '?'
        let query = this.props.location.search.slice(1)
-       this.props.submitSearchData(query)
+       this.props.submitSearchData(query, null, this.handleRequestClose)
     }
     state = {
         open: false

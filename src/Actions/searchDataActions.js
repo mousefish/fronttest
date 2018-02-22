@@ -15,9 +15,11 @@ export const submitSearchData = (searchData, history, cb)=> async dispatch =>{
         type: FETCH_SEARCH_DATA,
         payload:res.data
     });
+
     if(history){
         history.push(`/searchResult?${q}`);
     }
+    cb()
 
 
 };
