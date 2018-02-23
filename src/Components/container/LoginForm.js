@@ -15,16 +15,13 @@ import PasswordSetVisibility from "../presenter/PasswordSetVisibility";
 const styles = theme => ({
   progress: {
     width: "95%",
-    margin: "auto"
+    margin: "auto",
+    backgroundColor:"#1976D2",
   },
 
   button: {
     margin: theme.spacing.unit,
-    width: "95%"
-  },
-
-  text: {
-    fontWeight: "bold"
+    width: "95%",
   },
 
   hint: {
@@ -61,15 +58,22 @@ class LoginForm extends Component {
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
         <div className="wizard-header">
-          <Link to="/loginSignUp">
-            <KeyboardArrowLeft style={{ float: "left", color: "grey" }} />
-          </Link>
-          <h4 className={classes.text}>登陆账户</h4>
+            <KeyboardArrowLeft
+              className="arrow"
+              style={{
+                width: 30,
+                height: 30
+              }}
+              onClick={()=>this.props.history.goBack()}
+            />
+
+          <h3 className="page-title">登陆账户</h3>
         </div>
         <div className="flex-form-wrapper">
           <LinearProgress
             className={classes.progress}
             mode="determinate"
+            color="secondary"
             value={this.state.completed}
           />
         </div>

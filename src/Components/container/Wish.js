@@ -71,9 +71,14 @@ class WishDetails extends Component {
             <div className="wrapper">
                 <div className="wizard-header">
                     <KeyboardArrowLeft
+                        style={{
+                            width: 30,
+                            height: 30
+                        }}
                         className="arrow"
                         onClick={()=>this.props.history.goBack()}
                     />
+                     <h3 className="page-title">愿望</h3>
                 </div>
                 <div className={classes.buttonSet}>NEEDS REDESIGN</div>
                 <div>{wish.id}</div>

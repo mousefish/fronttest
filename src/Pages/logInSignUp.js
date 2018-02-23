@@ -30,7 +30,7 @@ const loginSignUp = props => {
             </div>
 
             <div className="flex-inner-wrapper">
-                <Link to="/login">
+                <Link to="/login" className="unlink">
                     <Button
                         color="primary"
                         raised
@@ -40,7 +40,7 @@ const loginSignUp = props => {
                         登陆已有账户
                     </Button>
                 </Link>
-                <Link to="/signup">
+                <Link to="/signup" className="unlink">
                     <Button
                         color="primary"
                         raised

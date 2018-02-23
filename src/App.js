@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import PageNotFound from "./Pages/404Page";
-import SignUpWizard from "./Components/container/SignUpWizard";
+import SignupWizard from "./Components/container/SignupWizard";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
-import MyUploader from "./Pages/TestPages";
 
 import LogInSignUp from "./Pages/logInSignUp";
 
@@ -157,7 +155,6 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={TripMain} />
             <Route exact path="/trip" component={Home} />
-            <Route exact path="/tr/test" component={MyUploader} />
             <Route exact path="/home" component={TripMain} />
             <Route exact path="/wish" component={WishMain} />
             <Route exact path="/my" component={RequireAuth(MyAccount)} />
@@ -183,7 +180,7 @@ class App extends Component {
 
             {/*unit test used below, production will check env.production to disable*/}
 
-            <Route path="/signup" component={SignUpWizard} />
+            <Route path="/signup" component={SignupWizard} />
             <Route path="/login" component={LoginForm} />
             <Route component={PageNotFound} />
           </Switch>

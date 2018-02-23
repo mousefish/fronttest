@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { withStyles } from "material-ui/styles";
 import * as actions from "../Actions";
 import RatingForm from "./RatingForm";
 import RatingIndex from "./RatingIndex";
@@ -8,6 +9,7 @@ import RatingSummary from "./RatingSummary";
 import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
+const styles = {};
 
 class Activity extends Component {
     componentWillMount() {
@@ -17,7 +19,7 @@ class Activity extends Component {
 
     render() {
         const activityId = this.props.match.params.activityId;
-        const { activity, message, ratings } = this.props;
+        const { classes, activity, message, ratings } = this.props;
         if (!activity) {
             return <div>loading</div>;
         }
@@ -25,9 +27,14 @@ class Activity extends Component {
             <div className="wrapper">
                 <div className="wizard-header">
                     <KeyboardArrowLeft
+                        style={{
+                            width: 30,
+                            height: 30
+                        }}
                         className="arrow"
-                        onClick={()=>this.props.history.goBack()}
+                        onClick={() => this.props.history.goBack()}
                     />
+                    <h3 className="page-title">活动</h3>
                 </div>
                 <div className="flex-inner-wrapper">
                     <RatingSummary activityId={activityId} />
@@ -84,4 +91,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, actions)(Activity);
+export default connect(mapStateToProps, actions)(withStyles(styles)(Activity));

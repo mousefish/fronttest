@@ -14,7 +14,7 @@ import services from "../../data/services";
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
-        width: "95%",
+        width: "95%"
     }
 });
 
@@ -35,7 +35,11 @@ class WizardFirst extends Component {
                     placeholder="活动的主题(例：骨灰级成都吃货地图)"
                 />
             </div>,
-            <div className="flex-form-wrapper" style={{ width: "95%" }} key="location">
+            <div
+                className="flex-form-wrapper"
+                style={{ width: "95%" }}
+                key="location"
+            >
                 <Field
                     key="location"
                     name="location"
@@ -57,10 +61,12 @@ class WizardFirst extends Component {
                 />
             </div>,
 
-            <div className="flex-form-wrapper" style={{ width: "95%" }} key="date">
-                <h4 className="category-title">
-                    你的活动时间
-                </h4>
+            <div
+                className="flex-form-wrapper"
+                style={{ width: "95%" }}
+                key="date"
+            >
+                <h4 className="category-title">你的活动时间</h4>
                 <Field
                     key="dapartdate"
                     name="departdate"
@@ -86,21 +92,22 @@ class WizardFirst extends Component {
 
         return (
             <div className="wrapper">
-                <div className="wizard-header" onClick={this.goBack.bind(this)}>
-                    <KeyboardArrowLeft className="arrow" />
-
-                    <h4 className="category-title">发布新活动</h4>
+                <div className="wizard-header">
+                    <KeyboardArrowLeft
+                        className="arrow"
+                        style={{
+                            width: 30,
+                            height: 30
+                        }}
+                        onClick={this.goBack.bind(this)}
+                    />
+                 <h3 className="page-title">发布新活动</h3>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div>{this.renderFields(classes)}</div>
 
-                    <div
-                        className="flex-form-wrapper"
-                        style={{ width: "95%" }}
-                    >
-                        <h4 className="category-title">
-                            你可以提供的向导服务
-                        </h4>
+                    <div className="flex-form-wrapper" style={{ width: "95%" }}>
+                        <h4 className="category-title">你可以提供的向导服务</h4>
                         <Field
                             key="services"
                             name="services"

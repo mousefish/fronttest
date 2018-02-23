@@ -7,7 +7,7 @@ import WizardFirst from "../presenter/WizardFirst";
 import WizardSecond from "../presenter/WizardSecond";
 import WizardThird from "../presenter/WizardThird";
 
-class SignUpWizard extends Component {
+class SignupWizard extends Component {
   constructor(props) {
     super(props);
     this.nextPage = this.nextPage.bind(this);
@@ -22,7 +22,7 @@ class SignUpWizard extends Component {
     this.setState({ page: this.state.page + 1 });
   }
 
-// the email is not valid, then the user cannot go to the next page!
+  // the email is not valid, then the user cannot go to the next page!
   verifyEmail(value) {
     let p = new Promise((resolve, reject) => {
       resolve(this.props.verifySignupEmail({ email: value.email }));
@@ -39,7 +39,7 @@ class SignUpWizard extends Component {
   }
 
   handleSubmit(values) {
-    console.log('submit', values)
+    console.log("submit", values);
     this.props.userSignupRequest(values, this.props.history);
   }
 
@@ -48,7 +48,12 @@ class SignUpWizard extends Component {
     const { page } = this.state;
     return (
       <div>
-        {page === 1 && <WizardFirst onSubmit={this.verifyEmail} />}
+        {page === 1 && (
+          <WizardFirst
+            history={this.props.history}
+            onSubmit={this.verifyEmail}
+          />
+        )}
         {page === 2 && (
           <WizardSecond
             previousPage={this.previousPage}
@@ -80,4 +85,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(withRouter(SignUpWizard));
+export default connect(mapStateToProps, actions)(withRouter(SignupWizard));

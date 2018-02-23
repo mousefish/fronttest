@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import Button from "material-ui/Button";
 import AutocompleteField from "../../Components/container/AutocompleteField";
 import popupSearchDateField from "../../Components/container/popupSearchDateField";
@@ -11,9 +11,8 @@ import popupSearchMultiServices from "../../Components/container/popupSearchMult
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { TextField } from "redux-form-material-ui";
 import validate from "../../Utility/validate";
-import * as actions from '../../Actions';
+import * as actions from "../../Actions";
 import services from "../../data/services";
-
 
 const styles = theme => ({
     button: {
@@ -29,8 +28,8 @@ class AddWish extends Component {
     goBack() {
         this.props.history.goBack();
     }
-    submitForm(value){
-        console.log('wish value', value);
+    submitForm(value) {
+        console.log("wish value", value);
         this.props.submitWishData(value, this.props.history);
     }
 
@@ -42,7 +41,11 @@ class AddWish extends Component {
 
     renderFields(classes) {
         return [
-           <div key="location" className="flex-form-wrapper" style={{ width: "95%" }}>
+            <div
+                key="location"
+                className="flex-form-wrapper"
+                style={{ width: "95%" }}
+            >
                 <Field
                     key="location"
                     name="location"
@@ -64,10 +67,12 @@ class AddWish extends Component {
                 />
             </div>,
 
-            <div key="date" className="flex-form-wrapper" style={{ width: "95%" }}>
-                <h4 className="category-title">
-                    你的行程时间
-                </h4>
+            <div
+                key="date"
+                className="flex-form-wrapper"
+                style={{ width: "95%" }}
+            >
+                <h4 className="category-title">你的行程时间</h4>
                 <Field
                     key="dapartdate"
                     name="departdate"
@@ -82,7 +87,6 @@ class AddWish extends Component {
                     type="text"
                     component={popupSearchDateField}
                     placeholder="结束日期和时间"
-
                 />
             </div>
         ];
@@ -94,26 +98,21 @@ class AddWish extends Component {
 
         return (
             <div className="wrapper">
-                <div
-                    className="wizard-header"
-                    onClick={this.goBack.bind(this)}
-                >
+                <div className="wizard-header" onClick={this.goBack.bind(this)}>
                     <KeyboardArrowLeft
                         className="arrow"
+                        style={{
+                            width: 30,
+                            height: 30
+                        }}
                     />
-
-                    <h4 className="category-title">发布新愿望</h4>
+                    <h3 className="page-title">发布新愿望</h3>
                 </div>
                 <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
                     <div>{this.renderFields(classes)}</div>
 
-                    <div
-                        className="flex-form-wrapper"
-                        style={{ width: "95%" }}
-                    >
-                        <h4 className="category-title">
-                            你需要的向导服务
-                        </h4>
+                    <div className="flex-form-wrapper" style={{ width: "95%" }}>
+                        <h4 className="category-title">你需要的向导服务</h4>
                         <Field
                             key="services"
                             name="services"
@@ -132,7 +131,7 @@ class AddWish extends Component {
                         提交
                     </Button>
                 </form>
-             <div className="input-success">{this.props.msg}</div>
+                <div className="input-success">{this.props.msg}</div>
             </div>
         );
     }
@@ -143,10 +142,12 @@ const mapStateToProps = state => {
 };
 
 AddWish = reduxForm({
-  form: "AddWish",
-  destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true,
-  validate
+    form: "AddWish",
+    destroyOnUnmount: false,
+    forceUnregisterOnUnmount: true,
+    validate
 })(withStyles(styles)(AddWish));
 
-export default (AddWish = connect(mapStateToProps, actions)(withRouter(AddWish)))
+export default (AddWish = connect(mapStateToProps, actions)(
+    withRouter(AddWish)
+));

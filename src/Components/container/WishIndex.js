@@ -101,7 +101,7 @@ class WishIndex extends Component {
 
     return wishes.map(wish => {
       return (
-        <Link to={`/wish/${wish.id}`} className="unlink">
+        <Link to={`/wish/${wish.id}`} key={wish.id} className="unlink">
           <Card className="card" key={wish.id}>
             <div className={classes.details}>
               <CardContent className={classes.content}>

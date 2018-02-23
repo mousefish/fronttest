@@ -11,7 +11,7 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
         width: "95%"
-    }
+    },
 });
 
 class ActivityWishPanel extends Component {
@@ -24,7 +24,7 @@ class ActivityWishPanel extends Component {
                     <img src={bg} alt="chengdu" className="image-wrapper" />
                 </div>
                 <div className="flex-inner-wrapper">
-                    <Link to="/addActivity">
+                    <Link to="/addActivity" className="unlink">
                         <Button
                             color="primary"
                             raised
@@ -34,7 +34,7 @@ class ActivityWishPanel extends Component {
                             发布新活动
                         </Button>
                     </Link>
-                    <Link to="/addWish">
+                    <Link to="/addWish" className="unlink">
                         <Button
                             color="primary"
                             raised

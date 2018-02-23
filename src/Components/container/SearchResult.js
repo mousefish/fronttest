@@ -45,9 +45,14 @@ class SearchResult extends Component {
     result.push(
       <div className="wizard-header" key="header">
         <KeyboardArrowLeft
+          style={{
+            width: 30,
+            height: 30
+          }}
           className="arrow"
           onClick={() => this.props.history.goBack()}
         />
+         <h3 className="page-title">搜索结果</h3>
       </div>
     );
     if (!searchResult[0]) {

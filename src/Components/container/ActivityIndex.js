@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import _ from "lodash";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
@@ -24,33 +23,19 @@ import Card, {
   CardContent,
   CardActions
 } from "material-ui/Card";
-import Avatar from "material-ui/Avatar";
 
 import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
-import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
-
+import List from "material-ui/List";
 import Slide from "material-ui/transitions/Slide";
-import AppBar from "material-ui/AppBar";
-
-import Button from "material-ui/Button";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
-import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-
 import Dialog from "material-ui/Dialog";
-
-import PersonProfile from "../../Pages/PersonProfile";
-import RatingSummary from "../../Pages/RatingSummary";
 import RegisterDialog from "../../Pages/RegisterDialog";
-
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
 const styles = {
-
   flex: {
     flex: 1
   },
@@ -65,19 +50,18 @@ const styles = {
     verticalAlign: "-2px"
   },
 
-  heartOn:{
-    color:"#F44336"
+  heartOn: {
+    color: "#F44336"
   },
-  numberOfLikes:{
-    fontSize:"1.2rem"
+  numberOfLikes: {
+    fontSize: "1.2rem"
   }
 };
 
 class ActivityIndex extends Component {
   state = {
-    open: false,
+    open: false
   };
-
 
   handleClose = () => {
     this.setState({ open: false });
@@ -115,15 +99,14 @@ class ActivityIndex extends Component {
   handleLikes(event, itemId) {
     event.preventDefault();
     event.stopPropagation();
-     // cannot "like" until you login/signup
+    // cannot "like" until you login/signup
     if (!localStorage.getItem("jwtToken")) {
       this.setState({
         open: true
       });
-    }else{
-       this.props.submitLikes(itemId);
+    } else {
+      this.props.submitLikes(itemId);
     }
-
   }
 
   renderItems() {
@@ -194,8 +177,12 @@ class ActivityIndex extends Component {
                   this.handleLikes(event, item.id);
                 }}
               >
-                <FavoriteIcon className={item.likes === 0 ? "" : classes.heartOn}/>
-                 <span className={classes.numberOfLikes}>&nbsp;{item.likes}</span>
+                <FavoriteIcon
+                  className={item.likes === 0 ? "" : classes.heartOn}
+                />
+                <span className={classes.numberOfLikes}>
+                  &nbsp;{item.likes}
+                </span>
               </IconButton>
               <IconButton aria-label="Share">
                 <ShareIcon />
@@ -208,7 +195,7 @@ class ActivityIndex extends Component {
   }
 
   render() {
-    const { fullScreen, classes } = this.props;
+    const { fullScreen } = this.props;
 
     return (
       <List>
@@ -218,7 +205,7 @@ class ActivityIndex extends Component {
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
         >
-          <RegisterDialog onClick={this.handleClose}/>
+          <RegisterDialog onClick={this.handleClose} />
         </Dialog>
         {this.renderItems()}
       </List>

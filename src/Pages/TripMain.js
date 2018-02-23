@@ -15,7 +15,6 @@ import Toolbar from "material-ui/Toolbar";
 import IconButton from "material-ui/IconButton";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
-
 WebFontLoader.load({
   google: {
     families: ["Roboto:300,400,500,700", "Material Icons"]
@@ -24,7 +23,8 @@ WebFontLoader.load({
 
 const styles = {
   appBar: {
-    position: "relative"
+    position: "relative",
+    backgroundColor:"#1976D2"
   }
 };
 
@@ -49,12 +49,12 @@ class TripMain extends Component {
     this.setState({ open: false });
   };
 
-  renderContent(activityData){
-     if(!activityData){
-       return <div>Loading..</div>
-     }else{
-       return <ActivityIndex activityData={activityData} />
-     }
+  renderContent(activityData) {
+    if (!activityData) {
+      return <div>Loading..</div>;
+    } else {
+      return <ActivityIndex activityData={activityData} />;
+    }
   }
 
   render() {
@@ -62,8 +62,8 @@ class TripMain extends Component {
     const { activityData } = this.props;
     const { likes } = this.props;
     return (
-      <div style={{ position: "relative"}}>
-        <SideButton onClick={this.handleClickOpen} URI='/' />
+      <div style={{ position: "relative" }}>
+        <SideButton onClick={this.handleClickOpen} URI="/" />
         <Dialog
           fullScreen
           open={this.state.open}
@@ -77,7 +77,12 @@ class TripMain extends Component {
                 onClick={this.handleRequestClose}
                 aria-label="Close"
               >
-                <KeyboardArrowLeft />
+                <KeyboardArrowLeft
+                  style={{
+                    width: 30,
+                    height: 30
+                  }}
+                />
               </IconButton>
             </Toolbar>
           </AppBar>
@@ -89,7 +94,6 @@ class TripMain extends Component {
         </div>
       </div>
     );
-
   }
 }
 
@@ -97,9 +101,10 @@ TripMain.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => {
-  return { activityData: state.ActivityReducer.all,
-         };
+const mapStateToProps = state => {
+  return {
+    activityData: state.ActivityReducer.all
+  };
 };
 
-export default connect(mapStateToProps,actions)(withStyles(styles)(TripMain));
+export default connect(mapStateToProps, actions)(withStyles(styles)(TripMain));

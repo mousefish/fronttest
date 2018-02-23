@@ -10,7 +10,6 @@ import { withStyles } from "material-ui/styles";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { FormControlLabel } from "material-ui/Form";
 
-
 const styles = theme => ({
   progress: {
     width: "95%",
@@ -19,7 +18,7 @@ const styles = theme => ({
 
   button: {
     margin: theme.spacing.unit,
-    width: "95%",
+    width: "95%"
   },
 
   radioInner: {
@@ -56,11 +55,14 @@ class wizardSecond extends Component {
       <form className="wrapper" onSubmit={handleSubmit}>
         <div className="wizard-header">
           <KeyboardArrowLeft
-            style={{ float: "left", color: "grey" }}
+            className="arrow"
+            style={{
+              width: 30,
+              height: 30
+            }}
             onClick={previousPage}
           />
-
-          <h4 className={classes.text}>个人基本资料</h4>
+          <h3 className="page-title">个人基本资料</h3>
         </div>
         <div className="flex-form-wrapper">
           <LinearProgress
@@ -79,7 +81,7 @@ class wizardSecond extends Component {
           />
         </div>
         <div className="flex-form-wrapper">
-        <Field
+          <Field
             name="sex"
             component={RadioGroup}
             className={classes.radioInner}
@@ -135,7 +137,7 @@ class wizardSecond extends Component {
             color="primary"
             raised
             className={classes.button}
-            id='btn'
+            id="btn"
           >
             下一步
           </Button>

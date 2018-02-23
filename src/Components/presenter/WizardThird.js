@@ -17,8 +17,7 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
-    width: "95%",
-
+    width: "95%"
   },
   formInner: {
     width: "95%"
@@ -42,11 +41,14 @@ class wizardThird extends Component {
       <form className="wrapper" onSubmit={handleSubmit}>
         <div className="wizard-header">
           <KeyboardArrowLeft
-            style={{ float: "left", color: "grey" }}
+            className="arrow"
+            style={{
+              width: 30,
+              height: 30
+            }}
             onClick={previousPage}
           />
-
-          <h4 className={classes.text}>其他信息</h4>
+          <h3 className="page-title">其他信息</h3>
         </div>
         <div className="flex-form-wrapper">
           <LinearProgress
@@ -108,7 +110,7 @@ class wizardThird extends Component {
             color="primary"
             raised
             className={classes.button}
-            id='btn'
+            id="btn"
           >
             提交
           </Button>

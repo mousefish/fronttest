@@ -7,7 +7,7 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { withStyles } from "material-ui/styles";
 import { LinearProgress } from "material-ui/Progress";
 import { Link } from "react-router-dom";
-import PasswordSetVisibility from './PasswordSetVisibility';
+import PasswordSetVisibility from "./PasswordSetVisibility";
 
 const styles = theme => ({
   progress: {
@@ -17,11 +17,7 @@ const styles = theme => ({
 
   button: {
     margin: theme.spacing.unit,
-    width: "95%",
-  },
-
-  text: {
-    fontWeight: "bold"
+    width: "95%"
   }
 });
 
@@ -31,16 +27,20 @@ class wizardFirst extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const { handleSubmit } = this.props;
+    const { classes, history, handleSubmit } = this.props;
 
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
         <div className="wizard-header">
-          <Link to='/loginSignUp'>
-          <KeyboardArrowLeft className='arrow'/>
-          </Link>
-          <h4 className={classes.text}>创建新账户</h4>
+            <KeyboardArrowLeft
+              className="arrow"
+              style={{
+                width: 30,
+                height: 30
+              }}
+              onClick={()=>history.goBack()}
+            />
+          <h3 className="page-title">创建新账户</h3>
         </div>
         <div className="flex-form-wrapper">
           <LinearProgress
@@ -57,10 +57,10 @@ class wizardFirst extends Component {
             label="输入邮箱地址"
           />
         </div>
-        <div className="flex-form-wrapper" style={{marginBottom:20}}>
+        <div className="flex-form-wrapper" style={{ marginBottom: 20 }}>
           <Field
             name="password"
-            type='password'
+            type="password"
             component={PasswordSetVisibility}
             className="text-field"
             label="输入密码 - 六位数"
@@ -73,7 +73,7 @@ class wizardFirst extends Component {
             color="primary"
             raised
             className="text-field"
-            id='btn'
+            id="btn"
           >
             点击注册
           </Button>

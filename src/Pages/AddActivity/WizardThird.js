@@ -33,10 +33,13 @@ class WizardThird extends Component {
                 <div className="wizard-header">
                     <KeyboardArrowLeft
                         className="arrow"
+                        style={{
+                            width: 30,
+                            height: 30
+                        }}
                         onClick={previousPage}
                     />
-
-                    <h4 style={{fontWeight: "bold"}}>上传照片</h4>
+                    <h3 className="page-title">上传照片</h3>
                 </div>
 
                 <form onSubmit={handleSubmit}>

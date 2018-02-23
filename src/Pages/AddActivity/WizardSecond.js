@@ -24,10 +24,13 @@ class WizardSecond extends Component {
                 <div className="wizard-header">
                     <KeyboardArrowLeft
                         className="arrow"
+                        style={{
+                            width: 30,
+                            height: 30
+                        }}
                         onClick={previousPage}
                     />
-
-                    <h4 className="category-title">我在这个地方的故事</h4>
+                    <h3 className="page-title">我在这个地方的故事</h3>
                 </div>
                 <form onSubmit={handleSubmit} >
 
