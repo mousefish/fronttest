@@ -43,6 +43,14 @@ const styles = theme => ({
         height: "1.2em",
         background:
             "linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)"
+    },
+    toggler: {
+        marginTop:2,
+        alignSelf:"center",
+        color: "#fff",
+        backgroundColor:"#1976D2",
+        borderRadius:10,
+        width:100
     }
 });
 
@@ -75,20 +83,18 @@ class Story extends Component {
                             }
                         />
                     </div>
-                    <Button
-                        color="primary"
-                        raised
-                        className={classes.button}
+                    <button
+                        className={classes.toggler}
                         onClick={() =>
                             this.setState(prevState => ({
                                 isExpanded: !prevState.isExpanded
                             }))}
                     >
-                        {this.state.isExpanded ? "收回内容" : "展开全部内容"}
-                    </Button>
+                        {this.state.isExpanded ? "收回内容" : "展开全部"}
+                    </button>
                 </div>
                 <div className="gallery">
-                    <h4 style={{textAlign:'center'}}>我的旅游相册，快来看看吧</h4>
+                    <h4 style={{ textAlign: "center" }}>我的旅游相册，快来看看吧</h4>
                     <div className={classes.galleryWrapper}>
                         <div className={classes.imageFrame}>
                             <img
@@ -128,7 +134,11 @@ class Story extends Component {
                     </div>
                 </div>
                 <div className="flex-inner-wrapper">
-                    <Link to="/friendComments" className="unlink" style={{textAlign:'center'}}>
+                    <Link
+                        to="/friendComments"
+                        className="unlink"
+                        style={{ textAlign: "center" }}
+                    >
                         <h2 className={classes.link}>来看看小伙伴对我的评价吧</h2>
                     </Link>
                 </div>
