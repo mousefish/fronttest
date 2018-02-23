@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Button from "material-ui/Button";
 import {
   DialogActions,
   DialogContent,
@@ -12,43 +11,62 @@ import {
 import { withStyles } from "material-ui/styles";
 
 const styles = {
-  right:{
-    marginRight:30
+  bottom: {
+    marginBottom: 10,
   },
-  bottom:{
-    marginBottom:10
+  choice: {
+    color: "#1976D2",
+    backgroundColor: "#fff",
+    fontSize: "1.4rem",
+    fontWeight: "bold",
+    marginRight: 20,
+    borderBottom:"1px solid #1976D2"
   },
+  actions: {
+    color: "#1976D2",
+    fontSize: 12
+  }
 };
 
 const RegisterDialog = props => {
-    const { classes } = props;
-    return (
-        <div>
-            <DialogTitle id="responsive-dialog-title">{"请登录"}</DialogTitle>
-            <DialogContent>
-                <div className={classes.bottom}>
-                    <Link to="/login" className={classes.right}>
-                        <Button color="primary" raised>
-                            登陆已有账户
-                        </Button>
-                    </Link>
-                    <Link to="/signup">
-                        <Button color="primary" raised>
-                            创建新账户
-                        </Button>
-                    </Link>
-                </div>
-                <DialogContentText>
-                    注册代表已经同意<Link to="/">服务条款</Link>，<Link to="/">隐私政策</Link>，<Link to="/">免责声明</Link>，<Link to="/">保障计划条款</Link>，<Link to="/">使用政策须知</Link>。
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={props.onClick} color="primary">
-                    稍后再说
-                </Button>
-            </DialogActions>
+  const { classes } = props;
+  return (
+    <div>
+      <DialogTitle id="responsive-dialog-title">{"请注册"}</DialogTitle>
+      <DialogContent>
+        <div className={classes.bottom}>
+          <Link to="/login" className="unlink">
+            <span className={classes.choice} raised>
+              登陆已有账户
+            </span>
+          </Link>
+          <Link to="/signup" className="unlink">
+            <span className={classes.choice} raised>
+              创建新账户
+            </span>
+          </Link>
         </div>
-    );
+        <DialogContentText>
+          注册代表已经同意<Link to="/" className="unlink">
+            服务条款
+          </Link>，<Link to="/" className="unlink">
+            隐私政策
+          </Link>，<Link to="/" className="unlink">
+            免责声明
+          </Link>，<Link to="/" className="unlink">
+            保障计划条款
+          </Link>，<Link to="/" className="unlink">
+            使用政策须知
+          </Link>。
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <span className={classes.actions} onClick={props.onClick}>
+          稍后再说
+        </span>
+      </DialogActions>
+    </div>
+  );
 };
 
 export default withStyles(styles)(RegisterDialog);
