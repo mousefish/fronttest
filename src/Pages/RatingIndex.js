@@ -22,7 +22,7 @@ class RatingIndex extends Component {
     renderStars(num){
         let result = []
         for(let i = 0 ; i < num; i++){
-            result.push(<Star />)
+            result.push(<Star key={i} />)
         }
 
         return result

@@ -58,7 +58,7 @@ class RatingForm extends Component {
         const starContainer = [];
         for (let i = 0; i < 5; i++) {
             starContainer.push(
-                <StarBorder onClick={() => this.updateStars(i)} />
+                <StarBorder key={i} onClick={() => this.updateStars(i)} />
             );
         }
 

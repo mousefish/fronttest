@@ -74,12 +74,18 @@ const styles = {
   },
   bottom:{
     marginBottom:10
+  },
+  heartOn:{
+    color:"#F44336"
+  },
+  numberOfLikes:{
+    fontSize:"1.2rem"
   }
 };
 
 class ActivityIndex extends Component {
   state = {
-    open: false
+    open: false,
   };
 
 
@@ -119,7 +125,7 @@ class ActivityIndex extends Component {
   handleLikes(event, itemId) {
     event.preventDefault();
     event.stopPropagation();
-
+     // cannot "like" until you login/signup
     if (!localStorage.getItem("jwtToken")) {
       this.setState({
         open: true
@@ -198,8 +204,8 @@ class ActivityIndex extends Component {
                   this.handleLikes(event, item.id);
                 }}
               >
-                <FavoriteIcon />
-                {item.likes}
+                <FavoriteIcon className={item.likes === 0 ? "" : classes.heartOn}/>
+                 <span className={classes.numberOfLikes}>&nbsp;{item.likes}</span>
               </IconButton>
               <IconButton aria-label="Share">
                 <ShareIcon />
