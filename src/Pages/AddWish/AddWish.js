@@ -12,7 +12,7 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { TextField } from "redux-form-material-ui";
 import validate from "../../Utility/validate";
 import * as actions from "../../Actions";
-import services from "../../data/services";
+import services from "../../Data/services";
 import PageHeader from "../PageHeader";
 
 const styles = theme => ({

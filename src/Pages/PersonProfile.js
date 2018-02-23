@@ -37,16 +37,13 @@ const styles = theme => ({
         marginBottom: 40
     },
     avatar: {
-        margin: 10
-    },
-
-    bigAvatar: {
         width: 60,
         height: 60,
         position: "absolute",
         left: "50%",
         top: 230,
-        marginLeft: "-30px"
+        marginLeft: "-30px",
+        margin: 10
     },
 
     innerWrapper: {
@@ -139,7 +136,10 @@ class PersonProfile extends Component {
 
         return (
             <div className="wrapper">
-              <PageHeader history={this.props.history} title={user.username} />
+                <PageHeader
+                    history={this.props.history}
+                    title={user.username}
+                />
                 <Dialog
                     fullScreen
                     open={this.state.open}
@@ -171,10 +171,7 @@ class PersonProfile extends Component {
                         <Avatar
                             alt="profile pic"
                             src={pic}
-                            className={classNames(
-                                classes.avatar,
-                                classes.bigAvatar
-                            )}
+                            className={classes.avatar}
                         />
                     </div>
                     <div className="flex-inner-wrapper customized-align">

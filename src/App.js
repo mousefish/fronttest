@@ -17,7 +17,7 @@ import Home from "material-ui-icons/Home";
 
 import Person from "material-ui-icons/Person";
 
-import WebFontLoader from "webfontloader";
+// import WebFontLoader from "webfontloader";
 
 import TripMain from "./Pages/TripMain";
 
@@ -63,11 +63,11 @@ const styleSheet = {
     minWidth: 60
   }
 };
-WebFontLoader.load({
-  google: {
-    families: ["Roboto:300,400,500,700", "Material Icons"]
-  }
-});
+// WebFontLoader.load({
+//   google: {
+//     families: ["Roboto:300,400,500,700", "Material Icons"]
+//   }
+// });
 
 class App extends Component {
   static propTypes = {

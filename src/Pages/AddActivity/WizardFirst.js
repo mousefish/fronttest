@@ -9,7 +9,7 @@ import AutocompleteField from "../../Components/container/AutocompleteField";
 import { TextField } from "redux-form-material-ui";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "../../Utility/validate";
-import services from "../../data/services";
+import services from "../../Data/services";
 import PageHeader from "../PageHeader";
 
 const styles = theme => ({

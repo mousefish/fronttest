@@ -60,7 +60,6 @@ class TripMain extends Component {
   render() {
     const classes = this.props.classes;
     const { activityData } = this.props;
-    const { likes } = this.props;
     return (
       <div style={{ position: "relative" }}>
         <SideButton onClick={this.handleClickOpen} URI="/" />

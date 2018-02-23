@@ -1,73 +1,83 @@
 import React, { Component } from "react";
-// import * as actions from "../Actions";
 import { connect } from "react-redux";
+import Avatar from "material-ui/Avatar";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import * as actions from '../Actions';
-import PageHeader from "./PageHeader";
+import * as actions from "../Actions";
+import pic from "../Assets/Images/profile.jpg";
+import MyItem from "./MyItem";
 
 
 const styles = theme => ({
+    avatar: {
+        width: 60,
+        height: 60
+    },
+
     subHeader: {
+        margin: "5px 0px",
         display: "flex",
         flexFlow: "row nowrap",
-        borderTop: "1px solid grey",
-        padding: 20
+        justifyContent: "flex-start",
+        padding: 10,
+        marginBottom: 5,
+        backgroundColor: "#1976D2",
+        color: "#fff"
     },
 
     subHeaderRight: {
-        marginLeft: 20,
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center"
+        justifyContent: "center",
+        paddingLeft: 20
     },
 
     list: {
         listStyle: "none",
-        padding:0,
+        padding: 0
     },
 
-    ele: {
-        lineHeight: 2,
-        paddingLeft:20,
-        borderTop: "1px solid grey"
-    }
+
 });
 
-
-
-
 class MyAccount extends Component {
-    renderEle(classes) {
-        let eles = ["我的活动 | 愿望", "我的收藏", "我的好友", "系统设置", "关于我们", "版本更新"];
-        return eles.map((ele, index, eles) => {
-            return <li key={index} className={classes.ele}>{eles[index]}</li>;
+    renderItems() {
+        const { classes } = this.props;
+        const items = ["我的活动 | 愿望", "我的收藏", "我的好友", "系统设置", "关于我们", "版本更新"];
+        return items.map((item, index, items) => {
+            return (
+               <MyItem item={item} />
+            );
         });
     }
     render() {
         const { classes } = this.props;
         return (
             <div className="wrapper">
-                <PageHeader history={this.props.history} title="我的事项"/>
                 <div className={classes.subHeader}>
-                    <div>
-                        <img src="https://placeholdit.co//i/80x80?&text=portrait" />
-                    </div>
-                    <div className={classes.subHeaderRight}>
-                        <p>陈嘉熙</p>
-                        <p>完善个人资料(75%)</p>
-                    </div>
+                    <Avatar
+                        alt="profile"
+                        src={pic}
+                        className={classes.avatar}
+                    />
+                    <div className={classes.subHeaderRight}>陈嘉熙</div>
                 </div>
 
                 <div>
-                    <ul className={classes.list}>{this.renderEle(classes)}</ul>
-                    <button onClick={()=>this.props.logout(this.props.history)}>推出账户(temp for testing)</button>
+                    <ul className={classes.list}>{this.renderItems()}</ul>
                 </div>
+                <button style={{backgroundColor:"red", marginTop:30, padding:20}}
+                        onClick={() => this.props.logout(this.props.history)}
+                    >
+                        退出账户(only for testing)
+               </button>
             </div>
         );
     }
 }
 
-export default connect(null, actions)(withStyles(styles)(withRouter(MyAccount)));
+export default connect(null, actions)(
+    withStyles(styles)(withRouter(MyAccount))
+);
