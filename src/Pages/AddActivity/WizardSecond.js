@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import validate from './validate';
+import validate from "../../Utility/validate";
 import { TextField } from "redux-form-material-ui";
 
 const styles = theme => ({

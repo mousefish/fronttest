@@ -12,7 +12,7 @@ import { withRouter } from "react-router";
 import { MenuItem } from "material-ui/Menu";
 import { Select } from "redux-form-material-ui";
 import classNames from "classnames";
-import validate from "../presenter/validate";
+import validate from "../../Utility/validate";
 import Radio from "material-ui/Radio";
 import { RadioGroup, TextField } from "redux-form-material-ui";
 import { FormControlLabel } from "material-ui/Form";

@@ -80,7 +80,7 @@ class MyAccount extends Component {
                     </div>
                 </div>
 
-                <div>PART OF TOKEN: {localStorage.getItem("jwtToken").slice(0,5)}
+                <div>
                     <ul className={classes.list}>{this.renderEle(classes)}</ul>
                     <button onClick={()=>this.props.logout(this.props.history)}>推出账户(temp for testing)</button>
                 </div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
 import { Field, reduxForm } from "redux-form";
-import validate from "./validate";
+import validate from "../../Utility/validate";
 import Button from "material-ui/Button";
 
 import { TextField } from "redux-form-material-ui";

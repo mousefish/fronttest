@@ -8,7 +8,7 @@ import popupSearchMultiServices from "../../Components/container/popupSearchMult
 import AutocompleteField from "../../Components/container/AutocompleteField";
 import { TextField } from "redux-form-material-ui";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import validate from "./validate";
+import validate from "../../Utility/validate";
 import services from "../../data/services";
 
 const styles = theme => ({

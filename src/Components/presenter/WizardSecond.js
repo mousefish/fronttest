@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
-import validate from "./validate";
+import validate from "../../Utility/validate";
 import Radio from "material-ui/Radio";
 import { RadioGroup, TextField } from "redux-form-material-ui";
 import { LinearProgress } from "material-ui/Progress";
