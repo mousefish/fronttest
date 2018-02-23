@@ -8,6 +8,7 @@ import { withStyles } from "material-ui/styles";
 import { LinearProgress } from "material-ui/Progress";
 import { Link } from "react-router-dom";
 import PasswordSetVisibility from "./PasswordSetVisibility";
+import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
@@ -31,17 +32,8 @@ class wizardFirst extends Component {
 
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
-        <div className="wizard-header">
-            <KeyboardArrowLeft
-              className="arrow"
-              style={{
-                width: 30,
-                height: 30
-              }}
-              onClick={()=>history.goBack()}
-            />
-          <h3 className="page-title">创建新账户</h3>
-        </div>
+        <PageHeader history={this.props.history} title="创建新账户" />
+
         <div className="flex-form-wrapper">
           <LinearProgress
             className={classes.progress}

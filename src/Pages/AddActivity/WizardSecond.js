@@ -5,12 +5,13 @@ import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "../../Utility/validate";
 import { TextField } from "redux-form-material-ui";
+import PageHeader from "../PageHeader";
 
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
         width: "95%",
-        marginTop:20
+        marginTop: 20
     }
 });
 
@@ -21,19 +22,8 @@ class WizardSecond extends Component {
 
         return (
             <div className="wrapper">
-                <div className="wizard-header">
-                    <KeyboardArrowLeft
-                        className="arrow"
-                        style={{
-                            width: 30,
-                            height: 30
-                        }}
-                        onClick={previousPage}
-                    />
-                    <h3 className="page-title">我在这个地方的故事</h3>
-                </div>
-                <form onSubmit={handleSubmit} >
-
+                <PageHeader onClick={previousPage} title="我在这个地方的故事" />
+                <form onSubmit={handleSubmit}>
                     <Field
                         key="story"
                         name="story"
@@ -42,7 +32,7 @@ class WizardSecond extends Component {
                         multiline
                         rowsMax="4"
                         placeholder="我在这里生活了10年......"
-                        className='text-field'
+                        className="text-field"
                     />
 
                     <Button
@@ -50,7 +40,7 @@ class WizardSecond extends Component {
                         color="primary"
                         raised
                         className={classes.button}
-                        id='btn'
+                        id="btn"
                     >
                         下一步
                     </Button>

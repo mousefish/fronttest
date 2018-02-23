@@ -10,6 +10,7 @@ import { TextField } from "redux-form-material-ui";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "../../Utility/validate";
 import services from "../../data/services";
+import PageHeader from "../PageHeader";
 
 const styles = theme => ({
     button: {
@@ -19,9 +20,6 @@ const styles = theme => ({
 });
 
 class WizardFirst extends Component {
-    goBack() {
-        this.props.history.goBack();
-    }
 
     renderFields(classes) {
         return [
@@ -92,17 +90,7 @@ class WizardFirst extends Component {
 
         return (
             <div className="wrapper">
-                <div className="wizard-header">
-                    <KeyboardArrowLeft
-                        className="arrow"
-                        style={{
-                            width: 30,
-                            height: 30
-                        }}
-                        onClick={this.goBack.bind(this)}
-                    />
-                 <h3 className="page-title">发布新活动</h3>
-                </div>
+                <PageHeader history={this.props.history} title="发布新活动"/>
                 <form onSubmit={handleSubmit}>
                     <div>{this.renderFields(classes)}</div>
 

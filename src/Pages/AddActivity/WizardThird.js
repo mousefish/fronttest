@@ -5,6 +5,8 @@ import Button from "material-ui/Button";
 import FileInput from "./FileInput";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "../../Utility/validate";
+import PageHeader from "../PageHeader";
+
 
 const styles = theme => ({
 
@@ -30,17 +32,7 @@ class WizardThird extends Component {
         const { classes } = this.props;
         return (
             <div className="wrapper">
-                <div className="wizard-header">
-                    <KeyboardArrowLeft
-                        className="arrow"
-                        style={{
-                            width: 30,
-                            height: 30
-                        }}
-                        onClick={previousPage}
-                    />
-                    <h3 className="page-title">上传照片</h3>
-                </div>
+                <PageHeader onClick={previousPage} title="上传照片" />
 
                 <form onSubmit={handleSubmit}>
                     <div className={classes.imageWrapper}>

@@ -6,23 +6,10 @@ import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import * as actions from '../Actions';
+import PageHeader from "./PageHeader";
+
+
 const styles = theme => ({
-    wrapper: {
-        width: '95vw',
-        maxWidth:600,
-        margin: "auto",
-        marginBottom: 50,
-        marginTop: 20
-    },
-
-    header: {
-        width: "100%",
-        height: "20%",
-        textAlign: "center",
-        padding: 10,
-        fontWeight: "bold"
-    },
-
     subHeader: {
         display: "flex",
         flexFlow: "row nowrap",
@@ -62,14 +49,8 @@ class MyAccount extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div className={classes.wrapper}>
-                <div className={classes.header}>
-                    <Link to='/'><KeyboardArrowLeft
-                        style={{ float: "left", color: "grey" }}
-                    /></Link>
-                    <h4 style={{ fontWeight: "bold" }}>我的事项</h4>
-                </div>
-
+            <div className="wrapper">
+                <PageHeader history={this.props.history} title="我的事项"/>
                 <div className={classes.subHeader}>
                     <div>
                         <img src="https://placeholdit.co//i/80x80?&text=portrait" />

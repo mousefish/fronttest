@@ -20,10 +20,16 @@ import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PersonProfileDetails from "../Components/container/PersonProfileDetails";
+import PageHeader from "./PageHeader";
 
 import * as actions from "../Actions";
 
 const styles = theme => ({
+    appBar: {
+        position: "relative",
+        backgroundColor: "#1976D2"
+    },
+
     image: {
         width: "100%",
         maxWidth: "100%",
@@ -39,7 +45,7 @@ const styles = theme => ({
         height: 60,
         position: "absolute",
         left: "50%",
-        top: 180,
+        top: 230,
         marginLeft: "-30px"
     },
 
@@ -133,6 +139,7 @@ class PersonProfile extends Component {
 
         return (
             <div className="wrapper">
+              <PageHeader history={this.props.history} title={user.username} />
                 <Dialog
                     fullScreen
                     open={this.state.open}
@@ -146,20 +153,17 @@ class PersonProfile extends Component {
                                 onClick={this.handleRequestClose}
                                 aria-label="Close"
                             >
-                                <KeyboardArrowLeft className='arrow'/>
+                                <KeyboardArrowLeft
+                                    style={{
+                                        width: 30,
+                                        height: 30
+                                    }}
+                                />
                             </IconButton>
-                            <Typography
-                                type="title"
-                                color="inherit"
-                                className={classes.flex}
-                            >
-                                {user.username}的资料
-                            </Typography>
                         </Toolbar>
                     </AppBar>
                     <PersonProfileDetails profile={user} />
                 </Dialog>
-
 
                 <div>
                     <div className="image-wrapper">
@@ -190,7 +194,7 @@ class PersonProfile extends Component {
                             color="primary"
                             raised
                             className={classes.smallButton}
-                            id='btn'
+                            id="btn"
                             onClick={this.handleClickOpen}
                         >
                             更多我的资料哦

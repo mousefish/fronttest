@@ -29,8 +29,7 @@ import Wish from "./Components/container/Wish";
 
 import MyAccount from "./Pages/MyAccount";
 import MyMessage from "./Pages/MyMessage";
-import Discovery from "./Pages/Discovery";
-import MyRoute from "./Pages/MyRoute";
+
 import AddActivity from "./Pages/AddActivity/AddActivity";
 import AddWish from "./Pages/AddWish/AddWish";
 import Activity from "./Pages/Activity";
@@ -159,8 +158,6 @@ class App extends Component {
             <Route exact path="/wish" component={WishMain} />
             <Route exact path="/my" component={RequireAuth(MyAccount)} />
             <Route exact path="/message" component={MyMessage} />
-            <Route exact path="/discovery" component={Discovery} />
-            <Route exact path="/myRoute" component={MyRoute} />
             <Route
               exact
               path="/addActivity"

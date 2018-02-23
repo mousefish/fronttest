@@ -21,6 +21,7 @@ import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+import PageHeader from "../../Pages/PageHeader";
 
 const style = theme => ({
     media: {
@@ -69,17 +70,8 @@ class WishDetails extends Component {
         }
         return (
             <div className="wrapper">
-                <div className="wizard-header">
-                    <KeyboardArrowLeft
-                        style={{
-                            width: 30,
-                            height: 30
-                        }}
-                        className="arrow"
-                        onClick={()=>this.props.history.goBack()}
-                    />
-                     <h3 className="page-title">愿望</h3>
-                </div>
+                <PageHeader history={this.props.history} title="愿望" />
+
                 <div className={classes.buttonSet}>NEEDS REDESIGN</div>
                 <div>{wish.id}</div>
                 <div>{wish.location}</div>

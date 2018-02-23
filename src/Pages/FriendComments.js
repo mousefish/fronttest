@@ -62,7 +62,7 @@ class FriendComments extends Component {
         const classes = this.props.classes;
         var starWrapper = [];
         for (let i = 0; i < numOfStars; i++) {
-            starWrapper.push(<Star className={classes.icon} />);
+            starWrapper.push(<Star key={i} className={classes.icon} />);
         }
 
         return starWrapper;
@@ -72,9 +72,9 @@ class FriendComments extends Component {
         const classes = this.props.classes;
         const initalFriendData = [friendData[0]];
         let friends = this.state.showAll ? friendData : initalFriendData;
-        return friends.map(friend => {
+        return friends.map((friend,index) => {
             return [
-                <li className={classes.space}>
+                <li className={classes.space} key={index}>
                     <div className={classes.subHeader}>
                         <div className={classes.subHeader}>
                             <Avatar

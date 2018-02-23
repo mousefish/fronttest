@@ -12,10 +12,12 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PopupSearch from "./PopupSearch";
 import { Link } from "react-router-dom";
 import * as actions from "../../Actions";
+import PageHeader from "../../Pages/PageHeader";
 
 const styles = {
   appBar: {
-    position: "relative"
+    position: "relative",
+    backgroundColor:"#1976D2"
   }
 };
 function Transition(props) {
@@ -43,17 +45,7 @@ class SearchResult extends Component {
   renderSearchResult(searchResult) {
     let result = [];
     result.push(
-      <div className="wizard-header" key="header">
-        <KeyboardArrowLeft
-          style={{
-            width: 30,
-            height: 30
-          }}
-          className="arrow"
-          onClick={() => this.props.history.goBack()}
-        />
-         <h3 className="page-title">搜索结果</h3>
-      </div>
+      <PageHeader key="header" history={this.props.history} title="搜索结果" />
     );
     if (!searchResult[0]) {
       result.push(<div key="no">尚未有搜索结果</div>);
@@ -100,7 +92,12 @@ class SearchResult extends Component {
                 onClick={this.handleRequestClose}
                 aria-label="Close"
               >
-                <KeyboardArrowLeft />
+                <KeyboardArrowLeft
+                 style={{
+                    width: 30,
+                    height: 30
+                  }}
+                />
               </IconButton>
             </Toolbar>
           </AppBar>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
-import { connect } from 'react-redux';
-import * as actions from '../Actions';
+import { connect } from "react-redux";
+import * as actions from "../Actions";
 import WebFontLoader from "webfontloader";
 import WishIndex from "../Components/container/WishIndex";
 import PopupSearch from "../Components/container/PopupSearch";
@@ -22,7 +22,8 @@ WebFontLoader.load({
 
 const styles = {
   appBar: {
-    position: "relative"
+    position: "relative",
+    backgroundColor:"#1976D2"
   }
 };
 
@@ -31,7 +32,7 @@ function Transition(props) {
 }
 
 class WishMain extends Component {
-  componentWillMount(){
+  componentWillMount() {
     this.props.fetchWishData();
   }
 
@@ -47,12 +48,12 @@ class WishMain extends Component {
     this.setState({ open: false });
   };
 
-  renderContent(wishes){
-    if(!wishes){
-      return <div>loading..</div>
+  renderContent(wishes) {
+    if (!wishes) {
+      return <div>loading..</div>;
     }
 
-    return <WishIndex wishes={wishes} />
+    return <WishIndex wishes={wishes} />;
   }
   render() {
     const { classes } = this.props;
@@ -73,24 +74,28 @@ class WishMain extends Component {
                 onClick={this.handleRequestClose}
                 aria-label="Close"
               >
-                <KeyboardArrowLeft />
+                <KeyboardArrowLeft
+                  style={{
+                    width: 30,
+                    height: 30
+                  }}
+                />
               </IconButton>
             </Toolbar>
           </AppBar>
           <PopupSearch handleRequestClose={this.handleRequestClose} />
         </Dialog>
-         <div className="wrapper">
+        <div className="wrapper">
           <Header description="这是一个有深度的旅游服务平台" />
-           {this.renderContent(wishes)}
+          {this.renderContent(wishes)}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return { wishes: state.WishReducer.all}
-
-}
+const mapStateToProps = state => {
+  return { wishes: state.WishReducer.all };
+};
 
 export default connect(mapStateToProps, actions)(withStyles(styles)(WishMain));

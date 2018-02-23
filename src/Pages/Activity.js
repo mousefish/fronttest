@@ -8,6 +8,7 @@ import RatingIndex from "./RatingIndex";
 import RatingSummary from "./RatingSummary";
 import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+import PageHeader from "./PageHeader";
 
 const styles = {};
 
@@ -25,17 +26,7 @@ class Activity extends Component {
         }
         return (
             <div className="wrapper">
-                <div className="wizard-header">
-                    <KeyboardArrowLeft
-                        style={{
-                            width: 30,
-                            height: 30
-                        }}
-                        className="arrow"
-                        onClick={() => this.props.history.goBack()}
-                    />
-                    <h3 className="page-title">活动</h3>
-                </div>
+                <PageHeader history={this.props.history} title="活动" />
                 <div className="flex-inner-wrapper">
                     <RatingSummary activityId={activityId} />
                     <ul className="activity-info">

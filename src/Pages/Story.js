@@ -7,13 +7,6 @@ import { Link } from "react-router-dom";
 import * as actions from "../Actions";
 
 const styles = theme => ({
-    wrapper: {
-        width: "90%",
-        margin: "auto",
-        marginTop: 20,
-        marginBottom: 50,
-        textAlign: "center"
-    },
     innerWrapper: {
         marginBottom: 20
     },

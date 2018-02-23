@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import validate from "../../Utility/validate";
 import { TextField } from "redux-form-material-ui";
 import Button from "material-ui/Button";
-import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+
 import { withStyles } from "material-ui/styles";
 import { LinearProgress } from "material-ui/Progress";
 import { Link } from "react-router-dom";
@@ -11,17 +11,18 @@ import { connect } from "react-redux";
 import * as actions from "../../Actions";
 import { withRouter } from "react-router";
 import PasswordSetVisibility from "../presenter/PasswordSetVisibility";
+import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
     width: "95%",
     margin: "auto",
-    backgroundColor:"#1976D2",
+    backgroundColor: "#1976D2"
   },
 
   button: {
     margin: theme.spacing.unit,
-    width: "95%",
+    width: "95%"
   },
 
   hint: {
@@ -57,18 +58,7 @@ class LoginForm extends Component {
         className="wrapper"
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
-        <div className="wizard-header">
-            <KeyboardArrowLeft
-              className="arrow"
-              style={{
-                width: 30,
-                height: 30
-              }}
-              onClick={()=>this.props.history.goBack()}
-            />
-
-          <h3 className="page-title">登陆账户</h3>
-        </div>
+        <PageHeader history={this.props.history} title="登录账户" />
         <div className="flex-form-wrapper">
           <LinearProgress
             className={classes.progress}

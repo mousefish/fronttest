@@ -13,6 +13,7 @@ import { TextField } from "redux-form-material-ui";
 import validate from "../../Utility/validate";
 import * as actions from "../../Actions";
 import services from "../../data/services";
+import PageHeader from "../PageHeader";
 
 const styles = theme => ({
     button: {
@@ -25,9 +26,6 @@ const styles = theme => ({
 });
 
 class AddWish extends Component {
-    goBack() {
-        this.props.history.goBack();
-    }
     submitForm(value) {
         console.log("wish value", value);
         this.props.submitWishData(value, this.props.history);
@@ -98,19 +96,9 @@ class AddWish extends Component {
 
         return (
             <div className="wrapper">
-                <div className="wizard-header" onClick={this.goBack.bind(this)}>
-                    <KeyboardArrowLeft
-                        className="arrow"
-                        style={{
-                            width: 30,
-                            height: 30
-                        }}
-                    />
-                    <h3 className="page-title">发布新愿望</h3>
-                </div>
+                <PageHeader history={this.props.history} title="发布新愿望" />
                 <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
                     <div>{this.renderFields(classes)}</div>
-
                     <div className="flex-form-wrapper" style={{ width: "95%" }}>
                         <h4 className="category-title">你需要的向导服务</h4>
                         <Field

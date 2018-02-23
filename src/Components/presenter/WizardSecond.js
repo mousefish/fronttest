@@ -9,6 +9,7 @@ import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { FormControlLabel } from "material-ui/Form";
+import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
@@ -53,17 +54,7 @@ class wizardSecond extends Component {
     const { classes } = this.props;
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
-        <div className="wizard-header">
-          <KeyboardArrowLeft
-            className="arrow"
-            style={{
-              width: 30,
-              height: 30
-            }}
-            onClick={previousPage}
-          />
-          <h3 className="page-title">个人基本资料</h3>
-        </div>
+        <PageHeader onClick={previousPage} title="个人基本资料" />
         <div className="flex-form-wrapper">
           <LinearProgress
             className={classes.progress}

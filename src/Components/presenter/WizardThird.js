@@ -1,14 +1,13 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
 import { Field, reduxForm } from "redux-form";
 import validate from "../../Utility/validate";
 import Button from "material-ui/Button";
-
 import { TextField } from "redux-form-material-ui";
-
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { LinearProgress } from "material-ui/Progress";
-import { Link } from "react-router-dom";
+import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
@@ -39,17 +38,7 @@ class wizardThird extends Component {
 
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
-        <div className="wizard-header">
-          <KeyboardArrowLeft
-            className="arrow"
-            style={{
-              width: 30,
-              height: 30
-            }}
-            onClick={previousPage}
-          />
-          <h3 className="page-title">其他信息</h3>
-        </div>
+         <PageHeader onClick={previousPage} title="其他信息" />
         <div className="flex-form-wrapper">
           <LinearProgress
             className={classes.progress}
