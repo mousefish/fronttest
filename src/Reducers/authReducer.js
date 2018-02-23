@@ -4,7 +4,8 @@ import { AUTH_ERROR, AUTH_USER, DEAUTH_USER, OK_TO_GO } from '../Actions/types';
 const initState={
   isAuthenticated: false,
   error: "",
-  go:false
+  go:false,
+  user:{}
 };
 
 // Use "go" to verify if use can go to the next wizard form or not.
@@ -16,13 +17,15 @@ export default (state = initState, action = {}) => {
       return {
         ...state,
         go:true,
-        error:""
+        error:"",
+        user:{}
       };
 
     case AUTH_USER:
       return {
         ...state,
         isAuthenticated: true,
+        user:action.payload,
         error:"",
         go:false
       };
@@ -31,6 +34,7 @@ export default (state = initState, action = {}) => {
        return {
         ...state,
         isAuthenticated:false,
+        user:{},
         error:action.payload
     };
 
@@ -39,6 +43,7 @@ export default (state = initState, action = {}) => {
        return {
          ...state,
          isAuthenticated: false,
+         user:{},
          error:"",
          go:false,
     };

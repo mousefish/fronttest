@@ -48,12 +48,18 @@ class MyAccount extends Component {
         const items = ["我的活动 | 愿望", "我的收藏", "我的好友", "系统设置", "关于我们", "版本更新"];
         return items.map((item, index, items) => {
             return (
-               <MyItem item={item} />
+               <MyItem key={index} item={item} />
             );
         });
     }
+
+    renderUser(){
+        let user = JSON.parse(localStorage.getItem('user'))
+        let username =""
+        return username = user ? user.mail : ""
+    }
     render() {
-        const { classes } = this.props;
+        const { classes, user } = this.props;
         return (
             <div className="wrapper">
                 <div className={classes.subHeader}>
@@ -62,7 +68,7 @@ class MyAccount extends Component {
                         src={pic}
                         className={classes.avatar}
                     />
-                    <div className={classes.subHeaderRight}>陈嘉熙</div>
+                    <div className={classes.subHeaderRight}>{this.renderUser()}</div>
                 </div>
 
                 <div>
@@ -78,6 +84,7 @@ class MyAccount extends Component {
     }
 }
 
-export default connect(null, actions)(
+
+export default connect(null,actions)(
     withStyles(styles)(withRouter(MyAccount))
 );

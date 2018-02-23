@@ -17,7 +17,7 @@ const styles = theme => ({
 const MyItem = props => {
     const { item, classes } = props
     return (
-        <li key={item} className={classes.item}>
+        <li className={classes.item}>
             <span>{item}</span>
             <KeyboardArrowRight style={{color: "lightgrey" }}/>
 

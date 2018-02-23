@@ -21,7 +21,6 @@ import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PersonProfileDetails from "../Components/container/PersonProfileDetails";
 import PageHeader from "./PageHeader";
-
 import * as actions from "../Actions";
 
 const styles = theme => ({
