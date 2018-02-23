@@ -5,6 +5,7 @@ import Button from "material-ui/Button";
 import gallery from "../Assets/Images/gallery.jpg";
 import { Link } from "react-router-dom";
 import * as actions from "../Actions";
+import PageHeader from "./PageHeader";
 
 const styles = theme => ({
     innerWrapper: {
@@ -12,7 +13,7 @@ const styles = theme => ({
     },
     button: {
         margin: theme.spacing.unit,
-        width:'55%'
+        width: "55%"
     },
     galleryWrapper: {
         whiteSpace: "nowrap",
@@ -63,11 +64,11 @@ class Story extends Component {
         }
 
         return (
-            <div className="wrapper" style={{textAlign:'center'}}>
-                <div className="flex-inner-wrapper customized-align">
-                    <h2>我在这座城市的故事</h2>
+            <div className="wrapper">
+                <PageHeader history={this.props.history} title="我的旅行故事" />
+                <div className="flex-inner-wrapper">
                     <div className={this.state.isExpanded ? "" : classes.fade}>
-                        <p style={{ textAlign: "center" }}>{user.mail}</p>
+                        我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行
                         <span
                             className={
                                 this.state.isExpanded ? "" : classes.fadeHelper
@@ -86,8 +87,8 @@ class Story extends Component {
                         {this.state.isExpanded ? "收回内容" : "展开全部内容"}
                     </Button>
                 </div>
-                <div className='gallery'>
-                    <h2>我的旅游相册，快来看看吧</h2>
+                <div className="gallery">
+                    <h4 style={{textAlign:'center'}}>我的旅游相册，快来看看吧</h4>
                     <div className={classes.galleryWrapper}>
                         <div className={classes.imageFrame}>
                             <img
@@ -127,7 +128,7 @@ class Story extends Component {
                     </div>
                 </div>
                 <div className="flex-inner-wrapper">
-                    <Link to="/friendComments">
+                    <Link to="/friendComments" className="unlink" style={{textAlign:'center'}}>
                         <h2 className={classes.link}>来看看小伙伴对我的评价吧</h2>
                     </Link>
                 </div>

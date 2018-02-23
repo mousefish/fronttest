@@ -5,28 +5,57 @@ import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import Avatar from "material-ui/Avatar";
-import LocationOn from "material-ui-icons/LocationOn";
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
-import deepOrange from "material-ui/colors/deepOrange";
-import sichuan from "../Assets/Images/sichuan.jpg";
 import pic from "../Assets/Images/profile.jpg";
 import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
-import Slide from "material-ui/transitions/Slide";
-import AppBar from "material-ui/AppBar";
-import Dialog from "material-ui/Dialog";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
+
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PersonProfileDetails from "../Components/container/PersonProfileDetails";
 import PageHeader from "./PageHeader";
 import * as actions from "../Actions";
 
 const styles = theme => ({
-    appBar: {
-        position: "relative",
-        backgroundColor: "#1976D2"
+    avatar: {
+        width: 70,
+        height: 70
+    },
+
+    headerWrapper: {
+        display: "flex",
+        flexFlow: "column",
+        justifyContent: "flex-start",
+        backgroundColor: "#1976D2",
+        color: "#fff",
+        marginBottom: 5,
+        padding: 10
+    },
+
+    myHeader: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        justifyContent: "flex-start",
+        paddingBottom: 10
+    },
+
+    myHeaderRight: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        paddingLeft: 20,
+        fontSize: "1.2rem"
+    },
+
+    subHeader: {
+        display: "flex",
+        flexDirection: "row nowrap",
+        justifyContent: "flex-end",
+        color: "#fff"
+    },
+
+    subHeaderContent: {
+        paddingLeft: 25
     },
 
     image: {
@@ -35,28 +64,11 @@ const styles = theme => ({
         height: 224,
         marginBottom: 40
     },
-    avatar: {
-        width: 60,
-        height: 60,
-        position: "absolute",
-        left: "50%",
-        top: 230,
-        marginLeft: "-30px",
-        margin: 10
-    },
 
     innerWrapper: {
         textAlign: "center"
     },
 
-    space: {
-        marginBottom: 10
-    },
-    icon: {
-        width: 15,
-        height: 15,
-        verticalAlign: "-2px"
-    },
     button: {
         margin: theme.spacing.unit,
         width: "95%"
@@ -74,144 +86,61 @@ const styles = theme => ({
     },
     flex: {
         flex: 1
-    },
-
-    link: {
-        cursor: "pointer",
-        color: "#337ab7"
     }
 });
 
-function Transition(props) {
-    return <Slide direction="up" {...props} />;
-}
-
 class PersonProfile extends Component {
-    state = {
-        open: false
-    };
-
-    handleClickOpen = name => {
-        this.setState({ open: true });
-    };
-
-    handleRequestClose = () => {
-        this.setState({ open: false });
-    };
-
     componentWillMount() {
         const userId = this.props.match.params.userId;
         this.props.fetchUser(userId);
     }
 
-    renderService(services) {
-        const icon = this.props.classes.icon;
-
-        return services.map(service => {
-            return (
-                <span style={{ marginRight: 6 }}>
-                    <LocalOffer className={icon} />
-                    &nbsp;{service}
-                </span>
-            );
-        });
-    }
-
-    renderStar(nums) {
-        const icon = this.props.classes.icon;
-        var starWrapper = [];
-        for (let i = 0; i < nums; i++) {
-            starWrapper.push(<Star className={icon} />);
-        }
-        return starWrapper;
-    }
-
     render() {
-        const classes = this.props.classes;
+        const { classes, history } = this.props;
         const { user } = this.props;
         if (!user) {
             return <div>loading</div>;
         }
 
         return (
-            <div className="wrapper">
-                <PageHeader
-                    history={this.props.history}
-                    title={user.username}
-                />
-                <Dialog
-                    fullScreen
-                    open={this.state.open}
-                    onRequestClose={this.handleRequestClose}
-                    transition={Transition}
-                >
-                    <AppBar className={classes.appBar}>
-                        <Toolbar>
-                            <IconButton
-                                color="contrast"
-                                onClick={this.handleRequestClose}
-                                aria-label="Close"
-                            >
-                                <KeyboardArrowLeft
-                                    style={{
-                                        width: 30,
-                                        height: 30
-                                    }}
-                                />
-                            </IconButton>
-                        </Toolbar>
-                    </AppBar>
-                    <PersonProfileDetails profile={user} />
-                </Dialog>
-
-                <div>
-                    <div className="image-wrapper">
-                        <img className={classes.image} src={sichuan} />
+            <div>
+                <div className={classes.headerWrapper}>
+                    <KeyboardArrowLeft
+                        className="arrow"
+                        onClick={history.goBack}
+                        style={{
+                            width: 30,
+                            height: 30,
+                            color: "#fff",
+                            marginBottom: 10
+                        }}
+                    />
+                    <div className={classes.myHeader}>
                         <Avatar
-                            alt="profile pic"
+                            alt="profile"
                             src={pic}
                             className={classes.avatar}
                         />
-                    </div>
-                    <div className="flex-inner-wrapper customized-align">
-                        <h4
-                            className={classes.space}
-                            style={{ fontWeight: "bold" }}
-                        >
+                        <div className={classes.myHeaderRight}>
                             {user.username}
-                        </h4>
-                        <div className={classes.space}>
-                            <LocationOn className={classes.icon} />
-                            {user.city}
                         </div>
-                        <div className={classes.space} />
-
-                        <Button
-                            color="primary"
-                            raised
-                            className={classes.smallButton}
-                            id="btn"
-                            onClick={this.handleClickOpen}
-                        >
-                            更多我的资料哦
-                        </Button>
                     </div>
-                    <div className="flex-inner-wrapper customized-align">
-                        <Link to={`/story/${user.id}`}>
-                            <h2 className={classes.link}>我在这座城市的故事</h2>
+                    <div className={classes.subHeader}>
+                        <Link
+                            to={`/story/${user.id}`}
+                            className="unlink"
+                            style={{ color: "#fff" }}
+                        >
+                            <span className={classes.subHeaderContent}>
+                                我的故事
+                            </span>
                         </Link>
-                    </div>
-                    <div className="flex-inner-wrapper customized-align">
-                        <Button
-                            color="primary"
-                            raised
-                            className={classes.button}
-                            id="btn"
-                        >
-                            一起参与吧
-                        </Button>
+                        <span className={classes.subHeaderContent}>我的愿望</span>
+                        <span className={classes.subHeaderContent}>我的活动</span>
+                        <span className={classes.subHeaderContent}>我的收藏</span>
                     </div>
                 </div>
+                <div className="wrapper">{this.props.children}</div>
             </div>
         );
     }

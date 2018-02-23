@@ -11,26 +11,26 @@ import MyItem from "./MyItem";
 
 const styles = theme => ({
     avatar: {
-        width: 60,
-        height: 60
+        width: 70,
+        height: 70
     },
 
-    subHeader: {
-        margin: "5px 0px",
+    myHeader: {
         display: "flex",
         flexFlow: "row nowrap",
         justifyContent: "flex-start",
-        padding: 10,
+        padding: 15,
         marginBottom: 5,
         backgroundColor: "#1976D2",
         color: "#fff"
     },
 
-    subHeaderRight: {
+    myHeaderRight: {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        paddingLeft: 20
+        paddingLeft: 20,
+        fontSize:"1.2rem"
     },
 
     list: {
@@ -55,41 +55,42 @@ class MyAccount extends Component {
 
     renderItems() {
         const { classes } = this.props;
-        const items = ["我的活动 | 愿望", "我的收藏", "我的好友", "系统设置", "关于我们", "版本更新"];
+        const items = ["账号信息","我的活动 | 愿望", "我的收藏", "我的好友", "系统设置", "关于我们", "版本更新"];
         return items.map((item, index, items) => {
             return <MyItem key={index} item={item} />;
         });
     }
     render() {
-        const { history, classes, user } = this.props;
-        const { id, username } = this.state.user;
+        const { history, classes } = this.props;
+        const { user } = this.state;
         return (
-            <div className="wrapper">
+            <div>
                 <div
-                    className={classes.subHeader}
-                    onClick={() => history.push(`/user/${id}`)}
+                    className={classes.myHeader}
+                    onClick={() => history.push("/myInfo")}
                 >
                     <Avatar
                         alt="profile"
                         src={pic}
                         className={classes.avatar}
                     />
-                    <div className={classes.subHeaderRight}>{username}</div>
+                    <div className={classes.myHeaderRight}>{user.mail}</div>
                 </div>
-
-                <div>
-                    <ul className={classes.list}>{this.renderItems()}</ul>
+                <div className="wrapper">
+                    <div>
+                        <ul className={classes.list}>{this.renderItems()}</ul>
+                    </div>
+                    <button
+                        style={{
+                            backgroundColor: "red",
+                            marginTop: 30,
+                            padding: 20
+                        }}
+                        onClick={() => this.props.logout(this.props.history)}
+                    >
+                        退出账户(only for testing)
+                    </button>
                 </div>
-                <button
-                    style={{
-                        backgroundColor: "red",
-                        marginTop: 30,
-                        padding: 20
-                    }}
-                    onClick={() => this.props.logout(this.props.history)}
-                >
-                    退出账户(only for testing)
-                </button>
             </div>
         );
     }
