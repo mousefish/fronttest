@@ -56,7 +56,7 @@ class MyAccount extends Component {
     renderEle(classes) {
         let eles = ["我的活动 | 愿望", "我的收藏", "我的好友", "系统设置", "关于我们", "版本更新"];
         return eles.map((ele, index, eles) => {
-            return <li className={classes.ele}>{eles[index]}</li>;
+            return <li key={index} className={classes.ele}>{eles[index]}</li>;
         });
     }
     render() {
@@ -80,7 +80,7 @@ class MyAccount extends Component {
                     </div>
                 </div>
 
-                <div>
+                <div>PART OF TOKEN: {localStorage.getItem("jwtToken").slice(0,5)}
                     <ul className={classes.list}>{this.renderEle(classes)}</ul>
                     <button onClick={()=>this.props.logout(this.props.history)}>推出账户(temp for testing)</button>
                 </div>

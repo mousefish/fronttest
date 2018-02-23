@@ -19,9 +19,7 @@ export const submitSearchData = (searchData, history, cb)=> async dispatch =>{
     if(history){
         history.push(`/searchResult?${q}`);
     }
-    cb()
-
-
+    cb();
 };
 
 

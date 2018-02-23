@@ -16,7 +16,6 @@ export default ComposedComponent => {
 
         componentWillUpdate(nextProps) {
             if (!nextProps.isAuthenticated) {
-                console.log(this.props.isAuthenticated)
                 this.context.router.history.push("/logInSignUp");
             }
         }
