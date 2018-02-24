@@ -123,7 +123,7 @@ class MyAccount extends Component {
                         }}
                         onClick={() => this.props.logout(this.props.history)}
                     >
-                        退出账户(only for testing)
+                        退出账户(FOR TESTING PURPOSE. NO NEED IN PRODUCTION)
                     </button>
                 </div>
             </div>

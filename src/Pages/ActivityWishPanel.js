@@ -10,8 +10,9 @@ import AddWish from "./AddWish/AddWish";
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
-        width: "95%"
-    },
+        width: "95%",
+        marginBottom:15
+    }
 });
 
 class ActivityWishPanel extends Component {
@@ -19,31 +20,31 @@ class ActivityWishPanel extends Component {
         const { classes } = this.props;
 
         return (
-            <div className="wrapper">
-                <div className="flex-inner-wrapper fixed-height">
-                    <img src={bg} alt="chengdu" className="image-wrapper" />
-                </div>
-                <div className="flex-inner-wrapper">
-                    <Link to="/addActivity" className="unlink">
-                        <Button
-                            color="primary"
-                            raised
-                            className={classes.button}
-                            id="btn"
-                        >
-                            发布新活动
-                        </Button>
-                    </Link>
-                    <Link to="/addWish" className="unlink">
-                        <Button
-                            color="primary"
-                            raised
-                            className={classes.button}
-                            id="btn"
-                        >
-                            发布新愿望
-                        </Button>
-                    </Link>
+            <div>
+                <img src={bg} alt="chengdu" className="image-wrapper" />
+                <div className="wrapper" style={{marginTop:40}}>
+                    <div className="flex-inner-wrapper">
+                        <Link to="/addActivity" className="unlink">
+                            <Button
+                                color="primary"
+                                raised
+                                className={classes.button}
+                                id="btn"
+                            >
+                                发布新活动
+                            </Button>
+                        </Link>
+                        <Link to="/addWish" className="unlink">
+                            <Button
+                                color="primary"
+                                raised
+                                className={classes.button}
+                                id="btn"
+                            >
+                                发布新愿望
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         );

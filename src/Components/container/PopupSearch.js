@@ -19,14 +19,16 @@ import { FormControlLabel } from "material-ui/Form";
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
-    width: "95%"
+    // margin: theme.spacing.unit,
+    width: "100%",
+    marginTop:30
   },
   radioInner: {
     width: "95%",
     display: "flex",
     flexFlow: "row nowrap",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    marginTop:20
   },
 
   formInner: {
@@ -44,9 +46,9 @@ const renderError = ({ meta: { touched, error } }) =>
   ) : (
     false
   );
+
 class PopupSearch extends Component {
   submitForm(values) {
-    console.log("values:", values);
     this.props.submitSearchData(
       values,
       this.props.history,
@@ -62,7 +64,7 @@ class PopupSearch extends Component {
         className="wrapper"
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
-        <div className="flex-form-wrapper">
+        <div className="flex-form-wrapper" style={{marginTop:10}}>
           <Field
             name="location"
             type="text"
@@ -70,9 +72,7 @@ class PopupSearch extends Component {
             component={AutocompleteField}
             props={this.props}
           />
-        </div>
 
-        <div className="flex-form-wrapper">
           <Field
             name="category"
             component={RadioGroup}
@@ -82,8 +82,7 @@ class PopupSearch extends Component {
             <FormControlLabel value="wish" control={<Radio />} label="愿望" />
           </Field>
           <Field name="category" component={renderError} />
-        </div>
-        <div className="flex-form-wrapper">
+
           <Button
             type="submit"
             color="primary"
