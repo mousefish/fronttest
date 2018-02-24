@@ -105,7 +105,7 @@ class PopupSearch extends Component {
           </Button>
         </form>
         <div style={{marginTop:60}}>
-          <HistorySearch />
+          <HistorySearch onClick={(value)=>this.submitForm(value)}/>
         </div>
       </div>
     );

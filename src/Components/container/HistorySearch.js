@@ -12,7 +12,7 @@ const styles = theme => ({
         display: "flex",
         justifyContent: "flex-start",
         flexWrap: "wrap",
-        justifyContent:"space-between",
+        justifyContent: "space-between",
         padding: theme.spacing.unit / 2
     },
     chip: {
@@ -34,6 +34,14 @@ const generateChipData = data => {
     });
 };
 
+const generateIndividualData = data => {
+    // {key: 0, label: "大连市 辽宁省, 活动"}
+    let record = data.label.split(",");
+    let location = record[0];
+    let category = record[1] === " 活动" ? "activity" : "wish";
+    return { location, category };
+};
+
 // 珠海市 广东省,activity|大连市 辽宁省,activity|
 class HistorySearch extends Component {
     state = {
@@ -41,26 +49,20 @@ class HistorySearch extends Component {
     };
 
     deleteChip(data) {
-       // {key: 0, label: "大连市 辽宁省, 活动"}
+        // {key: 0, label: "大连市 辽宁省, 活动"}
         const chipData = [...this.state.chipData];
         const chipToDelete = chipData.indexOf(data);
         chipData.splice(chipToDelete, 1);
         this.setState({ chipData });
 
-        let newHist = localStorage.hist.split("|").filter((record)=>record !== data.label).join("|")
+        let newHist = localStorage.hist
+            .split("|")
+            .filter(record => record !== data.label)
+            .join("|");
 
         localStorage.hist = newHist;
-        console.log("newhist", localStorage.hist)
+        console.log("newhist", localStorage.hist);
     }
-
-    // handleClickChip(data){
-    //    // {key: 0, label: "大连市 辽宁省, 活动"}
-    //    let record = data.label.split(",")
-    //    let location = record[0];
-    //    let category = record[1];
-    //    console.log("here", location, category)
-    //    this.props.submitSearchData({ location, category})
-    // }
 
     render() {
         const { classes } = this.props;
@@ -84,6 +86,11 @@ class HistorySearch extends Component {
                                 avatar={avatar}
                                 label={data.label}
                                 className={classes.chip}
+                                onClick={() => {
+                                    this.props.onClick(
+                                        generateIndividualData(data)
+                                    );
+                                }}
                             />
                         );
                     })}
