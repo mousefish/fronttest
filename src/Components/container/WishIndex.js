@@ -33,43 +33,24 @@ function Transition(props) {
 }
 
 const styles = theme => ({
-  appBar: {
-    position: "relative"
-  },
-  flex: {
-    flex: 1
-  },
-  media: {
-    height: 224,
-    position: "relative"
-  },
   icon: {
     width: 15,
     height: 15,
     verticalAlign: "-2px"
   },
 
-  card: {
-    display: "flex"
-  },
-  details: {
-    display: "flex",
-    flexFlow: "row nowrap",
-    justifyContent: "space-between",
-    padding: 0
-  },
   content: {
-    flex: "1 0 auto",
-    paddingTop: 10
-  },
-  cover: {
-    width: 10,
-    height: 10
+    display:"flex",
+    flexFlow:"column",
+    justifyContent:"center",
   },
 
   firstline: {
     display: "flex",
-    justifyContent: "space-between"
+    flexFlow:"row nowrap",
+    justifyContent: "space-between",
+    alignItems:"center",
+    paddingBottom:10
   },
 
   right: {
@@ -103,18 +84,17 @@ class WishIndex extends Component {
       return (
         <Link to={`/wish/${wish.id}`} key={wish.id} className="unlink">
           <Card className="card" key={wish.id}>
-            <div className={classes.details}>
               <CardContent className={classes.content}>
                 <div className={classes.firstline}>
-                  <h4 style={{ fontWeight: "bold" }}>{wish.location}</h4>
+                  <div style={{ fontWeight: "bold", fontSize:"1.2rem" }}>{wish.location}</div>
                   <div className={classes.right}>{wish.budget} 元/人</div>
                 </div>
-                <h6>
+                <div style={{paddingBottom:10}}>
                   <AccessTime className={classes.icon} /> {wish.departdate} 出发
-                </h6>
-                <h6>{this.renderService(wish.services)}</h6>
+                </div>
+                <div>{this.renderService(wish.services)}</div>
               </CardContent>
-            </div>
+
           </Card>
         </Link>
       );
