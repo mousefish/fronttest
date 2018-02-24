@@ -12,6 +12,7 @@ const styles = theme => ({
         display: "flex",
         justifyContent: "flex-start",
         flexWrap: "wrap",
+        justifyContent:"space-between",
         padding: theme.spacing.unit / 2
     },
     chip: {
