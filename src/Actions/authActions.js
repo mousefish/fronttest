@@ -12,6 +12,8 @@ const buildURL = searchData => {
 
 export const logout = history => dispatch => {
   localStorage.removeItem("jwtToken");
+  localStorage.removeItem("user");
+  console.log("remove", localStorage.getItem("user"))
   dispatch({ type: DEAUTH_USER });
   history.push("/");
 };
@@ -35,11 +37,12 @@ export const userSignupRequest = (userData, history) => async dispatch => {
     const res = await axios.post(`${ROOT_URL}/signup`, userData);
     if (res.data.token) {
       localStorage.setItem("jwtToken", res.data.token);
-      localStorage.setItem("user", res.data.user);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
       dispatch({
         type: AUTH_USER,
         payload: res.data.user
       });
+
       history.goBack();
     } else {
       dispatch(authError(res.data));
@@ -58,6 +61,7 @@ export const userLogin = (userData, history) => async dispatch => {
       type: AUTH_USER,
       payload: res.data.user
     });
+
     history.goBack();
   } catch (err) {
     // err is an Object - Error: Request failed with status code 401.

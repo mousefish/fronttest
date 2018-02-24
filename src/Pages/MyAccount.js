@@ -1,81 +1,116 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Avatar from "material-ui/Avatar";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
-import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import * as actions from "../Actions";
-import pic from "../Assets/Images/profile.jpg";
 import MyItem from "./MyItem";
+import MyHeader from "./MyHeader";
+import RegisterHeader from "./RegisterHeader";
+import Button from "material-ui/Button";
+import Dialog from "material-ui/Dialog";
+import RegisterDialog from "./RegisterDialog";
+
 
 const styles = theme => ({
-    avatar: {
-        width: 70,
-        height: 70
-    },
-
-    myHeader: {
-        display: "flex",
-        flexFlow: "row nowrap",
-        justifyContent: "flex-start",
-        padding: 15,
-        marginBottom: 5,
-        backgroundColor: "#1976D2",
-        color: "#fff"
-    },
-
-    myHeaderRight: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        paddingLeft: 20,
-        fontSize:"1.2rem"
-    },
-
     list: {
         listStyle: "none",
         padding: 0
-    }
+    },
+    container: {
+        display: "flex",
+        flexWrap: "wrap"
+    },
+
+    button: {
+        margin: theme.spacing.unit,
+        width: "45%",
+        padding: 10,
+        fontSize: 14,
+        backgroundColor:"#1976D2"
+    },
 });
 
 class MyAccount extends Component {
     state = {
-        user: {}
+        open: false
     };
 
-    componentWillMount() {
-        let user = JSON.parse(localStorage.getItem("user"));
-        if (user) {
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+
+    handleClick(item) {
+        let rawUser = localStorage.getItem("user");
+        if (rawUser) {
+            switch (item) {
+                case "账号信息":
+                    return this.props.history.push("/myInfo");
+            }
+        } else {
             this.setState({
-                user
-            });
+                open:true
+            })
+        }
+    }
+    renderItems() {
+        let rawUser = localStorage.getItem("user");
+
+        const { classes } = this.props;
+        const items = [
+            "账号信息",
+            "我的活动 | 愿望",
+            "我的收藏",
+            "我的好友",
+            "系统设置",
+            "关于我们",
+            "版本更新"
+        ];
+        return items.map((item, index, items) => {
+            return (
+                <MyItem
+                    key={index}
+                    item={item}
+                    rawUser={rawUser}
+                    history={this.props.history}
+                    onClick={() => {
+                        this.handleClick(item);
+                    }}
+                />
+            );
+        });
+    }
+
+    renderMyHeader() {
+        let rawUser = localStorage.getItem("user");
+        let user;
+
+        if (rawUser) {
+            user = JSON.parse(rawUser);
+
+            return <MyHeader history={this.props.history} user={user} />;
+        } else {
+            return <RegisterHeader />;
         }
     }
 
-    renderItems() {
-        const { classes } = this.props;
-        const items = ["账号信息","我的活动 | 愿望", "我的收藏", "我的好友", "系统设置", "关于我们", "版本更新"];
-        return items.map((item, index, items) => {
-            return <MyItem key={index} item={item} />;
-        });
-    }
     render() {
-        const { history, classes } = this.props;
-        const { user } = this.state;
+        const { history, classes,fullScreen} = this.props;
         return (
             <div>
-                <div
-                    className={classes.myHeader}
-                    onClick={() => history.push("/myInfo")}
+                <Dialog
+                    fullScreen={fullScreen}
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="responsive-dialog-title"
                 >
-                    <Avatar
-                        alt="profile"
-                        src={pic}
-                        className={classes.avatar}
-                    />
-                    <div className={classes.myHeaderRight}>{user.mail}</div>
-                </div>
+                    <div>
+                        <RegisterDialog onClick={this.handleClose} />
+                    </div>
+                </Dialog>
+
+                {this.renderMyHeader()}
                 <div className="wrapper">
                     <div>
                         <ul className={classes.list}>{this.renderItems()}</ul>

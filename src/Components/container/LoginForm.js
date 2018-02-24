@@ -25,6 +25,12 @@ const styles = theme => ({
     width: "95%"
   },
 
+  right: {
+    fontSize: "1rem",
+    float: "right",
+    marginRight: 5
+  },
+
   hint: {
     position: "absolute",
     right: 6,
@@ -45,7 +51,6 @@ class LoginForm extends Component {
   };
 
   submitForm(values) {
-    console.log("loginin", values);
     this.props.userLogin(values, this.props.history);
   }
 
@@ -59,6 +64,7 @@ class LoginForm extends Component {
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
         <PageHeader history={this.props.history} title="登录账户" />
+
         <div className="flex-form-wrapper">
           <LinearProgress
             className={classes.progress}
@@ -95,7 +101,19 @@ class LoginForm extends Component {
             </Link>
           </span>
         </div>
-
+        <div className="legal-footer">
+          注册代表已经同意<Link to="/" className="unlink">
+            服务条款
+          </Link>，<Link to="/" className="unlink">
+            隐私政策
+          </Link>，<Link to="/" className="unlink">
+            免责声明
+          </Link>，<Link to="/" className="unlink">
+            保障计划条款
+          </Link>，<Link to="/" className="unlink">
+            使用政策须知
+          </Link>
+        </div>
         <div className="flex-form-wrapper">
           <Button
             type="submit"

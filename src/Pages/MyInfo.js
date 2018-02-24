@@ -49,34 +49,33 @@ const styles = theme => ({
 });
 
 class MyInfo extends Component {
-    state={
-        user:{}
-    }
-    componentWillMount(){
-        let user = JSON.parse(localStorage.getItem("user"));
-        if(user){
-            this.setState({
-                user
-            });
+
+    renderPage(){
+        let originalUser = localStorage.getItem("user");
+        let user;
+        if(originalUser){
+           user=JSON.parse(originalUser);
+           return (
+             <div>
+                 <PageHeader history={this.props.history} title="我的信息" />
+                <PersonProfileDetails profile={user} />
+                <div className="flex-inner-wrapper customized-align">
+                    <Link to={`/story/${user.id}`} className="unlink">
+                        <span style={{ fontSize: "1.5rem" }}>我的旅游故事</span>
+                    </Link>
+                </div>
+             </div>
+           )
+        }else{
+            return <div>无权访问</div>
         }
     }
 
     render() {
         const { classes } = this.props;
-        const { user } = this.state;
-        if (user.size === 0) {
-            return <div>你无权访问该页面！</div>;
-        }
-
         return (
             <div className="wrapper">
-                <PageHeader history={this.props.history} title="我的信息" />
-                <PersonProfileDetails profile={user} />
-                <div className="flex-inner-wrapper customized-align">
-                    <Link to={`/story/${user.id}`} className="unlink">
-                        <span style={{ fontSize: "1.5rem" }}>我在这座城市的故事</span>
-                    </Link>
-                </div>
+                {this.renderPage()}
             </div>
         );
     }

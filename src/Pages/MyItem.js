@@ -14,10 +14,15 @@ const styles = theme => ({
         color: "grey"
     }
 });
+
+
 const MyItem = props => {
-    const { item, classes } = props;
+    const { item, classes, history, onClick } = props;
     return (
-        <li className={classes.item}>
+        <li
+            className={classes.item}
+            onClick={()=> onClick()}
+        >
             <span>{item}</span>
             <KeyboardArrowRight style={{ color: "lightgrey" }} />
         </li>

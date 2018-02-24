@@ -12,15 +12,14 @@ import { withStyles } from "material-ui/styles";
 
 const styles = {
   bottom: {
-    marginBottom: 10,
+    marginBottom: 20,
   },
   choice: {
     color: "#1976D2",
     backgroundColor: "#fff",
-    fontSize: "1.4rem",
+    fontSize: "1.3rem",
     fontWeight: "bold",
-    marginRight: 20,
-    borderBottom:"1px solid #1976D2"
+    marginRight: 40,
   },
   actions: {
     color: "#1976D2",
@@ -35,16 +34,20 @@ const RegisterDialog = props => {
       <DialogTitle id="responsive-dialog-title">{"请注册"}</DialogTitle>
       <DialogContent>
         <div className={classes.bottom}>
-          <Link to="/login" className="unlink">
-            <span className={classes.choice} raised>
+
+            <span className={classes.choice}>
+             <Link to="/login" className="unlink">
               登陆已有账户
+              </Link>
             </span>
-          </Link>
-          <Link to="/signup" className="unlink">
-            <span className={classes.choice} raised>
+
+
+            <span className={classes.choice}>
+             <Link to="/signup" className="unlink">
               创建新账户
+              </Link>
             </span>
-          </Link>
+
         </div>
         <DialogContentText>
           注册代表已经同意<Link to="/" className="unlink">

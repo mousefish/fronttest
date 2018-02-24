@@ -58,6 +58,19 @@ class wizardFirst extends Component {
             label="输入密码 - 六位数"
           />
         </div>
+        <div className="legal-footer">
+          注册代表已经同意<Link to="/" className="unlink">
+            服务条款
+          </Link>，<Link to="/" className="unlink">
+            隐私政策
+          </Link>，<Link to="/" className="unlink">
+            免责声明
+          </Link>，<Link to="/" className="unlink">
+            保障计划条款
+          </Link>，<Link to="/" className="unlink">
+            使用政策须知
+          </Link>
+        </div>
 
         <div className="flex-form-wrapper">
           <Button
