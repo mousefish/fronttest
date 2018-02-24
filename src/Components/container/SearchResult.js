@@ -109,7 +109,7 @@ class SearchResult extends Component {
     if (!searchResult[0]) {
       result.push(<h4 key="no">尚未有搜索结果，发布你的愿望？</h4>);
       result.push(
-        <Link to="/addWish" className="unlink">
+        <Link to="/addWish" className="unlink" key="wish">
           <Button color="primary" raised className={classes.button} id="btn">
             发布新愿望
           </Button>
