@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { withStyles } from "material-ui/styles";
 import * as actions from "../../Actions";
+import { withStyles } from "material-ui/styles";
 import { connect } from "react-redux";
 import Chip from "material-ui/Chip";
 import Avatar from "material-ui/Avatar";
@@ -19,27 +19,43 @@ const styles = theme => ({
     }
 });
 
-class HistorySearch extends Component {
-    state = {
-        chipData: [
-            { key: 0, label: "Angular" },
-            { key: 1, label: "jQuery" },
-            { key: 2, label: "Polymer" },
-            { key: 3, label: "React" },
-            { key: 4, label: "Vue.js" }
-        ]
-    };
-
-    componentWillMount() {
-        this.props.fetchHistoryData();
+const generateChipData = data => {
+    if (!data) {
+        return [];
+    }
+    let histList = data.split("|");
+    if (histList[histList.length - 1] === "") {
+        histList.pop();
     }
 
-    handleClick(data) {
+    return histList.map((record, index) => {
+        return { key: index, label: record };
+    });
+};
+
+// 珠海市 广东省,activity|大连市 辽宁省,activity|
+class HistorySearch extends Component {
+    state = {
+        chipData: generateChipData(localStorage.hist)
+    };
+
+    deleteChip(data) {
         const chipData = [...this.state.chipData];
         const chipToDelete = chipData.indexOf(data);
         chipData.splice(chipToDelete, 1);
         this.setState({ chipData });
+        localStorage.hist = "";
     }
+
+    // handleClickChip(data){
+    //    // {key: 0, label: "大连市 辽宁省, 活动"}
+    //    let record = data.label.split(",")
+    //    let location = record[0];
+    //    let category = record[1];
+    //    console.log("here", location, category)
+    //    this.props.submitSearchData({ location, category})
+    // }
+
 
     render() {
         const { classes } = this.props;
@@ -51,7 +67,9 @@ class HistorySearch extends Component {
                         let avatar = null;
                         avatar = (
                             <Avatar>
-                                <CloseIcon className={classes.svgIcon} />
+                                <CloseIcon className={classes.svgIcon}
+                                 onClick={() => this.deleteChip(data)}
+                                />
                             </Avatar>
                         );
                         return (
@@ -59,7 +77,6 @@ class HistorySearch extends Component {
                                 key={data.key}
                                 avatar={avatar}
                                 label={data.label}
-                                onClick={() => this.handleClick(data)}
                                 className={classes.chip}
                             />
                         );
@@ -70,11 +87,4 @@ class HistorySearch extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        historyData: state.HistoryDataReducer
-    };
-};
-export default connect(mapStateToProps, actions)(
-    withStyles(styles)(HistorySearch)
-);
+export default connect(null, actions)(withStyles(styles)(HistorySearch));

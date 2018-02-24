@@ -18,17 +18,29 @@ import { RadioGroup, TextField } from "redux-form-material-ui";
 import { FormControlLabel } from "material-ui/Form";
 
 const styles = theme => ({
+  wrapper: {
+    width: "95%",
+    maxWidth: 600,
+    height: "100%",
+    margin: "auto",
+    marginBottom: 45,
+    display: "flex",
+    flexFlow: "column",
+    justifyContent: "flex-start"
+  },
+
   button: {
     // margin: theme.spacing.unit,
     width: "100%",
-    marginTop:30
+    marginTop: 30,
+    marginBottom:0
   },
   radioInner: {
     width: "95%",
     display: "flex",
     flexFlow: "row nowrap",
     justifyContent: "space-around",
-    marginTop:20
+    marginTop: 20
   },
 
   formInner: {
@@ -60,11 +72,11 @@ class PopupSearch extends Component {
     const classes = this.props.classes;
     const { handleSubmit } = this.props;
     return (
-      <form
-        className="wrapper"
-        onSubmit={handleSubmit(this.submitForm.bind(this))}
-      >
-        <div className="flex-form-wrapper" style={{marginTop:10}}>
+      <div className={classes.wrapper}>
+        <form
+          style={{marginTop:30}}
+          onSubmit={handleSubmit(this.submitForm.bind(this))}
+        >
           <Field
             name="location"
             type="text"
@@ -82,7 +94,6 @@ class PopupSearch extends Component {
             <FormControlLabel value="wish" control={<Radio />} label="愿望" />
           </Field>
           <Field name="category" component={renderError} />
-
           <Button
             type="submit"
             color="primary"
@@ -92,12 +103,11 @@ class PopupSearch extends Component {
           >
             搜索
           </Button>
-        </div>
-
-        <div className="flex-form-wrapper">
+        </form>
+        <div style={{marginTop:60}}>
           <HistorySearch />
         </div>
-      </form>
+      </div>
     );
   }
 }

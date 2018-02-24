@@ -110,7 +110,7 @@ class SearchResult extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("searchResult", state.SearchDataReducer);
+  // console.log("searchResult", state.SearchDataReducer);
   return { searchResult: state.SearchDataReducer };
 };
 
