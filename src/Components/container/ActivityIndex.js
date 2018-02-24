@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import _ from "lodash";
 import { withStyles } from "material-ui/styles";
-
+import { Link } from "react-router-dom";
 import * as actions from "../../Actions";
 import IconButton from "material-ui/IconButton";
 import LocationOn from "material-ui-icons/LocationOn";
@@ -24,34 +23,22 @@ import Card, {
   CardContent,
   CardActions
 } from "material-ui/Card";
-import Avatar from "material-ui/Avatar";
 
 import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
-import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
-
+import List from "material-ui/List";
 import Slide from "material-ui/transitions/Slide";
-import AppBar from "material-ui/AppBar";
 import Dialog from "material-ui/Dialog";
-import Button from "material-ui/Button";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
-import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import PersonProfile from "../../Pages/PersonProfile";
-import { Link } from "react-router-dom";
-import RatingSummary from "../../Pages/RatingSummary";
+import RegisterDialog from "../../Pages/RegisterDialog";
 
-const styleSheet = {
-  card: {
-    width: "100%",
-    marginBottom: 30,
-    margin: "auto",
-    boxShadow: "none",
-    border: "1px solid #f2f2f2",
-    position: "relative",
-    color: "#000"
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
+
+const styles = {
+  flex: {
+    flex: 1
   },
-
   media: {
     height: 224,
     position: "relative"
@@ -63,26 +50,20 @@ const styleSheet = {
     verticalAlign: "-2px"
   },
 
-  unlink: {
-    textDecoration: "none"
+  heartOn: {
+    color: "#F44336"
+  },
+  numberOfLikes: {
+    fontSize: "1.2rem"
   }
 };
-
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
 
 class ActivityIndex extends Component {
   state = {
     open: false
   };
 
-  handleClickOpen = name => {
-    this.setState({ open: true });
-    this.props.fetchProfileData(name);
-  };
-
-  handleRequestClose = () => {
+  handleClose = () => {
     this.setState({ open: false });
   };
 
@@ -118,7 +99,14 @@ class ActivityIndex extends Component {
   handleLikes(event, itemId) {
     event.preventDefault();
     event.stopPropagation();
-    this.props.submitLikes(itemId);
+    // cannot "like" until you login/signup
+    if (!localStorage.getItem("jwtToken")) {
+      this.setState({
+        open: true
+      });
+    } else {
+      this.props.submitLikes(itemId);
+    }
   }
 
   renderItems() {
@@ -127,12 +115,8 @@ class ActivityIndex extends Component {
 
     return _.map(activityData, item => {
       return (
-        <Link
-          to={`/activity/${item.id}`}
-          className={classes.unlink}
-          key={item.id}
-        >
-          <Card className={classes.card}>
+        <Link to={`/activity/${item.id}`} className="unlink" key={item.id}>
+          <Card className="card">
             <CardMedia className={classes.media} image={travel} title="travel">
               <span
                 style={{
@@ -193,8 +177,12 @@ class ActivityIndex extends Component {
                   this.handleLikes(event, item.id);
                 }}
               >
-                <FavoriteIcon />
-                {item.likes}
+                <FavoriteIcon
+                  className={item.likes === 0 ? "" : classes.heartOn}
+                />
+                <span className={classes.numberOfLikes}>
+                  &nbsp;{item.likes}
+                </span>
               </IconButton>
               <IconButton aria-label="Share">
                 <ShareIcon />
@@ -207,8 +195,22 @@ class ActivityIndex extends Component {
   }
 
   render() {
-    return <List>{this.renderItems()}</List>;
+    const { fullScreen } = this.props;
+
+    return (
+      <List>
+        <Dialog
+          fullScreen={fullScreen}
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="responsive-dialog-title"
+        >
+          <RegisterDialog onClick={this.handleClose} />
+        </Dialog>
+        {this.renderItems()}
+      </List>
+    );
   }
 }
 
-export default connect(null, actions)(withStyles(styleSheet)(ActivityIndex));
+export default connect(null, actions)(withStyles(styles)(ActivityIndex));

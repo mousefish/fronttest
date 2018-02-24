@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
-import validate from "./validate";
+import validate from "../../Utility/validate";
 import { TextField } from "redux-form-material-ui";
 import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { withStyles } from "material-ui/styles";
 import { LinearProgress } from "material-ui/Progress";
 import { Link } from "react-router-dom";
+import PasswordSetVisibility from "./PasswordSetVisibility";
+import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
@@ -16,42 +18,7 @@ const styles = theme => ({
 
   button: {
     margin: theme.spacing.unit,
-    width: "95%",
-    padding: 20,
-    fontSize: 16
-  },
-
-  wrapper: {
-    width: "90%",
-    margin: "auto",
-    marginBottom: 98,
-    marginTop: 20,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-    // border:'1px solid green'
-  },
-
-  formWrapper: {
-    width: "90%",
-    margin: "auto",
-    textAlign: "center",
-    padding: "10px 0"
-    // border:'1px solid red'
-  },
-
-  formInner: {
     width: "95%"
-  },
-
-  header: {
-    width: "100%",
-    height: "20%",
-    textAlign: "center",
-    padding: 10
-  },
-  text: {
-    fontWeight: "bold"
   }
 });
 
@@ -61,48 +28,57 @@ class wizardFirst extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const { handleSubmit } = this.props;
+    const { classes, history, handleSubmit } = this.props;
 
     return (
-      <form className={classes.wrapper} onSubmit={handleSubmit}>
-        <div className={classes.header}>
-          <Link to='/loginSignUp'>
-          <KeyboardArrowLeft style={{ float: "left", color:'grey'}} />
-          </Link>
-          <h4 className={classes.text}>创建新账户</h4>
-        </div>
-        <div className={classes.formWrapper}>
+      <form className="wrapper" onSubmit={handleSubmit}>
+        <PageHeader history={this.props.history} title="创建新账户" />
+
+        <div className="flex-form-wrapper">
           <LinearProgress
             className={classes.progress}
             mode="determinate"
             value={this.state.completed}
           />
         </div>
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             name="email"
             component={TextField}
-            className={classes.formInner}
+            className="text-field"
             label="输入邮箱地址"
           />
         </div>
-        <div className={classes.formWrapper} style={{marginBottom:20}}>
+        <div className="flex-form-wrapper" style={{ marginBottom: 20 }}>
           <Field
             name="password"
-            type='password'
-            component={TextField}
-            className={classes.formInner}
+            type="password"
+            component={PasswordSetVisibility}
+            className="text-field"
             label="输入密码 - 六位数"
           />
         </div>
+        <div className="legal-footer">
+          注册代表已经同意<Link to="/" className="unlink">
+            服务条款
+          </Link>，<Link to="/" className="unlink">
+            隐私政策
+          </Link>，<Link to="/" className="unlink">
+            免责声明
+          </Link>，<Link to="/" className="unlink">
+            保障计划条款
+          </Link>，<Link to="/" className="unlink">
+            使用政策须知
+          </Link>
+        </div>
 
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Button
             type="submit"
             color="primary"
             raised
-            className={classes.button}
+            className="text-field"
+            id="btn"
           >
             点击注册
           </Button>

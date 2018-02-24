@@ -12,12 +12,13 @@ const styles = theme => ({
     backgroundColor: "#43A047"
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    backgroundColor:"#1976D2"
   },
 
   buttonWrapper: {
     position: "fixed",
-    right: "10%",
+    right: "2%",
     bottom: "10%",
     zIndex: "1000"
   }

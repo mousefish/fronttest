@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
-import validate from "./validate";
+import validate from "../../Utility/validate";
 import Radio from "material-ui/Radio";
 import { RadioGroup, TextField } from "redux-form-material-ui";
 import { LinearProgress } from "material-ui/Progress";
@@ -9,7 +9,7 @@ import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { FormControlLabel } from "material-ui/Form";
-
+import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
@@ -19,28 +19,7 @@ const styles = theme => ({
 
   button: {
     margin: theme.spacing.unit,
-    width: "95%",
-    padding: 20,
-    fontSize: 16
-  },
-
-  wrapper: {
-    width: "90%",
-    margin: "auto",
-    marginBottom: 98,
-    marginTop: 20,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-    // border:'1px solid green'
-  },
-
-  formWrapper: {
-    width: "90%",
-    margin: "auto",
-    textAlign: "center",
-    padding: "10px 0"
-    // border:'1px solid red'
+    width: "95%"
   },
 
   radioInner: {
@@ -54,12 +33,6 @@ const styles = theme => ({
     width: "95%"
   },
 
-  header: {
-    width: "100%",
-    height: "20%",
-    textAlign: "center",
-    padding: 10
-  },
   text: {
     fontWeight: "bold"
   }
@@ -80,23 +53,16 @@ class wizardSecond extends Component {
     const { handleSubmit, previousPage } = this.props;
     const { classes } = this.props;
     return (
-      <form className={classes.wrapper} onSubmit={handleSubmit}>
-        <div className={classes.header}>
-          <KeyboardArrowLeft
-            style={{ float: "left", color: "grey" }}
-            onClick={previousPage}
-          />
-
-          <h4 className={classes.text}>个人基本资料</h4>
-        </div>
-        <div className={classes.formWrapper}>
+      <form className="wrapper" onSubmit={handleSubmit}>
+        <PageHeader onClick={previousPage} title="个人基本资料" />
+        <div className="flex-form-wrapper">
           <LinearProgress
             className={classes.progress}
             mode="determinate"
             value={this.state.completed}
           />
         </div>
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             className={classes.formInner}
             name="username"
@@ -105,8 +71,8 @@ class wizardSecond extends Component {
             label="用户名"
           />
         </div>
-        <div className={classes.formWrapper}>
-        <Field
+        <div className="flex-form-wrapper">
+          <Field
             name="sex"
             component={RadioGroup}
             className={classes.radioInner}
@@ -118,7 +84,7 @@ class wizardSecond extends Component {
           <Field name="sex" component={renderError} />
         </div>
 
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             className={classes.formInner}
             name="age"
@@ -127,7 +93,7 @@ class wizardSecond extends Component {
             label="年龄"
           />
         </div>
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             className={classes.formInner}
             name="city"
@@ -136,7 +102,7 @@ class wizardSecond extends Component {
             label="当前居住城市"
           />
         </div>
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             className={classes.formInner}
             name="yearOfLiving"
@@ -145,7 +111,7 @@ class wizardSecond extends Component {
             label="当前居住城市年限"
           />
         </div>
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             className={classes.formInner}
             name="hometown"
@@ -156,12 +122,13 @@ class wizardSecond extends Component {
           />
         </div>
 
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Button
             type="submit"
             color="primary"
             raised
             className={classes.button}
+            id="btn"
           >
             下一步
           </Button>

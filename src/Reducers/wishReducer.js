@@ -1,7 +1,7 @@
-import { ADD_WISH_DATA, WISH_ERROR, FETCH_WISH_DATA, HANDLE_WISH_LIKES } from "../Actions/types";
+import { ADD_WISH_DATA, WISH_ERROR, FETCH_WISH_DATA, FETCH_ONE_WISH, HANDLE_WISH_LIKES } from "../Actions/types";
 
 // dummy initial state:
-const INITIAL_STATE = { error:"", message:"", all:[]};
+const INITIAL_STATE = { error:"", message:"", all:[] };
 
 
 export default (state = INITIAL_STATE, action) => {
@@ -9,7 +9,9 @@ export default (state = INITIAL_STATE, action) => {
         case ADD_WISH_DATA:
             return { ...state, message: action.payload };
         case FETCH_WISH_DATA:
-            return { ...state, all: action.payload }
+            return { ...state, all: action.payload, message:"" }
+        case FETCH_ONE_WISH:
+             return {...state, wish:action.payload}
         case HANDLE_WISH_LIKES:
              const wishId = Object.keys(action.payload)[0];
              const numOfLikes = Object.values(action.payload)[0];

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
-import { connect } from 'react-redux';
-import * as actions from '../Actions';
+import { connect } from "react-redux";
+import * as actions from "../Actions";
 import WebFontLoader from "webfontloader";
 import WishIndex from "../Components/container/WishIndex";
 import PopupSearch from "../Components/container/PopupSearch";
@@ -10,10 +10,8 @@ import Header from "../Components/presenter/header";
 import Slide from "material-ui/transitions/Slide";
 import AppBar from "material-ui/AppBar";
 import Dialog from "material-ui/Dialog";
-import Button from "material-ui/Button";
 import Toolbar from "material-ui/Toolbar";
 import IconButton from "material-ui/IconButton";
-import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
 WebFontLoader.load({
@@ -23,16 +21,9 @@ WebFontLoader.load({
 });
 
 const styles = {
-  wrapper: {
-    width: '95vw',
-    maxWidth:600,
-    margin: "auto",
-    marginBottom: 50,
-    marginTop: 20
-  },
-
   appBar: {
-    position: "relative"
+    position: "relative",
+    backgroundColor:"#1976D2"
   }
 };
 
@@ -41,7 +32,7 @@ function Transition(props) {
 }
 
 class WishMain extends Component {
-  componentWillMount(){
+  componentWillMount() {
     this.props.fetchWishData();
   }
 
@@ -57,12 +48,12 @@ class WishMain extends Component {
     this.setState({ open: false });
   };
 
-  renderContent(wishes){
-    if(!wishes){
-      return <div>loading..</div>
+  renderContent(wishes) {
+    if (!wishes) {
+      return <div>loading..</div>;
     }
 
-    return <WishIndex wishes={wishes} />
+    return <WishIndex wishes={wishes} />;
   }
   render() {
     const { classes } = this.props;
@@ -83,25 +74,28 @@ class WishMain extends Component {
                 onClick={this.handleRequestClose}
                 aria-label="Close"
               >
-                <KeyboardArrowLeft />
+                <KeyboardArrowLeft
+                  style={{
+                    width: 30,
+                    height: 30
+                  }}
+                />
               </IconButton>
             </Toolbar>
           </AppBar>
           <PopupSearch handleRequestClose={this.handleRequestClose} />
         </Dialog>
-         <div className={classes.wrapper}>
+        <div className="wrapper">
           <Header description="这是一个有深度的旅游服务平台" />
-           {this.renderContent(wishes)}
+          {this.renderContent(wishes)}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log("wishes", state.WishReducer.all);
-  return { wishes: state.WishReducer.all}
-
-}
+const mapStateToProps = state => {
+  return { wishes: state.WishReducer.all };
+};
 
 export default connect(mapStateToProps, actions)(withStyles(styles)(WishMain));

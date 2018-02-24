@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import PropTypes from "prop-types";
 import * as actions from "../../Actions";
-import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
 import Button from "material-ui/Button";
 
@@ -11,14 +10,7 @@ import WizardFirst from "./WizardFirst";
 import WizardSecond from "./WizardSecond";
 import WizardThird from "./WizardThird";
 
-const styles = theme => ({
-    wrapper: {
-        width: "90%",
-        margin: "auto",
-        marginBottom: 50,
-        marginTop: 20
-    }
-});
+
 
 class AddActivity extends Component {
     constructor(props) {
@@ -39,6 +31,7 @@ class AddActivity extends Component {
     }
 
     handleSubmit(values) {
+       console.log('value', values);
         const images = [];
         for(let i = 1 ; i <= 8; i ++){
             if(values['img'+i]){
@@ -56,6 +49,8 @@ class AddActivity extends Component {
             story,
             images
         };
+
+
         this.props.submitActivityData(modifiedValues, this.props.history);
     }
 
@@ -88,7 +83,7 @@ class AddActivity extends Component {
                         onSubmit={this.handleSubmit}
                     />
                 )}
-                {this.renderErrorMsg()}
+                <div className='input-success'>{this.props.msg}</div>
             </div>
         );
     }
@@ -96,12 +91,11 @@ class AddActivity extends Component {
 
 
 const mapStateToProps = state => {
-    console.log('msg',state.ActivityReducer.message)
     return { msg: state.ActivityReducer.message };
 };
 
-AddActivity.propTypes = {
-    onSubmit: PropTypes.func.isRequired
-};
+// AddActivity.propTypes = {
+//     onSubmit: PropTypes.func.isRequired
+// };
 
 export default connect(mapStateToProps, actions)(withRouter(AddActivity));

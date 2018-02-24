@@ -1,7 +1,9 @@
-export const SET_AUTH = 'LOGIN_AUTH_SET';
 export const AUTH_USER = 'auth_user';
 export const AUTH_ERROR = 'auth_error';
 export const DEAUTH_USER = 'deauth_user';
+export const OK_TO_GO = 'ok_to_go';
+
+
 export const FETCH_SEARCH_DATA = 'fetch_search_data';
 export const FETCH_HISTORY_DATA ='fetch_history_data';
 export const CLEAR_HISTORY_DATA = 'clear_history_data';
@@ -17,6 +19,7 @@ export const ADD_WISH_DATA = 'add_wish_data';
 export const WISH_ERROR = "wish_error";
 export const HANDLE_LIKES = "handle_likes";
 export const FETCH_ONE_ACTIVITY = "fetch_one_activity";
+export const FETCH_ONE_WISH = "fetch_one_wish";
 
 export const FETCH_PROFILE_DATA = 'fetch_profile_data';
 export const ADD_RATING_DATA = 'add_rating_data';

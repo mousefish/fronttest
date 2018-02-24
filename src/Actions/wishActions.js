@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_WISH_DATA, WISH_ERROR, FETCH_WISH_DATA, HANDLE_WISH_LIKES } from "./types";
+import { ADD_WISH_DATA, WISH_ERROR, FETCH_WISH_DATA, HANDLE_WISH_LIKES, FETCH_ONE_WISH } from "./types";
 
 const ROOT_URL = "http://localhost:8000";
 export const submitWishData = (data, history) => async dispatch => {
@@ -14,6 +14,7 @@ export const submitWishData = (data, history) => async dispatch => {
             type: ADD_WISH_DATA,
             payload: res.data
         });
+        history.push("/wish");
     } catch (err) {
         dispatch(wishErr(err));
     }
@@ -26,6 +27,16 @@ export const fetchWishData=()=> async dispatch=>{
         payload:res.data
     });
 }
+
+export const fetchOneWish =(wishId)=>async dispatch=>{
+
+        const res = await axios.get(`${ROOT_URL}/api/wish/${wishId}`);
+        dispatch({
+            type: FETCH_ONE_WISH,
+            payload: res.data
+        });
+
+};
 
 export const sendWishLike = (wishId) => async dispatch=>{
     const res = await axios.post(`${ROOT_URL}/api/sendWishLike/${wishId}`,{}, {

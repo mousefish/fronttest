@@ -5,36 +5,27 @@ import Button from "material-ui/Button";
 import gallery from "../Assets/Images/gallery.jpg";
 import { Link } from "react-router-dom";
 import * as actions from "../Actions";
+import PageHeader from "./PageHeader";
 
 const styles = theme => ({
-    wrapper: {
-        width: "90%",
-        margin: "auto",
-        marginTop: 20,
-        marginBottom: 50,
-        textAlign: "center"
-    },
     innerWrapper: {
         marginBottom: 20
     },
     button: {
-        margin: theme.spacing.unit
+        margin: theme.spacing.unit,
+        width: "55%"
     },
     galleryWrapper: {
         whiteSpace: "nowrap",
         overflowX: "auto"
     },
-    imageWrapper: {
+    imageFrame: {
         display: "inline-block",
         marginRight: 15,
         height: 200,
         width: 200
     },
-    image: {
-        width: "100%",
-        maxWidth: "100%",
-        maxHeight: "100%"
-    },
+
     link: {
         color: "#337ab7"
     },
@@ -52,6 +43,14 @@ const styles = theme => ({
         height: "1.2em",
         background:
             "linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)"
+    },
+    toggler: {
+        marginTop:2,
+        alignSelf:"center",
+        color: "#fff",
+        backgroundColor:"#1976D2",
+        borderRadius:10,
+        width:100
     }
 });
 
@@ -60,7 +59,7 @@ class Story extends Component {
         isExpanded: false
     };
 
-    componentWillMount(){
+    componentWillMount() {
         const userId = this.props.match.params.userId;
         this.props.fetchUser(userId);
     }
@@ -68,78 +67,80 @@ class Story extends Component {
     render() {
         const classes = this.props.classes;
         const { user } = this.props;
-        if(!user){
-            return <div>loading</div>
+        if (!user) {
+            return <div>loading</div>;
         }
 
         return (
-            <div className={classes.wrapper}>
-                <div className={classes.innerWrapper}>
-                    <h2>我在这座城市的故事</h2>
+            <div className="wrapper">
+                <PageHeader history={this.props.history} title="我的旅行故事" />
+                <div className="flex-inner-wrapper">
                     <div className={this.state.isExpanded ? "" : classes.fade}>
-                        <p style={{ textAlign: "center" }}>
-                          {user.mail}
-                        </p>
+                        我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行
                         <span
                             className={
                                 this.state.isExpanded ? "" : classes.fadeHelper
                             }
                         />
                     </div>
-                    <Button
-                        color="primary"
-                        raised
-                        className={classes.button}
+                    <button
+                        className={classes.toggler}
                         onClick={() =>
                             this.setState(prevState => ({
                                 isExpanded: !prevState.isExpanded
                             }))}
                     >
-                        {this.state.isExpanded ? "收回内容" : "展开全部内容"}
-                    </Button>
+                        {this.state.isExpanded ? "收回内容" : "展开全部"}
+                    </button>
                 </div>
-                <div className={classes.innerWrapper}>
-                    <h2>我的旅游相册，快来看看吧</h2>
+                <div className="gallery">
+                    <h4 style={{ textAlign: "center" }}>我的旅游相册，快来看看吧</h4>
                     <div className={classes.galleryWrapper}>
-                        <div className={classes.imageWrapper}>
+                        <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
-                                alt="image in my gallery"
-                                className={classes.image}
+                                alt=""
+                                className="image-wrapper"
                             />
                         </div>
-                        <div className={classes.imageWrapper}>
+                        <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
-                                alt="image in my gallery"
-                                className={classes.image}
+                                alt=""
+                                className="image-wrapper"
                             />
                         </div>
-                        <div className={classes.imageWrapper}>
+                        <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
-                                alt="image in my gallery"
-                                className={classes.image}
+                                alt=""
+                                className="image-wrapper"
                             />
                         </div>
-                        <div className={classes.imageWrapper}>
+                        <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
-                                alt="image in my gallery"
-                                className={classes.image}
+                                alt=""
+                                className="image-wrapper"
                             />
                         </div>
-                        <div className={classes.imageWrapper}>
+                        <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
-                                alt="image in my gallery"
-                                className={classes.image}
+                                alt=""
+                                className="image-wrapper"
                             />
                         </div>
                     </div>
                 </div>
-                <div className={classes.innerWrapper}>
-                    <Link to='/friendComments'><h2 className={classes.link}>来看看小伙伴对我的评价吧</h2></Link>
+                <div className="flex-inner-wrapper">
+                    <Link
+                        to="/friendComments"
+                        className="unlink"
+                        style={{ textAlign: "center" }}
+                    >
+                        <h2 className={classes.link}>来看看小伙伴对我的评价吧</h2>
+                    </Link>
                 </div>
             </div>
         );

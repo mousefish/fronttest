@@ -1,68 +1,103 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import * as actions from "../../Actions";
+import { withStyles } from "material-ui/styles";
 import { connect } from "react-redux";
+import Chip from "material-ui/Chip";
+import Avatar from "material-ui/Avatar";
+import CloseIcon from "material-ui-icons/Close";
 
+const styles = theme => ({
+    root: {
+        display: "flex",
+        justifyContent: "flex-start",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        padding: theme.spacing.unit / 2
+    },
+    chip: {
+        margin: theme.spacing.unit / 2
+    }
+});
+
+const generateChipData = data => {
+    if (!data) {
+        return [];
+    }
+    let histList = data.split("|");
+    if (histList[histList.length - 1] === "") {
+        histList.pop();
+    }
+
+    return histList.map((record, index) => {
+        return { key: index, label: record };
+    });
+};
+
+const generateIndividualData = data => {
+    // {key: 0, label: "大连市 辽宁省, 活动"}
+    let record = data.label.split(",");
+    let location = record[0];
+    let category = record[1] === " 活动" ? "activity" : "wish";
+    return { location, category };
+};
+
+// 珠海市 广东省,activity|大连市 辽宁省,activity|
 class HistorySearch extends Component {
+    state = {
+        chipData: generateChipData(localStorage.hist)
+    };
 
-    componentWillMount(){
-        this.props.fetchHistoryData();
-    }
+    deleteChip(data) {
+        // {key: 0, label: "大连市 辽宁省, 活动"}
+        const chipData = [...this.state.chipData];
+        const chipToDelete = chipData.indexOf(data);
+        chipData.splice(chipToDelete, 1);
+        this.setState({ chipData });
 
-    clearHistory() {
-        this.props.clearHistoryData();
-    }
+        let newHist = localStorage.hist
+            .split("|")
+            .filter(record => record !== data.label)
+            .join("|");
 
-    renderItems() {
-        // console.log("historyitem", this.props.historyData);
-        return _.map(this.props.historyData, item => {
-            return (
-                <div
-                    key={item.location}
-                    style={{
-                        display: "flex",
-                        flexDirection: "row nowrap",
-                        justifyContent: "space-between"
-                    }}
-                >
-                    <div>{item.location}</div>
-                    <div>{item.searchTime}</div>
-                </div>
-            );
-        });
+        localStorage.hist = newHist;
+        console.log("newhist", localStorage.hist);
     }
 
     render() {
+        const { classes } = this.props;
         return (
-            <div
-                style={{
-                    textAlign: "center",
-                    position: "relative",
-                    paddingBottom: 40
-                }}
-            >
-                <h4 style={{ fontWeight: "bold" }}>搜索历史</h4>
-                {this.renderItems()}
-                <span
-                    style={{
-                        position: "absolute",
-                        bottom: 0,
-                        right: 0,
-                        textDecoration: "underline",
-                        cursor:'pointer'
-                    }}
-                    onClick={this.clearHistory.bind(this)}
-                >
-                    {this.props.historyData.length === 0 ? ' ' : '清除历史记录'}
-                </span>
+            <div>
+                <h4 style={{ textAlign: "center" }}>搜索历史</h4>
+                <div className={classes.root}>
+                    {this.state.chipData.map(data => {
+                        let avatar = null;
+                        avatar = (
+                            <Avatar>
+                                <CloseIcon
+                                    className={classes.svgIcon}
+                                    onClick={() => this.deleteChip(data)}
+                                />
+                            </Avatar>
+                        );
+                        return (
+                            <Chip
+                                key={data.key}
+                                avatar={avatar}
+                                label={data.label}
+                                className={classes.chip}
+                                onClick={() => {
+                                    this.props.onClick(
+                                        generateIndividualData(data)
+                                    );
+                                }}
+                            />
+                        );
+                    })}
+                </div>
             </div>
         );
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        historyData: state.HistoryDataReducer
-    };
-};
-export default connect(mapStateToProps, actions)(HistorySearch);
+export default connect(null, actions)(withStyles(styles)(HistorySearch));

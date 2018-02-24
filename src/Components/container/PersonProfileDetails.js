@@ -1,75 +1,96 @@
 import React, { Component } from "react";
+import { withStyles } from "material-ui/styles";
+import KeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
 
 const styles = {
-    wrapper: {
-        width: "90%",
-        margin: "auto",
-        marginBottom: 50,
-        marginTop: 80
+    item: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: 10,
+        borderBottom: "1px solid lightgrey",
+        backgroundColor: "#fff",
+        color: "grey"
     },
-    lists: {
+    list: {
         listStyle: "none",
-        padding: 0,
-        lineHeight: 2
+        padding: 0
     },
-    space: {
-        padding: 5,
-        textAlign: "center",
-        fontWeight:"bold"
-    },
-    item :{
-        display:'flex',
-        flexDirection:'row nowrap',
-        justifyContent:'space-between'
+    flexRight: {
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "center"
     }
 };
 
 class PersonProfileDetails extends Component {
     renderItem() {
-        const profile = this.props.profile;
+        const { profile, classes } = this.props;
         return (
-            <ul style={styles.lists}>
-                <h4 style={styles.space}>基本资料</h4>
-                <li style={styles.item}>
+            <ul className={classes.list}>
+                <li className={classes.item}>
                     <span>性别</span>
-                    <span>{profile.sex}</span>
+                    <div className={classes.flexRight}>
+                        <span>{profile.sex}</span>
+                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                    </div>
                 </li>
-                <li style={styles.item}>
+                <li className={classes.item}>
                     <span>老家</span>
-                    <span>{profile.hometown}</span>
+                    <div className={classes.flexRight}>
+                        <span>{profile.hometown}</span>
+                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                    </div>
                 </li>
-                <li style={styles.item}>
+                <li className={classes.item}>
                     <span>当前城市居住年限</span>
-                    <span>{profile.yearOfLiving}</span>
+                    <div className={classes.flexRight}>
+                        <span>{profile.yearOfLiving}</span>
+                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                    </div>
                 </li>
-                <h4 style={styles.space}>职业，教育背景</h4>
-                <li style={styles.item}>
+                <li className={classes.item}>
                     <span>毕业院校</span>
-                    <span>{profile.school}</span>
+                    <div className={classes.flexRight}>
+                        <span>{profile.school}</span>
+                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                    </div>
                 </li>
-                <li style={styles.item}>
+                <li className={classes.item}>
                     <span>专业</span>
-                    <span>{profile.major}</span>
+                    <div className={classes.flexRight}>
+                        <span>{profile.major}</span>
+                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                    </div>
                 </li>
-                <li style={styles.item}>
+                <li className={classes.item}>
                     <span>语言能力</span>
-                    <span>{profile.language}</span>
+                    <div className={classes.flexRight}>
+                        <span>{profile.language}</span>
+                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                    </div>
                 </li>
-                <h4 style={styles.space}>性格爱好</h4>
-                <li style={styles.item}>
+                <li className={classes.item}>
                     <span>兴趣</span>
-                    <span>{profile.hobby}</span>
+                    <div className={classes.flexRight}>
+                        <span>{profile.hobby}</span>
+                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                    </div>
                 </li>
-                <li style={styles.item}>
+                <li className={classes.item}>
                     <span>性格</span>
-                    <span>{profile.personality}</span>
+                    <div className={classes.flexRight}>
+                        <span>{profile.personality}</span>
+                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                    </div>
                 </li>
             </ul>
         );
     }
     render() {
-        return <div style={styles.wrapper}>{this.renderItem()}</div>;
+        return <div className="wrapper">{this.renderItem()}</div>;
     }
 }
 
-export default PersonProfileDetails;
+export default withStyles(styles)(PersonProfileDetails);

@@ -7,10 +7,11 @@ import WizardFirst from "../presenter/WizardFirst";
 import WizardSecond from "../presenter/WizardSecond";
 import WizardThird from "../presenter/WizardThird";
 
-class SignUpWizard extends Component {
+class SignupWizard extends Component {
   constructor(props) {
     super(props);
     this.nextPage = this.nextPage.bind(this);
+    this.verifyEmail = this.verifyEmail.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
@@ -21,22 +22,25 @@ class SignUpWizard extends Component {
     this.setState({ page: this.state.page + 1 });
   }
 
+  // the email is not valid, then the user cannot go to the next page!
+  verifyEmail(value) {
+    let p = new Promise((resolve, reject) => {
+      resolve(this.props.verifySignupEmail({ email: value.email }));
+    });
+    return p.then(() => {
+      if (this.props.canGo) {
+        this.nextPage();
+      }
+    });
+  }
+
   previousPage() {
     this.setState({ page: this.state.page - 1 });
   }
 
   handleSubmit(values) {
-    console.log(values);
+    console.log("submit", values);
     this.props.userSignupRequest(values, this.props.history);
-  }
-
-  // Use this function to show the error message from backend
-  renderErrorMsg() {
-    if (this.props.errorMsg) {
-      return (
-        <div style={{ width: "100%", color: "red", textAlign:'center' }}>{this.props.errorMsg}</div>
-      );
-    }
   }
 
   render() {
@@ -44,7 +48,12 @@ class SignUpWizard extends Component {
     const { page } = this.state;
     return (
       <div>
-        {page === 1 && <WizardFirst onSubmit={this.nextPage} />}
+        {page === 1 && (
+          <WizardFirst
+            history={this.props.history}
+            onSubmit={this.verifyEmail}
+          />
+        )}
         {page === 2 && (
           <WizardSecond
             previousPage={this.previousPage}
@@ -57,18 +66,23 @@ class SignUpWizard extends Component {
             onSubmit={this.handleSubmit}
           />
         )}
-        {this.renderErrorMsg()}
+        <div className="input-error" style={{ textAlign: "center" }}>
+          {this.props.errorMsg}
+        </div>
       </div>
     );
   }
 }
 
-SignUpWizard.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-};
+// SignUpWizard.propTypes = {
+//   onSubmit: PropTypes.func.isRequired
+// };
 
 const mapStateToProps = state => {
-  return { errorMsg: state.UserAuth.error.signupErr || state.UserAuth.error.error};
+  return {
+    errorMsg: state.UserAuth.error,
+    canGo: state.UserAuth.go
+  };
 };
 
-export default connect(mapStateToProps, actions)(withRouter(SignUpWizard));
+export default connect(mapStateToProps, actions)(withRouter(SignupWizard));

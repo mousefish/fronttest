@@ -11,12 +11,9 @@ import Header from "../Components/presenter/header";
 import Slide from "material-ui/transitions/Slide";
 import AppBar from "material-ui/AppBar";
 import Dialog from "material-ui/Dialog";
-import Button from "material-ui/Button";
 import Toolbar from "material-ui/Toolbar";
 import IconButton from "material-ui/IconButton";
-import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-
 
 WebFontLoader.load({
   google: {
@@ -25,16 +22,9 @@ WebFontLoader.load({
 });
 
 const styles = {
-  wrapper: {
-    width: '95vw',
-    maxWidth:600,
-    margin: "auto",
-    marginBottom: 50,
-    marginTop: 20
-  },
-
   appBar: {
-    position: "relative"
+    position: "relative",
+    backgroundColor:"#1976D2"
   }
 };
 
@@ -59,21 +49,20 @@ class TripMain extends Component {
     this.setState({ open: false });
   };
 
-  renderContent(activityData){
-     if(!activityData){
-       return <div>Loading..</div>
-     }else{
-       return <ActivityIndex activityData={activityData} />
-     }
+  renderContent(activityData) {
+    if (!activityData) {
+      return <div>Loading..</div>;
+    } else {
+      return <ActivityIndex activityData={activityData} />;
+    }
   }
 
   render() {
     const classes = this.props.classes;
     const { activityData } = this.props;
-    const { likes } = this.props;
     return (
       <div style={{ position: "relative" }}>
-        <SideButton onClick={this.handleClickOpen} URI='/' />
+        <SideButton onClick={this.handleClickOpen} URI="/" />
         <Dialog
           fullScreen
           open={this.state.open}
@@ -87,19 +76,23 @@ class TripMain extends Component {
                 onClick={this.handleRequestClose}
                 aria-label="Close"
               >
-                <KeyboardArrowLeft />
+                <KeyboardArrowLeft
+                  style={{
+                    width: 30,
+                    height: 30
+                  }}
+                />
               </IconButton>
             </Toolbar>
           </AppBar>
           <PopupSearch handleRequestClose={this.handleRequestClose} />
         </Dialog>
-        <div className={classes.wrapper}>
+        <div className="wrapper">
           <Header description="这是一个有深度的旅游服务平台" />
           <div>{this.renderContent(activityData)}</div>
         </div>
       </div>
     );
-
   }
 }
 
@@ -107,9 +100,10 @@ TripMain.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => {
-  return { activityData: state.ActivityReducer.all,
-         };
+const mapStateToProps = state => {
+  return {
+    activityData: state.ActivityReducer.all
+  };
 };
 
-export default connect(mapStateToProps,actions)(withStyles(styles)(TripMain));
+export default connect(mapStateToProps, actions)(withStyles(styles)(TripMain));

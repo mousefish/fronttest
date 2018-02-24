@@ -2,65 +2,65 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import Button from "material-ui/Button";
-import popupSearchTextField from "./popupSearchTextField";
-import popupSearchDateField from "./popupSearchDateField";
+import AutocompleteField from "./AutocompleteField";
 import popupSearchMultiServices from "./popupSearchMultiServices";
+// import popupSearchMultiSelect from "./popupSearchMultiSelect";
 import * as actions from "../../Actions";
 import HistorySearch from "./HistorySearch";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
+import { MenuItem } from "material-ui/Menu";
+import { Select } from "redux-form-material-ui";
+import classNames from "classnames";
+import validate from "../../Utility/validate";
+import Radio from "material-ui/Radio";
+import { RadioGroup, TextField } from "redux-form-material-ui";
+import { FormControlLabel } from "material-ui/Form";
 
 const styles = theme => ({
   wrapper: {
-    width: "90%",
-    marginTop: 20,
-    margin: "auto"
-  },
-
-  sectionWrapper: {
-    textAlign: "center",
-    marginBottom: 35
+    width: "95%",
+    maxWidth: 600,
+    height: "100%",
+    margin: "auto",
+    marginBottom: 45,
+    display: "flex",
+    flexFlow: "column",
+    justifyContent: "flex-start"
   },
 
   button: {
-    margin: theme.spacing.unit,
+    // margin: theme.spacing.unit,
+    width: "100%",
     marginTop: 30,
+    marginBottom:0
+  },
+  radioInner: {
     width: "95%",
-    padding: 15,
-    fontSize: 16
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "space-around",
+    marginTop: 20
+  },
+
+  formInner: {
+    width: "95%"
+  },
+
+  text: {
+    fontWeight: "bold"
   }
 });
 
+const renderError = ({ meta: { touched, error } }) =>
+  touched && error ? (
+    <span style={{ color: "red", fontSize: "12px" }}>{error}</span>
+  ) : (
+    false
+  );
+
 class PopupSearch extends Component {
-  renderFields(classes) {
-    return [
-      <Field
-        name="location"
-        type="text"
-        component={popupSearchTextField}
-        placeholder="你想去的国家和城市"
-      />,
-
-      <Field
-        key="dapartdate"
-        name="departdate"
-        type="text"
-        component={popupSearchDateField}
-        placeholder="出发日期和时间"
-      />,
-
-      <Field
-        key="finishdate"
-        name="finishdate"
-        type="text"
-        component={popupSearchDateField}
-        placeholder="结束日期和时间"
-      />
-    ];
-  }
-
   submitForm(values) {
-    // console.log("values:", values);
     this.props.submitSearchData(
       values,
       this.props.history,
@@ -71,38 +71,52 @@ class PopupSearch extends Component {
   render() {
     const classes = this.props.classes;
     const { handleSubmit } = this.props;
-
     return (
-      <form
-        className={classes.wrapper}
-        onSubmit={handleSubmit(this.submitForm.bind(this))}
-      >
-        <div className={classes.sectionWrapper}>
-          {this.renderFields(classes)}
-        </div>
-
-        <div className={classes.sectionWrapper}>
-          <h4 style={{ fontWeight: "bold" }}>向导服务</h4>
+      <div className={classes.wrapper}>
+        <form
+          style={{marginTop:30}}
+          onSubmit={handleSubmit(this.submitForm.bind(this))}
+        >
           <Field
-            name="services"
-            component={popupSearchMultiServices}
-            data={["徒步旅行", "汽车接送", "购物打折"]}
+            name="location"
+            type="text"
+            placehoder="选择一个城市"
+            component={AutocompleteField}
+            props={this.props}
           />
+
+          <Field
+            name="category"
+            component={RadioGroup}
+            className={classes.radioInner}
+          >
+            <FormControlLabel value="activity" control={<Radio />} label="活动" />
+            <FormControlLabel value="wish" control={<Radio />} label="愿望" />
+          </Field>
+          <Field name="category" component={renderError} />
+          <Button
+            type="submit"
+            color="primary"
+            raised
+            className={classes.button}
+            id="btn"
+          >
+            搜索
+          </Button>
+        </form>
+        <div style={{marginTop:60}}>
+          <HistorySearch onClick={(value)=>this.submitForm(value)}/>
         </div>
-
-        <HistorySearch />
-
-        <Button type="submit" color="primary" raised className={classes.button}>
-          搜索
-        </Button>
-      </form>
+      </div>
     );
   }
 }
 
 PopupSearch = reduxForm({
-  form: "PopupSearchForm"
+  form: "PopupSearchForm",
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true,
+  validate
 })(withStyles(styles)(PopupSearch));
-
 
 export default (PopupSearch = connect(null, actions)(withRouter(PopupSearch)));

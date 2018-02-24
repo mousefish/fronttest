@@ -1,9 +1,13 @@
 const validate = values => {
-  // console.log(values);
-
   const errors = {};
-
   const names = [
+    "theme",
+    "location",
+    "departdate",
+    "finishdate",
+    "budget",
+    "services",
+    "story",
     "email",
     "password",
     "username",
@@ -16,7 +20,8 @@ const validate = values => {
     "major",
     "language",
     "hobby",
-    "personality"
+    "personality",
+    "category"
   ];
 
   names.forEach(name => {
@@ -24,7 +29,6 @@ const validate = values => {
       errors[name] = "值不能为空！";
     }
   });
-
   if (
     values.email &&
     !/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
@@ -59,6 +63,9 @@ const validate = values => {
     errors.yearOfLiving = "请输入有效年限";
   }
 
+  if (values.story && values.story.length >= 300) {
+    errors.story = "字数不能超过300";
+  }
   return errors;
 };
 

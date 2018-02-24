@@ -1,64 +1,27 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
 import { Field, reduxForm } from "redux-form";
-import validate from "./validate";
+import validate from "../../Utility/validate";
 import Button from "material-ui/Button";
-
 import { TextField } from "redux-form-material-ui";
-
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { LinearProgress } from "material-ui/Progress";
-import { Link } from "react-router-dom";
+import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
     width: "95%",
     margin: "auto"
   },
-
   button: {
     margin: theme.spacing.unit,
-    width: "95%",
-    padding: 20,
-    fontSize: 16
+    width: "95%"
   },
-
-  wrapper: {
-    width: "90%",
-    margin: "auto",
-
-    marginTop: 20,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-    // border:'1px solid green'
-  },
-
-  formWrapper: {
-    width: "90%",
-    margin: "auto",
-    textAlign: "center",
-    padding: "10px 0"
-    // border:'1px solid red'
-  },
-
-  radioInner: {
-    width: "95%",
-    display: "flex",
-    flexFlow: "row nowrap",
-    justifyContent: "space-around"
-  },
-
   formInner: {
     width: "95%"
   },
 
-  header: {
-    width: "100%",
-    height: "20%",
-    textAlign: "center",
-    padding: 10
-  },
   text: {
     fontWeight: "bold"
   }
@@ -74,23 +37,16 @@ class wizardThird extends Component {
     const { handleSubmit, pristine, previousPage, submitting } = this.props;
 
     return (
-      <form className={classes.wrapper} onSubmit={handleSubmit}>
-        <div className={classes.header}>
-          <KeyboardArrowLeft
-            style={{ float: "left", color: "grey" }}
-            onClick={previousPage}
-          />
-
-          <h4 className={classes.text}>其他信息</h4>
-        </div>
-        <div className={classes.formWrapper}>
+      <form className="wrapper" onSubmit={handleSubmit}>
+         <PageHeader onClick={previousPage} title="其他信息" />
+        <div className="flex-form-wrapper">
           <LinearProgress
             className={classes.progress}
             mode="determinate"
             value={this.state.completed}
           />
         </div>
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             className={classes.formInner}
             name="school"
@@ -99,7 +55,7 @@ class wizardThird extends Component {
             label="毕业院校"
           />
         </div>
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             className={classes.formInner}
             name="major"
@@ -108,7 +64,7 @@ class wizardThird extends Component {
             label="毕业专业"
           />
         </div>
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             className={classes.formInner}
             name="language"
@@ -118,7 +74,7 @@ class wizardThird extends Component {
           />
         </div>
 
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             className={classes.formInner}
             name="hobby"
@@ -128,7 +84,7 @@ class wizardThird extends Component {
           />
         </div>
 
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Field
             className={classes.formInner}
             name="personality"
@@ -137,12 +93,13 @@ class wizardThird extends Component {
             label="性格"
           />
         </div>
-        <div className={classes.formWrapper}>
+        <div className="flex-form-wrapper">
           <Button
             type="submit"
             color="primary"
             raised
             className={classes.button}
+            id="btn"
           >
             提交
           </Button>

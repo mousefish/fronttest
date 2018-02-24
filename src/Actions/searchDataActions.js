@@ -1,31 +1,32 @@
- // needs APIs, axios and reduxThunk here later
-// import axios from 'axios';
-import { FETCH_SEARCH_DATA } from './types';
+import axios from "axios";
+import { FETCH_SEARCH_DATA } from "./types";
+import qs from "qs";
+import generateSearchHistory from "../Utility/generateSearchingHistory";
 
-export const submitSearchData = (searchData, history, cb)=> dispatch =>{
-    // console.log('searchData', searchData);
-    // request to API
-    // const res = await axios.post('/api/searchData', searchData);
-    history.push('/searchResult');
 
-    // dispatch({
-    //     type: FETCH_SEARCH_DATA,
-    //     payload:res.data
-    // });
-    cb();
-    // temp
-       dispatch({
-           type: FETCH_SEARCH_DATA
-       });
+const ROOT_URL = "http://localhost:8000";
 
+const buildURL = searchData => {
+    return qs.stringify(searchData);
 };
+export const submitSearchData = (searchData, history, cb) => async dispatch => {
+    let q = typeof searchData === "string" ? searchData : buildURL(searchData);
+    const res = await axios.get(`${ROOT_URL}/api/searchData?${q}`);
 
-export const fetchSearchData = () => dispatch => {
     dispatch({
-        type: FETCH_SEARCH_DATA
+        type: FETCH_SEARCH_DATA,
+        payload: res.data
     });
+     console.log("clicked!", res.data)
+    if (history) {
+        history.push(`/searchResult?${q}`);
+    }
+    if(cb){
+        cb();
+    }
+
+
+    //  for Browsing search history
+    generateSearchHistory(searchData, res.data);
 
 };
-
-
-

@@ -1,0 +1,146 @@
+body {
+  margin: 0;
+  padding: 0;
+  /*  font-family: sans-serif;*/
+  overflow: auto; }
+
+header {
+  display: flex;
+  flex-flow: column;
+  text-align: center; }
+
+header .title {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center; }
+
+header .title img {
+  width: 100px;
+  height: 100px; }
+
+header .title .name {
+  color: #666666;
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 2.6;
+  margin-left: 20px; }
+
+#btn {
+  padding: 15px;
+  font-size: 16px;
+  background-color: #1976D2; }
+
+.card {
+  width: 100%;
+  margin: auto;
+  margin-bottom: 30px;
+  box-shadow: "none";
+  border: 1px solid #f2f2f2;
+  position: relative;
+  color: #000; }
+
+.unlink {
+  text-decoration: none;
+  cursor: pointer;
+  color: #337ab7; }
+
+.wrapper {
+  width: 95vw;
+  max-width: 600px;
+  height: 100%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 45px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between; }
+
+.fixed-height {
+  height: 455px; }
+
+.flex-inner-wrapper {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start; }
+
+.customized-align {
+  align-items: center;
+  padding: 10px; }
+
+.flex-form-wrapper {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  padding: 10px 0; }
+
+.image-wrapper {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%; }
+
+.legal-footer {
+  margin-top: 25px;
+  padding: 5px;
+  line-height: 1.5; }
+
+/****************************/
+.wizard-header {
+  width: 100%;
+  padding: 4px 0;
+  margin-bottom: 5px; }
+
+.wizard-header-bottom {
+  border-bottom: 2px solid #1976D2; }
+
+.page-title {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #1976D2;
+  text-align: center;
+  margin: 0; }
+
+.arrow {
+  float: left;
+  margin-right: -30px;
+  color: #1976D2; }
+
+/****************************/
+.gallery {
+  margin: 10px 0; }
+
+.text-field {
+  width: 95%; }
+
+.category-title {
+  font-weight: bold;
+  text-align: center; }
+
+.input-error {
+  margin-top: 6px;
+  color: red;
+  font-size: 11px;
+  text-align: left; }
+
+.input-success {
+  margin-top: 6px;
+  width: 95%;
+  color: blue;
+  font-size: 1.2rem;
+  text-align: center; }
+
+.activity-info {
+  padding: 0;
+  list-style: none; }
+
+.number-emphasized {
+  font-size: 2rem;
+  font-weight: bolder; }
+
+.activity {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between; }
+
+.comment {
+  border-bottom: 1px solid lightgrey;
+  padding: 10px; }

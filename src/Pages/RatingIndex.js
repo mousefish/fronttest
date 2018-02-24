@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as actions from "../Actions";
 import { connect } from "react-redux";
+import Star from "material-ui-icons/Star";
 // Data [ { id: 5,
 //   feedback: 'pretty good!',
 //   numOfStars: 4,
@@ -18,17 +19,23 @@ class RatingIndex extends Component {
         this.props.fetchRatings(activityId);
     }
 
+    renderStars(num){
+        let result = []
+        for(let i = 0 ; i < num; i++){
+            result.push(<Star key={i} />)
+        }
+
+        return result
+    }
+
     renderItems(ratings) {
         if (!ratings || ratings.length == 0) {
             return <div>暂时没有评论</div>;
         } else {
             return ratings.map(item => {
                 return (
-                    <li key={item.userId}>
-                        <div>
-                            User {item.userId} gave{" "}
-                            <span>{item.numOfStars} stars</span>
-                        </div>
+                    <li className="comment" key={item.userId}>
+                           用户 {item.userId} 说：<span>{this.renderStars(item.numOfStars)}</span>
                         <div>{item.feedback}</div>
                     </li>
                 );
@@ -38,9 +45,8 @@ class RatingIndex extends Component {
     render() {
         const { ratings } = this.props;
         return (
-            <div>
-                <h3>------------以下显示评论区----------------</h3>
-                <ul>{this.renderItems(ratings)}</ul>
+            <div className="flex-inner-wrapper">
+                <ul className="activity-info">{this.renderItems(ratings)}</ul>
             </div>
         );
     }
