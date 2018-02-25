@@ -48,7 +48,7 @@ const styles = theme => ({
     }
 });
 
-class MyInfo extends Component {
+class PrivateBasicInfo extends Component {
 
     renderPage(){
         let originalUser = localStorage.getItem("user");
@@ -59,11 +59,6 @@ class MyInfo extends Component {
              <div>
                  <PageHeader history={this.props.history} title="我的信息" />
                 <PersonProfileDetails profile={user} />
-                <div className="flex-inner-wrapper customized-align">
-                    <Link to={`/story/${user.id}`} className="unlink">
-                        <span style={{ fontSize: "1.5rem" }}>我的旅游故事</span>
-                    </Link>
-                </div>
              </div>
            )
         }else{
@@ -88,5 +83,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, actions)(
-    withRouter(withStyles(styles)(MyInfo))
+    withRouter(withStyles(styles)(PrivateBasicInfo))
 );
