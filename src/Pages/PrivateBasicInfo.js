@@ -25,6 +25,7 @@ import Dialog, {
 
 import TextField from "material-ui/TextField";
 import Translation from "../Data/UserBasicInfoENtoCH";
+import CHtoEN from "../Data/UserBasicInfoCHtoEN";
 
 const sexOptions = ["男", "女", "其他"];
 const styles = theme => ({
@@ -42,7 +43,8 @@ class PrivateBasicInfo extends Component {
         open: false,
         key: "",
         value: "",
-        err: ""
+        err: "",
+        userId: null
     };
 
     handleClose = () => {
@@ -58,42 +60,67 @@ class PrivateBasicInfo extends Component {
 
         this.setState({
             open: true,
+            original: data.value,
             key: Translation[data.key],
-            value: data.value
+            value: data.value,
+            userId: data.userId
         });
-        console.log("state", this.state);
     }
 
     submitUpdates = () => {
+        this.setState({
+            err: ""
+        });
         let inputValue = this.state.value;
-        console.log("inputValue", inputValue);
-        switch (this.state.key) {
-            case "邮箱":
-                if (
-                    !/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-                        inputValue
-                    )
-                ) {
-                    this.setState({
-                        err: "请输入有效邮箱"
-                    });
-                }
-                break;
 
-            case "密码":
-                if (inputValue.length !== 6) {
-                    this.setState({
-                        err: "密码长度为六位"
-                    });
-                }
-                break;
-            default:
-                if (!inputValue) {
-                    this.setState({
-                        err: "值不能为空"
-                    });
-                }
-        }
+        const p = new Promise((resolve, reject) => {
+            if (!inputValue) {
+                this.setState({
+                    err: "值不能为空"
+                });
+            }
+
+            if (inputValue.trim() === this.state.original) {
+                this.setState({
+                    err: "值未发生更新"
+                });
+            }
+
+            switch (this.state.key) {
+                case "邮箱":
+                    if (
+                        !/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+                            inputValue
+                        )
+                    ) {
+                        this.setState({
+                            err: "请输入有效邮箱"
+                        });
+                    }
+                    break;
+
+                case "密码":
+                    if (inputValue.length !== 6) {
+                        this.setState({
+                            err: "密码长度为六位"
+                        });
+                    }
+                    break;
+            }
+            resolve(this.state.err);
+        });
+
+        p.then(() => {
+            if (this.state.err === "") {
+                let value = {
+                    userId: this.state.userId,
+                    key: CHtoEN[this.state.key],
+                    value: inputValue
+                };
+
+                console.log("submitValue", value);
+            }
+        });
     };
 
     renderPage() {
