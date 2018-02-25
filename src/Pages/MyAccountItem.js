@@ -16,7 +16,7 @@ const styles = theme => ({
 });
 
 
-const MyItem = props => {
+const MyAccountItem = props => {
     const { item, classes, history, onClick } = props;
     return (
         <li
@@ -29,4 +29,4 @@ const MyItem = props => {
     );
 };
 
-export default withStyles(styles)(MyItem);
+export default withStyles(styles)(MyAccountItem);

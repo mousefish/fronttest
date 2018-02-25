@@ -12,7 +12,6 @@ import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
 
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import PersonProfileDetails from "../Components/container/PersonProfileDetails";
 import PageHeader from "./PageHeader";
 import * as actions from "../Actions";
 
@@ -89,7 +88,7 @@ const styles = theme => ({
     }
 });
 
-class PersonProfile extends Component {
+class PublicProfile extends Component {
     componentWillMount() {
         const userId = this.props.match.params.userId;
         this.props.fetchUser(userId);
@@ -144,6 +143,7 @@ class PersonProfile extends Component {
             </div>
         );
     }
+
 }
 
 const mapStateToProps = state => {
@@ -153,5 +153,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, actions)(
-    withRouter(withStyles(styles)(PersonProfile))
+    withRouter(withStyles(styles)(PublicProfile))
 );

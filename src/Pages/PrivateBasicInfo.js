@@ -13,7 +13,7 @@ import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
 
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import PersonProfileDetails from "../Components/container/PersonProfileDetails";
+import BasicInfoItem from "../Components/container/BasicInfoItem";
 import PageHeader from "./PageHeader";
 import * as actions from "../Actions";
 import Dialog, {
@@ -104,7 +104,7 @@ class PrivateBasicInfo extends Component {
             return (
                 <div>
                     <PageHeader history={this.props.history} title="我的信息" />
-                    <PersonProfileDetails
+                    <BasicInfoItem
                         profile={user}
                         onClick={data => this.handleUpdate(data)}
                     />

@@ -28,7 +28,7 @@ const styles = theme => ({
     }
 });
 
-const MyHeader = props => {
+const MyAccountLoggedinHeader = props => {
     const { classes } = props;
     return (
         <div className={classes.myHeader}>
@@ -38,4 +38,5 @@ const MyHeader = props => {
     );
 };
 
-export default withStyles(styles)(MyHeader);
+export default withStyles(styles)(MyAccountLoggedinHeader
+    );

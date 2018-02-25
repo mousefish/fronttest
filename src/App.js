@@ -34,7 +34,7 @@ import PrivateBasicInfo from "./Pages/PrivateBasicInfo";
 import AddActivity from "./Pages/AddActivity/AddActivity";
 import AddWish from "./Pages/AddWish/AddWish";
 import Activity from "./Pages/Activity";
-import PersonProfile from "./Pages/PersonProfile";
+import PublicProfile from "./Pages/PublicProfile";
 
 import RequireAuth from "./HOC/RequireAuth";
 import ActivityWishPanel from "./Pages/ActivityWishPanel";
@@ -176,7 +176,7 @@ class App extends Component {
             <Route exact path="/activity/:activityId" component={Activity} />
             <Route exact path="/wish/:wishId" component={Wish} />
 
-            <Route exact path="/user/:userId" component={PersonProfile} />
+            <Route exact path="/user/:userId" component={PublicProfile} />
 
             {/*unit test used below, production will check env.production to disable*/}
 
