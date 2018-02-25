@@ -24,7 +24,17 @@ const styles = {
     }
 };
 
+const sex = { female: "女", male: "男", other: "其他" };
+
 class PersonProfileDetails extends Component {
+    handleSex(profile) {
+        this.props.onClick({
+            userId: profile.id,
+            key: "sex",
+            value: sex[profile.sex]
+        });
+    }
+
     renderItem() {
         const { profile, classes } = this.props;
         return (
@@ -34,8 +44,8 @@ class PersonProfileDetails extends Component {
                     onClick={() =>
                         this.props.onClick({
                             userId: profile.id,
-                            key:"mail",
-                            value:profile.mail
+                            key: "mail",
+                            value: profile.mail
                         })}
                 >
                     <span>邮箱</span>
@@ -50,8 +60,8 @@ class PersonProfileDetails extends Component {
                     onClick={() =>
                         this.props.onClick({
                             userId: profile.id,
-                            key:"password",
-                            value: "******"
+                            key: "password",
+                            value: ""
                         })}
                 >
                     <span>密码</span>
@@ -65,7 +75,7 @@ class PersonProfileDetails extends Component {
                     onClick={() =>
                         this.props.onClick({
                             userId: profile.id,
-                            key:"username",
+                            key: "username",
                             value: profile.username
                         })}
                 >
@@ -78,12 +88,9 @@ class PersonProfileDetails extends Component {
 
                 <li
                     className={classes.item}
-                    onClick={() =>
-                        this.props.onClick({
-                            userId: profile.id,
-                            key:"sex",
-                            value: profile.sex
-                        })}
+                    onClick={() => {
+                        this.handleSex(profile);
+                    }}
                 >
                     <span>性别</span>
                     <div className={classes.flexRight}>
@@ -96,7 +103,7 @@ class PersonProfileDetails extends Component {
                     onClick={() =>
                         this.props.onClick({
                             userId: profile.id,
-                            key:"hometown",
+                            key: "hometown",
                             value: profile.hometown
                         })}
                 >
@@ -111,7 +118,7 @@ class PersonProfileDetails extends Component {
                     onClick={() =>
                         this.props.onClick({
                             userId: profile.id,
-                            key:"yearOfLiving",
+                            key: "yearOfLiving",
                             value: profile.yearOfLiving
                         })}
                 >
@@ -126,7 +133,7 @@ class PersonProfileDetails extends Component {
                     onClick={() =>
                         this.props.onClick({
                             userId: profile.id,
-                            key:"school",
+                            key: "school",
                             value: profile.school
                         })}
                 >
@@ -141,7 +148,7 @@ class PersonProfileDetails extends Component {
                     onClick={() =>
                         this.props.onClick({
                             userId: profile.id,
-                            key:"major",
+                            key: "major",
                             value: profile.major
                         })}
                 >
@@ -156,7 +163,7 @@ class PersonProfileDetails extends Component {
                     onClick={() =>
                         this.props.onClick({
                             userId: profile.id,
-                            key:"language",
+                            key: "language",
                             value: profile.language
                         })}
                 >
@@ -171,7 +178,7 @@ class PersonProfileDetails extends Component {
                     onClick={() =>
                         this.props.onClick({
                             userId: profile.id,
-                            key:"hobby",
+                            key: "hobby",
                             value: profile.hobby
                         })}
                 >
@@ -186,7 +193,7 @@ class PersonProfileDetails extends Component {
                     onClick={() =>
                         this.props.onClick({
                             userId: profile.id,
-                            key:"personality",
+                            key: "personality",
                             value: profile.personality
                         })}
                 >

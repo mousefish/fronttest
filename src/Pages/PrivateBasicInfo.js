@@ -4,7 +4,8 @@ import { withRouter } from "react-router";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-
+import Radio, { RadioGroup } from "material-ui/Radio";
+import { FormControlLabel } from "material-ui/Form";
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
 
@@ -25,6 +26,7 @@ import Dialog, {
 import TextField from "material-ui/TextField";
 import Translation from "../Data/UserBasicInfoENtoCH";
 
+const sexOptions = ["男", "女", "其他"];
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
@@ -48,20 +50,23 @@ class PrivateBasicInfo extends Component {
     };
 
     handleUpdate(data) {
-         //  Needs to clear the err message to avoid showing the previous one
+        //  Needs to clear the err message to avoid showing the previous one
         this.setState({
-            err:""
-        })
+            err: ""
+        });
         // valueToBeUpdated {userId: 23, username: "jingyi"}
+
         this.setState({
             open: true,
             key: Translation[data.key],
             value: data.value
         });
+        console.log("state", this.state);
     }
 
     submitUpdates = () => {
         let inputValue = this.state.value;
+        console.log("inputValue", inputValue);
         switch (this.state.key) {
             case "邮箱":
                 if (
@@ -82,7 +87,6 @@ class PrivateBasicInfo extends Component {
                     });
                 }
                 break;
-
             default:
                 if (!inputValue) {
                     this.setState({
@@ -126,18 +130,41 @@ class PrivateBasicInfo extends Component {
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText style={{ width: 400 }} />
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label={this.state.key}
-                            type="email"
-                            value={this.state.value}
-                            onChange={e => {
-                                this.setState({ value: e.target.value });
-                            }}
-                            fullWidth
-                        />
+                        {this.state.key === "性别" ? (
+                            <RadioGroup
+                                ref={node => {
+                                    this.radioGroup = node;
+                                }}
+                                aria-label="ringtone"
+                                name="ringtone"
+                                value={this.state.value}
+                                onChange={e => {
+                                    this.setState({ value: e.target.value });
+                                }}
+                            >
+                                {sexOptions.map(option => (
+                                    <FormControlLabel
+                                        value={option}
+                                        key={option}
+                                        control={<Radio />}
+                                        label={option}
+                                    />
+                                ))}
+                            </RadioGroup>
+                        ) : (
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label={this.state.key}
+                                type="email"
+                                value={this.state.value}
+                                onChange={e => {
+                                    this.setState({ value: e.target.value });
+                                }}
+                                fullWidth
+                            />
+                        )}
                         <div className={classes.errMsg}>{this.state.err}</div>
                     </DialogContent>
 
