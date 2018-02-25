@@ -22,7 +22,7 @@ class Activity extends Component {
         const activityId = this.props.match.params.activityId;
         const { classes, activity, message, ratings } = this.props;
         if (!activity) {
-            return <div>loading</div>;
+            return <div>次活动尚未出现</div>;
         }
         return (
             <div className="wrapper">
@@ -50,7 +50,7 @@ class Activity extends Component {
                             <h4 className="category-title">
                                 我在{activity.location.split(" ")[0]}的故事
                             </h4>
-                            <div>{activity.story}</div>
+                            <div style={{overflowY: "scroll"}}>{activity.story}</div>
                         </li>
                         <li
                             style={{

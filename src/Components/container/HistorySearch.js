@@ -48,8 +48,9 @@ class HistorySearch extends Component {
         chipData: generateChipData(localStorage.hist)
     };
 
-    deleteChip(data) {
+    deleteChip(e,data) {
         // {key: 0, label: "大连市 辽宁省, 活动"}
+        e.stopPropagation()
         const chipData = [...this.state.chipData];
         const chipToDelete = chipData.indexOf(data);
         chipData.splice(chipToDelete, 1);
@@ -76,7 +77,7 @@ class HistorySearch extends Component {
                             <Avatar>
                                 <CloseIcon
                                     className={classes.svgIcon}
-                                    onClick={() => this.deleteChip(data)}
+                                    onClick={(e) => this.deleteChip(e,data)}
                                 />
                             </Avatar>
                         );
