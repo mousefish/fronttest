@@ -12,7 +12,6 @@ import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
 
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import PersonProfileDetails from "../Components/container/PersonProfileDetails";
 import PageHeader from "./PageHeader";
 import * as actions from "../Actions";
 
@@ -89,7 +88,7 @@ const styles = theme => ({
     }
 });
 
-class PersonProfile extends Component {
+class PublicProfile extends Component {
     componentWillMount() {
         const userId = this.props.match.params.userId;
         this.props.fetchUser(userId);
@@ -132,26 +131,27 @@ class PersonProfile extends Component {
                             style={{ color: "#fff" }}
                         >
                             <span className={classes.subHeaderContent}>
-                                我的故事
+                                他的故事
                             </span>
                         </Link>
-                        <span className={classes.subHeaderContent}>我的愿望</span>
-                        <span className={classes.subHeaderContent}>我的活动</span>
-                        <span className={classes.subHeaderContent}>我的收藏</span>
+                        <span className={classes.subHeaderContent}>他的愿望</span>
+                        <span className={classes.subHeaderContent}>他的活动</span>
+                        <span className={classes.subHeaderContent}>他的收藏</span>
                     </div>
                 </div>
                 <div className="wrapper">{this.props.children}</div>
             </div>
         );
     }
+
 }
 
 const mapStateToProps = state => {
     return {
-        user: state.UserReducer
+        user: state.UserReducer.basicInfo
     };
 };
 
 export default connect(mapStateToProps, actions)(
-    withRouter(withStyles(styles)(PersonProfile))
+    withRouter(withStyles(styles)(PublicProfile))
 );

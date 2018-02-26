@@ -2,7 +2,12 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import qs from "qs";
 
-import { AUTH_USER, AUTH_ERROR, DEAUTH_USER, OK_TO_GO } from "./types";
+import {
+  AUTH_USER,
+  AUTH_ERROR,
+  DEAUTH_USER,
+  OK_TO_GO,
+} from "./types";
 
 const ROOT_URL = "http://localhost:8000/api";
 
@@ -13,7 +18,7 @@ const buildURL = searchData => {
 export const logout = history => dispatch => {
   localStorage.removeItem("jwtToken");
   localStorage.removeItem("user");
-  console.log("remove", localStorage.getItem("user"))
+  console.log("remove", localStorage.getItem("user"));
   dispatch({ type: DEAUTH_USER });
   history.push("/");
 };
@@ -37,6 +42,7 @@ export const userSignupRequest = (userData, history) => async dispatch => {
     const res = await axios.post(`${ROOT_URL}/signup`, userData);
     if (res.data.token) {
       localStorage.setItem("jwtToken", res.data.token);
+       // store the user info for visiting basic info later, my story, those items under my account later
       localStorage.setItem("user", JSON.stringify(res.data.user));
       dispatch({
         type: AUTH_USER,
@@ -55,7 +61,9 @@ export const userSignupRequest = (userData, history) => async dispatch => {
 export const userLogin = (userData, history) => async dispatch => {
   try {
     const res = await axios.post(`${ROOT_URL}/login`, userData);
+
     localStorage.setItem("jwtToken", res.data.token);
+    // store the user info for visiting basic info later, my story, those items under my account later
     localStorage.setItem("user", JSON.stringify(res.data.user));
     dispatch({
       type: AUTH_USER,

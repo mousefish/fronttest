@@ -4,9 +4,9 @@ import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import * as actions from "../Actions";
-import MyItem from "./MyItem";
-import MyHeader from "./MyHeader";
-import RegisterHeader from "./RegisterHeader";
+import MyAccountItem from "./MyAccountItem";
+import MyAccountLoggedinHeader from "./MyAccountLoggedinHeader";
+import MyAccountRegisterHeader from "./MyAccountRegisterHeader";
 import Button from "material-ui/Button";
 import Dialog from "material-ui/Dialog";
 import RegisterDialog from "./RegisterDialog";
@@ -44,11 +44,11 @@ class MyAccount extends Component {
     handleClick(item) {
         let rawUser = localStorage.getItem("user");
         if (rawUser) {
+            let userId = JSON.parse(rawUser).id;
             switch (item) {
                 case "账号信息":
-                    return this.props.history.push("/myInfo");
+                    return this.props.history.push(`/myInfo/${userId}`);
                 case "我的旅游故事":
-                    let userId = JSON.parse(rawUser).id;
                     return this.props.history.push(`/story/${userId}`);
             }
         } else {
@@ -73,7 +73,7 @@ class MyAccount extends Component {
         ];
         return items.map((item, index, items) => {
             return (
-                <MyItem
+                <MyAccountItem
                     key={index}
                     item={item}
                     rawUser={rawUser}
@@ -92,10 +92,9 @@ class MyAccount extends Component {
 
         if (rawUser) {
             user = JSON.parse(rawUser);
-
-            return <MyHeader history={this.props.history} user={user} />;
+            return <MyAccountLoggedinHeader history={this.props.history} user={user} />;
         } else {
-            return <RegisterHeader />;
+            return <MyAccountRegisterHeader />;
         }
     }
 

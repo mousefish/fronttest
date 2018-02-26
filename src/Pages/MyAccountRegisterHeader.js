@@ -24,7 +24,7 @@ const styles = theme => ({
     }
 });
 
-const RegisterHeader = props => {
+const MyAccountRegisterHeader = props => {
     const { classes } = props;
     return (
         <div className={classes.registerHeader}>
@@ -38,4 +38,4 @@ const RegisterHeader = props => {
     );
 };
 
-export default withStyles(styles)(RegisterHeader);
+export default withStyles(styles)(MyAccountRegisterHeader);
