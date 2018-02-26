@@ -131,12 +131,12 @@ class PublicProfile extends Component {
                             style={{ color: "#fff" }}
                         >
                             <span className={classes.subHeaderContent}>
-                                我的故事
+                                他的故事
                             </span>
                         </Link>
-                        <span className={classes.subHeaderContent}>我的愿望</span>
-                        <span className={classes.subHeaderContent}>我的活动</span>
-                        <span className={classes.subHeaderContent}>我的收藏</span>
+                        <span className={classes.subHeaderContent}>他的愿望</span>
+                        <span className={classes.subHeaderContent}>他的活动</span>
+                        <span className={classes.subHeaderContent}>他的收藏</span>
                     </div>
                 </div>
                 <div className="wrapper">{this.props.children}</div>
@@ -148,7 +148,7 @@ class PublicProfile extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.UserReducer
+        user: state.UserReducer.basicInfo
     };
 };
 

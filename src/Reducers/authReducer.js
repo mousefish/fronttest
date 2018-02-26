@@ -1,11 +1,15 @@
-import { AUTH_ERROR, AUTH_USER, DEAUTH_USER, OK_TO_GO,  UPDATE_USER_BASIC} from '../Actions/types';
+import {
+  AUTH_ERROR,
+  AUTH_USER,
+  DEAUTH_USER,
+  OK_TO_GO,
+} from "../Actions/types";
 
-
-const initState={
+const initState = {
   isAuthenticated: false,
   error: "",
-  go:false,
-  user:{}
+  go: false,
+  user: {}
 };
 
 // Use "go" to verify if use can go to the next wizard form or not.
@@ -14,53 +18,39 @@ const initState={
 export default (state = initState, action = {}) => {
   switch (action.type) {
 
-    case UPDATE_USER_BASIC:
-      let updatedUser = Object.assign({}, state.user);
-      let { key, value } = action.payload;
-      updatedUser[key] = value
-      return {
-        ...state,
-        user:updatedUser
-      }
-
-     return {
-       ...state,
-
-     }
     case OK_TO_GO:
       return {
         ...state,
-        go:true,
-        error:"",
-        user:{}
+        go: true,
+        error: "",
+        user: {}
       };
 
     case AUTH_USER:
       return {
         ...state,
         isAuthenticated: true,
-        user:action.payload,
-        error:"",
-        go:false
+        user: action.payload,
+        error: "",
+        go: false
       };
 
     case AUTH_ERROR:
-       return {
+      return {
         ...state,
-        isAuthenticated:false,
-        user:{},
-        error:action.payload
-    };
-
+        isAuthenticated: false,
+        user: {},
+        error: action.payload
+      };
 
     case DEAUTH_USER:
-       return {
-         ...state,
-         isAuthenticated: false,
-         user:{},
-         error:"",
-         go:false,
-    };
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: {},
+        error: "",
+        go: false
+      };
 
     default:
       return state;

@@ -44,11 +44,11 @@ class MyAccount extends Component {
     handleClick(item) {
         let rawUser = localStorage.getItem("user");
         if (rawUser) {
+            let userId = JSON.parse(rawUser).id;
             switch (item) {
                 case "账号信息":
-                    return this.props.history.push("/myInfo");
+                    return this.props.history.push(`/myInfo/${userId}`);
                 case "我的旅游故事":
-                    let userId = JSON.parse(rawUser).id;
                     return this.props.history.push(`/story/${userId}`);
             }
         } else {

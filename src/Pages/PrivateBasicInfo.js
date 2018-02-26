@@ -25,7 +25,6 @@ import Dialog, {
 
 import TextField from "material-ui/TextField";
 import Translation from "../Data/UserBasicInfoENtoCH";
-import CHtoEN from "../Data/UserBasicInfoCHtoEN";
 
 const sexOptions = ["男", "女", "其他"];
 const styles = theme => ({
@@ -39,12 +38,17 @@ const styles = theme => ({
 });
 
 class PrivateBasicInfo extends Component {
+    componentWillMount() {
+        const userId = this.props.match.params.userId;
+        this.props.fetchUser(userId);
+    }
+
     state = {
         open: false,
         key: "",
         value: "",
         err: "",
-        userId: null
+        userId: this.props.match.params.userId
     };
 
     handleClose = () => {
@@ -52,18 +56,14 @@ class PrivateBasicInfo extends Component {
     };
 
     handleUpdate(data) {
-        //  Needs to clear the err message to avoid showing the previous one
-        this.setState({
-            err: ""
-        });
         // valueToBeUpdated {userId: 23, username: "jingyi"}
-
+        //  Needs to clear the err message to avoid showing the previous one
         this.setState({
             open: true,
             original: data.value,
-            key: Translation[data.key],
+            key: data.key,
             value: data.value,
-            userId: data.userId
+            err: ""
         });
     }
 
@@ -72,7 +72,6 @@ class PrivateBasicInfo extends Component {
             err: ""
         });
         let inputValue = this.state.value;
-
         const p = new Promise((resolve, reject) => {
             if (!inputValue) {
                 this.setState({
@@ -80,26 +79,26 @@ class PrivateBasicInfo extends Component {
                 });
             }
             // Make sure the it works on number-typed input too!
-            if ((""+inputValue).trim() === ""+this.state.original) {
+            if (("" + inputValue).trim() === "" + this.state.original) {
                 this.setState({
                     err: "值未发生更新"
                 });
             }
-
             switch (this.state.key) {
-                case "邮箱":
+                case "mail":
                     if (
                         !/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
                             inputValue
                         )
                     ) {
+
                         this.setState({
                             err: "请输入有效邮箱"
                         });
                     }
                     break;
 
-                case "密码":
+                case "password":
                     if (inputValue.length !== 6) {
                         this.setState({
                             err: "密码长度为六位"
@@ -114,33 +113,36 @@ class PrivateBasicInfo extends Component {
             if (this.state.err === "") {
                 let value = {
                     userId: this.state.userId,
-                    key: CHtoEN[this.state.key],
+                    key: this.state.key,
                     value: inputValue
                 };
 
-                console.log("submitValue", value);
+                // console.log("submitValue", value);
                 this.props.updateUserBasicInfo(value);
+                setTimeout(()=>{
+                    if(this.props.user.err === ""){
+                        this.setState({ open: false });
+                    }
+                }, 100);
+
             }
         });
     };
 
+    // renderPage is called everytime the Dialog is opened and closed!!!
     renderPage() {
-        let originalUser = localStorage.getItem("user");
-        let user;
-        if (originalUser) {
-            user = JSON.parse(originalUser);
-            return (
-                <div>
-                    <PageHeader history={this.props.history} title="我的信息" />
-                    <BasicInfoItem
-                        profile={this.props.user||user}
-                        onClick={data => this.handleUpdate(data)}
-                    />
-                </div>
-            );
-        } else {
-            return <div>无权访问</div>;
+        if (!this.props.user) {
+            return <div>loading...</div>;
         }
+        return (
+            <div>
+                <PageHeader history={this.props.history} title="我的信息" />
+                <BasicInfoItem
+                    profile={this.props.user.basicInfo}
+                    onClick={data => this.handleUpdate(data)}
+                />
+            </div>
+        );
     }
 
     render() {
@@ -154,7 +156,7 @@ class PrivateBasicInfo extends Component {
                     aria-labelledby="form-dialog-title"
                 >
                     <DialogTitle id="form-dialog-title">
-                        更改{this.state.key}信息
+                        更改{Translation[this.state.key]}信息
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText style={{ width: 400 }} />
@@ -163,7 +165,7 @@ class PrivateBasicInfo extends Component {
                                 ref={node => {
                                     this.radioGroup = node;
                                 }}
-                                aria-label="ringtone"
+                                aria-label="gender"
                                 name="ringtone"
                                 value={this.state.value}
                                 onChange={e => {
@@ -184,7 +186,7 @@ class PrivateBasicInfo extends Component {
                                 autoFocus
                                 margin="dense"
                                 id="name"
-                                label={this.state.key}
+                                label={Translation[this.state.key]}
                                 type="email"
                                 value={this.state.value}
                                 onChange={e => {
@@ -193,7 +195,9 @@ class PrivateBasicInfo extends Component {
                                 fullWidth
                             />
                         )}
-                        <div className={classes.errMsg}>{this.state.err}</div>
+                        <div className={classes.errMsg}>
+                            {this.state.err || this.props.user.err}
+                        </div>
                     </DialogContent>
 
                     <DialogActions>
@@ -211,9 +215,11 @@ class PrivateBasicInfo extends Component {
     }
 }
 
+// err from backend if the user update his email with a one that is already used by another user!
 const mapStateToProps = state => {
+    console.log("err", state.UserReducer.err);
     return {
-        user: state.UserReducer.user
+        user: state.UserReducer
     };
 };
 

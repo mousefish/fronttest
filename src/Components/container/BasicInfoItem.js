@@ -29,7 +29,6 @@ const sex = { female: "女", male: "男", other: "其他" };
 class BasicInfoItem extends Component {
     handleSex(profile) {
         this.props.onClick({
-            userId: profile.id,
             key: "sex",
             value: sex[profile.sex]
         });
@@ -43,7 +42,6 @@ class BasicInfoItem extends Component {
                     className={classes.item}
                     onClick={() =>
                         this.props.onClick({
-                            userId: profile.id,
                             key: "mail",
                             value: profile.mail
                         })}
@@ -59,7 +57,6 @@ class BasicInfoItem extends Component {
                     className={classes.item}
                     onClick={() =>
                         this.props.onClick({
-                            userId: profile.id,
                             key: "password",
                             value: ""
                         })}
@@ -74,7 +71,6 @@ class BasicInfoItem extends Component {
                     className={classes.item}
                     onClick={() =>
                         this.props.onClick({
-                            userId: profile.id,
                             key: "username",
                             value: profile.username
                         })}
@@ -102,7 +98,6 @@ class BasicInfoItem extends Component {
                     className={classes.item}
                     onClick={() =>
                         this.props.onClick({
-                            userId: profile.id,
                             key: "hometown",
                             value: profile.hometown
                         })}
@@ -117,7 +112,6 @@ class BasicInfoItem extends Component {
                     className={classes.item}
                     onClick={() =>
                         this.props.onClick({
-                            userId: profile.id,
                             key: "yearOfLiving",
                             value: profile.yearOfLiving
                         })}
@@ -132,7 +126,6 @@ class BasicInfoItem extends Component {
                     className={classes.item}
                     onClick={() =>
                         this.props.onClick({
-                            userId: profile.id,
                             key: "school",
                             value: profile.school
                         })}
@@ -147,7 +140,6 @@ class BasicInfoItem extends Component {
                     className={classes.item}
                     onClick={() =>
                         this.props.onClick({
-                            userId: profile.id,
                             key: "major",
                             value: profile.major
                         })}
@@ -162,7 +154,6 @@ class BasicInfoItem extends Component {
                     className={classes.item}
                     onClick={() =>
                         this.props.onClick({
-                            userId: profile.id,
                             key: "language",
                             value: profile.language
                         })}
@@ -177,7 +168,6 @@ class BasicInfoItem extends Component {
                     className={classes.item}
                     onClick={() =>
                         this.props.onClick({
-                            userId: profile.id,
                             key: "hobby",
                             value: profile.hobby
                         })}
@@ -192,7 +182,6 @@ class BasicInfoItem extends Component {
                     className={classes.item}
                     onClick={() =>
                         this.props.onClick({
-                            userId: profile.id,
                             key: "personality",
                             value: profile.personality
                         })}
