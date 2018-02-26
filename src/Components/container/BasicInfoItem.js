@@ -26,7 +26,7 @@ const styles = {
 
 const sex = { female: "女", male: "男", other: "其他" };
 
-class PersonProfileDetails extends Component {
+class BasicInfoItem extends Component {
     handleSex(profile) {
         this.props.onClick({
             userId: profile.id,
@@ -211,4 +211,4 @@ class PersonProfileDetails extends Component {
     }
 }
 
-export default withStyles(styles)(PersonProfileDetails);
+export default withStyles(styles)(BasicInfoItem);

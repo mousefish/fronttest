@@ -79,8 +79,8 @@ class PrivateBasicInfo extends Component {
                     err: "值不能为空"
                 });
             }
-
-            if (inputValue.trim() === this.state.original) {
+            // Make sure the it works on number-typed input too!
+            if ((""+inputValue).trim() === ""+this.state.original) {
                 this.setState({
                     err: "值未发生更新"
                 });
@@ -119,6 +119,7 @@ class PrivateBasicInfo extends Component {
                 };
 
                 console.log("submitValue", value);
+                this.props.updateUserBasicInfo(value);
             }
         });
     };
@@ -132,7 +133,7 @@ class PrivateBasicInfo extends Component {
                 <div>
                     <PageHeader history={this.props.history} title="我的信息" />
                     <BasicInfoItem
-                        profile={user}
+                        profile={this.props.user||user}
                         onClick={data => this.handleUpdate(data)}
                     />
                 </div>
@@ -212,7 +213,7 @@ class PrivateBasicInfo extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.UserReducer
+        user: state.UserReducer.user
     };
 };
 

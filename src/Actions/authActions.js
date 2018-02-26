@@ -2,7 +2,13 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import qs from "qs";
 
-import { AUTH_USER, AUTH_ERROR, DEAUTH_USER, OK_TO_GO } from "./types";
+import {
+  AUTH_USER,
+  AUTH_ERROR,
+  DEAUTH_USER,
+  OK_TO_GO,
+  UPDATE_USER_BASIC
+} from "./types";
 
 const ROOT_URL = "http://localhost:8000/api";
 
@@ -13,7 +19,7 @@ const buildURL = searchData => {
 export const logout = history => dispatch => {
   localStorage.removeItem("jwtToken");
   localStorage.removeItem("user");
-  console.log("remove", localStorage.getItem("user"))
+  console.log("remove", localStorage.getItem("user"));
   dispatch({ type: DEAUTH_USER });
   history.push("/");
 };
@@ -68,6 +74,36 @@ export const userLogin = (userData, history) => async dispatch => {
     // err.message - string
     dispatch(authError("邮箱或者密码不正确！"));
   }
+};
+
+export const updateUserBasicInfo = basicInfo => async dispatch => {
+  console.log("Action", basicInfo);
+  try {
+    const res = await axios.post(
+      `${ROOT_URL}/updateBasicInfo/${basicInfo.userId}`,
+      basicInfo,
+      {
+        headers: {
+          authorization: localStorage.getItem("jwtToken")
+        }
+      }
+    );
+    console.log("res.data",res.data)
+    dispatch({
+      type: UPDATE_USER_BASIC,
+      payload: res.data
+    });
+
+    let value = JSON.parse(localStorage.getItem("user"));
+    // console.log("res.data", res.data)
+    let key = res.data[0];
+    let val = res.data[1];
+    console.log("key", key)
+    console.log("val", val)
+    value[key] = val;
+    console.log("updatedUserLocalStorage", value);
+    localStorage.setItem("user", JSON.stringify(value));
+  } catch (err) {}
 };
 
 export const authError = err => {
