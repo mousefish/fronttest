@@ -24,16 +24,7 @@ const styles = {
     }
 };
 
-const sex = { female: "女", male: "男", other: "其他" };
-
 class BasicInfoItem extends Component {
-    handleSex(profile) {
-        this.props.onClick({
-            key: "sex",
-            value: sex[profile.sex]
-        });
-    }
-
     renderItem() {
         const { profile, classes } = this.props;
         return (
@@ -85,7 +76,10 @@ class BasicInfoItem extends Component {
                 <li
                     className={classes.item}
                     onClick={() => {
-                        this.handleSex(profile);
+                        this.props.onClick({
+                            key: "sex",
+                            value: profile.sex
+                        });
                     }}
                 >
                     <span>性别</span>
@@ -94,6 +88,23 @@ class BasicInfoItem extends Component {
                         <KeyboardArrowRight style={{ color: "lightgrey" }} />
                     </div>
                 </li>
+
+                <li
+                    className={classes.item}
+                    onClick={() => {
+                        this.props.onClick({
+                            key: "age",
+                            value: profile.age
+                        });
+                    }}
+                >
+                    <span>年龄</span>
+                    <div className={classes.flexRight}>
+                        <span>{profile.age}</span>
+                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                    </div>
+                </li>
+
                 <li
                     className={classes.item}
                     onClick={() =>

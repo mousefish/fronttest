@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC } from "./types";
+import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR } from "./types";
 
 const ROOT_URL = "http://localhost:8000/api";
 
@@ -53,5 +53,15 @@ export const updateUserBasicInfo = basicInfo => async dispatch => {
             localStorage.setItem("user", JSON.stringify(newInfo));
             // console.log("local!!",localStorage.user);
         }
-    } catch (err) {}
+    } catch (err) {
+        // err from backend database
+        dispatch(inputError("非法输入"));
+    }
+};
+
+export const inputError = err => {
+  return {
+    type: INPUT_ERROR,
+    payload: err
+  };
 };

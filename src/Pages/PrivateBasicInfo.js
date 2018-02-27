@@ -27,7 +27,7 @@ import TextField from "material-ui/TextField";
 import Translation from "../Data/UserBasicInfoENtoCH";
 
 
-import verfiyAndSubmit from "../Utility/UpdateBasicGenerator";
+import verfiyAndSubmit from "../Utility/verfiyAndSubmit";
 
 
 const sexOptions = ["男", "女", "其他"];
@@ -169,7 +169,9 @@ class PrivateBasicInfo extends Component {
     }
 }
 
-// err from backend if the user update his email with a one that is already used by another user!
+// err from backend errors:
+// if the user update his email with a one that is already used by another user!
+// or err from database
 const mapStateToProps = state => {
     console.log("err", state.UserReducer.err);
     return {

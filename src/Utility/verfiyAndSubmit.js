@@ -32,6 +32,19 @@ export default that => {
                     });
                 }
                 break;
+
+            // case "age":
+            //     if(Number.isNaN(parseInt(inputValue))){
+            //         that.setState({
+            //             err:"无效数字"
+            //         });
+            //     }
+            //     else if(Number(inputValue)< 18 ){
+            //         that.setState({
+            //             err:"必须年满18岁"
+            //         });
+            //     }
+            //     break;
         }
         resolve(that.state.err);
     });
