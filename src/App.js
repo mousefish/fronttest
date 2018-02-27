@@ -158,7 +158,7 @@ class App extends Component {
             <Route exact path="/home" component={TripMain} />
             <Route exact path="/wish" component={WishMain} />
             <Route exact path="/my" component={MyAccount} />
-            <Route exact path="/myInfo/:userId" component={RequireAuth(PrivateBasicInfo)} />
+            <Route exact path="/myBasicInfo" component={RequireAuth(PrivateBasicInfo)} />
 
             <Route exact path="/message" component={MyMessage} />
             <Route

@@ -26,6 +26,10 @@ import Dialog, {
 import TextField from "material-ui/TextField";
 import Translation from "../Data/UserBasicInfoENtoCH";
 
+
+import verfiyAndSubmit from "../Utility/UpdateBasicGenerator";
+
+
 const sexOptions = ["男", "女", "其他"];
 const styles = theme => ({
     button: {
@@ -39,8 +43,12 @@ const styles = theme => ({
 
 class PrivateBasicInfo extends Component {
     componentWillMount() {
-        const userId = this.props.match.params.userId;
-        this.props.fetchUser(userId);
+        let rawUser = localStorage.getItem("user");
+        if (rawUser) {
+            let userId = JSON.parse(rawUser).id;
+            this.props.fetchUser(userId);
+        }
+
     }
 
     state = {
@@ -71,62 +79,8 @@ class PrivateBasicInfo extends Component {
         this.setState({
             err: ""
         });
-        let inputValue = this.state.value;
-        const p = new Promise((resolve, reject) => {
-            if (!inputValue) {
-                this.setState({
-                    err: "值不能为空"
-                });
-            }
-            // Make sure the it works on number-typed input too!
-            if (("" + inputValue).trim() === "" + this.state.original) {
-                this.setState({
-                    err: "值未发生更新"
-                });
-            }
-            switch (this.state.key) {
-                case "mail":
-                    if (
-                        !/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-                            inputValue
-                        )
-                    ) {
 
-                        this.setState({
-                            err: "请输入有效邮箱"
-                        });
-                    }
-                    break;
-
-                case "password":
-                    if (inputValue.length !== 6) {
-                        this.setState({
-                            err: "密码长度为六位"
-                        });
-                    }
-                    break;
-            }
-            resolve(this.state.err);
-        });
-
-        p.then(() => {
-            if (this.state.err === "") {
-                let value = {
-                    userId: this.state.userId,
-                    key: this.state.key,
-                    value: inputValue
-                };
-
-                // console.log("submitValue", value);
-                this.props.updateUserBasicInfo(value);
-                setTimeout(()=>{
-                    if(this.props.user.err === ""){
-                        this.setState({ open: false });
-                    }
-                }, 100);
-
-            }
-        });
+      verfiyAndSubmit(this);
     };
 
     // renderPage is called everytime the Dialog is opened and closed!!!
@@ -160,13 +114,13 @@ class PrivateBasicInfo extends Component {
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText style={{ width: 400 }} />
-                        {this.state.key === "性别" ? (
+                        {this.state.key === "sex" ? (
                             <RadioGroup
                                 ref={node => {
                                     this.radioGroup = node;
                                 }}
                                 aria-label="gender"
-                                name="ringtone"
+                                name="gener"
                                 value={this.state.value}
                                 onChange={e => {
                                     this.setState({ value: e.target.value });

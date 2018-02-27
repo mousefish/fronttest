@@ -47,7 +47,7 @@ class MyAccount extends Component {
             let userId = JSON.parse(rawUser).id;
             switch (item) {
                 case "账号信息":
-                    return this.props.history.push(`/myInfo/${userId}`);
+                    return this.props.history.push(`/myBasicInfo`);
                 case "我的旅游故事":
                     return this.props.history.push(`/story/${userId}`);
             }
