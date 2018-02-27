@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC } from "../Actions/types";
+import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR } from "../Actions/types";
 
 const INITIAL_STATE = {basicInfo:{}, err:""};
 
@@ -19,6 +19,9 @@ export default (state = INITIAL_STATE, action) => {
             }else{
                 return {...state, err:action.payload}
             }
+
+        case INPUT_ERROR:
+           return {...state, err:action.payload}
     }
 
      return state;

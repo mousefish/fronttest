@@ -77,9 +77,9 @@ class wizardSecond extends Component {
             component={RadioGroup}
             className={classes.radioInner}
           >
-            <FormControlLabel value="male" control={<Radio />} label="男" />
-            <FormControlLabel value="female" control={<Radio />} label="女" />
-            <FormControlLabel value="other" control={<Radio />} label="其他" />
+            <FormControlLabel value="男" control={<Radio />} label="男" />
+            <FormControlLabel value="女" control={<Radio />} label="女" />
+            <FormControlLabel value="其他" control={<Radio />} label="其他" />
           </Field>
           <Field name="sex" component={renderError} />
         </div>

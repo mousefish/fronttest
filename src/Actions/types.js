@@ -28,3 +28,6 @@ export const FETCH_RATING_DATA = 'fetch_rating_data';
 export const RATING_ERROR = 'rating_error';
 export const FETCH_OVERALL_RATING = 'overall_error';
 export const HANDLE_WISH_LIKES = "handle_wish_likes";
+
+
+export const INPUT_ERROR = "INPUT_ERROR";

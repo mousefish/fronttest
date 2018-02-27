@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC } from "./types";
+import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR } from "./types";
 
 const ROOT_URL = "http://localhost:8000/api";
 
@@ -32,22 +32,20 @@ export const fetchUser = userId => async dispatch => {
 export const updateUserBasicInfo = basicInfo => async dispatch => {
     // console.log("Action", basicInfo);
     try {
-        const res = await axios.post(
-            `${ROOT_URL}/updateBasicInfo/${basicInfo.userId}`,
-            basicInfo,
-            {
-                headers: {
-                    authorization: localStorage.getItem("jwtToken")
-                }
+        const res = await axios.post(`${ROOT_URL}/updateBasicInfo`, basicInfo, {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
             }
-        );
+        });
         // console.log("res.data",res.data)
         dispatch({
             type: UPDATE_USER_BASIC,
             payload: res.data
         });
 
-        if(typeof res.data !== "string"){
+        // for showing latest MyAccount
+
+        if (typeof res.data !== "string") {
             let newInfo = JSON.parse(localStorage.getItem("user"));
             let key = res.data[0];
             let value = res.data[1];
@@ -55,7 +53,15 @@ export const updateUserBasicInfo = basicInfo => async dispatch => {
             localStorage.setItem("user", JSON.stringify(newInfo));
             // console.log("local!!",localStorage.user);
         }
+    } catch (err) {
+        // err from backend database
+        dispatch(inputError("非法输入"));
+    }
+};
 
-
-    } catch (err) {}
+export const inputError = err => {
+  return {
+    type: INPUT_ERROR,
+    payload: err
+  };
 };

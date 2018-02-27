@@ -18,7 +18,6 @@ const buildURL = searchData => {
 export const logout = history => dispatch => {
   localStorage.removeItem("jwtToken");
   localStorage.removeItem("user");
-  console.log("remove", localStorage.getItem("user"));
   dispatch({ type: DEAUTH_USER });
   history.push("/");
 };
