@@ -31,7 +31,7 @@ class AddActivity extends Component {
     }
 
     handleSubmit(values) {
-       console.log('value', values);
+       // console.log('value', values);
         const images = [];
         for(let i = 1 ; i <= 8; i ++){
             if(values['img'+i]){
@@ -50,6 +50,8 @@ class AddActivity extends Component {
             images
         };
 
+      // console.log('aftervalue', modifiedValues);
+      // blob:http://localhost:3000/95ed0c2e-7b16-4d37-8e69-250a6f57a860
 
         this.props.submitActivityData(modifiedValues, this.props.history);
     }

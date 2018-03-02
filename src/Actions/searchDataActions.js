@@ -24,8 +24,6 @@ export const submitSearchData = (searchData, history, cb) => async dispatch => {
     if(cb){
         cb();
     }
-
-
     //  for Browsing search history
     generateSearchHistory(searchData, res.data);
 
