@@ -7,7 +7,8 @@ import { ToastContainer } from "react-toastify";
 import LogInSignUp from "./Pages/logInSignUp";
 
 import LoginForm from "./Components/container/LoginForm";
-import SeachResult from "./Components/container/SearchResult";
+import SearchPanel from "./Components/container/SearchPanel";
+import SearchResult from "./Components/container/SearchResult";
 
 import { withStyles } from "material-ui/styles";
 import BottomNavigation, {
@@ -169,7 +170,9 @@ class App extends Component {
             <Route exact path="/addWish" component={RequireAuth(AddWish)} />
 
             <Route exact path="/logInSignUp" component={LogInSignUp} />
-            <Route exact path="/searchResult" component={SeachResult} />
+            <Route exact path="/searchPanel" component={SearchPanel} />
+            <Route exact path="/searchResult" component={SearchResult} />
+
             <Route exact path="/story/:userId" component={Story} />
             <Route exact path="/friendComments" component={FriendComments} />
             <Route exact path="/activityWish" component={ActivityWishPanel} />

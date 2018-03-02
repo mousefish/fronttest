@@ -29,8 +29,8 @@ function sideButton(props) {
   return (
     <div className={classes.buttonWrapper}>
       <div>
+      <Link to="/searchPanel">
         <Button
-          onClick={props.onClick}
           fab
           color="primary"
           aria-label="search"
@@ -38,6 +38,7 @@ function sideButton(props) {
         >
           <SearchIcon />
         </Button>
+          </Link>
       </div>
       <div>
         <Link to="/activityWish">

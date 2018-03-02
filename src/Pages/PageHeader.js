@@ -3,7 +3,7 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 
 const PageHeader = props => {
   return (
-    <div className="wizard-header" key={props.key || ""}>
+    <div className="wizard-header">
       <KeyboardArrowLeft
         className="arrow"
         style={{

@@ -1,3 +1,5 @@
+import cities from "../Data/cities";
+
 const validate = values => {
   const errors = {};
   const names = [
@@ -71,6 +73,7 @@ const validate = values => {
   if (values.story && values.story.length >= 300) {
     errors.story = "字数不能超过300";
   }
+
   return errors;
 };
 

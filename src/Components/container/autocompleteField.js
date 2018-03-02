@@ -1,5 +1,4 @@
 import React from "react";
-
 import Paper from "material-ui/Paper";
 import { MenuItem } from "material-ui/Menu";
 import Downshift from "downshift";
@@ -19,7 +18,7 @@ const renderInput = inputProps => {
       inputRef={ref}
       InputProps={{
         classes: {
-          input: classes.input
+          input: classes.input,
         },
         ...InputProps
       }}
@@ -56,9 +55,9 @@ const getCitys = inputValue => {
       let city = province.citys[j];
       if (
         !inputValue ||
-        city.citysName.toLowerCase().includes(inputValue.toLowerCase())
+        city.toLowerCase().includes(inputValue.toLowerCase())
       ) {
-        result.push(city.citysName + " " + provinceName);
+        result.push(city+ " " + provinceName);
         if (result.length == 5) {
           return result;
         }
@@ -81,7 +80,7 @@ const autocompleteField = props => {
         selectedItem,
         highlightedIndex
       }) => (
-        <div className={classes.container}>
+        <div className={classes.container} style={{width:"100%"}}>
           {renderInput({
             fullWidth: true,
             classes,
