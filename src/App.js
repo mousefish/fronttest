@@ -4,8 +4,6 @@ import PageNotFound from "./Pages/404Page";
 import SignupWizard from "./Components/container/SignupWizard";
 import { ToastContainer } from "react-toastify";
 
-import LogInSignUp from "./Pages/logInSignUp";
-
 import LoginForm from "./Components/container/LoginForm";
 import SearchPanel from "./Components/container/SearchPanel";
 import SearchResult from "./Components/container/SearchResult";
@@ -169,7 +167,6 @@ class App extends Component {
             />
             <Route exact path="/addWish" component={RequireAuth(AddWish)} />
 
-            <Route exact path="/logInSignUp" component={LogInSignUp} />
             <Route exact path="/searchPanel" component={SearchPanel} />
             <Route exact path="/searchResult" component={SearchResult} />
 

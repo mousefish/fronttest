@@ -14,7 +14,7 @@ const styles = theme => ({
         backgroundColor: "#1976D2"
     },
     button: {
-        width:100,
+        width:200,
         padding: 10,
         borderRadius: 45,
         border: "1px solid #1976D2",
@@ -29,10 +29,7 @@ const MyAccountRegisterHeader = props => {
     return (
         <div className={classes.registerHeader}>
             <Link to="/login" className="unlink">
-                <button className={classes.button}>登陆</button>
-            </Link>
-            <Link to="/signup" className="unlink">
-                <button className={classes.button}>创建新账户</button>
+                <button className={classes.button}>登陆/创建新账户</button>
             </Link>
         </div>
     );
