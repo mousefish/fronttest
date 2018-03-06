@@ -41,41 +41,7 @@ class WizardThird extends Component {
                             name="img1"
                             className={classes.image}
                         />
-                        <Field
-                            component={FileInput}
-                            name="img2"
-                            className={classes.image}
-                        />
-                        <Field
-                            component={FileInput}
-                            name="img3"
-                            className={classes.image}
-                        />
-                        <Field
-                            component={FileInput}
-                            name="img4"
-                            className={classes.image}
-                        />
-                        <Field
-                            component={FileInput}
-                            name="img5"
-                            className={classes.image}
-                        />
-                        <Field
-                            component={FileInput}
-                            name="img6"
-                            className={classes.image}
-                        />
-                        <Field
-                            component={FileInput}
-                            name="img7"
-                            className={classes.image}
-                        />
-                        <Field
-                            component={FileInput}
-                            name="img8"
-                            className={classes.image}
-                        />
+
                     </div>
                     <Button
                         type="submit"

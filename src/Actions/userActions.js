@@ -1,7 +1,9 @@
 import axios from "axios";
 import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR } from "./types";
 
-const ROOT_URL = "http://localhost:8000/api";
+import config from "../config/config";
+
+const ROOT_URL = config["ROOT_URL"];
 
 // fetch user's basic info!!
 // { id: 6,
@@ -21,7 +23,7 @@ const ROOT_URL = "http://localhost:8000/api";
 //  createdAt: 2018-01-02T06:43:37.753Z,
 //  updatedAt: 2018-01-02T06:43:37.753Z }
 export const fetchUser = userId => async dispatch => {
-    const res = await axios.get(`${ROOT_URL}/user/${userId}`);
+    const res = await axios.get(`${ROOT_URL}/api/user/${userId}`);
 
     dispatch({
         type: FETCH_PROFILE_DATA,
@@ -32,7 +34,7 @@ export const fetchUser = userId => async dispatch => {
 export const updateUserBasicInfo = basicInfo => async dispatch => {
     // console.log("Action", basicInfo);
     try {
-        const res = await axios.post(`${ROOT_URL}/updateBasicInfo`, basicInfo, {
+        const res = await axios.post(`${ROOT_URL}/api/updateBasicInfo`, basicInfo, {
             headers: {
                 authorization: localStorage.getItem("jwtToken")
             }

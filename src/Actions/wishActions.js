@@ -1,7 +1,10 @@
 import axios from "axios";
 import { ADD_WISH_DATA, WISH_ERROR, FETCH_WISH_DATA, HANDLE_WISH_LIKES, FETCH_ONE_WISH } from "./types";
 
-const ROOT_URL = "http://localhost:8000";
+import config from "../config/config";
+const ROOT_URL = config["ROOT_URL"];
+
+
 export const submitWishData = (data, history) => async dispatch => {
     console.log("wish data", data);
     try {

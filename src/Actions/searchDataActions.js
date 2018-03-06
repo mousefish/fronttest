@@ -3,8 +3,9 @@ import { FETCH_SEARCH_DATA } from "./types";
 import qs from "qs";
 import generateSearchHistory from "../Utility/generateSearchingHistory";
 
+import config from "../config/config";
 
-const ROOT_URL = "http://localhost:8000";
+const ROOT_URL = config["ROOT_URL"];
 
 const buildURL = searchData => {
     return qs.stringify(searchData);
