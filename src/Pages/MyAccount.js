@@ -64,7 +64,8 @@ class MyAccount extends Component {
         const items = [
             "账号信息",
             "我的旅游故事",
-            "我的活动 | 愿望",
+            "我的活动",
+            "我的愿望",
             "我的收藏",
             "我的好友",
             "系统设置",

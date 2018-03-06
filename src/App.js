@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import PageNotFound from "./Pages/404Page";
-import SignupWizard from "./Components/container/SignUpWizard";
+import SignupWizard from "./Components/container/SignupWizard";
 import { ToastContainer } from "react-toastify";
 
 import LogInSignUp from "./Pages/logInSignUp";

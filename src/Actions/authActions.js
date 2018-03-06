@@ -9,7 +9,9 @@ import {
   OK_TO_GO,
 } from "./types";
 
-const ROOT_URL = "http://localhost:8000/api";
+import config from "../config/config";
+
+const ROOT_URL = config["ROOT_URL"];
 
 const buildURL = searchData => {
   return qs.stringify(searchData);
@@ -25,7 +27,7 @@ export const logout = history => dispatch => {
 export const verifySignupEmail = emailObj => async dispatch => {
   try {
     let q = buildURL(emailObj);
-    const res = await axios.get(`${ROOT_URL}/verifySignupEmail?${q}`);
+    const res = await axios.get(`${ROOT_URL}/api/verifySignupEmail?${q}`);
     if (res.data) {
       dispatch({ type: OK_TO_GO });
     } else {
@@ -38,7 +40,7 @@ export const verifySignupEmail = emailObj => async dispatch => {
 
 export const userSignupRequest = (userData, history) => async dispatch => {
   try {
-    const res = await axios.post(`${ROOT_URL}/signup`, userData);
+    const res = await axios.post(`${ROOT_URL}/api/signup`, userData);
     if (res.data.token) {
       localStorage.setItem("jwtToken", res.data.token);
        // store the user info for visiting basic info later, my story, those items under my account later
@@ -59,7 +61,7 @@ export const userSignupRequest = (userData, history) => async dispatch => {
 
 export const userLogin = (userData, history) => async dispatch => {
   try {
-    const res = await axios.post(`${ROOT_URL}/login`, userData);
+    const res = await axios.post(`${ROOT_URL}/api/login`, userData);
 
     localStorage.setItem("jwtToken", res.data.token);
     // store the user info for visiting basic info later, my story, those items under my account later

@@ -1,7 +1,9 @@
 import axios from "axios";
 import { ADD_RATING_DATA, RATING_ERROR, FETCH_RATING_DATA, FETCH_OVERALL_RATING } from "./types";
 
-const ROOT_URL = "http://localhost:8000";
+import config from "../config/config";
+
+const ROOT_URL = config["ROOT_URL"];
 
 export const sendRating = ratingData => async dispatch => {
 

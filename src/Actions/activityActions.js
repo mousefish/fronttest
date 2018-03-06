@@ -7,7 +7,9 @@ import {
     FETCH_ONE_ACTIVITY
 } from "./types";
 
-const ROOT_URL = "http://localhost:8000";
+import config from "../config/config";
+
+const ROOT_URL = config["ROOT_URL"];
 
 export const fetchActivityData = () => async dispatch => {
     try {
