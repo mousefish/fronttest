@@ -21,8 +21,8 @@ const styles = theme => ({
   },
 
   button: {
-    margin: theme.spacing.unit,
-    width: "95%"
+    // margin: theme.spacing.unit,
+    width: "96%"
   },
 
   right: {
@@ -125,9 +125,10 @@ class LoginForm extends Component {
             点击登陆
           </Button>
         </div>
-        <div className="input-error" style={{ textAlign: "center" }}>
+        <p className="input-error" style={{ textAlign: "center" }}>
           {this.props.errorMessage}
-        </div>
+        </p>
+        <div style={{ textAlign: "center" }}>还没有账户？ 点击<Link to="/signup" className="unlink" >创建新账户</Link></div>
       </form>
     );
   }

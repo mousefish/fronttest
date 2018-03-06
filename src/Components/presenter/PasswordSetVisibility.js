@@ -29,8 +29,9 @@ class InputAdornments extends Component {
                 id="adornment-password"
                 type={this.state.showPassword ? "text" : "password"}
                 endAdornment={
-                    <InputAdornment position="end">
+                    <InputAdornment  position="end">
                         <IconButton
+                           style={{height:10}}
                             onClick={this.handleClickShowPasssword}
                             onMouseDown={this.handleMouseDownPassword}
                         >
