@@ -35,13 +35,14 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-const styles = {
+const styles = theme => ({
   flex: {
     flex: 1
   },
   media: {
     height: 224,
-    position: "relative"
+    position: "relative",
+    borderRadius: 10
   },
 
   icon: {
@@ -55,8 +56,36 @@ const styles = {
   },
   numberOfLikes: {
     fontSize: "1.2rem"
+  },
+  themeBar: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    height: "18%",
+    lineHeight:2,
+    paddingLeft:20,
+    color: "#fff",
+    backgroundColor: "rgba(0,0,0,0.6)",
+    fontSize: "1.5rem",
+    fontWeight:"bold",
+    letterSpacing:1.3
+  },
+
+  budgetBox: {
+    position: "absolute",
+    width:60,
+    height:60,
+    padding:"0 2px",
+    lineHeight:4.3,
+    textAlign:"center",
+    fontWeight:"bold",
+    left: 20,
+    top: 15,
+    color: "#fff",
+    borderRadius:"50%",
+    backgroundColor:"#03A9F4",
   }
-};
+});
 
 class ActivityIndex extends Component {
   state = {
@@ -116,50 +145,30 @@ class ActivityIndex extends Component {
     return _.map(activityData, item => {
       return (
         <Link to={`/activity/${item.id}`} className="unlink" key={item.id}>
-          <Card className="card">
+          <Card className="card" style={{ borderRadius: 10 }}>
             <CardMedia className={classes.media} image={travel} title="travel">
-              <span
-                style={{
-                  position: "absolute",
-                  right: 10,
-                  top: 10,
-                  color: "#fff"
-                }}
-              >
-                <LocationOn
-                  className={classes.icon}
-                  style={{ color: "#fff" }}
-                />{" "}
-                {item.location}
-              </span>
-              <span
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  width: "100%",
-                  height: "12%",
-                  padding: 4,
-                  color: "#fff",
-                  backgroundColor: "rgba(0,0,0,0.6)"
-                }}
-              >
-                {item.theme}
-              </span>
+              <div className={classes.budgetBox}>
+               ¥{item.budget}
+              </div>
+              <span className={classes.themeBar}>{item.theme}</span>
             </CardMedia>
             <CardContent>
               <div
                 style={{
-                  marginBottom: 10
+                  display:"flex",
+                  flexFlow:"row nowrap",
+                  justifyContent:"space-between",
+                  marginBottom: 10,
+
                 }}
               >
-                <div style={{ float: "left" }}>
-                  <MonetizationOn className={classes.icon} /> &nbsp;{item.budget}
+                <div>
+                  <LocationOn className={classes.icon} /> {item.location}
                 </div>
-                <div style={{ float: "right" }}>
+                <div>
                   {this.renderStar(item.averageScore)}星 &nbsp;{item.numOfRater}{" "}
                   人评价
                 </div>
-                <div style={{ clear: "both" }} />
               </div>
 
               <div style={{ marginBottom: 10 }} className={classes.link}>
