@@ -15,7 +15,7 @@ import StarHalf from "material-ui-icons/StarHalf";
 
 import Person from "material-ui-icons/Person";
 
-import travel from "../../Assets/Images/sichuan.jpg";
+import travel from "../../Assets/Images/test.jpg";
 
 import Card, {
   CardHeader,
@@ -40,9 +40,9 @@ const styles = theme => ({
     flex: 1
   },
   media: {
-    height: 224,
+    height: 204,
     position: "relative",
-    borderRadius: 10
+    borderRadius: "10px 10px 0 0"
   },
 
   icon: {
@@ -57,30 +57,30 @@ const styles = theme => ({
   numberOfLikes: {
     fontSize: "1.2rem"
   },
-  themeBar: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    height: "18%",
-    lineHeight:2,
-    paddingLeft:20,
-    color: "#fff",
-    backgroundColor: "rgba(0,0,0,0.6)",
-    fontSize: "1.5rem",
-    fontWeight:"bold",
-    letterSpacing:1.3
-  },
+
+  // themeBar: {
+  //   position: "absolute",
+  //   bottom: 0,
+  //   width: "100%",
+  //   height: "18%",
+  //   lineHeight:2,
+  //   paddingLeft:20,
+  //   color: "#fff",
+  //   backgroundColor: "rgba(0,0,0,0.6)",
+  //   fontSize: "1.5rem",
+  //   fontWeight:"bold",
+  //   letterSpacing:1.3
+  // },
 
   budgetBox: {
     position: "absolute",
     width:60,
     height:60,
-    padding:"0 2px",
     lineHeight:4.3,
     textAlign:"center",
     fontWeight:"bold",
-    left: 20,
-    top: 15,
+    left: 17,
+    top: 10,
     color: "#fff",
     borderRadius:"50%",
     backgroundColor:"#03A9F4",
@@ -150,9 +150,10 @@ class ActivityIndex extends Component {
               <div className={classes.budgetBox}>
                ¥{item.budget}
               </div>
-              <span className={classes.themeBar}>{item.theme}</span>
+
             </CardMedia>
-            <CardContent>
+            <CardContent style={{color:"#757575"}}>
+             <h3 style={{fontWeight:"bold"}}>{item.theme}</h3>
               <div
                 style={{
                   display:"flex",
@@ -162,7 +163,7 @@ class ActivityIndex extends Component {
 
                 }}
               >
-                <div>
+                <div >
                   <LocationOn className={classes.icon} /> {item.location}
                 </div>
                 <div>
@@ -171,7 +172,7 @@ class ActivityIndex extends Component {
                 </div>
               </div>
 
-              <div style={{ marginBottom: 10 }} className={classes.link}>
+              <div style={{ marginBottom: 10}} className={classes.link}>
                 <Person className={classes.icon} />
                 &nbsp;{item.username}
               </div>
@@ -185,6 +186,7 @@ class ActivityIndex extends Component {
                 onClick={event => {
                   this.handleLikes(event, item.id);
                 }}
+                style={{marginLeft:4}}
               >
                 <FavoriteIcon
                   className={item.likes === 0 ? "" : classes.heartOn}
