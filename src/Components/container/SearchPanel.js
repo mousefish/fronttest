@@ -19,6 +19,11 @@ import { FormControlLabel } from "material-ui/Form";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import Search from "material-ui-icons/Search";
 import PageHeader from "../../Pages/PageHeader";
+
+import AppBar from "material-ui/AppBar";
+
+import Tabs, { Tab } from "material-ui/Tabs";
+
 const styles = theme => ({
   wrapper: {
     width: "95%",
@@ -32,20 +37,20 @@ const styles = theme => ({
   },
 
   searchBar: {
-    marginTop:10,
+    marginTop: 10,
     display: "flex",
-    position:"relative",
+    position: "relative",
     flexFlow: "row nowrap",
     justifyContent: "space-between",
     paddingLeft: 12,
     alignItems: "center",
-    paddingRight:10,
+    paddingRight: 10
   },
 
   button: {
-    position:"absolute",
-    right:-25,
-    top:-9,
+    position: "absolute",
+    right: -25,
+    top: -9
 
     // margin: theme.spacing.unit,
     // width: "100%",
@@ -66,18 +71,34 @@ const styles = theme => ({
 
   text: {
     fontWeight: "bold"
+  },
+  tab:{
+    fontSize:"2rem"
   }
 });
 
 const renderError = ({ meta: { touched, error } }) =>
   touched && error ? (
-    <span style={{ color: "red", fontSize: "11px", marginLeft:10 }}>{error}</span>
+    <span style={{ color: "red", fontSize: "11px", marginLeft: 10 }}>
+      {error}
+    </span>
   ) : (
     false
   );
 
 class SearchPanel extends Component {
+  state = {
+    value: 0
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   submitForm(values) {
+    let categoryValue = this.state.value === 0 ? "activity" : "wish";
+    values["category"] = categoryValue;
+    // console.log("here", values)
     this.props.submitSearchData(
       values,
       this.props.history,
@@ -86,21 +107,27 @@ class SearchPanel extends Component {
   }
 
   render() {
-    const classes = this.props.classes;
+    const { classes, theme } = this.props;
     const { handleSubmit } = this.props;
     return (
-      <div className="wrapper">
+      <div className="searchPanelWrapper">
         <PageHeader title="搜索" history={this.props.history} />
         <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
-          <Field
-            name="category"
-            component={RadioGroup}
-            className={classes.radioInner}
-          >
-            <FormControlLabel value="activity" control={<Radio />} label="活动" />
-            <FormControlLabel value="wish" control={<Radio />} label="愿望" />
-          </Field>
+        <div className={classes.root} style={{margin:"15px 0 35px 0"}}>
+          <AppBar position="static" color="default" >
+            <Tabs
+              value={this.state.value}
+              onChange={this.handleChange}
+              indicatorColor="#1976D2"
+              textColor="#1976D2"
+              fullWidth
 
+            >
+              <Tab label="活动"/>
+              <Tab label="愿望"/>
+            </Tabs>
+          </AppBar>
+         </div>
           <Field name="category" component={renderError} />
 
           <div className={classes.searchBar}>
@@ -110,6 +137,7 @@ class SearchPanel extends Component {
               placehoder="选择一个城市"
               component={AutocompleteField}
               props={this.props}
+
             />
 
             <Button type="submit" className={classes.button}>
@@ -118,7 +146,6 @@ class SearchPanel extends Component {
           </div>
 
         </form>
-
 
         <div style={{ marginTop: 60 }}>
           <HistorySearch onClick={value => this.submitForm(value)} />
@@ -133,6 +160,6 @@ SearchPanel = reduxForm({
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
-})(withStyles(styles)(SearchPanel));
+})(withStyles(styles, { withTheme: true })(SearchPanel));
 
 export default (SearchPanel = connect(null, actions)(withRouter(SearchPanel)));

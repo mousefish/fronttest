@@ -23,7 +23,6 @@ const validate = values => {
     "language",
     "hobby",
     "personality",
-    "category"
   ];
 
   names.forEach(name => {
