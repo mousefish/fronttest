@@ -20,7 +20,8 @@ const styles = {
     flexRight: {
         display: "flex",
         justifyContent: "flex-end",
-        alignItems: "center"
+        alignItems: "center",
+        marginRight:-8
     }
 };
 
@@ -39,7 +40,7 @@ class BasicInfoItem extends Component {
                 >
                     <span>邮箱</span>
                     <div className={classes.flexRight}>
-                        <span>{profile.mail}</span>
+                        <span>{profile.mail}</span>&nbsp;&nbsp;
                         <KeyboardArrowRight style={{ color: "lightgrey" }} />
                     </div>
                 </li>
