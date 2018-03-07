@@ -21,7 +21,7 @@ const styles = {
         display: "flex",
         justifyContent: "flex-end",
         alignItems: "center",
-        marginRight:-8
+        marginRight:-7
     }
 };
 

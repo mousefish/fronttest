@@ -114,7 +114,7 @@ class SearchPanel extends Component {
         <PageHeader title="搜索" history={this.props.history} />
         <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
         <div className={classes.root} style={{margin:"15px 0 35px 0"}}>
-          <AppBar position="static" color="default" >
+          <AppBar position="static" color="default" style={{boxShadow:"none"}} >
             <Tabs
               value={this.state.value}
               onChange={this.handleChange}
@@ -123,8 +123,8 @@ class SearchPanel extends Component {
               fullWidth
 
             >
-              <Tab label="活动"/>
-              <Tab label="愿望"/>
+              <Tab style={{letterSpacing:2}} label="活动"/>
+              <Tab style={{letterSpacing:2}} label="愿望"/>
             </Tabs>
           </AppBar>
          </div>

@@ -167,7 +167,7 @@ class ActivityIndex extends Component {
                   <LocationOn className={classes.icon} /> {item.location}
                 </div>
                 <div>
-                  {this.renderStar(item.averageScore)}星 &nbsp;{item.numOfRater}{" "}
+                  {this.renderStar(item.averageScore)} &nbsp;{item.numOfRater}{" "}
                   人评价
                 </div>
               </div>
