@@ -35,7 +35,40 @@ class EditPanel extends Component {
         this.props.fetchOneUserActivityForEditting(activityId);
     }
 
-    submitForm(values) {}
+    submitForm(values) {
+        // console.log("values",values)
+        const keys = [
+            "theme",
+            "location",
+            "budget",
+            "departdate",
+            "finishdate",
+            "services",
+            "story"
+        ];
+        const { edit } = this.props;
+        let edittedValues = {};
+        keys.forEach(item => {
+            if (edit[item] !== values[item]) {
+                edittedValues[item] = values[item];
+            }
+            if (item == "serivices") {
+                for (let i = 0; i < services.length; i++) {
+                    if (edittedValues[item][i] !== values[item][i]) {
+                        edittedValues[item] = values[item];
+                    }
+                }
+            }
+        });
+
+        if (Object.keys(edittedValues).length === 0) {
+            alert("没有值发生改变！");
+            return null;
+        }
+
+        const { activityId } = this.props.match.params;
+        this.props.updateUserActivity(activityId, edittedValues);
+    }
 
     renderEditPanel(classes) {
         if (this.props.error) {
@@ -49,7 +82,7 @@ class EditPanel extends Component {
         // console.log(edit.userId, you.id)
 
         if (edit.size === 0 || edit.userId !== you.id) {
-            console.log("!!!!");
+            // console.log("!!!!");
             return <div>你没有权限修改该活动！</div>;
         }
 
@@ -137,10 +170,11 @@ class EditPanel extends Component {
                         id="multiline-flexible"
                         multiline
                         rowsMax="4"
-                        placeholder="我在这里生活了10年......"
-                        style={{width:"100%"}}
+                        placeholder="不超过300个字"
+                        style={{ width: "100%" }}
                     />
                 </div>
+                <div className="input-success">{this.props.msg}</div>
                 <div className={classes.btnGroup}>
                     <Button
                         type="submit"
@@ -181,19 +215,28 @@ class EditPanel extends Component {
 }
 
 const mapStateToProps = state => {
+    const {
+        theme,
+        location,
+        budget,
+        story,
+        departdate,
+        finishdate,
+        services
+    } = state.ActivityReducer.edit;
     return {
         edit: state.ActivityReducer.edit,
         error: state.ActivityReducer.error,
+        msg: state.ActivityReducer.message,
         initialValues: {
-            theme: state.ActivityReducer.edit.theme,
-            location: state.ActivityReducer.edit.location,
-            budget: state.ActivityReducer.edit.budget,
-            dapartdate: state.ActivityReducer.edit.departdate,
-            story: state.ActivityReducer.edit.story,
-            location:state.ActivityReducer.edit.location,
-            departdate:state.ActivityReducer.edit.departdate,
-            finishdate:state.ActivityReducer.edit.finishdate,
-            services:state.ActivityReducer.edit.services
+            theme,
+            location,
+            budget,
+            story,
+            location,
+            departdate,
+            finishdate,
+            services
         }
     };
 };

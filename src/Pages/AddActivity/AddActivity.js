@@ -56,13 +56,6 @@ class AddActivity extends Component {
         this.props.submitActivityData(modifiedValues, this.props.history);
     }
 
-    // Use this function to show the error message from backend
-    renderErrorMsg() {
-        if (this.props.msg) {
-            return <div style={{textAlign:"center"}}>{this.props.msg}</div>;
-        }
-    }
-
     render() {
         const { onSubmit } = this.props;
         const { page } = this.state;
