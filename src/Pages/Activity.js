@@ -10,7 +10,25 @@ import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "./PageHeader";
 
-const styles = {};
+const styles = theme => ({
+    editBar: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        margin: "10px 0"
+    },
+    editBtn: {
+        border: "1px solid #1976D2",
+        padding: "7px 15px",
+        borderRadius: 40,
+        color: "#1976D2"
+    },
+    divider: {
+        width:"100%",
+        border:"10px solid #BDBDBD",
+        marginBottom:10
+    }
+});
 
 class Activity extends Component {
     componentWillMount() {
@@ -18,15 +36,40 @@ class Activity extends Component {
         this.props.fetchOneActivity(activityId);
     }
 
+    renderEditChoice() {
+        const userId = this.props.activity.userId;
+        const { classes } = this.props;
+        if(!localStorage["user"]) {return null}
+        let you = JSON.parse(localStorage["user"]);
+        if (you) {
+            console.log(you.id);
+            if (you.id === userId) {
+                return (
+                    <div>
+                        <div className={classes.editBar}>
+                            <div>
+                                <div>{you.mail}</div>
+                                <div>{you.username}</div>
+                            </div>
+                            <div className={classes.editBtn}>修改我的活动</div>
+                        </div>
+                        <div className={classes.divider} />
+                    </div>
+                );
+            }
+        }
+    }
+
     render() {
         const activityId = this.props.match.params.activityId;
         const { classes, activity, message, ratings } = this.props;
         if (!activity) {
-            return <div>次活动尚未出现</div>;
+            return <div>该活动尚未出现</div>;
         }
         return (
             <div className="wrapper">
                 <PageHeader history={this.props.history} title="活动" />
+                {this.renderEditChoice()}
                 <div className="flex-inner-wrapper">
                     <RatingSummary activityId={activityId} />
                     <ul className="activity-info">
@@ -50,7 +93,9 @@ class Activity extends Component {
                             <h4 className="category-title">
                                 我在{activity.location.split(" ")[0]}的故事
                             </h4>
-                            <div style={{overflowY: "scroll"}}>{activity.story}</div>
+                            <div style={{ overflowY: "scroll" }}>
+                                {activity.story}
+                            </div>
                         </li>
                         <li
                             style={{

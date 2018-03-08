@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as actions from "../Actions";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class UserActivities extends Component {
     componentWillMount() {
@@ -10,7 +11,15 @@ class UserActivities extends Component {
 
     renderUserActivities(userActivities) {
         return userActivities.map(item => {
-            return <li key={item.id}>{item.theme}</li>;
+            return (
+                <Link
+                    to={`/activity/${item.id}`}
+                    className="unlink"
+                    key={item.id}
+                >
+                    <li key={item.id}>{item.theme}</li>
+                </Link>
+            );
         });
     }
 
