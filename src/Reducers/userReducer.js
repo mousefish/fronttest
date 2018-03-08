@@ -5,7 +5,7 @@ const INITIAL_STATE = {basicInfo:{}, err:""};
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        // fetch data for publicprofile
+        // fetch data for the public profile
         case FETCH_PROFILE_DATA:
             return {...state, basicInfo:action.payload}
 

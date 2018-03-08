@@ -65,8 +65,12 @@ class WishDetails extends Component {
     }
     render() {
         const { classes, wish, match } = this.props;
-        if (!wish && match) {
-            return <div>Loading</div>;
+        if (wish && wish.hasOwnProperty("warning")) {
+            return(
+            <div>
+                <PageHeader history={this.props.history} title="愿望" />
+                <div style={{ textAlign: "center" }}>{wish["warning"]}</div>
+            </div>)
         }
         return (
             <div className="wrapper">

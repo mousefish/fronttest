@@ -11,6 +11,9 @@ class UserActivities extends Component {
     }
 
     renderUserActivities(userActivities) {
+        if(userActivities && typeof userActivities[0] === "string"){
+            return <div style={{textAlign:"center"}}>{userActivities[0]}</div>
+        }
         return userActivities.map(item => {
             return (
                 <Link
@@ -35,9 +38,8 @@ class UserActivities extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log("here", state.ActivityReducer.userActivities);
     return {
-        userActivities: state.ActivityReducer.userActivities
+        userActivities: state.ActivityReducer.userActivities,
     };
 };
 export default connect(mapStateToProps, actions)(UserActivities);

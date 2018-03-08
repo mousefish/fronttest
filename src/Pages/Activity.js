@@ -88,15 +88,19 @@ class Activity extends Component {
                     <RatingSummary activityId={activityId} />
                     <ul className="activity-info">
                         <li className="activity">
-                            <div>活动主题： </div>
+                            <div>活动主题</div>
                             <div>{activity.theme}</div>
                         </li>
                         <li className="activity">
-                            <div>活动地点：</div>
+                            <div>活动地点</div>
                             <div>{activity.location}</div>
                         </li>
+                         <li className="activity">
+                            <div>活动预算</div>
+                            <div>{activity.budget} 元</div>
+                        </li>
                         <li className="activity">
-                            <div>活动开始时间：</div>
+                            <div>活动开始时间</div>
                             <div>{activity.departdate}</div>
                         </li>
                         <li className="activity" style={{ marginBottom: 10 }}>

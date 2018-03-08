@@ -97,8 +97,8 @@ class PublicProfile extends Component {
     render() {
         const { classes, history } = this.props;
         const { user } = this.props;
-        if (!user) {
-            return <div>loading</div>;
+        if (user && user.hasOwnProperty("warning")) {
+            return <div>{user["warning"]}</div>;
         }
 
         return (
@@ -143,10 +143,10 @@ class PublicProfile extends Component {
             </div>
         );
     }
-
 }
 
 const mapStateToProps = state => {
+    console.log("here", state.UserReducer.basicInfo);
     return {
         user: state.UserReducer.basicInfo
     };

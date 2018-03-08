@@ -222,10 +222,7 @@ class EditPanel extends Component {
     render() {
         const { classes, handleSubmit, fullScreen, edit } = this.props;
         return (
-            <form
-                className="wrapper"
-                onSubmit={handleSubmit(this.submitForm.bind(this))}
-            >
+            <div>
                 <Dialog
                     fullScreen={fullScreen}
                     open={this.state.open}
@@ -242,10 +239,14 @@ class EditPanel extends Component {
                         />
                     </div>
                 </Dialog>
-
-                <PageHeader history={this.props.history} title="修改活动" />
-                {this.renderEditPanel(classes)}
-            </form>
+                <form
+                    className="wrapper"
+                    onSubmit={handleSubmit(this.submitForm.bind(this))}
+                >
+                    <PageHeader history={this.props.history} title="修改活动" />
+                    {this.renderEditPanel(classes)}
+                </form>
+            </div>
         );
     }
 }

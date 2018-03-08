@@ -8,7 +8,7 @@ import Button from "material-ui/Button";
 
 const ConfirmDelete = (props) => {
     return (
-        <div style={{width:"80%", margin:"auto"}}>
+        <div>
            <DialogTitle id="responsive-dialog-title">确定要删除该活动吗？</DialogTitle>
             <DialogActions>
                 <Button onClick={()=>props.onClick()} color="primary">
