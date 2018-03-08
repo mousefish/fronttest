@@ -66,11 +66,17 @@ class Activity extends Component {
     render() {
         const activityId = this.props.match.params.activityId;
         const { classes, activity, message, ratings } = this.props;
-        if (!activity) {
+        // better use an object to pass the warning message since initial value is obj.
+        // also, if we use if(!activity) here, since React's default value is undefined,
+        // so even for the values that DO exist, the warning message will still show for a second before the content shows!
+        // But be careful dealing with the following data, since when undefine, undefined does not have any property!!!
+        // for example
+        // 我在{activity.location ? activity.location.split(" ")[0]:""}的故事
+        if (activity.hasOwnProperty("warning")) {
             return (
                 <div>
                     <PageHeader history={this.props.history} title="活动" />
-                    <div style={{ textAlign: "center" }}>该活动尚未出现</div>
+                    <div style={{ textAlign: "center" }}>{activity.warning}</div>
                 </div>
             );
         }
@@ -99,7 +105,7 @@ class Activity extends Component {
                         </li>
                         <li style={{ marginBottom: 10 }}>
                             <h4 className="category-title">
-                                我在{activity.location.split(" ")[0]}的故事
+                                我在{activity.location ? activity.location.split(" ")[0]:""}的故事
                             </h4>
                             <div style={{ overflowY: "scroll" }}>
                                 {activity.story}

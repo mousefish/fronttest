@@ -11,15 +11,10 @@ import popupSearchDateField from "../Components/container/popupSearchDateField";
 import popupSearchMultiServices from "../Components/container/popupSearchMultiServices";
 import AutocompleteField from "../Components/container/AutocompleteField";
 import { TextField } from "redux-form-material-ui";
-import Dialog, {
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    withMobileDialog
-} from "material-ui/Dialog";
+import Dialog from "material-ui/Dialog";
 import services from "../Data/services";
-
+import ConfirmDelete from "./ConfirmDelete";
+import RegisterDialog from "./RegisterDialog";
 const styles = theme => ({
     button: {
         // margin: theme.spacing.unit,
@@ -83,6 +78,7 @@ class EditPanel extends Component {
         });
 
         if (Object.keys(edittedValues).length === 0) {
+            // need a dialogue here!
             alert("没有值发生改变！");
             return null;
         }
@@ -236,24 +232,15 @@ class EditPanel extends Component {
                     onClose={this.handleClose}
                     aria-labelledby="responsive-dialog-title"
                 >
-                    <DialogContent>
-                        <DialogContentText>确定要删除该活动吗？</DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            稍后再说
-                        </Button>
-                        <Button
+                    <div>
+                        <ConfirmDelete
+                            edit={edit}
                             onClick={this.handleClose}
-                            autoFocus
-                            style={{ color: "#D32F2F" }}
-                            onClick={() => {
-                                this.deleteActivity(edit.userId);
+                            onDelete={() => {
+                                this.deleteActivity(this.props.edit.userId);
                             }}
-                        >
-                            删除
-                        </Button>
-                    </DialogActions>
+                        />
+                    </div>
                 </Dialog>
 
                 <PageHeader history={this.props.history} title="修改活动" />

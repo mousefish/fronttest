@@ -9,7 +9,7 @@ import {
 } from "../Actions/types";
 
 
-const INITIAL_STATE = { all: [], message: "", error: "", userActivities:[], edit:{} };
+const INITIAL_STATE = { all: [], message: "", error: "", userActivities:[], edit:{}, activity:{} };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {

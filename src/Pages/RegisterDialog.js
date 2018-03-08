@@ -72,4 +72,4 @@ const RegisterDialog = props => {
   );
 };
 
-export default withStyles(styles)(RegisterDialog);
+export default withMobileDialog()(withStyles(styles)(RegisterDialog));
