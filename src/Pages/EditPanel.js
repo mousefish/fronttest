@@ -11,6 +11,13 @@ import popupSearchDateField from "../Components/container/popupSearchDateField";
 import popupSearchMultiServices from "../Components/container/popupSearchMultiServices";
 import AutocompleteField from "../Components/container/AutocompleteField";
 import { TextField } from "redux-form-material-ui";
+import Dialog, {
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    withMobileDialog
+} from "material-ui/Dialog";
 import services from "../Data/services";
 
 const styles = theme => ({
@@ -30,9 +37,20 @@ const styles = theme => ({
 });
 
 class EditPanel extends Component {
+    state = {
+        open: false
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
     componentWillMount() {
         const { activityId } = this.props.match.params;
         this.props.fetchOneUserActivityForEditting(activityId);
+    }
+    deleteActivity() {
+        const { activityId } = this.props.match.params;
     }
 
     submitForm(values) {
@@ -78,7 +96,7 @@ class EditPanel extends Component {
             return null;
         }
         let you = JSON.parse(localStorage["user"]);
-        const { edit } = this.props;
+        const { edit, msg } = this.props;
         // console.log(edit.userId, you.id)
 
         if (edit.size === 0 || edit.userId !== you.id) {
@@ -174,7 +192,7 @@ class EditPanel extends Component {
                         style={{ width: "100%" }}
                     />
                 </div>
-                <div className="input-success">{this.props.msg}</div>
+                <div className="input-success">{msg}</div>
                 <div className={classes.btnGroup}>
                     <Button
                         type="submit"
@@ -186,12 +204,16 @@ class EditPanel extends Component {
                         修改
                     </Button>
                     <Button
-                        type="submit"
                         color="primary"
                         style={{ backgroundColor: "#D32F2F" }}
                         raised
                         className={classes.button}
                         id="btn"
+                        onClick={() => {
+                            this.setState({
+                                open: true
+                            });
+                        }}
                     >
                         删除
                     </Button>
@@ -201,12 +223,38 @@ class EditPanel extends Component {
     }
 
     render() {
-        const { classes, handleSubmit } = this.props;
+        const { classes, handleSubmit, fullScreen } = this.props;
         return (
             <form
                 className="wrapper"
                 onSubmit={handleSubmit(this.submitForm.bind(this))}
             >
+                <Dialog
+                    fullScreen={fullScreen}
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="responsive-dialog-title"
+                >
+                    <DialogContent>
+                        <DialogContentText>
+                           确定要删除该活动吗？
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                            稍后再说
+                        </Button>
+                        <Button
+                            onClick={this.handleClose}
+                            autoFocus
+                            style={{color:"#D32F2F"}}
+                            onClick={()=>{this.deleteActivity()}}
+                        >
+                            删除
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
                 <PageHeader history={this.props.history} title="修改活动" />
                 {this.renderEditPanel(classes)}
             </form>
