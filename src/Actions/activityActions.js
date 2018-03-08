@@ -96,7 +96,7 @@ export const deleteUserActivity = (activityId, history, userId)=> async dispatch
         }
     );
     dispatch({
-         // since we only need to receive the success message here
+         // since we may only need to receive the success message here
         type:ADD_ACTIVITY_DATA,
         payload: res.DATA
     })

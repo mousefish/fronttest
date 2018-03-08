@@ -50,10 +50,10 @@ class EditPanel extends Component {
         this.props.fetchOneUserActivityForEditting(activityId);
     }
 
-   //  need userId to push back to this user's activity list
+    //  need userId to push back to this user's activity list
     deleteActivity(userId) {
         const { activityId } = this.props.match.params;
-        this.props.deleteUserActivity(activityId, this.props.history, userId)
+        this.props.deleteUserActivity(28, this.props.history, userId);
     }
 
     submitForm(values) {
@@ -100,11 +100,9 @@ class EditPanel extends Component {
         }
         let you = JSON.parse(localStorage["user"]);
         const { edit, msg } = this.props;
-        // console.log(edit.userId, you.id)
-
-        if (edit.size === 0 || edit.userId !== you.id) {
-            // console.log("!!!!");
-            return <div style={{textAlign:"center"}}>你没有权限修改该活动或者该活动已经被删除</div>;
+        // receive { warning:"xxx"} from backend. edit initial value is {}, so still use obj to pass warning msg here
+        if (edit.hasOwnProperty("warning") || edit.userId !== you.id) {
+            return <div style={{ textAlign: "center" }}>{edit.warning}</div>;
         }
 
         return (
@@ -239,9 +237,7 @@ class EditPanel extends Component {
                     aria-labelledby="responsive-dialog-title"
                 >
                     <DialogContent>
-                        <DialogContentText>
-                           确定要删除该活动吗？
-                        </DialogContentText>
+                        <DialogContentText>确定要删除该活动吗？</DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">
@@ -250,8 +246,10 @@ class EditPanel extends Component {
                         <Button
                             onClick={this.handleClose}
                             autoFocus
-                            style={{color:"#D32F2F"}}
-                            onClick={()=>{this.deleteActivity(edit.userId)}}
+                            style={{ color: "#D32F2F" }}
+                            onClick={() => {
+                                this.deleteActivity(edit.userId);
+                            }}
                         >
                             删除
                         </Button>

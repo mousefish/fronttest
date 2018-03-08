@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as actions from "../Actions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import PageHeader from "./PageHeader";
 
 class UserActivities extends Component {
     componentWillMount() {
@@ -25,7 +26,10 @@ class UserActivities extends Component {
 
     render() {
         return (
-            <div>{this.renderUserActivities(this.props.userActivities)}</div>
+            <div className="wrapper">
+            <PageHeader title="我的活动" history={this.props.history}/>
+            {this.renderUserActivities(this.props.userActivities)}
+            </div>
         );
     }
 }
