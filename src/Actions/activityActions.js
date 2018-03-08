@@ -6,7 +6,7 @@ import {
     HANDLE_LIKES,
     FETCH_ONE_ACTIVITY,
     FETCH_USER_ACTIVITIES,
-    FETCH_ACTIVITY_FOR_EDITTING,
+    FETCH_ACTIVITY_FOR_EDITTING
 } from "./types";
 
 import config from "../config/config";
@@ -84,6 +84,23 @@ export const updateUserActivity = (
         type: ADD_ACTIVITY_DATA,
         payload: res.data
     });
+};
+
+export const deleteUserActivity = (activityId, history, userId)=> async dispatch => {
+    const res = await axios.put(
+        `${ROOT_URL}/api/deleteUserActivity/${activityId}`, null,
+        {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        }
+    );
+    dispatch({
+         // since we only need to receive the success message here
+        type:ADD_ACTIVITY_DATA,
+        payload: res.DATA
+    })
+    history.push(`/userActivities/${userId}`)
 };
 
 export const fetchActivityData = () => async dispatch => {

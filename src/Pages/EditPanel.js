@@ -49,8 +49,11 @@ class EditPanel extends Component {
         const { activityId } = this.props.match.params;
         this.props.fetchOneUserActivityForEditting(activityId);
     }
-    deleteActivity() {
+
+   //  need userId to push back to this user's activity list
+    deleteActivity(userId) {
         const { activityId } = this.props.match.params;
+        this.props.deleteUserActivity(activityId, this.props.history, userId)
     }
 
     submitForm(values) {
@@ -101,7 +104,7 @@ class EditPanel extends Component {
 
         if (edit.size === 0 || edit.userId !== you.id) {
             // console.log("!!!!");
-            return <div>你没有权限修改该活动！</div>;
+            return <div style={{textAlign:"center"}}>你没有权限修改该活动或者该活动已经被删除</div>;
         }
 
         return (
@@ -223,7 +226,7 @@ class EditPanel extends Component {
     }
 
     render() {
-        const { classes, handleSubmit, fullScreen } = this.props;
+        const { classes, handleSubmit, fullScreen, edit } = this.props;
         return (
             <form
                 className="wrapper"
@@ -248,7 +251,7 @@ class EditPanel extends Component {
                             onClick={this.handleClose}
                             autoFocus
                             style={{color:"#D32F2F"}}
-                            onClick={()=>{this.deleteActivity()}}
+                            onClick={()=>{this.deleteActivity(edit.userId)}}
                         >
                             删除
                         </Button>

@@ -24,9 +24,9 @@ const styles = theme => ({
         color: "#1976D2"
     },
     divider: {
-        width:"100%",
-        border:"6px solid #BDBDBD",
-        margin:"15px 0 20px 0"
+        width: "100%",
+        border: "6px solid #BDBDBD",
+        margin: "15px 0 20px 0"
     }
 });
 
@@ -37,9 +37,11 @@ class Activity extends Component {
     }
 
     renderEditChoice() {
-        const { userId, id} = this.props.activity;
+        const { userId, id } = this.props.activity;
         const { classes } = this.props;
-        if(!localStorage["user"]) {return null}
+        if (!localStorage["user"]) {
+            return null;
+        }
         let you = JSON.parse(localStorage["user"]);
         if (you) {
             if (you.id === userId) {
@@ -50,7 +52,9 @@ class Activity extends Component {
                                 <div>{you.mail}</div>
                                 <div>{you.username}</div>
                             </div>
-                            <Link className="unlink" to={`/editActivity/${id}`}><div className={classes.editBtn}>修改我的活动</div></Link>
+                            <Link className="unlink" to={`/editActivity/${id}`}>
+                                <div className={classes.editBtn}>修改我的活动</div>
+                            </Link>
                         </div>
                         <div className={classes.divider} />
                     </div>
@@ -63,7 +67,12 @@ class Activity extends Component {
         const activityId = this.props.match.params.activityId;
         const { classes, activity, message, ratings } = this.props;
         if (!activity) {
-            return <div>该活动尚未出现</div>;
+            return (
+                <div>
+                    <PageHeader history={this.props.history} title="活动" />
+                    <div style={{ textAlign: "center" }}>该活动尚未出现</div>
+                </div>
+            );
         }
         return (
             <div className="wrapper">
