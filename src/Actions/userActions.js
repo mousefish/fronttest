@@ -31,6 +31,7 @@ export const fetchUser = userId => async dispatch => {
     });
 };
 
+
 export const updateUserBasicInfo = basicInfo => async dispatch => {
     // console.log("Action", basicInfo);
     try {

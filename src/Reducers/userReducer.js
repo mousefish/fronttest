@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR } from "../Actions/types";
+import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR} from "../Actions/types";
 
 const INITIAL_STATE = {basicInfo:{}, err:""};
 

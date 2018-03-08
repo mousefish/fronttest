@@ -50,6 +50,8 @@ class MyAccount extends Component {
                     return this.props.history.push(`/myBasicInfo`);
                 case "我的旅游故事":
                     return this.props.history.push(`/story/${userId}`);
+                case "我的活动":
+                    return this.props.history.push(`/userActivities/${userId}`)
             }
         } else {
             this.setState({
