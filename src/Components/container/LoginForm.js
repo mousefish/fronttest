@@ -55,8 +55,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-    const { handleSubmit } = this.props;
+    const { classes, handleSubmit } = this.props;
 
     return (
       <form

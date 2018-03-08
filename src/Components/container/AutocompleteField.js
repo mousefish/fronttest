@@ -12,6 +12,7 @@ const provinces = data.provinces;
 
 const renderInput = inputProps => {
   const { InputProps, classes, ref, ...other } = inputProps;
+  console.log(inputProps)
   return (
     <TextField
       {...other}

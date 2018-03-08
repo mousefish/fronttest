@@ -25,8 +25,8 @@ const styles = theme => ({
     },
     divider: {
         width:"100%",
-        border:"10px solid #BDBDBD",
-        marginBottom:10
+        border:"6px solid #BDBDBD",
+        margin:"15px 0 20px 0"
     }
 });
 
@@ -37,12 +37,11 @@ class Activity extends Component {
     }
 
     renderEditChoice() {
-        const userId = this.props.activity.userId;
+        const { userId, id} = this.props.activity;
         const { classes } = this.props;
         if(!localStorage["user"]) {return null}
         let you = JSON.parse(localStorage["user"]);
         if (you) {
-            console.log(you.id);
             if (you.id === userId) {
                 return (
                     <div>
@@ -51,7 +50,7 @@ class Activity extends Component {
                                 <div>{you.mail}</div>
                                 <div>{you.username}</div>
                             </div>
-                            <div className={classes.editBtn}>修改我的活动</div>
+                            <Link className="unlink" to={`/editActivity/${id}`}><div className={classes.editBtn}>修改我的活动</div></Link>
                         </div>
                         <div className={classes.divider} />
                     </div>
