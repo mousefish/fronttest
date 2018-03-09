@@ -16,18 +16,17 @@ import services from "../../Data/services";
 import PageHeader from "../PageHeader";
 
 const styles = theme => ({
-    button: {
-        margin: theme.spacing.unit,
-        marginTop: 30,
-        width: "95%",
-        padding: 15,
-        fontSize: 16
+    button: {},
+
+    textField: {
+        padding: "8px 0"
+        // border: "1px solid blue"
     }
 });
 
 class AddWish extends Component {
     submitForm(value) {
-        console.log("wish value", value);
+        // console.log("wish value", value);
         this.props.submitWishData(value, this.props.history);
     }
 
@@ -39,38 +38,32 @@ class AddWish extends Component {
 
     renderFields(classes) {
         return [
-            <div
-                key="location"
-                className="flex-form-wrapper"
-                style={{ width: "95%" }}
-            >
+            <div key="basic" className="form-group">
+                <h4 className="category-title">愿望基本信息</h4>
                 <Field
+                    fullWidth
                     key="location"
                     name="location"
                     type="text"
                     component={AutocompleteField}
                     className="text-field"
-                    placeholder="你想去的城市"
+                    placeholder="你想去的城市，按提示列表选择"
                     props={this.props}
                 />
-            </div>,
-            <div key="budget" className="flex-form-wrapper">
+
                 <Field
+                    fullWidth
                     key="budget"
                     name="budget"
                     type="text"
                     component={TextField}
-                    className="text-field"
+                    className={classes.textField}
                     placeholder="你的预算/人"
                 />
             </div>,
 
-            <div
-                key="date"
-                className="flex-form-wrapper"
-                style={{ width: "95%" }}
-            >
-                <h4 className="category-title">你的行程时间</h4>
+            <div key="date" className="form-group">
+                <h4 className="category-title">行程时间</h4>
                 <Field
                     key="dapartdate"
                     name="departdate"
@@ -99,8 +92,8 @@ class AddWish extends Component {
                 <PageHeader history={this.props.history} title="发布新愿望" />
                 <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
                     <div>{this.renderFields(classes)}</div>
-                    <div className="flex-form-wrapper" style={{ width: "95%" }}>
-                        <h4 className="category-title">你需要的向导服务</h4>
+                    <div className="form-group">
+                        <h4 className="category-title">需要的向导服务</h4>
                         <Field
                             key="services"
                             name="services"
@@ -108,16 +101,17 @@ class AddWish extends Component {
                             data={services}
                         />
                     </div>
-
-                    <Button
-                        type="submit"
-                        color="primary"
-                        raised
-                        className={classes.button}
-                        id="btn"
-                    >
-                        提交
-                    </Button>
+                    <div className="centralize-button">
+                        <Button
+                            type="submit"
+                            color="primary"
+                            raised
+                            className={classes.button}
+                            id="btn"
+                        >
+                            提交
+                        </Button>
+                    </div>
                 </form>
                 <div className="input-success">{this.props.msg}</div>
             </div>

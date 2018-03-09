@@ -11,19 +11,16 @@ import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
-    width: "95%",
+    width: "90%",
     margin: "auto"
   },
   button: {
-    margin: theme.spacing.unit,
-    width: "95%"
+    // margin: theme.spacing.unit,
+    // width: "95%"
   },
-  formInner: {
-    width: "95%"
-  },
-
-  text: {
-    fontWeight: "bold"
+  textField: {
+    padding: "8px 0"
+    // border: "1px solid blue"
   }
 });
 
@@ -38,62 +35,55 @@ class wizardThird extends Component {
 
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
-         <PageHeader onClick={previousPage} title="其他信息" />
-        <div className="flex-form-wrapper">
-          <LinearProgress
-            className={classes.progress}
-            mode="determinate"
-            value={this.state.completed}
-          />
-        </div>
-        <div className="flex-form-wrapper">
+        <PageHeader onClick={previousPage} title="其他信息" />
+
+        <LinearProgress
+          className={classes.progress}
+          mode="determinate"
+          value={this.state.completed}
+        />
+        <div className="form-group">
           <Field
-            className={classes.formInner}
+            className={classes.textField}
             name="school"
             type="text"
             component={TextField}
             label="毕业院校"
           />
-        </div>
-        <div className="flex-form-wrapper">
+
           <Field
-            className={classes.formInner}
+            className={classes.textField}
             name="major"
             type="text"
             component={TextField}
             label="毕业专业"
           />
-        </div>
-        <div className="flex-form-wrapper">
+
           <Field
-            className={classes.formInner}
+            className={classes.textField}
             name="language"
             type="text"
             component={TextField}
             label="语言能力"
           />
-        </div>
 
-        <div className="flex-form-wrapper">
           <Field
-            className={classes.formInner}
+            className={classes.textField}
             name="hobby"
             type="text"
             component={TextField}
             label="爱好"
           />
-        </div>
 
-        <div className="flex-form-wrapper">
           <Field
-            className={classes.formInner}
+            className={classes.textField}
             name="personality"
             type="text"
             component={TextField}
             label="性格"
           />
         </div>
-        <div className="flex-form-wrapper">
+        <div className="centralize-button">
           <Button
             type="submit"
             color="primary"

@@ -111,7 +111,7 @@ class SearchPanel extends Component {
     const { handleSubmit } = this.props;
     return (
       <div className="searchPanelWrapper">
-        <PageHeader title="搜索" history={this.props.history} />
+        <PageHeader title="搜索" history={this.props.history}/>
         <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
         <div className={classes.root} style={{margin:"15px 0 35px 0"}}>
           <AppBar position="static" color="default" style={{boxShadow:"none"}} >

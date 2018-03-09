@@ -32,10 +32,13 @@ class WizardThird extends Component {
         const { classes } = this.props;
         return (
             <div className="wrapper">
-                <PageHeader onClick={previousPage} title="上传照片" />
+                <PageHeader onClick={previousPage} title="发布新活动" />
 
                 <form onSubmit={handleSubmit}>
+                  <div className="form-group">
+                  <h4 className="category-title">上传照片</h4>
                     <div className={classes.imageWrapper}>
+
                         <Field
                             component={FileInput}
                             name="img1"
@@ -43,6 +46,8 @@ class WizardThird extends Component {
                         />
 
                     </div>
+                    </div>
+                    <div className="centralize-button">
                     <Button
                         type="submit"
                         color="primary"
@@ -52,6 +57,7 @@ class WizardThird extends Component {
                     >
                         提交
                     </Button>
+                    </div>
                 </form>
             </div>
         );

@@ -19,15 +19,22 @@ const styles = theme => ({
     button: {
         // margin: theme.spacing.unit,
         width: "40%",
-        height: "30px",
         color: "#fff",
-        lineHeight: 0.6
+        lineHeight: 0.6,
+        height:40
     },
     btnGroup: {
+        width:"90%",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        margin: "20px 0"
+        margin: "20px auto",
+
+    },
+
+    textField: {
+        padding: "8px 0"
+        // border: "1px solid blue"
     }
 });
 
@@ -103,46 +110,38 @@ class EditPanel extends Component {
 
         return (
             <div>
-                <div className="flex-form-wrapper" key="theme">
+                <div className="form-group" key="basic">
+                    <h4 className="category-title">你的基本活动信息</h4>
                     <Field
+                        fullWidth
                         key="theme"
                         name="theme"
                         type="text"
                         component={TextField}
-                        className="text-field"
+                        className={classes.textField}
                         placeholder="活动的主题(例：骨灰级成都吃货地图)"
                     />
-                </div>
-                <div
-                    className="flex-form-wrapper"
-                    style={{ width: "95%" }}
-                    key="location"
-                >
+
                     <Field
                         key="location"
                         name="location"
                         type="text"
                         component={AutocompleteField}
-                        className="text-field"
                         placeholder="活动所在的国家和城市"
                         props={this.props}
                     />
-                </div>
-                <div className="flex-form-wrapper" key="budget">
+
                     <Field
+                        fullWidth
                         key="budget"
                         name="budget"
                         type="text"
                         component={TextField}
-                        className="text-field"
+                        className={classes.textField}
                         placeholder="活动费用/人"
                     />
                 </div>
-                <div
-                    className="flex-form-wrapper"
-                    style={{ width: "95%" }}
-                    key="date"
-                >
+                <div className="form-group" key="date">
                     <h4 className="category-title">你的活动时间</h4>
                     <Field
                         key="dapartdate"
@@ -159,11 +158,7 @@ class EditPanel extends Component {
                         placeholder="结束日期和时间"
                     />
                 </div>
-                <div
-                    className="flex-form-wrapper"
-                    style={{ width: "95%" }}
-                    key="service"
-                >
+                <div className="form-group" key="service">
                     <h4 className="category-title">你可以提供的向导服务</h4>
                     <Field
                         key="services"
@@ -172,13 +167,10 @@ class EditPanel extends Component {
                         data={services}
                     />
                 </div>
-                <div
-                    className="flex-form-wrapper"
-                    style={{ width: "95%" }}
-                    key="story"
-                >
+                <div className="form-group" key="story">
                     <h4 className="category-title">我在这个地方的故事</h4>
                     <Field
+                        fullWidth
                         key="story"
                         name="story"
                         component={TextField}
@@ -186,7 +178,7 @@ class EditPanel extends Component {
                         multiline
                         rowsMax="4"
                         placeholder="不超过300个字"
-                        style={{ width: "100%" }}
+                        className={classes.textField}
                     />
                 </div>
                 <div className="input-success">{msg}</div>
@@ -194,9 +186,10 @@ class EditPanel extends Component {
                     <Button
                         type="submit"
                         color="primary"
+                        style={{ backgroundColor: "#1976D2" }}
                         raised
                         className={classes.button}
-                        id="btn"
+
                     >
                         修改
                     </Button>
@@ -205,7 +198,7 @@ class EditPanel extends Component {
                         style={{ backgroundColor: "#D32F2F" }}
                         raised
                         className={classes.button}
-                        id="btn"
+
                         onClick={() => {
                             this.setState({
                                 open: true

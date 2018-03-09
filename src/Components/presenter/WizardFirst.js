@@ -12,13 +12,26 @@ import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
-    width: "95%",
+    width: "90%",
     margin: "auto"
   },
 
   button: {
-    margin: theme.spacing.unit,
-    width: "100%"
+
+  },
+
+  textField: {
+    padding: "8px 0"
+    // border: "1px solid blue"
+  },
+
+  legal: {
+    margin:"auto",
+    marginTop: 45,
+    width:"90%",
+    lineHeight: 1.5,
+    fontSize:12
+    // border: "1px solid blue"
   }
 });
 
@@ -33,32 +46,29 @@ class wizardFirst extends Component {
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
         <PageHeader history={this.props.history} title="创建新账户" />
-
-        <div className="flex-form-wrapper">
           <LinearProgress
             className={classes.progress}
             mode="determinate"
             value={this.state.completed}
           />
-        </div>
-        <div className="flex-form-wrapper">
+        <div className="form-group">
           <Field
+            fullWidth
             name="email"
             component={TextField}
-            className="text-field"
+            className={classes.textField}
             label="输入邮箱地址"
           />
-        </div>
-        <div className="flex-form-wrapper" style={{ marginBottom: 20 }}>
+
           <Field
             name="password"
             type="password"
             component={PasswordSetVisibility}
-            className="text-field"
+            className={classes.textField}
             label="输入密码 - 六位数"
           />
         </div>
-        <div className="legal-footer">
+        <div className={classes.legal}>
           注册代表已经同意<Link to="/" className="unlink">
             服务条款
           </Link>，<Link to="/" className="unlink">
@@ -72,13 +82,14 @@ class wizardFirst extends Component {
           </Link>
         </div>
 
-        <div className="flex-form-wrapper">
+        <div className="centralize-button">
           <Button
             type="submit"
             color="primary"
             raised
             className="text-field"
             id="btn"
+            style={{marginTop:5}}
           >
             点击注册
           </Button>

@@ -1,7 +1,7 @@
 //entry point
 import React from "react";
 import ReactDOM from "react-dom";
-import "./Style/index.css";
+
 import App from "./App";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
@@ -12,6 +12,7 @@ import { AUTH_USER } from './Actions/types';
 
 
 import "./CSS/main.css";
+import "./CSS/index.css";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //create redux store in root

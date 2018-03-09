@@ -22,6 +22,7 @@ const renderInput = inputProps => {
         },
         ...InputProps
       }}
+      style={{paddingTop:8, marginBottom:8}}
     />
   );
 };
@@ -91,7 +92,7 @@ const autocompleteField = props => {
             ...props.input
           })}
           {isOpen ? (
-            <Paper square>
+            <Paper square style={{marginTop:-8}}>
               {getCitys(inputValue).map((city, index) =>
                 renderCity({
                   city,

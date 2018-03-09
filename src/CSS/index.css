@@ -27,8 +27,13 @@ header .title .name {
 
 #btn {
   padding: 15px;
-  font-size: 16px;
-  background-color: #1976D2; }
+  font-size: 18px;
+  background-color: #1976D2;
+  width: 90%;
+  margin: 20px auto; }
+
+.centralize-button {
+  text-align: center; }
 
 .card {
   width: 100%;
@@ -45,6 +50,7 @@ header .title .name {
   color: #337ab7; }
 
 .wrapper {
+  /*  border: 1px solid red;*/
   width: 95vw;
   max-width: 600px;
   height: 100%;
@@ -53,7 +59,17 @@ header .title .name {
   margin-bottom: 45px;
   display: flex;
   flex-flow: column;
-  justify-content: space-between; }
+  justify-content: center;
+  align-items: stretch; }
+
+.form-group {
+  /*  border: 1px solid green;*/
+  margin: 0 auto 20px auto;
+  width: 90%;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: stretch; }
 
 .searchPanelWrapper {
   height: 100%;
@@ -68,6 +84,7 @@ header .title .name {
   height: 455px; }
 
 .flex-inner-wrapper {
+  /*  border: 1px solid blue;*/
   display: flex;
   flex-flow: column;
   justify-content: flex-start; }
@@ -76,12 +93,6 @@ header .title .name {
   align-items: center;
   padding: 10px; }
 
-.flex-form-wrapper {
-  width: 100%;
-  margin: auto;
-  text-align: center;
-  padding: 10px 0; }
-
 .image-wrapper {
   width: 100%;
   max-width: 100%;
@@ -89,14 +100,15 @@ header .title .name {
 
 .legal-footer {
   margin-top: 25px;
+  line-height: 1.5;
   padding: 8px;
-  line-height: 1.5; }
+  border: 1px solid blue; }
 
 /****************************/
 .wizard-header {
   width: 100%;
   padding: 4px 0;
-  margin-bottom: 5px; }
+  margin-bottom: 15px; }
 
 .wizard-header-bottom {
   border-bottom: 2px solid #1976D2; }
@@ -117,18 +129,15 @@ header .title .name {
 .gallery {
   margin: 10px 0; }
 
-.text-field {
-  width: 95%; }
-
 .category-title {
   font-weight: bold;
-  text-align: center; }
+  /*text-align: center; */ }
 
 .input-error {
-  margin-top: 6px;
   color: red;
   font-size: 11px;
-  text-align: left; }
+  text-align: left;
+  /* border:1px solid blue;*/ }
 
 .input-success {
   margin-top: 6px;

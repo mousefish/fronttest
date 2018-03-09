@@ -3,6 +3,7 @@ import DateTimePicker from "react-widgets/lib/DateTimePicker";
 import moment from "moment";
 import momentLocaliser from "react-widgets-moment";
 import "react-widgets/dist/css/react-widgets.css";
+import "../../CSS/updated-react-widgets.css";
 
 // .rw-widget-container{background-color:#fff;
 // .rw-select-bordered {
@@ -14,7 +15,12 @@ export default ({ format, input, placeholder, meta: { error, touched } }) => {
 
     return (
         <div>
-            <div style={{ marginBottom: 15, borderBottom: "1px solid lightgrey" }}>
+            <div
+                style={{
+                    margin: "10px 0 5px 0",
+                    borderBottom: "1px solid rgba(0, 0, 0, 0.42)",
+                }}
+            >
                 <DateTimePicker
                     {...input}
                     onChange={input.onChange}
@@ -24,9 +30,7 @@ export default ({ format, input, placeholder, meta: { error, touched } }) => {
                     placeholder={placeholder}
                 />
             </div>
-            <div className='input-error'>
-                {touched && error}
-            </div>
+            <div className="input-error">{touched && error}</div>
         </div>
     );
 };

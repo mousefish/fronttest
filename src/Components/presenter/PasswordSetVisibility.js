@@ -24,14 +24,15 @@ class InputAdornments extends Component {
         return (
            <div>
             <Input
-                style={{width:"95%"}}
+                style={{width:"100%"}}
+                placeholder="输入密码"
                 {...this.props.input}
                 id="adornment-password"
                 type={this.state.showPassword ? "text" : "password"}
                 endAdornment={
                     <InputAdornment  position="end">
                         <IconButton
-                           style={{height:10}}
+
                             onClick={this.handleClickShowPasssword}
                             onMouseDown={this.handleMouseDownPassword}
                         >
@@ -44,7 +45,7 @@ class InputAdornments extends Component {
                     </InputAdornment>
                 }
             />
-            <div className="input-error" style={{marginLeft:10}}>
+            <div className="input-error">
                 {touched && error}
             </div>
           </div>
