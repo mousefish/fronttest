@@ -49,8 +49,11 @@ class Activity extends Component {
     };
 
     componentWillMount() {
-        const activityId = this.props.match.params.activityId;
+        const { activityId } = this.props.match.params;
         this.props.fetchOneActivity(activityId);
+        if (localStorage["user"]) {
+            this.props.verifyYourFav(activityId);
+        }
     }
 
     renderEditChoice() {
@@ -87,13 +90,25 @@ class Activity extends Component {
                 open: true
             });
         } else {
-            this.props.submitLikes(itemId);
+            // let func 1 finish, then run func 2 based on the result of func 1
+            return new Promise((resolve, reject)=>{
+                resolve(this.props.submitLikes(itemId));
+            }).then(()=>{
+                this.props.verifyYourFav(itemId);
+            })
         }
     }
 
     render() {
-        const activityId = this.props.match.params.activityId;
-        const { classes, fullScreen, activity, message, ratings } = this.props;
+        const { activityId } = this.props.match.params;
+        const {
+            classes,
+            fullScreen,
+            activity,
+            message,
+            ratings,
+            isYourFav
+        } = this.props;
         // better use an object to pass the warning message since initial value is obj.
         // also, if we use if(!activity) here, since React's default value is undefined,
         // so even for the values that DO exist, the warning message will still show for a second before the content shows!
@@ -132,7 +147,7 @@ class Activity extends Component {
                                 }}
                             />
                         </IconButton>
-                        收藏
+                        {isYourFav ? "你已经收藏" : "收藏"}
                         <IconButton aria-label="Share">
                             <ShareIcon />
                         </IconButton>
@@ -196,8 +211,10 @@ class Activity extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log("isYourFav", state.ActivityReducer.isYourFav);
     return {
-        activity: state.ActivityReducer.activity
+        activity: state.ActivityReducer.activity,
+        isYourFav: state.ActivityReducer.isYourFav
     };
 };
 

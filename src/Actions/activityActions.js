@@ -6,12 +6,26 @@ import {
     HANDLE_LIKES,
     FETCH_ONE_ACTIVITY,
     FETCH_USER_ACTIVITIES,
-    FETCH_ACTIVITY_FOR_EDITTING
+    FETCH_ACTIVITY_FOR_EDITTING,
+    IS_YOUR_FAV
 } from "./types";
 
 import config from "../config/config";
 
 const ROOT_URL = config["ROOT_URL"];
+
+export const verifyYourFav = activityId => async dispatch => {
+    console.log("mo")
+    const res = await axios.get(`${ROOT_URL}/api/verifyYourFav/${activityId}`, {
+        headers: {
+            authorization: localStorage.getItem("jwtToken")
+        }
+    });
+    dispatch({
+        type: IS_YOUR_FAV,
+        payload: res.data
+    });
+};
 
 export const fetchUserActivities = userId => async dispatch => {
     const res = await axios.get(`${ROOT_URL}/api/activities/${userId}`);
@@ -86,9 +100,14 @@ export const updateUserActivity = (
     });
 };
 
-export const deleteUserActivity = (activityId, history, userId)=> async dispatch => {
+export const deleteUserActivity = (
+    activityId,
+    history,
+    userId
+) => async dispatch => {
     const res = await axios.put(
-        `${ROOT_URL}/api/deleteUserActivity/${activityId}`, null,
+        `${ROOT_URL}/api/deleteUserActivity/${activityId}`,
+        null,
         {
             headers: {
                 authorization: localStorage.getItem("jwtToken")
@@ -96,11 +115,11 @@ export const deleteUserActivity = (activityId, history, userId)=> async dispatch
         }
     );
     dispatch({
-         // since we may only need to receive the success message here
-        type:ADD_ACTIVITY_DATA,
+        // since we may only need to receive the success message here
+        type: ADD_ACTIVITY_DATA,
         payload: res.DATA
-    })
-    history.push(`/userActivities/${userId}`)
+    });
+    history.push(`/userActivities/${userId}`);
 };
 
 export const fetchActivityData = () => async dispatch => {

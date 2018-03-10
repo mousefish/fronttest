@@ -33,3 +33,4 @@ export const HANDLE_WISH_LIKES = "handle_wish_likes";
 
 
 export const INPUT_ERROR = "INPUT_ERROR";
+export const IS_YOUR_FAV = "IS_YOUR_FAV";
