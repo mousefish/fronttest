@@ -139,13 +139,3 @@ header .title .name {
   color: blue;
   font-size: 1.2rem;
   text-align: center; }
-
-.activity-line-wrapper {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  /*border: 1px solid blue; */ }
-
-.comment {
-  border-bottom: 1px solid lightgrey;
-  padding: 10px; }

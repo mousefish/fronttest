@@ -17,13 +17,16 @@ import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "./PageHeader";
 import RegisterDialog from "./RegisterDialog";
+import test from "../Assets/imgForTest/dalian1.jpg";
 
 const styles = theme => ({
     editBar: {
+        // border:"1px solid red",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        margin: "10px 0"
+        margin: "10px 0 30px 0",
+        padding: 5
     },
     editBtn: {
         border: "1px solid #1976D2",
@@ -31,14 +34,13 @@ const styles = theme => ({
         borderRadius: 40,
         color: "#1976D2"
     },
-    divider: {
-        width: "100%",
-        border: "6px solid #BDBDBD",
-        margin: "15px 0 20px 0"
-    },
-
     heartOn: {
-        color: "#F44336"
+        color: "#F44336",
+        border: "1px solid #F44336"
+    },
+    heartOut: {
+        color: "#757575",
+        border: "1px solid #757575"
     },
     icon: {
         width: 15,
@@ -46,17 +48,11 @@ const styles = theme => ({
         verticalAlign: "-2px"
     },
 
-    left: {
-        paddingRight: 20,
-        // border:"1px solid green",
-        fontSize: 12
-    },
-
     detailPanel: {
         // border: "1px solid green",
         padding: 0,
         listStyle: "none",
-        color:"#424242"
+        color: "#424242"
     },
 
     detailTitle: {
@@ -78,14 +74,31 @@ const styles = theme => ({
         alignItems: "center",
         paddingLeft: 5
     },
+
+    line: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        justifyContent: "space-around",
+        // border: "1px solid blue",
+        width: 200,
+        margin: "20px 0"
+    },
+
     commentArea: {
         // border: "1px solid red",
-        padding:5
+        padding: 5
     },
     writeArea: {
         // border: "1px solid red"
     },
 
+    bg: {
+        marginBottom: 10
+    },
+    bgImg: {
+        maxWidth: "100%",
+        height: 250
+    }
 });
 
 class Activity extends Component {
@@ -115,17 +128,16 @@ class Activity extends Component {
         if (you) {
             if (you.id === userId) {
                 return (
-                    <div>
-                        <div className={classes.editBar}>
-                            <div>
-                                <div>{you.mail}</div>
-                                <div>{you.username}</div>
-                            </div>
+                    <div className={classes.editBar}>
+                        <div style={{ lineHeight: 1.5 }}>
+                            <div>{you.mail}</div>
+                            <div>{you.username}</div>
+                        </div>
+                        <div>
                             <Link className="unlink" to={`/editActivity/${id}`}>
                                 <div className={classes.editBtn}>修改我的活动</div>
                             </Link>
                         </div>
-                        <div className={classes.divider} />
                     </div>
                 );
             }
@@ -175,7 +187,7 @@ class Activity extends Component {
             );
         }
         return (
-            <div className="wrapper">
+            <div>
                 <Dialog
                     fullScreen={fullScreen}
                     open={this.state.open}
@@ -186,89 +198,98 @@ class Activity extends Component {
                 </Dialog>
                 <PageHeader history={this.props.history} title="活动" />
                 {this.renderEditChoice()}
-
+                <div className={classes.bg}>
+                    <img className={classes.bgImg} src={test} />
+                </div>
                 <div className={classes.container}>
                     <h3 style={{ fontWeight: "bold" }}>{activity.theme}</h3>
-                    <div className="activity-line-wrapper">
-                        <div className={classes.left}>
-                            <LocationOn className={classes.icon} />
-                            {activity.location}
-                        </div>
+                    <div>
+                        <LocationOn className={classes.icon} />&nbsp;{activity.location}
                     </div>
 
-                    <div className="activity-line-wrapper">
+                    <div className={classes.line}>
                         <IconButton
                             aria-label="Add to favorites"
-                            className={isYourFav ? classes.heartOn : ""}
+                            className={
+                                isYourFav ? classes.heartOn : classes.heartOut
+                            }
+                            onClick={() => {
+                                this.handleLikes(activityId);
+                            }}
                         >
-                            <FavoriteIcon
-                                aria-label="Add to favorites"
-                                onClick={() => {
-                                    this.handleLikes(activityId);
-                                }}
-                            />
+                            <FavoriteIcon aria-label="Add to favorites" />
                         </IconButton>
                         <span />
-                        <IconButton aria-label="Share">
+                        <IconButton
+                            style={{ border: "1px solid #757575" }}
+                            aria-label="Share"
+                        >
                             <ShareIcon />
                         </IconButton>
                     </div>
+                </div>
 
+                <div className="wrapper">
                     <div>
-                        <div style={{ overflowY: "scroll" }}>
+                        <div style={{ paddingLeft: 5, overflowY: "scroll" }}>
                             {activity.story}
                         </div>
                     </div>
-                </div>
 
-                <ul className={classes.detailPanel}>
-                    <li>
-                        <div className={classes.detailTitle}>活动发起人</div>
-                        <div className={classes.detailContent}>
-                            {" "}
-                            <Link
-                                style={{color:"#424242"}}
-                                to={`/user/${activity.userId}`}
-                                className="unlink"
-                            >
-                                {activity.username}&nbsp;
-                                <OpenInNew className={classes.icon}/>
-                            </Link>
-                        </div>
-                    </li>
+                    <ul className={classes.detailPanel}>
+                        <li>
+                            <div className={classes.detailTitle}>活动发起人</div>
+                            <div className={classes.detailContent}>
+                                {" "}
+                                <Link
+                                    style={{ color: "#424242" }}
+                                    to={`/user/${activity.userId}`}
+                                    className="unlink"
+                                >
+                                    {activity.username}&nbsp;
+                                    <OpenInNew className={classes.icon} />
+                                </Link>
+                            </div>
+                        </li>
 
-                    <li>
-                        <div className={classes.detailTitle}>活动日期</div>
-                        <div className={classes.detailContent}>
-                            {activity.departdate} — {activity.finishdate}
-                        </div>
-                    </li>
+                        <li>
+                            <div className={classes.detailTitle}>活动日期</div>
+                            <div className={classes.detailContent}>
+                                {activity.departdate} — {activity.finishdate}
+                            </div>
+                        </li>
 
-                     <li>
-                        <div className={classes.detailTitle}>活动价格</div>
-                        <div className={classes.detailContent}>
-                            {activity.budget}
-                        </div>
-                    </li>
+                        <li>
+                            <div className={classes.detailTitle}>活动价格</div>
+                            <div className={classes.detailContent}>
+                                {activity.budget}
+                            </div>
+                        </li>
 
-                    <li>
-                        <div className={classes.detailTitle}>提供的服务</div>
-                        <div className={classes.detailContent}>
-                            {activity.services}
+                        <li>
+                            <div className={classes.detailTitle}>提供的服务</div>
+                            <div className={classes.detailContent}>
+                                {activity.services}
+                            </div>
+                        </li>
+                        <li>
+                            <div className={classes.detailTitle}>口碑</div>
+                            <div className={classes.detailContent}>
+                                <Link
+                                    style={{ color: "#424242" }}
+                                    className="unlink"
+                                    to={`/ratingIndex/${activityId}`}
+                                >
+                                    <RatingSummary activityId={activityId} />
+                                </Link>
+                            </div>
+                        </li>
+                    </ul>
+                    <div className={classes.commentArea}>
+                        <div className={classes.writeArea}>
+                            <RatingForm activityId={activityId} />
                         </div>
-                    </li>
-                    <li>
-                        <div className={classes.detailTitle}>口碑</div>
-                        <div className={classes.detailContent}>
-                            <RatingSummary activityId={activityId} />
-                        </div>
-                    </li>
-                </ul>
-                <div className={classes.commentArea}>
-                    <div className={classes.writeArea}>
-                        <RatingForm activityId={activityId} />
                     </div>
-
                 </div>
             </div>
         );

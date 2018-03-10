@@ -34,6 +34,8 @@ import MyMessage from "./Pages/MyMessage";
 import PrivateBasicInfo from "./Pages/PrivateBasicInfo";
 import PrivateFavorites from "./Pages/PrivateFavorites";
 
+import RatingIndex from "./Pages/RatingIndex";
+
 import AddActivity from "./Pages/AddActivity/AddActivity";
 import AddWish from "./Pages/AddWish/AddWish";
 import Activity from "./Pages/Activity";
@@ -183,6 +185,8 @@ class App extends Component {
             <Route exact path="/activity/:activityId" component={Activity} />
             <Route exact path="/wish/:wishId" component={Wish} />
             <Route exact path="/user/:userId" component={PublicProfile} />
+            <Route exact path="/ratingIndex/:activityId" component={RatingIndex} />
+
 
             {/*unit test used below, production will check env.production to disable*/}
 

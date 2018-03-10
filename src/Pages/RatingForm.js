@@ -16,7 +16,6 @@ const styles = theme => ({
         // marginLeft: theme.spacing.unit,
         // marginRight: theme.spacing.unit,
         width: "100%",
-
     },
     container: {
         display: "flex",
@@ -71,11 +70,11 @@ class RatingForm extends Component {
         for (let i = 0; i < 5; i++) {
             if (i <= index) {
                 starContainer.push(
-                    <Star onClick={() => this.updateStars(i)} />
+                    <Star key={i} onClick={() => this.updateStars(i)} />
                 );
             } else {
                 starContainer.push(
-                    <StarBorder onClick={() => this.updateStars(i)} />
+                    <StarBorder key={i} onClick={() => this.updateStars(i)} />
                 );
             }
         }
@@ -106,6 +105,7 @@ class RatingForm extends Component {
         const { classes, fullScreen } = this.props;
         const { activityId } = this.props;
         const { message } = this.props;
+        console.log("State",this.state.message)
         return (
             <div>
                 <Dialog
@@ -120,14 +120,14 @@ class RatingForm extends Component {
                 </Dialog>
 
                 <form>
-                    <div>{this.state.stars}</div>
+                    {this.state.stars}
                     <TextField
                         id="textarea"
-                        label="写下你的评论"
+                        label="给个评论吧"
                         placeholder="Placeholder"
                         multiline
                         className={classes.textField}
-                        margin="normal"
+                        // margin="normal"
                         onChange={event => {
                             this.setState({ feedback: event.target.value });
                         }}
