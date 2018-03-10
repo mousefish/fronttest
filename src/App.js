@@ -116,6 +116,10 @@ class App extends Component {
   renderBottomNav() {
     const main_value = this.state.main_value;
     const classes = this.props.classes;
+    const { pathname } =this.props.history.location;
+    if(pathname.includes("/editActivity/")){
+      return null
+    }
 
     return (
       <BottomNavigation
@@ -145,6 +149,7 @@ class App extends Component {
           icon={<Person />}
         />
       </BottomNavigation>
+
     );
   }
 

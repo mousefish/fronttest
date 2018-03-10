@@ -15,21 +15,28 @@ import Dialog from "material-ui/Dialog";
 import services from "../Data/services";
 import ConfirmDelete from "./ConfirmDelete";
 import RegisterDialog from "./RegisterDialog";
+
 const styles = theme => ({
+    root: {
+        width: 500
+    },
     button: {
         // margin: theme.spacing.unit,
-        width: "40%",
+        width: "50%",
         color: "#fff",
         lineHeight: 0.6,
-        height:40
+        height: 60,
+        borderRadius: 0,
+        fontSize: "1.5rem"
     },
     btnGroup: {
-        width:"90%",
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        width: "100%",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        margin: "20px auto",
-
     },
 
     textField: {
@@ -86,7 +93,7 @@ class EditPanel extends Component {
 
         if (Object.keys(edittedValues).length === 0) {
             // need a dialogue here!
-            alert("没有值发生改变！");
+            // alert("没有值发生改变！");
             return null;
         }
 
@@ -182,38 +189,13 @@ class EditPanel extends Component {
                     />
                 </div>
                 <div className="input-success">{msg}</div>
-                <div className={classes.btnGroup}>
-                    <Button
-                        type="submit"
-                        color="primary"
-                        style={{ backgroundColor: "#1976D2" }}
-                        raised
-                        className={classes.button}
-
-                    >
-                        修改
-                    </Button>
-                    <Button
-                        color="primary"
-                        style={{ backgroundColor: "#D32F2F" }}
-                        raised
-                        className={classes.button}
-
-                        onClick={() => {
-                            this.setState({
-                                open: true
-                            });
-                        }}
-                    >
-                        删除
-                    </Button>
-                </div>
             </div>
         );
     }
 
     render() {
         const { classes, handleSubmit, fullScreen, edit } = this.props;
+
         return (
             <div>
                 <Dialog
@@ -233,11 +215,36 @@ class EditPanel extends Component {
                     </div>
                 </Dialog>
                 <form
+                    style={{ marginBottom: 0 }}
                     className="wrapper"
                     onSubmit={handleSubmit(this.submitForm.bind(this))}
                 >
                     <PageHeader history={this.props.history} title="修改活动" />
                     {this.renderEditPanel(classes)}
+                    <div className={classes.btnGroup}>
+                        <Button
+                            type="submit"
+                            color="primary"
+                            style={{ backgroundColor: "#1976D2" }}
+                            raised
+                            className={classes.button}
+                        >
+                            修改
+                        </Button>
+                        <Button
+                            color="primary"
+                            style={{ backgroundColor: "#D32F2F" }}
+                            raised
+                            className={classes.button}
+                            onClick={() => {
+                                this.setState({
+                                    open: true
+                                });
+                            }}
+                        >
+                            删除
+                        </Button>
+                    </div>
                 </form>
             </div>
         );

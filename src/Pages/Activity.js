@@ -93,11 +93,26 @@ const styles = theme => ({
     },
 
     bg: {
-        marginBottom: 10
+        marginBottom: 10,
+        position:"relative",
+        textAlign:"center"
+
     },
     bgImg: {
         maxWidth: "100%",
-        height: 250
+        height: 250,
+
+    },
+
+    bgImgLayer:{
+        position:"absolute",
+        top:0,
+        bottom:0,
+        left:0,
+        right:0,
+        // border:"1px solid red",
+        backgroundColor:"#1976D2",
+        opacity:0.2
     }
 });
 
@@ -129,7 +144,7 @@ class Activity extends Component {
             if (you.id === userId) {
                 return (
                     <div className={classes.editBar}>
-                        <div style={{ lineHeight: 1.5 }}>
+                        <div style={{ lineHeight: 1.8, marginTop:1 }}>
                             <div>{you.mail}</div>
                             <div>{you.username}</div>
                         </div>
@@ -200,6 +215,7 @@ class Activity extends Component {
                 {this.renderEditChoice()}
                 <div className={classes.bg}>
                     <img className={classes.bgImg} src={test} />
+                    <div className={classes.bgImgLayer} />
                 </div>
                 <div className={classes.container}>
                     <h3 style={{ fontWeight: "bold" }}>{activity.theme}</h3>
@@ -262,7 +278,7 @@ class Activity extends Component {
                         <li>
                             <div className={classes.detailTitle}>活动价格</div>
                             <div className={classes.detailContent}>
-                                {activity.budget}
+                                {activity.budget} 元
                             </div>
                         </li>
 
