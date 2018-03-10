@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
-import * as actions from "../../Actions";
-import IconButton from "material-ui/IconButton";
 import LocationOn from "material-ui-icons/LocationOn";
 import MonetizationOn from "material-ui-icons/MonetizationOn";
 
@@ -17,19 +15,10 @@ import Person from "material-ui-icons/Person";
 
 import travel from "../../Assets/Images/test.jpg";
 
-import Card, {
-  CardHeader,
-  CardMedia,
-  CardContent,
-  CardActions
-} from "material-ui/Card";
+import Card, { CardHeader, CardMedia, CardContent } from "material-ui/Card";
 
-import FavoriteIcon from "material-ui-icons/Favorite";
-import ShareIcon from "material-ui-icons/Share";
 import List from "material-ui/List";
 import Slide from "material-ui/transitions/Slide";
-import Dialog from "material-ui/Dialog";
-import RegisterDialog from "../../Pages/RegisterDialog";
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -51,12 +40,12 @@ const styles = theme => ({
     verticalAlign: "-2px"
   },
 
-  heartOn: {
-    color: "#F44336"
+  iconHeart:{
+    width: 12,
+    height: 12,
+    verticalAlign: "-2px"
   },
-  numberOfLikes: {
-    fontSize: "1.2rem"
-  },
+
 
   // themeBar: {
   //   position: "absolute",
@@ -74,30 +63,32 @@ const styles = theme => ({
 
   budgetBox: {
     position: "absolute",
-    width:60,
-    height:60,
-    lineHeight:4.3,
-    textAlign:"center",
-    fontWeight:"bold",
+    width: 60,
+    height: 60,
+    lineHeight: 4.3,
+    textAlign: "center",
+    fontWeight: "bold",
     left: 17,
     top: 10,
     color: "#fff",
-    borderRadius:"50%",
-    backgroundColor:"#03A9F4",
+    borderRadius: "50%",
+    backgroundColor: "#03A9F4"
+  },
+
+
+
+  lineWrapper: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "space-between",
+    marginBottom: 10,
+    alignItems:"flex-start",
   }
 });
 
 class ActivityIndex extends Component {
-  state = {
-    open: false
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
   renderService(services) {
-    const icon = this.props.classes.icon;
+    const { icon }= this.props.classes;
     return services.map(service => {
       return (
         <span style={{ marginRight: 6 }} key={service}>
@@ -109,7 +100,7 @@ class ActivityIndex extends Component {
   }
 
   renderStar(num) {
-    const icon = this.props.classes.icon;
+    const { icon } = this.props.classes;
     const starWrapper = [];
 
     for (let i = 0; i < 5; i++) {
@@ -125,18 +116,7 @@ class ActivityIndex extends Component {
     return starWrapper;
   }
 
-  handleLikes(event, itemId) {
-    event.preventDefault();
-    event.stopPropagation();
-    // cannot "like" until you login/signup
-    if (!localStorage.getItem("jwtToken")) {
-      this.setState({
-        open: true
-      });
-    } else {
-      this.props.submitLikes(itemId);
-    }
-  }
+
 
   renderItems() {
     const classes = this.props.classes;
@@ -147,23 +127,12 @@ class ActivityIndex extends Component {
         <Link to={`/activity/${item.id}`} className="unlink" key={item.id}>
           <Card className="card" style={{ borderRadius: 10 }}>
             <CardMedia className={classes.media} image={travel} title="travel">
-              <div className={classes.budgetBox}>
-               ¥{item.budget}
-              </div>
-
+              <div className={classes.budgetBox}>¥{item.budget}</div>
             </CardMedia>
-            <CardContent style={{color:"#757575"}}>
-             <h3 style={{fontWeight:"bold"}}>{item.theme}</h3>
-              <div
-                style={{
-                  display:"flex",
-                  flexFlow:"row nowrap",
-                  justifyContent:"space-between",
-                  marginBottom: 10,
-
-                }}
-              >
-                <div >
+            <CardContent style={{ color: "#757575" }}>
+              <h3 style={{ fontWeight: "bold" }}>{item.theme}</h3>
+              <div className={classes.lineWrapper}>
+                <div>
                   <LocationOn className={classes.icon} /> {item.location}
                 </div>
                 <div>
@@ -172,33 +141,17 @@ class ActivityIndex extends Component {
                 </div>
               </div>
 
-              <div style={{ marginBottom: 10}} className={classes.link}>
-                <Person className={classes.icon} />
-                &nbsp;{item.username}
+              <div className={classes.lineWrapper}>
+                <div>
+                  <Person className={classes.icon} />
+                  &nbsp;{item.username}
+                </div>
+                <div>
+                  {item.likes} 人收藏
+                </div>
               </div>
-
               <div>{this.renderService(item.services)}</div>
             </CardContent>
-
-            <CardActions disableActionSpacing>
-              <IconButton
-                aria-label="Add to favorites"
-                onClick={event => {
-                  this.handleLikes(event, item.id);
-                }}
-                style={{marginLeft:4}}
-              >
-                <FavoriteIcon
-                  className={item.likes === 0 ? "" : classes.heartOn}
-                />
-                <span className={classes.numberOfLikes}>
-                  &nbsp;{item.likes}
-                </span>
-              </IconButton>
-              <IconButton aria-label="Share">
-                <ShareIcon />
-              </IconButton>
-            </CardActions>
           </Card>
         </Link>
       );
@@ -208,20 +161,8 @@ class ActivityIndex extends Component {
   render() {
     const { fullScreen } = this.props;
 
-    return (
-      <List>
-        <Dialog
-          fullScreen={fullScreen}
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="responsive-dialog-title"
-        >
-          <RegisterDialog onClick={this.handleClose} />
-        </Dialog>
-        {this.renderItems()}
-      </List>
-    );
+    return <List>{this.renderItems()}</List>;
   }
 }
 
-export default connect(null, actions)(withStyles(styles)(ActivityIndex));
+export default withStyles(styles)(ActivityIndex);

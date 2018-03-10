@@ -32,6 +32,7 @@ import Wish from "./Components/container/Wish";
 import MyAccount from "./Pages/MyAccount";
 import MyMessage from "./Pages/MyMessage";
 import PrivateBasicInfo from "./Pages/PrivateBasicInfo";
+import PrivateFavorites from "./Pages/PrivateFavorites";
 
 import AddActivity from "./Pages/AddActivity/AddActivity";
 import AddWish from "./Pages/AddWish/AddWish";
@@ -161,6 +162,7 @@ class App extends Component {
             <Route exact path="/wish" component={WishMain} />
             <Route exact path="/my" component={MyAccount} />
             <Route exact path="/myBasicInfo" component={RequireAuth(PrivateBasicInfo)} />
+            <Route exact path="/myFavorites" component={RequireAuth(PrivateFavorites)} />
 
             <Route exact path="/message" component={MyMessage} />
             <Route
@@ -176,12 +178,10 @@ class App extends Component {
             <Route exact path="/story/:userId" component={Story} />
             <Route exact path="/userActivities/:userId" component={UserActivities} />
             <Route exact path="/editActivity/:activityId" component={RequireAuth(EditPanel)} />
-
             <Route exact path="/friendComments" component={FriendComments} />
             <Route exact path="/activityWish" component={ActivityWishPanel} />
             <Route exact path="/activity/:activityId" component={Activity} />
             <Route exact path="/wish/:wishId" component={Wish} />
-
             <Route exact path="/user/:userId" component={PublicProfile} />
 
             {/*unit test used below, production will check env.production to disable*/}

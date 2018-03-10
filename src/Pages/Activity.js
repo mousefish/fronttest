@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
+import FavoriteIcon from "material-ui-icons/Favorite";
+import ShareIcon from "material-ui-icons/Share";
+import IconButton from "material-ui/IconButton";
+import Dialog from "material-ui/Dialog";
 import * as actions from "../Actions";
 import RatingForm from "./RatingForm";
 import RatingIndex from "./RatingIndex";
@@ -9,6 +13,7 @@ import RatingSummary from "./RatingSummary";
 import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "./PageHeader";
+import RegisterDialog from "./RegisterDialog";
 
 const styles = theme => ({
     editBar: {
@@ -27,10 +32,22 @@ const styles = theme => ({
         width: "100%",
         border: "6px solid #BDBDBD",
         margin: "15px 0 20px 0"
+    },
+
+    heartOn: {
+        color: "#F44336"
     }
 });
 
 class Activity extends Component {
+    state = {
+        open: false
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
     componentWillMount() {
         const activityId = this.props.match.params.activityId;
         this.props.fetchOneActivity(activityId);
@@ -63,9 +80,20 @@ class Activity extends Component {
         }
     }
 
+    handleLikes(itemId) {
+        // cannot "like" until you login/signup
+        if (!localStorage.getItem("jwtToken")) {
+            this.setState({
+                open: true
+            });
+        } else {
+            this.props.submitLikes(itemId);
+        }
+    }
+
     render() {
         const activityId = this.props.match.params.activityId;
-        const { classes, activity, message, ratings } = this.props;
+        const { classes, fullScreen, activity, message, ratings } = this.props;
         // better use an object to pass the warning message since initial value is obj.
         // also, if we use if(!activity) here, since React's default value is undefined,
         // so even for the values that DO exist, the warning message will still show for a second before the content shows!
@@ -76,15 +104,39 @@ class Activity extends Component {
             return (
                 <div>
                     <PageHeader history={this.props.history} title="活动" />
-                    <div style={{ textAlign: "center" }}>{activity.warning}</div>
+                    <div style={{ textAlign: "center" }}>
+                        {activity.warning}
+                    </div>
                 </div>
             );
         }
         return (
             <div className="wrapper">
+                <Dialog
+                    fullScreen={fullScreen}
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="responsive-dialog-title"
+                >
+                    <RegisterDialog onClick={this.handleClose} />
+                </Dialog>
                 <PageHeader history={this.props.history} title="活动" />
                 {this.renderEditChoice()}
                 <div className="flex-inner-wrapper">
+                    <div>
+                        <IconButton aria-label="Add to favorites">
+                            <FavoriteIcon
+                                aria-label="Add to favorites"
+                                onClick={() => {
+                                    this.handleLikes(activityId);
+                                }}
+                            />
+                        </IconButton>
+                        收藏
+                        <IconButton aria-label="Share">
+                            <ShareIcon />
+                        </IconButton>
+                    </div>
                     <RatingSummary activityId={activityId} />
                     <ul className="activity-info">
                         <li className="activity">
@@ -95,7 +147,7 @@ class Activity extends Component {
                             <div>活动地点</div>
                             <div>{activity.location}</div>
                         </li>
-                         <li className="activity">
+                        <li className="activity">
                             <div>活动预算</div>
                             <div>{activity.budget} 元</div>
                         </li>
@@ -109,7 +161,11 @@ class Activity extends Component {
                         </li>
                         <li style={{ marginBottom: 10 }}>
                             <h4 className="category-title">
-                                我在{activity.location ? activity.location.split(" ")[0]:""}的故事
+                                我在{activity.location ? (
+                                    activity.location.split(" ")[0]
+                                ) : (
+                                    ""
+                                )}的故事
                             </h4>
                             <div style={{ overflowY: "scroll" }}>
                                 {activity.story}

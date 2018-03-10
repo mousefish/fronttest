@@ -5,7 +5,7 @@ export const OK_TO_GO = 'ok_to_go';
 export const UPDATE_USER_BASIC = 'update_user_basic';
 export const FETCH_USER_ACTIVITIES = "FETCH_USER_ACTIVITIES"
 export const FETCH_ACTIVITY_FOR_EDITTING = "FETCH_ACTIVITY_FOR_EDITTING"
-export const UPDATE_USER_ACTIVITY = "UPDATE_USER_ACTIVITY"
+export const FETCH_USER_FAVORITES = "FETCH_USER_FAVORITES";
 
 export const FETCH_SEARCH_DATA = 'fetch_search_data';
 export const FETCH_HISTORY_DATA ='fetch_history_data';

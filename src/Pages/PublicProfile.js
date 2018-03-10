@@ -136,7 +136,6 @@ class PublicProfile extends Component {
                         </Link>
                         <span className={classes.subHeaderContent}>他的愿望</span>
                         <span className={classes.subHeaderContent}>他的活动</span>
-                        <span className={classes.subHeaderContent}>他的收藏</span>
                     </div>
                 </div>
                 <div className="wrapper">{this.props.children}</div>

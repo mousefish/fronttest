@@ -52,6 +52,8 @@ class MyAccount extends Component {
                     return this.props.history.push(`/story/${userId}`);
                 case "我的活动":
                     return this.props.history.push(`/userActivities/${userId}`)
+                case "我的收藏":
+                    return this.props.history.push(`/myFavorites`);
             }
         } else {
             this.setState({
