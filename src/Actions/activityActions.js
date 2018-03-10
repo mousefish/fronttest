@@ -15,7 +15,6 @@ import config from "../config/config";
 const ROOT_URL = config["ROOT_URL"];
 
 export const verifyYourFav = activityId => async dispatch => {
-    console.log("mo")
     const res = await axios.get(`${ROOT_URL}/api/verifyYourFav/${activityId}`, {
         headers: {
             authorization: localStorage.getItem("jwtToken")

@@ -5,6 +5,9 @@ import { withStyles } from "material-ui/styles";
 import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
 import IconButton from "material-ui/IconButton";
+import LocationOn from "material-ui-icons/LocationOn";
+import OpenInNew from "material-ui-icons/OpenInNew";
+import AttachMoney from "material-ui-icons/AttachMoney";
 import Dialog from "material-ui/Dialog";
 import * as actions from "../Actions";
 import RatingForm from "./RatingForm";
@@ -36,7 +39,53 @@ const styles = theme => ({
 
     heartOn: {
         color: "#F44336"
-    }
+    },
+    icon: {
+        width: 15,
+        height: 15,
+        verticalAlign: "-2px"
+    },
+
+    left: {
+        paddingRight: 20,
+        // border:"1px solid green",
+        fontSize: 12
+    },
+
+    detailPanel: {
+        // border: "1px solid green",
+        padding: 0,
+        listStyle: "none",
+        color:"#424242"
+    },
+
+    detailTitle: {
+        margin: 5,
+        color: "#1976D2"
+    },
+    detailContent: {
+        margin: 5,
+        paddingBottom: 5,
+        marginBottom: 10,
+        borderBottom: "1px solid #BDBDBD"
+    },
+
+    container: {
+        // border: "1px solid blue",
+        display: "flex",
+        flexFlow: "column",
+        justifyContent: "flexStart",
+        alignItems: "center",
+        paddingLeft: 5
+    },
+    commentArea: {
+        // border: "1px solid red",
+        padding:5
+    },
+    writeArea: {
+        // border: "1px solid red"
+    },
+
 });
 
 class Activity extends Component {
@@ -91,11 +140,11 @@ class Activity extends Component {
             });
         } else {
             // let func 1 finish, then run func 2 based on the result of func 1
-            return new Promise((resolve, reject)=>{
+            return new Promise((resolve, reject) => {
                 resolve(this.props.submitLikes(itemId));
-            }).then(()=>{
+            }).then(() => {
                 this.props.verifyYourFav(itemId);
-            })
+            });
         }
     }
 
@@ -137,9 +186,21 @@ class Activity extends Component {
                 </Dialog>
                 <PageHeader history={this.props.history} title="活动" />
                 {this.renderEditChoice()}
-                <div className="flex-inner-wrapper">
-                    <div>
-                        <IconButton aria-label="Add to favorites">
+
+                <div className={classes.container}>
+                    <h3 style={{ fontWeight: "bold" }}>{activity.theme}</h3>
+                    <div className="activity-line-wrapper">
+                        <div className={classes.left}>
+                            <LocationOn className={classes.icon} />
+                            {activity.location}
+                        </div>
+                    </div>
+
+                    <div className="activity-line-wrapper">
+                        <IconButton
+                            aria-label="Add to favorites"
+                            className={isYourFav ? classes.heartOn : ""}
+                        >
                             <FavoriteIcon
                                 aria-label="Add to favorites"
                                 onClick={() => {
@@ -147,71 +208,75 @@ class Activity extends Component {
                                 }}
                             />
                         </IconButton>
-                        {isYourFav ? "你已经收藏" : "收藏"}
+                        <span />
                         <IconButton aria-label="Share">
                             <ShareIcon />
                         </IconButton>
                     </div>
-                    <RatingSummary activityId={activityId} />
-                    <ul className="activity-info">
-                        <li className="activity">
-                            <div>活动主题</div>
-                            <div>{activity.theme}</div>
-                        </li>
-                        <li className="activity">
-                            <div>活动地点</div>
-                            <div>{activity.location}</div>
-                        </li>
-                        <li className="activity">
-                            <div>活动预算</div>
-                            <div>{activity.budget} 元</div>
-                        </li>
-                        <li className="activity">
-                            <div>活动开始时间</div>
-                            <div>{activity.departdate}</div>
-                        </li>
-                        <li className="activity" style={{ marginBottom: 10 }}>
-                            <div>活动结束时间</div>
-                            <div>{activity.finishdate}</div>
-                        </li>
-                        <li style={{ marginBottom: 10 }}>
-                            <h4 className="category-title">
-                                我在{activity.location ? (
-                                    activity.location.split(" ")[0]
-                                ) : (
-                                    ""
-                                )}的故事
-                            </h4>
-                            <div style={{ overflowY: "scroll" }}>
-                                {activity.story}
-                            </div>
-                        </li>
-                        <li
-                            style={{
-                                textAlign: "center",
-                                marginBottom: 10,
-                                fontSize: "1.2rem"
-                            }}
-                        >
+
+                    <div>
+                        <div style={{ overflowY: "scroll" }}>
+                            {activity.story}
+                        </div>
+                    </div>
+                </div>
+
+                <ul className={classes.detailPanel}>
+                    <li>
+                        <div className={classes.detailTitle}>活动发起人</div>
+                        <div className={classes.detailContent}>
+                            {" "}
                             <Link
+                                style={{color:"#424242"}}
                                 to={`/user/${activity.userId}`}
                                 className="unlink"
                             >
-                                来看看{activity.username}的档案
+                                {activity.username}&nbsp;
+                                <OpenInNew className={classes.icon}/>
                             </Link>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
+                    </li>
 
-                <RatingForm activityId={activityId} />
-                <RatingIndex activityId={activityId} />
+                    <li>
+                        <div className={classes.detailTitle}>活动日期</div>
+                        <div className={classes.detailContent}>
+                            {activity.departdate} — {activity.finishdate}
+                        </div>
+                    </li>
+
+                     <li>
+                        <div className={classes.detailTitle}>活动价格</div>
+                        <div className={classes.detailContent}>
+                            {activity.budget}
+                        </div>
+                    </li>
+
+                    <li>
+                        <div className={classes.detailTitle}>提供的服务</div>
+                        <div className={classes.detailContent}>
+                            {activity.services}
+                        </div>
+                    </li>
+                    <li>
+                        <div className={classes.detailTitle}>口碑</div>
+                        <div className={classes.detailContent}>
+                            <RatingSummary activityId={activityId} />
+                        </div>
+                    </li>
+                </ul>
+                <div className={classes.commentArea}>
+                    <div className={classes.writeArea}>
+                        <RatingForm activityId={activityId} />
+                    </div>
+
+                </div>
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
-    console.log("isYourFav", state.ActivityReducer.isYourFav);
+    // console.log("isYourFav", state.ActivityReducer.isYourFav);
     return {
         activity: state.ActivityReducer.activity,
         isYourFav: state.ActivityReducer.isYourFav

@@ -50,13 +50,13 @@ header .title .name {
   color: #337ab7; }
 
 .wrapper {
-  /*  border: 1px solid red;*/
+  /* border: 1px solid red;*/
   width: 95vw;
   max-width: 600px;
   height: 100%;
   margin: auto;
   margin-top: 10px;
-  margin-bottom: 45px;
+  margin-bottom: 65px;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -82,12 +82,6 @@ header .title .name {
 
 .fixed-height {
   height: 455px; }
-
-.flex-inner-wrapper {
-  /*  border: 1px solid blue;*/
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start; }
 
 .customized-align {
   align-items: center;
@@ -131,7 +125,7 @@ header .title .name {
 
 .category-title {
   font-weight: bold;
-  /*text-align: center; */ }
+  /*  text-align: center;*/ }
 
 .input-error {
   color: red;
@@ -146,18 +140,11 @@ header .title .name {
   font-size: 1.2rem;
   text-align: center; }
 
-.activity-info {
-  padding: 0;
-  list-style: none; }
-
-.number-emphasized {
-  font-size: 2rem;
-  font-weight: bolder; }
-
-.activity {
+.activity-line-wrapper {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between; }
+  justify-content: center;
+  /*border: 1px solid blue; */ }
 
 .comment {
   border-bottom: 1px solid lightgrey;

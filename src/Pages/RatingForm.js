@@ -13,9 +13,10 @@ import RegisterDialog from "./RegisterDialog";
 
 const styles = theme => ({
     textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: "95%"
+        // marginLeft: theme.spacing.unit,
+        // marginRight: theme.spacing.unit,
+        width: "100%",
+
     },
     container: {
         display: "flex",
@@ -23,13 +24,16 @@ const styles = theme => ({
     },
 
     button: {
-        margin: theme.spacing.unit,
+        // margin: theme.spacing.unit,
         width: "45%",
         padding: 10,
         fontSize: 14,
-        backgroundColor:"#1976D2"
+        backgroundColor: "#1976D2",
+        margin:"10px 0"
     },
-
+    starColor: {
+        color: "#BDBDBD"
+    }
 });
 class RatingForm extends Component {
     state = {
@@ -45,10 +49,15 @@ class RatingForm extends Component {
     };
 
     componentWillMount() {
+        const { classes } = this.props;
         const starContainer = [];
         for (let i = 0; i < 5; i++) {
             starContainer.push(
-                <StarBorder key={i} onClick={() => this.updateStars(i)} />
+                <StarBorder
+                    className={classes.starColor}
+                    key={i}
+                    onClick={() => this.updateStars(i)}
+                />
             );
         }
 
@@ -98,16 +107,18 @@ class RatingForm extends Component {
         const { activityId } = this.props;
         const { message } = this.props;
         return (
-            <div className="flex-inner-wrapper">
+            <div>
                 <Dialog
                     fullScreen={fullScreen}
                     open={this.state.open}
                     onClose={this.handleClose}
                     aria-labelledby="responsive-dialog-title"
                 >
-                   <div><RegisterDialog onClick={this.handleClose}/></div>
+                    <div>
+                        <RegisterDialog onClick={this.handleClose} />
+                    </div>
                 </Dialog>
-                <h3 className="category-title">在此发表评论</h3>
+
                 <form>
                     <div>{this.state.stars}</div>
                     <TextField
@@ -132,7 +143,7 @@ class RatingForm extends Component {
                         提交评论
                     </Button>
                     <div className="input-error">
-                        { this.state.message || message}
+                        {this.state.message || message}
                     </div>
                 </form>
             </div>

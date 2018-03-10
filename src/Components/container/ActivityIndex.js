@@ -4,7 +4,6 @@ import _ from "lodash";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
 import LocationOn from "material-ui-icons/LocationOn";
-import MonetizationOn from "material-ui-icons/MonetizationOn";
 
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";

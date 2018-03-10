@@ -23,7 +23,7 @@ import TripMain from "./Pages/TripMain";
 import WishMain from "./Pages/WishMain";
 import Story from "./Pages/Story";
 import UserActivities from "./Pages/UserActivities";
-import EditPanel from "./Pages/EditPanel";
+import EditActivityPanel from "./Pages/EditActivityPanel";
 
 import FriendComments from "./Pages/FriendComments";
 
@@ -177,7 +177,7 @@ class App extends Component {
 
             <Route exact path="/story/:userId" component={Story} />
             <Route exact path="/userActivities/:userId" component={UserActivities} />
-            <Route exact path="/editActivity/:activityId" component={RequireAuth(EditPanel)} />
+            <Route exact path="/editActivity/:activityId" component={RequireAuth(EditActivityPanel)} />
             <Route exact path="/friendComments" component={FriendComments} />
             <Route exact path="/activityWish" component={ActivityWishPanel} />
             <Route exact path="/activity/:activityId" component={Activity} />
