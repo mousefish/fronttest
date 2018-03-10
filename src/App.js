@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import PageNotFound from "./Pages/404Page";
 import SignupWizard from "./Components/container/SignupWizard";
 import { ToastContainer } from "react-toastify";
-
+import Button from "material-ui/Button";
 import LoginForm from "./Components/container/LoginForm";
 import SearchPanel from "./Components/container/SearchPanel";
 import SearchResult from "./Components/container/SearchResult";
@@ -15,6 +15,7 @@ import BottomNavigation, {
 import Home from "material-ui-icons/Home";
 
 import Person from "material-ui-icons/Person";
+
 
 // import WebFontLoader from "webfontloader";
 
@@ -50,6 +51,7 @@ import Favorite from "material-ui-icons/FavoriteBorder";
 import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+import UserFavorite from "material-ui-icons/Favorite";
 
 // import { connect } from "react-redux";
 // import * as actions from "./Actions";
@@ -61,13 +63,27 @@ const styleSheet = {
     inlineHeight: 1,
     position: "fixed",
     zIndex: 1000
+    // border:"1px solid red",
   },
   icon: {
     display: "block"
   },
   broot: {
     minWidth: 60
-  }
+  },
+
+  bottomBtn: {
+    position: "fixed",
+    bottom: 0,
+    right: 0,
+    height: 58,
+    // border: "1px solid red",
+    borderRadius: 0,
+    color: "#fff",
+    width: "50%",
+    marginRight: 0,
+    fontSize: "1.2rem"
+  },
 };
 // WebFontLoader.load({
 //   google: {
@@ -85,8 +101,8 @@ class App extends Component {
     super();
     this.state = {
       main_value: 0,
-      my_value: 0,
-      popup: false
+      popup: false,
+      sub_value: 0
     };
   }
 
@@ -95,6 +111,7 @@ class App extends Component {
   // }
 
   handleMainChange(event, main_value) {
+    console.log("main_value", main_value);
     this.setState({ main_value });
     if (main_value === 0) {
       this.props.history.push("/");
@@ -107,6 +124,17 @@ class App extends Component {
     }
   }
 
+  handleSubChange(event, sub_value) {
+    // console.log("sub_value", sub_value);
+    this.setState({ sub_value });
+    if (sub_value === 0) {
+      this.props.history.push("/myFavorites");
+    } else if (sub_value === 1) {
+    } else if (sub_value === 2) {
+    } else if (sub_value === 3) {
+    }
+  }
+
   testdir() {
     console.log("change dir");
     alert("change dir");
@@ -114,11 +142,45 @@ class App extends Component {
   }
 
   renderBottomNav() {
-    const main_value = this.state.main_value;
-    const classes = this.props.classes;
-    const { pathname } =this.props.history.location;
-    if(pathname.includes("/editActivity/")){
-      return null
+    const { main_value, sub_value } = this.state;
+    const { classes } = this.props;
+    const { pathname } = this.props.history.location;
+    if (pathname.includes("/editActivity/")) {
+      return null;
+    }
+    if (pathname.includes("/activity/")) {
+      return (
+        <span>
+        <BottomNavigation
+          value={sub_value}
+          onChange={this.handleSubChange.bind(this)}
+          showLabels
+        >
+
+           <BottomNavigationButton
+            classes={{ icon: classes.icon, root: classes.broot}}
+            label="我的收藏"
+            icon={<UserFavorite />}
+            style={{position:"fixed", left:0}}
+          />
+
+          <BottomNavigationButton
+            classes={{ icon: classes.icon, root: classes.broot}}
+            style={{position:"fixed",left:100}}
+            label="联系携U行"
+            icon={<Person />}
+          />
+
+        </BottomNavigation>
+         <Button
+            style={{ backgroundColor: "#1976D2" }}
+            raised
+            className={classes.bottomBtn}
+          >
+            我有兴趣
+          </Button>
+          </span>
+      );
     }
 
     return (
@@ -149,7 +211,6 @@ class App extends Component {
           icon={<Person />}
         />
       </BottomNavigation>
-
     );
   }
 
@@ -168,8 +229,16 @@ class App extends Component {
             <Route exact path="/home" component={TripMain} />
             <Route exact path="/wish" component={WishMain} />
             <Route exact path="/my" component={MyAccount} />
-            <Route exact path="/myBasicInfo" component={RequireAuth(PrivateBasicInfo)} />
-            <Route exact path="/myFavorites" component={RequireAuth(PrivateFavorites)} />
+            <Route
+              exact
+              path="/myBasicInfo"
+              component={RequireAuth(PrivateBasicInfo)}
+            />
+            <Route
+              exact
+              path="/myFavorites"
+              component={RequireAuth(PrivateFavorites)}
+            />
 
             <Route exact path="/message" component={MyMessage} />
             <Route
@@ -183,15 +252,26 @@ class App extends Component {
             <Route exact path="/searchResult" component={SearchResult} />
 
             <Route exact path="/story/:userId" component={Story} />
-            <Route exact path="/userActivities/:userId" component={UserActivities} />
-            <Route exact path="/editActivity/:activityId" component={RequireAuth(EditActivityPanel)} />
+            <Route
+              exact
+              path="/userActivities/:userId"
+              component={UserActivities}
+            />
+            <Route
+              exact
+              path="/editActivity/:activityId"
+              component={RequireAuth(EditActivityPanel)}
+            />
             <Route exact path="/friendComments" component={FriendComments} />
             <Route exact path="/activityWish" component={ActivityWishPanel} />
             <Route exact path="/activity/:activityId" component={Activity} />
             <Route exact path="/wish/:wishId" component={Wish} />
             <Route exact path="/user/:userId" component={PublicProfile} />
-            <Route exact path="/ratingIndex/:activityId" component={RatingIndex} />
-
+            <Route
+              exact
+              path="/ratingIndex/:activityId"
+              component={RatingIndex}
+            />
 
             {/*unit test used below, production will check env.production to disable*/}
 
