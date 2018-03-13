@@ -12,7 +12,7 @@ import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
-    width: "90%",
+    width: "95%",
     margin: "auto"
   },
 
@@ -28,7 +28,7 @@ const styles = theme => ({
   legal: {
     margin:"auto",
     marginTop: 45,
-    width:"90%",
+    width:"95%",
     lineHeight: 1.5,
     fontSize:12
     // border: "1px solid blue"

@@ -24,7 +24,11 @@ export const submitWishData = (data, history) => async dispatch => {
 };
 
 export const fetchWishData=()=> async dispatch=>{
-    const res = await axios.get(`${ROOT_URL}/api/fetchWish`);
+    const res = await axios.get(`${ROOT_URL}/api/fetchWish`,  {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
     dispatch({
         type:FETCH_WISH_DATA,
         payload:res.data
@@ -33,7 +37,11 @@ export const fetchWishData=()=> async dispatch=>{
 
 export const fetchOneWish =(wishId)=>async dispatch=>{
 
-        const res = await axios.get(`${ROOT_URL}/api/wish/${wishId}`);
+        const res = await axios.get(`${ROOT_URL}/api/wish/${wishId}`,  {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
         dispatch({
             type: FETCH_ONE_WISH,
             payload: res.data

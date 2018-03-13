@@ -23,7 +23,7 @@ class ActivityWishPanel extends Component {
             <div>
                 <img src={bg} alt="chengdu" className="image-wrapper" />
                 <div className="wrapper" style={{marginTop:40}}>
-                    <div className="flex-inner-wrapper">
+
                         <Link to="/addActivity" className="unlink centralize-button">
                             <Button
                                 color="primary"
@@ -45,7 +45,7 @@ class ActivityWishPanel extends Component {
                             </Button>
                         </Link>
                     </div>
-                </div>
+
             </div>
         );
     }

@@ -170,7 +170,7 @@ class BasicInfoItem extends Component {
                             value: profile.language
                         })}
                 >
-                    <span>语言能力</span>
+                    <span>掌握的语言种类</span>
                     <div className={classes.flexRight}>
                         <span>{profile.language}</span>
                         <KeyboardArrowRight style={{ color: "lightgrey" }} />

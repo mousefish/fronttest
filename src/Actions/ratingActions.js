@@ -25,7 +25,11 @@ export const sendRating = ratingData => async dispatch => {
 };
 
 export const fetchRatings = (activityId) => async dispatch => {
-    const res = await axios.get(`${ROOT_URL}/api/fetchRatings/${activityId}`);
+    const res = await axios.get(`${ROOT_URL}/api/fetchRatings/${activityId}`,  {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
     dispatch({
         type: FETCH_RATING_DATA,
         payload:res.data
@@ -34,7 +38,11 @@ export const fetchRatings = (activityId) => async dispatch => {
 
 
 export const fetchRatingSummary=(activityId)=> async dispatch=>{
-    const res = await axios.get(`${ROOT_URL}/api/fetchRatingSummary/${activityId}`)
+    const res = await axios.get(`${ROOT_URL}/api/fetchRatingSummary/${activityId}`,  {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        })
     dispatch({
        type:FETCH_OVERALL_RATING,
        payload:res.data

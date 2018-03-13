@@ -27,7 +27,11 @@ export const verifyYourFav = activityId => async dispatch => {
 };
 
 export const fetchUserActivities = userId => async dispatch => {
-    const res = await axios.get(`${ROOT_URL}/api/activities/${userId}`);
+    const res = await axios.get(`${ROOT_URL}/api/activities/${userId}`,  {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
     //     [ { id: 7,
     // theme: '大连城市风光游',
     // location: '大连市 辽宁省',
@@ -73,14 +77,15 @@ export const fetchOneUserActivityForEditting = activityId => async dispatch => {
             payload: res.data
         });
     } catch (e) {
-        console.log("e", e);
+        // console.log("e", e);
         dispatch(activityErr(e.message));
     }
 };
 
 export const updateUserActivity = (
     activityId,
-    edittedValues
+    edittedValues,
+    history
 ) => async dispatch => {
     const res = await axios.post(
         `${ROOT_URL}/api/updateUserActivity/${activityId}`,
@@ -97,6 +102,8 @@ export const updateUserActivity = (
         type: ADD_ACTIVITY_DATA,
         payload: res.data
     });
+
+    history.push("/activity");
 };
 
 export const deleteUserActivity = (
@@ -123,7 +130,11 @@ export const deleteUserActivity = (
 
 export const fetchActivityData = () => async dispatch => {
     try {
-        const res = await axios.get(`${ROOT_URL}/api/fetchActivity`);
+        const res = await axios.get(`${ROOT_URL}/api/fetchActivity`,  {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
         dispatch({
             type: FETCH_ACTIVITY_DATA,
             payload: res.data
@@ -134,7 +145,11 @@ export const fetchActivityData = () => async dispatch => {
 };
 export const fetchOneActivity = activityId => async dispatch => {
     try {
-        const res = await axios.get(`${ROOT_URL}/api/activity/${activityId}`);
+        const res = await axios.get(`${ROOT_URL}/api/activity/${activityId}`, {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
         dispatch({
             type: FETCH_ONE_ACTIVITY,
             payload: res.data

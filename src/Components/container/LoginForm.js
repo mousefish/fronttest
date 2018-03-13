@@ -31,11 +31,15 @@ const styles = theme => ({
 
   legal: {
     margin:"auto",
-    marginTop: 45,
-    width:"90%",
+    marginTop: 25,
+    width:"95%",
     lineHeight: 1.5,
     fontSize:12
     // border: "1px solid blue"
+  },
+  createNew:{
+    textAlign:"center",
+    fontSize:"1.2rem"
   }
 });
 
@@ -49,21 +53,24 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { classes, handleSubmit } = this.props;
+    const { classes, handleSubmit, forOpen } = this.props;
+
+     // return(
+     //   <PageHeader history={this.props.history} title="登录账户" />
+     //    <LinearProgress
+     //      className={classes.progress}
+     //      mode="determinate"
+     //      color="secondary"
+     //      value={this.state.completed}
+     //    />
+
+     //  )
 
     return (
       <form
         className="wrapper"
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
-        <PageHeader history={this.props.history} title="登录账户" />
-        <LinearProgress
-          className={classes.progress}
-          mode="determinate"
-          color="secondary"
-          value={this.state.completed}
-        />
-
         <div className="form-group">
           <Field
             fullWidth
@@ -105,15 +112,16 @@ class LoginForm extends Component {
             raised
             className={classes.button}
             id="btn"
-            style={{marginTop:5}}
+            style={{margin:"5px 0"}}
           >
             点击登陆
           </Button>
-        </div>
-        <p className="input-error" style={{ textAlign: "center" }}>
+           <p className="input-error centralize-button" style={{ textAlign: "center" }}>
           {this.props.errorMessage}
         </p>
-        <div className="centralize-button">
+        </div>
+
+        <div className={classes.createNew}>
           还没有账户？ 点击<Link to="/signup" className="unlink">
             创建新账户
           </Link>

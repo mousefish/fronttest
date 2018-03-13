@@ -94,25 +94,23 @@ const styles = theme => ({
 
     bg: {
         marginBottom: 10,
-        position:"relative",
-        textAlign:"center"
-
+        position: "relative",
+        textAlign: "center"
     },
     bgImg: {
         maxWidth: "100%",
-        height: 250,
-
+        height: 250
     },
 
-    bgImgLayer:{
-        position:"absolute",
-        top:0,
-        bottom:0,
-        left:0,
-        right:0,
+    bgImgLayer: {
+        position: "absolute",
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
         // border:"1px solid red",
-        backgroundColor:"#1976D2",
-        opacity:0.2
+        backgroundColor: "#1976D2",
+        opacity: 0.2
     }
 });
 
@@ -128,34 +126,29 @@ class Activity extends Component {
     componentWillMount() {
         const { activityId } = this.props.match.params;
         this.props.fetchOneActivity(activityId);
-        if (localStorage["user"]) {
+        if (localStorage["jwtToken"]) {
             this.props.verifyYourFav(activityId);
         }
     }
 
     renderEditChoice() {
-        const { userId, id } = this.props.activity;
-        const { classes } = this.props;
-        if (!localStorage["user"]) {
-            return null;
-        }
-        let you = JSON.parse(localStorage["user"]);
-        if (you) {
-            if (you.id === userId) {
-                return (
-                    <div className={classes.editBar}>
-                        <div style={{ lineHeight: 1.8, marginTop:1 }}>
-                            <div>{you.mail}</div>
-                            <div>{you.username}</div>
-                        </div>
-                        <div>
-                            <Link className="unlink" to={`/editActivity/${id}`}>
-                                <div className={classes.editBtn}>修改我的活动</div>
-                            </Link>
-                        </div>
+        const { id, isYourActivity } = this.props.activity;
+        const { classes, activity } = this.props;
+
+        if (isYourActivity) {
+            return (
+                <div className={classes.editBar}>
+                    <div style={{ lineHeight: 1.8, marginTop: 1 }}>
+                        <div>{activity.mail}</div>
+                        <div>{activity.username}</div>
                     </div>
-                );
-            }
+                    <div>
+                        <Link className="unlink" to={`/editActivity/${id}`}>
+                            <div className={classes.editBtn}>修改我的活动</div>
+                        </Link>
+                    </div>
+                </div>
+            );
         }
     }
 
@@ -171,6 +164,14 @@ class Activity extends Component {
                 resolve(this.props.submitLikes(itemId));
             }).then(() => {
                 this.props.verifyYourFav(itemId);
+            });
+        }
+    }
+
+    renderServices(services) {
+        if (services) {
+            return services.map(item => {
+                return <span key={item}>{item}&nbsp; </span>;
             });
         }
     }
@@ -285,7 +286,7 @@ class Activity extends Component {
                         <li>
                             <div className={classes.detailTitle}>提供的服务</div>
                             <div className={classes.detailContent}>
-                                {activity.services}
+                                {this.renderServices(activity.services)}
                             </div>
                         </li>
                         <li>
@@ -314,9 +315,11 @@ class Activity extends Component {
 
 const mapStateToProps = state => {
     // console.log("isYourFav", state.ActivityReducer.isYourFav);
+    // console.log("isYourActivity", state.ActivityReducer.activity.isYourActivity)
     return {
         activity: state.ActivityReducer.activity,
-        isYourFav: state.ActivityReducer.isYourFav
+        isYourFav: state.ActivityReducer.isYourFav,
+        isYourActivity: state.ActivityReducer.activity.isYourActivity
     };
 };
 

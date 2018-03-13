@@ -134,8 +134,16 @@ class PublicProfile extends Component {
                                 他的故事
                             </span>
                         </Link>
+                        <Link
+                            to={`/userActivities/${user.id}`}
+                            className="unlink"
+                            style={{ color: "#fff" }}
+                        >
+                            <span className={classes.subHeaderContent}>
+                                他的活动
+                            </span>
+                        </Link>
                         <span className={classes.subHeaderContent}>他的愿望</span>
-                        <span className={classes.subHeaderContent}>他的活动</span>
                     </div>
                 </div>
                 <div className="wrapper">{this.props.children}</div>
@@ -145,7 +153,7 @@ class PublicProfile extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log("here", state.UserReducer.basicInfo);
+    // console.log("here", state.UserReducer.basicInfo);
     return {
         user: state.UserReducer.basicInfo
     };

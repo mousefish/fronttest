@@ -33,7 +33,7 @@ const MyAccountLoggedinHeader = props => {
     return (
         <div className={classes.myHeader}>
             <Avatar alt="profile" src={pic} className={classes.avatar} />
-            <div className={classes.myHeaderRight}>{props.user.mail}</div>
+            <div className={classes.myHeaderRight}>欢迎你！{props.userName}</div>
         </div>
     );
 };

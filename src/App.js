@@ -30,6 +30,9 @@ import FriendComments from "./Pages/FriendComments";
 
 import Wish from "./Components/container/Wish";
 
+import OpenPage from "./Pages/OpenPage";
+import Recommendation from "./Pages/Recommendation";
+
 import MyAccount from "./Pages/MyAccount";
 import MyMessage from "./Pages/MyMessage";
 import PrivateBasicInfo from "./Pages/PrivateBasicInfo";
@@ -47,11 +50,15 @@ import ActivityWishPanel from "./Pages/ActivityWishPanel";
 
 import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
+import CardGiftcard from "material-ui-icons/CardGiftcard";
 
 import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import UserFavorite from "material-ui-icons/Favorite";
+import Contacts from "material-ui-icons/Contacts";
+
+
 
 // import { connect } from "react-redux";
 // import * as actions from "./Actions";
@@ -102,7 +109,7 @@ class App extends Component {
     this.state = {
       main_value: 0,
       popup: false,
-      sub_value: 0
+      sub_value: null
     };
   }
 
@@ -111,12 +118,12 @@ class App extends Component {
   // }
 
   handleMainChange(event, main_value) {
-    console.log("main_value", main_value);
+    // console.log("main_value", main_value);
     this.setState({ main_value });
     if (main_value === 0) {
-      this.props.history.push("/");
+      this.props.history.push("/recommendation");
     } else if (main_value === 1) {
-      this.props.history.push("/wish");
+      this.props.history.push("/activity");
     } else if (main_value === 2) {
       this.props.history.push("/message");
     } else if (main_value === 3) {
@@ -166,9 +173,9 @@ class App extends Component {
 
           <BottomNavigationButton
             classes={{ icon: classes.icon, root: classes.broot}}
-            style={{position:"fixed",left:100}}
+            style={{position:"fixed",left:80}}
             label="联系携U行"
-            icon={<Person />}
+            icon={<Contacts />}
           />
 
         </BottomNavigation>
@@ -192,14 +199,17 @@ class App extends Component {
         <BottomNavigationButton
           style={{ marginLeft: 5 }}
           classes={{ icon: classes.icon, root: classes.broot }}
+          label="推荐"
+          icon={<CardGiftcard />}
+        />
+
+        <BottomNavigationButton
+          style={{ marginLeft: 5 }}
+          classes={{ icon: classes.icon, root: classes.broot }}
           label="找活动"
           icon={<LocationSearch />}
         />
-        <BottomNavigationButton
-          classes={{ icon: classes.icon, root: classes.broot }}
-          label="心愿单"
-          icon={<Favorite />}
-        />
+
         <BottomNavigationButton
           classes={{ icon: classes.icon, root: classes.broot }}
           label="消息"
@@ -224,11 +234,14 @@ class App extends Component {
       <div>
         <div>
           <Switch>
-            <Route exact path="/" component={TripMain} />
+            <Route exact path="/" component={RequireAuth(Recommendation)} />
+            <Route exact path="/openPage" component={OpenPage} />
+            <Route exact path="/recommendation" component={RequireAuth(Recommendation)} />
+            <Route exact path="/activity" component={RequireAuth(TripMain)} />
             <Route exact path="/trip" component={Home} />
-            <Route exact path="/home" component={TripMain} />
-            <Route exact path="/wish" component={WishMain} />
-            <Route exact path="/my" component={MyAccount} />
+
+            <Route exact path="/wish" component={RequireAuth(WishMain)} />
+            <Route exact path="/my" component={RequireAuth(MyAccount)} />
             <Route
               exact
               path="/myBasicInfo"
@@ -248,14 +261,14 @@ class App extends Component {
             />
             <Route exact path="/addWish" component={RequireAuth(AddWish)} />
 
-            <Route exact path="/searchPanel" component={SearchPanel} />
-            <Route exact path="/searchResult" component={SearchResult} />
+            <Route exact path="/searchPanel" component={RequireAuth(SearchPanel)} />
+            <Route exact path="/searchResult" component={RequireAuth(SearchResult)} />
 
-            <Route exact path="/story/:userId" component={Story} />
+            <Route exact path="/story/:userId" component={RequireAuth(Story)} />
             <Route
               exact
               path="/userActivities/:userId"
-              component={UserActivities}
+              component={RequireAuth(UserActivities)}
             />
             <Route
               exact
@@ -263,14 +276,14 @@ class App extends Component {
               component={RequireAuth(EditActivityPanel)}
             />
             <Route exact path="/friendComments" component={FriendComments} />
-            <Route exact path="/activityWish" component={ActivityWishPanel} />
-            <Route exact path="/activity/:activityId" component={Activity} />
-            <Route exact path="/wish/:wishId" component={Wish} />
-            <Route exact path="/user/:userId" component={PublicProfile} />
+            <Route exact path="/activityWish" component={RequireAuth(ActivityWishPanel)} />
+            <Route exact path="/activity/:activityId" component={RequireAuth(Activity)} />
+            <Route exact path="/wish/:wishId" component={RequireAuth(Wish)} />
+            <Route exact path="/user/:userId" component={RequireAuth(PublicProfile)} />
             <Route
               exact
               path="/ratingIndex/:activityId"
-              component={RatingIndex}
+              component={RequireAuth(RatingIndex)}
             />
 
             {/*unit test used below, production will check env.production to disable*/}

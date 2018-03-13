@@ -23,7 +23,11 @@ const ROOT_URL = config["ROOT_URL"];
 //  createdAt: 2018-01-02T06:43:37.753Z,
 //  updatedAt: 2018-01-02T06:43:37.753Z }
 export const fetchUser = userId => async dispatch => {
-    const res = await axios.get(`${ROOT_URL}/api/user/${userId}`);
+    const res = await axios.get(`${ROOT_URL}/api/user/${userId}`, {
+        headers: {
+            authorization: localStorage.getItem("jwtToken")
+        }
+    });
 
     dispatch({
         type: FETCH_PROFILE_DATA,
@@ -31,31 +35,28 @@ export const fetchUser = userId => async dispatch => {
     });
 };
 
-
 export const updateUserBasicInfo = basicInfo => async dispatch => {
     // console.log("Action", basicInfo);
     try {
-        const res = await axios.post(`${ROOT_URL}/api/updateBasicInfo`, basicInfo, {
-            headers: {
-                authorization: localStorage.getItem("jwtToken")
+        const res = await axios.post(
+            `${ROOT_URL}/api/updateBasicInfo`,
+            basicInfo,
+            {
+                headers: {
+                    authorization: localStorage.getItem("jwtToken")
+                }
             }
-        });
-        // console.log("res.data",res.data)
+        );
+
+        // ["age", 33]
+        // update localStorage to greet user
+        if(res.data[0] === "username"){
+            localStorage["userName"] = res.data[1];
+        }
         dispatch({
             type: UPDATE_USER_BASIC,
             payload: res.data
         });
-
-        // for showing latest MyAccount
-
-        if (typeof res.data !== "string") {
-            let newInfo = JSON.parse(localStorage.getItem("user"));
-            let key = res.data[0];
-            let value = res.data[1];
-            newInfo[key] = value;
-            localStorage.setItem("user", JSON.stringify(newInfo));
-            // console.log("local!!",localStorage.user);
-        }
     } catch (err) {
         // err from backend database
         dispatch(inputError("非法输入"));
@@ -63,8 +64,8 @@ export const updateUserBasicInfo = basicInfo => async dispatch => {
 };
 
 export const inputError = err => {
-  return {
-    type: INPUT_ERROR,
-    payload: err
-  };
+    return {
+        type: INPUT_ERROR,
+        payload: err
+    };
 };

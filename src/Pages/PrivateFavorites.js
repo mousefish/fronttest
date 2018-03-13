@@ -6,8 +6,8 @@ import PageHeader from "./PageHeader";
 
 class PrivateFavorites extends Component {
     componentWillMount() {
-        let you = localStorage["user"];
-        if (you) {
+        let token = localStorage["jwtToken"];
+        if (token) {
             this.props.fetchUserFavorites();
         }
     }
@@ -32,10 +32,13 @@ class PrivateFavorites extends Component {
     render() {
         const { favorites } = this.props;
         return (
+            <div>
+             <PageHeader history={this.props.history} title="我的活动收藏" />
             <ul>
-                <PageHeader history={this.props.history} title="我的活动收藏" />
+
                 {this.renderFavorites(favorites)}
             </ul>
+            </div>
         );
     }
 }

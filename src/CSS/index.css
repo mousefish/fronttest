@@ -29,11 +29,12 @@ header .title .name {
   padding: 15px;
   font-size: 18px;
   background-color: #1976D2;
-  width: 90%;
+  width: 95%;
   margin: 20px auto; }
 
 .centralize-button {
-  text-align: center; }
+  text-align: center;
+  /*  border:1px solid green;*/ }
 
 .card {
   width: 100%;
@@ -63,9 +64,9 @@ header .title .name {
   align-items: stretch; }
 
 .form-group {
-  /*  border: 1px solid green;*/
+  /* border: 1px solid green;*/
   margin: 0 auto 20px auto;
-  width: 90%;
+  width: 95%;
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
@@ -101,8 +102,9 @@ header .title .name {
 /****************************/
 .wizard-header {
   width: 100%;
-  padding: 4px 0;
-  margin-bottom: 15px; }
+  padding: 10px 0 4px 0;
+  margin-bottom: 15px;
+  /*  border: 1px solid blue; */ }
 
 .wizard-header-bottom {
   border-bottom: 2px solid #1976D2; }
@@ -134,7 +136,7 @@ header .title .name {
   /* border:1px solid blue;*/ }
 
 .input-success {
-  margin-top: 6px;
+  /*  margin-top: 6px;*/
   width: 95%;
   color: blue;
   font-size: 1.2rem;

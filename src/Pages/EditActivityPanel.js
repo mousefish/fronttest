@@ -37,6 +37,7 @@ const styles = theme => ({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        border:"1px solid green"
     },
 
     textField: {
@@ -62,7 +63,8 @@ class EditPanel extends Component {
     //  need userId to push back to this user's activity list
     deleteActivity(userId) {
         const { activityId } = this.props.match.params;
-        this.props.deleteUserActivity(28, this.props.history, userId);
+        const { history } = this.props;
+        this.props.deleteUserActivity(activityId, history, userId);
     }
 
     submitForm(values) {
@@ -98,25 +100,26 @@ class EditPanel extends Component {
         }
 
         const { activityId } = this.props.match.params;
-        this.props.updateUserActivity(activityId, edittedValues);
+        const history = this.props.history;
+        this.props.updateUserActivity(activityId, edittedValues, history);
     }
 
     renderEditPanel(classes) {
         if (this.props.error) {
             return <div>{this.props.error}</div>;
         }
-        if (!localStorage["user"]) {
+        if (!localStorage["jwtToken"]) {
             return null;
         }
-        let you = JSON.parse(localStorage["user"]);
+
         const { edit, msg } = this.props;
         // receive { warning:"xxx"} from backend. edit initial value is {}, so still use obj to pass warning msg here
-        if (edit.hasOwnProperty("warning") || edit.userId !== you.id) {
+        if (edit.hasOwnProperty("warning")) {
             return <div style={{ textAlign: "center" }}>{edit.warning}</div>;
         }
 
         return (
-            <div>
+            <div style={{marginBottom:60}}>
                 <div className="form-group" key="basic">
                     <h4 className="category-title">你的基本活动信息</h4>
                     <Field
@@ -195,7 +198,6 @@ class EditPanel extends Component {
 
     render() {
         const { classes, handleSubmit, fullScreen, edit } = this.props;
-
         return (
             <div>
                 <Dialog
