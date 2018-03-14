@@ -39,7 +39,7 @@ const styles = theme => ({
   },
   createNew:{
     textAlign:"center",
-    fontSize:"1.2rem"
+    fontSize:"1.1rem"
   }
 });
 
@@ -54,7 +54,6 @@ class LoginForm extends Component {
 
   render() {
     const { classes, handleSubmit, forOpen } = this.props;
-
      // return(
      //   <PageHeader history={this.props.history} title="登录账户" />
      //    <LinearProgress
@@ -65,7 +64,6 @@ class LoginForm extends Component {
      //    />
 
      //  )
-
     return (
       <form
         className="wrapper"
@@ -126,7 +124,7 @@ class LoginForm extends Component {
             创建新账户
           </Link>
         </div>
-      </form>
+     </form>
     );
   }
 }

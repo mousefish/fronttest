@@ -9,13 +9,14 @@ const styles = {
         justifyContent: "space-between",
         alignItems: "center",
         padding: 10,
-        borderBottom: "1px solid lightgrey",
+        borderBottom: "1px solid #BDBDBD",
         backgroundColor: "#fff",
-        color: "grey"
+        color: "#757575"
     },
     list: {
         listStyle: "none",
-        padding: 0
+        padding: 0,
+        marginTop:5
     },
     flexRight: {
         display: "flex",
@@ -41,7 +42,7 @@ class BasicInfoItem extends Component {
                     <span>邮箱</span>
                     <div className={classes.flexRight}>
                         <span>{profile.mail}</span>&nbsp;&nbsp;
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
 
@@ -55,7 +56,7 @@ class BasicInfoItem extends Component {
                 >
                     <span>密码</span>
                     <div className={classes.flexRight}>
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
 
@@ -70,7 +71,7 @@ class BasicInfoItem extends Component {
                     <span>用户名</span>
                     <div className={classes.flexRight}>
                         <span>{profile.username}</span>
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
 
@@ -86,7 +87,7 @@ class BasicInfoItem extends Component {
                     <span>性别</span>
                     <div className={classes.flexRight}>
                         <span>{profile.sex}</span>
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
 
@@ -102,7 +103,7 @@ class BasicInfoItem extends Component {
                     <span>年龄</span>
                     <div className={classes.flexRight}>
                         <span>{profile.age}</span>
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
 
@@ -117,7 +118,7 @@ class BasicInfoItem extends Component {
                     <span>老家</span>
                     <div className={classes.flexRight}>
                         <span>{profile.hometown}</span>
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
                 <li
@@ -131,7 +132,7 @@ class BasicInfoItem extends Component {
                     <span>当前城市居住年限</span>
                     <div className={classes.flexRight}>
                         <span>{profile.yearOfLiving}</span>
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
                 <li
@@ -145,7 +146,7 @@ class BasicInfoItem extends Component {
                     <span>毕业院校</span>
                     <div className={classes.flexRight}>
                         <span>{profile.school}</span>
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
                 <li
@@ -159,7 +160,7 @@ class BasicInfoItem extends Component {
                     <span>专业</span>
                     <div className={classes.flexRight}>
                         <span>{profile.major}</span>
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
                 <li
@@ -173,7 +174,7 @@ class BasicInfoItem extends Component {
                     <span>掌握的语言种类</span>
                     <div className={classes.flexRight}>
                         <span>{profile.language}</span>
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
                 <li
@@ -187,7 +188,7 @@ class BasicInfoItem extends Component {
                     <span>兴趣</span>
                     <div className={classes.flexRight}>
                         <span>{profile.hobby}</span>
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
                 <li
@@ -201,7 +202,7 @@ class BasicInfoItem extends Component {
                     <span>性格</span>
                     <div className={classes.flexRight}>
                         <span>{profile.personality}</span>
-                        <KeyboardArrowRight style={{ color: "lightgrey" }} />
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
                     </div>
                 </li>
             </ul>

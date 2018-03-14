@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
 import logo from "../Assets/Images/logo.jpg";
 import trip from "../Assets/Images/trip.jpg";
-
 import LoginForm from "../Components/container/LoginForm";
 
 const styles = {
@@ -21,16 +20,18 @@ const styles = {
     },
 
     logoWrapper: {
-        textAlign: "center"
+        textAlign: "center",
+        // border: "1px solid red",
+        marginBottom:-15
     },
 
     logo: {
-        maxWidth: 80
+        maxWidth: 90
     },
 
     color: {
         color: "#fff"
-    }
+    },
 };
 class OpenPage extends Component {
     render() {
@@ -41,14 +42,16 @@ class OpenPage extends Component {
                     <h2 className={classes.color}>什么是旅行？</h2>
                     <p className={classes.color} style={{ lineHeight: 1.5 }}>
                         在携U行的定义里，旅行就是像本地人一样去体验，热爱一个城市。没有走马观花，没有强迫消费。有的只是涤荡灵魂，深入骨髓的文化撞击，和地道真实的生活体验。
-                        携U行的唯一使命：创造让你毕生难忘的深度旅行体验。
+                        携U行的唯一使命 - 创造让你毕生难忘的深度游体验。
                     </p>
                 </div>
 
                 <div className={classes.logoWrapper}>
                     <img className={classes.logo} src={logo} />
                 </div>
+
                 <LoginForm />
+
             </div>
         );
     }

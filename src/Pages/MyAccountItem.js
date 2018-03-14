@@ -9,9 +9,10 @@ const styles = theme => ({
         justifyContent: "space-between",
         alignItems: "center",
         padding: 10,
-        borderBottom: "1px solid lightgrey",
+        borderBottom: "1px solid #BDBDBD",
         backgroundColor: "#fff",
-        color: "grey"
+        color: "#757575",
+        fontSize:"1.1rem"
     }
 });
 
@@ -24,7 +25,7 @@ const MyAccountItem = props => {
             onClick={()=> onClick()}
         >
             <span>{item}</span>
-            <KeyboardArrowRight style={{ color: "lightgrey" }} />
+            <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
         </li>
     );
 };

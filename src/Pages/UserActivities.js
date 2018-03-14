@@ -17,27 +17,29 @@ class UserActivities extends Component {
         return userActivities.map(item => {
             return (
                 <Link
-                    to={`/activity/${item.id}`}
                     className="unlink"
-                    key={item.id}
-                >
-                    <li key={item.id}>{item.theme}</li>
-                </Link>
+                    to={`/activity/${item.id}`}
+                    key={item.id}>
+                 <li>{item.theme}</li>
+               </Link>
+
             );
         });
     }
 
     render() {
+        const { userActivities } = this.props
         return (
             <div className="wrapper">
             <PageHeader title="我的活动" history={this.props.history}/>
-            {this.renderUserActivities(this.props.userActivities)}
+            <ul className="unlist">{this.renderUserActivities(userActivities)}</ul>
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
+    // console.log("??", state.ActivityReducer.userActivities)
     return {
         userActivities: state.ActivityReducer.userActivities,
     };

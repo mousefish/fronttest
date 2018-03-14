@@ -46,7 +46,7 @@ const styles = theme => ({
     }
 });
 
-class EditActivityPanel extends Component {
+class EditWishPanel extends Component {
     state = {
         open: false
     };
@@ -56,27 +56,26 @@ class EditActivityPanel extends Component {
     };
 
     componentWillMount() {
-        const { activityId } = this.props.match.params;
-        this.props.fetchOneUserActivityForEditting(activityId);
+        const { wishId } = this.props.match.params;
+        this.props.fetchOneUserWishForEditting(wishId);
     }
 
-    //  need userId to push back to this user's activity list
-    deleteActivity(userId) {
-        const { activityId } = this.props.match.params;
+    //  need userId to push back to this user's wish list
+    deleteWish(userId) {
+        const { wishId } = this.props.match.params;
         const { history } = this.props;
-        this.props.deleteUserActivity(activityId, history, userId);
+        this.props.deleteUserWish(wishId, history, userId);
     }
 
     submitForm(values) {
         // console.log("values",values)
         const keys = [
-            "theme",
             "location",
             "budget",
             "departdate",
             "finishdate",
             "services",
-            "story"
+            "note"
         ];
         const { edit } = this.props;
         let edittedValues = {};
@@ -99,9 +98,9 @@ class EditActivityPanel extends Component {
             return null;
         }
 
-        const { activityId } = this.props.match.params;
+        const { wishId } = this.props.match.params;
         const history = this.props.history;
-        this.props.updateUserActivity(activityId, edittedValues, history);
+        this.props.updateUserWish(wishId, edittedValues, history);
     }
 
     renderEditPanel(classes) {
@@ -120,77 +119,72 @@ class EditActivityPanel extends Component {
 
         return (
             <div style={{marginBottom:60}}>
-                <div className="form-group" key="basic">
-                    <h4 className="category-title">你的基本活动信息</h4>
-                    <Field
-                        fullWidth
-                        key="theme"
-                        name="theme"
-                        type="text"
-                        component={TextField}
-                        className={classes.textField}
-                        placeholder="活动的主题(例：骨灰级成都吃货地图)"
-                    />
+             <div className="form-group" key="basic">
+                <h4 className="category-title">愿望基本信息</h4>
+                <Field
+                    fullWidth
+                    key="location"
+                    name="location"
+                    type="text"
+                    component={AutocompleteField}
+                    className="text-field"
+                    placeholder="你想去的城市，按提示列表选择"
+                    props={this.props}
+                />
 
-                    <Field
-                        key="location"
-                        name="location"
-                        type="text"
-                        component={AutocompleteField}
-                        placeholder="活动所在的国家和城市"
-                        props={this.props}
-                    />
+                <Field
+                    fullWidth
+                    key="budget"
+                    name="budget"
+                    type="text"
+                    component={TextField}
+                    className={classes.textField}
+                    placeholder="你的预算/人"
+                />
+            </div>
 
-                    <Field
-                        fullWidth
-                        key="budget"
-                        name="budget"
-                        type="text"
-                        component={TextField}
-                        className={classes.textField}
-                        placeholder="活动费用/人"
-                    />
+            <div key="date" className="form-group">
+                <h4 className="category-title">行程时间</h4>
+                <Field
+                    key="dapartdate"
+                    name="departdate"
+                    type="text"
+                    component={popupSearchDateField}
+                    placeholder="出发日期和时间"
+                />
+
+                <Field
+                    key="finishdate"
+                    name="finishdate"
+                    type="text"
+                    component={popupSearchDateField}
+                    placeholder="结束日期和时间"
+                />
                 </div>
-                <div className="form-group" key="date">
-                    <h4 className="category-title">你的活动时间</h4>
-                    <Field
-                        key="dapartdate"
-                        name="departdate"
-                        type="text"
-                        component={popupSearchDateField}
-                        placeholder="出发日期和时间"
-                    />
-                    <Field
-                        key="finishdate"
-                        name="finishdate"
-                        type="text"
-                        component={popupSearchDateField}
-                        placeholder="结束日期和时间"
-                    />
-                </div>
-                <div className="form-group" key="service">
-                    <h4 className="category-title">你可以提供的向导服务</h4>
-                    <Field
-                        key="services"
-                        name="services"
-                        component={popupSearchMultiServices}
-                        data={services}
-                    />
-                </div>
-                <div className="form-group" key="story">
-                    <h4 className="category-title">我在这个地方的故事</h4>
-                    <Field
-                        fullWidth
-                        key="story"
-                        name="story"
-                        component={TextField}
-                        id="multiline-flexible"
-                        multiline
-                        rowsMax="4"
-                        placeholder="不超过300个字"
-                        className={classes.textField}
-                    />
-                </div>
+
+                <div className="form-group">
+                        <h4 className="category-title">需要的向导服务</h4>
+                        <Field
+                            key="services"
+                            name="services"
+                            component={popupSearchMultiServices}
+                            data={services}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <h4 className="category-title">额外说明</h4>
+                        <Field
+                            fullWidth
+                            key="note"
+                            name="note"
+                            component={TextField}
+                            id="multiline-flexible"
+                            multiline
+                            rowsMax="4"
+                            placeholder="我对本地向导或者旅行体验的要求等等"
+                            className={classes.textField}
+                        />
+                    </div>
                 <div className="input-success">{msg}</div>
             </div>
         );
@@ -211,7 +205,7 @@ class EditActivityPanel extends Component {
                             edit={edit}
                             onClick={this.handleClose}
                             onDelete={() => {
-                                this.deleteActivity(this.props.edit.userId);
+                                this.deleteWish(this.props.edit.userId);
                             }}
                         />
                     </div>
@@ -221,7 +215,7 @@ class EditActivityPanel extends Component {
                     className="wrapper"
                     onSubmit={handleSubmit(this.submitForm.bind(this))}
                 >
-                    <PageHeader history={this.props.history} title="修改活动" />
+                    <PageHeader history={this.props.history} title="修改愿望" />
                     {this.renderEditPanel(classes)}
                     <div className={classes.btnGroup}>
                         <Button
@@ -255,23 +249,21 @@ class EditActivityPanel extends Component {
 
 const mapStateToProps = state => {
     const {
-        theme,
         location,
         budget,
-        story,
+        note,
         departdate,
         finishdate,
         services
-    } = state.ActivityReducer.edit;
+    } = state.WishReducer.edit;
     return {
-        edit: state.ActivityReducer.edit,
-        error: state.ActivityReducer.error,
-        msg: state.ActivityReducer.message,
+        edit: state.WishReducer.edit,
+        error: state.WishReducer.error,
+        msg: state.WishReducer.message,
         initialValues: {
-            theme,
             location,
             budget,
-            story,
+            note,
             departdate,
             finishdate,
             services
@@ -279,12 +271,12 @@ const mapStateToProps = state => {
     };
 };
 
-EditActivityPanel = reduxForm({
-    form: "UpdateUserActivity",
+EditWishPanel = reduxForm({
+    form: "UpdateUserWish",
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
     validate,
     enableReinitialize: true
-})(withStyles(styles, { withTheme: true })(EditActivityPanel));
+})(withStyles(styles, { withTheme: true })(EditWishPanel));
 
-export default (EditActivityPanel = connect(mapStateToProps, actions)(EditActivityPanel));
+export default (EditWishPanel = connect(mapStateToProps, actions)(EditWishPanel));

@@ -27,7 +27,7 @@ import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { Link } from "react-router-dom";
-
+import trip from "../../Assets/Images/trip.jpg";
 
 
 
@@ -46,6 +46,7 @@ const styles = theme => ({
     display:"flex",
     flexFlow:"column",
     justifyContent:"center",
+    marginLeft:80
   },
 
   firstline: {
@@ -58,7 +59,27 @@ const styles = theme => ({
 
   right: {
     fontSize: "1.5rem",
-    fontWeight: "bold"
+    fontWeight: "bold",
+
+  },
+  innerWrapper:{
+    display:"flex",
+    flexFlow:"row nowrap",
+    justifyContent:"flex-start"
+
+  },
+  leftImg:{
+    position:"absolute",
+    left:0,
+    top:0,
+    bottom:0,
+    maxWidth:"30%",
+    // border:"1px solid red"
+
+  },
+  wishImg:{
+    maxWidth:"100%",
+    height:"100%"
   }
 });
 
@@ -86,7 +107,10 @@ class WishIndex extends Component {
     return wishes.map(wish => {
       return (
         <Link to={`/wish/${wish.id}`} key={wish.id} className="unlink">
-          <Card className="card" key={wish.id}>
+          <Card className="card" key={wish.id} style={{position:"relative"}}>
+             <div className={classes.leftImg}>
+               <img className={classes.wishImg} src={trip} alt="wish card"/>
+             </div>
               <CardContent className={classes.content}>
                 <div className={classes.firstline}>
                   <div style={{ fontWeight: "bold", fontSize:"1.2rem" }}>{wish.location}</div>
@@ -99,13 +123,14 @@ class WishIndex extends Component {
               </CardContent>
 
           </Card>
+
         </Link>
       );
     });
   }
 
   render() {
-    return <List>{this.renderItems()}</List>;
+    return <div className="wrapper">{this.renderItems()}</div>;
   }
 }
 

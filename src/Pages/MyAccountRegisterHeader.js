@@ -11,7 +11,7 @@ const styles = theme => ({
         justifyContent:"space-around",
         padding: 15,
         marginBottom: 5,
-        backgroundColor: "#1976D2"
+        background: "linear-gradient(to bottom right, #2196F3 0%, #0D47A1 100%)",
     },
     button: {
         width:200,

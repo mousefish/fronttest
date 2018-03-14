@@ -37,7 +37,8 @@ class AddWish extends Component {
     }
 
     renderFields(classes) {
-        return [
+        return (
+           <div>
             <div key="basic" className="form-group">
                 <h4 className="category-title">愿望基本信息</h4>
                 <Field
@@ -60,7 +61,7 @@ class AddWish extends Component {
                     className={classes.textField}
                     placeholder="你的预算/人"
                 />
-            </div>,
+            </div>
 
             <div key="date" className="form-group">
                 <h4 className="category-title">行程时间</h4>
@@ -80,7 +81,9 @@ class AddWish extends Component {
                     placeholder="结束日期和时间"
                 />
             </div>
-        ];
+           </div>
+        )
+
     }
 
     render() {
@@ -101,6 +104,21 @@ class AddWish extends Component {
                             data={services}
                         />
                     </div>
+                    <div className="form-group">
+                        <h4 className="category-title">额外说明</h4>
+                        <Field
+                            fullWidth
+                            key="note"
+                            name="note"
+                            component={TextField}
+                            id="multiline-flexible"
+                            multiline
+                            rowsMax="4"
+                            placeholder="对本地向导或者旅行体验的要求等等"
+                            className={classes.textField}
+                        />
+                    </div>
+
                     <div className="centralize-button">
                         <Button
                             type="submit"

@@ -97,13 +97,17 @@ export const updateUserActivity = (
         }
     );
 
+     if(res.data==="修改成功！"){
+         history.goBack();
+    }
+
     dispatch({
         // since we only need to receive the success message here
         type: ADD_ACTIVITY_DATA,
         payload: res.data
     });
 
-    history.push("/activity");
+
 };
 
 export const deleteUserActivity = (
@@ -120,12 +124,16 @@ export const deleteUserActivity = (
             }
         }
     );
+    if(res.data === "成功删除该活动"){
+         history.goBack();
+    }
+
     dispatch({
         // since we may only need to receive the success message here
         type: ADD_ACTIVITY_DATA,
         payload: res.DATA
     });
-    history.push(`/userActivities/${userId}`);
+
 };
 
 export const fetchActivityData = () => async dispatch => {

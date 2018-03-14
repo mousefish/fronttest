@@ -123,7 +123,7 @@ class PrivateBasicInfo extends Component {
         const { classes } = this.props;
 
         return (
-            <div className="wrapper">
+            <div className="wrapper" style={{fontSize:"1.1rem"}}>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}

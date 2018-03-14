@@ -40,6 +40,7 @@ class ActivityWishPanel extends Component {
                                 raised
                                 className={classes.button}
                                 id="btn"
+                                style={{backgroundColor:"#43A047"}}
                             >
                                 发布新愿望
                             </Button>

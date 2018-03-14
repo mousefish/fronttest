@@ -15,7 +15,7 @@ import dalian from "../Assets/imgForTest/dalian2.jpg";
 import dunhuang from "../Assets/Images/trip.jpg";
 import Avatar from "material-ui/Avatar";
 import classNames from "classnames";
-
+import WhatsHot from "material-ui-icons/Whatshot";
 import p1 from "../Assets/imgForTest/1.jpg";
 import p2 from "../Assets/imgForTest/2.jpg";
 import p3 from "../Assets/imgForTest/3.jpg";
@@ -40,6 +40,12 @@ const tileData = [
     }
 ];
 const styles = theme => ({
+    icon: {
+        width: 20,
+        height: 20,
+        verticalAlign: "-2px",
+        color:"#F44336"
+    },
     row: {
         display: "flex",
         justifyContent: "flex-start"
@@ -95,9 +101,11 @@ class Recommendation extends Component {
         return (
             <div style={{ position: "relative" }}>
                 <div className="wrapper">
-                    <Header description="这是一个有深度的旅游服务平台" />
+                    <Header/>
                     <div className={classes.cities}>
-                        <h4 style={{ fontWeight: "bold" }}>热门城市</h4>
+                        <h4 style={{ fontWeight: "bold" }}>
+                            热门城市<WhatsHot className={classes.icon} />
+                        </h4>
                         <div className={classes.root}>
                             <GridList className={classes.gridList} cols={2.5}>
                                 {tileData.map(tile => (
@@ -117,7 +125,9 @@ class Recommendation extends Component {
                         </div>
                     </div>
                     <div>
-                        <h4 style={{ fontWeight: "bold" }}>热门本地人</h4>
+                        <h4 style={{ fontWeight: "bold" }}>
+                            热门本地人<WhatsHot className={classes.icon} />
+                        </h4>
                         <ul className={classes.peopleContainer}>
                             <li>
                                 <div className={classes.row}>

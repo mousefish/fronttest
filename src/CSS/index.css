@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  /*  font-family: sans-serif;*/
+  font-family: sans-serif;
   overflow: auto; }
 
 header {
@@ -41,14 +41,15 @@ header .title .name {
   margin: auto;
   margin-bottom: 30px;
   box-shadow: "none";
-  border: 1px solid #f2f2f2;
+  /*  border: 1px solid #f2f2f2;
+*/
   position: relative;
   color: #000; }
 
 .unlink {
   text-decoration: none;
   cursor: pointer;
-  color: #337ab7; }
+  color: #1976D2; }
 
 .wrapper {
   /* border: 1px solid red;*/
@@ -104,7 +105,7 @@ header .title .name {
   width: 100%;
   padding: 10px 0 4px 0;
   margin-bottom: 15px;
-  /*  border: 1px solid blue; */ }
+  /* border: 1px solid blue;*/ }
 
 .wizard-header-bottom {
   border-bottom: 2px solid #1976D2; }
@@ -120,6 +121,10 @@ header .title .name {
   float: left;
   margin-right: -30px;
   color: #1976D2; }
+
+.unlist {
+  padding: 0;
+  list-style: none; }
 
 /****************************/
 .gallery {

@@ -57,7 +57,7 @@ class TripMain extends Component {
       <div style={{ position: "relative" }}>
         <SideButton/>
         <div className="wrapper">
-          <Header description="这是一个有深度的旅游服务平台" />
+          <Header />
           <div>{this.renderContent(activityData)}</div>
         </div>
       </div>

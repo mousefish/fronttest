@@ -25,6 +25,9 @@ import WishMain from "./Pages/WishMain";
 import Story from "./Pages/Story";
 import UserActivities from "./Pages/UserActivities";
 import EditActivityPanel from "./Pages/EditActivityPanel";
+import UserWishes from "./Pages/UserWishes";
+
+import EditWishPanel from "./Pages/EditWishPanel";
 
 import FriendComments from "./Pages/FriendComments";
 
@@ -125,7 +128,7 @@ class App extends Component {
     } else if (main_value === 1) {
       this.props.history.push("/activity");
     } else if (main_value === 2) {
-      this.props.history.push("/message");
+      this.props.history.push("/wish");
     } else if (main_value === 3) {
       this.props.history.push("/my");
     }
@@ -152,8 +155,11 @@ class App extends Component {
     const { main_value, sub_value } = this.state;
     const { classes } = this.props;
     const { pathname } = this.props.history.location;
-    if (pathname.includes("/editActivity/")) {
+    if (pathname.includes("/editActivity/") || pathname.includes("/editWish/") || pathname==="/openPage") {
       return null;
+    }
+    if(pathname.includes("/wish/")){
+      return null
     }
     if (pathname.includes("/activity/")) {
       return (
@@ -212,7 +218,7 @@ class App extends Component {
 
         <BottomNavigationButton
           classes={{ icon: classes.icon, root: classes.broot }}
-          label="消息"
+          label="找心愿"
           icon={<ChatBubbleOutline />}
         />
         <BottomNavigationButton
@@ -275,6 +281,18 @@ class App extends Component {
               path="/editActivity/:activityId"
               component={RequireAuth(EditActivityPanel)}
             />
+
+            <Route
+              exact
+              path="/userWishes/:userId"
+              component={RequireAuth(UserWishes)}
+            />
+            <Route
+              exact
+              path="/editWish/:wishId"
+              component={RequireAuth(EditWishPanel)}
+            />
+
             <Route exact path="/friendComments" component={FriendComments} />
             <Route exact path="/activityWish" component={RequireAuth(ActivityWishPanel)} />
             <Route exact path="/activity/:activityId" component={RequireAuth(Activity)} />
