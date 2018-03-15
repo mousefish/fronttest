@@ -10,7 +10,7 @@ import data from "../../Data/cities";
 
 const provinces = data.provinces;
 
-const renderInput = inputProps => {
+const renderInput = (inputProps) => {
   const { InputProps, classes, ref, ...other } = inputProps;
   return (
     <TextField
@@ -18,20 +18,26 @@ const renderInput = inputProps => {
       inputRef={ref}
       InputProps={{
         classes: {
-          input: classes.input,
+          input: classes.input
         },
         ...InputProps
       }}
-      style={{paddingTop:8, marginBottom:8}}
+      style={{ paddingTop: 8, marginBottom: 8 }}
     />
   );
 };
 
-const renderCity = params => {
-  const { city, index, itemProps, highlightedIndex, selectedItem } = params;
+const renderCity = (params, props) => {
+  const {
+    city,
+    index,
+    itemProps,
+    highlightedIndex,
+    selectedItem,
+    onClick
+  } = params;
   const isHighlighted = highlightedIndex === index;
   const isSelected = selectedItem === city;
-
   return (
     <MenuItem
       {...itemProps}
@@ -40,6 +46,9 @@ const renderCity = params => {
       component="div"
       style={{
         fontWeight: isSelected ? 500 : 400
+      }}
+      onClick={() => {
+        props.onClick(city);
       }}
     >
       {city}
@@ -58,7 +67,7 @@ const getCitys = inputValue => {
         !inputValue ||
         city.toLowerCase().includes(inputValue.toLowerCase())
       ) {
-        result.push(city+ " " + provinceName);
+        result.push(city + " " + provinceName);
         if (result.length == 5) {
           return result;
         }
@@ -81,26 +90,29 @@ const autocompleteField = props => {
         selectedItem,
         highlightedIndex
       }) => (
-        <div className={classes.container} style={{width:"100%"}}>
+        <div className={classes.container} style={{ width: "100%" }}>
           {renderInput({
             fullWidth: true,
             classes,
             InputProps: getInputProps({
               placeholder: "输入城市，按提示列表选择",
-              id: "integration-downshift"
+              id: "integration-downshift",
             }),
             ...props.input
           })}
           {isOpen ? (
-            <Paper square style={{marginTop:-8}}>
+            <Paper square style={{ marginTop: -8 }}>
               {getCitys(inputValue).map((city, index) =>
-                renderCity({
-                  city,
-                  index,
-                  itemProps: getItemProps({ item: city }),
-                  highlightedIndex,
-                  selectedItem
-                })
+                renderCity(
+                  {
+                    city,
+                    index,
+                    itemProps: getItemProps({ item: city }),
+                    highlightedIndex,
+                    selectedItem
+                  },
+                  props
+                )
               )}
             </Paper>
           ) : null}

@@ -12,10 +12,6 @@ import List, {
 } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
-import { FormGroup, FormControlLabel } from 'material-ui/Form';
-import Checkbox from 'material-ui/Checkbox';
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
 import FolderIcon from 'material-ui-icons/Folder';
 import DeleteIcon from 'material-ui-icons/Delete';
 import { withStyles } from "material-ui/styles";
@@ -69,7 +65,6 @@ class PrivateFavorites extends Component {
                     <ListItemSecondaryAction >
                       <IconButton
                            aria-label="Delete"
-                           className={classes.deleteIcon}
                            onClick={(e)=>{this.deleteFev(e, fav.id)}}
                       >
                         <DeleteIcon />

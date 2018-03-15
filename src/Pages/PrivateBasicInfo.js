@@ -191,7 +191,7 @@ class PrivateBasicInfo extends Component {
 // if the user update his email with a one that is already used by another user!
 // or err from database
 const mapStateToProps = state => {
-    // console.log("err", state.UserReducer.err);
+    console.log("UserReducer", state.UserReducer);
     return {
         user: state.UserReducer
     };

@@ -174,12 +174,12 @@ class App extends Component {
             classes={{ icon: classes.icon, root: classes.broot}}
             label="我的收藏"
             icon={<UserFavorite />}
-            style={{position:"fixed", left:0}}
+            style={{position:"fixed", left:0 }}
           />
 
           <BottomNavigationButton
             classes={{ icon: classes.icon, root: classes.broot}}
-            style={{position:"fixed",left:80}}
+            style={{position:"fixed",left:80 }}
             label="联系携U行"
             icon={<Contacts />}
           />
@@ -203,14 +203,14 @@ class App extends Component {
         showLabels
       >
         <BottomNavigationButton
-          style={{ marginLeft: 5 }}
+          style={{ marginLeft: 5}}
           classes={{ icon: classes.icon, root: classes.broot }}
           label="推荐"
           icon={<CardGiftcard />}
         />
 
         <BottomNavigationButton
-          style={{ marginLeft: 5 }}
+          style={{ marginLeft: 5}}
           classes={{ icon: classes.icon, root: classes.broot }}
           label="找活动"
           icon={<LocationSearch />}
@@ -250,7 +250,7 @@ class App extends Component {
             <Route exact path="/my" component={RequireAuth(MyAccount)} />
             <Route
               exact
-              path="/myBasicInfo"
+              path="/myBasicInfo/:userId"
               component={RequireAuth(PrivateBasicInfo)}
             />
             <Route

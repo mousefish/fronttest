@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../Actions";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
 import IconButton from "material-ui/IconButton";
@@ -22,6 +23,7 @@ import ShareIcon from "material-ui-icons/Share";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "../../Pages/PageHeader";
+import test from "../../Assets/imgForTest/4.jpg";
 
 const style = theme => ({
     media: {
@@ -56,10 +58,10 @@ const style = theme => ({
         width: "100%",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: "center"
         // border:"1px solid green"
     },
-      editBar: {
+    editBar: {
         // border:"1px solid red",
         display: "flex",
         alignItems: "center",
@@ -73,14 +75,42 @@ const style = theme => ({
         borderRadius: 40,
         color: "#1976D2"
     },
-    note:{
-        color:"#F44336"
+    note: {
+        color: "#F44336"
+    },
+
+    detailPanel: {
+        // border: "1px solid green",
+        padding: 0,
+        listStyle: "none",
+        color: "#424242"
+    },
+
+    detailTitle: {
+        margin: 5,
+        color: "#1976D2"
+    },
+    detailContent: {
+        margin: 5,
+        paddingBottom: 5,
+        marginBottom: 10,
+        borderBottom: "1px solid #BDBDBD"
+    },
+    row: {
+        display: "flex",
+        justifyContent: "center",
+    },
+    avatar: {
+        margin: 10
+    },
+    bigAvatar: {
+        width: 80,
+        height: 80
     }
 });
 
 class WishDetails extends Component {
-
-     renderEditChoice() {
+    renderEditChoice() {
         const { id } = this.props.wish;
         const { classes, wish, isYourWish } = this.props;
 
@@ -101,7 +131,6 @@ class WishDetails extends Component {
         }
     }
 
-
     renderServices(services) {
         if (services) {
             return services.map(item => {
@@ -117,48 +146,100 @@ class WishDetails extends Component {
     render() {
         const { classes, wish, match } = this.props;
         if (wish && wish.hasOwnProperty("warning")) {
-            return(
-            <div>
-                <PageHeader history={this.props.history} title="愿望" />
-                <div style={{ textAlign: "center" }}>{wish["warning"]}</div>
-            </div>)
+            return (
+                <div>
+                    <PageHeader history={this.props.history} title="愿望" />
+                    <div style={{ textAlign: "center" }}>{wish["warning"]}</div>
+                </div>
+            );
         }
         return (
             <div className="wrapper">
                 <PageHeader history={this.props.history} title="愿望" />
                 {this.renderEditChoice()}
-                <Link
-                    style={{ color: "#424242" }}
-                    to={`/user/${wish.userId}`}
-                    className="unlink"
-                    >
-                     {wish.username}&nbsp;
-                    <OpenInNew className={classes.icon} />
-                </Link>
-                <div>{wish.location}</div>
-                <div>{wish.departdate} — {wish.finishdate}</div>
+                <div className={classes.row}>
+                    <Avatar
+                        alt="tour guide"
+                        src={test}
+                        className={classNames(
+                            classes.avatar,
+                            classes.bigAvatar
+                        )}
+                    />
+                </div>
 
-                <div>{wish.budget} 元 / 人</div>
-                <div>{this.renderServices(wish.services)}</div>
-                 <div className={classes.note}>{wish.note ? wish.note :"目前没有额外要求"}</div>
+                <ul className={classes.detailPanel}>
+                    <li>
+                        <div className={classes.detailTitle}>愿望发起人</div>
+                        <div className={classes.detailContent}>
+                            {" "}
+                            <Link
+                                style={{ color: "#424242" }}
+                                to={`/user/${wish.userId}`}
+                                className="unlink"
+                            >
+                                {wish.username}&nbsp;
+                                <OpenInNew className={classes.icon} />
+                            </Link>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div className={classes.detailTitle}>愿望地点</div>
+                        <div className={classes.detailContent}>
+                            {wish.location}
+                        </div>
+                    </li>
+
+                    <li>
+                        <div className={classes.detailTitle}>期待愿望开始和结束日期</div>
+                        <div className={classes.detailContent}>
+                            {wish.departdate} — {wish.finishdate}
+                        </div>
+                    </li>
+
+                    <li>
+                        <div className={classes.detailTitle}>预算</div>
+                        <div className={classes.detailContent}>
+                            {wish.budget} 元 / 人
+                        </div>
+                    </li>
+
+                    <li>
+                        <div className={classes.detailTitle}>希望提供的服务</div>
+                        <div className={classes.detailContent}>
+                            {this.renderServices(wish.services)}
+                        </div>
+                    </li>
+                    <li>
+                        <div className={classes.detailTitle}>额外要求</div>
+                        <div
+                            className={classes.detailContent}
+                            style={{ color: "#F44336" }}
+                        >
+                            {wish.note ? wish.note : "目前没有额外要求"}
+                        </div>
+                    </li>
+                </ul>
+
                 <div className={classes.btnGroup}>
-                        <Button
-                          color="primary"
-                            style={{ backgroundColor: "#1976D2" }}
-                            raised
-                            className={classes.button}
-                        >
-                            我有兴趣
-                        </Button>
-                        <Button
-                            color="primary"
-                            style={{ backgroundColor: "#43A047" }}
-                            raised
-                            className={classes.button}
-                        >
-                            我想加入
-                        </Button>
-                    </div>
+                    <Button
+                        color="primary"
+                        style={{ backgroundColor: "#1976D2" }}
+                        raised
+                        className={classes.button}
+                    >
+                        我有兴趣
+                    </Button>
+                    <Button
+                        color="primary"
+                        style={{ backgroundColor: "#43A047" }}
+                        raised
+                        className={classes.button}
+                    >
+                        我想加入
+                    </Button>
+                </div>
             </div>
         );
     }

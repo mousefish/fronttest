@@ -4,24 +4,16 @@ import { reduxForm, Field } from "redux-form";
 import Button from "material-ui/Button";
 import AutocompleteField from "./AutocompleteField";
 import popupSearchMultiServices from "./popupSearchMultiServices";
-// import popupSearchMultiSelect from "./popupSearchMultiSelect";
 import * as actions from "../../Actions";
 import HistorySearch from "./HistorySearch";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
-import { MenuItem } from "material-ui/Menu";
-import { Select } from "redux-form-material-ui";
 import classNames from "classnames";
 import validate from "../../Utility/validate";
-import Radio from "material-ui/Radio";
-import { RadioGroup, TextField } from "redux-form-material-ui";
-import { FormControlLabel } from "material-ui/Form";
-import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import Search from "material-ui-icons/Search";
+
+// import Search from "material-ui-icons/Search";
 import PageHeader from "../../Pages/PageHeader";
-
 import AppBar from "material-ui/AppBar";
-
 import Tabs, { Tab } from "material-ui/Tabs";
 
 const styles = theme => ({
@@ -72,8 +64,8 @@ const styles = theme => ({
   text: {
     fontWeight: "bold"
   },
-  tab:{
-    fontSize:"2rem"
+  tab: {
+    fontSize: "2rem"
   }
 });
 
@@ -96,9 +88,21 @@ class SearchPanel extends Component {
   };
 
   submitForm(values) {
-    let categoryValue = this.state.value === 0 ? "activity" : "wish";
-    values["category"] = categoryValue;
-    // console.log("here", values)
+    if (!values.hasOwnProperty("fromChip")) {
+      let categoryValue;
+      if (this.state.value === 0) {
+        categoryValue = "活动";
+      }
+      if (this.state.value === 1) {
+        categoryValue = "愿望";
+      }
+      if (this.state.value === 2) {
+        categoryValue = "向导";
+      }
+      values["category"] = categoryValue;
+      // console.log("here", values)
+    }
+
     this.props.submitSearchData(
       values,
       this.props.history,
@@ -111,23 +115,27 @@ class SearchPanel extends Component {
     const { handleSubmit } = this.props;
     return (
       <div className="searchPanelWrapper">
-        <PageHeader title="搜索" history={this.props.history}/>
+        <PageHeader title="搜索" history={this.props.history} />
         <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
-        <div className={classes.root} style={{margin:"15px 0 35px 0"}}>
-          <AppBar position="static" color="default" style={{boxShadow:"none"}} >
-            <Tabs
-              value={this.state.value}
-              onChange={this.handleChange}
-              indicatorColor="#1976D2"
-              textColor="#1976D2"
-              fullWidth
-
+          <div className={classes.root} style={{ margin: "15px 0 35px 0" }}>
+            <AppBar
+              position="static"
+              color="default"
+              style={{ boxShadow: "none" }}
             >
-              <Tab style={{letterSpacing:2}} label="活动"/>
-              <Tab style={{letterSpacing:2}} label="愿望"/>
-            </Tabs>
-          </AppBar>
-         </div>
+              <Tabs
+                value={this.state.value}
+                onChange={this.handleChange}
+                indicatorColor="#1976D2"
+                textColor="#1976D2"
+                fullWidth
+              >
+                <Tab style={{ letterSpacing: 2 }} label="活动" />
+                <Tab style={{ letterSpacing: 2 }} label="愿望" />
+                <Tab style={{ letterSpacing: 2 }} label="向导" />
+              </Tabs>
+            </AppBar>
+          </div>
           <Field name="category" component={renderError} />
 
           <div className={classes.searchBar}>
@@ -136,18 +144,16 @@ class SearchPanel extends Component {
               type="text"
               placehoder="选择一个城市"
               component={AutocompleteField}
+              onClick={value => {
+                this.submitForm({ location: value });
+              }}
+              value={this.state.location}
               props={this.props}
-
             />
-
-            <Button type="submit" className={classes.button}>
-              <Search style={{ color: "lightgrey" }} />
-            </Button>
           </div>
-
         </form>
 
-        <div style={{ marginTop: 60 }}>
+        <div>
           <HistorySearch onClick={value => this.submitForm(value)} />
         </div>
       </div>

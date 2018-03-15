@@ -4,7 +4,7 @@ import _ from "lodash";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
 import LocationOn from "material-ui-icons/LocationOn";
-
+import AccessTime from "material-ui-icons/AccessTime";
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
 import StarBorder from "material-ui-icons/StarBorder";
@@ -86,18 +86,6 @@ const styles = theme => ({
 });
 
 class ActivityIndex extends Component {
-  renderService(services) {
-    const { icon }= this.props.classes;
-    return services.map(service => {
-      return (
-        <span style={{ marginRight: 6 }} key={service}>
-          <LocalOffer className={icon} />
-          &nbsp;{service}
-        </span>
-      );
-    });
-  }
-
   renderStar(num) {
     const { icon } = this.props.classes;
     const starWrapper = [];
@@ -149,7 +137,7 @@ class ActivityIndex extends Component {
                   {item.likes} 人收藏
                 </div>
               </div>
-              <div>{this.renderService(item.services)}</div>
+              <div><AccessTime className={classes.icon} /> {item.departdate} 出发</div>
             </CardContent>
           </Card>
         </Link>

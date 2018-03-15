@@ -29,6 +29,7 @@ export const submitSearchData = (searchData, history, cb) => async dispatch => {
     if (cb) {
         cb();
     }
+    // searchData:"青岛市 山东省"
     //  for Browsing search history
     generateSearchHistory(searchData, res.data);
 };

@@ -35,7 +35,7 @@ class WizardFirst extends Component {
                     name="theme"
                     type="text"
                     component={TextField}
-                    placeholder="活动的主题(例：骨灰级成都吃货地图)"
+                    placeholder="活动的主题，字数不多于20个"
                     className={classes.textField}
                 />
 

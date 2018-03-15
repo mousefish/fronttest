@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
+import classNames from "classnames";
+import Avatar from "material-ui/Avatar";
 import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
 import IconButton from "material-ui/IconButton";
@@ -18,6 +20,7 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "./PageHeader";
 import RegisterDialog from "./RegisterDialog";
 import test from "../Assets/imgForTest/dalian1.jpg";
+import test2 from "../Assets/imgForTest/4.jpg";
 
 const styles = theme => ({
     editBar: {
@@ -68,6 +71,7 @@ const styles = theme => ({
 
     container: {
         // border: "1px solid blue",
+        marginTop:40,
         display: "flex",
         flexFlow: "column",
         justifyContent: "flexStart",
@@ -81,7 +85,8 @@ const styles = theme => ({
         justifyContent: "space-around",
         // border: "1px solid blue",
         width: 200,
-        margin: "20px 0"
+        margin: "20px 0",
+        padding:"0 20px"
     },
 
     commentArea: {
@@ -111,6 +116,21 @@ const styles = theme => ({
         // border:"1px solid red",
         backgroundColor: "#1976D2",
         opacity: 0.2
+    },
+    row: {
+        // border:"1px solid red",
+        position:"absolute",
+        bottom:-35,
+        left:"50%",
+        marginLeft:-45
+
+    },
+    avatar: {
+        margin: 10
+    },
+    bigAvatar: {
+        width: 80,
+        height: 80
     }
 });
 
@@ -217,6 +237,16 @@ class Activity extends Component {
                 <div className={classes.bg}>
                     <img className={classes.bgImg} src={test} />
                     <div className={classes.bgImgLayer} />
+                    <div className={classes.row}>
+                        <Avatar
+                            alt="tour guide"
+                            src={test2}
+                            className={classNames(
+                                classes.avatar,
+                                classes.bigAvatar
+                            )}
+                        />
+                    </div>
                 </div>
                 <div className={classes.container}>
                     <h3 style={{ fontWeight: "bold" }}>{activity.theme}</h3>
@@ -270,7 +300,7 @@ class Activity extends Component {
                         </li>
 
                         <li>
-                            <div className={classes.detailTitle}>活动日期</div>
+                            <div className={classes.detailTitle}>活动开始和结束日期</div>
                             <div className={classes.detailContent}>
                                 {activity.departdate} — {activity.finishdate}
                             </div>
@@ -279,7 +309,7 @@ class Activity extends Component {
                         <li>
                             <div className={classes.detailTitle}>活动价格</div>
                             <div className={classes.detailContent}>
-                                {activity.budget} 元
+                                {activity.budget} 元 / 人
                             </div>
                         </li>
 

@@ -104,7 +104,7 @@ class Recommendation extends Component {
                     <Header/>
                     <div className={classes.cities}>
                         <h4 style={{ fontWeight: "bold" }}>
-                            热门城市<WhatsHot className={classes.icon} />
+                            热门活动城市<WhatsHot className={classes.icon} />
                         </h4>
                         <div className={classes.root}>
                             <GridList className={classes.gridList} cols={2.5}>
@@ -126,7 +126,7 @@ class Recommendation extends Component {
                     </div>
                     <div>
                         <h4 style={{ fontWeight: "bold" }}>
-                            热门本地人<WhatsHot className={classes.icon} />
+                            热门本地向导<WhatsHot className={classes.icon} />
                         </h4>
                         <ul className={classes.peopleContainer}>
                             <li>

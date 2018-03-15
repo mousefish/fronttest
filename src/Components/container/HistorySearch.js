@@ -36,10 +36,10 @@ const generateChipData = data => {
 
 const generateIndividualData = data => {
     // {key: 0, label: "大连市 辽宁省, 活动"}
-    let record = data.label.split(",");
+    let record = data.label.split("—");
     let location = record[0];
-    let category = record[1] === " 活动" ? "activity" : "wish";
-    return { location, category };
+    let category = record[1];
+    return { location, category, fromChip: true };
 };
 
 // 珠海市 广东省,activity|大连市 辽宁省,activity|
@@ -48,9 +48,9 @@ class HistorySearch extends Component {
         chipData: generateChipData(localStorage.hist)
     };
 
-    deleteChip(e,data) {
+    deleteChip(e, data) {
         // {key: 0, label: "大连市 辽宁省, 活动"}
-        e.stopPropagation()
+        e.stopPropagation();
         const chipData = [...this.state.chipData];
         const chipToDelete = chipData.indexOf(data);
         chipData.splice(chipToDelete, 1);
@@ -68,8 +68,8 @@ class HistorySearch extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div>
-                <h4 style={{ textAlign: "center" }}>搜索历史</h4>
+            <div style={{ marginTop: 30 }}>
+                <h6 style={{ paddingLeft: 10, color: "#616161" }}>搜索历史</h6>
                 <div className={classes.root}>
                     {this.state.chipData.map(data => {
                         let avatar = null;
@@ -77,7 +77,7 @@ class HistorySearch extends Component {
                             <Avatar>
                                 <CloseIcon
                                     className={classes.svgIcon}
-                                    onClick={(e) => this.deleteChip(e,data)}
+                                    onClick={e => this.deleteChip(e, data)}
                                 />
                             </Avatar>
                         );
