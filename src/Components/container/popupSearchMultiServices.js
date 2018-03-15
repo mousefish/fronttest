@@ -1,8 +1,6 @@
 import React from "react";
 import Multiselect from "react-widgets/lib/Multiselect";
 import { withStyles } from "material-ui/styles";
-import "react-widgets/dist/css/react-widgets.css";
-import "../../CSS/updated-react-widgets.css";
 
 const styles = theme => ({});
 const popupSearchMultiServices = ({

@@ -13,6 +13,8 @@ import { AUTH_USER } from './Actions/types';
 
 import "./CSS/main.css";
 import "./CSS/index.css";
+import "react-widgets/dist/css/react-widgets.css";
+import "./CSS/updated-react-widgets.css";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //create redux store in root
