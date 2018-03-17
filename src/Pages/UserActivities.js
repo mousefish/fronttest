@@ -30,6 +30,7 @@ class UserActivities extends Component {
                     <ImageIcon />
                 </Avatar>
                 <ListItemText
+                    style={{overflow:"auto"}}
                     primary={item.theme}
                     secondary={`${item.budget} 元`}
                 />

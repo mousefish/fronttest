@@ -96,17 +96,24 @@ const styles = theme => ({
 
   item: {
     fontSize: "1.2rem",
-    marginBottom: 6,
+    marginBottom: 6
     // border:"1px solid red"
+  },
+  themeStyle: {
+    fontWeight: "bold",
+    overflow: "auto"
   }
 });
 
 class ActivityIndex extends Component {
-
   renderStarZone(score) {
     const { classes } = this.props;
     if (score > 0) {
-      return <div className={classes.item}><Stars num={score}/></div>;
+      return (
+        <div className={classes.item}>
+          <Stars num={score} />
+        </div>
+      );
     }
   }
 
@@ -131,7 +138,7 @@ class ActivityIndex extends Component {
               <div className={classes.budgetBox}>¥{item.budget}</div>
             </CardMedia>
             <CardContent className={classes.content}>
-              <h3 style={{ fontWeight: "bold" }}>{item.theme}</h3>
+              <h3 className={classes.themeStyle}>{item.theme}</h3>
               <div className={classes.infoWrapper}>
                 <div className={classes.left}>
                   <div className={classes.item}>

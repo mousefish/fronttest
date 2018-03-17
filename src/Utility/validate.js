@@ -62,7 +62,7 @@ const validate = values => {
     errors.budget = "请输入有效数字";
   }
 
-  if (values.story && values.theme.length > 20) {
+  if (values.theme && values.theme.length > 20) {
     errors.theme = "字数不能超过20";
   }
   if (
