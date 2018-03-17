@@ -23,6 +23,9 @@ export default that => {
                         err: "请输入有效邮箱"
                     });
                 }
+                that.setState({
+                    email: inputValue
+                });
                 break;
 
             case "password":
@@ -31,20 +34,25 @@ export default that => {
                         err: "密码长度为六位"
                     });
                 }
+                if(that.state.mailMarker && that.state.mailMarker.indexOf(inputValue) !== -1){
+                    that.setState({
+                        err:"密码不能含有邮箱地址"
+                    });
+                 }
                 break;
 
-            // case "age":
-            //     if(Number.isNaN(parseInt(inputValue))){
-            //         that.setState({
-            //             err:"无效数字"
-            //         });
-            //     }
-            //     else if(Number(inputValue)< 18 ){
-            //         that.setState({
-            //             err:"必须年满18岁"
-            //         });
-            //     }
-            //     break;
+            case "age":
+                if(Number.isNaN(parseInt(inputValue))){
+                    that.setState({
+                        err:"无效数字"
+                    });
+                }
+                else if(Number(inputValue) < 18 ){
+                    that.setState({
+                        err:"必须年满18岁"
+                    });
+                }
+                break;
         }
         resolve(that.state.err);
     });

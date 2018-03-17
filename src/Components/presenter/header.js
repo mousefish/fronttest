@@ -13,7 +13,7 @@ const header = props => {
         </div>
       </div>
 
-      <h4>{props.description}</h4>
+      <h4>我们不打造攻略，我们只创造体验</h4>
     </header>
   );
 };

@@ -3,7 +3,13 @@ export const AUTH_ERROR = 'auth_error';
 export const DEAUTH_USER = 'deauth_user';
 export const OK_TO_GO = 'ok_to_go';
 export const UPDATE_USER_BASIC = 'update_user_basic';
+export const FETCH_USER_ACTIVITIES = "FETCH_USER_ACTIVITIES"
+export const FETCH_ACTIVITY_FOR_EDITTING = "FETCH_ACTIVITY_FOR_EDITTING"
+export const FETCH_USER_FAVORITES = "FETCH_USER_FAVORITES";
+export const DELETE_USER_FAVORITE = "DELETE_USER_FAVORITE";
 
+export const FETCH_WISH_FOR_EDITTING = "FETCH_WISH_FOR_EDITTING";
+export const FETCH_USER_WISHES = "FETCH_USER_WISHES";
 
 export const FETCH_SEARCH_DATA = 'fetch_search_data';
 export const FETCH_HISTORY_DATA ='fetch_history_data';
@@ -31,3 +37,4 @@ export const HANDLE_WISH_LIKES = "handle_wish_likes";
 
 
 export const INPUT_ERROR = "INPUT_ERROR";
+export const IS_YOUR_FAV = "IS_YOUR_FAV";

@@ -13,34 +13,33 @@ import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
-    width: "95%",
+    width: "90%",
     margin: "auto"
   },
 
+  textField: {
+    padding: "8px 0"
+    // border: "1px solid blue"
+  },
+
   button: {
-    margin: theme.spacing.unit,
-    width: "95%"
+    // margin: theme.spacing.unit,
+    // width: "95%"
   },
 
   radioInner: {
     width: "95%",
     display: "flex",
     flexFlow: "row nowrap",
-    justifyContent: "space-around"
-  },
-
-  formInner: {
-    width: "95%"
-  },
-
-  text: {
-    fontWeight: "bold"
+    justifyContent: "flex-start",
+    marginTop:5,
+    // border:"1px solid red"
   }
 });
 
 const renderError = ({ meta: { touched, error } }) =>
   touched && error ? (
-    <span style={{ color: "red", fontSize: "12px" }}>{error}</span>
+    <span style={{ color: "red", fontSize: "10px" }}>{error}</span>
   ) : (
     false
   );
@@ -55,23 +54,20 @@ class wizardSecond extends Component {
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
         <PageHeader onClick={previousPage} title="个人基本资料" />
-        <div className="flex-form-wrapper">
-          <LinearProgress
+         <LinearProgress
             className={classes.progress}
             mode="determinate"
             value={this.state.completed}
           />
-        </div>
-        <div className="flex-form-wrapper">
+        <div className="form-group">
           <Field
-            className={classes.formInner}
+            className={classes.textField}
             name="username"
             type="text"
             component={TextField}
             label="用户名"
           />
-        </div>
-        <div className="flex-form-wrapper">
+
           <Field
             name="sex"
             component={RadioGroup}
@@ -82,47 +78,41 @@ class wizardSecond extends Component {
             <FormControlLabel value="其他" control={<Radio />} label="其他" />
           </Field>
           <Field name="sex" component={renderError} />
-        </div>
 
-        <div className="flex-form-wrapper">
           <Field
-            className={classes.formInner}
+            className={classes.textField}
             name="age"
             type="number"
             component={TextField}
             label="年龄"
           />
-        </div>
-        <div className="flex-form-wrapper">
+
           <Field
-            className={classes.formInner}
+            className={classes.textField}
             name="city"
             type="text"
             component={TextField}
             label="当前居住城市"
           />
-        </div>
-        <div className="flex-form-wrapper">
+
           <Field
-            className={classes.formInner}
+            className={classes.textField}
             name="yearOfLiving"
             type="number"
             component={TextField}
             label="当前居住城市年限"
           />
-        </div>
-        <div className="flex-form-wrapper">
+
           <Field
-            className={classes.formInner}
+            className={classes.textField}
             name="hometown"
             type="text"
             component={TextField}
             label="老家城市"
-            style={{ marginBottom: 20 }}
           />
         </div>
 
-        <div className="flex-form-wrapper">
+        <div className="centralize-button">
           <Button
             type="submit"
             color="primary"

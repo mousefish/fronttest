@@ -15,7 +15,7 @@ const styles = theme => ({
         justifyContent: "flex-start",
         padding: 15,
         marginBottom: 5,
-        backgroundColor: "#1976D2",
+        background: "linear-gradient(to bottom right, #2196F3 0%, #0D47A1 100%)",
         color: "#fff"
     },
 
@@ -33,7 +33,7 @@ const MyAccountLoggedinHeader = props => {
     return (
         <div className={classes.myHeader}>
             <Avatar alt="profile" src={pic} className={classes.avatar} />
-            <div className={classes.myHeaderRight}>{props.user.mail}</div>
+            <div className={classes.myHeaderRight}>欢迎你！{props.userName}</div>
         </div>
     );
 };

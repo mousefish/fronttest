@@ -8,10 +8,11 @@ import { TextField } from "redux-form-material-ui";
 import PageHeader from "../PageHeader";
 
 const styles = theme => ({
-    button: {
-        margin: theme.spacing.unit,
-        width: "95%",
-        marginTop: 20
+    button: {},
+
+    textField: {
+        padding: "8px 0",
+        // border: "1px solid blue"
     }
 });
 
@@ -22,19 +23,23 @@ class WizardSecond extends Component {
 
         return (
             <div className="wrapper">
-                <PageHeader onClick={previousPage} title="我在这个地方的故事" />
+                <PageHeader onClick={previousPage} title="发布新活动" />
                 <form onSubmit={handleSubmit}>
-                    <Field
-                        key="story"
-                        name="story"
-                        component={TextField}
-                        id="multiline-flexible"
-                        multiline
-                        rowsMax="4"
-                        placeholder="我在这里生活了10年......"
-                        className="text-field"
-                    />
-
+                    <div className="form-group">
+                        <h4 className="category-title">我在这里的故事</h4>
+                        <Field
+                            fullWidth
+                            key="story"
+                            name="story"
+                            component={TextField}
+                            id="multiline-flexible"
+                            multiline
+                            rowsMax="4"
+                            placeholder="我在这里生活了10年......"
+                            className={classes.textField}
+                        />
+                    </div>
+                    <div className="centralize-button">
                     <Button
                         type="submit"
                         color="primary"
@@ -44,6 +49,7 @@ class WizardSecond extends Component {
                     >
                         下一步
                     </Button>
+                    </div>
                 </form>
             </div>
         );

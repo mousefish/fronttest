@@ -1,11 +1,11 @@
 import axios from "axios";
-import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR } from "../Actions/types";
+import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR} from "../Actions/types";
 
 const INITIAL_STATE = {basicInfo:{}, err:""};
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        // fetch data for publicprofile
+        // fetch data for the public profile
         case FETCH_PROFILE_DATA:
             return {...state, basicInfo:action.payload}
 

@@ -14,14 +14,14 @@ export default (state = INITIAL_STATE, action) => {
             if (!_.isEmpty(action.payload)) {
                 let newRatings = state["ratings"].slice(0);
                 newRatings.push(action.payload);
-                return { ...state, ratings: newRatings };
+                return { ...state, ratings: newRatings, message:"评论提交成功" };
             } else {
                 return { ...state, message: " 你已经提交过了评论！" };
             }
         case FETCH_RATING_DATA:
             return { ...state, ratings: action.payload, message:"" };
         case FETCH_OVERALL_RATING:
-            return { ...state, summary: action.payload };
+            return { ...state, summary: action.payload, message:"" };
 
         case RATING_ERROR:
             return { ...state, message: "请确认登录!" };

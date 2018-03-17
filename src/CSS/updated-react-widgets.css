@@ -1,0 +1,26 @@
+.rw-widget-container {
+  background-color: none; }
+
+.rw-input, .rw-filter-input {
+  color: #555;
+  padding: 0;
+  background-color: none; }
+
+.rw-multiselect {
+  background-color: none;
+  border-color: none;
+  cursor: text; }
+
+.rw-list-option.rw-state-focus, .rw-list-option.rw-state-focus:hover {
+  /*  background-color: transparent;*/
+  border: none;
+  color: #333; }
+
+/*.rw-select-bordered {
+  cursor: pointer;
+  border: none; }
+
+.rw-multiselect-tag.rw-state-focus, .rw-multiselect-tag.rw-state-focus:hover {
+  background-color: transparent;
+  border: none;
+  color: #333; }*/

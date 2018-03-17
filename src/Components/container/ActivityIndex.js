@@ -2,46 +2,33 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { withStyles } from "material-ui/styles";
+import classNames from "classnames";
 import { Link } from "react-router-dom";
-import * as actions from "../../Actions";
-import IconButton from "material-ui/IconButton";
+import Card, { CardHeader, CardMedia, CardContent } from "material-ui/Card";
 import LocationOn from "material-ui-icons/LocationOn";
-import MonetizationOn from "material-ui-icons/MonetizationOn";
-
+import AccessTime from "material-ui-icons/AccessTime";
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
 import StarBorder from "material-ui-icons/StarBorder";
 import StarHalf from "material-ui-icons/StarHalf";
-
 import Person from "material-ui-icons/Person";
-
-import travel from "../../Assets/Images/sichuan.jpg";
-
-import Card, {
-  CardHeader,
-  CardMedia,
-  CardContent,
-  CardActions
-} from "material-ui/Card";
-
-import FavoriteIcon from "material-ui-icons/Favorite";
-import ShareIcon from "material-ui-icons/Share";
+import travel from "../../Assets/Images/test.jpg";
 import List from "material-ui/List";
 import Slide from "material-ui/transitions/Slide";
-import Dialog from "material-ui/Dialog";
-import RegisterDialog from "../../Pages/RegisterDialog";
+import Stars from "../../Pages/Stars";
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-const styles = {
+const styles = theme => ({
   flex: {
     flex: 1
   },
   media: {
-    height: 224,
-    position: "relative"
+    height: 204,
+    position: "relative",
+    borderRadius: "10px 10px 0 0"
   },
 
   icon: {
@@ -50,62 +37,92 @@ const styles = {
     verticalAlign: "-2px"
   },
 
-  heartOn: {
-    color: "#F44336"
+  iconHeart: {
+    width: 12,
+    height: 12,
+    verticalAlign: "-2px"
   },
-  numberOfLikes: {
-    fontSize: "1.2rem"
+
+  // themeBar: {
+  //   position: "absolute",
+  //   bottom: 0,
+  //   width: "100%",
+  //   height: "18%",
+  //   lineHeight:2,
+  //   paddingLeft:20,
+  //   color: "#fff",
+  //   backgroundColor: "rgba(0,0,0,0.6)",
+  //   fontSize: "1.5rem",
+  //   fontWeight:"bold",
+  //   letterSpacing:1.3
+  // },
+
+  budgetBox: {
+    position: "absolute",
+    width: 60,
+    height: 60,
+    lineHeight: 4.3,
+    textAlign: "center",
+    fontWeight: "bold",
+    left: 17,
+    top: 10,
+    color: "#fff",
+    borderRadius: "50%",
+    backgroundColor: "#03A9F4"
+  },
+
+  content: {
+    color: "#757575"
+  },
+
+  infoWrapper: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "space-between",
+    marginBottom: 10,
+    alignItems: "flex-start"
+  },
+
+  fav: {
+    textAlign: "right"
+  },
+  // left:{
+  //   border:"1px solid green"
+  // },
+
+  // right:{
+  //   border:"1px solid red"
+  // },
+
+  item: {
+    fontSize: "1.2rem",
+    marginBottom: 6
+    // border:"1px solid red"
+  },
+  themeStyle: {
+    fontWeight: "bold",
+    overflow: "auto"
   }
-};
+});
 
 class ActivityIndex extends Component {
-  state = {
-    open: false
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  renderService(services) {
-    const icon = this.props.classes.icon;
-    return services.map(service => {
+  renderStarZone(score) {
+    const { classes } = this.props;
+    if (score > 0) {
       return (
-        <span style={{ marginRight: 6 }} key={service}>
-          <LocalOffer className={icon} />
-          &nbsp;{service}
-        </span>
+        <div className={classes.item}>
+          <Stars num={score} />
+        </div>
       );
-    });
-  }
-
-  renderStar(num) {
-    const icon = this.props.classes.icon;
-    const starWrapper = [];
-
-    for (let i = 0; i < 5; i++) {
-      if (num - i > 0 && num - i < 1) {
-        starWrapper[i] = <StarHalf key={i} className={icon} />;
-      } else if (i < num) {
-        starWrapper[i] = <Star key={i} className={icon} />;
-      } else {
-        starWrapper[i] = <StarBorder key={i} className={icon} />;
-      }
     }
-
-    return starWrapper;
   }
 
-  handleLikes(event, itemId) {
-    event.preventDefault();
-    event.stopPropagation();
-    // cannot "like" until you login/signup
-    if (!localStorage.getItem("jwtToken")) {
-      this.setState({
-        open: true
-      });
-    } else {
-      this.props.submitLikes(itemId);
+  renderFavZone(num) {
+    const { classes } = this.props;
+    if (num > 0) {
+      return (
+        <div className={classNames(classes.item, classes.fav)}>{num} 人收藏</div>
+      );
     }
   }
 
@@ -116,78 +133,32 @@ class ActivityIndex extends Component {
     return _.map(activityData, item => {
       return (
         <Link to={`/activity/${item.id}`} className="unlink" key={item.id}>
-          <Card className="card">
+          <Card className="card" style={{ borderRadius: 10 }}>
             <CardMedia className={classes.media} image={travel} title="travel">
-              <span
-                style={{
-                  position: "absolute",
-                  right: 10,
-                  top: 10,
-                  color: "#fff"
-                }}
-              >
-                <LocationOn
-                  className={classes.icon}
-                  style={{ color: "#fff" }}
-                />{" "}
-                {item.location}
-              </span>
-              <span
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  width: "100%",
-                  height: "12%",
-                  padding: 4,
-                  color: "#fff",
-                  backgroundColor: "rgba(0,0,0,0.6)"
-                }}
-              >
-                {item.theme}
-              </span>
+              <div className={classes.budgetBox}>¥{item.budget}</div>
             </CardMedia>
-            <CardContent>
-              <div
-                style={{
-                  marginBottom: 10
-                }}
-              >
-                <div style={{ float: "left" }}>
-                  <MonetizationOn className={classes.icon} /> &nbsp;{item.budget}
+            <CardContent className={classes.content}>
+              <h3 className={classes.themeStyle}>{item.theme}</h3>
+              <div className={classes.infoWrapper}>
+                <div className={classes.left}>
+                  <div className={classes.item}>
+                    <LocationOn className={classes.icon} /> {item.location}
+                  </div>
+                  <div className={classes.item}>
+                    <Person className={classes.icon} />
+                    &nbsp;{item.username}
+                  </div>
+                  <div className={classes.item}>
+                    <AccessTime className={classes.icon} /> {item.departdate} 出发
+                  </div>
                 </div>
-                <div style={{ float: "right" }}>
-                  {this.renderStar(item.averageScore)}星 &nbsp;{item.numOfRater}{" "}
-                  人评价
+
+                <div className={classes.right}>
+                  {this.renderStarZone(item.averageScore)}
+                  {this.renderFavZone(item.likes)}
                 </div>
-                <div style={{ clear: "both" }} />
               </div>
-
-              <div style={{ marginBottom: 10 }} className={classes.link}>
-                <Person className={classes.icon} />
-                &nbsp;{item.username}
-              </div>
-
-              <div>{this.renderService(item.services)}</div>
             </CardContent>
-
-            <CardActions disableActionSpacing>
-              <IconButton
-                aria-label="Add to favorites"
-                onClick={event => {
-                  this.handleLikes(event, item.id);
-                }}
-              >
-                <FavoriteIcon
-                  className={item.likes === 0 ? "" : classes.heartOn}
-                />
-                <span className={classes.numberOfLikes}>
-                  &nbsp;{item.likes}
-                </span>
-              </IconButton>
-              <IconButton aria-label="Share">
-                <ShareIcon />
-              </IconButton>
-            </CardActions>
           </Card>
         </Link>
       );
@@ -197,20 +168,8 @@ class ActivityIndex extends Component {
   render() {
     const { fullScreen } = this.props;
 
-    return (
-      <List>
-        <Dialog
-          fullScreen={fullScreen}
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="responsive-dialog-title"
-        >
-          <RegisterDialog onClick={this.handleClose} />
-        </Dialog>
-        {this.renderItems()}
-      </List>
-    );
+    return <List>{this.renderItems()}</List>;
   }
 }
 
-export default connect(null, actions)(withStyles(styles)(ActivityIndex));
+export default withStyles(styles)(ActivityIndex);

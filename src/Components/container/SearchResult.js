@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Button from "material-ui/Button";
+import classNames from "classnames";
 import SideButton from "../../Pages/sideButton";
-import Card, { CardContent, CardMedia } from "material-ui/Card";
+import Card, { CardContent } from "material-ui/Card";
 import IconButton from "material-ui/IconButton";
 import Typography from "material-ui/Typography";
 import Header from "../presenter/header";
 import Slide from "material-ui/transitions/Slide";
-
 import { withStyles } from "material-ui/styles";
-
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+import EventAvailable from "material-ui-icons/EventAvailable";
+import LocalPlay from "material-ui-icons/LocalPlay";
+import Person from "material-ui-icons/PersonPin";
 import { Link } from "react-router-dom";
 import * as actions from "../../Actions";
 import PageHeader from "../../Pages/PageHeader";
 import LocalOffer from "material-ui-icons/LocalOffer";
-import travel from "../../Assets/Images/trip.jpg";
+import Stars from "../../Pages/Stars";
 
 const styles = theme => ({
   button: {
@@ -30,14 +32,12 @@ const styles = theme => ({
   },
 
   card: {
-    display: "flex"
-  },
-
-  content: {
     display: "flex",
-    flexFlow: "column",
-    justifyContent: "center",
-    width: "80%"
+    flexFlow: "row nowrap",
+    justifyContent: "flex-start",
+    boxShadow: "none",
+    borderBottom: "1px solid #BDBDBD",
+    padding: "10px 10px 10px 0px"
   },
 
   cover: {
@@ -45,19 +45,71 @@ const styles = theme => ({
     height: 151
   },
 
+  listWrapper: {
+    marginTop: 10,
+    marginBottom: 65
+  },
+
   resultList: {
     display: "flex",
-    flexFlow: "column",
-    textAlign: "center"
+    flexFlow: "column"
+  },
+  result: {
+    width: "95vw",
+    maxWidth: 600,
+    margin: "10px auto"
+  },
+
+  createBtn: {
+    border: "1px solid #1976D2",
+    padding: "15px 20px",
+    fontSize: "1.1rem"
+  },
+
+  createActivity: {
+    backgroundColor: "#1976D2",
+    borderRight: "none",
+    color: "#fff"
+  },
+
+  createWish: {
+    color: "#fff",
+    backgroundColor: "#43A047"
   },
 
   heading: {
     fontWeight: "bold",
-    textAlign: "left"
+    textAlign: "left",
+    maxWidth: "70%",
+    margin: 0
   },
 
   subheading: {
-    textAlign: "left"
+    textAlign: "left",
+    // border:"1px solid red",
+    margin: 0
+  },
+  rowWrapper: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "space-between"
+  },
+  iconWrapper: {
+    margin: "0px 15px 0 10px",
+    // border:"1px solid red",
+    paddingTop: 3
+  },
+  icon: {
+    width: 50,
+    height: 50
+  },
+  right: {
+    width: "80%"
+  },
+
+  unlink: {
+    textDecoration: "none",
+    color: "#fff"
   }
 });
 
@@ -66,93 +118,126 @@ function Transition(props) {
 }
 
 class SearchResult extends Component {
-  componentWillMount() {
-    // slice(1) to remove the first '?'
-    if (this.props.location) {
-      let query = this.props.location.search.slice(1);
-      this.props.submitSearchData(query, null, this.handleRequestClose);
-    }
-  }
-
-  renderServices(services) {
-    const icon = this.props.classes.icon;
-    return services.map(service => {
-      return (
-        <span style={{ marginRight: 6 }} key={service}>
-          <LocalOffer className={icon} />
-          &nbsp;{service}
-        </span>
-      );
-    });
-  }
+  // componentWillMount() {
+  //   // slice(1) to remove the first '?'
+  //   if (this.props.location) {
+  //     let query = this.props.location.search.slice(1);
+  //     this.props.submitSearchData(query, null, this.handleRequestClose);
+  //   }
+  // }
 
   renderSearchResult(searchResult) {
     const { classes } = this.props;
     let result = [];
-
-    result.push(<PageHeader title="搜索结果" history={this.props.history} />);
-
-    if (!searchResult[0]) {
-      result.push(<h4 key="no">尚未有搜索结果，发布你的愿望？</h4>);
+    if (
+      searchResult &&
+      searchResult[0] &&
+      typeof searchResult[0] === "string"
+    ) {
       result.push(
-        <Link to="/addWish" className="unlink" key="wish">
-          <Button color="primary" raised className={classes.button} id="btn">
-            发布新愿望
-          </Button>
-        </Link>
+        <h4 key="no" className={classes.result}>
+          {searchResult[0]}
+        </h4>
       );
-
-      return result
+      result.push(
+        <div
+          className={classNames(classes.result, classes.createGroup)}
+          key="createGroup"
+        >
+          <span
+            className={classNames(classes.createBtn, classes.createActivity)}
+          >
+            <Link to="/addActivity" className={classes.unlink}>
+              创建新活动
+            </Link>
+          </span>
+          <span className={classNames(classes.createBtn, classes.createWish)}>
+            <Link to="/addWish" className={classes.unlink}>
+              创建新愿望
+            </Link>
+          </span>
+        </div>
+      );
+      return result;
     }
+    if (searchResult && searchResult[0]) {
+      result.push(
+        <h4 key="counter" className={classes.result}>
+          找到 {searchResult[0].counter} 个{searchResult[0].category}
+        </h4>
+      );
+      if (searchResult[0].category === "活动") {
+        searchResult.forEach(item => {
+          result.push(
+            <Link to={`/activity/${item.id}`} key={item.id} className="unlink">
+              <Card className={classes.card}>
+                <div className={classes.iconWrapper}>
+                  <EventAvailable className={classes.icon} />
+                </div>
+                <div className={classes.right}>
+                  <div className={classes.rowWrapper}>
+                    <h4 className={classes.heading}>{item.theme}</h4>
+                    <h4 className={classes.subheading} color="textSecondary">
+                      <Stars num={item.averageScore} />
+                    </h4>
+                  </div>
 
-    result.push(<h4 key="counter">共计 {searchResult[0].counter} 个结果</h4>);
-    if (searchResult[0].category === "activity") {
-      searchResult.forEach(item => {
-        result.push(
-          <Link to={`/activity/${item.id}`} key={item.id} className="unlink">
-            <Card className={classes.card}>
-              <CardContent className={classes.content}>
-                <h4 className={classes.heading}>{item.theme}</h4>
-                <h6 className={classes.subheading} color="textSecondary">
-                  {item.budget} 元/人
-                  <div style={{ marginTop: 8 }}>
-                    {this.renderServices(item.services)}
+                  <p className={classes.subheading} color="textSecondary">
+                    {item.budget} 元 / 人
+                  </p>
+                  <div className={classes.rowWrapper}>
+                    <p className={classes.subheading} color="textSecondary">
+                      {item.departdate} 出发
+                    </p>
                   </div>
-                </h6>
-              </CardContent>
-              <CardMedia
-                className={classes.cover}
-                image={travel}
-                title="travel"
-              />
-            </Card>
-          </Link>
-        );
-      });
-    }
-    if (searchResult[0].category === "wish") {
-      searchResult.forEach(item => {
-        result.push(
-          <Link to={`/wish/${item.id}`} key={item.id} className="unlink">
-            <Card className={classes.card}>
-              <CardContent className={classes.content}>
-                <h4 className={classes.heading}>{item.location}</h4>
-                <h6 className={classes.subheading} color="textSecondary">
-                  {item.budget} 元/人
-                  <div style={{ marginTop: 8 }}>
-                    {this.renderServices(item.services)}
-                  </div>
-                </h6>
-              </CardContent>
-              <CardMedia
-                className={classes.cover}
-                image={travel}
-                title="travel"
-              />
-            </Card>
-          </Link>
-        );
-      });
+                </div>
+              </Card>
+            </Link>
+          );
+        });
+      } else if (searchResult[0].category === "愿望") {
+        searchResult.forEach(item => {
+          result.push(
+            <Link to={`/wish/${item.id}`} key={item.id} className="unlink">
+              <Card className={classes.card}>
+                <div className={classes.iconWrapper}>
+                  <LocalPlay className={classes.icon} />
+                </div>
+                <div className={classes.right}>
+                  <h4 className={classes.heading}>{item.location}</h4>
+                  <p className={classes.subheading} color="textSecondary">
+                    预算 {item.budget} 元 / 人
+                  </p>
+                  <p className={classes.subheading} color="textSecondary">
+                    希望 {item.departdate} 出发
+                  </p>
+                </div>
+              </Card>
+            </Link>
+          );
+        });
+      } else if (searchResult[0].category === "向导") {
+        searchResult.forEach(item => {
+          result.push(
+            <Link to={`/user/${item.id}`} key={item.id} className="unlink">
+              <Card className={classes.card}>
+                <div className={classes.iconWrapper}>
+                  <Person className={classes.icon} />
+                </div>
+                <div className={classes.right}>
+                  <h4 className={classes.heading}>{item.username}</h4>
+                  <p className={classes.subheading} color="textSecondary">
+                    {item.sex} {item.age} 岁
+                  </p>
+                  <p className={classes.subheading} color="textSecondary">
+                    {item.language}
+                  </p>
+                </div>
+              </Card>
+            </Link>
+          );
+        });
+      }
     }
 
     return result;
@@ -160,7 +245,7 @@ class SearchResult extends Component {
   render() {
     const { classes, searchResult } = this.props;
     return (
-      <div className="wrapper">
+      <div className={classes.listWrapper}>
         <div className={classes.resultList}>
           {this.renderSearchResult(searchResult)}
         </div>

@@ -12,20 +12,24 @@ const buildURL = searchData => {
 };
 export const submitSearchData = (searchData, history, cb) => async dispatch => {
     let q = typeof searchData === "string" ? searchData : buildURL(searchData);
-    const res = await axios.get(`${ROOT_URL}/api/searchData?${q}`);
+    const res = await axios.get(`${ROOT_URL}/api/searchData?${q}`, {
+        headers: {
+            authorization: localStorage.getItem("jwtToken")
+        }
+    });
 
     dispatch({
         type: FETCH_SEARCH_DATA,
         payload: res.data
     });
     // console.log("clicked!", res.data)
-    if (history) {
-        history.push(`/searchResult?${q}`);
-    }
-    if(cb){
+    // if (history) {
+    //     history.push(`/searchResult?${q}`);
+    // }
+    if (cb) {
         cb();
     }
+    // searchData:"青岛市 山东省"
     //  for Browsing search history
     generateSearchHistory(searchData, res.data);
-
 };

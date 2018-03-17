@@ -11,7 +11,6 @@ import Button from "material-ui/Button";
 import Dialog from "material-ui/Dialog";
 import RegisterDialog from "./RegisterDialog";
 
-
 const styles = theme => ({
     list: {
         listStyle: "none",
@@ -27,8 +26,8 @@ const styles = theme => ({
         width: "45%",
         padding: 10,
         fontSize: 14,
-        backgroundColor:"#1976D2"
-    },
+        backgroundColor: "#1976D2"
+    }
 });
 
 class MyAccount extends Component {
@@ -40,26 +39,28 @@ class MyAccount extends Component {
         this.setState({ open: false });
     };
 
-
     handleClick(item) {
-        let rawUser = localStorage.getItem("user");
-        if (rawUser) {
-            let userId = JSON.parse(rawUser).id;
+        let token = localStorage.getItem("jwtToken");
+        if (token) {
             switch (item) {
                 case "账号信息":
-                    return this.props.history.push(`/myBasicInfo`);
+                    return this.props.history.push(`/myBasicInfo/0`);
                 case "我的旅游故事":
-                    return this.props.history.push(`/story/${userId}`);
+                    return this.props.history.push(`/story/0`);
+                case "我的活动":
+                    return this.props.history.push(`/userActivities/0`);
+                case "我的愿望":
+                    return this.props.history.push(`/userWishes/0`);
+                case "我的收藏":
+                    return this.props.history.push(`/myFavorites`);
             }
         } else {
             this.setState({
-                open:true
-            })
+                open: true
+            });
         }
     }
     renderItems() {
-        let rawUser = localStorage.getItem("user");
-
         const { classes } = this.props;
         const items = [
             "账号信息",
@@ -77,7 +78,6 @@ class MyAccount extends Component {
                 <MyAccountItem
                     key={index}
                     item={item}
-                    rawUser={rawUser}
                     history={this.props.history}
                     onClick={() => {
                         this.handleClick(item);
@@ -88,19 +88,23 @@ class MyAccount extends Component {
     }
 
     renderMyHeader() {
-        let rawUser = localStorage.getItem("user");
-        let user;
+        let token = localStorage.getItem("jwtToken");
+        const userName  = localStorage.getItem("userName");
+        if (token) {
 
-        if (rawUser) {
-            user = JSON.parse(rawUser);
-            return <MyAccountLoggedinHeader history={this.props.history} user={user} />;
+            return (
+                <MyAccountLoggedinHeader
+                    history={this.props.history} userName={userName}
+
+                />
+            );
         } else {
             return <MyAccountRegisterHeader />;
         }
     }
 
     render() {
-        const { history, classes,fullScreen} = this.props;
+        const { history, classes, fullScreen } = this.props;
         return (
             <div>
                 <Dialog
@@ -134,6 +138,8 @@ class MyAccount extends Component {
         );
     }
 }
+
+
 
 export default connect(null, actions)(
     withStyles(styles)(withRouter(MyAccount))

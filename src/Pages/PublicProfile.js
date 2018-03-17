@@ -83,8 +83,10 @@ const styles = theme => ({
         width: "95%",
         padding: 15
     },
-    flex: {
-        flex: 1
+
+    highlight: {
+        fontSize: "1.2rem",
+        fontWeight: "bold"
     }
 });
 
@@ -97,8 +99,8 @@ class PublicProfile extends Component {
     render() {
         const { classes, history } = this.props;
         const { user } = this.props;
-        if (!user) {
-            return <div>loading</div>;
+        if (user && user.hasOwnProperty("warning")) {
+            return <div>{user["warning"]}</div>;
         }
 
         return (
@@ -134,19 +136,46 @@ class PublicProfile extends Component {
                                 他的故事
                             </span>
                         </Link>
-                        <span className={classes.subHeaderContent}>他的愿望</span>
-                        <span className={classes.subHeaderContent}>他的活动</span>
-                        <span className={classes.subHeaderContent}>他的收藏</span>
+                        <Link
+                            to={`/userActivities/${user.id}`}
+                            className="unlink"
+                            style={{ color: "#fff" }}
+                        >
+                            <span className={classes.subHeaderContent}>
+                                他的活动
+                            </span>
+                        </Link>
+                        <Link
+                            to={`/userWishes/${user.id}`}
+                            className="unlink"
+                            style={{ color: "#fff" }}
+                        >
+                            <span className={classes.subHeaderContent}>
+                                他的愿望
+                            </span>
+                        </Link>
                     </div>
                 </div>
-                <div className="wrapper">{this.props.children}</div>
+                <div className="wrapper">
+                    <div>
+                        {user.sex}，{user.age}岁， 爱好{user.hobby}， 老家{user.hometown}，
+                        <span className={classes.highlight}>
+                            {user.language}
+                        </span>，
+                        {user.school}
+                        {user.major}毕业，
+                        <span className={classes.highlight}>
+                            {user.personality}
+                        </span>
+                    </div>
+                </div>
             </div>
         );
     }
-
 }
 
 const mapStateToProps = state => {
+    // console.log("here", state.UserReducer.basicInfo);
     return {
         user: state.UserReducer.basicInfo
     };

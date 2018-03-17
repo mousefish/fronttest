@@ -26,9 +26,7 @@ import Dialog, {
 import TextField from "material-ui/TextField";
 import Translation from "../Data/UserBasicInfoENtoCH";
 
-
 import verfiyAndSubmit from "../Utility/verfiyAndSubmit";
-
 
 const sexOptions = ["男", "女", "其他"];
 const styles = theme => ({
@@ -43,12 +41,13 @@ const styles = theme => ({
 
 class PrivateBasicInfo extends Component {
     componentWillMount() {
-        let rawUser = localStorage.getItem("user");
-        if (rawUser) {
-            let userId = JSON.parse(rawUser).id;
-            this.props.fetchUser(userId);
+        let token = localStorage.getItem("jwtToken");
+        if (token) {
+        // 0 means the person itself is reviewing his/ her file
+            this.props.fetchUser(0);
+        } else {
+            return null;
         }
-
     }
 
     state = {
@@ -56,16 +55,27 @@ class PrivateBasicInfo extends Component {
         key: "",
         value: "",
         err: "",
-        userId: this.props.match.params.userId
+        mailMarker: ""
     };
 
     handleClose = () => {
         this.setState({ open: false });
     };
 
-    handleUpdate(data) {
-        // valueToBeUpdated {userId: 23, username: "jingyi"}
+    handlePopup(data) {
+        // valueToBeUpdated {key: "mail", value: "xyz@abc.com"}
         //  Needs to clear the err message to avoid showing the previous one
+        // need this to verify password: password cannot be part of email!
+        if (data.key === "mail") {
+            this.setState({
+                mailMarker: data.value
+            });
+            // when user only update password, not clicking on or updating on email!
+        }else if(data.key === "password"){
+            this.setState({
+                mailMarker: this.props.user.basicInfo.mail
+            });
+        };
         this.setState({
             open: true,
             original: data.value,
@@ -75,12 +85,21 @@ class PrivateBasicInfo extends Component {
         });
     }
 
+    handleChange(e) {
+        if (this.state.key === "mail") {
+            // need this to verify password: password cannot be part of email!
+            this.setState({
+                mailMarker: e.target.value
+            });
+        }
+        this.setState({ value: e.target.value });
+    }
+
     submitUpdates = () => {
         this.setState({
             err: ""
         });
-
-      verfiyAndSubmit(this);
+        verfiyAndSubmit(this);
     };
 
     // renderPage is called everytime the Dialog is opened and closed!!!
@@ -88,12 +107,13 @@ class PrivateBasicInfo extends Component {
         if (!this.props.user) {
             return <div>loading...</div>;
         }
+
         return (
             <div>
                 <PageHeader history={this.props.history} title="我的信息" />
                 <BasicInfoItem
                     profile={this.props.user.basicInfo}
-                    onClick={data => this.handleUpdate(data)}
+                    onClick={data => this.handlePopup(data)}
                 />
             </div>
         );
@@ -103,7 +123,7 @@ class PrivateBasicInfo extends Component {
         const { classes } = this.props;
 
         return (
-            <div className="wrapper">
+            <div className="wrapper" style={{fontSize:"1.1rem"}}>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -143,9 +163,7 @@ class PrivateBasicInfo extends Component {
                                 label={Translation[this.state.key]}
                                 type="email"
                                 value={this.state.value}
-                                onChange={e => {
-                                    this.setState({ value: e.target.value });
-                                }}
+                                onChange={e => this.handleChange(e)}
                                 fullWidth
                             />
                         )}
@@ -173,7 +191,7 @@ class PrivateBasicInfo extends Component {
 // if the user update his email with a one that is already used by another user!
 // or err from database
 const mapStateToProps = state => {
-    console.log("err", state.UserReducer.err);
+    console.log("UserReducer", state.UserReducer);
     return {
         user: state.UserReducer
     };

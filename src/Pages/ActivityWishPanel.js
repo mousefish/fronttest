@@ -23,8 +23,8 @@ class ActivityWishPanel extends Component {
             <div>
                 <img src={bg} alt="chengdu" className="image-wrapper" />
                 <div className="wrapper" style={{marginTop:40}}>
-                    <div className="flex-inner-wrapper">
-                        <Link to="/addActivity" className="unlink">
+
+                        <Link to="/addActivity" className="unlink centralize-button">
                             <Button
                                 color="primary"
                                 raised
@@ -34,18 +34,19 @@ class ActivityWishPanel extends Component {
                                 发布新活动
                             </Button>
                         </Link>
-                        <Link to="/addWish" className="unlink">
+                        <Link to="/addWish" className="unlink centralize-button">
                             <Button
                                 color="primary"
                                 raised
                                 className={classes.button}
                                 id="btn"
+                                style={{backgroundColor:"#43A047"}}
                             >
                                 发布新愿望
                             </Button>
                         </Link>
                     </div>
-                </div>
+
             </div>
         );
     }

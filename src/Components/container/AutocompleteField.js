@@ -18,32 +18,63 @@ const renderInput = inputProps => {
       inputRef={ref}
       InputProps={{
         classes: {
-          input: classes.input,
+          input: classes.input
         },
         ...InputProps
       }}
+      style={{ paddingTop: 8, marginBottom: 8 }}
     />
   );
 };
 
-const renderCity = params => {
-  const { city, index, itemProps, highlightedIndex, selectedItem } = params;
+const renderCity = (params, props) => {
+  console.log("props...", props.onClick);
+  const {
+    city,
+    index,
+    itemProps,
+    highlightedIndex,
+    selectedItem,
+    onClick
+  } = params;
   const isHighlighted = highlightedIndex === index;
   const isSelected = selectedItem === city;
-
-  return (
-    <MenuItem
-      {...itemProps}
-      key={city}
-      selected={isHighlighted}
-      component="div"
-      style={{
-        fontWeight: isSelected ? 500 : 400
-      }}
-    >
-      {city}
-    </MenuItem>
-  );
+  if (props.onClick) {
+    return (
+      <div
+        key={city}
+        onClick={() => {
+          props.onClick(city);
+        }}
+      >
+        <MenuItem
+          {...itemProps}
+          key={city}
+          selected={isHighlighted}
+          component="div"
+          style={{
+            fontWeight: isSelected ? 500 : 400
+          }}
+        >
+          {city}
+        </MenuItem>
+      </div>
+    );
+  } else {
+    return (
+      <MenuItem
+        {...itemProps}
+        key={city}
+        selected={isHighlighted}
+        component="div"
+        style={{
+          fontWeight: isSelected ? 500 : 400
+        }}
+      >
+        {city}
+      </MenuItem>
+    );
+  }
 };
 
 const getCitys = inputValue => {
@@ -57,7 +88,7 @@ const getCitys = inputValue => {
         !inputValue ||
         city.toLowerCase().includes(inputValue.toLowerCase())
       ) {
-        result.push(city+ " " + provinceName);
+        result.push(city + " " + provinceName);
         if (result.length == 5) {
           return result;
         }
@@ -80,7 +111,7 @@ const autocompleteField = props => {
         selectedItem,
         highlightedIndex
       }) => (
-        <div className={classes.container} style={{width:"100%"}}>
+        <div className={classes.container} style={{ width: "100%" }}>
           {renderInput({
             fullWidth: true,
             classes,
@@ -91,15 +122,18 @@ const autocompleteField = props => {
             ...props.input
           })}
           {isOpen ? (
-            <Paper square>
+            <Paper square style={{ marginTop: -8 }}>
               {getCitys(inputValue).map((city, index) =>
-                renderCity({
-                  city,
-                  index,
-                  itemProps: getItemProps({ item: city }),
-                  highlightedIndex,
-                  selectedItem
-                })
+                renderCity(
+                  {
+                    city,
+                    index,
+                    itemProps: getItemProps({ item: city }),
+                    highlightedIndex,
+                    selectedItem
+                  },
+                  props
+                )
               )}
             </Paper>
           ) : null}

@@ -1,17 +1,16 @@
-export default (searchData, resData)=>{
+export default (searchData, resData) => {
     if (typeof searchData !== "string") {
-        // console.log(localStorage.hist);
         let location;
         let category;
 
-        if (resData.length === 0) {
+        if (typeof resData[0] === "string") {
             location = searchData.location;
-            category = searchData.category === "activity" ? "活动" : "愿望";
+            category = searchData.category;
         } else {
             location = resData[0].location;
-            category = resData[0].category === "activity" ? "活动" : "愿望";
+            category = resData[0].category
         }
-        let record = location + ", " + category;
+        let record = location + "—" + category;
         let newRecord;
         let hist = localStorage.hist;
         if (!hist) {
@@ -30,4 +29,4 @@ export default (searchData, resData)=>{
             localStorage.hist = newRecord;
         }
     }
-}
+};

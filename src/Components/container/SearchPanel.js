@@ -4,21 +4,19 @@ import { reduxForm, Field } from "redux-form";
 import Button from "material-ui/Button";
 import AutocompleteField from "./AutocompleteField";
 import popupSearchMultiServices from "./popupSearchMultiServices";
-// import popupSearchMultiSelect from "./popupSearchMultiSelect";
 import * as actions from "../../Actions";
 import HistorySearch from "./HistorySearch";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
-import { MenuItem } from "material-ui/Menu";
-import { Select } from "redux-form-material-ui";
 import classNames from "classnames";
 import validate from "../../Utility/validate";
-import Radio from "material-ui/Radio";
-import { RadioGroup, TextField } from "redux-form-material-ui";
-import { FormControlLabel } from "material-ui/Form";
-import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import Search from "material-ui-icons/Search";
+
+// import Search from "material-ui-icons/Search";
 import PageHeader from "../../Pages/PageHeader";
+import AppBar from "material-ui/AppBar";
+import Tabs, { Tab } from "material-ui/Tabs";
+import SearchResult from "./SearchResult";
+
 const styles = theme => ({
   wrapper: {
     width: "95%",
@@ -32,20 +30,20 @@ const styles = theme => ({
   },
 
   searchBar: {
-    marginTop:10,
+    marginTop: 10,
     display: "flex",
-    position:"relative",
+    position: "relative",
     flexFlow: "row nowrap",
     justifyContent: "space-between",
     paddingLeft: 12,
     alignItems: "center",
-    paddingRight:10,
+    paddingRight: 10
   },
 
   button: {
-    position:"absolute",
-    right:-25,
-    top:-9,
+    position: "absolute",
+    right: -25,
+    top: -9
 
     // margin: theme.spacing.unit,
     // width: "100%",
@@ -66,18 +64,46 @@ const styles = theme => ({
 
   text: {
     fontWeight: "bold"
+  },
+  tab: {
+    fontSize: "2rem"
   }
 });
 
 const renderError = ({ meta: { touched, error } }) =>
   touched && error ? (
-    <span style={{ color: "red", fontSize: "11px", marginLeft:10 }}>{error}</span>
+    <span style={{ color: "red", fontSize: "11px", marginLeft: 10 }}>
+      {error}
+    </span>
   ) : (
     false
   );
 
 class SearchPanel extends Component {
+  state = {
+    value: 0
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   submitForm(values) {
+    if (!values.hasOwnProperty("fromChip")) {
+      let categoryValue;
+      if (this.state.value === 0) {
+        categoryValue = "活动";
+      }
+      if (this.state.value === 1) {
+        categoryValue = "愿望";
+      }
+      if (this.state.value === 2) {
+        categoryValue = "向导";
+      }
+      values["category"] = categoryValue;
+      // console.log("here", values)
+    }
+
     this.props.submitSearchData(
       values,
       this.props.history,
@@ -86,21 +112,31 @@ class SearchPanel extends Component {
   }
 
   render() {
-    const classes = this.props.classes;
+    const { classes, theme } = this.props;
     const { handleSubmit } = this.props;
     return (
-      <div className="wrapper">
+      <div className="searchPanelWrapper">
         <PageHeader title="搜索" history={this.props.history} />
         <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
-          <Field
-            name="category"
-            component={RadioGroup}
-            className={classes.radioInner}
-          >
-            <FormControlLabel value="activity" control={<Radio />} label="活动" />
-            <FormControlLabel value="wish" control={<Radio />} label="愿望" />
-          </Field>
-
+          <div className={classes.root} style={{ margin: "15px 0 35px 0" }}>
+            <AppBar
+              position="static"
+              color="default"
+              style={{ boxShadow: "none" }}
+            >
+              <Tabs
+                value={this.state.value}
+                onChange={this.handleChange}
+                indicatorColor="#1976D2"
+                textColor="#1976D2"
+                fullWidth
+              >
+                <Tab style={{ letterSpacing: 2 }} label="活动" />
+                <Tab style={{ letterSpacing: 2 }} label="愿望" />
+                <Tab style={{ letterSpacing: 2 }} label="向导" />
+              </Tabs>
+            </AppBar>
+          </div>
           <Field name="category" component={renderError} />
 
           <div className={classes.searchBar}>
@@ -109,19 +145,20 @@ class SearchPanel extends Component {
               type="text"
               placehoder="选择一个城市"
               component={AutocompleteField}
+              onClick={value => {
+                this.submitForm({ location: value });
+              }}
+              value={this.state.location}
               props={this.props}
             />
-
-            <Button type="submit" className={classes.button}>
-              <Search style={{ color: "lightgrey" }} />
-            </Button>
           </div>
-
         </form>
 
-
-        <div style={{ marginTop: 60 }}>
+        <div>
           <HistorySearch onClick={value => this.submitForm(value)} />
+        </div>
+        <div>
+          <SearchResult />
         </div>
       </div>
     );
@@ -133,6 +170,6 @@ SearchPanel = reduxForm({
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
-})(withStyles(styles)(SearchPanel));
+})(withStyles(styles, { withTheme: true })(SearchPanel));
 
 export default (SearchPanel = connect(null, actions)(withRouter(SearchPanel)));

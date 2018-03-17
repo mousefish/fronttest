@@ -53,14 +53,7 @@ class AddActivity extends Component {
       // console.log('aftervalue', modifiedValues);
       // blob:http://localhost:3000/95ed0c2e-7b16-4d37-8e69-250a6f57a860
 
-        // this.props.submitActivityData(modifiedValues, this.props.history);
-    }
-
-    // Use this function to show the error message from backend
-    renderErrorMsg() {
-        if (this.props.msg) {
-            return <div style={{textAlign:"center"}}>{this.props.msg}</div>;
-        }
+        this.props.submitActivityData(modifiedValues, this.props.history);
     }
 
     render() {

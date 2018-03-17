@@ -19,9 +19,9 @@ const buildURL = searchData => {
 
 export const logout = history => dispatch => {
   localStorage.removeItem("jwtToken");
-  localStorage.removeItem("user");
+  localStorage.removeItem("userName");
   dispatch({ type: DEAUTH_USER });
-  history.push("/");
+  history.push("/openPage");
 };
 
 export const verifySignupEmail = emailObj => async dispatch => {
@@ -44,13 +44,13 @@ export const userSignupRequest = (userData, history) => async dispatch => {
     if (res.data.token) {
       localStorage.setItem("jwtToken", res.data.token);
        // store the user info for visiting basic info later, my story, those items under my account later
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("userName", res.data.userName);
       dispatch({
         type: AUTH_USER,
-        payload: res.data.user
+
       });
 
-      history.goBack();
+      history.push("/recommendation");
     } else {
       dispatch(authError(res.data));
     }
@@ -65,13 +65,13 @@ export const userLogin = (userData, history) => async dispatch => {
 
     localStorage.setItem("jwtToken", res.data.token);
     // store the user info for visiting basic info later, my story, those items under my account later
-    localStorage.setItem("user", JSON.stringify(res.data.user));
+    localStorage.setItem("userName", res.data.userName);
+
     dispatch({
       type: AUTH_USER,
-      payload: res.data.user
     });
 
-    history.goBack();
+    history.push("/recommendation");
   } catch (err) {
     // err is an Object - Error: Request failed with status code 401.
     // err.message - string

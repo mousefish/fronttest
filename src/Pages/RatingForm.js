@@ -13,9 +13,9 @@ import RegisterDialog from "./RegisterDialog";
 
 const styles = theme => ({
     textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: "95%"
+        // marginLeft: theme.spacing.unit,
+        // marginRight: theme.spacing.unit,
+        width: "100%",
     },
     container: {
         display: "flex",
@@ -23,13 +23,16 @@ const styles = theme => ({
     },
 
     button: {
-        margin: theme.spacing.unit,
+        // margin: theme.spacing.unit,
         width: "45%",
         padding: 10,
         fontSize: 14,
-        backgroundColor:"#1976D2"
+        backgroundColor: "#1976D2",
+        margin:"10px 0"
     },
-
+    starColor: {
+        color: "#BDBDBD"
+    }
 });
 class RatingForm extends Component {
     state = {
@@ -45,10 +48,15 @@ class RatingForm extends Component {
     };
 
     componentWillMount() {
+        const { classes } = this.props;
         const starContainer = [];
         for (let i = 0; i < 5; i++) {
             starContainer.push(
-                <StarBorder key={i} onClick={() => this.updateStars(i)} />
+                <StarBorder
+                    className={classes.starColor}
+                    key={i}
+                    onClick={() => this.updateStars(i)}
+                />
             );
         }
 
@@ -62,11 +70,11 @@ class RatingForm extends Component {
         for (let i = 0; i < 5; i++) {
             if (i <= index) {
                 starContainer.push(
-                    <Star onClick={() => this.updateStars(i)} />
+                    <Star key={i} onClick={() => this.updateStars(i)} />
                 );
             } else {
                 starContainer.push(
-                    <StarBorder onClick={() => this.updateStars(i)} />
+                    <StarBorder key={i} onClick={() => this.updateStars(i)} />
                 );
             }
         }
@@ -97,26 +105,29 @@ class RatingForm extends Component {
         const { classes, fullScreen } = this.props;
         const { activityId } = this.props;
         const { message } = this.props;
+        console.log("State",this.state.message)
         return (
-            <div className="flex-inner-wrapper">
+            <div>
                 <Dialog
                     fullScreen={fullScreen}
                     open={this.state.open}
                     onClose={this.handleClose}
                     aria-labelledby="responsive-dialog-title"
                 >
-                   <div><RegisterDialog onClick={this.handleClose}/></div>
+                    <div>
+                        <RegisterDialog onClick={this.handleClose} />
+                    </div>
                 </Dialog>
-                <h3 className="category-title">在此发表评论</h3>
+
                 <form>
-                    <div>{this.state.stars}</div>
+                    {this.state.stars}
                     <TextField
                         id="textarea"
-                        label="写下你的评论"
+                        label="给个评论吧"
                         placeholder="Placeholder"
                         multiline
                         className={classes.textField}
-                        margin="normal"
+                        // margin="normal"
                         onChange={event => {
                             this.setState({ feedback: event.target.value });
                         }}
@@ -132,7 +143,7 @@ class RatingForm extends Component {
                         提交评论
                     </Button>
                     <div className="input-error">
-                        { this.state.message || message}
+                        {this.state.message || message}
                     </div>
                 </form>
             </div>

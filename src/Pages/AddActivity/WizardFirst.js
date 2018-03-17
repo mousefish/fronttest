@@ -14,57 +14,54 @@ import PageHeader from "../PageHeader";
 
 const styles = theme => ({
     button: {
-        margin: theme.spacing.unit,
-        width: "95%"
+        margin: "auto"
+
+    },
+
+    textField: {
+        padding: "8px 0",
+        // border: "1px solid blue"
     }
 });
 
 class WizardFirst extends Component {
-
     renderFields(classes) {
         return [
-            <div className="flex-form-wrapper" key="theme">
+            <div className="form-group" key="basic">
+                <h4 className="category-title">基本活动信息</h4>
                 <Field
+                    fullWidth
                     key="theme"
                     name="theme"
                     type="text"
                     component={TextField}
-                    className="text-field"
-                    placeholder="活动的主题(例：骨灰级成都吃货地图)"
+                    placeholder="活动的主题，字数不多于20个"
+                    className={classes.textField}
                 />
-            </div>,
-            <div
-                className="flex-form-wrapper"
-                style={{ width: "95%" }}
-                key="location"
-            >
+
                 <Field
+                    fullWidth
                     key="location"
                     name="location"
                     type="text"
                     component={AutocompleteField}
-                    className="text-field"
-                    placeholder="活动所在的国家和城市"
+                    placeholder="活动所在的国家和城市,按提示列表选择"
                     props={this.props}
                 />
-            </div>,
-            <div className="flex-form-wrapper" key="budget">
+
                 <Field
+                    fullWidth
                     key="budget"
                     name="budget"
                     type="text"
                     component={TextField}
-                    className="text-field"
                     placeholder="活动费用/人"
+                    className={classes.textField}
                 />
             </div>,
 
-            <div
-                className="flex-form-wrapper"
-                style={{ width: "95%" }}
-                key="date"
-            >
-                <h4 className="category-title">你的活动时间</h4>
+            <div className="form-group" key="date">
+                <h4 className="category-title">活动时间</h4>
                 <Field
                     key="dapartdate"
                     name="departdate"
@@ -90,12 +87,12 @@ class WizardFirst extends Component {
 
         return (
             <div className="wrapper">
-                <PageHeader history={this.props.history} title="发布新活动"/>
+                <PageHeader history={this.props.history} title="发布新活动" />
                 <form onSubmit={handleSubmit}>
                     <div>{this.renderFields(classes)}</div>
 
-                    <div className="flex-form-wrapper" style={{ width: "95%" }}>
-                        <h4 className="category-title">你可以提供的向导服务</h4>
+                    <div className="form-group">
+                        <h4 className="category-title">向导服务</h4>
                         <Field
                             key="services"
                             name="services"
@@ -103,7 +100,7 @@ class WizardFirst extends Component {
                             data={services}
                         />
                     </div>
-
+                   <div className="centralize-button">
                     <Button
                         type="submit"
                         color="primary"
@@ -113,6 +110,7 @@ class WizardFirst extends Component {
                     >
                         下一步
                     </Button>
+                    </div>
                 </form>
             </div>
         );
