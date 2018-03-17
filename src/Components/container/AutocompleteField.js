@@ -10,7 +10,7 @@ import data from "../../Data/cities";
 
 const provinces = data.provinces;
 
-const renderInput = (inputProps) => {
+const renderInput = inputProps => {
   const { InputProps, classes, ref, ...other } = inputProps;
   return (
     <TextField
@@ -39,20 +39,24 @@ const renderCity = (params, props) => {
   const isHighlighted = highlightedIndex === index;
   const isSelected = selectedItem === city;
   return (
-    <MenuItem
-      {...itemProps}
+    <div
       key={city}
-      selected={isHighlighted}
-      component="div"
-      style={{
-        fontWeight: isSelected ? 500 : 400
-      }}
       onClick={() => {
         props.onClick(city);
       }}
     >
-      {city}
-    </MenuItem>
+      <MenuItem
+        {...itemProps}
+        key={city}
+        selected={isHighlighted}
+        component="div"
+        style={{
+          fontWeight: isSelected ? 500 : 400
+        }}
+      >
+        {city}
+      </MenuItem>
+    </div>
   );
 };
 
@@ -96,7 +100,7 @@ const autocompleteField = props => {
             classes,
             InputProps: getInputProps({
               placeholder: "输入城市，按提示列表选择",
-              id: "integration-downshift",
+              id: "integration-downshift"
             }),
             ...props.input
           })}

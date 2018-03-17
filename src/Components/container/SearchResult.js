@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Button from "material-ui/Button";
+import classNames from "classnames";
 import SideButton from "../../Pages/sideButton";
 import Card, { CardContent } from "material-ui/Card";
 import IconButton from "material-ui/IconButton";
 import Typography from "material-ui/Typography";
 import Header from "../presenter/header";
 import Slide from "material-ui/transitions/Slide";
-
 import { withStyles } from "material-ui/styles";
-
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import EventAvailable from "material-ui-icons/EventAvailable";
 import LocalPlay from "material-ui-icons/LocalPlay";
@@ -53,8 +52,29 @@ const styles = theme => ({
 
   resultList: {
     display: "flex",
-    flexFlow: "column",
-    textAlign: "center"
+    flexFlow: "column"
+  },
+  result: {
+    width: "95vw",
+    maxWidth: 600,
+    margin: "10px auto"
+  },
+
+  createBtn: {
+    border: "1px solid #1976D2",
+    padding: "15px 20px",
+    fontSize: "1.1rem"
+  },
+
+  createActivity: {
+    backgroundColor: "#1976D2",
+    borderRight: "none",
+    color: "#fff"
+  },
+
+  createWish: {
+    color: "#fff",
+    backgroundColor: "#43A047"
   },
 
   heading: {
@@ -85,6 +105,11 @@ const styles = theme => ({
   },
   right: {
     width: "80%"
+  },
+
+  unlink: {
+    textDecoration: "none",
+    color: "#fff"
   }
 });
 
@@ -93,13 +118,13 @@ function Transition(props) {
 }
 
 class SearchResult extends Component {
-  componentWillMount() {
-    // slice(1) to remove the first '?'
-    if (this.props.location) {
-      let query = this.props.location.search.slice(1);
-      this.props.submitSearchData(query, null, this.handleRequestClose);
-    }
-  }
+  // componentWillMount() {
+  //   // slice(1) to remove the first '?'
+  //   if (this.props.location) {
+  //     let query = this.props.location.search.slice(1);
+  //     this.props.submitSearchData(query, null, this.handleRequestClose);
+  //   }
+  // }
 
   renderSearchResult(searchResult) {
     const { classes } = this.props;
@@ -109,20 +134,35 @@ class SearchResult extends Component {
       searchResult[0] &&
       typeof searchResult[0] === "string"
     ) {
-      result.push(<h4 key="no">{searchResult[0]}</h4>);
       result.push(
-        <Link to="/addWish" className="unlink" key="wish">
-          <Button color="primary" raised className={classes.button} id="btn">
-            发布新愿望
-          </Button>
-        </Link>
+        <h4 key="no" className={classes.result}>
+          {searchResult[0]}
+        </h4>
       );
-
+      result.push(
+        <div
+          className={classNames(classes.result, classes.createGroup)}
+          key="createGroup"
+        >
+          <span
+            className={classNames(classes.createBtn, classes.createActivity)}
+          >
+            <Link to="/addActivity" className={classes.unlink}>
+              创建新活动
+            </Link>
+          </span>
+          <span className={classNames(classes.createBtn, classes.createWish)}>
+            <Link to="/addWish" className={classes.unlink}>
+              创建新愿望
+            </Link>
+          </span>
+        </div>
+      );
       return result;
     }
     if (searchResult && searchResult[0]) {
       result.push(
-        <h4 key="counter">
+        <h4 key="counter" className={classes.result}>
           找到 {searchResult[0].counter} 个{searchResult[0].category}
         </h4>
       );
@@ -206,8 +246,6 @@ class SearchResult extends Component {
     const { classes, searchResult } = this.props;
     return (
       <div className={classes.listWrapper}>
-        <PageHeader key={0} title="搜索结果" history={this.props.history} />
-
         <div className={classes.resultList}>
           {this.renderSearchResult(searchResult)}
         </div>

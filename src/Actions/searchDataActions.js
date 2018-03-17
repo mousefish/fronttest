@@ -23,9 +23,9 @@ export const submitSearchData = (searchData, history, cb) => async dispatch => {
         payload: res.data
     });
     // console.log("clicked!", res.data)
-    if (history) {
-        history.push(`/searchResult?${q}`);
-    }
+    // if (history) {
+    //     history.push(`/searchResult?${q}`);
+    // }
     if (cb) {
         cb();
     }

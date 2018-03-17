@@ -15,6 +15,7 @@ import validate from "../../Utility/validate";
 import PageHeader from "../../Pages/PageHeader";
 import AppBar from "material-ui/AppBar";
 import Tabs, { Tab } from "material-ui/Tabs";
+import SearchResult from "./SearchResult";
 
 const styles = theme => ({
   wrapper: {
@@ -155,6 +156,9 @@ class SearchPanel extends Component {
 
         <div>
           <HistorySearch onClick={value => this.submitForm(value)} />
+        </div>
+        <div>
+          <SearchResult />
         </div>
       </div>
     );
