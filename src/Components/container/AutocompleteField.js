@@ -28,6 +28,7 @@ const renderInput = inputProps => {
 };
 
 const renderCity = (params, props) => {
+  console.log("props...", props.onClick);
   const {
     city,
     index,
@@ -38,13 +39,29 @@ const renderCity = (params, props) => {
   } = params;
   const isHighlighted = highlightedIndex === index;
   const isSelected = selectedItem === city;
-  return (
-    <div
-      key={city}
-      onClick={() => {
-        props.onClick(city);
-      }}
-    >
+  if (props.onClick) {
+    return (
+      <div
+        key={city}
+        onClick={() => {
+          props.onClick(city);
+        }}
+      >
+        <MenuItem
+          {...itemProps}
+          key={city}
+          selected={isHighlighted}
+          component="div"
+          style={{
+            fontWeight: isSelected ? 500 : 400
+          }}
+        >
+          {city}
+        </MenuItem>
+      </div>
+    );
+  } else {
+    return (
       <MenuItem
         {...itemProps}
         key={city}
@@ -56,8 +73,8 @@ const renderCity = (params, props) => {
       >
         {city}
       </MenuItem>
-    </div>
-  );
+    );
+  }
 };
 
 const getCitys = inputValue => {
