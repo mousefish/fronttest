@@ -334,7 +334,7 @@ class Activity extends Component {
                     </ul>
                     <div className={classes.commentArea}>
                         <div className={classes.writeArea}>
-                            <RatingForm activityId={activityId} />
+                            <RatingForm activityId={activityId} creatorId={activity.userId} />
                         </div>
                     </div>
                 </div>

@@ -48,7 +48,7 @@ class RatingIndex extends Component {
     renderItems(ratings) {
         const { classes } = this.props;
         if (!ratings || ratings.length == 0) {
-            return <div className={classes.comment}>暂时没有评论</div>;
+            return <div key={0} className={classes.comment}>暂时没有评论</div>;
         } else {
             return ratings.map(item => {
                 return (

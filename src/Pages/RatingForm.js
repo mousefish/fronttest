@@ -15,7 +15,7 @@ const styles = theme => ({
     textField: {
         // marginLeft: theme.spacing.unit,
         // marginRight: theme.spacing.unit,
-        width: "100%",
+        width: "100%"
     },
     container: {
         display: "flex",
@@ -28,7 +28,7 @@ const styles = theme => ({
         padding: 10,
         fontSize: 14,
         backgroundColor: "#1976D2",
-        margin:"10px 0"
+        margin: "10px 0"
     },
     starColor: {
         color: "#BDBDBD"
@@ -84,7 +84,7 @@ class RatingForm extends Component {
         });
     }
 
-    sendRating(event, activityId) {
+    sendRating(event, activityId, creatorId) {
         event.preventDefault();
         const { numOfStars, feedback } = this.state;
         if (!localStorage.getItem("jwtToken")) {
@@ -95,17 +95,22 @@ class RatingForm extends Component {
             this.setState({ message: "请提供星评和评论" });
             return;
         }
-        const data = { numOfStars, feedback, activityId };
+        const data = { numOfStars, feedback, activityId, creatorId };
         this.setState({ message: "" });
         // data: {numOfStars: 3, feedback: "ilove", activityId: 1}
         this.props.sendRating(data);
     }
 
     render() {
-        const { classes, fullScreen } = this.props;
-        const { activityId } = this.props;
-        const { message } = this.props;
-        console.log("State",this.state.message)
+        const {
+            classes,
+            fullScreen,
+            activityId,
+            creatorId,
+            message
+        } = this.props;
+
+        // console.log("State",this.state.message)
         return (
             <div>
                 <Dialog
@@ -137,7 +142,7 @@ class RatingForm extends Component {
                         color="primary"
                         raised
                         onClick={event => {
-                            this.sendRating(event, activityId);
+                            this.sendRating(event, activityId, creatorId);
                         }}
                     >
                         提交评论

@@ -76,9 +76,9 @@ const styles = theme => ({
   },
 
   infoWrapper: {
+    // border:"1px solid green",
     display: "flex",
-    flexFlow: "row nowrap",
-    justifyContent: "space-between",
+    flexFlow: "column",
     marginBottom: 10,
     alignItems: "flex-start"
   },
@@ -86,18 +86,15 @@ const styles = theme => ({
   fav: {
     textAlign: "right"
   },
-  // left:{
-  //   border:"1px solid green"
-  // },
-
-  // right:{
-  //   border:"1px solid red"
-  // },
 
   item: {
+    width: "100%",
     fontSize: "1.2rem",
-    marginBottom: 6
-    // border:"1px solid red"
+    marginBottom: 6,
+    // border:"1px solid red",
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "space-between"
   },
   themeStyle: {
     fontWeight: "bold",
@@ -110,8 +107,8 @@ class ActivityIndex extends Component {
     const { classes } = this.props;
     if (score > 0) {
       return (
-        <div className={classes.item}>
-          <Stars num={score} />
+        <div>
+          <Stars num={score} pos={true}/>
         </div>
       );
     }
@@ -120,9 +117,7 @@ class ActivityIndex extends Component {
   renderFavZone(num) {
     const { classes } = this.props;
     if (num > 0) {
-      return (
-        <div className={classNames(classes.item, classes.fav)}>{num} 人收藏</div>
-      );
+      return <div className={classes.fav}>{num} 人收藏</div>;
     }
   }
 
@@ -140,22 +135,23 @@ class ActivityIndex extends Component {
             <CardContent className={classes.content}>
               <h3 className={classes.themeStyle}>{item.theme}</h3>
               <div className={classes.infoWrapper}>
-                <div className={classes.left}>
-                  <div className={classes.item}>
+                <div className={classes.item}>
+                  <div>
                     <LocationOn className={classes.icon} /> {item.location}
                   </div>
-                  <div className={classes.item}>
+                  <div>{this.renderFavZone(item.likes)} </div>
+                </div>
+                <div className={classes.item}>
+                  <div>
                     <Person className={classes.icon} />
                     &nbsp;{item.username}
                   </div>
-                  <div className={classes.item}>
+                  <div>{this.renderStarZone(item.averageScore)}</div>
+                </div>
+                <div className={classes.item}>
+                  <div>
                     <AccessTime className={classes.icon} /> {item.departdate} 出发
                   </div>
-                </div>
-
-                <div className={classes.right}>
-                  {this.renderStarZone(item.averageScore)}
-                  {this.renderFavZone(item.likes)}
                 </div>
               </div>
             </CardContent>
