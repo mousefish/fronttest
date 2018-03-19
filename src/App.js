@@ -29,8 +29,6 @@ import UserWishes from "./Pages/UserWishes";
 
 import EditWishPanel from "./Pages/EditWishPanel";
 
-import FriendComments from "./Pages/FriendComments";
-
 import Wish from "./Components/container/Wish";
 
 import OpenPage from "./Pages/OpenPage";
@@ -293,7 +291,6 @@ class App extends Component {
               component={RequireAuth(EditWishPanel)}
             />
 
-            <Route exact path="/friendComments" component={FriendComments} />
             <Route exact path="/activityWish" component={RequireAuth(ActivityWishPanel)} />
             <Route exact path="/activity/:activityId" component={RequireAuth(Activity)} />
             <Route exact path="/wish/:wishId" component={RequireAuth(Wish)} />

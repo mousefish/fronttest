@@ -45,7 +45,7 @@ class MyAccount extends Component {
             switch (item) {
                 case "账号信息":
                     return this.props.history.push(`/myBasicInfo/0`);
-                case "我的旅游故事":
+                case "我的圈子":
                     return this.props.history.push(`/story/0`);
                 case "我的活动":
                     return this.props.history.push(`/userActivities/0`);
@@ -64,7 +64,7 @@ class MyAccount extends Component {
         const { classes } = this.props;
         const items = [
             "账号信息",
-            "我的旅游故事",
+            "我的圈子",
             "我的活动",
             "我的愿望",
             "我的收藏",

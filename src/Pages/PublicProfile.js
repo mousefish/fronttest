@@ -133,7 +133,7 @@ class PublicProfile extends Component {
                             style={{ color: "#fff" }}
                         >
                             <span className={classes.subHeaderContent}>
-                                他的故事
+                                他的圈子
                             </span>
                         </Link>
                         <Link
