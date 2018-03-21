@@ -37,30 +37,13 @@ const style = theme => ({
         verticalAlign: "-2px"
     },
 
-    button: {
-        // margin: theme.spacing.unit,
-        width: "50%",
-        color: "#fff",
-        lineHeight: 0.6,
-        height: 60,
-        borderRadius: 0,
-        fontSize: "1.5rem"
-    },
+
     root: {
         margin: theme.spacing.unit,
         backgroundColor: "#43A047",
         color: "#fff"
     },
-    btnGroup: {
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        width: "100%",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center"
-        // border:"1px solid green"
-    },
+
     editBar: {
         // border:"1px solid red",
         display: "flex",
@@ -205,6 +188,13 @@ class WishDetails extends Component {
                         </div>
                     </li>
 
+                     <li>
+                        <div className={classes.detailTitle}>参加人数上限</div>
+                        <div className={classes.detailContent}>
+                            {wish.numberOfPeople} 人
+                        </div>
+                    </li>
+
                     <li>
                         <div className={classes.detailTitle}>希望提供的服务</div>
                         <div className={classes.detailContent}>
@@ -222,24 +212,6 @@ class WishDetails extends Component {
                     </li>
                 </ul>
 
-                <div className={classes.btnGroup}>
-                    <Button
-                        color="primary"
-                        style={{ backgroundColor: "#1976D2" }}
-                        raised
-                        className={classes.button}
-                    >
-                        我有兴趣
-                    </Button>
-                    <Button
-                        color="primary"
-                        style={{ backgroundColor: "#43A047" }}
-                        raised
-                        className={classes.button}
-                    >
-                        我想加入
-                    </Button>
-                </div>
             </div>
         );
     }

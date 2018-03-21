@@ -61,6 +61,15 @@ class AddWish extends Component {
                     className={classes.textField}
                     placeholder="你的预算/人"
                 />
+                <Field
+                    fullWidth
+                    key="numberOfPeople"
+                    name="numberOfPeople"
+                    type="text"
+                    component={TextField}
+                    className={classes.textField}
+                    placeholder="你能接受的人数上限"
+                />
             </div>
 
             <div key="date" className="form-group">

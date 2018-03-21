@@ -73,6 +73,7 @@ class EditActivityPanel extends Component {
             "theme",
             "location",
             "budget",
+            "numberOfPeople",
             "departdate",
             "finishdate",
             "services",
@@ -83,13 +84,6 @@ class EditActivityPanel extends Component {
         keys.forEach(item => {
             if (edit[item] !== values[item]) {
                 edittedValues[item] = values[item];
-            }
-            if (item == "serivices") {
-                for (let i = 0; i < services.length; i++) {
-                    if (edittedValues[item][i] !== values[item][i]) {
-                        edittedValues[item] = values[item];
-                    }
-                }
             }
         });
 
@@ -150,6 +144,15 @@ class EditActivityPanel extends Component {
                         className={classes.textField}
                         placeholder="活动费用/人"
                     />
+                    <Field
+                    fullWidth
+                    key="numberOfPeople"
+                    name="numberOfPeople"
+                    type="text"
+                    component={TextField}
+                    className={classes.textField}
+                    placeholder="你能接收的人数上限"
+                />
                 </div>
                 <div className="form-group" key="date">
                     <h4 className="category-title">你的活动时间</h4>
@@ -258,6 +261,7 @@ const mapStateToProps = state => {
         theme,
         location,
         budget,
+        numberOfPeople,
         story,
         departdate,
         finishdate,
@@ -271,6 +275,7 @@ const mapStateToProps = state => {
             theme,
             location,
             budget,
+            numberOfPeople,
             story,
             departdate,
             finishdate,

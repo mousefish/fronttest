@@ -38,13 +38,14 @@ class AddActivity extends Component {
                 images.push(values['img'+i]);
             }
         }
-        let { theme, location,departdate,finishdate, budget,services,story } = values;
+        let { theme, location,departdate,finishdate, budget, numberOfPeople, services,story } = values;
         const modifiedValues={
             theme,
             location,
             departdate,
             finishdate,
             budget,
+            numberOfPeople,
             services,
             story,
             images

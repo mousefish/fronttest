@@ -8,6 +8,7 @@ const validate = values => {
     "departdate",
     "finishdate",
     "budget",
+    "numberOfPeople",
     "services",
     "story",
     "email",
@@ -62,8 +63,12 @@ const validate = values => {
     errors.budget = "请输入有效数字";
   }
 
-  if (values.theme && values.theme.length > 20) {
-    errors.theme = "字数不能超过20";
+  if (Number.isNaN(parseInt(values.numberOfPeople)) || parseInt(values.numberOfPeople) <= 0) {
+    errors.numberOfPeople = "请输入有效数字";
+  }
+
+  if (values.theme && values.theme.length > 15) {
+    errors.theme = "字数不能超过15";
   }
   if (
     Number.isNaN(Number(values.yearOfLiving)) ||

@@ -58,6 +58,15 @@ class WizardFirst extends Component {
                     placeholder="活动费用/人"
                     className={classes.textField}
                 />
+                <Field
+                    fullWidth
+                    key="numberOfPeople"
+                    name="numberOfPeople"
+                    type="text"
+                    component={TextField}
+                    className={classes.textField}
+                    placeholder="你能接收的人数上限"
+                />
             </div>,
 
             <div className="form-group" key="date">

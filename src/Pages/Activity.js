@@ -318,6 +318,12 @@ class Activity extends Component {
                                 {activity.budget} 元 / 人
                             </div>
                         </li>
+                         <li>
+                        <div className={classes.detailTitle}>参加人数上限</div>
+                        <div className={classes.detailContent}>
+                            {activity.numberOfPeople} 人
+                        </div>
+                    </li>
 
                         <li>
                             <div className={classes.detailTitle}>提供的服务</div>

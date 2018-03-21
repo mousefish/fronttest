@@ -156,10 +156,8 @@ class App extends Component {
     if (pathname.includes("/editActivity/") || pathname.includes("/editWish/") || pathname==="/openPage") {
       return null;
     }
-    if(pathname.includes("/wish/")){
-      return null
-    }
-    if (pathname.includes("/activity/")) {
+
+    if (pathname.includes("/activity/") || pathname.includes("/wish/")) {
       return (
         <span>
         <BottomNavigation

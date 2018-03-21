@@ -72,6 +72,7 @@ class EditWishPanel extends Component {
         const keys = [
             "location",
             "budget",
+            "numberOfPeople",
             "departdate",
             "finishdate",
             "services",
@@ -82,13 +83,6 @@ class EditWishPanel extends Component {
         keys.forEach(item => {
             if (edit[item] !== values[item]) {
                 edittedValues[item] = values[item];
-            }
-            if (item == "serivices") {
-                for (let i = 0; i < services.length; i++) {
-                    if (edittedValues[item][i] !== values[item][i]) {
-                        edittedValues[item] = values[item];
-                    }
-                }
             }
         });
 
@@ -140,6 +134,15 @@ class EditWishPanel extends Component {
                     component={TextField}
                     className={classes.textField}
                     placeholder="你的预算/人"
+                />
+                <Field
+                    fullWidth
+                    key="numberOfPeople"
+                    name="numberOfPeople"
+                    type="text"
+                    component={TextField}
+                    className={classes.textField}
+                    placeholder="你能接受的拼团人数上限"
                 />
             </div>
 
@@ -251,6 +254,7 @@ const mapStateToProps = state => {
     const {
         location,
         budget,
+        numberOfPeople,
         note,
         departdate,
         finishdate,
@@ -263,6 +267,7 @@ const mapStateToProps = state => {
         initialValues: {
             location,
             budget,
+            numberOfPeople,
             note,
             departdate,
             finishdate,
