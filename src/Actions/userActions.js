@@ -1,9 +1,21 @@
 import axios from "axios";
-import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR } from "./types";
+import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR, FETCH_COMMENTS } from "./types";
 
 import config from "../config/config";
 
 const ROOT_URL = config["ROOT_URL"];
+
+export const fetchComments = userId => async dispatch=>{
+    const res = await axios.get(`${ROOT_URL}/api/comments/${userId}`,{
+        headers: {
+            authorization: localStorage.getItem("jwtToken")
+        }
+    });
+    dispatch({
+        type:"FETCH_COMMENTS",
+        payload:res.data
+    });
+};
 
 // fetch user's basic info!!
 // { id: 6,

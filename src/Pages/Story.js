@@ -74,7 +74,7 @@ class Story extends Component {
 
     componentWillMount() {
         const userId = this.props.match.params.userId;
-        this.props.fetchUser(userId);
+        this.props.fetchComments(userId);
     }
 
     render() {
@@ -124,13 +124,14 @@ class Story extends Component {
                         </div>
                     </div>
                 </div>
-                <FriendComments />
+                <FriendComments comments={user.comments}/>
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
+    console.log("!user", state.UserReducer)
     return {
         user: state.UserReducer
     };

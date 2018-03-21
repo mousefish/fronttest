@@ -25,10 +25,11 @@ import test2 from "../Assets/imgForTest/4.jpg";
 const styles = theme => ({
     editBar: {
         // border:"1px solid red",
+        maxWidth:600,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        margin: "10px 0 30px 0",
+        margin: "10px auto 30px auto",
         padding: 5
     },
     editBtn: {
@@ -98,10 +99,13 @@ const styles = theme => ({
     },
 
     bg: {
+        maxWidth:600,
+        margin:"auto",
         marginBottom: 10,
         position: "relative",
-        textAlign: "center"
+        textAlign: "center",
     },
+
     bgImg: {
         maxWidth: "100%",
         height: 250
@@ -110,12 +114,14 @@ const styles = theme => ({
     bgImgLayer: {
         position: "absolute",
         top: 0,
-        bottom: 0,
+        bottom: 2,
         left: 0,
         right: 0,
         // border:"1px solid red",
         backgroundColor: "#1976D2",
-        opacity: 0.2
+        opacity: 0.2,
+        maxWidth:"75%",
+        margin:"auto"
     },
     row: {
         // border:"1px solid red",
