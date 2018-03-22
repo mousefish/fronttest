@@ -24,7 +24,6 @@ const validate = values => {
     "language",
     "hobby",
     "personality",
-    "note"
   ];
 
   names.forEach(name => {
@@ -77,7 +76,11 @@ const validate = values => {
     errors.yearOfLiving = "请输入有效年限";
   }
 
-  if (values.story && values.story.length >= 300) {
+  if (values.note && values.note.length > 300) {
+    errors.note = "字数不能超过300";
+  }
+
+  if (values.story && values.story.length > 300) {
     errors.story = "字数不能超过300";
   }
 

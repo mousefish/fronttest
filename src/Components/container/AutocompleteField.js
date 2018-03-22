@@ -12,6 +12,7 @@ const provinces = data.provinces;
 
 const renderInput = inputProps => {
   const { InputProps, classes, ref, ...other } = inputProps;
+
   return (
     <TextField
       {...other}
@@ -28,7 +29,7 @@ const renderInput = inputProps => {
 };
 
 const renderCity = (params, props) => {
-  console.log("props...", props.onClick);
+
   const {
     city,
     index,
@@ -119,7 +120,7 @@ const autocompleteField = props => {
               placeholder: "输入城市，按提示列表选择",
               id: "integration-downshift"
             }),
-            ...props.input
+            ...props.input,
           })}
           {isOpen ? (
             <Paper square style={{ marginTop: -8 }}>

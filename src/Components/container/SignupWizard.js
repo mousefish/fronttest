@@ -39,7 +39,7 @@ class SignupWizard extends Component {
   }
 
   handleSubmit(values) {
-    console.log("submit", values);
+    // console.log("submit", values);
     this.props.userSignupRequest(values, this.props.history);
   }
 

@@ -91,13 +91,18 @@ class RatingForm extends Component {
             this.setState({
                 open: true
             });
-        } else if (numOfStars === 0) {
+        }
+        else if (numOfStars === 0) {
             this.setState({ message: "请提供星评和评论" });
+            return;
+        } else if(feedback && feedback.length > 300){
+            this.setState({ message:"评论长度不能多于300个字"})
             return;
         }
         const data = { numOfStars, feedback, activityId, creatorId };
         this.setState({ message: "" });
         // data: {numOfStars: 3, feedback: "ilove", activityId: 1}
+
         this.props.sendRating(data);
     }
 

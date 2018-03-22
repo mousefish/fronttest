@@ -35,7 +35,7 @@ class WizardFirst extends Component {
                     name="theme"
                     type="text"
                     component={TextField}
-                    placeholder="活动的主题，字数不多于20个"
+                    placeholder="活动的主题，字数不多于15个"
                     className={classes.textField}
                 />
 

@@ -16,8 +16,6 @@ import services from "../../Data/services";
 import PageHeader from "../PageHeader";
 
 const styles = theme => ({
-    button: {},
-
     textField: {
         padding: "8px 0"
         // border: "1px solid blue"
@@ -154,7 +152,7 @@ AddWish = reduxForm({
     form: "AddWish",
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
-    validate
+    // validate
 })(withStyles(styles)(AddWish));
 
 export default (AddWish = connect(mapStateToProps, actions)(
