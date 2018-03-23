@@ -37,7 +37,7 @@ const styles = theme => ({
 
 class wizardFirst extends Component {
   state = {
-    completed: 35
+    completed: 25
   };
 
   render() {

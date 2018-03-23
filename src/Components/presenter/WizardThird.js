@@ -11,7 +11,7 @@ import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
-    width: "90%",
+    width: "95%",
     margin: "auto"
   },
   button: {
@@ -26,8 +26,9 @@ const styles = theme => ({
 
 class wizardThird extends Component {
   state = {
-    completed: 100
+    completed: 75
   };
+
 
   render() {
     const { classes } = this.props;
@@ -36,7 +37,6 @@ class wizardThird extends Component {
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
         <PageHeader onClick={previousPage} title="其他信息" />
-
         <LinearProgress
           className={classes.progress}
           mode="determinate"
@@ -91,13 +91,14 @@ class wizardThird extends Component {
             className={classes.button}
             id="btn"
           >
-            提交
+            下一步
           </Button>
         </div>
       </form>
     );
   }
 }
+
 export default reduxForm({
   form: "wizard",
   destroyOnUnmount: false,

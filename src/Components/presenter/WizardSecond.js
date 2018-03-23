@@ -13,7 +13,7 @@ import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
-    width: "90%",
+    width: "95%",
     margin: "auto"
   },
 
@@ -46,7 +46,7 @@ const renderError = ({ meta: { touched, error } }) =>
 
 class wizardSecond extends Component {
   state = {
-    completed: 70
+    completed: 50
   };
   render() {
     const { handleSubmit, previousPage } = this.props;

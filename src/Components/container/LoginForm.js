@@ -15,7 +15,7 @@ import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
   progress: {
-    width: "90%",
+    width: "95%",
     margin: "auto",
     backgroundColor: "#1976D2"
   },

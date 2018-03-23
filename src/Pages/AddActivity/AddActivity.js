@@ -31,13 +31,8 @@ class AddActivity extends Component {
     }
 
     handleSubmit(values) {
-       console.log('value', values);
-        const images = [];
-        for(let i = 1 ; i <= 8; i ++){
-            if(values['img'+i]){
-                images.push(values['img'+i]);
-            }
-        }
+       console.log('valueToSubmit', values);
+
         let { theme, location,departdate,finishdate, budget, numberOfPeople, services,story } = values;
         const modifiedValues={
             theme,
@@ -48,11 +43,8 @@ class AddActivity extends Component {
             numberOfPeople,
             services,
             story,
-            images
-        };
 
-      // console.log('aftervalue', modifiedValues);
-      // blob:http://localhost:3000/95ed0c2e-7b16-4d37-8e69-250a6f57a860
+        };
 
         this.props.submitActivityData(modifiedValues, this.props.history);
     }
@@ -87,7 +79,11 @@ class AddActivity extends Component {
 
 
 const mapStateToProps = state => {
-    return { msg: state.ActivityReducer.message };
+
+    return {
+        msg: state.ActivityReducer.message,
+
+    };
 };
 
 // AddActivity.propTypes = {
