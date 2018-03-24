@@ -4,9 +4,15 @@ import AddAPhoto from "material-ui-icons/AddAPhoto";
 import Save from "material-ui-icons/Save";
 import Cancel from "material-ui-icons/Cancel";
 import IconButton from "material-ui/IconButton";
+import { withStyles } from "material-ui/styles";
 
+const styles = theme => ({
+  bg: {
+    backgroundColor: "#000"
+  }
+});
 class FileInput extends Component {
-  state = { src: "", action: false, file: null };
+  state = { src: "", action: false, toggle: false, file: null };
 
   renderIcon() {
     if (this.state.action === false) {
@@ -30,7 +36,7 @@ class FileInput extends Component {
     }
   }
   renderOperation() {
-    const { onUploadNewImage, onCancelUploading } = this.props;
+    const { onUploadNewImage } = this.props;
     if (onUploadNewImage && this.state.action === true) {
       const { file } = this.state;
       return (
@@ -42,14 +48,15 @@ class FileInput extends Component {
             color: "#fff"
           }}
         >
-        <IconButton
+          <IconButton
             aria-label="cancel uploading image"
-            style={{marginRight:40}}
+            style={{ marginRight: 40 }}
             onClick={e => {
               e.stopPropagation();
-              onCancelUploading();
               this.setState({
-                action: false
+                action: false,
+                toggle: false,
+                src: ""
               });
             }}
           >
@@ -64,7 +71,8 @@ class FileInput extends Component {
               e.stopPropagation();
               onUploadNewImage(file);
               this.setState({
-                action: false
+                action: false,
+                toggle: true
               });
             }}
           >
@@ -79,19 +87,21 @@ class FileInput extends Component {
   }
 
   render() {
-    const { input: { value }, touched, error } = this.props;
+    const { input: { value }, touched, error, classes } = this.props;
     return (
       <div>
         <Dropzone
           style={this.props.style}
           name={this.props.name}
           multiple={true}
+          className={this.state.toggle ? classes.bg : ""}
           onDrop={imagesToUpload => {
             const reader = new FileReader();
             reader.onload = () => {
               this.setState({
                 src: reader.result,
                 action: true,
+                toggle: true,
                 file: imagesToUpload[0]
               });
             };
@@ -99,7 +109,19 @@ class FileInput extends Component {
             this.props.input.onChange(imagesToUpload);
           }}
         >
-          <img src={this.state.src} style={{ width: "100%", height: "100%" }} />
+          {this.state.src ? (
+            <img
+              src={this.state.src}
+              style={{
+                flex: 1,
+                maxWidth: "100%",
+                maxHeight: 240
+              }}
+            />
+          ) : (
+            ""
+          )}
+
           {this.renderIcon()}
           {this.renderOperation()}
         </Dropzone>
@@ -109,7 +131,7 @@ class FileInput extends Component {
   }
 }
 
-export default FileInput;
+export default withStyles(styles)(FileInput);
 
 // using redux form
 

@@ -53,13 +53,11 @@ const styles = theme => ({
     imageWrapper: {
         position: "relative",
         textAlign: "center",
-        maxHeight: 240
     },
     image: {
-        width: "100%",
-        maxWidth: "100%",
-        height: "100%",
-        maxHeight: 240
+       flex:1,
+       maxWidth:"100%",
+       maxHeight:240
     }
 });
 
@@ -122,19 +120,8 @@ class EditActivityPanel extends Component {
 
     uploadNewImage(file) {
         const { edit, history } = this.props;
-        return new Promise((resolve, reject) => {
-            resolve(
-                this.props.uploadNewImage(edit.id, edit.userId, file, history)
-            );
-        }).then(() => {
-            const { activityId } = this.props.match.params;
-            this.props.fetchOneUserActivityForEditting(activityId);
-        });
+        this.props.uploadNewImage(edit.id, edit.userId, file, history)
     }
-    cancelUploading(){
-
-    }
-
     renderImg(edit) {
         const { classes } = this.props;
         if (edit && edit.imageurl) {
@@ -156,7 +143,6 @@ class EditActivityPanel extends Component {
                             border: "4px dashed #000"
                         }}
                         onUploadNewImage={file => this.uploadNewImage(file)}
-                        onCancelUploading={()=> this.cancelUploading()}
                     />
                 </div>
             );

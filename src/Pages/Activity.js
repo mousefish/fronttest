@@ -108,10 +108,9 @@ const styles = theme => ({
     },
 
     bgImg: {
-        width:"100%",
-        maxWidth: "100%",
-        height: 250,
-        maxHeight:250
+       flex:1,
+       maxWidth:"100%",
+       maxHeight:240
     },
 
     // bgImgLayer: {

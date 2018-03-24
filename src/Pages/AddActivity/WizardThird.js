@@ -14,13 +14,9 @@ const styles = theme => ({
         // flexFlow: "row wrap"
         position: "relative",
         textAlign: "center",
-        maxHeight: 240,
-        border: "1px solid green"
+        maxHeight: 250,
     },
 
-    image: {
-        flex: 1
-    },
     btnGroup: {
         width: "95%",
         margin: "260px auto",

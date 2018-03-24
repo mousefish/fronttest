@@ -152,6 +152,7 @@ export const uploadNewImage = (activityId, userId, file, history) => async dispa
     if (typeof res.data !== "string") {
         // 3. if the user's activity has the old image, delete it on AWS.
         if (res.data && res.data.hasOwnProperty("oldimageurl")) {
+            console.log("supposed to be here!!!!!!")
             let result = await axios.post(
                 `${ROOT_URL}/api/deleteImage`,
                 { imgurl: res.data.oldimageurl },
