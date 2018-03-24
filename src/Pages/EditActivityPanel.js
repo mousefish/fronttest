@@ -6,6 +6,7 @@ import { withRouter } from "react-router";
 import * as actions from "../Actions";
 import PageHeader from "./PageHeader";
 import Button from "material-ui/Button";
+
 import validate from "../Utility/validate";
 import popupSearchDateField from "../Components/container/popupSearchDateField";
 import popupSearchMultiServices from "../Components/container/popupSearchMultiServices";
@@ -15,6 +16,10 @@ import Dialog from "material-ui/Dialog";
 import services from "../Data/services";
 import ConfirmDelete from "./ConfirmDelete";
 import RegisterDialog from "./RegisterDialog";
+import config from "../config/config";
+import testPic from "../Assets/imgForTest/shanghai1.jpg";
+import test2 from "../Assets/imgForTest/4.jpg";
+import FileInput from "./AddActivity/FileInput";
 
 const styles = theme => ({
     root: {
@@ -36,13 +41,25 @@ const styles = theme => ({
         width: "100%",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: "center"
         // border:"1px solid green"
     },
 
     textField: {
         padding: "8px 0"
         // border: "1px solid blue"
+    },
+
+    imageWrapper: {
+        position: "relative",
+        textAlign: "center",
+        maxHeight: 240
+    },
+    image: {
+        width: "100%",
+        maxWidth: "100%",
+        height: "100%",
+        maxHeight: 240
     }
 });
 
@@ -69,6 +86,8 @@ class EditActivityPanel extends Component {
 
     submitForm(values) {
         // console.log("values",values)
+        const { edit } = this.props;
+
         const keys = [
             "theme",
             "location",
@@ -79,7 +98,7 @@ class EditActivityPanel extends Component {
             "services",
             "story"
         ];
-        const { edit } = this.props;
+
         let edittedValues = {};
         keys.forEach(item => {
             if (edit[item] !== values[item]) {
@@ -87,7 +106,10 @@ class EditActivityPanel extends Component {
             }
         });
 
-        if (Object.keys(edittedValues).length === 0) {
+        if (
+            Object.keys(edittedValues).length === 0 &&
+            !values.hasOwnProperty("images")
+        ) {
             // need a dialogue here!
             // alert("没有值发生改变！");
             return null;
@@ -98,6 +120,67 @@ class EditActivityPanel extends Component {
         this.props.updateUserActivity(activityId, edittedValues, history);
     }
 
+    uploadNewImage(file) {
+        const { edit, history } = this.props;
+        return new Promise((resolve, reject) => {
+            resolve(
+                this.props.uploadNewImage(edit.id, edit.userId, file, history)
+            );
+        }).then(() => {
+            const { activityId } = this.props.match.params;
+            this.props.fetchOneUserActivityForEditting(activityId);
+        });
+    }
+    cancelUploading(){
+
+    }
+
+    renderImg(edit) {
+        const { classes } = this.props;
+        if (edit && edit.imageurl) {
+            return (
+                <div className={classes.imageWrapper}>
+                    <img
+                        className={classes.image}
+                        src={config.BUCKET_URL + edit.imageurl}
+                    />
+                    <Field
+                        component={FileInput}
+                        name="images"
+                        style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            border: "4px dashed #000"
+                        }}
+                        onUploadNewImage={file => this.uploadNewImage(file)}
+                        onCancelUploading={()=> this.cancelUploading()}
+                    />
+                </div>
+            );
+        } else {
+            return (
+                <div className={classes.imageWrapper}>
+                    <img src={testPic} className={classes.image} />
+                    <Field
+                        component={FileInput}
+                        name="images"
+                        style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            border: "4px dashed #000"
+                        }}
+                        onUploadNewImage={file => this.uploadNewImage(file)}
+                    />
+                </div>
+            );
+        }
+    }
     renderEditPanel(classes) {
         if (this.props.error) {
             return <div>{this.props.error}</div>;
@@ -113,7 +196,10 @@ class EditActivityPanel extends Component {
         }
 
         return (
-            <div style={{marginBottom:60}}>
+            <div style={{ marginBottom: 60 }}>
+                <div className="form-group" key="img">
+                    {this.renderImg(edit)}
+                </div>
                 <div className="form-group" key="basic">
                     <h4 className="category-title">你的基本活动信息</h4>
                     <Field
@@ -145,14 +231,14 @@ class EditActivityPanel extends Component {
                         placeholder="活动费用/人"
                     />
                     <Field
-                    fullWidth
-                    key="numberOfPeople"
-                    name="numberOfPeople"
-                    type="text"
-                    component={TextField}
-                    className={classes.textField}
-                    placeholder="你能接收的人数上限"
-                />
+                        fullWidth
+                        key="numberOfPeople"
+                        name="numberOfPeople"
+                        type="text"
+                        component={TextField}
+                        className={classes.textField}
+                        placeholder="你能接收的人数上限"
+                    />
                 </div>
                 <div className="form-group" key="date">
                     <h4 className="category-title">你的活动时间</h4>
@@ -292,4 +378,6 @@ EditActivityPanel = reduxForm({
     enableReinitialize: true
 })(withStyles(styles, { withTheme: true })(EditActivityPanel));
 
-export default (EditActivityPanel = connect(mapStateToProps, actions)(EditActivityPanel));
+export default (EditActivityPanel = connect(mapStateToProps, actions)(
+    EditActivityPanel
+));

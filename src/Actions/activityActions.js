@@ -26,24 +26,45 @@ export const verifyYourFav = activityId => async dispatch => {
     });
 };
 
-export const fetchUserActivities = userId => async dispatch => {
-    const res = await axios.get(`${ROOT_URL}/api/activities/${userId}`,  {
+export const fetchActivityData = () => async dispatch => {
+    try {
+        const res = await axios.get(`${ROOT_URL}/api/fetchActivity`, {
             headers: {
                 authorization: localStorage.getItem("jwtToken")
             }
         });
-    //     [ { id: 7,
-    // theme: '大连城市风光游',
-    // location: '大连市 辽宁省',
-    // departdate: '23 Feb 2018 6:16',
-    // finishdate: '28 Feb 2018 6:16',
-    // budget: '5000',
-    // services: [ '徒步旅行', '汽车接送', '购物打折' ],
-    // story: '我在大连生活了10年。这里的一山一水一草一木都充满了灵性。大连是一个热情，开方，时尚的城市。海纳百川，兼容并蓄。',
-    // images: [],
-    // createdAt: 2018-02-21T02:18:16.284Z,
-    // updatedAt: 2018-02-21T02:18:16.284Z,
-    // userId: 6 } ]
+        dispatch({
+            type: FETCH_ACTIVITY_DATA,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch(activityErr(err.message));
+    }
+};
+
+export const fetchOneActivity = activityId => async dispatch => {
+    try {
+        const res = await axios.get(`${ROOT_URL}/api/activity/${activityId}`, {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
+        dispatch({
+            type: FETCH_ONE_ACTIVITY,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch(activityErr(err.message));
+    }
+};
+
+export const fetchUserActivities = userId => async dispatch => {
+    const res = await axios.get(`${ROOT_URL}/api/activities/${userId}`, {
+        headers: {
+            authorization: localStorage.getItem("jwtToken")
+        }
+    });
+
     dispatch({
         type: FETCH_USER_ACTIVITIES,
         payload: res.data
@@ -60,18 +81,6 @@ export const fetchOneUserActivityForEditting = activityId => async dispatch => {
                 }
             }
         );
-        // { id: 12,
-        //   theme: '北京三日游',
-        //   location: '北京市 北京市',
-        //   departdate: '23 Mar 2018 9:45',
-        //   finishdate: '31 Mar 2018 9:45',
-        //   budget: '5000',
-        //   services: [ '徒步旅行', '购物打折' ],
-        //   story: '我在北京呆了2年，对北京文化，景点念念不忘。北京的景点大气辉煌，充满历史感。我一定会带你领略中华在过去的帝国风采。',
-        //   images: [ 'http://localhost:3000/a8a47ac8-30e7-4de6-b394-a03f9b0996c3' ],
-        //   createdAt: 2018-03-01T17:48:00.606Z,
-        //   updatedAt: 2018-03-01T17:48:00.606Z,
-        //   userId: 9 }
         dispatch({
             type: FETCH_ACTIVITY_FOR_EDITTING,
             payload: res.data
@@ -97,8 +106,8 @@ export const updateUserActivity = (
         }
     );
 
-     if(res.data==="修改成功！"){
-         history.goBack();
+    if (res.data === "修改成功！") {
+        history.goBack();
     }
 
     dispatch({
@@ -106,16 +115,64 @@ export const updateUserActivity = (
         type: ADD_ACTIVITY_DATA,
         payload: res.data
     });
-
-
 };
+
+
+
+export const uploadNewImage = (activityId, userId, file, history) => async dispatch => {
+    // 1. first make sure the user has the authority to replace the image
+    // a. must be logged in b. must the be the user who created the activity
+    const uploadConfig = await axios.get(
+        `${ROOT_URL}/api/replace/activity/${userId}`,
+        {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        }
+    );
+    if (typeof uploadConfig.data === "string") {
+        return;
+    }
+
+    const upload = await axios.put(uploadConfig.data.url, file, {
+        headers: {
+            "Content-Type": file.type
+        }
+    });
+    const res = await axios.post(
+        `${ROOT_URL}/api/updateUserActivity/${activityId}`,
+        { imageurl: uploadConfig.data.key },
+        {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        }
+    );
+    // 2. if the user has the authority, upload the new image to AWS.
+    if (typeof res.data !== "string") {
+        // 3. if the user's activity has the old image, delete it on AWS.
+        if (res.data && res.data.hasOwnProperty("oldimageurl")) {
+            let result = await axios.post(
+                `${ROOT_URL}/api/deleteImage`,
+                { imgurl: res.data.oldimageurl },
+                {
+                    headers: {
+                        authorization: localStorage.getItem("jwtToken")
+                    }
+                }
+            );
+            // console.log("result", result);
+        }
+    }
+};
+
 
 export const deleteUserActivity = (
     activityId,
     history,
     userId
 ) => async dispatch => {
-    const res = await axios.put(
+    let res = await axios.put(
         `${ROOT_URL}/api/deleteUserActivity/${activityId}`,
         null,
         {
@@ -124,61 +181,93 @@ export const deleteUserActivity = (
             }
         }
     );
-    if(res.data === "成功删除该活动"){
-         history.goBack();
-    }
-
-    dispatch({
-        // since we may only need to receive the success message here
-        type: ADD_ACTIVITY_DATA,
-        payload: res.DATA
-    });
-
-};
-
-export const fetchActivityData = () => async dispatch => {
-    try {
-        const res = await axios.get(`${ROOT_URL}/api/fetchActivity`,  {
-            headers: {
-                authorization: localStorage.getItem("jwtToken")
-            }
-        });
+    // 1. check if the use has the authority to delete the activty. a:loggedin b. be the person who created the activity
+    if (res.data === "你没有权限或者该活动不存在") {
         dispatch({
-            type: FETCH_ACTIVITY_DATA,
-            payload: res.data
+            // only need to receive the message
+            type: ADD_ACTIVITY_DATA,
+            payload: res.DATA
         });
-    } catch (err) {
-        dispatch(activityErr(err.message));
-    }
-};
-export const fetchOneActivity = activityId => async dispatch => {
-    try {
-        const res = await axios.get(`${ROOT_URL}/api/activity/${activityId}`, {
-            headers: {
-                authorization: localStorage.getItem("jwtToken")
+        // 2. if the user is authorized, then check if the activity has imgurl, if no, delete the row in database, otherwise, delete the row in database first, then delete it on AWS.
+    } else if (res.data.hasOwnProperty("imgurl")) {
+        let result = await axios.post(
+            `${ROOT_URL}/api/deleteImage`,
+            { imgurl: res.data.imgurl },
+            {
+                headers: {
+                    authorization: localStorage.getItem("jwtToken")
+                }
             }
-        });
-        dispatch({
-            type: FETCH_ONE_ACTIVITY,
-            payload: res.data
-        });
-    } catch (err) {
-        dispatch(activityErr(err.message));
-    }
-};
-export const submitActivityData = (data, history) => async dispatch => {
-    try {
-        const res = await axios.post(`${ROOT_URL}/api/addActivity`, data, {
-            headers: {
-                authorization: localStorage.getItem("jwtToken")
-            }
-        });
+        );
+        // console.log("result", result);
         dispatch({
             type: ADD_ACTIVITY_DATA,
-            payload: res.data
+            payload: "活动成功删除"
         });
 
-        history.push("/");
+        history.push("/userActivities/0");
+    } else {
+        dispatch({
+            type: ADD_ACTIVITY_DATA,
+            payload: "活动成功删除"
+        });
+
+        history.push("/userActivities/0");
+    }
+};
+
+export const submitActivityData = (data, file, history) => async dispatch => {
+    try {
+        // ----------------handle uploading activity image-----
+        if (file) {
+            const uploadConfig = await axios.get(
+                `${ROOT_URL}/api/upload/activity`,
+                {
+                    headers: {
+                        authorization: localStorage.getItem("jwtToken")
+                    }
+                }
+            );
+
+            const upload = await axios.put(uploadConfig.data.url, file, {
+                headers: {
+                    "Content-Type": file.type
+                }
+            });
+
+            // console.log("upload", uploadConfig.data.key);
+            // ----------------handle upload-----
+            const res = await axios.post(
+                `${ROOT_URL}/api/addActivity`,
+                {
+                    ...data,
+                    imageurl: uploadConfig.data.key
+                },
+                {
+                    headers: {
+                        authorization: localStorage.getItem("jwtToken")
+                    }
+                }
+            );
+            dispatch({
+                type: ADD_ACTIVITY_DATA,
+                payload: res.data
+            });
+
+            history.push("/");
+        } else {
+            const res = await axios.post(`${ROOT_URL}/api/addActivity`, data, {
+                headers: {
+                    authorization: localStorage.getItem("jwtToken")
+                }
+            });
+            dispatch({
+                type: ADD_ACTIVITY_DATA,
+                payload: res.data
+            });
+
+            history.push("/");
+        }
     } catch (err) {
         dispatch(activityErr(err.message));
     }

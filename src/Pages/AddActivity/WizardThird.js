@@ -10,24 +10,31 @@ import PageHeader from "../PageHeader";
 
 const styles = theme => ({
     imageWrapper: {
-        display: "flex",
-        flexFlow: "row wrap"
+        // display: "flex",
+        // flexFlow: "row wrap"
+        position: "relative",
+        textAlign: "center",
+        maxHeight: 240,
+        border: "1px solid green"
     },
 
     image: {
         flex: 1
     },
     btnGroup: {
-         width: "95%",
-         margin:"auto",
+        width: "95%",
+        margin: "260px auto",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center"
         // border:"1px solid green"
     },
     button: {
-        color:"#fff",
-        width: "40%"
+        color: "#fff",
+        width: "40%",
+        padding: 15,
+        backgroundColor: "#1976D2",
+        fontSize:14
     },
     item: {
         padding: "5px 0"
@@ -69,8 +76,16 @@ class WizardThird extends Component {
                         <div className={classes.imageWrapper}>
                             <Field
                                 component={FileInput}
-                                name="img1"
-                                className={classes.image}
+                                name="images"
+                                style={{
+                                    position: "absolute",
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    height: 240,
+                                    border: "2px dashed #000"
+                                }}
                             />
                         </div>
                     </div>

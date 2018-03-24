@@ -19,13 +19,14 @@ import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "./PageHeader";
 import RegisterDialog from "./RegisterDialog";
-import test from "../Assets/imgForTest/dalian1.jpg";
 import test2 from "../Assets/imgForTest/4.jpg";
+import config from "../config/config";
+import testPic from "../Assets/imgForTest/shanghai1.jpg";
 
 const styles = theme => ({
     editBar: {
         // border:"1px solid red",
-        maxWidth:600,
+        maxWidth: 600,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
@@ -72,7 +73,7 @@ const styles = theme => ({
 
     container: {
         // border: "1px solid blue",
-        marginTop:40,
+        marginTop: 40,
         display: "flex",
         flexFlow: "column",
         justifyContent: "flexStart",
@@ -87,7 +88,7 @@ const styles = theme => ({
         // border: "1px solid blue",
         width: 200,
         margin: "20px 0",
-        padding:"0 20px"
+        padding: "0 20px"
     },
 
     commentArea: {
@@ -99,37 +100,38 @@ const styles = theme => ({
     },
 
     bg: {
-        maxWidth:600,
-        margin:"auto",
+        maxWidth: 600,
+        margin: "auto",
         marginBottom: 10,
         position: "relative",
-        textAlign: "center",
+        textAlign: "center"
     },
 
     bgImg: {
+        width:"100%",
         maxWidth: "100%",
-        height: 250
+        height: 250,
+        maxHeight:250
     },
 
-    bgImgLayer: {
-        position: "absolute",
-        top: 0,
-        bottom: 2,
-        left: 0,
-        right: 0,
-        // border:"1px solid red",
-        backgroundColor: "#1976D2",
-        opacity: 0.2,
-        maxWidth:"75%",
-        margin:"auto"
-    },
+    // bgImgLayer: {
+    //     position: "absolute",
+    //     top: 0,
+    //     bottom: 2,
+    //     left: 0,
+    //     right: 0,
+    //     // border:"1px solid red",
+    //     backgroundColor: "#1976D2",
+    //     opacity: 0.2,
+    //     maxWidth: "75%",
+    //     margin: "auto"
+    // },
     row: {
         // border:"1px solid red",
-        position:"absolute",
-        bottom:-35,
-        left:"50%",
-        marginLeft:-45
-
+        position: "absolute",
+        bottom: -35,
+        left: "50%",
+        marginLeft: -45
     },
     avatar: {
         margin: 10
@@ -154,6 +156,44 @@ class Activity extends Component {
         this.props.fetchOneActivity(activityId);
         if (localStorage["jwtToken"]) {
             this.props.verifyYourFav(activityId);
+        }
+    }
+
+    renderAvatar() {
+        const { activity, classes } = this.props;
+        if (activity.userimageurl) {
+            return (
+                <Avatar
+                    alt="tour guide"
+                    src={
+                        "https://s3-us-west-1.amazonaws.com/utrip-bucket/" +
+                        activity.userimageurl
+                    }
+                    className={classNames(classes.avatar, classes.bigAvatar)}
+                />
+            );
+        } else {
+            return (
+                <Avatar
+                    alt="tour guide"
+                    src={test2}
+                    className={classNames(classes.avatar, classes.bigAvatar)}
+                />
+            );
+        }
+    }
+
+    renderImage() {
+        const { activity, classes } = this.props;
+        if (activity.imageurl) {
+            return (
+                <img
+                    className={classes.bgImg}
+                    src={config.BUCKET_URL + activity.imageurl}
+                />
+            );
+        } else {
+            return <img className={classes.bgImg} src={testPic} />;
         }
     }
 
@@ -241,18 +281,8 @@ class Activity extends Component {
                 <PageHeader history={this.props.history} title="活动" />
                 {this.renderEditChoice()}
                 <div className={classes.bg}>
-                    <img className={classes.bgImg} src={test} />
-                    <div className={classes.bgImgLayer} />
-                    <div className={classes.row}>
-                        <Avatar
-                            alt="tour guide"
-                            src={test2}
-                            className={classNames(
-                                classes.avatar,
-                                classes.bigAvatar
-                            )}
-                        />
-                    </div>
+                    {this.renderImage()}
+                    <div className={classes.row}>{this.renderAvatar()}</div>
                 </div>
                 <div className={classes.container}>
                     <h3 style={{ fontWeight: "bold" }}>{activity.theme}</h3>
@@ -318,12 +348,12 @@ class Activity extends Component {
                                 {activity.budget} 元 / 人
                             </div>
                         </li>
-                         <li>
-                        <div className={classes.detailTitle}>参加人数上限</div>
-                        <div className={classes.detailContent}>
-                            {activity.numberOfPeople} 人
-                        </div>
-                    </li>
+                        <li>
+                            <div className={classes.detailTitle}>参加人数上限</div>
+                            <div className={classes.detailContent}>
+                                {activity.numberOfPeople} 人
+                            </div>
+                        </li>
 
                         <li>
                             <div className={classes.detailTitle}>提供的服务</div>
@@ -346,7 +376,10 @@ class Activity extends Component {
                     </ul>
                     <div className={classes.commentArea}>
                         <div className={classes.writeArea}>
-                            <RatingForm activityId={activityId} creatorId={activity.userId} />
+                            <RatingForm
+                                activityId={activityId}
+                                creatorId={activity.userId}
+                            />
                         </div>
                     </div>
                 </div>

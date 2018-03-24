@@ -10,8 +10,6 @@ import WizardFirst from "./WizardFirst";
 import WizardSecond from "./WizardSecond";
 import WizardThird from "./WizardThird";
 
-
-
 class AddActivity extends Component {
     constructor(props) {
         super(props);
@@ -31,10 +29,7 @@ class AddActivity extends Component {
     }
 
     handleSubmit(values) {
-       console.log('valueToSubmit', values);
-
-        let { theme, location,departdate,finishdate, budget, numberOfPeople, services,story } = values;
-        const modifiedValues={
+        let {
             theme,
             location,
             departdate,
@@ -42,11 +37,16 @@ class AddActivity extends Component {
             budget,
             numberOfPeople,
             services,
-            story,
+            story
+        } = values;
 
-        };
+        let file;
+        if(values.images){
+            file = values.images[0];
+        }
+        // console.log("file", file)
 
-        this.props.submitActivityData(modifiedValues, this.props.history);
+        this.props.submitActivityData(values, file, this.props.history);
     }
 
     render() {
@@ -54,11 +54,7 @@ class AddActivity extends Component {
         const { page } = this.state;
         return (
             <div>
-                {page === 1 && (
-                    <WizardFirst
-                        onSubmit={this.nextPage}
-                    />
-                )}
+                {page === 1 && <WizardFirst onSubmit={this.nextPage} />}
                 {page === 2 && (
                     <WizardSecond
                         previousPage={this.previousPage}
@@ -71,18 +67,15 @@ class AddActivity extends Component {
                         onSubmit={this.handleSubmit}
                     />
                 )}
-                <div className='input-success'>{this.props.msg}</div>
+                <div className="input-success">{this.props.msg}</div>
             </div>
         );
     }
 }
 
-
 const mapStateToProps = state => {
-
     return {
-        msg: state.ActivityReducer.message,
-
+        msg: state.ActivityReducer.message
     };
 };
 

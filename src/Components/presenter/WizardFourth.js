@@ -86,7 +86,7 @@ class wizardFourth extends Component {
           <div className={classes.imageWrapper}>
             <Field
               component={FileInput}
-              name="img1"
+              name="images"
               className={classes.image}
             />
           </div>
