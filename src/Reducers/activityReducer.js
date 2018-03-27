@@ -29,7 +29,7 @@ export default (state = INITIAL_STATE, action) => {
         case FETCH_ACTIVITY_FOR_EDITTING:
             return { ...state, activity:{}, edit: action.payload };
         case ADD_ACTIVITY_DATA:
-            return { ...state, message: action.payload };
+            return { ...state, edit:{}, activity:{}, message: action.payload };
         case FETCH_ACTIVITY_DATA:
             return { ...state, activity:{}, all: action.payload };
         case ACTIVITY_ERROR:

@@ -50,20 +50,26 @@ const styles = theme => ({
         // border: "1px solid blue"
     },
 
+    // may need to define the max width later!
     imageWrapper: {
         position: "relative",
         textAlign: "center",
+        height: 225
+        // border: "2px solid green"
     },
     image: {
-       flex:1,
-       maxWidth:"100%",
-       maxHeight:240
+        flex: 1,
+        maxWidth: "100%",
+        height: 225,
+        maxHeight: 225
+        // border: "1px solid red"
     }
 });
 
 class EditActivityPanel extends Component {
     state = {
-        open: false
+        open: false,
+        showCrop: true
     };
 
     handleClose = () => {
@@ -118,19 +124,50 @@ class EditActivityPanel extends Component {
         this.props.updateUserActivity(activityId, edittedValues, history);
     }
 
-    uploadNewImage(file) {
-        const { edit, history } = this.props;
-        this.props.uploadNewImage(edit.id, edit.userId, file, history)
+    onGetImgUrl(file) {
+        const { edit } = this.props;
+        this.props.replaceWithNewImg(edit.id, edit.userId, file);
     }
+
+    async onCropImageObject(keyforUrl, width, height, x, y) {
+        const { edit } = this.props;
+        let oldImageurl = edit.imgurl ? edit.imgurl : null;
+
+        await this.props.cropImageObj(
+            oldImageurl,
+            edit.id,
+            edit.userId,
+            keyforUrl,
+            width,
+            height,
+            x,
+            y
+        );
+
+        const { activityId } = this.props.match.params;
+        await this.props.fetchOneUserActivityForEditting(activityId);
+
+        setTimeout(() => {
+            this.setState({
+                showCrop: false
+            });
+        }, 1000);
+    }
+
     renderImg(edit) {
         const { classes } = this.props;
-        if (edit && edit.imageurl) {
+        if (edit) {
             return (
                 <div className={classes.imageWrapper}>
-                    <img
-                        className={classes.image}
-                        src={config.BUCKET_URL + edit.imageurl}
-                    />
+                    {edit.imageurl ? (
+                        <img
+                            className={classes.image}
+                            src={config.BUCKET_URL + edit.imageurl}
+                        />
+                    ) : (
+                        <img src={testPic} className={classes.image} />
+                    )}
+
                     <Field
                         component={FileInput}
                         name="images"
@@ -139,30 +176,20 @@ class EditActivityPanel extends Component {
                             top: 0,
                             left: 0,
                             right: 0,
-                            bottom: 0,
-                            border: "4px dashed #000"
+                            bottom: 0
                         }}
-                        onUploadNewImage={file => this.uploadNewImage(file)}
+                        onGetImgUrl={file => this.onGetImgUrl(file)}
+                        onCropImageObject={(keyforUrl, width, height, x, y) =>
+                            this.onCropImageObject(
+                                keyforUrl,
+                                width,
+                                height,
+                                x,
+                                y
+                            )}
+                        showCrop={this.state.showCrop}
                     />
-                </div>
-            );
-        } else {
-            return (
-                <div className={classes.imageWrapper}>
-                    <img src={testPic} className={classes.image} />
-                    <Field
-                        component={FileInput}
-                        name="images"
-                        style={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            border: "4px dashed #000"
-                        }}
-                        onUploadNewImage={file => this.uploadNewImage(file)}
-                    />
+                    {this.props.error}
                 </div>
             );
         }
@@ -183,10 +210,11 @@ class EditActivityPanel extends Component {
 
         return (
             <div style={{ marginBottom: 60 }}>
-                <div className="form-group" key="img">
+                <div style={{ margin: "0 auto 20px auto" }}>
                     {this.renderImg(edit)}
                 </div>
-                <div className="form-group" key="basic">
+
+                <div className="wrap form-group" key="basic">
                     <h4 className="category-title">你的基本活动信息</h4>
                     <Field
                         fullWidth
@@ -226,7 +254,7 @@ class EditActivityPanel extends Component {
                         placeholder="你能接收的人数上限"
                     />
                 </div>
-                <div className="form-group" key="date">
+                <div className="wrap form-group" key="date">
                     <h4 className="category-title">你的活动时间</h4>
                     <Field
                         key="dapartdate"
@@ -243,7 +271,7 @@ class EditActivityPanel extends Component {
                         placeholder="结束日期和时间"
                     />
                 </div>
-                <div className="form-group" key="service">
+                <div className="wrap form-group" key="service">
                     <h4 className="category-title">你可以提供的向导服务</h4>
                     <Field
                         key="services"
@@ -252,7 +280,7 @@ class EditActivityPanel extends Component {
                         data={services}
                     />
                 </div>
-                <div className="form-group" key="story">
+                <div className="wrap form-group" key="story">
                     <h4 className="category-title">我在这个地方的故事</h4>
                     <Field
                         fullWidth
@@ -293,10 +321,16 @@ class EditActivityPanel extends Component {
                 </Dialog>
                 <form
                     style={{ marginBottom: 0 }}
-                    className="wrapper"
                     onSubmit={handleSubmit(this.submitForm.bind(this))}
                 >
-                    <PageHeader history={this.props.history} title="修改活动" />
+                    <PageHeader
+                        history={this.props.history}
+                        style={{
+                            width: "95vw",
+                            maxWidth: 600
+                        }}
+                        title="修改活动"
+                    />
                     {this.renderEditPanel(classes)}
                     <div className={classes.btnGroup}>
                         <Button

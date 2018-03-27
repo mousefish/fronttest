@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { withStyles } from "material-ui/styles";
+import * as actions from "../../Actions";
 import Button from "material-ui/Button";
 import FileInput from "./FileInput";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
@@ -10,16 +11,15 @@ import PageHeader from "../PageHeader";
 
 const styles = theme => ({
     imageWrapper: {
-        // display: "flex",
-        // flexFlow: "row wrap"
         position: "relative",
         textAlign: "center",
-        maxHeight: 250,
+        height: 225
+        // border: "2px solid green"
     },
 
     btnGroup: {
         width: "95%",
-        margin: "260px auto",
+        margin: "20px auto",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center"
@@ -30,7 +30,7 @@ const styles = theme => ({
         width: "40%",
         padding: 15,
         backgroundColor: "#1976D2",
-        fontSize:14
+        fontSize: 14
     },
     item: {
         padding: "5px 0"
@@ -55,6 +55,7 @@ class WizardThird extends Component {
             </div>
         );
     }
+
     render() {
         const { handleSubmit, pristine, previousPage, submitting } = this.props;
         const { classes } = this.props;
@@ -66,24 +67,6 @@ class WizardThird extends Component {
                     <div className="form-group">
                         <h4 className="category-title">请确认输入</h4>
                         {this.renderInputs()}
-                    </div>
-                    <div className="form-group">
-                        <h4 className="category-title">上传照片</h4>
-                        <div className={classes.imageWrapper}>
-                            <Field
-                                component={FileInput}
-                                name="images"
-                                style={{
-                                    position: "absolute",
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    height: 240,
-                                    border: "2px dashed #000"
-                                }}
-                            />
-                        </div>
                     </div>
                     <div className={classes.btnGroup}>
                         <Button
@@ -121,4 +104,4 @@ export default reduxForm({
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
     validate
-})(withStyles(styles)(connect(mapStateToProps)(WizardThird)));
+})(withStyles(styles)(connect(mapStateToProps, actions)(WizardThird)));

@@ -117,57 +117,6 @@ export const updateUserActivity = (
     });
 };
 
-
-
-export const uploadNewImage = (activityId, userId, file, history) => async dispatch => {
-    // 1. first make sure the user has the authority to replace the image
-    // a. must be logged in b. must the be the user who created the activity
-    const uploadConfig = await axios.get(
-        `${ROOT_URL}/api/replace/activity/${userId}`,
-        {
-            headers: {
-                authorization: localStorage.getItem("jwtToken")
-            }
-        }
-    );
-    if (typeof uploadConfig.data === "string") {
-        return;
-    }
-
-    const upload = await axios.put(uploadConfig.data.url, file, {
-        headers: {
-            "Content-Type": file.type
-        }
-    });
-    const res = await axios.post(
-        `${ROOT_URL}/api/updateUserActivity/${activityId}`,
-        { imageurl: uploadConfig.data.key },
-        {
-            headers: {
-                authorization: localStorage.getItem("jwtToken")
-            }
-        }
-    );
-    // 2. if the user has the authority, upload the new image to AWS.
-    if (typeof res.data !== "string") {
-        // 3. if the user's activity has the old image, delete it on AWS.
-        if (res.data && res.data.hasOwnProperty("oldimageurl")) {
-            console.log("supposed to be here!!!!!!")
-            let result = await axios.post(
-                `${ROOT_URL}/api/deleteImage`,
-                { imgurl: res.data.oldimageurl },
-                {
-                    headers: {
-                        authorization: localStorage.getItem("jwtToken")
-                    }
-                }
-            );
-            // console.log("result", result);
-        }
-    }
-};
-
-
 export const deleteUserActivity = (
     activityId,
     history,
@@ -217,58 +166,24 @@ export const deleteUserActivity = (
     }
 };
 
-export const submitActivityData = (data, file, history) => async dispatch => {
+export const submitActivityData = (data, history) => async dispatch => {
     try {
-        // ----------------handle uploading activity image-----
-        if (file) {
-            const uploadConfig = await axios.get(
-                `${ROOT_URL}/api/upload/activity`,
-                {
-                    headers: {
-                        authorization: localStorage.getItem("jwtToken")
-                    }
-                }
-            );
-
-            const upload = await axios.put(uploadConfig.data.url, file, {
-                headers: {
-                    "Content-Type": file.type
-                }
-            });
-
-            // console.log("upload", uploadConfig.data.key);
-            // ----------------handle upload-----
-            const res = await axios.post(
-                `${ROOT_URL}/api/addActivity`,
-                {
-                    ...data,
-                    imageurl: uploadConfig.data.key
-                },
-                {
-                    headers: {
-                        authorization: localStorage.getItem("jwtToken")
-                    }
-                }
-            );
+        const res = await axios.post(`${ROOT_URL}/api/addActivity`, data, {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
+        if (typeof res.data === "string") {
             dispatch({
                 type: ADD_ACTIVITY_DATA,
                 payload: res.data
             });
-
-            history.push("/");
-        } else {
-            const res = await axios.post(`${ROOT_URL}/api/addActivity`, data, {
-                headers: {
-                    authorization: localStorage.getItem("jwtToken")
-                }
-            });
-            dispatch({
-                type: ADD_ACTIVITY_DATA,
-                payload: res.data
-            });
-
-            history.push("/");
+        }else{
+            const { activityId } = res.data;
+            history.push(`/editActivity/${activityId}`);
         }
+
+
     } catch (err) {
         dispatch(activityErr(err.message));
     }

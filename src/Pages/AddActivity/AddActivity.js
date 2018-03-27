@@ -40,13 +40,7 @@ class AddActivity extends Component {
             story
         } = values;
 
-        let file;
-        if(values.images){
-            file = values.images[0];
-        }
-        // console.log("file", file)
-
-        this.props.submitActivityData(values, file, this.props.history);
+        this.props.submitActivityData(values, this.props.history);
     }
 
     render() {
