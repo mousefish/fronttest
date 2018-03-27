@@ -6,12 +6,30 @@ import classNames from "classnames";
 import bg from "../Assets/Images/bg.jpg";
 import AddActivity from "./AddActivity/AddActivity";
 import AddWish from "./AddWish/AddWish";
+import logo from "../Assets/Images/logo.jpg";
 
 const styles = theme => ({
     button: {
-        margin: theme.spacing.unit,
-        width: "95%",
-        marginBottom:15
+        letterSpacing: 2,
+        padding: 15,
+        fontSize: 18,
+        width: "100%",
+        margin: "10px auto",
+        color: "#fff"
+    },
+    logo: {
+        flex: 1,
+        width: "40%",
+        maxWidth: "100%",
+
+        margin: "auto",
+        marginBottom: 65
+    },
+    title: {
+        fontWeight: "bold"
+    },
+    logoWrapper: {
+        textAlign: "center"
     }
 });
 
@@ -20,33 +38,34 @@ class ActivityWishPanel extends Component {
         const { classes } = this.props;
 
         return (
-            <div>
-                <img src={bg} alt="chengdu" className="image-wrapper" />
-                <div className="wrapper" style={{marginTop:40}}>
-
-                        <Link to="/addActivity" className="unlink centralize-button">
-                            <Button
-                                color="primary"
-                                raised
-                                className={classes.button}
-                                id="btn"
-                            >
-                                发布新活动
-                            </Button>
-                        </Link>
-                        <Link to="/addWish" className="unlink centralize-button">
-                            <Button
-                                color="primary"
-                                raised
-                                className={classes.button}
-                                id="btn"
-                                style={{backgroundColor:"#43A047"}}
-                            >
-                                发布新愿望
-                            </Button>
-                        </Link>
-                    </div>
-
+            <div className="wrapper">
+                <div className={classes.logoWrapper}>
+                    <img src={logo} alt="logo" className={classes.logo} />
+                </div>
+                <div className={classes.instruction}>
+                    <h4 className={classes.title}>发布须知：</h4>
+                    <p>
+                        发布活动或者愿望意味着您了解必须承担的责任，并将遵守携U行的所有法律条款。
+                    </p>
+                </div>
+                <Link to="/addActivity" className="unlink centralize-button">
+                    <Button
+                        raised
+                        className={classes.button}
+                        style={{ backgroundColor: "#1976D2" }}
+                    >
+                        发布新活动
+                    </Button>
+                </Link>
+                <Link to="/addWish" className="unlink centralize-button">
+                    <Button
+                        raised
+                        className={classes.button}
+                        style={{ backgroundColor: "#43A047" }}
+                    >
+                        发布新愿望
+                    </Button>
+                </Link>
             </div>
         );
     }
