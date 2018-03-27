@@ -7,6 +7,7 @@ import bg from "../Assets/Images/bg.jpg";
 import AddActivity from "./AddActivity/AddActivity";
 import AddWish from "./AddWish/AddWish";
 import logo from "../Assets/Images/logo.jpg";
+import PageHeader from "./PageHeader";
 
 const styles = theme => ({
     button: {
@@ -35,10 +36,11 @@ const styles = theme => ({
 
 class ActivityWishPanel extends Component {
     render() {
-        const { classes } = this.props;
+        const { classes, history } = this.props;
 
         return (
             <div className="wrapper">
+              <PageHeader history={this.props.history} title="发布活动或者愿望" />
                 <div className={classes.logoWrapper}>
                     <img src={logo} alt="logo" className={classes.logo} />
                 </div>
