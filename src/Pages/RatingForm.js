@@ -23,12 +23,13 @@ const styles = theme => ({
     },
 
     button: {
-        // margin: theme.spacing.unit,
-        width: "45%",
-        padding: 10,
-        fontSize: 14,
-        backgroundColor: "#1976D2",
-        margin: "10px 0"
+        letterSpacing: 2,
+        padding: 15,
+        fontSize: 18,
+        width: "100%",
+        margin: "10px auto",
+        color: "#fff",
+        backgroundColor:"#1976D2"
     },
     starColor: {
         color: "#BDBDBD"
@@ -144,7 +145,6 @@ class RatingForm extends Component {
                     />
                     <Button
                         className={classes.button}
-                        color="primary"
                         raised
                         onClick={event => {
                             this.sendRating(event, activityId, creatorId);
