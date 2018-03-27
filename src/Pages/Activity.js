@@ -23,6 +23,7 @@ import test2 from "../Assets/imgForTest/4.jpg";
 import config from "../config/config";
 import testPic from "../Assets/imgForTest/shanghai1.jpg";
 
+
 const styles = theme => ({
     editBar: {
         // border:"1px solid red",
@@ -165,7 +166,7 @@ class Activity extends Component {
                 <Avatar
                     alt="tour guide"
                     src={
-                        "https://s3-us-west-1.amazonaws.com/utrip-bucket/" +
+                        config.BUCKET_URL +
                         activity.userimageurl
                     }
                     className={classNames(classes.avatar, classes.bigAvatar)}

@@ -69,7 +69,8 @@ const styles = theme => ({
 class EditActivityPanel extends Component {
     state = {
         open: false,
-        showCrop: true
+        showCrop: true,
+        showIcon: false
     };
 
     handleClose = () => {
@@ -126,12 +127,12 @@ class EditActivityPanel extends Component {
 
     onGetImgUrl(file) {
         const { edit } = this.props;
-        this.props.replaceWithNewImg(edit.id, edit.userId, file);
+        this.props.replaceWithNewImg(edit.userId, file);
     }
 
     async onCropImageObject(keyforUrl, width, height, x, y) {
         const { edit } = this.props;
-        let oldImageurl = edit.imgurl ? edit.imgurl : null;
+        let oldImageurl = edit.imageurl ? edit.imageurl : null;
 
         await this.props.cropImageObj(
             oldImageurl,
@@ -149,7 +150,8 @@ class EditActivityPanel extends Component {
 
         setTimeout(() => {
             this.setState({
-                showCrop: false
+                showCrop: false,
+                showIcon:true
             });
         }, 1000);
     }
@@ -168,16 +170,7 @@ class EditActivityPanel extends Component {
                         <img src={testPic} className={classes.image} />
                     )}
 
-                    <Field
-                        component={FileInput}
-                        name="images"
-                        style={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0
-                        }}
+                    <FileInput
                         onGetImgUrl={file => this.onGetImgUrl(file)}
                         onCropImageObject={(keyforUrl, width, height, x, y) =>
                             this.onCropImageObject(
@@ -188,6 +181,7 @@ class EditActivityPanel extends Component {
                                 y
                             )}
                         showCrop={this.state.showCrop}
+                        showIcon={this.state.showIcon}
                     />
                     {this.props.error}
                 </div>

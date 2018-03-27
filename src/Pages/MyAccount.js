@@ -44,7 +44,7 @@ class MyAccount extends Component {
         if (token) {
             switch (item) {
                 case "账号信息":
-                    return this.props.history.push(`/myBasicInfo/0`);
+                    return this.props.history.push(`/myBasicInfo`);
                 case "我的圈子":
                     return this.props.history.push(`/story/0`);
                 case "我的活动":

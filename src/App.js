@@ -246,7 +246,7 @@ class App extends Component {
             <Route exact path="/my" component={RequireAuth(MyAccount)} />
             <Route
               exact
-              path="/myBasicInfo/:userId"
+              path="/myBasicInfo"
               component={RequireAuth(PrivateBasicInfo)}
             />
             <Route

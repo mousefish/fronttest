@@ -4,6 +4,41 @@ import "cropperjs/dist/cropper.css"; // see installation section above for versi
 // If you choose not to use import, you need to assign Cropper to default
 // var Cropper = require('react-cropper').default
 import { connect } from "react-redux";
+import { withStyles } from "material-ui/styles";
+
+const styles = theme => ({
+  avatarDimension: {
+    height: 128,
+    width: 128,
+
+  },
+
+  // may need to redefine the max width later!
+  backgroundDimension: {
+    height: 225,
+    maxHeight: 225,
+    flex: 1,
+    maxWidth: "100%"
+  },
+
+  containerForAvatar: {
+    // may need to redefine the max width later!
+    position: "relative",
+    textAlign: "center",
+    height: 128,
+    maxWidth: 128,
+
+  },
+
+  containerForBackground: {
+    // may need to redefine the max width later!
+    position: "relative",
+    textAlign: "center",
+    height: 225,
+    maxWidth: "100%",
+    border: "2px solid blue"
+  }
+});
 
 class FileCrop extends Component {
   cropImgObj(e) {
@@ -16,29 +51,30 @@ class FileCrop extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     if (this.props.showCrop) {
       return (
         <div
-          style={{
-            // may need to redefine the max width later!
-            position: "relative",
-            textAlign: "center",
-            height: 225,
-            maxWidth: "100%"
-            // border:"2px solid blue"
-          }}
+          className={
+            this.props.purpose === "avatar" ? (
+              classes.containerForAvatar
+            ) : (
+              classes.containerForBackground
+            )
+          }
         >
           <Cropper
             ref="cropper"
             src={this.props.src}
-            aspectRatio={400 / 225}
+            aspectRatio={this.props.purpose === "avatar" ? 1 / 1 : 400 / 225}
             guides={false}
-            style={{
-              height: 225,
-              maxHeight: 225,
-              flex: 1,
-              maxWidth: "100%"
-            }}
+            className={
+              this.props.purpose === "avatar" ? (
+                classes.avatarDimension
+              ) : (
+                classes.backgroundDimension
+              )
+            }
           />
           <span
             style={{
@@ -56,7 +92,7 @@ class FileCrop extends Component {
               }}
               onClick={e => {
                 e.stopPropagation();
-                this.props.onCancel()
+                this.props.onCancel();
               }}
             >
               取消
@@ -87,4 +123,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(FileCrop);
+export default connect(mapStateToProps)(
+  withStyles(styles, { withTheme: true })(FileCrop)
+);

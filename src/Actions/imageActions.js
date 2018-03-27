@@ -5,11 +5,7 @@ import config from "../config/config";
 
 const ROOT_URL = config["ROOT_URL"];
 
-export const replaceWithNewImg = (
-    activityId,
-    userId,
-    file
-) => async dispatch => {
+export const replaceWithNewImg = (userId, file) => async dispatch => {
     // 1. first make sure the user has the authority to replace the image
     // a. must be logged in b. must the be the user who created the activity
 
@@ -75,15 +71,30 @@ export const cropImageObj = (
     // upload the imgurl in database with targetKey(cropped one)
     if (typeof result.data !== "string") {
         const { srcKey, targetKey } = result.data;
-        const res = await axios.post(
-            `${ROOT_URL}/api/updateUserActivity/${activityId}`,
-            { imageurl: targetKey },
-            {
-                headers: {
-                    authorization: localStorage.getItem("jwtToken")
+        let res;
+        if (activityId) {
+            res = await axios.post(
+                `${ROOT_URL}/api/updateUserActivity/${activityId}`,
+                { imageurl: targetKey },
+                {
+                    headers: {
+                        authorization: localStorage.getItem("jwtToken")
+                    }
                 }
-            }
-        );
+            );
+        }
+        if (userId === 0) {
+
+            res = await axios.post(
+                `${ROOT_URL}/api/updateBasicInfo`,
+                { imageurl: targetKey },
+                {
+                    headers: {
+                        authorization: localStorage.getItem("jwtToken")
+                    }
+                }
+            );
+        }
 
         // delete the srcKey(raw, non-cropped image) on AWS
         await axios.post(
@@ -107,7 +118,7 @@ export const cropImageObj = (
                 }
             );
         }
-    }else{
+    } else {
         dispatch(activityErr(result.data));
     }
 };
