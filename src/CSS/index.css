@@ -26,11 +26,11 @@ header .title .name {
   margin-left: 20px; }
 
 #btn {
-  padding: 15px;
+  letter-spacing: 2px;
+  padding: 12px;
   font-size: 18px;
-  background-color: #1976D2;
-  width: 95%;
-  margin: 10px auto; }
+  margin: 10px auto;
+  color: #fff; }
 
 .centralize-button {
   text-align: center;

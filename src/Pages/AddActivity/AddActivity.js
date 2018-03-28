@@ -61,7 +61,7 @@ class AddActivity extends Component {
                         onSubmit={this.handleSubmit}
                     />
                 )}
-                <div className="input-success">{this.props.msg}</div>
+
             </div>
         );
     }

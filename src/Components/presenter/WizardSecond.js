@@ -23,8 +23,8 @@ const styles = theme => ({
   },
 
   button: {
-    // margin: theme.spacing.unit,
-    // width: "95%"
+    width: "95%",
+    backgroundColor:"#1976D2"
   },
 
   radioInner: {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UPLOAD_NEW_IMAGE, ACTIVITY_ERROR } from "./types";
+import { UPLOAD_NEW_IMAGE, IMAGE_ERROR } from "./types";
 
 import config from "../config/config";
 
@@ -11,7 +11,7 @@ export const replaceWithNewImg = (userId, file) => async dispatch => {
 
     const maxSize = 100000;
     if (file.size > maxSize) {
-        dispatch(activityErr("文件不能超过100KB"));
+        dispatch(imageErr("文件不能超过100KB"));
     }
     const uploadConfig = await axios.get(
         `${ROOT_URL}/api/replace/image/${userId}`,
@@ -119,13 +119,13 @@ export const cropImageObj = (
             );
         }
     } else {
-        dispatch(activityErr(result.data));
+        dispatch(imageErr(result.data));
     }
 };
 
-export const activityErr = err => {
+export const imageErr = err => {
     return {
-        type: ACTIVITY_ERROR,
+        type: IMAGE_ERROR,
         payload: err
     };
 };

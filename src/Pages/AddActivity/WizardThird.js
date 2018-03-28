@@ -26,12 +26,14 @@ const styles = theme => ({
         // border:"1px solid green"
     },
     button: {
-        color: "#fff",
         width: "40%",
-        padding: 15,
-        backgroundColor: "#1976D2",
-        fontSize: 14
+        letterSpacing: 2,
+        padding: 12,
+        fontSize: 18,
+        backgroundColor:"#1976D2",
+        color: "#fff"
     },
+
     item: {
         padding: "5px 0"
     }
@@ -70,7 +72,6 @@ class WizardThird extends Component {
                     </div>
                     <div className={classes.btnGroup}>
                         <Button
-                            style={{ backgroundColor: "#1976D2" }}
                             raised
                             className={classes.button}
                             onClick={previousPage}
@@ -80,7 +81,6 @@ class WizardThird extends Component {
 
                         <Button
                             type="submit"
-                            style={{ backgroundColor: "#1976D2" }}
                             raised
                             className={classes.button}
                         >

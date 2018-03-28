@@ -8,7 +8,10 @@ import { TextField } from "redux-form-material-ui";
 import PageHeader from "../PageHeader";
 
 const styles = theme => ({
-    button: {},
+    button: {
+         width: "100%",
+        backgroundColor: "#1976D2"
+    },
 
     textField: {
         padding: "8px 0",

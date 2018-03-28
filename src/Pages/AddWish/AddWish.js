@@ -19,6 +19,10 @@ const styles = theme => ({
     textField: {
         padding: "8px 0"
         // border: "1px solid blue"
+    },
+    button:{
+        width:"95%",
+        backgroundColor:"#1976D2"
     }
 });
 
@@ -138,7 +142,6 @@ class AddWish extends Component {
                         </Button>
                     </div>
                 </form>
-                <div className="input-success">{this.props.msg}</div>
             </div>
         );
     }

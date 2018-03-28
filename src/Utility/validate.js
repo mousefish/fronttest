@@ -23,7 +23,7 @@ const validate = values => {
     "major",
     "language",
     "hobby",
-    "personality",
+    "personality"
   ];
 
   names.forEach(name => {
@@ -52,6 +52,19 @@ const validate = values => {
     errors.password = "密码不能含有邮箱地址";
   }
 
+  if (values.departdate && Date.now() > Date.parse(values.departdate)) {
+    errors.departdate = "出发日期不能先于当前时间";
+  }
+
+  if (
+    values.departdate &&
+    values.finishdate &&
+    Date.parse(values.departdate) > Date.parse(values.finishdate)
+  ) {
+    console.log(Date.parse(values.departdate));
+    errors.finishdate = "结束时间不能先于出发时间";
+  }
+
   if (Number.isNaN(Number(values.age)) || Number(values.age) <= 0) {
     errors.age = "请输入有效年龄";
   } else if (Number(values.age) < 18) {
@@ -62,7 +75,10 @@ const validate = values => {
     errors.budget = "请输入有效数字";
   }
 
-  if (Number.isNaN(parseInt(values.numberOfPeople)) || parseInt(values.numberOfPeople) <= 0) {
+  if (
+    Number.isNaN(parseInt(values.numberOfPeople)) ||
+    parseInt(values.numberOfPeople) <= 0
+  ) {
     errors.numberOfPeople = "请输入有效数字";
   }
 

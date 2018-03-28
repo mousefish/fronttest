@@ -9,33 +9,39 @@ import { TextField } from "redux-form-material-ui";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { LinearProgress } from "material-ui/Progress";
 import PageHeader from "../../Pages/PageHeader";
-import FileInput from "../../Pages/AddActivity/FileInput";
 
 const styles = theme => ({
   progress: {
     width: "95%",
     margin: "auto"
   },
-  button: {
-    width: "40%",
-    color:"#fff"
+
+  head: {
+    marginTop: 6,
+    fontWeight: "bold"
   },
+
   btnGroup: {
     width: "95%",
-    margin:"auto",
+    margin: "20px auto",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center"
     // border:"1px solid green"
   },
+  button: {
+    width: "40%",
+    letterSpacing: 2,
+    padding: 12,
+    fontSize: 18,
+    backgroundColor: "#1976D2",
+    color: "#fff"
+  },
   textField: {
     padding: "8px 0"
     // border: "1px solid blue"
   },
-   imageWrapper: {
-        display: "flex",
-        flexFlow: "row wrap"
-    },
+
   item: {
     padding: "5px 0"
   }
@@ -78,35 +84,15 @@ class wizardFourth extends Component {
           value={this.state.completed}
         />
         <div className="form-group">
-          <h4 className="category-title">请确认输入</h4>
+          <h4 className={classes.head}>请确认输入</h4>
           {this.renderInputs()}
         </div>
-        <div className="form-group">
-          <h4 className="category-title">上传照片</h4>
-          <div className={classes.imageWrapper}>
-            <Field
-              component={FileInput}
-              name="images"
-              className={classes.image}
-            />
-          </div>
-        </div>
         <div className={classes.btnGroup}>
-          <Button
-            style={{ backgroundColor: "#1976D2" }}
-            raised
-            className={classes.button}
-            onClick={previousPage}
-          >
+          <Button raised className={classes.button} onClick={previousPage}>
             返回修改
           </Button>
 
-          <Button
-            type="submit"
-            className={classes.button}
-            style={{ backgroundColor: "#1976D2" }}
-            raised
-          >
+          <Button type="submit" className={classes.button} raised>
             提交
           </Button>
         </div>
@@ -115,7 +101,7 @@ class wizardFourth extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log("values", state.form.wizard.values);
+  // console.log("values", state.form.wizard.values);
   return {
     values: state.form.wizard.values
   };

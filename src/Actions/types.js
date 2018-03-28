@@ -40,3 +40,4 @@ export const HANDLE_WISH_LIKES = "handle_wish_likes";
 export const INPUT_ERROR = "INPUT_ERROR";
 export const IS_YOUR_FAV = "IS_YOUR_FAV";
 export const UPLOAD_NEW_IMAGE = "UPLOAD_NEW_IMAGE";
+export const IMAGE_ERROR = "IMAGE_ERROR";

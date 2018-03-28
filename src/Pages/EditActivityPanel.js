@@ -91,7 +91,8 @@ class EditActivityPanel extends Component {
 
     submitForm(values) {
         // console.log("values",values)
-        const { edit } = this.props;
+        const { edit, history } = this.props;
+        const { activityId } = this.props.match.params;
 
         const keys = [
             "theme",
@@ -117,11 +118,11 @@ class EditActivityPanel extends Component {
         ) {
             // need a dialogue here!
             // alert("没有值发生改变！");
+            history.push(`/activity/${activityId}`);
             return null;
         }
 
-        const { activityId } = this.props.match.params;
-        const history = this.props.history;
+
         this.props.updateUserActivity(activityId, edittedValues, history);
     }
 
@@ -183,7 +184,7 @@ class EditActivityPanel extends Component {
                         showCrop={this.state.showCrop}
                         showIcon={this.state.showIcon}
                     />
-                    {this.props.error}
+                    {this.props.imageError}
                 </div>
             );
         }
@@ -368,6 +369,7 @@ const mapStateToProps = state => {
         services
     } = state.ActivityReducer.edit;
     return {
+        imageError:state.ImageReducer.error,
         edit: state.ActivityReducer.edit,
         error: state.ActivityReducer.error,
         msg: state.ActivityReducer.message,

@@ -14,7 +14,8 @@ import PageHeader from "../PageHeader";
 
 const styles = theme => ({
     button: {
-        margin: "auto"
+        width: "95%",
+        backgroundColor: "#1976D2"
 
     },
 

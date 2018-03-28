@@ -11,18 +11,20 @@ import PageHeader from "./PageHeader";
 
 const styles = theme => ({
     button: {
-        letterSpacing: 2,
-        padding: 15,
-        fontSize: 18,
-        width: "100%",
-        margin: "10px auto",
-        color: "#fff"
+        width: "100%"
     },
+
+    blueBtn: {
+        backgroundColor: "#1976D2"
+    },
+    greenBtn: {
+        backgroundColor: "#43A047"
+    },
+
     logo: {
         flex: 1,
         width: "40%",
         maxWidth: "100%",
-
         margin: "auto",
         marginBottom: 65
     },
@@ -40,21 +42,19 @@ class ActivityWishPanel extends Component {
 
         return (
             <div className="wrapper">
-              <PageHeader history={this.props.history} title="发布活动或者愿望" />
+                <PageHeader history={this.props.history} title="发布活动或者愿望" />
                 <div className={classes.logoWrapper}>
                     <img src={logo} alt="logo" className={classes.logo} />
                 </div>
                 <div className={classes.instruction}>
                     <h4 className={classes.title}>发布须知：</h4>
-                    <p>
-                        发布活动或者愿望意味着您了解必须承担的责任，并将遵守携U行的所有法律条款。
-                    </p>
+                    <p>发布活动或者愿望意味着您了解必须承担的责任，并将遵守携U行的所有法律条款。</p>
                 </div>
                 <Link to="/addActivity" className="unlink centralize-button">
                     <Button
                         raised
-                        className={classes.button}
-                        style={{ backgroundColor: "#1976D2" }}
+                        className={classNames(classes.button, classes.blueBtn)}
+                        id="btn"
                     >
                         发布新活动
                     </Button>
@@ -62,8 +62,8 @@ class ActivityWishPanel extends Component {
                 <Link to="/addWish" className="unlink centralize-button">
                     <Button
                         raised
-                        className={classes.button}
-                        style={{ backgroundColor: "#43A047" }}
+                        className={classNames(classes.button, classes.greenBtn)}
+                        id="btn"
                     >
                         发布新愿望
                     </Button>

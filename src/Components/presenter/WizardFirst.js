@@ -17,6 +17,8 @@ const styles = theme => ({
   },
 
   button: {
+    width: "95%",
+    backgroundColor:"#1976D2"
 
   },
 
@@ -87,7 +89,7 @@ class wizardFirst extends Component {
             type="submit"
             color="primary"
             raised
-            className="text-field"
+            className={classes.button}
             id="btn"
             style={{marginTop:5}}
           >

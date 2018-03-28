@@ -15,7 +15,8 @@ const styles = theme => ({
     textField: {
         // marginLeft: theme.spacing.unit,
         // marginRight: theme.spacing.unit,
-        width: "100%"
+        width: "100%",
+        marginBottom:10
     },
     container: {
         display: "flex",
@@ -23,13 +24,9 @@ const styles = theme => ({
     },
 
     button: {
-        letterSpacing: 2,
-        padding: 15,
-        fontSize: 18,
         width: "100%",
-        margin: "10px auto",
-        color: "#fff",
-        backgroundColor:"#1976D2"
+        backgroundColor: "#1976D2"
+
     },
     starColor: {
         color: "#BDBDBD"
@@ -130,8 +127,8 @@ class RatingForm extends Component {
                     </div>
                 </Dialog>
 
-                <form>
-                    {this.state.stars}
+                <form >
+                    <div>{this.state.stars}</div>
                     <TextField
                         id="textarea"
                         label="给个评论吧"
@@ -146,6 +143,7 @@ class RatingForm extends Component {
                     <Button
                         className={classes.button}
                         raised
+                        id="btn"
                         onClick={event => {
                             this.sendRating(event, activityId, creatorId);
                         }}

@@ -119,7 +119,7 @@ class FileCrop extends Component {
 
 const mapStateToProps = state => {
   return {
-    keyforUrl: state.ImageReducer.key
+    keyforUrl: state.ImageReducer.image.key,
   };
 };
 

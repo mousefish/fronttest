@@ -15,8 +15,8 @@ const styles = theme => ({
     margin: "auto"
   },
   button: {
-    // margin: theme.spacing.unit,
-    // width: "95%"
+    width: "95%",
+    backgroundColor: "#1976D2"
   },
   textField: {
     padding: "8px 0"
@@ -28,7 +28,6 @@ class wizardThird extends Component {
   state = {
     completed: 75
   };
-
 
   render() {
     const { classes } = this.props;
