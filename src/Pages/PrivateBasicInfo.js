@@ -158,8 +158,8 @@ class PrivateBasicInfo extends Component {
         );
         await this.props.fetchUser(0);
         this.setState({
-            open:false
-        })
+            open: false
+        });
 
         setTimeout(() => {
             this.setState({
@@ -199,14 +199,17 @@ class PrivateBasicInfo extends Component {
                 case "imageurl":
                     return (
                         <div className={classes.imageWrapper}>
-                            {this.state.value ? (
-                                <img
-                                    className={classes.image}
-                                    src={config.BUCKET_URL + user.basicInfo.imageurl}
-                                />
-                            ) : (
-                                <img src={test0} className={classes.image} />
-                            )}
+                            <img
+                                className={classes.image}
+                                src={
+                                    user.basicInfo.imageurl ? (
+                                        config.BUCKET_URL +
+                                        user.basicInfo.imageurl
+                                    ) : (
+                                        test0
+                                    )
+                                }
+                            />
 
                             <FileInput
                                 purpose="avatar"

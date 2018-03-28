@@ -122,7 +122,6 @@ class EditActivityPanel extends Component {
             return null;
         }
 
-
         this.props.updateUserActivity(activityId, edittedValues, history);
     }
 
@@ -152,7 +151,7 @@ class EditActivityPanel extends Component {
         setTimeout(() => {
             this.setState({
                 showCrop: false,
-                showIcon:true
+                showIcon: true
             });
         }, 1000);
     }
@@ -162,14 +161,16 @@ class EditActivityPanel extends Component {
         if (edit) {
             return (
                 <div className={classes.imageWrapper}>
-                    {edit.imageurl ? (
-                        <img
-                            className={classes.image}
-                            src={config.BUCKET_URL + edit.imageurl}
-                        />
-                    ) : (
-                        <img src={testPic} className={classes.image} />
-                    )}
+                    <img
+                        className={classes.image}
+                        src={
+                            edit.imageurl ? (
+                                config.BUCKET_URL + edit.imageurl
+                            ) : (
+                                testPic
+                            )
+                        }
+                    />
 
                     <FileInput
                         onGetImgUrl={file => this.onGetImgUrl(file)}
@@ -369,7 +370,7 @@ const mapStateToProps = state => {
         services
     } = state.ActivityReducer.edit;
     return {
-        imageError:state.ImageReducer.error,
+        imageError: state.ImageReducer.error,
         edit: state.ActivityReducer.edit,
         error: state.ActivityReducer.error,
         msg: state.ActivityReducer.message,

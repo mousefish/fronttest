@@ -23,7 +23,6 @@ import test2 from "../Assets/imgForTest/4.jpg";
 import config from "../config/config";
 import testPic from "../Assets/imgForTest/shanghai1.jpg";
 
-
 const styles = theme => ({
     editBar: {
         // border:"1px solid red",
@@ -109,9 +108,9 @@ const styles = theme => ({
     },
 
     bgImg: {
-       flex:1,
-       maxWidth:"100%",
-       maxHeight:240
+        flex: 1,
+        maxWidth: "100%",
+        maxHeight: 240
     },
 
     // bgImgLayer: {
@@ -161,40 +160,36 @@ class Activity extends Component {
 
     renderAvatar() {
         const { activity, classes } = this.props;
-        if (activity.userimageurl) {
-            return (
-                <Avatar
-                    alt="tour guide"
-                    src={
-                        config.BUCKET_URL +
-                        activity.userimageurl
-                    }
-                    className={classNames(classes.avatar, classes.bigAvatar)}
-                />
-            );
-        } else {
-            return (
-                <Avatar
-                    alt="tour guide"
-                    src={test2}
-                    className={classNames(classes.avatar, classes.bigAvatar)}
-                />
-            );
-        }
+
+        return (
+            <Avatar
+                alt="tour guide"
+                src={
+                    activity.userimageurl ? (
+                        config.BUCKET_URL + activity.userimageurl
+                    ) : (
+                        test2
+                    )
+                }
+                className={classNames(classes.avatar, classes.bigAvatar)}
+            />
+        );
     }
 
     renderImage() {
         const { activity, classes } = this.props;
-        if (activity.imageurl) {
-            return (
-                <img
-                    className={classes.bgImg}
-                    src={config.BUCKET_URL + activity.imageurl}
-                />
-            );
-        } else {
-            return <img className={classes.bgImg} src={testPic} />;
-        }
+        return (
+            <img
+                className={classes.bgImg}
+                src={
+                    activity.imageurl ? (
+                        config.BUCKET_URL + activity.imageurl
+                    ) : (
+                        testPic
+                    )
+                }
+            />
+        );
     }
 
     renderEditChoice() {
