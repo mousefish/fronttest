@@ -53,7 +53,7 @@ const validate = values => {
   }
 
   if (values.departdate && Date.now() > Date.parse(values.departdate)) {
-    errors.departdate = "出发日期不能先于当前时间";
+    errors.departdate = "出发时间不能先于当前时间";
   }
 
   if (
@@ -61,7 +61,7 @@ const validate = values => {
     values.finishdate &&
     Date.parse(values.departdate) > Date.parse(values.finishdate)
   ) {
-    console.log(Date.parse(values.departdate));
+
     errors.finishdate = "结束时间不能先于出发时间";
   }
 

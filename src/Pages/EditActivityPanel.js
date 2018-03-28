@@ -147,7 +147,6 @@ class EditActivityPanel extends Component {
 
         const { activityId } = this.props.match.params;
         await this.props.fetchOneUserActivityForEditting(activityId);
-
         setTimeout(() => {
             this.setState({
                 showCrop: false,
@@ -200,6 +199,9 @@ class EditActivityPanel extends Component {
 
         const { edit, msg } = this.props;
         // receive { warning:"xxx"} from backend. edit initial value is {}, so still use obj to pass warning msg here
+        if (Object.keys(edit).length === 0) {
+            return null;
+        }
         if (edit.hasOwnProperty("warning")) {
             return <div style={{ textAlign: "center" }}>{edit.warning}</div>;
         }
@@ -291,6 +293,30 @@ class EditActivityPanel extends Component {
                     />
                 </div>
                 <div className="input-success">{msg}</div>
+                <div className={classes.btnGroup}>
+                    <Button
+                        type="submit"
+                        color="primary"
+                        style={{ backgroundColor: "#1976D2" }}
+                        raised
+                        className={classes.button}
+                    >
+                        修改
+                    </Button>
+                    <Button
+                        color="primary"
+                        style={{ backgroundColor: "#D32F2F" }}
+                        raised
+                        className={classes.button}
+                        onClick={() => {
+                            this.setState({
+                                open: true
+                            });
+                        }}
+                    >
+                        删除
+                    </Button>
+                </div>
             </div>
         );
     }
@@ -302,7 +328,6 @@ class EditActivityPanel extends Component {
                 <Dialog
                     fullScreen={fullScreen}
                     open={this.state.open}
-                    onClose={this.handleClose}
                     aria-labelledby="responsive-dialog-title"
                 >
                     <div>
@@ -328,30 +353,6 @@ class EditActivityPanel extends Component {
                         title="修改活动"
                     />
                     {this.renderEditPanel(classes)}
-                    <div className={classes.btnGroup}>
-                        <Button
-                            type="submit"
-                            color="primary"
-                            style={{ backgroundColor: "#1976D2" }}
-                            raised
-                            className={classes.button}
-                        >
-                            修改
-                        </Button>
-                        <Button
-                            color="primary"
-                            style={{ backgroundColor: "#D32F2F" }}
-                            raised
-                            className={classes.button}
-                            onClick={() => {
-                                this.setState({
-                                    open: true
-                                });
-                            }}
-                        >
-                            删除
-                        </Button>
-                    </div>
                 </form>
             </div>
         );

@@ -131,25 +131,21 @@ export const deleteUserActivity = (
             }
         }
     );
-    // 1. check if the use has the authority to delete the activty. a:loggedin b. be the person who created the activity
-    if (res.data === "你没有权限或者该活动不存在") {
-        dispatch({
-            // only need to receive the message
-            type: ADD_ACTIVITY_DATA,
-            payload: res.DATA
-        });
-        // 2. if the user is authorized, then check if the activity has imgurl, if no, delete the row in database, otherwise, delete the row in database first, then delete it on AWS.
-    } else if (res.data.hasOwnProperty("imgurl")) {
-        let result = await axios.post(
-            `${ROOT_URL}/api/deleteImage`,
-            { imgurl: res.data.imgurl },
-            {
-                headers: {
-                    authorization: localStorage.getItem("jwtToken")
+
+    // 1. if the user is authorized, and if the activity has imgurl.
+    if (res.data.hasOwnProperty("imgurl")) {
+        if (res.data.imgurl) {
+            let result = await axios.post(
+                `${ROOT_URL}/api/deleteImage`,
+                { imgurl: res.data.imgurl },
+                {
+                    headers: {
+                        authorization: localStorage.getItem("jwtToken")
+                    }
                 }
-            }
-        );
-        // console.log("result", result);
+            );
+        }
+
         dispatch({
             type: ADD_ACTIVITY_DATA,
             payload: "活动成功删除"
@@ -157,12 +153,12 @@ export const deleteUserActivity = (
 
         history.push("/userActivities/0");
     } else {
+        // 2. check if the use has the authority to delete the activty. a:loggedin b. be the person who created the activity
         dispatch({
+            // only need to receive the message
             type: ADD_ACTIVITY_DATA,
-            payload: "活动成功删除"
+            payload: res.DATA
         });
-
-        history.push("/userActivities/0");
     }
 };
 
@@ -178,12 +174,10 @@ export const submitActivityData = (data, history) => async dispatch => {
                 type: ADD_ACTIVITY_DATA,
                 payload: res.data
             });
-        }else{
+        } else {
             const { activityId } = res.data;
             history.push(`/editActivity/${activityId}`);
         }
-
-
     } catch (err) {
         dispatch(activityErr(err.message));
     }

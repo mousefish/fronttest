@@ -84,7 +84,6 @@ export const cropImageObj = (
             );
         }
         if (userId === 0) {
-
             res = await axios.post(
                 `${ROOT_URL}/api/updateBasicInfo`,
                 { imageurl: targetKey },

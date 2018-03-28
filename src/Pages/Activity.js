@@ -247,12 +247,11 @@ class Activity extends Component {
             ratings,
             isYourFav
         } = this.props;
-        // better use an object to pass the warning message since initial value is obj.
-        // also, if we use if(!activity) here, since React's default value is undefined,
-        // so even for the values that DO exist, the warning message will still show for a second before the content shows!
-        // But be careful dealing with the following data, since when undefine, undefined does not have any property!!!
-        // for example
-        // 我在{activity.location ? activity.location.split(" ")[0]:""}的故事
+
+        // the default value is {}, to avoid showing the regular component, add this condition here.
+        if(Object.keys(activity).length === 0){
+            return null
+        }
         if (activity.hasOwnProperty("warning")) {
             return (
                 <div>
@@ -263,6 +262,7 @@ class Activity extends Component {
                 </div>
             );
         }
+        // regular component
         return (
             <div>
                 <Dialog
@@ -384,8 +384,6 @@ class Activity extends Component {
 }
 
 const mapStateToProps = state => {
-    // console.log("isYourFav", state.ActivityReducer.isYourFav);
-    // console.log("isYourActivity", state.ActivityReducer.activity.isYourActivity)
     return {
         activity: state.ActivityReducer.activity,
         isYourFav: state.ActivityReducer.isYourFav,

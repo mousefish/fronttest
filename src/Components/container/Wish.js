@@ -128,7 +128,10 @@ class WishDetails extends Component {
     }
     render() {
         const { classes, wish, match } = this.props;
-        if (wish && wish.hasOwnProperty("warning")) {
+        if(Object.keys(wish).length === 0){
+            return null
+        }
+        else if (wish && wish.hasOwnProperty("warning")) {
             return (
                 <div>
                     <PageHeader history={this.props.history} title="愿望" />

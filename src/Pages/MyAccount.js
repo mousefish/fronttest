@@ -91,7 +91,6 @@ class MyAccount extends Component {
         let token = localStorage.getItem("jwtToken");
         const userName  = localStorage.getItem("userName");
         if (token) {
-
             return (
                 <MyAccountLoggedinHeader
                     history={this.props.history} userName={userName}
