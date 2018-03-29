@@ -6,6 +6,8 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "../../Utility/validate";
 import { TextField } from "redux-form-material-ui";
 import PageHeader from "../PageHeader";
+import { connect } from "react-redux";
+
 
 const styles = theme => ({
     button: {
@@ -59,9 +61,17 @@ class WizardSecond extends Component {
     }
 }
 
+const mapStateToProps = (state)=>{
+    console.log("reducer??", state.form.wizard.values);
+    return {
+
+        values: state.form.wizard.values
+
+    }
+}
 export default reduxForm({
     form: "wizard",
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
     validate
-})(withStyles(styles)(WizardSecond));
+})(withStyles(styles)(connect(mapStateToProps)(WizardSecond)));

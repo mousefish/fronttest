@@ -155,7 +155,7 @@ AddWish = reduxForm({
     form: "AddWish",
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
-    // validate
+    validate
 })(withStyles(styles)(AddWish));
 
 export default (AddWish = connect(mapStateToProps, actions)(

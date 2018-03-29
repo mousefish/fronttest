@@ -94,7 +94,6 @@ class WizardThird extends Component {
 }
 
 const mapStateToProps = state => {
-    // console.log(state.form.wizard.values);
     return {
         values: state.form.wizard.values
     };

@@ -52,14 +52,14 @@ const validate = values => {
     errors.password = "密码不能含有邮箱地址";
   }
 
-  if (values.departdate && Date.now() > Date.parse(values.departdate)) {
+  if (values.departdate && Date.now() >= Date.parse(values.departdate)) {
     errors.departdate = "出发时间不能先于当前时间";
   }
 
   if (
     values.departdate &&
     values.finishdate &&
-    Date.parse(values.departdate) > Date.parse(values.finishdate)
+    Date.parse(values.departdate) >= Date.parse(values.finishdate)
   ) {
 
     errors.finishdate = "结束时间不能先于出发时间";

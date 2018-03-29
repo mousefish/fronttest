@@ -1,26 +1,64 @@
 .rw-widget-container {
-  background-color: none; }
+  background-color: transparent;
+  border: none;
+  border-radius: none; }
 
-.rw-input, .rw-filter-input {
+.rw-calendar-popup {
+  right: auto;
+  min-width: 0;
+  width: 104%; }
+
+.rw-input,
+.rw-filter-input {
   color: #555;
   padding: 0;
-  background-color: none; }
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
+
+.rw-widget-input {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
+
+.rw-widget-input.rw-state-focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
+
+.rw-input {
+  background-color: transparent; }
 
 .rw-multiselect {
-  background-color: none;
+  background-color: transparent;
   border-color: none;
   cursor: text; }
 
-.rw-list-option.rw-state-focus, .rw-list-option.rw-state-focus:hover {
-  /*  background-color: transparent;*/
+.rw-list-option.rw-state-focus,
+.rw-list-option.rw-state-focus:hover {
+  /*  background-color: transparent;
+ */
   border: none;
   color: #333; }
 
-/*.rw-select-bordered {
+.rw-select-bordered {
   cursor: pointer;
   border: none; }
 
-.rw-multiselect-tag.rw-state-focus, .rw-multiselect-tag.rw-state-focus:hover {
+.rw-multiselect-tag.rw-state-focus,
+.rw-multiselect-tag.rw-state-focus:hover {
   background-color: transparent;
   border: none;
-  color: #333; }*/
+  color: #333; }
+
+.rw-calendar {
+  background-color: #fff;
+  border: none;
+  overflow: hidden; }
+
+.rw-widget-container.rw-state-focus,
+.rw-state-focus > .rw-widget-container,
+.rw-widget-container.rw-state-focus:hover,
+.rw-state-focus > .rw-widget-container:hover {
+  box-shadow: none;
+  border-color: none; }
