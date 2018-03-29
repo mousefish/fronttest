@@ -6,6 +6,7 @@ import Star from "material-ui-icons/Star";
 import Avatar from "material-ui/Avatar";
 import pic from "../Assets/Images/profile.jpg";
 import Stars from "./Stars";
+import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 
 const styles = theme => ({
     friendWrapper: {
@@ -18,7 +19,7 @@ const styles = theme => ({
         verticalAlign: "-2px"
     },
     avatar: {
-        margin: 10
+        margin: "10px 10px 10px 0"
     },
 
     bigAvatar: {
@@ -37,7 +38,6 @@ const styles = theme => ({
 
     comment: {
         margin: "auto",
-        paddingLeft: 12
         // border: "1px solid red"
     },
 

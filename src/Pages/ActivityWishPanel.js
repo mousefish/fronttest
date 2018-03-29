@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
-import bg from "../Assets/Images/bg.jpg";
 import AddActivity from "./AddActivity/AddActivity";
 import AddWish from "./AddWish/AddWish";
 import logo from "../Assets/Images/logo.jpg";

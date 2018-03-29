@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
+import config from "../config/config";
 import Avatar from "material-ui/Avatar";
 import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
@@ -19,9 +20,8 @@ import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "./PageHeader";
 import RegisterDialog from "./RegisterDialog";
-import test2 from "../Assets/imgForTest/4.jpg";
-import config from "../config/config";
-import testPic from "../Assets/imgForTest/shanghai1.jpg";
+import defaultAvatar from "../Assets/Images/defaultAvatar.png";
+import defaultBG from "../Assets/Images/defaultBG.png";
 
 const styles = theme => ({
     editBar: {
@@ -73,7 +73,7 @@ const styles = theme => ({
 
     container: {
         // border: "1px solid blue",
-        marginTop: 40,
+        marginTop: 45,
         display: "flex",
         flexFlow: "column",
         justifyContent: "flexStart",
@@ -113,22 +113,11 @@ const styles = theme => ({
         maxHeight: 240
     },
 
-    // bgImgLayer: {
-    //     position: "absolute",
-    //     top: 0,
-    //     bottom: 2,
-    //     left: 0,
-    //     right: 0,
-    //     // border:"1px solid red",
-    //     backgroundColor: "#1976D2",
-    //     opacity: 0.2,
-    //     maxWidth: "75%",
-    //     margin: "auto"
-    // },
+
     row: {
         // border:"1px solid red",
         position: "absolute",
-        bottom: -35,
+        bottom: -50,
         left: "50%",
         marginLeft: -45
     },
@@ -137,7 +126,8 @@ const styles = theme => ({
     },
     bigAvatar: {
         width: 80,
-        height: 80
+        height: 80,
+        border: "4px solid #fff"
     }
 });
 
@@ -168,7 +158,7 @@ class Activity extends Component {
                     activity.userimageurl ? (
                         config.BUCKET_URL + activity.userimageurl
                     ) : (
-                        test2
+                        defaultAvatar
                     )
                 }
                 className={classNames(classes.avatar, classes.bigAvatar)}
@@ -185,7 +175,7 @@ class Activity extends Component {
                     activity.imageurl ? (
                         config.BUCKET_URL + activity.imageurl
                     ) : (
-                        testPic
+                        defaultBG
                     )
                 }
             />
@@ -249,8 +239,8 @@ class Activity extends Component {
         } = this.props;
 
         // the default value is {}, to avoid showing the regular component, add this condition here.
-        if(Object.keys(activity).length === 0){
-            return null
+        if (Object.keys(activity).length === 0) {
+            return null;
         }
         if (activity.hasOwnProperty("warning")) {
             return (

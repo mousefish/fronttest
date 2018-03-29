@@ -9,7 +9,7 @@ import PageHeader from "./PageHeader";
 import Avatar from "material-ui/Avatar";
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
-import pic from "../Assets/Images/profile.jpg";
+import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
@@ -35,7 +35,8 @@ const styles = theme => ({
         display: "flex",
         flexFlow: "row nowrap",
         justifyContent: "flex-start",
-        paddingBottom: 10
+        paddingBottom: 10,
+        paddingLeft:10
     },
 
     myHeaderRight: {
@@ -120,7 +121,7 @@ class PublicProfile extends Component {
                     <div className={classes.myHeader}>
                         <Avatar
                             alt="profile"
-                            src={user.imageurl ? config.BUCKET_URL + user.imageurl: pic}
+                            src={user.imageurl ? config.BUCKET_URL + user.imageurl: defaultAvatar}
                             className={classes.avatar}
                         />
                         <div className={classes.myHeaderRight}>

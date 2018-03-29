@@ -17,9 +17,9 @@ import services from "../Data/services";
 import ConfirmDelete from "./ConfirmDelete";
 import RegisterDialog from "./RegisterDialog";
 import config from "../config/config";
-import testPic from "../Assets/imgForTest/shanghai1.jpg";
-import test2 from "../Assets/imgForTest/4.jpg";
+
 import FileInput from "./AddActivity/FileInput";
+import defaultBG from "../Assets/Images/defaultBG.png";
 
 const styles = theme => ({
     root: {
@@ -166,11 +166,10 @@ class EditActivityPanel extends Component {
                             edit.imageurl ? (
                                 config.BUCKET_URL + edit.imageurl
                             ) : (
-                                testPic
+                                defaultBG
                             )
                         }
                     />
-
                     <FileInput
                         onGetImgUrl={file => this.onGetImgUrl(file)}
                         onCropImageObject={(keyforUrl, width, height, x, y) =>
