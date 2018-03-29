@@ -90,7 +90,8 @@ const styleSheet = {
     color: "#fff",
     width: "50%",
     marginRight: 0,
-    fontSize: "1.2rem"
+    fontSize: "1.2rem",
+    letterSpacing:2
   },
 };
 // WebFontLoader.load({

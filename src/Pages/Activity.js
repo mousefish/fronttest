@@ -23,6 +23,7 @@ import RegisterDialog from "./RegisterDialog";
 import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import defaultBG from "../Assets/Images/defaultBG.png";
 
+
 const styles = theme => ({
     editBar: {
         // border:"1px solid red",

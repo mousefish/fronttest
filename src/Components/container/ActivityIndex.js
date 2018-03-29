@@ -12,10 +12,11 @@ import Star from "material-ui-icons/Star";
 import StarBorder from "material-ui-icons/StarBorder";
 import StarHalf from "material-ui-icons/StarHalf";
 import Person from "material-ui-icons/Person";
-import travel from "../../Assets/Images/test.jpg";
 import List from "material-ui/List";
 import Slide from "material-ui/transitions/Slide";
 import Stars from "../../Pages/Stars";
+import cardBG from "../../Assets/Images/cardBG.png";
+import config from "../../config/config";
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -31,6 +32,17 @@ const styles = theme => ({
     borderRadius: "10px 10px 0 0"
   },
 
+  imgWrapper: {
+    position: "absolute",
+    opacity: "0.4",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#18FFFF"
+    // backgroundImage: "linear-gradient(to bottom right, #F7F7F7, #EAFBFF)"
+  },
+
   icon: {
     width: 15,
     height: 15,
@@ -43,32 +55,14 @@ const styles = theme => ({
     verticalAlign: "-2px"
   },
 
-  // themeBar: {
-  //   position: "absolute",
-  //   bottom: 0,
-  //   width: "100%",
-  //   height: "18%",
-  //   lineHeight:2,
-  //   paddingLeft:20,
-  //   color: "#fff",
-  //   backgroundColor: "rgba(0,0,0,0.6)",
-  //   fontSize: "1.5rem",
-  //   fontWeight:"bold",
-  //   letterSpacing:1.3
-  // },
-
   budgetBox: {
     position: "absolute",
-    width: 60,
-    height: 60,
-    lineHeight: 4.3,
-    textAlign: "center",
-    fontWeight: "bold",
-    left: 17,
-    top: 10,
+    fontWeight: "bolder",
+    right: 10,
+    bottom: 2,
     color: "#fff",
-    borderRadius: "50%",
-    backgroundColor: "#03A9F4"
+    fontSize: "1.8rem",
+    zIndex: 1000
   },
 
   content: {
@@ -80,7 +74,7 @@ const styles = theme => ({
     display: "flex",
     flexFlow: "column",
     marginBottom: 10,
-    alignItems: "flex-start"
+    alignItems: "flex-start",
   },
 
   fav: {
@@ -108,7 +102,7 @@ class ActivityIndex extends Component {
     if (score > 0) {
       return (
         <div>
-          <Stars num={score} pos={true}/>
+          <Stars num={score} pos={true} />
         </div>
       );
     }
@@ -129,8 +123,10 @@ class ActivityIndex extends Component {
       return (
         <Link to={`/activity/${item.id}`} className="unlink" key={item.id}>
           <Card className="card" style={{ borderRadius: 10 }}>
-            <CardMedia className={classes.media} image={travel} title="travel">
-              <div className={classes.budgetBox}>¥{item.budget}</div>
+            <CardMedia className={classes.media} image={cardBG} title="travel">
+              {" "}
+              <div className={classes.imgWrapper} />
+              <div className={classes.budgetBox}>¥ {item.budget}</div>
             </CardMedia>
             <CardContent className={classes.content}>
               <h3 className={classes.themeStyle}>{item.theme}</h3>
