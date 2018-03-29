@@ -52,6 +52,14 @@ const validate = values => {
     errors.password = "密码不能含有邮箱地址";
   }
 
+  if (values.departdate && typeof values.departdate !== "string") {
+    errors.departdate = "请在有效月份区域内选择日期";
+  }
+
+  if (values.finishdate && typeof values.finishdate !== "string") {
+    errors.finishdate = "请在有效月份区域内选择日期";
+  }
+
   if (values.departdate && Date.now() >= Date.parse(values.departdate)) {
     errors.departdate = "出发时间不能先于当前时间";
   }
@@ -61,7 +69,6 @@ const validate = values => {
     values.finishdate &&
     Date.parse(values.departdate) >= Date.parse(values.finishdate)
   ) {
-
     errors.finishdate = "结束时间不能先于出发时间";
   }
 
