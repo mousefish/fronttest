@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
+import config from "../config/config";
 import Button from "material-ui/Button";
 import Star from "material-ui-icons/Star";
 import Avatar from "material-ui/Avatar";
-import pic from "../Assets/Images/profile.jpg";
 import Stars from "./Stars";
 import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 
@@ -38,11 +38,13 @@ const styles = theme => ({
 
     comment: {
         margin: "auto",
+        paddingBottom: 10
         // border: "1px solid red"
     },
 
-    space: {
-        marginBottom: 20
+    commentRow: {
+        padding: "20px 0px 10px 5px",
+        borderBottom: "1px solid #BDBDBD"
     },
     button: {
         // margin: theme.spacing.unit,
@@ -97,18 +99,25 @@ class FriendComments extends Component {
                 let average = comments[0].average;
                 return comments.map((item, index) => {
                     return (
-                        <li className={classes.space} key={index}>
+                        <li className={classes.commentRow} key={index}>
                             <div className={classes.subHeader}>
                                 <div className={classes.subHeader}>
                                     <Avatar
-                                        alt="friend pic"
-                                        src={pic}
+                                        alt="rater pic"
+                                        src={
+                                            item.imageurl ? (
+                                                config.BUCKET_URL +
+                                                item.imageurl
+                                            ) : (
+                                                defaultAvatar
+                                            )
+                                        }
                                         className={classNames(
                                             classes.avatar,
                                             classes.bigAvatar
                                         )}
                                     />
-                                    用户 {item.userId}
+                                    {item.username}
                                 </div>
                                 <div>
                                     <Stars num={item.numOfStars} />
@@ -145,7 +154,19 @@ class FriendComments extends Component {
         return (
             <div className={classes.commentZone}>
                 <div className={classes.title}>
-                    <h4>大家对我的评价</h4>
+                    <h4>
+                        共{" "}
+                        <span style={{ fontWeight: "bold" }}>
+                            {comments &&
+                            comments[0] &&
+                            comments[0].count ? (
+                                comments[0].count
+                            ) : (
+                                ""
+                            )}
+                        </span>{" "}
+                        人评价
+                    </h4>
                     <div>{this.renderAverage(comments)}</div>
                 </div>
                 <ul className={classes.friendWrapper}>

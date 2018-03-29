@@ -100,7 +100,6 @@ class PublicProfile extends Component {
     render() {
         const { classes, history } = this.props;
         const { user } = this.props;
-        console.log(user.imageurl);
         if (user && user.hasOwnProperty("warning")) {
             return <div>{user["warning"]}</div>;
         }

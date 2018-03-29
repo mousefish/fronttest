@@ -73,7 +73,7 @@ const styles = theme => ({
 
     container: {
         // border: "1px solid blue",
-        marginTop: 45,
+        marginTop: 50,
         display: "flex",
         flexFlow: "column",
         justifyContent: "flexStart",
@@ -95,9 +95,7 @@ const styles = theme => ({
         // border: "1px solid red",
         padding: 5
     },
-    writeArea: {
-        // border: "1px solid red"
-    },
+
 
     bg: {
         maxWidth: 600,
