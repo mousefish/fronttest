@@ -1,10 +1,12 @@
 import React from "react";
 import DateTimePicker from "react-widgets/lib/DateTimePicker";
 import moment from "moment";
-import momentLocaliser from "react-widgets-moment";
+import momentLocalizer from "react-widgets-moment";
 
 export default ({ format, input, placeholder, meta: { error, touched } }) => {
-    momentLocaliser(moment);
+    // console.log(moment.locale)
+    moment.locale('zh-cn')
+    momentLocalizer(moment);
 
     return (
         <div>
@@ -21,6 +23,7 @@ export default ({ format, input, placeholder, meta: { error, touched } }) => {
                     format={"DD MMM YYYY h:mm"}
                     time={true}
                     placeholder={placeholder}
+                    // culture='zh-cn'
                 />
             </div>
             <div className="input-error">{touched && error}</div>

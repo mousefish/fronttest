@@ -26,7 +26,7 @@ import FileInput from "./AddActivity/FileInput";
 import TextField from "material-ui/TextField";
 import Translation from "../Data/UserBasicInfoENtoCH";
 import verfiyAndSubmit from "../Utility/verfiyAndSubmit";
-import test0 from "../Assets/imgForTest/1.jpg";
+import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import config from "../config/config";
 
 const sexOptions = ["男", "女", "其他"];
@@ -206,7 +206,7 @@ class PrivateBasicInfo extends Component {
                                         config.BUCKET_URL +
                                         user.basicInfo.imageurl
                                     ) : (
-                                        test0
+                                        defaultAvatar
                                     )
                                 }
                             />
@@ -303,7 +303,7 @@ class PrivateBasicInfo extends Component {
 // if the user update his email with a one that is already used by another user!
 // or err from database
 const mapStateToProps = state => {
-    console.log(state.UserReducer);
+    // console.log(state.UserReducer);
     return {
         user: state.UserReducer
     };

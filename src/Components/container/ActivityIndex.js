@@ -39,7 +39,8 @@ const styles = theme => ({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "#18FFFF"
+    backgroundColor: "#18FFFF",
+    borderRadius: "10px 10px 0 0"
     // backgroundImage: "linear-gradient(to bottom right, #F7F7F7, #EAFBFF)"
   },
 

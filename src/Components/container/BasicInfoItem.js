@@ -4,7 +4,7 @@ import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
 import KeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
 import config from "../../config/config";
-import test0 from "../../Assets/imgForTest/1.jpg";
+import defaultAvatar from "../../Assets/Images/defaultAvatar.png";
 
 const styles = {
     item: {
@@ -69,7 +69,7 @@ class BasicInfoItem extends Component {
                             ) : (
                                 <Avatar
                                     alt="tour guide"
-                                    src={test0}
+                                    src={defaultAvatar}
                                     className={classNames(
                                         classes.avatar,
                                         classes.bigAvatar

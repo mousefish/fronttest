@@ -22,15 +22,17 @@ const styles = theme => ({
 
     logo: {
         flex: 1,
-        width: "40%",
+        width: "30%",
         maxWidth: "100%",
         margin: "auto",
-        marginBottom: 65
+        marginBottom: 45,
+
     },
     title: {
         fontWeight: "bold"
     },
     logoWrapper: {
+        marginTop:30,
         textAlign: "center"
     }
 });

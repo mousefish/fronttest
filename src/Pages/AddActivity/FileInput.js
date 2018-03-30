@@ -21,7 +21,7 @@ class FileInput extends Component {
         >
           <IconButton aria-label="upload image">
             <AddAPhoto
-              style={{ color: "#E0E0E0", width: 50, height: 50 }}
+              style={{ color: "#fff", width: 50, height: 50 }}
               aria-label="upload image"
             />
           </IconButton>
@@ -39,7 +39,7 @@ class FileInput extends Component {
         >
           <IconButton aria-label="upload image">
             <AddAPhoto
-              style={{ color: "#E0E0E0", width: 50, height: 50 }}
+              style={{ color: "#fff", width: 50, height: 50 }}
               aria-label="upload image"
             />
           </IconButton>

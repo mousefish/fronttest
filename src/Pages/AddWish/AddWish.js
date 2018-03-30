@@ -28,8 +28,8 @@ const styles = theme => ({
 
 class AddWish extends Component {
     submitForm(value) {
-        // console.log("wish value", value);
-        this.props.submitWishData(value, this.props.history);
+        console.log("wish value", value.departdate);
+        // this.props.submitWishData(value, this.props.history);
     }
 
     renderErrorMsg() {
