@@ -90,7 +90,7 @@ class EditActivityPanel extends Component {
     }
 
     submitForm(values) {
-        // console.log("values",values)
+        // console.log("values", values);
         const { edit, history } = this.props;
         const { activityId } = this.props.match.params;
 
@@ -108,7 +108,23 @@ class EditActivityPanel extends Component {
         let edittedValues = {};
         keys.forEach(item => {
             if (edit[item] !== values[item]) {
-                edittedValues[item] = values[item];
+                if (item === "departdate") {
+                    let depart = new Date(
+                        values.departdate.replace(/年|月|日/g, "/")
+                    );
+
+                    let departUTC = depart.toUTCString();
+                    edittedValues[item] = departUTC;
+                } else if (item === "finishdate") {
+                    let finish = new Date(
+                        values.finishdate.replace(/年|月|日/g, "/")
+                    );
+
+                    let finishUTC = finish.toUTCString();
+                    edittedValues[item] = finishUTC;
+                } else {
+                    edittedValues[item] = values[item];
+                }
             }
         });
 
@@ -116,8 +132,6 @@ class EditActivityPanel extends Component {
             Object.keys(edittedValues).length === 0 &&
             !values.hasOwnProperty("images")
         ) {
-            // need a dialogue here!
-            // alert("没有值发生改变！");
             history.push(`/activity/${activityId}`);
             return null;
         }
@@ -258,14 +272,14 @@ class EditActivityPanel extends Component {
                         name="departdate"
                         type="text"
                         component={popupSearchDateField}
-                        placeholder="出发日期和时间"
+                        placeholder={edit.departdate}
                     />
                     <Field
                         key="finishdate"
                         name="finishdate"
                         type="text"
                         component={popupSearchDateField}
-                        placeholder="结束日期和时间"
+                        placeholder={edit.finishdate}
                     />
                 </div>
                 <div className="wrap form-group" key="service">

@@ -15,6 +15,10 @@ import Dialog from "material-ui/Dialog";
 import services from "../Data/services";
 import ConfirmDelete from "./ConfirmDelete";
 import RegisterDialog from "./RegisterDialog";
+import moment from "moment";
+import "moment/locale/zh-cn.js";
+
+moment.locale("zh-cn");
 
 const styles = theme => ({
     root: {
@@ -78,22 +82,35 @@ class EditWishPanel extends Component {
             "services",
             "note"
         ];
-        const { edit } = this.props;
+        const { edit, history } = this.props;
+        const { wishId } = this.props.match.params;
         let edittedValues = {};
         keys.forEach(item => {
             if (edit[item] !== values[item]) {
-                edittedValues[item] = values[item];
+                if (item === "departdate") {
+                    let depart = new Date(
+                        values.departdate.replace(/年|月|日/g, "/")
+                    );
+
+                    let departUTC = depart.toUTCString();
+                    edittedValues[item] = departUTC;
+                } else if (item === "finishdate") {
+                    let finish = new Date(
+                        values.finishdate.replace(/年|月|日/g, "/")
+                    );
+
+                    let finishUTC = finish.toUTCString();
+                    edittedValues[item] = finishUTC;
+                } else {
+                    edittedValues[item] = values[item];
+                }
             }
         });
 
         if (Object.keys(edittedValues).length === 0) {
-            // need a dialogue here!
-            // alert("没有值发生改变！");
+            history.push(`/wish/${wishId}`);
             return null;
         }
-
-        const { wishId } = this.props.match.params;
-        const history = this.props.history;
         this.props.updateUserWish(wishId, edittedValues, history);
     }
 
@@ -124,7 +141,6 @@ class EditWishPanel extends Component {
                         type="text"
                         component={AutocompleteField}
                         className="text-field"
-                        placeholder="你想去的城市，按提示列表选择"
                         props={this.props}
                     />
 
@@ -155,7 +171,8 @@ class EditWishPanel extends Component {
                         name="departdate"
                         type="text"
                         component={popupSearchDateField}
-                        placeholder="出发日期和时间"
+                        placeholder={edit.departdate}
+                        defaultValue={edit.departdate}
                     />
 
                     <Field
@@ -163,7 +180,8 @@ class EditWishPanel extends Component {
                         name="finishdate"
                         type="text"
                         component={popupSearchDateField}
-                        placeholder="结束日期和时间"
+                        placeholder={edit.finishdate}
+                        defaultValue={edit.finishdate}
                     />
                 </div>
 

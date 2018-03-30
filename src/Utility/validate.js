@@ -52,25 +52,31 @@ const validate = values => {
     errors.password = "密码不能含有邮箱地址";
   }
 
-  if (values.departdate && typeof values.departdate !== "string") {
-    errors.departdate = "请在有效月份区域内选择日期";
+  // *******************date validation
+
+  if (values.departdate) {
+    if (typeof values.departdate !== "string") {
+      errors.departdate = "请在有效区域内选择日期";
+    }
+    let depart = new Date(values.departdate.replace(/年|月|日/g, "/"));
+
+    if (depart && Date.now() >= Date.parse(depart)) {
+      errors.departdate = "出发时间不能早于当前时间";
+    }
   }
 
-  if (values.finishdate && typeof values.finishdate !== "string") {
-    errors.finishdate = "请在有效月份区域内选择日期";
+  if (values.departdate && values.finishdate) {
+    if (typeof values.finishdate !== "string") {
+      errors.finishdate = "请在有效区域内选择日期";
+    }
+    let depart = new Date(values.departdate.replace(/年|月|日/g, "/"));
+    let finish = new Date(values.finishdate.replace(/年|月|日/g, "/"));
+    if (finish && depart && Date.parse(finish) <= Date.parse(depart)) {
+      errors.finishdate = "结束时间不能早于出发时间";
+    }
   }
 
-  if (values.departdate && Date.now() >= Date.parse(values.departdate)) {
-    errors.departdate = "出发时间不能先于当前时间";
-  }
-
-  if (
-    values.departdate &&
-    values.finishdate &&
-    Date.parse(values.departdate) >= Date.parse(values.finishdate)
-  ) {
-    errors.finishdate = "结束时间不能先于出发时间";
-  }
+  // *******************date validation
 
   if (Number.isNaN(Number(values.age)) || Number(values.age) <= 0) {
     errors.age = "请输入有效年龄";
