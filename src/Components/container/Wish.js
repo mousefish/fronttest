@@ -23,7 +23,8 @@ import ShareIcon from "material-ui-icons/Share";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "../../Pages/PageHeader";
-import test from "../../Assets/imgForTest/4.jpg";
+import defaultAvatar from "../../Assets/Images/defaultAvatar.png";
+import config from "../../config/config";
 
 const style = theme => ({
     media: {
@@ -36,7 +37,6 @@ const style = theme => ({
         height: 15,
         verticalAlign: "-2px"
     },
-
 
     root: {
         margin: theme.spacing.unit,
@@ -81,7 +81,7 @@ const style = theme => ({
     },
     row: {
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "center"
     },
     avatar: {
         margin: 10
@@ -128,10 +128,9 @@ class WishDetails extends Component {
     }
     render() {
         const { classes, wish, match } = this.props;
-        if(Object.keys(wish).length === 0){
-            return null
-        }
-        else if (wish && wish.hasOwnProperty("warning")) {
+        if (Object.keys(wish).length === 0) {
+            return null;
+        } else if (wish && wish.hasOwnProperty("warning")) {
             return (
                 <div>
                     <PageHeader history={this.props.history} title="愿望" />
@@ -146,7 +145,13 @@ class WishDetails extends Component {
                 <div className={classes.row}>
                     <Avatar
                         alt="tour guide"
-                        src={test}
+                        src={
+                            wish.userimageurl ? (
+                                config.BUCKET_URL + wish.userimageurl
+                            ) : (
+                                defaultAvatar
+                            )
+                        }
                         className={classNames(
                             classes.avatar,
                             classes.bigAvatar
@@ -191,7 +196,7 @@ class WishDetails extends Component {
                         </div>
                     </li>
 
-                     <li>
+                    <li>
                         <div className={classes.detailTitle}>参加人数上限</div>
                         <div className={classes.detailContent}>
                             {wish.numberOfPeople} 人
@@ -214,7 +219,6 @@ class WishDetails extends Component {
                         </div>
                     </li>
                 </ul>
-
             </div>
         );
     }

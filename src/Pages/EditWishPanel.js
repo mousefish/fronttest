@@ -142,6 +142,7 @@ class EditWishPanel extends Component {
                         component={AutocompleteField}
                         className="text-field"
                         props={this.props}
+                        placeholder={edit.location}
                     />
 
                     <Field
@@ -172,7 +173,7 @@ class EditWishPanel extends Component {
                         type="text"
                         component={popupSearchDateField}
                         placeholder={edit.departdate}
-                        defaultValue={edit.departdate}
+
                     />
 
                     <Field
@@ -181,7 +182,6 @@ class EditWishPanel extends Component {
                         type="text"
                         component={popupSearchDateField}
                         placeholder={edit.finishdate}
-                        defaultValue={edit.finishdate}
                     />
                 </div>
 
