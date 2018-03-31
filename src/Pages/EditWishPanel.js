@@ -142,7 +142,7 @@ class EditWishPanel extends Component {
                         component={AutocompleteField}
                         className="text-field"
                         props={this.props}
-                        placeholder={edit.location}
+                        defaultValue={edit.location}
                     />
 
                     <Field

@@ -244,6 +244,7 @@ class EditActivityPanel extends Component {
                         component={AutocompleteField}
                         placeholder="活动所在的国家和城市"
                         props={this.props}
+                        defaultValue={edit.location}
                     />
 
                     <Field

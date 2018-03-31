@@ -11,6 +11,7 @@ import data from "../../Data/cities";
 const provinces = data.provinces;
 const renderInput = inputProps => {
   const { InputProps, classes, ref, ...other } = inputProps;
+  console.log(inputProps)
   return (
     <TextField
       {...other}
@@ -19,7 +20,8 @@ const renderInput = inputProps => {
         classes: {
           input: classes.input
         },
-        ...InputProps
+        ...InputProps,
+
       }}
       style={{ paddingTop: 8, marginBottom: 8 }}
     />
@@ -98,10 +100,10 @@ const getCitys = inputValue => {
 };
 
 const autocompleteField = props => {
-  const { classes, placeholder } = props;
+  const { classes, placeholder, defaultValue } = props;
 
   return (
-    <Downshift>
+    <Downshift defaultSelectedItem={defaultValue}>
       {({
         getInputProps,
         getItemProps,
