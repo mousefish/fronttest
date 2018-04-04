@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
+import classNames from "classnames";
 import Button from "material-ui/Button";
 import AppBar from "material-ui/AppBar";
 import Tabs, { Tab } from "material-ui/Tabs";
 import backgroundWall from "../Assets/Images/backgroundWall.png";
+import wechat from "../Assets/Images/wechat.png";
 
 const styles = {
     container: {
@@ -21,12 +23,34 @@ const styles = {
 
     button: {
         width: "75%",
-        border: "1px solid #1976D2",
-        color: "#1976D2",
         marginBottom: 15,
         letterSpacing: 2,
-        borderRadius: 50,
+        borderRadius: 50
+    },
+
+    emailBtn: {
+        color: "#1976D2",
+        border: "1px solid #1976D2",
         padding: "15px 0"
+    },
+
+    wechatBtn: {
+        color: "#43A047",
+        border: "1px solid #43A047"
+    },
+    wechatBtnInner: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        justifyContent: "space-around",
+        alignItems: "center"
+    },
+
+    wechatIcon: {
+        height: 30,
+        width: 30,
+        maxWidth: "100%",
+        maxHeight: "100%",
+        marginRight:5
     },
 
     upper: {
@@ -125,9 +149,27 @@ class OpenPage extends Component {
                     </AppBar>
                     {value === 0 && (
                         <div className={classes.loginBtnGroup}>
-                            <Button className={classes.button}>用微信登陆</Button>
+                            <Button
+                                className={classNames(
+                                    classes.button,
+                                    classes.wechatBtn
+                                )}
+                            >
+                                <div className={classes.wechatBtnInner}>
+                                    <img
+                                        src={wechat}
+                                        className={classes.wechatIcon}
+                                    />
+                                    <div>用微信登陆</div>
+                                </div>
+                            </Button>
                             <Link to="/login" className="unlink">
-                                <Button className={classes.button}>
+                                <Button
+                                    className={classNames(
+                                        classes.button,
+                                        classes.emailBtn
+                                    )}
+                                >
                                     用邮箱登陆
                                 </Button>
                             </Link>
@@ -136,7 +178,12 @@ class OpenPage extends Component {
                     {value === 1 && (
                         <div className={classes.loginBtnGroup}>
                             <Link to="/signup" className="unlink">
-                                <Button className={classes.button}>
+                                <Button
+                                    className={classNames(
+                                        classes.button,
+                                        classes.emailBtn
+                                    )}
+                                >
                                     创建新账户
                                 </Button>
                             </Link>
