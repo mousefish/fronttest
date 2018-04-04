@@ -65,7 +65,8 @@ header .title .name {
   align-items: stretch; }
 
 .form-group {
-  /* border: 1px solid green;*/
+  /*  border: 1px solid green;
+*/
   margin: 0 auto 20px auto;
   width: 95%;
   display: flex;

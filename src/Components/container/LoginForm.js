@@ -21,9 +21,8 @@ const styles = theme => ({
   },
 
   button: {
-    width:"95%",
-    backgroundColor:"#1976D2"
-
+    width: "95%",
+    backgroundColor: "#1976D2"
   },
 
   textField: {
@@ -31,18 +30,17 @@ const styles = theme => ({
     // border: "1px solid blue"
   },
 
-  legal: {
-    margin:"auto",
-    marginTop: 25,
-    width:"95%",
-    lineHeight: 1.5,
-    fontSize:12
-    // border: "1px solid blue"
+  createNew: {
+    position:"fixed",
+    bottom:0,
+    left:0,
+    width:"100%",
+    letterSpacing:2,
+    textAlign: "center",
+    fontSize: "1.1rem",
+    marginBottom:10
   },
-  createNew:{
-    textAlign:"center",
-    fontSize:"1.1rem"
-  }
+
 });
 
 class LoginForm extends Component {
@@ -56,16 +54,7 @@ class LoginForm extends Component {
 
   render() {
     const { classes, handleSubmit, forOpen } = this.props;
-     // return(
-     //   <PageHeader history={this.props.history} title="登录账户" />
-     //    <LinearProgress
-     //      className={classes.progress}
-     //      mode="determinate"
-     //      color="secondary"
-     //      value={this.state.completed}
-     //    />
 
-     //  )
     return (
       <form
         className="wrapper"
@@ -91,20 +80,10 @@ class LoginForm extends Component {
             props={this.props}
             className={classes.textField}
           />
+
         </div>
-        <div className={classes.legal}>
-          注册代表已经同意<Link to="/" className="unlink">
-            服务条款
-          </Link>，<Link to="/" className="unlink">
-            隐私政策
-          </Link>，<Link to="/" className="unlink">
-            免责声明
-          </Link>，<Link to="/" className="unlink">
-            保障计划条款
-          </Link>，<Link to="/" className="unlink">
-            使用政策须知
-          </Link>
-        </div>
+
+
         <div className="centralize-button">
           <Button
             type="submit"
@@ -112,21 +91,34 @@ class LoginForm extends Component {
             raised
             className={classes.button}
             id="btn"
-            style={{margin:"5px 0"}}
+            style={{ margin: "5px 0" }}
           >
             点击登陆
           </Button>
-           <p className="input-error centralize-button" style={{ textAlign: "center" }}>
-          {this.props.errorMessage}
-        </p>
+          <p
+            className="input-error centralize-button"
+            style={{ textAlign: "center" }}
+          >
+            {this.props.errorMessage}
+          </p>
+           <div>
+          <Link className="unlink" to="/openPage">
+            {" "}
+            <span className={classes.forget}>忘记密码？</span>
+          </Link>
+        </div>
+        <p>或者</p>
+        <div>用微信登陆</div>
         </div>
 
         <div className={classes.createNew}>
-          还没有账户？ 点击<Link to="/signup" className="unlink">
-            创建新账户
+        还没有账号？
+          <Link to="/signup" className="unlink">
+            创建新账号
           </Link>
         </div>
-     </form>
+
+      </form>
     );
   }
 }
