@@ -14,11 +14,6 @@ import PasswordSetVisibility from "../presenter/PasswordSetVisibility";
 import PageHeader from "../../Pages/PageHeader";
 
 const styles = theme => ({
-  progress: {
-    width: "95%",
-    margin: "auto",
-    backgroundColor: "#1976D2"
-  },
 
   button: {
     width: "95%",
@@ -28,19 +23,7 @@ const styles = theme => ({
   textField: {
     padding: "8px 0"
     // border: "1px solid blue"
-  },
-
-  createNew: {
-    position:"fixed",
-    bottom:0,
-    left:0,
-    width:"100%",
-    letterSpacing:2,
-    textAlign: "center",
-    fontSize: "1.1rem",
-    marginBottom:10
-  },
-
+  }
 });
 
 class LoginForm extends Component {
@@ -60,6 +43,7 @@ class LoginForm extends Component {
         className="wrapper"
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
+        <PageHeader history={this.props.history} title="用邮箱登陆" />
         <div className="form-group">
           <Field
             fullWidth
@@ -80,9 +64,7 @@ class LoginForm extends Component {
             props={this.props}
             className={classes.textField}
           />
-
         </div>
-
 
         <div className="centralize-button">
           <Button
@@ -101,23 +83,13 @@ class LoginForm extends Component {
           >
             {this.props.errorMessage}
           </p>
-           <div>
-          <Link className="unlink" to="/openPage">
-            {" "}
-            <span className={classes.forget}>忘记密码？</span>
-          </Link>
+          <div>
+            <Link className="unlink" to="/openPage">
+              {" "}
+              <span className={classes.forget}>忘记密码？</span>
+            </Link>
+          </div>
         </div>
-        <p>或者</p>
-        <div>用微信登陆</div>
-        </div>
-
-        <div className={classes.createNew}>
-        还没有账号？
-          <Link to="/signup" className="unlink">
-            创建新账号
-          </Link>
-        </div>
-
       </form>
     );
   }

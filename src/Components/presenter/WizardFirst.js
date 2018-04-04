@@ -13,7 +13,7 @@ import PageHeader from "../../Pages/PageHeader";
 const styles = theme => ({
   progress: {
     width: "95%",
-    margin: "auto"
+    margin: "auto",
   },
 
   button: {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
 import AppBar from "material-ui/AppBar";
@@ -9,23 +10,23 @@ const styles = {
     container: {
         width: "100%",
         maxWidth: 600,
-        margin: "auto",
+        margin: "auto"
     },
 
-    loginBtnGroup:{
-        textAlign:"center",
-        padding:10,
-        marginTop:20
+    loginBtnGroup: {
+        textAlign: "center",
+        padding: 10,
+        marginTop: 20
     },
 
     button: {
         width: "75%",
-        border:"1px solid #1976D2",
-        color:"#1976D2",
-        marginBottom:15,
-        letterSpacing:2,
-        borderRadius:50,
-        padding:"15px 0"
+        border: "1px solid #1976D2",
+        color: "#1976D2",
+        marginBottom: 15,
+        letterSpacing: 2,
+        borderRadius: 50,
+        padding: "15px 0"
     },
 
     upper: {
@@ -46,7 +47,7 @@ const styles = {
         left: 0,
         right: 0,
         backgroundColor: "#1976D2",
-        opacity:0.6
+        opacity: 0.6
     },
     inner: {
         zIndex: 1000,
@@ -70,7 +71,7 @@ const styles = {
 
     tab: {
         letterSpacing: 2,
-        backgroundColor:"#1976D2"
+        backgroundColor: "#1976D2"
     }
 
     // logoWrapper: {
@@ -96,6 +97,7 @@ class OpenPage extends Component {
 
     render() {
         const { classes } = this.props;
+        const { value } = this.state;
         return (
             <div className={classes.container}>
                 <div className={classes.upper}>
@@ -121,10 +123,25 @@ class OpenPage extends Component {
                             <Tab className={classes.tab} label="注册" />
                         </Tabs>
                     </AppBar>
-                    <div className={classes.loginBtnGroup}>
-                        <Button className={classes.button}>用微信登陆</Button>
-                        <Button className={classes.button}>用百度登陆</Button>
-                    </div>
+                    {value === 0 && (
+                        <div className={classes.loginBtnGroup}>
+                            <Button className={classes.button}>用微信登陆</Button>
+                            <Link to="/login" className="unlink">
+                                <Button className={classes.button}>
+                                    用邮箱登陆
+                                </Button>
+                            </Link>
+                        </div>
+                    )}
+                    {value === 1 && (
+                        <div className={classes.loginBtnGroup}>
+                            <Link to="/signup" className="unlink">
+                                <Button className={classes.button}>
+                                    创建新账户
+                                </Button>
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </div>
         );
