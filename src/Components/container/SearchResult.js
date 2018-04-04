@@ -20,11 +20,7 @@ import LocalOffer from "material-ui-icons/LocalOffer";
 import Stars from "../../Pages/Stars";
 
 const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-    width: "95%",
-    marginBottom: 15
-  },
+
   icon: {
     width: 15,
     height: 15,
@@ -57,14 +53,28 @@ const styles = theme => ({
   result: {
     width: "95vw",
     maxWidth: 600,
-    margin: "10px auto"
+    margin: "auto",
+
   },
 
-  createBtn: {
-    border: "1px solid #1976D2",
-    padding: "15px 20px",
-    fontSize: "1.1rem"
-  },
+  btnGroup: {
+        width: "95%",
+        margin: "20px auto",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+        // border:"1px solid green"
+    },
+    button: {
+        width: "50%",
+        letterSpacing: 2,
+        padding: 12,
+        fontSize: 18,
+        backgroundColor:"#1976D2",
+        color: "#fff",
+        textAlign:"center"
+    },
+
 
   createActivity: {
     backgroundColor: "#1976D2",
@@ -141,17 +151,17 @@ class SearchResult extends Component {
       );
       result.push(
         <div
-          className={classNames(classes.result, classes.createGroup)}
+          className={classNames(classes.btnGroup)}
           key="createGroup"
         >
           <span
-            className={classNames(classes.createBtn, classes.createActivity)}
+            className={classNames(classes.button, classes.createActivity)}
           >
             <Link to="/addActivity" className={classes.unlink}>
               创建新活动
             </Link>
           </span>
-          <span className={classNames(classes.createBtn, classes.createWish)}>
+          <span className={classNames(classes.button, classes.createWish)}>
             <Link to="/addWish" className={classes.unlink}>
               创建新愿望
             </Link>

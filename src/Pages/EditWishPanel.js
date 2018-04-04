@@ -72,7 +72,7 @@ class EditWishPanel extends Component {
     }
 
     submitForm(values) {
-        // console.log("values",values)
+
         const keys = [
             "location",
             "budget",
@@ -87,6 +87,7 @@ class EditWishPanel extends Component {
         let edittedValues = {};
         keys.forEach(item => {
             if (edit[item] !== values[item]) {
+
                 if (item === "departdate") {
                     let depart = new Date(
                         values.departdate.replace(/年|月|日/g, "/")
@@ -106,11 +107,13 @@ class EditWishPanel extends Component {
                 }
             }
         });
+        // console.log(edittedValues);
 
         if (Object.keys(edittedValues).length === 0) {
             history.push(`/wish/${wishId}`);
             return null;
         }
+
         this.props.updateUserWish(wishId, edittedValues, history);
     }
 
@@ -129,6 +132,7 @@ class EditWishPanel extends Component {
         } else if (edit.hasOwnProperty("warning")) {
             return <div style={{ textAlign: "center" }}>{edit.warning}</div>;
         }
+
 
         return (
             <div style={{ marginBottom: 60 }}>
@@ -152,7 +156,6 @@ class EditWishPanel extends Component {
                         type="text"
                         component={TextField}
                         className={classes.textField}
-                        placeholder="你的预算/人"
                     />
                     <Field
                         fullWidth
@@ -161,7 +164,6 @@ class EditWishPanel extends Component {
                         type="text"
                         component={TextField}
                         className={classes.textField}
-                        placeholder="你能接受的拼团人数上限"
                     />
                 </div>
 
@@ -173,7 +175,6 @@ class EditWishPanel extends Component {
                         type="text"
                         component={popupSearchDateField}
                         placeholder={edit.departdate}
-
                     />
 
                     <Field

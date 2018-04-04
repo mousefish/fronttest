@@ -37,7 +37,6 @@ class InputDate extends Component {
                         {...input}
                         onChange={(newValue) =>
                             this.handleChange(newValue)}
-                        defaultValue={this.props.defaultValue}
                         value={this.state.value}
                         time={true}
                         placeholder={placeholder}
