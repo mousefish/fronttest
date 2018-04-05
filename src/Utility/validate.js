@@ -43,9 +43,7 @@ const validate = values => {
 
   if (
     values.password &&
-    !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,25}$/.test(
-      values.password
-    )
+    !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,25}$/.test(values.password)
   ) {
     errors.password = "密码长度必须在6-25位之间，且至少含有1个数字和1个字母";
   }
@@ -57,7 +55,6 @@ const validate = values => {
   ) {
     errors.password = "密码不能含有邮箱地址";
   }
-
 
   // *******************date validation
 

@@ -31,12 +31,12 @@ const styles = {
     emailBtn: {
         color: "#1976D2",
         border: "1px solid #1976D2",
-        padding: "15px 0"
+        padding: "14px 0"
     },
 
     wechatBtn: {
         color: "#43A047",
-        border: "1px solid #43A047"
+        border: "1px solid #43A047",
     },
     wechatBtnInner: {
         display: "flex",
