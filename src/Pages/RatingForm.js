@@ -16,6 +16,7 @@ const styles = theme => ({
         // marginLeft: theme.spacing.unit,
         // marginRight: theme.spacing.unit,
         width: "100%",
+        marginBottom:10
     },
     container: {
         display: "flex",
@@ -23,12 +24,9 @@ const styles = theme => ({
     },
 
     button: {
-        // margin: theme.spacing.unit,
-        width: "45%",
-        padding: 10,
-        fontSize: 14,
-        backgroundColor: "#1976D2",
-        margin:"10px 0"
+        width: "100%",
+        backgroundColor: "#1976D2"
+
     },
     starColor: {
         color: "#BDBDBD"
@@ -84,28 +82,38 @@ class RatingForm extends Component {
         });
     }
 
-    sendRating(event, activityId) {
+    sendRating(event, activityId, creatorId) {
         event.preventDefault();
         const { numOfStars, feedback } = this.state;
         if (!localStorage.getItem("jwtToken")) {
             this.setState({
                 open: true
             });
-        } else if (numOfStars === 0) {
+        }
+        else if (numOfStars === 0) {
             this.setState({ message: "请提供星评和评论" });
             return;
+        } else if(feedback && feedback.length > 300){
+            this.setState({ message:"评论长度不能多于300个字"})
+            return;
         }
-        const data = { numOfStars, feedback, activityId };
+        const data = { numOfStars, feedback, activityId, creatorId };
         this.setState({ message: "" });
         // data: {numOfStars: 3, feedback: "ilove", activityId: 1}
+
         this.props.sendRating(data);
     }
 
     render() {
-        const { classes, fullScreen } = this.props;
-        const { activityId } = this.props;
-        const { message } = this.props;
-        console.log("State",this.state.message)
+        const {
+            classes,
+            fullScreen,
+            activityId,
+            creatorId,
+            message
+        } = this.props;
+
+        // console.log("State",this.state.message)
         return (
             <div>
                 <Dialog
@@ -119,8 +127,8 @@ class RatingForm extends Component {
                     </div>
                 </Dialog>
 
-                <form>
-                    {this.state.stars}
+                <form >
+                    <div>{this.state.stars}</div>
                     <TextField
                         id="textarea"
                         label="给个评论吧"
@@ -134,10 +142,10 @@ class RatingForm extends Component {
                     />
                     <Button
                         className={classes.button}
-                        color="primary"
                         raised
+                        id="btn"
                         onClick={event => {
-                            this.sendRating(event, activityId);
+                            this.sendRating(event, activityId, creatorId);
                         }}
                     >
                         提交评论

@@ -10,8 +10,6 @@ import WizardFirst from "./WizardFirst";
 import WizardSecond from "./WizardSecond";
 import WizardThird from "./WizardThird";
 
-
-
 class AddActivity extends Component {
     constructor(props) {
         super(props);
@@ -31,29 +29,14 @@ class AddActivity extends Component {
     }
 
     handleSubmit(values) {
-       console.log('value', values);
-        const images = [];
-        for(let i = 1 ; i <= 8; i ++){
-            if(values['img'+i]){
-                images.push(values['img'+i]);
-            }
-        }
-        let { theme, location,departdate,finishdate, budget,services,story } = values;
-        const modifiedValues={
-            theme,
-            location,
-            departdate,
-            finishdate,
-            budget,
-            services,
-            story,
-            images
-        };
-
-      // console.log('aftervalue', modifiedValues);
-      // blob:http://localhost:3000/95ed0c2e-7b16-4d37-8e69-250a6f57a860
-
-        this.props.submitActivityData(modifiedValues, this.props.history);
+        let depart = new Date(values.departdate.replace(/年|月|日/g, "/"));
+        let finish = new Date(values.finishdate.replace(/年|月|日/g, "/"));
+        let departUTC = depart.toUTCString();
+        let finishUTC = finish.toUTCString();
+        this.props.submitActivityData(
+            { ...values, departdate: departUTC, finishdate: finishUTC },
+            this.props.history
+        );
     }
 
     render() {
@@ -61,11 +44,7 @@ class AddActivity extends Component {
         const { page } = this.state;
         return (
             <div>
-                {page === 1 && (
-                    <WizardFirst
-                        onSubmit={this.nextPage}
-                    />
-                )}
+                {page === 1 && <WizardFirst onSubmit={this.nextPage} />}
                 {page === 2 && (
                     <WizardSecond
                         previousPage={this.previousPage}
@@ -78,15 +57,15 @@ class AddActivity extends Component {
                         onSubmit={this.handleSubmit}
                     />
                 )}
-                <div className='input-success'>{this.props.msg}</div>
             </div>
         );
     }
 }
 
-
 const mapStateToProps = state => {
-    return { msg: state.ActivityReducer.message };
+    return {
+        msg: state.ActivityReducer.message
+    };
 };
 
 // AddActivity.propTypes = {

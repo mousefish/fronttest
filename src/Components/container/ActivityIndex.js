@@ -12,10 +12,11 @@ import Star from "material-ui-icons/Star";
 import StarBorder from "material-ui-icons/StarBorder";
 import StarHalf from "material-ui-icons/StarHalf";
 import Person from "material-ui-icons/Person";
-import travel from "../../Assets/Images/test.jpg";
 import List from "material-ui/List";
 import Slide from "material-ui/transitions/Slide";
 import Stars from "../../Pages/Stars";
+import cardBG from "../../Assets/Images/cardBG.png";
+import config from "../../config/config";
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -31,6 +32,19 @@ const styles = theme => ({
     borderRadius: "10px 10px 0 0"
   },
 
+  imgWrapper: {
+    position: "absolute",
+    opacity: "0.4",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#2196F3",
+    opacity:0.4,
+    borderRadius: "10px 10px 0 0",
+    // backgroundImage: "linear-gradient(to bottom right, #F7F7F7, #EAFBFF)"
+  },
+
   icon: {
     width: 15,
     height: 15,
@@ -43,32 +57,14 @@ const styles = theme => ({
     verticalAlign: "-2px"
   },
 
-  // themeBar: {
-  //   position: "absolute",
-  //   bottom: 0,
-  //   width: "100%",
-  //   height: "18%",
-  //   lineHeight:2,
-  //   paddingLeft:20,
-  //   color: "#fff",
-  //   backgroundColor: "rgba(0,0,0,0.6)",
-  //   fontSize: "1.5rem",
-  //   fontWeight:"bold",
-  //   letterSpacing:1.3
-  // },
-
   budgetBox: {
     position: "absolute",
-    width: 60,
-    height: 60,
-    lineHeight: 4.3,
-    textAlign: "center",
-    fontWeight: "bold",
-    left: 17,
-    top: 10,
+    fontWeight: "bolder",
+    right: 10,
+    bottom: 2,
     color: "#fff",
-    borderRadius: "50%",
-    backgroundColor: "#03A9F4"
+    fontSize: "1.8rem",
+    zIndex: 1000
   },
 
   content: {
@@ -76,28 +72,25 @@ const styles = theme => ({
   },
 
   infoWrapper: {
+    // border:"1px solid green",
     display: "flex",
-    flexFlow: "row nowrap",
-    justifyContent: "space-between",
+    flexFlow: "column",
     marginBottom: 10,
-    alignItems: "flex-start"
+    alignItems: "flex-start",
   },
 
   fav: {
     textAlign: "right"
   },
-  // left:{
-  //   border:"1px solid green"
-  // },
-
-  // right:{
-  //   border:"1px solid red"
-  // },
 
   item: {
+    width: "100%",
     fontSize: "1.2rem",
-    marginBottom: 6
-    // border:"1px solid red"
+    marginBottom: 6,
+    // border:"1px solid red",
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "space-between"
   },
   themeStyle: {
     fontWeight: "bold",
@@ -110,8 +103,8 @@ class ActivityIndex extends Component {
     const { classes } = this.props;
     if (score > 0) {
       return (
-        <div className={classes.item}>
-          <Stars num={score} />
+        <div>
+          <Stars num={score} pos={true} />
         </div>
       );
     }
@@ -120,9 +113,7 @@ class ActivityIndex extends Component {
   renderFavZone(num) {
     const { classes } = this.props;
     if (num > 0) {
-      return (
-        <div className={classNames(classes.item, classes.fav)}>{num} 人收藏</div>
-      );
+      return <div className={classes.fav}>{num} 人收藏</div>;
     }
   }
 
@@ -134,28 +125,31 @@ class ActivityIndex extends Component {
       return (
         <Link to={`/activity/${item.id}`} className="unlink" key={item.id}>
           <Card className="card" style={{ borderRadius: 10 }}>
-            <CardMedia className={classes.media} image={travel} title="travel">
-              <div className={classes.budgetBox}>¥{item.budget}</div>
+            <CardMedia className={classes.media} image={cardBG} title="travel">
+              {" "}
+              <div className={classes.imgWrapper} />
+              <div className={classes.budgetBox}>¥ {item.budget}</div>
             </CardMedia>
             <CardContent className={classes.content}>
               <h3 className={classes.themeStyle}>{item.theme}</h3>
               <div className={classes.infoWrapper}>
-                <div className={classes.left}>
-                  <div className={classes.item}>
+                <div className={classes.item}>
+                  <div>
                     <LocationOn className={classes.icon} /> {item.location}
                   </div>
-                  <div className={classes.item}>
+                  <div>{this.renderFavZone(item.likes)} </div>
+                </div>
+                <div className={classes.item}>
+                  <div>
                     <Person className={classes.icon} />
                     &nbsp;{item.username}
                   </div>
-                  <div className={classes.item}>
+                  <div>{this.renderStarZone(item.averageScore)}</div>
+                </div>
+                <div className={classes.item}>
+                  <div>
                     <AccessTime className={classes.icon} /> {item.departdate} 出发
                   </div>
-                </div>
-
-                <div className={classes.right}>
-                  {this.renderStarZone(item.averageScore)}
-                  {this.renderFavZone(item.likes)}
                 </div>
               </div>
             </CardContent>

@@ -1,57 +1,103 @@
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
+import Cropper from "react-cropper";
+import FileCrop from "./FileCrop";
+import AddAPhoto from "material-ui-icons/AddAPhoto";
+import IconButton from "material-ui/IconButton";
 
 class FileInput extends Component {
+  state = { src: "", showIcon: true };
 
-  state = { src: "" };
+  renderIcon() {
+    if (this.state.showIcon) {
+      return (
+        <span
+          style={{
+            position: "absolute",
+            top: "40%",
+            left: "calc(50% - 25px)",
+            color: "#fff"
+          }}
+        >
+          <IconButton aria-label="upload image">
+            <AddAPhoto
+              style={{ color: "#fff", width: 50, height: 50 }}
+              aria-label="upload image"
+            />
+          </IconButton>
+        </span>
+      );
+    }else if(this.props.showIcon){
+      return (
+        <span
+          style={{
+            position: "absolute",
+            top: "40%",
+            left: "calc(50% - 25px)",
+            color: "#fff"
+          }}
+        >
+          <IconButton aria-label="upload image">
+            <AddAPhoto
+              style={{ color: "#fff", width: 50, height: 50 }}
+              aria-label="upload image"
+            />
+          </IconButton>
+        </span>
+      );
+    }
+  }
 
+  onCancel() {
+    this.setState({
+      src: "",
+      showIcon:true
+    });
+  }
   render() {
-    const { input: { value }, touched, error } = this.props;
     return (
       <div>
         <Dropzone
-          style={{ border: "1px solid #e0e0e0" }}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0
+          }}
           name={this.props.name}
           multiple={true}
-          onDrop={(imagesToUpload) => {
+          onDrop={imagesToUpload => {
             const reader = new FileReader();
             reader.onload = () => {
-              this.setState({ src: reader.result });
+              this.setState({
+                src: reader.result,
+                showIcon: false
+              });
             };
             reader.readAsDataURL(imagesToUpload[0]);
-            this.props.input.onChange(imagesToUpload);
+            this.props.onGetImgUrl(imagesToUpload[0]);
           }}
         >
-          <img
-            style={{ height: "100px", width:100 }}
-            src={this.state.src}
-          />
+          {this.state.src ? (
+            <FileCrop
+              src={this.state.src}
+              purpose={this.props.purpose}
+              onCropImageObject={this.props.onCropImageObject}
+              showCrop={this.props.showCrop}
+              onCancel={() => {
+                this.onCancel();
+              }}
+
+            />
+          ) : (
+            ""
+          )}
+          {this.renderIcon()}
         </Dropzone>
-        {touched && error}
       </div>
     );
   }
 }
 
 export default FileInput;
-
-// using redux form
-
-// import Dropzone from "react-dropzone";
-
-// const adaptFileEventToValue = delegate => e => delegate([...e.target.files]);
-
-// export default ({
-//   input: { value: omitValue, onChange, onBlur, ...inputProps },
-//   meta: omitMeta,
-//   ...props
-// }) => (
-//   <input
-//     onChange={adaptFileEventToValue(onChange)}
-//     onBlur={adaptFileEventToValue(onBlur)}
-//     type="file"
-//     {...inputProps}
-//     {...props}
-//   />
-// );
-

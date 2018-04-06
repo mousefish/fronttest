@@ -16,18 +16,31 @@ import services from "../../Data/services";
 import PageHeader from "../PageHeader";
 
 const styles = theme => ({
-    button: {},
-
     textField: {
         padding: "8px 0"
         // border: "1px solid blue"
+    },
+    button: {
+        width: "95%",
+        backgroundColor: "#1976D2"
     }
 });
 
 class AddWish extends Component {
     submitForm(value) {
-        // console.log("wish value", value);
-        this.props.submitWishData(value, this.props.history);
+        let depart = new Date(value.departdate.replace(/年|月|日/g, "/"));
+        let finish = new Date(value.finishdate.replace(/年|月|日/g, "/"));
+        let departUTC = depart.toUTCString();
+        let finishUTC = finish.toUTCString();
+
+        this.props.submitWishData(
+            {
+                ...value,
+                departdate: departUTC,
+                finishdate: finishUTC
+            },
+            this.props.history
+        );
     }
 
     renderErrorMsg() {
@@ -38,52 +51,60 @@ class AddWish extends Component {
 
     renderFields(classes) {
         return (
-           <div>
-            <div key="basic" className="form-group">
-                <h4 className="category-title">愿望基本信息</h4>
-                <Field
-                    fullWidth
-                    key="location"
-                    name="location"
-                    type="text"
-                    component={AutocompleteField}
-                    className="text-field"
-                    placeholder="你想去的城市，按提示列表选择"
-                    props={this.props}
-                />
+            <div>
+                <div key="basic" className="form-group">
+                    <h4 className="category-title">愿望基本信息</h4>
+                    <Field
+                        fullWidth
+                        key="location"
+                        name="location"
+                        type="text"
+                        component={AutocompleteField}
+                        className="text-field"
+                        placeholder="你想去的城市，按提示列表选择"
+                        props={this.props}
+                    />
 
-                <Field
-                    fullWidth
-                    key="budget"
-                    name="budget"
-                    type="text"
-                    component={TextField}
-                    className={classes.textField}
-                    placeholder="你的预算/人"
-                />
+                    <Field
+                        fullWidth
+                        key="budget"
+                        name="budget"
+                        type="text"
+                        component={TextField}
+                        className={classes.textField}
+                        placeholder="你的预算/人"
+                    />
+                    <Field
+                        fullWidth
+                        key="numberOfPeople"
+                        name="numberOfPeople"
+                        type="text"
+                        component={TextField}
+                        className={classes.textField}
+                        placeholder="你能接受的人数上限"
+                    />
+                </div>
+
+                <div key="date" className="form-group">
+                    <h4 className="category-title">行程时间</h4>
+                    <Field
+                        key="dapartdate"
+                        name="departdate"
+                        type="text"
+                        component={popupSearchDateField}
+                        placeholder="出发日期和时间"
+                    />
+
+                    <Field
+                        key="finishdate"
+                        name="finishdate"
+                        type="text"
+                        component={popupSearchDateField}
+                        placeholder="结束日期和时间"
+                    />
+                </div>
             </div>
-
-            <div key="date" className="form-group">
-                <h4 className="category-title">行程时间</h4>
-                <Field
-                    key="dapartdate"
-                    name="departdate"
-                    type="text"
-                    component={popupSearchDateField}
-                    placeholder="出发日期和时间"
-                />
-
-                <Field
-                    key="finishdate"
-                    name="finishdate"
-                    type="text"
-                    component={popupSearchDateField}
-                    placeholder="结束日期和时间"
-                />
-            </div>
-           </div>
-        )
-
+        );
     }
 
     render() {
@@ -131,7 +152,6 @@ class AddWish extends Component {
                         </Button>
                     </div>
                 </form>
-                <div className="input-success">{this.props.msg}</div>
             </div>
         );
     }

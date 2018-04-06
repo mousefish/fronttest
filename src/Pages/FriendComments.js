@@ -1,19 +1,14 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
 import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
+import config from "../config/config";
 import Button from "material-ui/Button";
 import Star from "material-ui-icons/Star";
 import Avatar from "material-ui/Avatar";
-import pic from "../Assets/Images/profile.jpg";
+import Stars from "./Stars";
+import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 
 const styles = theme => ({
-    wrapper: {
-        width: "90%",
-        margin: "auto",
-        marginTop: 20,
-        marginBottom: 50
-    },
     friendWrapper: {
         listStyle: "none",
         padding: 0
@@ -24,7 +19,7 @@ const styles = theme => ({
         verticalAlign: "-2px"
     },
     avatar: {
-        margin: 10
+        margin: "10px 10px 10px 0"
     },
 
     bigAvatar: {
@@ -38,18 +33,38 @@ const styles = theme => ({
         flexFlow: "row nowrap",
         justifyContent: "space-between",
         alignItems: "center"
+        // border: "1px solid red"
     },
 
     comment: {
-        width: "95%",
-        margin: "auto"
+        margin: "auto",
+        paddingBottom: 10
+        // border: "1px solid red"
     },
 
-    space: {
-        marginBottom: 20
+    commentRow: {
+        padding: "20px 0px 10px 5px",
+        borderBottom: "1px solid #BDBDBD"
     },
     button: {
-        margin: theme.spacing.unit
+        // margin: theme.spacing.unit,
+        backgroundColor: "#1976D2",
+        width: "100%",
+        padding: 10,
+        fontSize: "1.1rem",
+        letterSpacing: 2
+    },
+
+    commentZone: {
+        marginTop: 30
+    },
+    title: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        justifyContent: "space-between"
+    },
+    average: {
+        fontWeight: "bold"
     }
 });
 
@@ -57,77 +72,111 @@ class FriendComments extends Component {
     state = {
         showAll: false
     };
-
-    renderStars(numOfStars) {
-        const classes = this.props.classes;
-        var starWrapper = [];
-        for (let i = 0; i < numOfStars; i++) {
-            starWrapper.push(<Star key={i} className={classes.icon} />);
+    renderButton(comments) {
+        const { classes } = this.props;
+        if (comments && typeof comments[0] !== "string") {
+            return (
+                <Button
+                    raised
+                    color="primary"
+                    className={classes.button}
+                    onClick={() =>
+                        this.setState(prevState => ({
+                            showAll: !prevState.showAll
+                        }))}
+                >
+                    {this.state.showAll ? "收回评论" : "查看全部评论"}
+                </Button>
+            );
         }
-
-        return starWrapper;
+    }
+    renderComments(comments) {
+        const { classes } = this.props;
+        if (comments && comments.length > 0) {
+            if (typeof comments[0] === "string") {
+                return <div>{comments[0]}</div>;
+            } else {
+                let average = comments[0].average;
+                return comments.map((item, index) => {
+                    return (
+                        <li className={classes.commentRow} key={index}>
+                            <div className={classes.subHeader}>
+                                <div className={classes.subHeader}>
+                                    <Avatar
+                                        alt="rater pic"
+                                        src={
+                                            item.imageurl ? (
+                                                config.BUCKET_URL +
+                                                item.imageurl
+                                            ) : (
+                                                defaultAvatar
+                                            )
+                                        }
+                                        className={classNames(
+                                            classes.avatar,
+                                            classes.bigAvatar
+                                        )}
+                                    />
+                                    {item.username}
+                                </div>
+                                <div>
+                                    <Stars num={item.numOfStars} />
+                                </div>
+                            </div>
+                            <div className={classes.comment}>
+                                {item.feedback}
+                            </div>
+                            <div style={{ float: "right" }}>
+                                {item.createdAt}
+                            </div>
+                            <div style={{ clear: "both" }} />
+                        </li>
+                    );
+                });
+            }
+        }
     }
 
-    renderFriends(friendData) {
-        const classes = this.props.classes;
-        const initalFriendData = [friendData[0]];
-        let friends = this.state.showAll ? friendData : initalFriendData;
-        return friends.map((friend,index) => {
-            return [
-                <li className={classes.space} key={index}>
-                    <div className={classes.subHeader}>
-                        <div className={classes.subHeader}>
-                            <Avatar
-                                alt="friend pic"
-                                src={pic}
-                                className={classNames(
-                                    classes.avatar,
-                                    classes.bigAvatar
-                                )}
-                            />
-                            {friend.name}
-                        </div>
-                        <div>{this.renderStars(friend.stars)}</div>
-                    </div>
-                    <div className={classNames(classes.space, classes.comment)}>
-                        {friend.comment}
-                    </div>
-                    <div style={{ float: "right" }}>{friend.date}</div>
-                    <div style={{ clear: "both" }} />
-                </li>
-            ];
-        });
+    renderAverage(comments) {
+        const { classes } = this.props;
+
+        if (comments && comments[0] && comments[0].average) {
+            return (
+                <h2 className={classes.average}>
+                    {comments[0].average} <Stars num={comments[0].average} />
+                </h2>
+            );
+        }
     }
 
     render() {
-        const classes = this.props.classes;
-        const friendData = this.props.storyData.friendComments;
+        const { comments, classes } = this.props;
         return (
-            <div className={classes.wrapper}>
-                <ul className={classes.friendWrapper}>
-                    {this.renderFriends(friendData, classes)}
-                </ul>
-                <div style={{ textAlign: "center" }}>
-                    <Button
-                        raised
-                        color="primary"
-                        className={classes.button}
-                        onClick={() =>
-                            this.setState(prevState =>({
-                                showAll: !prevState.showAll
-                            }))}
-                    >
-                        {this.state.showAll ? "收回评论" : "查看全部评论"}
-                    </Button>
+            <div className={classes.commentZone}>
+                <div className={classes.title}>
+                    <h4>
+                        共{" "}
+                        <span style={{ fontWeight: "bold" }}>
+                            {comments &&
+                            comments[0] &&
+                            comments[0].count ? (
+                                comments[0].count
+                            ) : (
+                                ""
+                            )}
+                        </span>{" "}
+                        人评价
+                    </h4>
+                    <div>{this.renderAverage(comments)}</div>
                 </div>
+                <ul className={classes.friendWrapper}>
+                    {this.renderComments(comments)}
+                </ul>
+
+                <div>{this.renderButton(comments)}</div>
             </div>
         );
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        storyData: state.StoryDataReducer
-    };
-};
-export default connect(mapStateToProps)(withStyles(styles)(FriendComments));
+export default withStyles(styles)(FriendComments);

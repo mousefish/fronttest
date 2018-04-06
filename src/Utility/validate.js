@@ -8,6 +8,7 @@ const validate = values => {
     "departdate",
     "finishdate",
     "budget",
+    "numberOfPeople",
     "services",
     "story",
     "email",
@@ -40,8 +41,11 @@ const validate = values => {
     errors.email = "请输入有效邮箱";
   }
 
-  if (values.password && values.password.length != 6) {
-    errors.password = "密码长度为六位";
+  if (
+    values.password &&
+    !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,25}$/.test(values.password)
+  ) {
+    errors.password = "密码长度必须在6-25位之间，且至少含有1个数字和1个字母";
   }
 
   if (
@@ -51,6 +55,32 @@ const validate = values => {
   ) {
     errors.password = "密码不能含有邮箱地址";
   }
+
+  // *******************date validation
+
+  if (values.departdate) {
+    if (typeof values.departdate !== "string") {
+      errors.departdate = "请在有效区域内选择日期";
+    }
+    let depart = new Date(values.departdate.replace(/年|月|日/g, "/"));
+
+    if (depart && Date.now() >= Date.parse(depart)) {
+      errors.departdate = "出发时间不能早于当前时间";
+    }
+  }
+
+  if (values.departdate && values.finishdate) {
+    if (typeof values.finishdate !== "string") {
+      errors.finishdate = "请在有效区域内选择日期";
+    }
+    let depart = new Date(values.departdate.replace(/年|月|日/g, "/"));
+    let finish = new Date(values.finishdate.replace(/年|月|日/g, "/"));
+    if (finish && depart && Date.parse(finish) <= Date.parse(depart)) {
+      errors.finishdate = "结束时间不能早于出发时间";
+    }
+  }
+
+  // *******************date validation
 
   if (Number.isNaN(Number(values.age)) || Number(values.age) <= 0) {
     errors.age = "请输入有效年龄";
@@ -62,8 +92,15 @@ const validate = values => {
     errors.budget = "请输入有效数字";
   }
 
-  if (values.theme && values.theme.length > 20) {
-    errors.theme = "字数不能超过20";
+  if (
+    Number.isNaN(parseInt(values.numberOfPeople)) ||
+    parseInt(values.numberOfPeople) <= 0
+  ) {
+    errors.numberOfPeople = "请输入有效数字";
+  }
+
+  if (values.theme && values.theme.length > 15) {
+    errors.theme = "字数不能超过15";
   }
   if (
     Number.isNaN(Number(values.yearOfLiving)) ||
@@ -72,7 +109,11 @@ const validate = values => {
     errors.yearOfLiving = "请输入有效年限";
   }
 
-  if (values.story && values.story.length >= 300) {
+  if (values.note && values.note.length > 300) {
+    errors.note = "字数不能超过300";
+  }
+
+  if (values.story && values.story.length > 300) {
     errors.story = "字数不能超过300";
   }
 

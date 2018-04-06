@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { withStyles } from "material-ui/styles";
+import * as actions from "../Actions";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
+import PageHeader from "./PageHeader";
 import Avatar from "material-ui/Avatar";
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
-import pic from "../Assets/Images/profile.jpg";
+import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
-
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import PageHeader from "./PageHeader";
-import * as actions from "../Actions";
+import config from "../config/config";
 
 const styles = theme => ({
     avatar: {
@@ -35,7 +35,8 @@ const styles = theme => ({
         display: "flex",
         flexFlow: "row nowrap",
         justifyContent: "flex-start",
-        paddingBottom: 10
+        paddingBottom: 10,
+        paddingLeft:10
     },
 
     myHeaderRight: {
@@ -119,7 +120,7 @@ class PublicProfile extends Component {
                     <div className={classes.myHeader}>
                         <Avatar
                             alt="profile"
-                            src={pic}
+                            src={user.imageurl ? config.BUCKET_URL + user.imageurl: defaultAvatar}
                             className={classes.avatar}
                         />
                         <div className={classes.myHeaderRight}>
@@ -133,7 +134,7 @@ class PublicProfile extends Component {
                             style={{ color: "#fff" }}
                         >
                             <span className={classes.subHeaderContent}>
-                                他的故事
+                                他的圈子
                             </span>
                         </Link>
                         <Link
@@ -175,7 +176,7 @@ class PublicProfile extends Component {
 }
 
 const mapStateToProps = state => {
-    // console.log("here", state.UserReducer.basicInfo);
+    // console.log("here", state.UserReducer.basicInfo.imageurl);
     return {
         user: state.UserReducer.basicInfo
     };

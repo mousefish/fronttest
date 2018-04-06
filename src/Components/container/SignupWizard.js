@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import WizardFirst from "../presenter/WizardFirst";
 import WizardSecond from "../presenter/WizardSecond";
 import WizardThird from "../presenter/WizardThird";
+import WizardFourth from "../presenter/WizardFourth";
+
 
 class SignupWizard extends Component {
   constructor(props) {
@@ -39,7 +41,7 @@ class SignupWizard extends Component {
   }
 
   handleSubmit(values) {
-    console.log("submit", values);
+    // console.log("submit", values);
     this.props.userSignupRequest(values, this.props.history);
   }
 
@@ -62,6 +64,12 @@ class SignupWizard extends Component {
         )}
         {page === 3 && (
           <WizardThird
+            previousPage={this.previousPage}
+            onSubmit={this.nextPage}
+          />
+        )}
+        {page === 4 && (
+          <WizardFourth
             previousPage={this.previousPage}
             onSubmit={this.handleSubmit}
           />

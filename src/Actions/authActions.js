@@ -50,7 +50,7 @@ export const userSignupRequest = (userData, history) => async dispatch => {
 
       });
 
-      history.push("/recommendation");
+      history.push("/myBasicInfo");
     } else {
       dispatch(authError(res.data));
     }

@@ -15,6 +15,10 @@ import Dialog from "material-ui/Dialog";
 import services from "../Data/services";
 import ConfirmDelete from "./ConfirmDelete";
 import RegisterDialog from "./RegisterDialog";
+import moment from "moment";
+import "moment/locale/zh-cn.js";
+
+moment.locale("zh-cn");
 
 const styles = theme => ({
     root: {
@@ -36,7 +40,7 @@ const styles = theme => ({
         width: "100%",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: "center"
         // border:"1px solid green"
     },
 
@@ -68,38 +72,48 @@ class EditWishPanel extends Component {
     }
 
     submitForm(values) {
-        // console.log("values",values)
+
         const keys = [
             "location",
             "budget",
+            "numberOfPeople",
             "departdate",
             "finishdate",
             "services",
             "note"
         ];
-        const { edit } = this.props;
+        const { edit, history } = this.props;
+        const { wishId } = this.props.match.params;
         let edittedValues = {};
         keys.forEach(item => {
             if (edit[item] !== values[item]) {
-                edittedValues[item] = values[item];
-            }
-            if (item == "serivices") {
-                for (let i = 0; i < services.length; i++) {
-                    if (edittedValues[item][i] !== values[item][i]) {
-                        edittedValues[item] = values[item];
-                    }
+
+                if (item === "departdate") {
+                    let depart = new Date(
+                        values.departdate.replace(/年|月|日/g, "/")
+                    );
+
+                    let departUTC = depart.toUTCString();
+                    edittedValues[item] = departUTC;
+                } else if (item === "finishdate") {
+                    let finish = new Date(
+                        values.finishdate.replace(/年|月|日/g, "/")
+                    );
+
+                    let finishUTC = finish.toUTCString();
+                    edittedValues[item] = finishUTC;
+                } else {
+                    edittedValues[item] = values[item];
                 }
             }
         });
+        // console.log(edittedValues);
 
         if (Object.keys(edittedValues).length === 0) {
-            // need a dialogue here!
-            // alert("没有值发生改变！");
+            history.push(`/wish/${wishId}`);
             return null;
         }
 
-        const { wishId } = this.props.match.params;
-        const history = this.props.history;
         this.props.updateUserWish(wishId, edittedValues, history);
     }
 
@@ -113,79 +127,113 @@ class EditWishPanel extends Component {
 
         const { edit, msg } = this.props;
         // receive { warning:"xxx"} from backend. edit initial value is {}, so still use obj to pass warning msg here
-        if (edit.hasOwnProperty("warning")) {
+        if (Object.keys(edit).length === 0) {
+            return null;
+        } else if (edit.hasOwnProperty("warning")) {
             return <div style={{ textAlign: "center" }}>{edit.warning}</div>;
         }
 
+
         return (
-            <div style={{marginBottom:60}}>
-             <div className="form-group" key="basic">
-                <h4 className="category-title">愿望基本信息</h4>
-                <Field
-                    fullWidth
-                    key="location"
-                    name="location"
-                    type="text"
-                    component={AutocompleteField}
-                    className="text-field"
-                    placeholder="你想去的城市，按提示列表选择"
-                    props={this.props}
-                />
+            <div style={{ marginBottom: 60 }}>
+                <div className="form-group" key="basic">
+                    <h4 className="category-title">愿望基本信息</h4>
+                    <Field
+                        fullWidth
+                        key="location"
+                        name="location"
+                        type="text"
+                        component={AutocompleteField}
+                        className="text-field"
+                        props={this.props}
+                        defaultValue={edit.location}
+                    />
 
-                <Field
-                    fullWidth
-                    key="budget"
-                    name="budget"
-                    type="text"
-                    component={TextField}
-                    className={classes.textField}
-                    placeholder="你的预算/人"
-                />
-            </div>
+                    <Field
+                        fullWidth
+                        key="budget"
+                        name="budget"
+                        type="text"
+                        component={TextField}
+                        className={classes.textField}
+                    />
+                    <Field
+                        fullWidth
+                        key="numberOfPeople"
+                        name="numberOfPeople"
+                        type="text"
+                        component={TextField}
+                        className={classes.textField}
+                    />
+                </div>
 
-            <div key="date" className="form-group">
-                <h4 className="category-title">行程时间</h4>
-                <Field
-                    key="dapartdate"
-                    name="departdate"
-                    type="text"
-                    component={popupSearchDateField}
-                    placeholder="出发日期和时间"
-                />
+                <div key="date" className="form-group">
+                    <h4 className="category-title">行程时间</h4>
+                    <Field
+                        key="dapartdate"
+                        name="departdate"
+                        type="text"
+                        component={popupSearchDateField}
+                        placeholder={edit.departdate}
+                    />
 
-                <Field
-                    key="finishdate"
-                    name="finishdate"
-                    type="text"
-                    component={popupSearchDateField}
-                    placeholder="结束日期和时间"
-                />
+                    <Field
+                        key="finishdate"
+                        name="finishdate"
+                        type="text"
+                        component={popupSearchDateField}
+                        placeholder={edit.finishdate}
+                    />
                 </div>
 
                 <div className="form-group">
-                        <h4 className="category-title">需要的向导服务</h4>
-                        <Field
-                            key="services"
-                            name="services"
-                            component={popupSearchMultiServices}
-                            data={services}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <h4 className="category-title">额外说明</h4>
-                        <Field
-                            fullWidth
-                            key="note"
-                            name="note"
-                            component={TextField}
-                            id="multiline-flexible"
-                            multiline
-                            rowsMax="4"
-                            placeholder="我对本地向导或者旅行体验的要求等等"
-                            className={classes.textField}
-                        />
-                    </div>
+                    <h4 className="category-title">需要的向导服务</h4>
+                    <Field
+                        key="services"
+                        name="services"
+                        component={popupSearchMultiServices}
+                        data={services}
+                    />
+                </div>
+                <div className="form-group">
+                    <h4 className="category-title">额外说明</h4>
+                    <Field
+                        fullWidth
+                        key="note"
+                        name="note"
+                        component={TextField}
+                        id="multiline-flexible"
+                        multiline
+                        rowsMax="4"
+                        placeholder="我对本地向导或者旅行体验的要求等等"
+                        className={classes.textField}
+                    />
+                </div>
                 <div className="input-success">{msg}</div>
+                <div className={classes.btnGroup}>
+                    <Button
+                        type="submit"
+                        color="primary"
+                        style={{ backgroundColor: "#1976D2" }}
+                        raised
+                        className={classes.button}
+                    >
+                        修改
+                    </Button>
+                    <Button
+                        color="primary"
+                        style={{ backgroundColor: "#D32F2F" }}
+                        raised
+                        className={classes.button}
+                        onClick={() => {
+                            this.setState({
+                                open: true
+                            });
+                        }}
+                    >
+                        删除
+                    </Button>
+                </div>
             </div>
         );
     }
@@ -217,30 +265,6 @@ class EditWishPanel extends Component {
                 >
                     <PageHeader history={this.props.history} title="修改愿望" />
                     {this.renderEditPanel(classes)}
-                    <div className={classes.btnGroup}>
-                        <Button
-                            type="submit"
-                            color="primary"
-                            style={{ backgroundColor: "#1976D2" }}
-                            raised
-                            className={classes.button}
-                        >
-                            修改
-                        </Button>
-                        <Button
-                            color="primary"
-                            style={{ backgroundColor: "#D32F2F" }}
-                            raised
-                            className={classes.button}
-                            onClick={() => {
-                                this.setState({
-                                    open: true
-                                });
-                            }}
-                        >
-                            删除
-                        </Button>
-                    </div>
                 </form>
             </div>
         );
@@ -251,6 +275,7 @@ const mapStateToProps = state => {
     const {
         location,
         budget,
+        numberOfPeople,
         note,
         departdate,
         finishdate,
@@ -263,6 +288,7 @@ const mapStateToProps = state => {
         initialValues: {
             location,
             budget,
+            numberOfPeople,
             note,
             departdate,
             finishdate,
@@ -279,4 +305,6 @@ EditWishPanel = reduxForm({
     enableReinitialize: true
 })(withStyles(styles, { withTheme: true })(EditWishPanel));
 
-export default (EditWishPanel = connect(mapStateToProps, actions)(EditWishPanel));
+export default (EditWishPanel = connect(mapStateToProps, actions)(
+    EditWishPanel
+));

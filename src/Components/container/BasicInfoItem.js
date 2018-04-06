@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import Avatar from "material-ui/Avatar";
 import { withStyles } from "material-ui/styles";
+import classNames from "classnames";
 import KeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
+import config from "../../config/config";
+import defaultAvatar from "../../Assets/Images/defaultAvatar.png";
 
 const styles = {
     item: {
@@ -16,13 +20,21 @@ const styles = {
     list: {
         listStyle: "none",
         padding: 0,
-        marginTop:5
+        marginTop: 5
     },
     flexRight: {
         display: "flex",
         justifyContent: "flex-end",
         alignItems: "center",
-        marginRight:-7
+        marginRight: -7
+    },
+
+    avatar: {
+        margin: 10
+    },
+    bigAvatar: {
+        width: 80,
+        height: 80
     }
 };
 
@@ -31,6 +43,43 @@ class BasicInfoItem extends Component {
         const { profile, classes } = this.props;
         return (
             <ul className={classes.list}>
+                <li
+                    className={classes.item}
+                    onClick={() =>
+                        this.props.onClick({
+                            key: "imageurl",
+                            value: profile.imageurl
+                        })}
+                >
+                    <span>头像</span>
+                    <div className={classes.flexRight}>
+                        <span>
+                            {profile.imageurl ? (
+                                <Avatar
+                                    alt="tour guide"
+                                    src={
+                                        config.BUCKET_URL +
+                                        profile.imageurl
+                                    }
+                                    className={classNames(
+                                        classes.avatar,
+                                        classes.bigAvatar
+                                    )}
+                                />
+                            ) : (
+                                <Avatar
+                                    alt="tour guide"
+                                    src={defaultAvatar}
+                                    className={classNames(
+                                        classes.avatar,
+                                        classes.bigAvatar
+                                    )}
+                                />
+                            )}
+                        </span>&nbsp;&nbsp;
+                        <KeyboardArrowRight style={{ color: "#BDBDBD" }} />
+                    </div>
+                </li>
                 <li
                     className={classes.item}
                     onClick={() =>

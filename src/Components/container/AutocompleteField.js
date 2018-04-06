@@ -9,7 +9,6 @@ import TextField from "material-ui/TextField";
 import data from "../../Data/cities";
 
 const provinces = data.provinces;
-
 const renderInput = inputProps => {
   const { InputProps, classes, ref, ...other } = inputProps;
   return (
@@ -20,7 +19,8 @@ const renderInput = inputProps => {
         classes: {
           input: classes.input
         },
-        ...InputProps
+        ...InputProps,
+
       }}
       style={{ paddingTop: 8, marginBottom: 8 }}
     />
@@ -28,7 +28,6 @@ const renderInput = inputProps => {
 };
 
 const renderCity = (params, props) => {
-  console.log("props...", props.onClick);
   const {
     city,
     index,
@@ -100,9 +99,10 @@ const getCitys = inputValue => {
 };
 
 const autocompleteField = props => {
-  const { classes } = props;
+  const { classes, placeholder, defaultValue } = props;
+
   return (
-    <Downshift>
+    <Downshift defaultSelectedItem={defaultValue}>
       {({
         getInputProps,
         getItemProps,
@@ -116,7 +116,7 @@ const autocompleteField = props => {
             fullWidth: true,
             classes,
             InputProps: getInputProps({
-              placeholder: "输入城市，按提示列表选择",
+              placeholder: placeholder,
               id: "integration-downshift"
             }),
             ...props.input

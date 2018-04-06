@@ -29,8 +29,6 @@ import UserWishes from "./Pages/UserWishes";
 
 import EditWishPanel from "./Pages/EditWishPanel";
 
-import FriendComments from "./Pages/FriendComments";
-
 import Wish from "./Components/container/Wish";
 
 import OpenPage from "./Pages/OpenPage";
@@ -92,7 +90,8 @@ const styleSheet = {
     color: "#fff",
     width: "50%",
     marginRight: 0,
-    fontSize: "1.2rem"
+    fontSize: "1.2rem",
+    letterSpacing:2
   },
 };
 // WebFontLoader.load({
@@ -158,10 +157,8 @@ class App extends Component {
     if (pathname.includes("/editActivity/") || pathname.includes("/editWish/") || pathname==="/openPage") {
       return null;
     }
-    if(pathname.includes("/wish/")){
-      return null
-    }
-    if (pathname.includes("/activity/")) {
+
+    if (pathname.includes("/activity/") || pathname.includes("/wish/")) {
       return (
         <span>
         <BottomNavigation
@@ -250,7 +247,7 @@ class App extends Component {
             <Route exact path="/my" component={RequireAuth(MyAccount)} />
             <Route
               exact
-              path="/myBasicInfo/:userId"
+              path="/myBasicInfo"
               component={RequireAuth(PrivateBasicInfo)}
             />
             <Route
@@ -293,7 +290,6 @@ class App extends Component {
               component={RequireAuth(EditWishPanel)}
             />
 
-            <Route exact path="/friendComments" component={FriendComments} />
             <Route exact path="/activityWish" component={RequireAuth(ActivityWishPanel)} />
             <Route exact path="/activity/:activityId" component={RequireAuth(Activity)} />
             <Route exact path="/wish/:wishId" component={RequireAuth(Wish)} />

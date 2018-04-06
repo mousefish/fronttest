@@ -13,10 +13,12 @@ import PageHeader from "../../Pages/PageHeader";
 const styles = theme => ({
   progress: {
     width: "95%",
-    margin: "auto"
+    margin: "auto",
   },
 
   button: {
+    width: "95%",
+    backgroundColor:"#1976D2"
 
   },
 
@@ -37,7 +39,7 @@ const styles = theme => ({
 
 class wizardFirst extends Component {
   state = {
-    completed: 35
+    completed: 25
   };
 
   render() {
@@ -87,7 +89,7 @@ class wizardFirst extends Component {
             type="submit"
             color="primary"
             raised
-            className="text-field"
+            className={classes.button}
             id="btn"
             style={{marginTop:5}}
           >

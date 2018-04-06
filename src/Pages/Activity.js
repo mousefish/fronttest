@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
+import config from "../config/config";
 import Avatar from "material-ui/Avatar";
 import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
@@ -19,16 +20,18 @@ import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "./PageHeader";
 import RegisterDialog from "./RegisterDialog";
-import test from "../Assets/imgForTest/dalian1.jpg";
-import test2 from "../Assets/imgForTest/4.jpg";
+import defaultAvatar from "../Assets/Images/defaultAvatar.png";
+import defaultBG from "../Assets/Images/defaultBG.png";
+
 
 const styles = theme => ({
     editBar: {
         // border:"1px solid red",
+        maxWidth: 600,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        margin: "10px 0 30px 0",
+        margin: "10px auto 30px auto",
         padding: 5
     },
     editBtn: {
@@ -71,7 +74,7 @@ const styles = theme => ({
 
     container: {
         // border: "1px solid blue",
-        marginTop:40,
+        marginTop: 50,
         display: "flex",
         flexFlow: "column",
         justifyContent: "flexStart",
@@ -86,51 +89,44 @@ const styles = theme => ({
         // border: "1px solid blue",
         width: 200,
         margin: "20px 0",
-        padding:"0 20px"
+        padding: "0 20px"
     },
 
     commentArea: {
         // border: "1px solid red",
         padding: 5
     },
-    writeArea: {
-        // border: "1px solid red"
-    },
+
 
     bg: {
+        maxWidth: 600,
+        margin: "auto",
         marginBottom: 10,
         position: "relative",
         textAlign: "center"
     },
+
     bgImg: {
+        flex: 1,
         maxWidth: "100%",
-        height: 250
+        maxHeight: 240
     },
 
-    bgImgLayer: {
-        position: "absolute",
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        // border:"1px solid red",
-        backgroundColor: "#1976D2",
-        opacity: 0.2
-    },
+
     row: {
         // border:"1px solid red",
-        position:"absolute",
-        bottom:-35,
-        left:"50%",
-        marginLeft:-45
-
+        position: "absolute",
+        bottom: -50,
+        left: "50%",
+        marginLeft: -45
     },
     avatar: {
         margin: 10
     },
     bigAvatar: {
         width: 80,
-        height: 80
+        height: 80,
+        border: "4px solid #fff"
     }
 });
 
@@ -149,6 +145,40 @@ class Activity extends Component {
         if (localStorage["jwtToken"]) {
             this.props.verifyYourFav(activityId);
         }
+    }
+
+    renderAvatar() {
+        const { activity, classes } = this.props;
+
+        return (
+            <Avatar
+                alt="tour guide"
+                src={
+                    activity.userimageurl ? (
+                        config.BUCKET_URL + activity.userimageurl
+                    ) : (
+                        defaultAvatar
+                    )
+                }
+                className={classNames(classes.avatar, classes.bigAvatar)}
+            />
+        );
+    }
+
+    renderImage() {
+        const { activity, classes } = this.props;
+        return (
+            <img
+                className={classes.bgImg}
+                src={
+                    activity.imageurl ? (
+                        config.BUCKET_URL + activity.imageurl
+                    ) : (
+                        defaultBG
+                    )
+                }
+            />
+        );
     }
 
     renderEditChoice() {
@@ -206,12 +236,11 @@ class Activity extends Component {
             ratings,
             isYourFav
         } = this.props;
-        // better use an object to pass the warning message since initial value is obj.
-        // also, if we use if(!activity) here, since React's default value is undefined,
-        // so even for the values that DO exist, the warning message will still show for a second before the content shows!
-        // But be careful dealing with the following data, since when undefine, undefined does not have any property!!!
-        // for example
-        // 我在{activity.location ? activity.location.split(" ")[0]:""}的故事
+
+        // the default value is {}, to avoid showing the regular component, add this condition here.
+        if (Object.keys(activity).length === 0) {
+            return null;
+        }
         if (activity.hasOwnProperty("warning")) {
             return (
                 <div>
@@ -222,6 +251,7 @@ class Activity extends Component {
                 </div>
             );
         }
+        // regular component
         return (
             <div>
                 <Dialog
@@ -235,18 +265,8 @@ class Activity extends Component {
                 <PageHeader history={this.props.history} title="活动" />
                 {this.renderEditChoice()}
                 <div className={classes.bg}>
-                    <img className={classes.bgImg} src={test} />
-                    <div className={classes.bgImgLayer} />
-                    <div className={classes.row}>
-                        <Avatar
-                            alt="tour guide"
-                            src={test2}
-                            className={classNames(
-                                classes.avatar,
-                                classes.bigAvatar
-                            )}
-                        />
-                    </div>
+                    {this.renderImage()}
+                    <div className={classes.row}>{this.renderAvatar()}</div>
                 </div>
                 <div className={classes.container}>
                     <h3 style={{ fontWeight: "bold" }}>{activity.theme}</h3>
@@ -312,6 +332,12 @@ class Activity extends Component {
                                 {activity.budget} 元 / 人
                             </div>
                         </li>
+                        <li>
+                            <div className={classes.detailTitle}>参加人数上限</div>
+                            <div className={classes.detailContent}>
+                                {activity.numberOfPeople} 人
+                            </div>
+                        </li>
 
                         <li>
                             <div className={classes.detailTitle}>提供的服务</div>
@@ -334,7 +360,10 @@ class Activity extends Component {
                     </ul>
                     <div className={classes.commentArea}>
                         <div className={classes.writeArea}>
-                            <RatingForm activityId={activityId} />
+                            <RatingForm
+                                activityId={activityId}
+                                creatorId={activity.userId}
+                            />
                         </div>
                     </div>
                 </div>
@@ -344,8 +373,6 @@ class Activity extends Component {
 }
 
 const mapStateToProps = state => {
-    // console.log("isYourFav", state.ActivityReducer.isYourFav);
-    // console.log("isYourActivity", state.ActivityReducer.activity.isYourActivity)
     return {
         activity: state.ActivityReducer.activity,
         isYourFav: state.ActivityReducer.isYourFav,

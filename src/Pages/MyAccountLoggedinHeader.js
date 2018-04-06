@@ -1,12 +1,13 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
 import Avatar from "material-ui/Avatar";
-import pic from "../Assets/Images/profile.jpg";
+import pic from "../Assets/Images/logo.jpg";
 
 const styles = theme => ({
     avatar: {
         width: 70,
-        height: 70
+        height: 70,
+        boxShadow:"2px 2px 5px #fff"
     },
 
     myHeader: {
@@ -15,7 +16,8 @@ const styles = theme => ({
         justifyContent: "flex-start",
         padding: 15,
         marginBottom: 5,
-        background: "linear-gradient(to bottom right, #2196F3 0%, #0D47A1 100%)",
+        background:
+            "linear-gradient(to bottom right, #2196F3 0%, #0D47A1 100%)",
         color: "#fff"
     },
 
@@ -38,5 +40,4 @@ const MyAccountLoggedinHeader = props => {
     );
 };
 
-export default withStyles(styles)(MyAccountLoggedinHeader
-    );
+export default withStyles(styles)(MyAccountLoggedinHeader);

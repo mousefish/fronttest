@@ -66,7 +66,10 @@ const styles = theme => ({
     fontWeight: "bold"
   },
   tab: {
-    fontSize: "2rem"
+    letterSpacing: 2
+  },
+  tabGroup:{
+    margin: "15px 0 35px 0"
   }
 });
 
@@ -118,7 +121,7 @@ class SearchPanel extends Component {
       <div className="searchPanelWrapper">
         <PageHeader title="搜索" history={this.props.history} />
         <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
-          <div className={classes.root} style={{ margin: "15px 0 35px 0" }}>
+          <div className={classes.tabGroup} >
             <AppBar
               position="static"
               color="default"
@@ -131,9 +134,9 @@ class SearchPanel extends Component {
                 textColor="#1976D2"
                 fullWidth
               >
-                <Tab style={{ letterSpacing: 2 }} label="活动" />
-                <Tab style={{ letterSpacing: 2 }} label="愿望" />
-                <Tab style={{ letterSpacing: 2 }} label="向导" />
+                <Tab className={classes.tab} label="活动" />
+                <Tab className={classes.tab} label="愿望" />
+                <Tab className={classes.tab} label="向导" />
               </Tabs>
             </AppBar>
           </div>

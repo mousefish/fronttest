@@ -27,11 +27,11 @@ export default (state = INITIAL_STATE, action) => {
         case FETCH_USER_ACTIVITIES:
             return { ...state, userActivities: action.payload };
         case FETCH_ACTIVITY_FOR_EDITTING:
-            return { ...state, edit: action.payload };
+            return { ...state, activity:{}, edit: action.payload };
         case ADD_ACTIVITY_DATA:
-            return { ...state, message: action.payload };
+            return { ...state, edit:{}, activity:{}, message: action.payload };
         case FETCH_ACTIVITY_DATA:
-            return { ...state, all: action.payload };
+            return { ...state, activity:{}, all: action.payload };
         case ACTIVITY_ERROR:
             return { ...state, error: action.payload };
         case HANDLE_LIKES:
@@ -45,7 +45,7 @@ export default (state = INITIAL_STATE, action) => {
             });
             return { ...state, all: newAll };
         case FETCH_ONE_ACTIVITY:
-            return { ...state, activity: action.payload, message: "" };
+            return { ...state, edit:{}, activity: action.payload, message: "" };
     }
 
     return state;

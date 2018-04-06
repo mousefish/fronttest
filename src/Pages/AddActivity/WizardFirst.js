@@ -14,7 +14,8 @@ import PageHeader from "../PageHeader";
 
 const styles = theme => ({
     button: {
-        margin: "auto"
+        width: "95%",
+        backgroundColor: "#1976D2"
 
     },
 
@@ -35,7 +36,7 @@ class WizardFirst extends Component {
                     name="theme"
                     type="text"
                     component={TextField}
-                    placeholder="活动的主题，字数不多于20个"
+                    placeholder="活动的主题，字数不多于15个"
                     className={classes.textField}
                 />
 
@@ -57,6 +58,15 @@ class WizardFirst extends Component {
                     component={TextField}
                     placeholder="活动费用/人"
                     className={classes.textField}
+                />
+                <Field
+                    fullWidth
+                    key="numberOfPeople"
+                    name="numberOfPeople"
+                    type="text"
+                    component={TextField}
+                    className={classes.textField}
+                    placeholder="你能接收的人数上限"
                 />
             </div>,
 

@@ -23,7 +23,8 @@ import ShareIcon from "material-ui-icons/Share";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "../../Pages/PageHeader";
-import test from "../../Assets/imgForTest/4.jpg";
+import defaultAvatar from "../../Assets/Images/defaultAvatar.png";
+import config from "../../config/config";
 
 const style = theme => ({
     media: {
@@ -37,30 +38,12 @@ const style = theme => ({
         verticalAlign: "-2px"
     },
 
-    button: {
-        // margin: theme.spacing.unit,
-        width: "50%",
-        color: "#fff",
-        lineHeight: 0.6,
-        height: 60,
-        borderRadius: 0,
-        fontSize: "1.5rem"
-    },
     root: {
         margin: theme.spacing.unit,
         backgroundColor: "#43A047",
         color: "#fff"
     },
-    btnGroup: {
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        width: "100%",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center"
-        // border:"1px solid green"
-    },
+
     editBar: {
         // border:"1px solid red",
         display: "flex",
@@ -98,7 +81,7 @@ const style = theme => ({
     },
     row: {
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "center"
     },
     avatar: {
         margin: 10
@@ -145,7 +128,9 @@ class WishDetails extends Component {
     }
     render() {
         const { classes, wish, match } = this.props;
-        if (wish && wish.hasOwnProperty("warning")) {
+        if (Object.keys(wish).length === 0) {
+            return null;
+        } else if (wish && wish.hasOwnProperty("warning")) {
             return (
                 <div>
                     <PageHeader history={this.props.history} title="愿望" />
@@ -160,7 +145,13 @@ class WishDetails extends Component {
                 <div className={classes.row}>
                     <Avatar
                         alt="tour guide"
-                        src={test}
+                        src={
+                            wish.userimageurl ? (
+                                config.BUCKET_URL + wish.userimageurl
+                            ) : (
+                                defaultAvatar
+                            )
+                        }
                         className={classNames(
                             classes.avatar,
                             classes.bigAvatar
@@ -206,6 +197,13 @@ class WishDetails extends Component {
                     </li>
 
                     <li>
+                        <div className={classes.detailTitle}>参加人数上限</div>
+                        <div className={classes.detailContent}>
+                            {wish.numberOfPeople} 人
+                        </div>
+                    </li>
+
+                    <li>
                         <div className={classes.detailTitle}>希望提供的服务</div>
                         <div className={classes.detailContent}>
                             {this.renderServices(wish.services)}
@@ -221,25 +219,6 @@ class WishDetails extends Component {
                         </div>
                     </li>
                 </ul>
-
-                <div className={classes.btnGroup}>
-                    <Button
-                        color="primary"
-                        style={{ backgroundColor: "#1976D2" }}
-                        raised
-                        className={classes.button}
-                    >
-                        我有兴趣
-                    </Button>
-                    <Button
-                        color="primary"
-                        style={{ backgroundColor: "#43A047" }}
-                        raised
-                        className={classes.button}
-                    >
-                        我想加入
-                    </Button>
-                </div>
             </div>
         );
     }

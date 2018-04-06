@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withStyles } from "material-ui/styles";
+import classNames from "classnames";
 import Button from "material-ui/Button";
 import gallery from "../Assets/Images/gallery.jpg";
 import { Link } from "react-router-dom";
 import * as actions from "../Actions";
 import PageHeader from "./PageHeader";
+import FriendComments from "./FriendComments";
 
 const styles = theme => ({
     innerWrapper: {
@@ -16,41 +18,52 @@ const styles = theme => ({
         width: "55%"
     },
     galleryWrapper: {
-        whiteSpace: "nowrap",
-        overflowX: "auto"
+        display: "flex",
+        flexFlow: "row wrap",
+        justifyContent: "space-between"
     },
+
+    gallary: {
+        position: "relative",
+        display:"flex",
+        flexFlow:"column",
+        justifyContent:"center",
+        alignItems:"center"
+    },
+
+    gallaryLayer: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "#fff",
+        opacity: 0.7,
+    },
+    checkAll:{
+        position: "absolute",
+        color:"#0D47A1",
+        border:"2px solid #0D47A1",
+        padding:"5px 20px",
+        letterSpacing:2,
+        borderRadius:15,
+    },
+
     imageFrame: {
-        display: "inline-block",
-        marginRight: 15,
-        height: 200,
-        width: 200
+        width: "calc(50% - 1px)",
+        marginBottom: 2
+        // border:"5px solid red"
+    },
+
+    imageWrapper: {
+        width: "100%",
+        maxWidth: "100%",
+        height: "100%",
+        maxHeight: "100%"
     },
 
     link: {
         color: "#337ab7"
-    },
-    fade: {
-        overflow: "hidden",
-        position: "relative",
-        height: "3.6em"
-    },
-    fadeHelper: {
-        textAlign: "right",
-        position: "absolute",
-        bottom: 0,
-        right: 0,
-        width: "70%",
-        height: "1.2em",
-        background:
-            "linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)"
-    },
-    toggler: {
-        marginTop:2,
-        alignSelf:"center",
-        color: "#fff",
-        backgroundColor:"#1976D2",
-        borderRadius:10,
-        width:100
     }
 });
 
@@ -61,7 +74,7 @@ class Story extends Component {
 
     componentWillMount() {
         const userId = this.props.match.params.userId;
-        this.props.fetchUser(userId);
+        this.props.fetchComments(userId);
     }
 
     render() {
@@ -73,81 +86,52 @@ class Story extends Component {
 
         return (
             <div className="wrapper">
-                <PageHeader history={this.props.history} title="我的旅行故事" />
-                <div className="flex-inner-wrapper">
-                    <div className={this.state.isExpanded ? "" : classes.fade}>
-                        我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行我爱旅行
-                        <span
-                            className={
-                                this.state.isExpanded ? "" : classes.fadeHelper
-                            }
-                        />
-                    </div>
-                    <button
-                        className={classes.toggler}
-                        onClick={() =>
-                            this.setState(prevState => ({
-                                isExpanded: !prevState.isExpanded
-                            }))}
-                    >
-                        {this.state.isExpanded ? "收回内容" : "展开全部"}
-                    </button>
-                </div>
-                <div className="gallery">
-                    <h4 style={{ textAlign: "center" }}>我的旅游相册，快来看看吧</h4>
+                <PageHeader history={this.props.history} title="我的圈子" />
+                <h4>我的相册</h4>
+                <div className={classes.gallary}>
+                    <div className={classes.gallaryLayer}/>
+                    <h2 className={classes.checkAll}>查看全部照片</h2>
+
                     <div className={classes.galleryWrapper}>
                         <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
                                 alt=""
-                                className="image-wrapper"
+                                className={classes.imageWrapper}
                             />
                         </div>
                         <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
                                 alt=""
-                                className="image-wrapper"
+                                className={classes.imageWrapper}
+                            />
+                        </div>
+
+                        <div className={classes.imageFrame}>
+                            <img
+                                src={gallery}
+                                alt=""
+                                className={classes.imageWrapper}
                             />
                         </div>
                         <div className={classes.imageFrame}>
                             <img
                                 src={gallery}
                                 alt=""
-                                className="image-wrapper"
-                            />
-                        </div>
-                        <div className={classes.imageFrame}>
-                            <img
-                                src={gallery}
-                                alt=""
-                                className="image-wrapper"
-                            />
-                        </div>
-                        <div className={classes.imageFrame}>
-                            <img
-                                src={gallery}
-                                alt=""
-                                className="image-wrapper"
+                                className={classes.imageWrapper}
                             />
                         </div>
                     </div>
                 </div>
-                <div className="flex-inner-wrapper">
-                    <Link
-                        to="/friendComments"
-                        className="unlink"
-                        style={{ textAlign: "center" }}
-                    >
-                        <h2 className={classes.link}>来看看小伙伴对我的评价吧</h2>
-                    </Link>
-                </div>
+                <FriendComments comments={user.comments}/>
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
+    console.log("!user", state.UserReducer)
     return {
         user: state.UserReducer
     };
