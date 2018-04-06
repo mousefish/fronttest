@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
 import Button from "material-ui/Button";
+import Avatar from "material-ui/Avatar";
 import AppBar from "material-ui/AppBar";
 import Tabs, { Tab } from "material-ui/Tabs";
+import logo from "../Assets/Images/logo.jpg";
 import backgroundWall from "../Assets/Images/backgroundWall.png";
 import wechat from "../Assets/Images/wechat.png";
 
@@ -36,7 +38,7 @@ const styles = {
 
     wechatBtn: {
         color: "#43A047",
-        border: "1px solid #43A047",
+        border: "1px solid #43A047"
     },
     wechatBtnInner: {
         display: "flex",
@@ -50,18 +52,18 @@ const styles = {
         width: 30,
         maxWidth: "100%",
         maxHeight: "100%",
-        marginRight:5
+        marginRight: 5
     },
 
     upper: {
         position: "relative",
         display: "flex",
         flexFlow: "column",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
         height: 350,
         background: `url(${backgroundWall})`,
-        padding: "10px 10px 10px 10px",
+        paddingTop: 40,
         textAlign: "center"
     },
     overlay: {
@@ -83,10 +85,12 @@ const styles = {
         marginBottom: 20,
         fontWeight: "bold"
     },
-    intro: {
+    slogan: {
         color: "#fff",
         fontSize: "1.2rem",
-        lineHeight: 1.8
+        lineHeight: 1.8,
+        fontWeight:"bold",
+        textAlign:"center",
     },
 
     image: {
@@ -96,19 +100,23 @@ const styles = {
     tab: {
         letterSpacing: 2,
         backgroundColor: "#1976D2"
-    }
+    },
 
-    // logoWrapper: {
-    //     textAlign: "center",
-    //     // border: "1px solid red",
-    //     marginBottom: -25,
-    //     zIndex:-100
-    // },
+    avatar: {
+        margin: 10
+    },
 
-    // logo: {
-    //     maxWidth: 90,
-    //     zIndex:-100
-    // },
+    bigAvatar: {
+        width: 100,
+        height: 100,
+    },
+
+    logoWrapper: {
+     display:"flex",
+     flexFlow:"column",
+     justifyContent:"center",
+     alignItems:"center",
+    },
 };
 class OpenPage extends Component {
     state = {
@@ -127,11 +135,18 @@ class OpenPage extends Component {
                 <div className={classes.upper}>
                     <div className={classes.overlay} />
                     <div className={classes.inner}>
-                        <h2 className={classes.title}>什么是旅行？</h2>
-                        <p className={classes.intro}>
-                            在携U行的定义里，旅行就是像本地人一样去体验，热爱一个城市。没有走马观花，没有强迫消费，有的只是涤荡灵魂，深入骨髓的文化撞击，和地道真实的生活体验。
-                            携U行的唯一使命就是去创造毕生难忘的深度体验。
-                        </p>
+                        <div className={classes.logoWrapper}>
+                            <Avatar
+                                alt="utrip logo"
+                                src={logo}
+                                className={classNames(
+                                    classes.avatar,
+                                    classes.bigAvatar,
+                                )}
+                            />
+                             <p className={classes.slogan}>创造毕生难忘的深度体验</p>
+                        </div>
+
                     </div>
                 </div>
                 <div>
