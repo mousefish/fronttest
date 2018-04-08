@@ -144,7 +144,7 @@ class OpenPage extends Component {
                                     classes.bigAvatar,
                                 )}
                             />
-                             <p className={classes.slogan}>创造毕生难忘的深度体验</p>
+                             <p className={classes.slogan}>你与世界之间，只差一个携U行的距离</p>
                         </div>
 
                     </div>
