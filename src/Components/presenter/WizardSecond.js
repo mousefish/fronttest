@@ -11,7 +11,8 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { FormControlLabel } from "material-ui/Form";
 import PageHeader from "../../Pages/PageHeader";
 import AutocompleteField from "../../Components/container/AutocompleteField";
-
+import popupSearchMultiServices from "../../Components/container/popupSearchMultiServices";
+import languages from "../../Data/languages";
 const styles = theme => ({
   progress: {
     width: "95%",
@@ -25,7 +26,7 @@ const styles = theme => ({
 
   button: {
     width: "95%",
-    backgroundColor:"#1976D2"
+    backgroundColor: "#1976D2"
   },
 
   radioInner: {
@@ -33,7 +34,7 @@ const styles = theme => ({
     display: "flex",
     flexFlow: "row nowrap",
     justifyContent: "flex-start",
-    marginTop:5,
+    marginTop: 5
     // border:"1px solid red"
   }
 });
@@ -55,11 +56,11 @@ class wizardSecond extends Component {
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
         <PageHeader onClick={previousPage} title="个人基本资料" />
-         <LinearProgress
-            className={classes.progress}
-            mode="determinate"
-            value={this.state.completed}
-          />
+        <LinearProgress
+          className={classes.progress}
+          mode="determinate"
+          value={this.state.completed}
+        />
         <div className="form-group">
           <Field
             className={classes.textField}
@@ -83,7 +84,7 @@ class wizardSecond extends Component {
           <Field
             className={classes.textField}
             name="age"
-            type="number"
+            type="text"
             component={AutocompleteField}
             placeholder="年龄范围，按提示列表选择"
             props={this.props}
@@ -104,11 +105,26 @@ class wizardSecond extends Component {
           <Field
             className={classes.textField}
             name="yearOfLiving"
-            type="number"
-            component={TextField}
+            type="text"
+            component={AutocompleteField}
             label="当前居住城市年限"
+            placeholder="当前居住的城市的年限，按提示列表选择"
+            props={this.props}
+            marker="year"
           />
 
+          <div style={{marginTop:10}}>
+            <h4 className="category-title">掌握的语言</h4>
+            <Field
+              className={classes.textField}
+              key="language"
+              name="language"
+              component={popupSearchMultiServices}
+              data={languages}
+              label="掌握的语言"
+              type="text"
+            />
+          </div>
         </div>
 
         <div className="centralize-button">

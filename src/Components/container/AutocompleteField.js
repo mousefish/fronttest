@@ -7,6 +7,7 @@ import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import data from "../../Data/cities";
 import ages from "../../Data/ages";
+import years from "../../Data/yearOfLiving";
 
 const provinces = data.provinces;
 const renderInput = inputProps => {
@@ -107,12 +108,25 @@ const getAges = inputValue => {
   return result;
 };
 
+const getYears = inputValue=>{
+  let result = [];
+  for (let i = 0; i < years.length; i++) {
+    if (!inputValue || years.includes(inputValue)) {
+      result.push(years[i]);
+    }
+  }
+  return result;
+}
+
 const renderSelectionList = (inputValue, marker )=> {
   if (marker === "age") {
     return getAges(inputValue);
   }
   if (marker === "loc") {
     return getCitys(inputValue);
+  }
+  if(marker === "year"){
+    return getYears(inputValue)
   }
 };
 

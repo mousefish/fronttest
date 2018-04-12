@@ -96,12 +96,6 @@ const validate = values => {
   if (values.theme && values.theme.length > 15) {
     errors.theme = "字数不能超过15";
   }
-  if (
-    Number.isNaN(Number(values.yearOfLiving)) ||
-    Number(values.yearOfLiving) <= 0
-  ) {
-    errors.yearOfLiving = "请输入有效年限";
-  }
 
   if (values.note && values.note.length > 300) {
     errors.note = "字数不能超过300";

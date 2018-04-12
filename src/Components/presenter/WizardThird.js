@@ -67,13 +67,6 @@ class wizardThird extends Component {
             label="毕业专业"
           />
 
-          <Field
-            className={classes.textField}
-            name="language"
-            type="text"
-            component={TextField}
-            label="掌握的语言种类"
-          />
 
           <Field
             className={classes.textField}
