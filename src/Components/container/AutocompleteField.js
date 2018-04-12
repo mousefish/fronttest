@@ -2,11 +2,11 @@ import React from "react";
 import Paper from "material-ui/Paper";
 import { MenuItem } from "material-ui/Menu";
 import Downshift from "downshift";
-
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import data from "../../Data/cities";
+import ages from "../../Data/ages";
 
 const provinces = data.provinces;
 const renderInput = inputProps => {
@@ -19,17 +19,16 @@ const renderInput = inputProps => {
         classes: {
           input: classes.input
         },
-        ...InputProps,
-
+        ...InputProps
       }}
       style={{ paddingTop: 8, marginBottom: 8 }}
     />
   );
 };
 
-const renderCity = (params, props) => {
+const renderItem = (params, props) => {
   const {
-    city,
+    item,
     index,
     itemProps,
     highlightedIndex,
@@ -37,25 +36,25 @@ const renderCity = (params, props) => {
     onClick
   } = params;
   const isHighlighted = highlightedIndex === index;
-  const isSelected = selectedItem === city;
+  const isSelected = selectedItem === item;
   if (props.onClick) {
     return (
       <div
-        key={city}
+        key={item}
         onClick={() => {
-          props.onClick(city);
+          props.onClick(item);
         }}
       >
         <MenuItem
           {...itemProps}
-          key={city}
+          key={item}
           selected={isHighlighted}
           component="div"
           style={{
             fontWeight: isSelected ? 500 : 400
           }}
         >
-          {city}
+          {item}
         </MenuItem>
       </div>
     );
@@ -63,14 +62,14 @@ const renderCity = (params, props) => {
     return (
       <MenuItem
         {...itemProps}
-        key={city}
+        key={item}
         selected={isHighlighted}
         component="div"
         style={{
           fontWeight: isSelected ? 500 : 400
         }}
       >
-        {city}
+        {item}
       </MenuItem>
     );
   }
@@ -98,8 +97,27 @@ const getCitys = inputValue => {
   return result;
 };
 
+const getAges = inputValue => {
+  let result = [];
+  for (let i = 0; i < ages.length; i++) {
+    if (!inputValue || ages.includes(inputValue)) {
+      result.push(ages[i]);
+    }
+  }
+  return result;
+};
+
+const renderSelectionList = (inputValue, marker )=> {
+  if (marker === "age") {
+    return getAges(inputValue);
+  }
+  if (marker === "loc") {
+    return getCitys(inputValue);
+  }
+};
+
 const autocompleteField = props => {
-  const { classes, placeholder, defaultValue } = props;
+  const { classes, placeholder, defaultValue, marker, ...rest } = props;
 
   return (
     <Downshift defaultSelectedItem={defaultValue}>
@@ -123,18 +141,19 @@ const autocompleteField = props => {
           })}
           {isOpen ? (
             <Paper square style={{ marginTop: -8 }}>
-              {getCitys(inputValue).map((city, index) =>
-                renderCity(
+              {renderSelectionList(inputValue, marker).map((item, index) =>
+                renderItem(
                   {
-                    city,
+                    item,
                     index,
-                    itemProps: getItemProps({ item: city }),
+                    itemProps: getItemProps({ item }),
                     highlightedIndex,
                     selectedItem
                   },
                   props
                 )
               )}
+
             </Paper>
           ) : null}
 

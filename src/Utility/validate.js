@@ -82,12 +82,6 @@ const validate = values => {
 
   // *******************date validation
 
-  if (Number.isNaN(Number(values.age)) || Number(values.age) <= 0) {
-    errors.age = "请输入有效年龄";
-  } else if (Number(values.age) < 18) {
-    errors.age = "您必须满18岁";
-  }
-
   if (Number.isNaN(parseInt(values.budget)) || parseInt(values.budget) <= 0) {
     errors.budget = "请输入有效数字";
   }

@@ -46,7 +46,7 @@ class WizardFirst extends Component {
                     name="location"
                     type="text"
                     component={AutocompleteField}
-                    placeholder="活动所在的国家和城市,按提示列表选择"
+                    placeholder="活动所在的城市,按提示列表选择"
                     props={this.props}
                 />
 

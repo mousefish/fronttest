@@ -35,13 +35,22 @@ class wizardThird extends Component {
 
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
-        <PageHeader onClick={previousPage} title="其他信息" />
+        <PageHeader onClick={previousPage} title="选填信息" />
         <LinearProgress
           className={classes.progress}
           mode="determinate"
           value={this.state.completed}
         />
         <div className="form-group">
+
+          <Field
+            className={classes.textField}
+            name="hometown"
+            type="text"
+            component={TextField}
+            label="老家城市"
+          />
+
           <Field
             className={classes.textField}
             name="school"

@@ -10,6 +10,7 @@ import { withStyles } from "material-ui/styles";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { FormControlLabel } from "material-ui/Form";
 import PageHeader from "../../Pages/PageHeader";
+import AutocompleteField from "../../Components/container/AutocompleteField";
 
 const styles = theme => ({
   progress: {
@@ -83,16 +84,21 @@ class wizardSecond extends Component {
             className={classes.textField}
             name="age"
             type="number"
-            component={TextField}
-            label="年龄"
+            component={AutocompleteField}
+            placeholder="年龄范围，按提示列表选择"
+            props={this.props}
+            label="年龄范围"
+            marker="age"
           />
 
           <Field
             className={classes.textField}
             name="city"
             type="text"
-            component={TextField}
-            label="当前居住城市"
+            component={AutocompleteField}
+            placeholder="当前居住的城市，按提示列表选择"
+            props={this.props}
+            marker="loc"
           />
 
           <Field
@@ -103,13 +109,6 @@ class wizardSecond extends Component {
             label="当前居住城市年限"
           />
 
-          <Field
-            className={classes.textField}
-            name="hometown"
-            type="text"
-            component={TextField}
-            label="老家城市"
-          />
         </div>
 
         <div className="centralize-button">

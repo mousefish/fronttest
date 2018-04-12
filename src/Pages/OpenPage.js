@@ -13,7 +13,7 @@ import wechat from "../Assets/Images/wechat.png";
 const styles = {
     container: {
         width: "100%",
-        maxWidth: 600,
+        maxWidth: 400,
         margin: "auto"
     },
 
