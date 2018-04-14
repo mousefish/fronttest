@@ -131,7 +131,7 @@ const renderSelectionList = (inputValue, marker )=> {
 };
 
 const autocompleteField = props => {
-  const { classes, placeholder, defaultValue, marker, ...rest } = props;
+  const { classes, placeholder, defaultValue, marker, id, ...rest } = props;
 
   return (
     <Downshift defaultSelectedItem={defaultValue}>
@@ -149,7 +149,7 @@ const autocompleteField = props => {
             classes,
             InputProps: getInputProps({
               placeholder: placeholder,
-              id: "integration-downshift"
+              id: id
             }),
             ...props.input
           })}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import PageNotFound from "./Pages/404Page";
+import SignupForm from "./Components/container/SignupForm";
 import SignupWizard from "./Components/container/SignupWizard";
 import { ToastContainer } from "react-toastify";
 import Button from "material-ui/Button";
@@ -302,7 +303,8 @@ class App extends Component {
 
             {/*unit test used below, production will check env.production to disable*/}
 
-            <Route path="/signup" component={SignupWizard} />
+            <Route path="/signup" component={SignupForm} />
+            <Route path="/completeUserProfile" component={RequireAuth(SignupWizard)} />
             <Route path="/login" component={LoginForm} />
             <Route component={PageNotFound} />
           </Switch>

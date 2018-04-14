@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR, FETCH_COMMENTS } from "../Actions/types";
 
-const INITIAL_STATE = {basicInfo:{}, err:"", comments:[]};
+const INITIAL_STATE = {basicInfo:{}, err:"", comments:[], msg:""};
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
@@ -12,15 +12,7 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, basicInfo:action.payload}
 
         case UPDATE_USER_BASIC:
-            if(typeof action.payload !== "string"){
-                let key = action.payload[0]
-                let value = action.payload[1];
-                let newBasicInfo = Object.assign({}, state.basicInfo);
-                newBasicInfo[key] = value;
-                return {...state, basicInfo:newBasicInfo, err:""}
-            }else{
-                return {...state, err:action.payload}
-            }
+            return {...state, msg:action.payload}
 
         case INPUT_ERROR:
            return {...state, err:action.payload}

@@ -3,7 +3,6 @@ import { Field, reduxForm } from "redux-form";
 import validate from "../../Utility/validate";
 import { TextField } from "redux-form-material-ui";
 import Button from "material-ui/Button";
-
 import { withStyles } from "material-ui/styles";
 import { LinearProgress } from "material-ui/Progress";
 import { Link } from "react-router-dom";
@@ -60,7 +59,7 @@ class LoginForm extends Component {
             type="password"
             component={PasswordSetVisibility}
             className="text-field"
-            label="输入密码 - 六位数"
+            label="输入 8 — 25 位密码"
             props={this.props}
             className={classes.textField}
           />

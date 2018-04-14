@@ -17,7 +17,6 @@ import services from "../Data/services";
 import ConfirmDelete from "./ConfirmDelete";
 import RegisterDialog from "./RegisterDialog";
 import config from "../config/config";
-
 import FileInput from "./AddActivity/FileInput";
 import defaultBG from "../Assets/Images/defaultBG.png";
 

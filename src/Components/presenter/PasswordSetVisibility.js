@@ -20,12 +20,12 @@ class InputAdornments extends Component {
     };
 
     render() {
-        const {input, meta:{touched, error}} = this.props;
+        const {input, placeholder, meta:{touched, error}} = this.props;
         return (
            <div>
             <Input
                 style={{width:"100%"}}
-                placeholder="输入密码"
+                placeholder={placeholder}
                 {...this.props.input}
                 id="adornment-password"
                 type={this.state.showPassword ? "text" : "password"}

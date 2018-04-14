@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
 import validate from "../../Utility/validate";
 import Radio from "material-ui/Radio";
 import { RadioGroup, TextField } from "redux-form-material-ui";
@@ -10,9 +11,16 @@ import { withStyles } from "material-ui/styles";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { FormControlLabel } from "material-ui/Form";
 import PageHeader from "../../Pages/PageHeader";
+
+import FileInput from "../../Pages/AddActivity/FileInput";
+import defaultAvatar from "../../Assets/Images/defaultAvatar.png";
+
 import AutocompleteField from "../../Components/container/AutocompleteField";
 import popupSearchMultiServices from "../../Components/container/popupSearchMultiServices";
 import languages from "../../Data/languages";
+import config from "../../config/config";
+import * as actions from "../../Actions";
+
 const styles = theme => ({
   progress: {
     width: "95%",
@@ -36,6 +44,20 @@ const styles = theme => ({
     justifyContent: "flex-start",
     marginTop: 5
     // border:"1px solid red"
+  },
+  imageWrapper: {
+    marginTop: 20,
+    position: "relative",
+    height: 128,
+    width: 128
+  },
+
+  image: {
+    flex: 1,
+    maxWidth: "100%",
+    height: 128,
+    maxHeight: 128
+    // border: "1px solid red"
   }
 });
 
@@ -48,28 +70,70 @@ const renderError = ({ meta: { touched, error } }) =>
 
 class wizardSecond extends Component {
   state = {
-    completed: 50
+    completed: 50,
+    showCrop: true,
+    showIcon: false
   };
+  onGetImgUrl(file) {
+    this.props.replaceWithNewImg(0, file);
+  }
+
+  async onCropImageObject(keyforUrl, width, height, x, y) {
+    const { user } = this.props;
+    let oldImageurl = user.basicInfo.imageurl ? user.basicInfo.imageurl : null;
+    await this.props.cropImageObj(
+      oldImageurl,
+      null,
+      0,
+      keyforUrl,
+      width,
+      height,
+      x,
+      y
+    );
+    await this.props.fetchUser(0);
+    setTimeout(() => {
+      this.setState({
+        showCrop: false,
+        showIcon: true
+      });
+    }, 1000);
+  }
   render() {
     const { handleSubmit, previousPage } = this.props;
-    const { classes } = this.props;
+    const { classes, user } = this.props;
+
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
-        <PageHeader onClick={previousPage} title="个人基本资料" />
+        <PageHeader onClick={previousPage} title="完善个人基本资料" />
         <LinearProgress
           className={classes.progress}
           mode="determinate"
           value={this.state.completed}
         />
         <div className="form-group">
-          <Field
-            className={classes.textField}
-            name="username"
-            type="text"
-            component={TextField}
-            label="用户名"
-          />
+          <div className={classes.imageWrapper}>
+            <img
+              className={classes.image}
+              src={
+                user.basicInfo.imageurl ? (
+                  config.BUCKET_URL + user.basicInfo.imageurl
+                ) : (
+                  defaultAvatar
+                )
+              }
+            />
 
+            <FileInput
+              purpose="avatar"
+              onGetImgUrl={file => this.onGetImgUrl(file)}
+              onCropImageObject={(keyforUrl, width, height, x, y) =>
+                this.onCropImageObject(keyforUrl, width, height, x, y)}
+              showCrop={this.state.showCrop}
+              showIcon={this.state.showIcon}
+            />
+            {this.props.error}
+          </div>
           <Field
             name="sex"
             component={RadioGroup}
@@ -113,7 +177,7 @@ class wizardSecond extends Component {
             marker="year"
           />
 
-          <div style={{marginTop:10}}>
+          <div style={{ marginTop: 10 }}>
             <h4 className="category-title">掌握的语言</h4>
             <Field
               className={classes.textField}
@@ -143,9 +207,16 @@ class wizardSecond extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  // console.log(state.UserReducer);
+  return {
+    user: state.UserReducer
+  };
+};
+
 export default reduxForm({
   form: "wizard",
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
-})(withStyles(styles)(wizardSecond));
+})(withStyles(styles)(connect(mapStateToProps, actions)(wizardSecond)));

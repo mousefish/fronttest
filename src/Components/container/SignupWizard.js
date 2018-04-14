@@ -3,17 +3,14 @@ import { connect } from "react-redux";
 import * as actions from "../../Actions";
 import { withRouter } from "react-router";
 import PropTypes from "prop-types";
-import WizardFirst from "../presenter/WizardFirst";
 import WizardSecond from "../presenter/WizardSecond";
 import WizardThird from "../presenter/WizardThird";
-import WizardFourth from "../presenter/WizardFourth";
 
 
 class SignupWizard extends Component {
   constructor(props) {
     super(props);
     this.nextPage = this.nextPage.bind(this);
-    this.verifyEmail = this.verifyEmail.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
@@ -24,25 +21,17 @@ class SignupWizard extends Component {
     this.setState({ page: this.state.page + 1 });
   }
 
-  // the email is not valid, then the user cannot go to the next page!
-  verifyEmail(value) {
-    let p = new Promise((resolve, reject) => {
-      resolve(this.props.verifySignupEmail({ email: value.email }));
-    });
-    return p.then(() => {
-      if (this.props.canGo) {
-        this.nextPage();
-      }
-    });
-  }
-
   previousPage() {
     this.setState({ page: this.state.page - 1 });
   }
 
   handleSubmit(values) {
-    // console.log("submit", values);
-    this.props.userSignupRequest(values, this.props.history);
+    if(Object.keys(values).length === 0){
+        this.props.history.push('/activity');
+        return null;
+    }
+     console.log("submit", values);
+    this.props.completeUserProfile(values, this.props.history);
   }
 
   render() {
@@ -50,30 +39,20 @@ class SignupWizard extends Component {
     const { page } = this.state;
     return (
       <div>
+
         {page === 1 && (
-          <WizardFirst
-            history={this.props.history}
-            onSubmit={this.verifyEmail}
-          />
-        )}
-        {page === 2 && (
           <WizardSecond
             previousPage={this.previousPage}
             onSubmit={this.nextPage}
           />
         )}
-        {page === 3 && (
+        {page === 2 && (
           <WizardThird
-            previousPage={this.previousPage}
-            onSubmit={this.nextPage}
-          />
-        )}
-        {page === 4 && (
-          <WizardFourth
             previousPage={this.previousPage}
             onSubmit={this.handleSubmit}
           />
         )}
+
         <div className="input-error" style={{ textAlign: "center" }}>
           {this.props.errorMsg}
         </div>
@@ -85,7 +64,6 @@ class SignupWizard extends Component {
 // SignUpWizard.propTypes = {
 //   onSubmit: PropTypes.func.isRequired
 // };
-
 const mapStateToProps = state => {
   return {
     errorMsg: state.UserAuth.error,
