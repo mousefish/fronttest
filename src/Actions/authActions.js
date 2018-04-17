@@ -24,8 +24,6 @@ export const userSignupRequest = (userData, history) => async dispatch => {
     const res = await axios.post(`${ROOT_URL}/api/signup`, userData);
     if (res.data.token) {
       localStorage.setItem("jwtToken", res.data.token);
-      // store the user info for visiting basic info later, my story, those items under my account later
-      localStorage.setItem("userName", res.data.userName);
       dispatch({
         type: AUTH_USER
       });
@@ -50,7 +48,7 @@ export const completeUserProfile = (value, history) => async dispatch => {
       dispatch({
         type: AUTH_USER
       });
-      // history.push("/completeUserProfile");
+      history.push("/activity");
     } else {
       dispatch(authError(res.data));
     }
@@ -64,9 +62,6 @@ export const userLogin = (userData, history) => async dispatch => {
     const res = await axios.post(`${ROOT_URL}/api/login`, userData);
 
     localStorage.setItem("jwtToken", res.data.token);
-    // store the user info for visiting basic info later, my story, those items under my account later
-    localStorage.setItem("userName", res.data.userName);
-
     dispatch({
       type: AUTH_USER
     });

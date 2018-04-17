@@ -94,7 +94,7 @@ const styles = {
     },
 
     image: {
-        width: "50%"
+        width: "50%",
     },
 
     tab: {
@@ -103,12 +103,13 @@ const styles = {
     },
 
     avatar: {
-        margin: 10
+        margin: 10,
     },
 
     bigAvatar: {
         width: 100,
         height: 100,
+
     },
 
     logoWrapper: {

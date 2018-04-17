@@ -1,13 +1,13 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
 import Avatar from "material-ui/Avatar";
-import pic from "../Assets/Images/logo.jpg";
+import logo from "../Assets/Images/logo.jpg";
 
 const styles = theme => ({
     avatar: {
         width: 70,
         height: 70,
-        boxShadow:"2px 2px 5px #fff"
+        // boxShadow:"2px 2px 5px #fff"
     },
 
     myHeader: {
@@ -34,7 +34,7 @@ const MyAccountLoggedinHeader = props => {
     const { classes } = props;
     return (
         <div className={classes.myHeader}>
-            <Avatar alt="profile" src={pic} className={classes.avatar} />
+            <Avatar alt="logo" src={logo} className={classes.avatar} />
             <div className={classes.myHeaderRight}>欢迎你！{props.userName}</div>
         </div>
     );

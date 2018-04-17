@@ -35,6 +35,9 @@ class MyAccount extends Component {
         open: false
     };
 
+    componentWillMount() {
+        this.props.fetchUser(0);
+    }
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -89,12 +92,11 @@ class MyAccount extends Component {
 
     renderMyHeader() {
         let token = localStorage.getItem("jwtToken");
-        const userName  = localStorage.getItem("userName");
+        const { user } = this.props;
         if (token) {
             return (
                 <MyAccountLoggedinHeader
-                    history={this.props.history} userName={userName}
-
+                    userName={user.username}
                 />
             );
         } else {
@@ -138,8 +140,12 @@ class MyAccount extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        user: state.UserReducer.basicInfo
+    };
+};
 
-
-export default connect(null, actions)(
+export default connect(mapStateToProps, actions)(
     withStyles(styles)(withRouter(MyAccount))
 );
