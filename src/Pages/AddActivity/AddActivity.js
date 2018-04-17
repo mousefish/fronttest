@@ -29,6 +29,7 @@ class AddActivity extends Component {
     }
 
     handleSubmit(values) {
+        // console.log("values", values)
         let depart = new Date(values.departdate.replace(/年|月|日/g, "/"));
         let finish = new Date(values.finishdate.replace(/年|月|日/g, "/"));
         let departUTC = depart.toUTCString();
