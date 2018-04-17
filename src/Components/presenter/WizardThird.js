@@ -18,10 +18,7 @@ const styles = theme => ({
     width: "95%",
     backgroundColor: "#1976D2"
   },
-  textField: {
-    padding: "8px 0"
-    // border: "1px solid blue"
-  }
+
 });
 
 class wizardThird extends Component {
@@ -35,7 +32,7 @@ class wizardThird extends Component {
 
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
-        <PageHeader onClick={previousPage} title="其他信息" />
+        <PageHeader onClick={previousPage} title="完善个人基本资料" />
         <LinearProgress
           className={classes.progress}
           mode="determinate"
@@ -43,43 +40,28 @@ class wizardThird extends Component {
         />
         <div className="form-group">
           <Field
-            className={classes.textField}
             name="school"
             type="text"
             component={TextField}
-            label="毕业院校"
+            label="毕业或在读院校"
           />
 
           <Field
-            className={classes.textField}
-            name="major"
+            name="occupation"
             type="text"
             component={TextField}
-            label="毕业专业"
+            label="职业：学生，公务员，导游，自由职业......"
           />
 
           <Field
-            className={classes.textField}
-            name="language"
+            name="bio"
             type="text"
             component={TextField}
-            label="掌握的语言种类"
-          />
-
-          <Field
-            className={classes.textField}
-            name="hobby"
-            type="text"
-            component={TextField}
-            label="爱好"
-          />
-
-          <Field
-            className={classes.textField}
-            name="personality"
-            type="text"
-            component={TextField}
-            label="性格"
+            id="multiline-flexible"
+            multiline
+            rowsMax="4"
+            placeholder="关于我的个人介绍"
+            label="100字以内个人介绍：逗逼铲屎官，爱狗子，爱生活"
           />
         </div>
         <div className="centralize-button">
@@ -90,7 +72,7 @@ class wizardThird extends Component {
             className={classes.button}
             id="btn"
           >
-            下一步
+            提交
           </Button>
         </div>
       </form>

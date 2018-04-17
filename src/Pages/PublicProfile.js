@@ -36,7 +36,7 @@ const styles = theme => ({
         flexFlow: "row nowrap",
         justifyContent: "flex-start",
         paddingBottom: 10,
-        paddingLeft:10
+        paddingLeft: 10
     },
 
     myHeaderRight: {
@@ -87,7 +87,8 @@ const styles = theme => ({
 
     highlight: {
         fontSize: "1.2rem",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginTop:20
     }
 });
 
@@ -120,7 +121,13 @@ class PublicProfile extends Component {
                     <div className={classes.myHeader}>
                         <Avatar
                             alt="profile"
-                            src={user.imageurl ? config.BUCKET_URL + user.imageurl: defaultAvatar}
+                            src={
+                                user.imageurl ? (
+                                    config.BUCKET_URL + user.imageurl
+                                ) : (
+                                    defaultAvatar
+                                )
+                            }
                             className={classes.avatar}
                         />
                         <div className={classes.myHeaderRight}>
@@ -159,15 +166,16 @@ class PublicProfile extends Component {
                 </div>
                 <div className="wrapper">
                     <div>
-                        {user.sex}，{user.age}岁， 爱好{user.hobby}， 老家{user.hometown}，
+                        <span>{user.sex ? user.sex : ""}</span>{" "}
+                        <span>{user.age ? user.age + "岁" : ""}</span>{" "}
                         <span className={classes.highlight}>
-                            {user.language}
-                        </span>，
-                        {user.school}
-                        {user.major}毕业，
-                        <span className={classes.highlight}>
-                            {user.personality}
-                        </span>
+                            {user.language ? "懂" + user.language : ""}
+                        </span>{" "}
+                        <span>{user.school ? user.school+"毕业/在读" : ""}</span>{" "}
+                        <span> {user.occupation ? user.occupation : ""}</span>
+                        <div className={classes.highlight}>
+                            {user.bio ? user.bio : "还没有个人介绍"}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -176,7 +184,7 @@ class PublicProfile extends Component {
 }
 
 const mapStateToProps = state => {
-    // console.log("here", state.UserReducer.basicInfo.imageurl);
+    console.log("here", state.UserReducer.basicInfo);
     return {
         user: state.UserReducer.basicInfo
     };

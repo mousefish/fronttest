@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
+import _ from "lodash";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
 import * as actions from "../Actions";
 import PageHeader from "./PageHeader";
 import Button from "material-ui/Button";
-
 import validate from "../Utility/validate";
 import popupSearchDateField from "../Components/container/popupSearchDateField";
 import popupSearchMultiServices from "../Components/container/popupSearchMultiServices";
@@ -17,7 +17,6 @@ import services from "../Data/services";
 import ConfirmDelete from "./ConfirmDelete";
 import RegisterDialog from "./RegisterDialog";
 import config from "../config/config";
-
 import FileInput from "./AddActivity/FileInput";
 import defaultBG from "../Assets/Images/defaultBG.png";
 
@@ -107,23 +106,29 @@ class EditActivityPanel extends Component {
 
         let edittedValues = {};
         keys.forEach(item => {
-            if (edit[item] !== values[item]) {
-                if (item === "departdate") {
-                    let depart = new Date(
-                        values.departdate.replace(/年|月|日/g, "/")
-                    );
-
-                    let departUTC = depart.toUTCString();
-                    edittedValues[item] = departUTC;
-                } else if (item === "finishdate") {
-                    let finish = new Date(
-                        values.finishdate.replace(/年|月|日/g, "/")
-                    );
-
-                    let finishUTC = finish.toUTCString();
-                    edittedValues[item] = finishUTC;
-                } else {
+            if (item === "services") {
+                if (_.isEqual(edit[item], values[item]) === false) {
                     edittedValues[item] = values[item];
+                }
+            } else {
+                if (edit[item] !== values[item]) {
+                    if (item === "departdate") {
+                        let depart = new Date(
+                            values.departdate.replace(/年|月|日/g, "/")
+                        );
+
+                        let departUTC = depart.toUTCString();
+                        edittedValues[item] = departUTC;
+                    } else if (item === "finishdate") {
+                        let finish = new Date(
+                            values.finishdate.replace(/年|月|日/g, "/")
+                        );
+
+                        let finishUTC = finish.toUTCString();
+                        edittedValues[item] = finishUTC;
+                    } else {
+                        edittedValues[item] = values[item];
+                    }
                 }
             }
         });

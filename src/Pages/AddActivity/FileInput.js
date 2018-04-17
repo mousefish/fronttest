@@ -16,7 +16,7 @@ class FileInput extends Component {
             position: "absolute",
             top: "40%",
             left: "calc(50% - 25px)",
-            color: "#fff"
+            color: "#fff",
           }}
         >
           <IconButton aria-label="upload image">

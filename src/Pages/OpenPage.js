@@ -13,7 +13,7 @@ import wechat from "../Assets/Images/wechat.png";
 const styles = {
     container: {
         width: "100%",
-        maxWidth: 600,
+        maxWidth: 400,
         margin: "auto"
     },
 
@@ -94,7 +94,7 @@ const styles = {
     },
 
     image: {
-        width: "50%"
+        width: "50%",
     },
 
     tab: {
@@ -103,12 +103,13 @@ const styles = {
     },
 
     avatar: {
-        margin: 10
+        margin: 10,
     },
 
     bigAvatar: {
         width: 100,
         height: 100,
+
     },
 
     logoWrapper: {
@@ -144,7 +145,7 @@ class OpenPage extends Component {
                                     classes.bigAvatar,
                                 )}
                             />
-                             <p className={classes.slogan}>创造毕生难忘的深度体验</p>
+                             <p className={classes.slogan}>你与世界之间，只差一个携U行的距离</p>
                         </div>
 
                     </div>

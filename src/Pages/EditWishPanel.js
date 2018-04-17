@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import _ from "lodash";
 import { reduxForm, Field } from "redux-form";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
@@ -72,7 +73,6 @@ class EditWishPanel extends Component {
     }
 
     submitForm(values) {
-
         const keys = [
             "location",
             "budget",
@@ -86,24 +86,29 @@ class EditWishPanel extends Component {
         const { wishId } = this.props.match.params;
         let edittedValues = {};
         keys.forEach(item => {
-            if (edit[item] !== values[item]) {
-
-                if (item === "departdate") {
-                    let depart = new Date(
-                        values.departdate.replace(/年|月|日/g, "/")
-                    );
-
-                    let departUTC = depart.toUTCString();
-                    edittedValues[item] = departUTC;
-                } else if (item === "finishdate") {
-                    let finish = new Date(
-                        values.finishdate.replace(/年|月|日/g, "/")
-                    );
-
-                    let finishUTC = finish.toUTCString();
-                    edittedValues[item] = finishUTC;
-                } else {
+            if (item === "services") {
+                if (_.isEqual(edit[item], values[item]) === false) {
                     edittedValues[item] = values[item];
+                }
+            } else {
+                if (edit[item] !== values[item]) {
+                    if (item === "departdate") {
+                        let depart = new Date(
+                            values.departdate.replace(/年|月|日/g, "/")
+                        );
+
+                        let departUTC = depart.toUTCString();
+                        edittedValues[item] = departUTC;
+                    } else if (item === "finishdate") {
+                        let finish = new Date(
+                            values.finishdate.replace(/年|月|日/g, "/")
+                        );
+
+                        let finishUTC = finish.toUTCString();
+                        edittedValues[item] = finishUTC;
+                    } else {
+                        edittedValues[item] = values[item];
+                    }
                 }
             }
         });
@@ -132,7 +137,6 @@ class EditWishPanel extends Component {
         } else if (edit.hasOwnProperty("warning")) {
             return <div style={{ textAlign: "center" }}>{edit.warning}</div>;
         }
-
 
         return (
             <div style={{ marginBottom: 60 }}>

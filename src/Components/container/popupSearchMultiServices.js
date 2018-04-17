@@ -9,6 +9,7 @@ const popupSearchMultiServices = ({
     data,
     valueField,
     textField,
+    placeholder,
     meta: { error, touched }
 }) => {
     return (
@@ -24,6 +25,7 @@ const popupSearchMultiServices = ({
                 data={data}
                 valueField={valueField}
                 textField={textField}
+                placeholder={placeholder}
             />
             <div className="input-error">{touched && error}</div>
         </div>

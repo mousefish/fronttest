@@ -14,16 +14,18 @@ const validate = values => {
     "email",
     "password",
     "username",
-    "sex",
-    "age",
-    "city",
-    "yearOfLiving",
-    "hometown",
-    "school",
-    "major",
-    "language",
-    "hobby",
-    "personality",
+    "minNumOfPeople",
+    "maxNumOfPeople",
+    // "sex",
+    // "age",
+    // "city",
+    // "yearOfLiving",
+    // "hometown",
+    // "school",
+    // "major",
+    // "language",
+    // occupation,
+    // "bio"
     "note"
   ];
 
@@ -55,6 +57,16 @@ const validate = values => {
   ) {
     errors.password = "密码不能含有邮箱地址";
   }
+  if (values.username && values.username.length > 20) {
+    errors.username = "用户名不能超过20个字";
+  }
+  if (
+    values.minNumOfPeople &&
+    values.maxNumOfPeople &&
+    values.maxNumOfPeople[0] < values.minNumOfPeople[0]
+  ) {
+    errors.minNumOfPeople = "区间无效";
+  }
 
   // *******************date validation
 
@@ -82,14 +94,11 @@ const validate = values => {
 
   // *******************date validation
 
-  if (Number.isNaN(Number(values.age)) || Number(values.age) <= 0) {
-    errors.age = "请输入有效年龄";
-  } else if (Number(values.age) < 18) {
-    errors.age = "您必须满18岁";
-  }
-
   if (Number.isNaN(parseInt(values.budget)) || parseInt(values.budget) <= 0) {
     errors.budget = "请输入有效数字";
+  }
+  if (values.bio && values.bio.length > 100) {
+    errors.bio = "字数不能多于100";
   }
 
   if (
@@ -101,12 +110,6 @@ const validate = values => {
 
   if (values.theme && values.theme.length > 15) {
     errors.theme = "字数不能超过15";
-  }
-  if (
-    Number.isNaN(Number(values.yearOfLiving)) ||
-    Number(values.yearOfLiving) <= 0
-  ) {
-    errors.yearOfLiving = "请输入有效年限";
   }
 
   if (values.note && values.note.length > 300) {

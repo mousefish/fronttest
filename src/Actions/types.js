@@ -1,7 +1,6 @@
 export const AUTH_USER = 'auth_user';
 export const AUTH_ERROR = 'auth_error';
 export const DEAUTH_USER = 'deauth_user';
-export const OK_TO_GO = 'ok_to_go';
 export const UPDATE_USER_BASIC = 'update_user_basic';
 export const FETCH_USER_ACTIVITIES = "FETCH_USER_ACTIVITIES"
 export const FETCH_ACTIVITY_FOR_EDITTING = "FETCH_ACTIVITY_FOR_EDITTING"

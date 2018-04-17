@@ -162,7 +162,7 @@ class FriendComments extends Component {
                             comments[0].count ? (
                                 comments[0].count
                             ) : (
-                                ""
+                                0
                             )}
                         </span>{" "}
                         人评价

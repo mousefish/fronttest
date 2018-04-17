@@ -29,14 +29,15 @@ class AddActivity extends Component {
     }
 
     handleSubmit(values) {
-        let depart = new Date(values.departdate.replace(/年|月|日/g, "/"));
-        let finish = new Date(values.finishdate.replace(/年|月|日/g, "/"));
-        let departUTC = depart.toUTCString();
-        let finishUTC = finish.toUTCString();
-        this.props.submitActivityData(
-            { ...values, departdate: departUTC, finishdate: finishUTC },
-            this.props.history
-        );
+        console.log("values", values)
+        // let depart = new Date(values.departdate.replace(/年|月|日/g, "/"));
+        // let finish = new Date(values.finishdate.replace(/年|月|日/g, "/"));
+        // let departUTC = depart.toUTCString();
+        // let finishUTC = finish.toUTCString();
+        // this.props.submitActivityData(
+        //     { ...values, departdate: departUTC, finishdate: finishUTC },
+        //     this.props.history
+        // );
     }
 
     render() {

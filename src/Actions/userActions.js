@@ -17,23 +17,7 @@ export const fetchComments = userId => async dispatch=>{
     });
 };
 
-// fetch user's basic info!!
-// { id: 6,
-//  mail: 'robert@yahoo.com',
-//  password: '$2a$10$bqeLmIeOYu/prAGamSP0s.cIuLyVpktpqdeCsXCa0KVpRASQhzFlW',
-//  username: 'Robert',
-//  sex: 'male',
-//  age: 40,
-//  city: 'San Francisco',
-//  yearOfLiving: 20,
-//  hometown: 'San Francisco',
-//  school: 'UC Berkeley',
-//  major: 'Mechanical Engineering',
-//  language: 'Good',
-//  hobby: 'Cars',
-//  personality: 'Patient',
-//  createdAt: 2018-01-02T06:43:37.753Z,
-//  updatedAt: 2018-01-02T06:43:37.753Z }
+
 export const fetchUser = userId => async dispatch => {
     const res = await axios.get(`${ROOT_URL}/api/user/${userId}`, {
         headers: {
@@ -60,7 +44,6 @@ export const updateUserBasicInfo = basicInfo => async dispatch => {
             }
         );
 
-        // ["age", 33]
         // update localStorage to greet user
         if(res.data[0] === "username"){
             localStorage["userName"] = res.data[1];

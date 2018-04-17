@@ -6,6 +6,8 @@ import Button from "material-ui/Button";
 import popupSearchDateField from "../../Components/container/popupSearchDateField";
 import popupSearchMultiServices from "../../Components/container/popupSearchMultiServices";
 import AutocompleteField from "../../Components/container/AutocompleteField";
+import SelectRangeField from "../../Components/container/SelectRangeField";
+
 import { TextField } from "redux-form-material-ui";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "../../Utility/validate";
@@ -16,12 +18,24 @@ const styles = theme => ({
     button: {
         width: "95%",
         backgroundColor: "#1976D2"
-
     },
 
     textField: {
-        padding: "8px 0",
+        padding: "8px 0"
         // border: "1px solid blue"
+    },
+
+    rangeContainer: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    side: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        justifyContent: "flex-start",
+        alignItems: "flex-end"
     }
 });
 
@@ -46,8 +60,9 @@ class WizardFirst extends Component {
                     name="location"
                     type="text"
                     component={AutocompleteField}
-                    placeholder="活动所在的国家和城市,按提示列表选择"
+                    placeholder="活动所在的城市,按提示列表选择"
                     props={this.props}
+                    marker="loc"
                 />
 
                 <Field
@@ -59,15 +74,28 @@ class WizardFirst extends Component {
                     placeholder="活动费用/人"
                     className={classes.textField}
                 />
-                <Field
-                    fullWidth
-                    key="numberOfPeople"
-                    name="numberOfPeople"
-                    type="text"
-                    component={TextField}
-                    className={classes.textField}
-                    placeholder="你能接收的人数上限"
-                />
+                <div className={classes.rangeContainer}>
+                    <div className={classes.side}>
+                        <span>最少人数：</span>
+                        <Field
+                            key="minNumOfPeople"
+                            name="minNumOfPeople"
+                            type="text"
+                            component={SelectRangeField}
+                            props={this.props}
+                        />
+                    </div>
+                    <div className={classes.side}>
+                        <span>最多人数：</span>
+                        <Field
+                            key="maxNumOfPeople"
+                            name="maxNumOfPeople"
+                            type="text"
+                            component={SelectRangeField}
+                            props={this.props}
+                        />
+                    </div>
+                </div>
             </div>,
 
             <div className="form-group" key="date">
@@ -110,16 +138,16 @@ class WizardFirst extends Component {
                             data={services}
                         />
                     </div>
-                   <div className="centralize-button">
-                    <Button
-                        type="submit"
-                        color="primary"
-                        raised
-                        className={classes.button}
-                        id="btn"
-                    >
-                        下一步
-                    </Button>
+                    <div className="centralize-button">
+                        <Button
+                            type="submit"
+                            color="primary"
+                            raised
+                            className={classes.button}
+                            id="btn"
+                        >
+                            下一步
+                        </Button>
                     </div>
                 </form>
             </div>
