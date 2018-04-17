@@ -29,13 +29,13 @@ const styles = theme => ({
         display: "flex",
         flexFlow: "row nowrap",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
     },
-    side:{
+    side: {
         display: "flex",
         flexFlow: "row nowrap",
-         justifyContent: "flex-start",
-         alignItems:"flex-end"
+        justifyContent: "flex-start",
+        alignItems: "flex-end"
     }
 });
 
@@ -62,6 +62,7 @@ class WizardFirst extends Component {
                     component={AutocompleteField}
                     placeholder="活动所在的城市,按提示列表选择"
                     props={this.props}
+                    marker="loc"
                 />
 
                 <Field

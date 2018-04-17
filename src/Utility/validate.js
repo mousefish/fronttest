@@ -14,6 +14,8 @@ const validate = values => {
     "email",
     "password",
     "username",
+    "minNumOfPeople",
+    "maxNumOfPeople",
     // "sex",
     // "age",
     // "city",
@@ -55,8 +57,15 @@ const validate = values => {
   ) {
     errors.password = "密码不能含有邮箱地址";
   }
-  if(values.username && values.username.length > 20){
-    errors.username="用户名不能超过20个字";
+  if (values.username && values.username.length > 20) {
+    errors.username = "用户名不能超过20个字";
+  }
+  if (
+    values.minNumOfPeople &&
+    values.maxNumOfPeople &&
+    values.maxNumOfPeople[0] < values.minNumOfPeople[0]
+  ) {
+    errors.minNumOfPeople = "区间无效";
   }
 
   // *******************date validation
@@ -88,7 +97,7 @@ const validate = values => {
   if (Number.isNaN(parseInt(values.budget)) || parseInt(values.budget) <= 0) {
     errors.budget = "请输入有效数字";
   }
-  if(values.bio && values.bio.length > 100){
+  if (values.bio && values.bio.length > 100) {
     errors.bio = "字数不能多于100";
   }
 
