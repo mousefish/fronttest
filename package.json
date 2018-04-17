@@ -17,7 +17,7 @@
     "material-ui-icons": "^1.0.0-alpha.19",
     "materialize-css": "^0.100.2",
     "moment": "^2.19.1",
-    "node-sass": "^4.5.2",
+    "node-sass": "^4.7.2",
     "npm": "^5.5.1",
     "npm-run-all": "^4.0.2",
     "qs": "^6.5.1",
