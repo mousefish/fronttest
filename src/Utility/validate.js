@@ -63,7 +63,7 @@ const validate = values => {
   if (
     values.minNumOfPeople &&
     values.maxNumOfPeople &&
-    values.maxNumOfPeople[0] < values.minNumOfPeople[0]
+    values.maxNumOfPeople < values.minNumOfPeople
   ) {
     errors.minNumOfPeople = "区间无效";
   }
