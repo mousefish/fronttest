@@ -9,6 +9,7 @@ import PageHeader from "./PageHeader";
 import Button from "material-ui/Button";
 import validate from "../Utility/validate";
 import popupSearchDateField from "../Components/container/popupSearchDateField";
+import SelectRangeField from "../Components/container/SelectRangeField";
 import popupSearchMultiServices from "../Components/container/popupSearchMultiServices";
 import AutocompleteField from "../Components/container/AutocompleteField";
 import { TextField } from "redux-form-material-ui";
@@ -62,6 +63,18 @@ const styles = theme => ({
         height: 225,
         maxHeight: 225
         // border: "1px solid red"
+    },
+    rangeContainer: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    side: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        justifyContent: "flex-start",
+        alignItems: "flex-end"
     }
 });
 
@@ -97,7 +110,8 @@ class EditActivityPanel extends Component {
             "theme",
             "location",
             "budget",
-            "numberOfPeople",
+            "minNumOfPeople",
+            "maxNumOfPeople",
             "departdate",
             "finishdate",
             "services",
@@ -261,15 +275,28 @@ class EditActivityPanel extends Component {
                         className={classes.textField}
                         placeholder="活动费用/人"
                     />
-                    <Field
-                        fullWidth
-                        key="numberOfPeople"
-                        name="numberOfPeople"
-                        type="text"
-                        component={TextField}
-                        className={classes.textField}
-                        placeholder="你能接收的人数上限"
-                    />
+                    <div className={classes.rangeContainer}>
+                    <div className={classes.side}>
+                        <span>最少人数：</span>
+                        <Field
+                            key="minNumOfPeople"
+                            name="minNumOfPeople"
+                            type="text"
+                            component={SelectRangeField}
+                            props={this.props}
+                        />
+                    </div>
+                    <div className={classes.side}>
+                        <span>最多人数：</span>
+                        <Field
+                            key="maxNumOfPeople"
+                            name="maxNumOfPeople"
+                            type="text"
+                            component={SelectRangeField}
+                            props={this.props}
+                        />
+                    </div>
+                </div>
                 </div>
                 <div className="wrap form-group" key="date">
                     <h4 className="category-title">你的活动时间</h4>
@@ -383,12 +410,14 @@ const mapStateToProps = state => {
         theme,
         location,
         budget,
-        numberOfPeople,
+        minNumOfPeople,
+        maxNumOfPeople,
         story,
         departdate,
         finishdate,
         services
     } = state.ActivityReducer.edit;
+
     return {
         imageError: state.ImageReducer.error,
         edit: state.ActivityReducer.edit,
@@ -398,7 +427,8 @@ const mapStateToProps = state => {
             theme,
             location,
             budget,
-            numberOfPeople,
+            minNumOfPeople,
+            maxNumOfPeople,
             story,
             departdate,
             finishdate,

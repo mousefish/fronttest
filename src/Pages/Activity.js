@@ -333,9 +333,9 @@ class Activity extends Component {
                             </div>
                         </li>
                         <li>
-                            <div className={classes.detailTitle}>参加人数上限</div>
+                            <div className={classes.detailTitle}>参加人数范围</div>
                             <div className={classes.detailContent}>
-                                {activity.numberOfPeople} 人
+                                {activity.minNumOfPeople} 人 — {activity.maxNumOfPeople} 人
                             </div>
                         </li>
 
@@ -373,6 +373,7 @@ class Activity extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state.ActivityReducer.activity,)
     return {
         activity: state.ActivityReducer.activity,
         isYourFav: state.ActivityReducer.isYourFav,
