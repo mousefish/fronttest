@@ -14,7 +14,6 @@ const buildURL = searchData => {
 
 export const logout = history => dispatch => {
   localStorage.removeItem("jwtToken");
-  localStorage.removeItem("userName");
   dispatch({ type: DEAUTH_USER });
   history.push("/openPage");
 };

@@ -179,7 +179,7 @@ class OpenPage extends Component {
                                     <div>用微信登陆</div>
                                 </div>
                             </Button>
-                            <Link to="/login" className="unlink">
+                            <Link to="/login" className="unlink withEmail">
                                 <Button
                                     className={classNames(
                                         classes.button,
