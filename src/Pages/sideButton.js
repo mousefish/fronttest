@@ -20,7 +20,7 @@ const styles = theme => ({
     position: "fixed",
     right: "2%",
     bottom: "10%",
-    zIndex: "1000"
+    zIndex: "10000"
   }
 });
 
