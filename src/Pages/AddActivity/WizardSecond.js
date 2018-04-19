@@ -31,7 +31,7 @@ class WizardSecond extends Component {
                 <PageHeader onClick={previousPage} title="发布新活动" />
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <h4 className="category-title">我在这里的故事</h4>
+                        <h4 className="category-title">我在这里的旅行故事</h4>
                         <Field
                             fullWidth
                             key="story"
@@ -41,6 +41,7 @@ class WizardSecond extends Component {
                             multiline
                             rowsMax="4"
                             placeholder="我在这里生活了10年......"
+                            label="我在这里的旅行故事"
                             className={classes.textField}
                         />
                     </div>

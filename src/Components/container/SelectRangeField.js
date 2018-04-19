@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Input, { InputLabel } from "material-ui/Input";
+import { FormControl } from "material-ui/Form";
 import Select from "material-ui/Select";
 
 class SelectRangeField extends Component {
@@ -16,23 +17,18 @@ class SelectRangeField extends Component {
         return result;
     }
     render() {
-        const {
-            classes,
-            input,
-            placeholder,
-            meta: { error, touched }
-        } = this.props;
+        const { classes, input, title, meta: { error, touched } } = this.props;
         return (
-            <div style={{ margin: "10px 0 5px 0" }}>
+            <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="age-simple">{title}</InputLabel>
                 <Select native {...input}>
-                    <option value="" placeholder="最大" />
+                    <option value="" />
                     {this.renderOptions(20)}
                 </Select>
 
                 <div className="input-error">{touched && error}</div>
-            </div>
+            </FormControl>
         );
     }
 }
-
 export default SelectRangeField;

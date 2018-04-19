@@ -19,6 +19,9 @@ const styles = theme => ({
         width: "95%",
         backgroundColor: "#1976D2"
     },
+    formControl: {
+        minWidth: 120
+    },
 
     textField: {
         padding: "8px 0"
@@ -31,12 +34,6 @@ const styles = theme => ({
         justifyContent: "space-between",
         alignItems: "center",
     },
-    side: {
-        display: "flex",
-        flexFlow: "row nowrap",
-        justifyContent: "flex-start",
-        alignItems: "flex-end"
-    }
 });
 
 class WizardFirst extends Component {
@@ -51,6 +48,7 @@ class WizardFirst extends Component {
                     type="text"
                     component={TextField}
                     placeholder="活动的主题，字数不多于15个"
+                    label="活动的主题，字数不多于15个"
                     className={classes.textField}
                 />
 
@@ -60,7 +58,8 @@ class WizardFirst extends Component {
                     name="location"
                     type="text"
                     component={AutocompleteField}
-                    placeholder="活动所在的城市,按提示列表选择"
+                    placeholder="活动所在的城市，按提示列表选择"
+                    label="活动所在的城市，按提示列表选择"
                     props={this.props}
                     marker="loc"
                 />
@@ -72,29 +71,28 @@ class WizardFirst extends Component {
                     type="text"
                     component={TextField}
                     placeholder="活动费用/人"
+                    label="活动费用/人"
                     className={classes.textField}
                 />
                 <div className={classes.rangeContainer}>
-                    <div className={classes.side}>
-                        <span>最少人数：</span>
                         <Field
                             key="minNumOfPeople"
                             name="minNumOfPeople"
                             type="text"
                             component={SelectRangeField}
+                            title="最少人数"
                             props={this.props}
                         />
-                    </div>
-                    <div className={classes.side}>
-                        <span>最多人数：</span>
+
                         <Field
                             key="maxNumOfPeople"
                             name="maxNumOfPeople"
                             type="text"
+                            title="最多人数"
                             component={SelectRangeField}
                             props={this.props}
                         />
-                    </div>
+
                 </div>
             </div>,
 
