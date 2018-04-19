@@ -128,8 +128,8 @@ class FriendComments extends Component {
                             <div className={classes.comment}>
                                 {item.feedback}
                             </div>
-                            <div style={{ float: "right", fontSize:12 }}>
-                                {moment(item.createdAt).format("LLL")}发布
+                            <div style={{ float: "right", fontSize: 12 }}>
+                                {moment(item.createdAt).format("LLL")}
                             </div>
                             <div style={{ clear: "both" }} />
                         </li>

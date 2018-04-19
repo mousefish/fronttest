@@ -21,10 +21,10 @@ export default (state = INITIAL_STATE, action) => {
         case FETCH_RATING_DATA:
             return { ...state, ratings: action.payload, message:"" };
         case FETCH_OVERALL_RATING:
-            return { ...state, summary: action.payload, message:"" };
+            return { ...state, ratings:[], summary: action.payload, message:"" };
 
         case RATING_ERROR:
-            return { ...state, message: "请确认登录!" };
+            return { ...state, ratings:[], message: "请确认登录!" };
     }
 
     return state;

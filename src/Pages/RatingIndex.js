@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import * as actions from "../Actions";
+import moment from "moment";
+import "moment/locale/zh-cn.js";
 import { connect } from "react-redux";
+import classNames from "classnames";
+import config from "../config/config";
 import Star from "material-ui-icons/Star";
 import { withStyles } from "material-ui/styles";
 import PageHeader from "./PageHeader";
+import Avatar from "material-ui/Avatar";
+import Stars from "./Stars";
+import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 // Data [ { id: 5,
 //   feedback: 'pretty good!',
 //   numOfStars: 4,
@@ -16,6 +23,21 @@ import PageHeader from "./PageHeader";
 // { average: 4 } ]
 
 const styles = {
+    icon: {
+        width: 15,
+        height: 15,
+        verticalAlign: "-2px"
+    },
+    avatar: {
+        margin: "10px 10px 10px 0"
+    },
+
+    bigAvatar: {
+        width: 40,
+        height: 40,
+        display: "inline-block"
+    },
+
     ratingIndex: {
         padding: 5,
         listStyle: "none"
@@ -26,12 +48,17 @@ const styles = {
     },
     feedback: {
         // border:"1px solid red",
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 10
+    },
+    time:{
+     float: "right",
+     fontSize: 12
     }
 };
 
 class RatingIndex extends Component {
-    componentDidMount() {
+    componentWillMount() {
         const { activityId } = this.props.match.params;
         this.props.fetchRatings(activityId);
     }
@@ -48,17 +75,41 @@ class RatingIndex extends Component {
     renderItems(ratings) {
         const { classes } = this.props;
         if (!ratings || ratings.length == 0) {
-            return <div key={0} className={classes.comment}>暂时没有评论</div>;
+            return (
+                <div key={0} className={classes.comment}>
+                    暂时没有评论
+                </div>
+            );
         } else {
             return ratings.map(item => {
                 return (
                     <li className={classes.comment} key={item.userId}>
                         <div>
-                            用户 {item.userId}：{this.renderStars(item.numOfStars)}
+                            <Avatar
+                                alt="rater pic"
+                                src={
+                                    item.imageurl ? (
+                                        config.BUCKET_URL + item.imageurl
+                                    ) : (
+                                        defaultAvatar
+                                    )
+                                }
+                                className={classNames(
+                                    classes.avatar,
+                                    classes.bigAvatar
+                                )}
+                            />
+                            <span style={{ verticalAlign: 20 }}>
+                                {item.username}：{this.renderStars(item.numOfStars)}
+                            </span>
                         </div>
                         <div className={classes.feedback}>
                             {item.feedback ? item.feedback : "无"}
                         </div>
+                        <div className={classes.time}>
+                            {moment(item.createdAt).format("LLL")}发布
+                        </div>
+                        <div style={{ clear: "both" }} />
                     </li>
                 );
             });
@@ -78,6 +129,7 @@ class RatingIndex extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state.RatingReducer.ratings);
     return {
         ratings: state.RatingReducer.ratings
     };
