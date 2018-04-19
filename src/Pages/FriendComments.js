@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
+import moment from "moment";
+import "moment/locale/zh-cn.js";
 import classNames from "classnames";
 import config from "../config/config";
 import Button from "material-ui/Button";
@@ -126,8 +128,8 @@ class FriendComments extends Component {
                             <div className={classes.comment}>
                                 {item.feedback}
                             </div>
-                            <div style={{ float: "right" }}>
-                                {item.createdAt}
+                            <div style={{ float: "right", fontSize:12 }}>
+                                {moment(item.createdAt).format("LLL")}发布
                             </div>
                             <div style={{ clear: "both" }} />
                         </li>
@@ -157,9 +159,7 @@ class FriendComments extends Component {
                     <h4>
                         共{" "}
                         <span style={{ fontWeight: "bold" }}>
-                            {comments &&
-                            comments[0] &&
-                            comments[0].count ? (
+                            {comments && comments[0] && comments[0].count ? (
                                 comments[0].count
                             ) : (
                                 0
