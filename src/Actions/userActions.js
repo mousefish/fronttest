@@ -1,29 +1,29 @@
 import axios from "axios";
-import { FETCH_PROFILE_DATA, UPDATE_USER_BASIC, INPUT_ERROR, FETCH_COMMENTS } from "./types";
+import {
+    FETCH_PROFILE_DATA,
+    UPDATE_USER_BASIC,
+    INPUT_ERROR,
+    FETCH_COMMENTS
+} from "./types";
 
 import config from "../config/config";
 
 const ROOT_URL = config["ROOT_URL"];
 
-export const fetchComments = userId => async dispatch=>{
-    const res = await axios.get(`${ROOT_URL}/api/comments/${userId}`,{
-        headers: {
-            authorization: localStorage.getItem("jwtToken")
-        }
-    });
+axios.defaults.headers.common["authorization"] = localStorage.getItem(
+    "jwtToken"
+);
+
+export const fetchComments = userId => async dispatch => {
+    const res = await axios.get(`${ROOT_URL}/api/comments/${userId}`);
     dispatch({
-        type:"FETCH_COMMENTS",
-        payload:res.data
+        type: "FETCH_COMMENTS",
+        payload: res.data
     });
 };
 
-
 export const fetchUser = userId => async dispatch => {
-    const res = await axios.get(`${ROOT_URL}/api/user/${userId}`, {
-        headers: {
-            authorization: localStorage.getItem("jwtToken")
-        }
-    });
+    const res = await axios.get(`${ROOT_URL}/api/user/${userId}`);
 
     dispatch({
         type: FETCH_PROFILE_DATA,
@@ -36,16 +36,11 @@ export const updateUserBasicInfo = basicInfo => async dispatch => {
     try {
         const res = await axios.post(
             `${ROOT_URL}/api/updateBasicInfo`,
-            basicInfo,
-            {
-                headers: {
-                    authorization: localStorage.getItem("jwtToken")
-                }
-            }
+            basicInfo
         );
 
         // update localStorage to greet user
-        if(res.data[0] === "username"){
+        if (res.data[0] === "username") {
             localStorage["userName"] = res.data[1];
         }
         dispatch({
