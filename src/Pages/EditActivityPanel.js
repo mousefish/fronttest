@@ -70,6 +70,11 @@ const styles = theme => ({
         justifyContent: "space-between",
         alignItems: "center"
     },
+    formControl: {
+        minWidth: 120,
+        // border:'1px solid red',
+        height:60
+    },
 });
 
 class EditActivityPanel extends Component {

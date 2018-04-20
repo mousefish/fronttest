@@ -20,7 +20,9 @@ const styles = theme => ({
         backgroundColor: "#1976D2"
     },
     formControl: {
-        minWidth: 120
+        minWidth: 120,
+        // border:'1px solid red',
+        height:60
     },
 
     textField: {
