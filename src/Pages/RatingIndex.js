@@ -35,7 +35,7 @@ const styles = {
     avatar: {
         width: 30,
         height: 30,
-        margin: "5px 5px 5px 0",
+        margin: "10px 5px 5px 0",
         display: "inline-block"
     },
 
@@ -80,7 +80,10 @@ const styles = {
         display: "flex",
         flexFlow: "row nowrap",
         justifyContent: "flex-start",
-        alignItems: "center"
+        alignItems: "flex-start"
+    },
+    reply:{
+       padding:"15px 0"
     }
 };
 
@@ -154,7 +157,7 @@ class RatingIndex extends Component {
                                 }
                                 className={classNames(classes.avatar)}
                             />
-                            <div>
+                            <div className={classes.reply}>
                                 <Link
                                     to={`/user/${item.userId}`}
                                     className="unlink"

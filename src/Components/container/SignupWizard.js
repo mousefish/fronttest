@@ -67,7 +67,6 @@ class SignupWizard extends Component {
 const mapStateToProps = state => {
   return {
     errorMsg: state.UserAuth.error,
-    canGo: state.UserAuth.go
   };
 };
 
