@@ -88,7 +88,7 @@ const styles = theme => ({
     highlight: {
         fontSize: "1.2rem",
         fontWeight: "bold",
-        marginTop:20
+        marginTop: 20
     }
 });
 
@@ -167,11 +167,17 @@ class PublicProfile extends Component {
                 <div className="wrapper">
                     <div>
                         <span>{user.sex ? user.sex : ""}</span>{" "}
-                        <span>{user.age ? user.age + "岁" : ""}</span>{" "}
+                        <span>{user.age ? user.age : ""}</span>{" "}
                         <span className={classes.highlight}>
-                            {user.language ? "懂" + user.language : ""}
+                            {user.language && user.language.length > 0 ? (
+                                `懂${user.language}`
+                            ) : (
+                                ""
+                            )}
                         </span>{" "}
-                        <span>{user.school ? user.school+"毕业/在读" : ""}</span>{" "}
+                        <span>
+                            {user.school ? user.school + "毕业/在读" : ""}
+                        </span>{" "}
                         <span> {user.occupation ? user.occupation : ""}</span>
                         <div className={classes.highlight}>
                             {user.bio ? user.bio : "还没有个人介绍"}

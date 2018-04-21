@@ -4,7 +4,6 @@ import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
 import Button from "material-ui/Button";
 import gallery from "../Assets/Images/gallery.jpg";
-import { Link } from "react-router-dom";
 import * as actions from "../Actions";
 import PageHeader from "./PageHeader";
 import FriendComments from "./FriendComments";
@@ -131,7 +130,7 @@ class Story extends Component {
 }
 
 const mapStateToProps = state => {
-    // console.log("!user", state.UserReducer.comments)
+    // console.log("user", state.UserReducer.comments)
     return {
         user: state.UserReducer
     };

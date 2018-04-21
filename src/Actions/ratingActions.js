@@ -18,7 +18,6 @@ export const sendRating = ratingData => async dispatch => {
     // ratingData: // data: {numOfStars: 3, feedback: "ilove", activityId: 1}
     try {
         const res = await axios.post(`${ROOT_URL}/api/addRating`, ratingData);
-
         dispatch({
             type: ADD_RATING_DATA,
             payload: res.data

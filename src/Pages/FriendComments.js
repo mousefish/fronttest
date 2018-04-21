@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
 import moment from "moment";
 import "moment/locale/zh-cn.js";
@@ -40,7 +41,8 @@ const styles = theme => ({
 
     comment: {
         margin: "auto",
-        paddingBottom: 10
+        paddingBottom: 10,
+        marginLeft: 50
         // border: "1px solid red"
     },
 
@@ -119,7 +121,12 @@ class FriendComments extends Component {
                                             classes.bigAvatar
                                         )}
                                     />
-                                    {item.username}
+                                    <Link
+                                        to={`/user/${item.userId}`}
+                                        className="unlink"
+                                    >
+                                        {item.username}
+                                    </Link>
                                 </div>
                                 <div>
                                     <Stars num={item.numOfStars} />
@@ -129,7 +136,16 @@ class FriendComments extends Component {
                                 {item.feedback}
                             </div>
                             <div style={{ float: "right", fontSize: 12 }}>
-                                {moment(item.createdAt).format("LLL")}
+                                {moment(item.createdAt).format("LLL")}发布{item.activityName ? (
+                                    <Link
+                                        to={`/activity/${item.activityId}`}
+                                        className="unlink"
+                                    >
+                                        针对{item.activityName}
+                                    </Link>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                             <div style={{ clear: "both" }} />
                         </li>

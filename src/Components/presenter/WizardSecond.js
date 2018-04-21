@@ -208,7 +208,7 @@ class wizardSecond extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log(state.UserReducer);
+  console.log(state.UserReducer);
   return {
     user: state.UserReducer
   };
@@ -216,7 +216,7 @@ const mapStateToProps = state => {
 
 export default reduxForm({
   form: "wizard",
-  destroyOnUnmount: false,
+  destroyOnUnmount: true,
   forceUnregisterOnUnmount: true,
   validate
 })(withStyles(styles)(connect(mapStateToProps, actions)(wizardSecond)));

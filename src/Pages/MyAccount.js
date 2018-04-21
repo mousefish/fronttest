@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
-import { Link } from "react-router-dom";
 import * as actions from "../Actions";
 import MyAccountItem from "./MyAccountItem";
 import MyAccountLoggedinHeader from "./MyAccountLoggedinHeader";
