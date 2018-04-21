@@ -373,7 +373,7 @@ class Activity extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state.ActivityReducer.activity,)
+    // console.log(state.ActivityReducer.activity,)
     return {
         activity: state.ActivityReducer.activity,
         isYourFav: state.ActivityReducer.isYourFav,

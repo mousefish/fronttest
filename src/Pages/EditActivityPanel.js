@@ -68,14 +68,13 @@ const styles = theme => ({
         display: "flex",
         flexFlow: "row nowrap",
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: "center"
     },
-    side: {
-        display: "flex",
-        flexFlow: "row nowrap",
-        justifyContent: "flex-start",
-        alignItems: "flex-end"
-    }
+    formControl: {
+        minWidth: 120,
+        // border:'1px solid red',
+        height:60
+    },
 });
 
 class EditActivityPanel extends Component {
@@ -276,27 +275,24 @@ class EditActivityPanel extends Component {
                         placeholder="活动费用/人"
                     />
                     <div className={classes.rangeContainer}>
-                    <div className={classes.side}>
-                        <span>最少人数：</span>
                         <Field
                             key="minNumOfPeople"
                             name="minNumOfPeople"
                             type="text"
                             component={SelectRangeField}
+                            title="最少人数"
                             props={this.props}
                         />
-                    </div>
-                    <div className={classes.side}>
-                        <span>最多人数：</span>
+
                         <Field
                             key="maxNumOfPeople"
                             name="maxNumOfPeople"
                             type="text"
                             component={SelectRangeField}
+                            title="最多人数"
                             props={this.props}
                         />
                     </div>
-                </div>
                 </div>
                 <div className="wrap form-group" key="date">
                     <h4 className="category-title">你的活动时间</h4>
