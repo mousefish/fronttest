@@ -36,7 +36,8 @@ const styles = theme => ({
 
 class SignupForm extends Component {
   state = {
-    completed: 25
+    completed: 25,
+    initialState:""
   };
 
   submitForm(values) {
@@ -123,7 +124,7 @@ class SignupForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    errorMessage: state.UserAuth.error
+    errorMessage: state.UserAuth.errorSignup
   };
 };
 

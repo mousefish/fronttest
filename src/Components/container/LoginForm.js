@@ -96,7 +96,7 @@ class LoginForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    errorMessage: state.UserAuth.error
+    errorMessage: state.UserAuth.errorLogin
   };
 };
 

@@ -2,7 +2,12 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import qs from "qs";
 
-import { AUTH_USER, AUTH_ERROR, DEAUTH_USER } from "./types";
+import {
+  AUTH_USER,
+  AUTH_ERROR_SIGNUP,
+  AUTH_ERROR_LOGIN,
+  DEAUTH_USER
+} from "./types";
 
 import config from "../config/config";
 
@@ -29,7 +34,7 @@ export const userSignupRequest = (userData, history) => async dispatch => {
 
       history.push("/completeUserProfile");
     } else {
-      dispatch(authError(res.data));
+      dispatch(authError(AUTH_ERROR_SIGNUP, res.data));
     }
   } catch (err) {
     dispatch(authError(err.message));
@@ -49,10 +54,10 @@ export const completeUserProfile = (value, history) => async dispatch => {
       });
       history.push("/activity");
     } else {
-      dispatch(authError(res.data));
+      dispatch(authError(AUTH_ERROR_SIGNUP, res.data));
     }
   } catch (err) {
-    dispatch(authError(err.message));
+    dispatch(authError(AUTH_ERROR_SIGNUP, err.message));
   }
 };
 
@@ -69,13 +74,13 @@ export const userLogin = (userData, history) => async dispatch => {
   } catch (err) {
     // err is an Object - Error: Request failed with status code 401.
     // err.message - string
-    dispatch(authError("邮箱或者密码不正确！"));
+    dispatch(authError(AUTH_ERROR_LOGIN, "邮箱或者密码不正确！"));
   }
 };
 
-export const authError = err => {
+export const authError = (type, err) => {
   return {
-    type: AUTH_ERROR,
+    type: type,
     payload: err
   };
 };
