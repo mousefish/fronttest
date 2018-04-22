@@ -128,13 +128,13 @@ header .title .name {
   /*  text-align: center;*/ }
 
 .input-error {
+  margin-top: 5px;
   color: red;
   font-size: 11px;
   text-align: left;
   /* border:1px solid blue;*/ }
 
 .input-success {
-  /*  margin-top: 6px;*/
   width: 95%;
   color: blue;
   font-size: 1.2rem;

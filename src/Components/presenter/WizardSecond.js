@@ -132,7 +132,7 @@ class wizardSecond extends Component {
               showCrop={this.state.showCrop}
               showIcon={this.state.showIcon}
             />
-            {this.props.error}
+            {this.props.errorSignup}
           </div>
           <Field
             name="sex"

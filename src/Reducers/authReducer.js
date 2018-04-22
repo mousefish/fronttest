@@ -1,12 +1,14 @@
 import {
-  AUTH_ERROR,
+  AUTH_ERROR_SIGNUP,
+  AUTH_ERROR_LOGIN,
   AUTH_USER,
-  DEAUTH_USER,
+  DEAUTH_USER
 } from "../Actions/types";
 
 const initState = {
   isAuthenticated: false,
-  error: "",
+  errorSignup: "",
+  errorLogin: ""
 };
 
 // Use "go" to verify if use can go to the next wizard form or not.
@@ -14,26 +16,36 @@ const initState = {
 
 export default (state = initState, action = {}) => {
   switch (action.type) {
-
     case AUTH_USER:
       return {
         ...state,
         isAuthenticated: true,
-        error: "",
+        errorSignup: "",
+        errorLogin: ""
       };
 
-    case AUTH_ERROR:
+    case AUTH_ERROR_SIGNUP:
       return {
         ...state,
         isAuthenticated: false,
-        error: action.payload
+        errorSignup: action.payload,
+        errorLogin: ""
+      };
+
+    case AUTH_ERROR_LOGIN:
+      return {
+        ...state,
+        isAuthenticated: false,
+        errorLogin: action.payload,
+        errorSignup: ""
       };
 
     case DEAUTH_USER:
       return {
         ...state,
         isAuthenticated: false,
-        error: "",
+        errorSignup: "",
+        errorLogin: ""
       };
 
     default:

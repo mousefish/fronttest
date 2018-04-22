@@ -47,7 +47,7 @@ const validate = values => {
     values.password &&
     !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,25}$/.test(values.password)
   ) {
-    errors.password = "密码长度必须在6-25位之间，且至少含有1个数字和1个字母";
+    errors.password = "密码长度必须在8-25位之间，且至少含有1个数字和1个字母";
   }
 
   if (
