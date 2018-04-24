@@ -6,24 +6,10 @@ import validate from "../../Utility/validate";
 import Bigbutton from "../../Pages/Bigbutton";
 import { TextField } from "redux-form-material-ui";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import { LinearProgress } from "material-ui/Progress";
 import PageHeader from "../../Pages/PageHeader";
+import ProgressBar from "./ProgressBar";
 
-import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
-import blue from "material-ui/colors/blue";
-
-const newtheme = createMuiTheme({
-  palette: {
-    primary: blue
-  }
-});
-
-const styles = theme => ({
-  progress: {
-    width: "95%",
-    margin: "auto"
-  },
-});
+const styles = theme => ({});
 
 class wizardThird extends Component {
   state = {
@@ -37,13 +23,7 @@ class wizardThird extends Component {
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
         <PageHeader onClick={previousPage} title="完善个人基本资料" />
-        <MuiThemeProvider theme={newtheme}>
-          <LinearProgress
-            className={classes.progress}
-            mode="determinate"
-            value={this.state.completed}
-          />
-        </MuiThemeProvider>
+        <ProgressBar completed={this.state.completed} />
         <div className="form-group">
           <Field
             name="school"

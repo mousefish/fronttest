@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import validate from "../../Utility/validate";
 import Radio from "material-ui/Radio";
 import { RadioGroup, TextField } from "redux-form-material-ui";
-import { LinearProgress } from "material-ui/Progress";
+
 import { Link } from "react-router-dom";
 import Bigbutton from "../../Pages/Bigbutton";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
@@ -18,26 +18,15 @@ import popupSearchMultiServices from "../../Components/container/popupSearchMult
 import languages from "../../Data/languages";
 import config from "../../config/config";
 import * as actions from "../../Actions";
-import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
-import blue from "material-ui/colors/blue";
+import ProgressBar from "./ProgressBar";
 
-const newtheme = createMuiTheme({
-  palette: {
-    primary: blue
-  }
-});
+
 
 const styles = theme => ({
-  progress: {
-    width: "95%",
-    margin: "auto"
-  },
-
   textField: {
     padding: "8px 0"
     // border: "1px solid blue"
   },
-
 
   radioInner: {
     width: "95%",
@@ -104,18 +93,10 @@ class wizardSecond extends Component {
   render() {
     const { handleSubmit, previousPage } = this.props;
     const { classes, user } = this.props;
-    console.log("newtheme", newtheme);
-
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
         <PageHeader onClick={previousPage} title="完善个人基本资料" />
-        <MuiThemeProvider theme={newtheme}>
-          <LinearProgress
-            className={classes.progress}
-            mode="determinate"
-            value={this.state.completed}
-          />
-        </MuiThemeProvider>
+        <ProgressBar completed={this.state.completed} />
         <div className="form-group">
           <div className={classes.imageWrapper}>
             <img
