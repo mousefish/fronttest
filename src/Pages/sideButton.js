@@ -6,16 +6,7 @@ import Button from "material-ui/Button";
 import AddIcon from "material-ui-icons/Add";
 import SearchIcon from "material-ui-icons/Search";
 
-// import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
-// import blue from "material-ui/colors/blue";
-// import green from "material-ui/colors/green";
 
-// const btnTheme = createMuiTheme({
-//   palette: {
-//     primary: blue,
-//     secondary: green
-//   }
-// });
 
 const styles = theme => ({
   button: {
@@ -40,7 +31,7 @@ function sideButton(props) {
         <Link to="/searchPanel">
           <Button
             fab
-            color="primary"
+            style={{backgroundColor:"#1976D2"}}
             aria-label="search"
             className={classes.button}
           >
@@ -53,7 +44,7 @@ function sideButton(props) {
         <Link to="/activityWish">
           <Button
             fab
-            color="secondary"
+            style={{backgroundColor:"#43A047"}}
             aria-label="add"
             className={classes.button}
           >

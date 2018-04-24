@@ -5,12 +5,12 @@ import { withRouter } from "react-router";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
+import Button from "material-ui/Button";
 import Radio from "material-ui/Radio";
 import { RadioGroup, TextField } from "redux-form-material-ui";
 import { FormControlLabel } from "material-ui/Form";
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
-import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import Dialog, {
@@ -29,6 +29,7 @@ import FileInput from "./AddActivity/FileInput";
 import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import config from "../config/config";
 import languages from "../Data/languages";
+import Bigbutton from "./Bigbutton";
 
 const styles = theme => ({
     button: {
@@ -175,11 +176,13 @@ class PrivateBasicInfo extends Component {
             }
         });
         // console.log("result", result);
-        this.props.updateUserBasicInfo(result)
-        this.setState({
-            open:false
-        })
+        if (Object.keys(result).length > 0) {
+            this.props.updateUserBasicInfo(result);
+        }
 
+        this.setState({
+            open: false
+        });
     }
 
     renderEdit() {
@@ -322,15 +325,7 @@ class PrivateBasicInfo extends Component {
                 </div>
 
                 <div className="centralize-button">
-                    <Button
-                        type="submit"
-                        color="primary"
-                        raised
-                        id="btn"
-                        className={classes.button}
-                    >
-                        保存修改
-                    </Button>
+                    <Bigbutton type="submit" text="保存修改" />
                     <div className="input-success">{msg}</div>
                 </div>
             </div>
@@ -392,7 +387,7 @@ const mapStateToProps = state => {
     } = state.UserReducer.basicInfo;
     return {
         user: state.UserReducer.basicInfo,
-        msg:state.UserReducer.msg,
+        msg: state.UserReducer.msg,
         imageError: state.ImageReducer.error,
         initialValues: {
             email: mail,

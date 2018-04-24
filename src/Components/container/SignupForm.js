@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { withRouter } from "react-router";
 import { TextField } from "redux-form-material-ui";
-import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
@@ -11,16 +10,12 @@ import validate from "../../Utility/validate";
 import PasswordSetVisibility from "../presenter/PasswordSetVisibility";
 import * as actions from "../../Actions";
 import PageHeader from "../../Pages/PageHeader";
+import Bigbutton from "../../Pages/Bigbutton";
 
 const styles = theme => ({
   progress: {
     width: "95%",
     margin: "auto"
-  },
-
-  button: {
-    width: "95%",
-    backgroundColor: "#1976D2"
   },
 
   legal: {
@@ -36,7 +31,7 @@ const styles = theme => ({
 class SignupForm extends Component {
   state = {
     completed: 25,
-    initialState:""
+    initialState: ""
   };
 
   submitForm(values) {
@@ -59,7 +54,6 @@ class SignupForm extends Component {
             component={TextField}
             label="输入邮箱地址"
             placeholder="输入邮箱地址"
-
           />
 
           <Field
@@ -77,7 +71,6 @@ class SignupForm extends Component {
             label="输入用户名"
             placeholder="输入用户名"
           />
-
         </div>
         <div className={classes.legal}>
           注册代表已经同意<Link to="/" className="unlink">
@@ -93,24 +86,13 @@ class SignupForm extends Component {
           </Link>
         </div>
 
-        <div className="centralize-button">
-          <Button
-            type="submit"
-            color="primary"
-            raised
-            className={classes.button}
-            id="btn"
-            style={{ marginTop: 5 }}
-          >
-            点击注册
-          </Button>
-           <p
-            className="input-error centralize-button"
-            style={{ textAlign: "center" }}
-          >
-            {this.props.errorMessage}
-          </p>
-        </div>
+        <Bigbutton type="submit" text="点击注册" />
+        <p
+          className="input-error centralize-button"
+          style={{ textAlign: "center" }}
+        >
+          {this.props.errorMessage}
+        </p>
       </form>
     );
   }

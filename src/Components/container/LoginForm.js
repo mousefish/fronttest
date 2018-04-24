@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import validate from "../../Utility/validate";
 import { TextField } from "redux-form-material-ui";
-import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
 import { LinearProgress } from "material-ui/Progress";
 import { Link } from "react-router-dom";
@@ -11,14 +10,9 @@ import * as actions from "../../Actions";
 import { withRouter } from "react-router";
 import PasswordSetVisibility from "../presenter/PasswordSetVisibility";
 import PageHeader from "../../Pages/PageHeader";
+import Bigbutton from "../../Pages/Bigbutton";
 
 const styles = theme => ({
-
-  button: {
-    width: "95%",
-    backgroundColor: "#1976D2"
-  },
-
   textField: {
     padding: "8px 0"
     // border: "1px solid blue"
@@ -65,29 +59,13 @@ class LoginForm extends Component {
           />
         </div>
 
-        <div className="centralize-button">
-          <Button
-            type="submit"
-            color="primary"
-            raised
-            className={classes.button}
-            id="btn"
-            style={{ margin: "5px 0" }}
-          >
-            点击登陆
-          </Button>
-          <p
-            className="input-error centralize-button"
-            style={{ textAlign: "center" }}
-          >
-            {this.props.errorMessage}
-          </p>
-          <div>
-            <Link className="unlink" to="/openPage">
-              {" "}
-              <span className={classes.forget}>忘记密码？</span>
-            </Link>
-          </div>
+        <Bigbutton text="点击登录" type="submit" />
+        <div style={{ margin: "auto" }}>
+          <p className="input-error">{this.props.errorMessage}</p>
+          <Link className="unlink" to="/openPage">
+            {" "}
+            忘记密码？
+          </Link>
         </div>
       </form>
     );

@@ -12,7 +12,6 @@ import years from "../../Data/yearOfLiving";
 const provinces = data.provinces;
 const renderInput = inputProps => {
   const { InputProps, classes, ref, ...other } = inputProps;
-
   return (
     <TextField
       InputProps={{

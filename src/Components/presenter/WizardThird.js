@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
 import { Field, reduxForm } from "redux-form";
 import validate from "../../Utility/validate";
-import Button from "material-ui/Button";
+import Bigbutton from "../../Pages/Bigbutton";
 import { TextField } from "redux-form-material-ui";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { LinearProgress } from "material-ui/Progress";
@@ -23,10 +23,6 @@ const styles = theme => ({
     width: "95%",
     margin: "auto"
   },
-  button: {
-    width: "95%",
-    backgroundColor: "#1976D2"
-  }
 });
 
 class wizardThird extends Component {
@@ -74,17 +70,7 @@ class wizardThird extends Component {
             label="100字以内个人介绍：逗逼铲屎官，爱狗子，爱生活"
           />
         </div>
-        <div className="centralize-button">
-          <Button
-            type="submit"
-            color="primary"
-            raised
-            className={classes.button}
-            id="btn"
-          >
-            提交
-          </Button>
-        </div>
+        <Bigbutton type="submit" text="提交" />
       </form>
     );
   }
