@@ -49,7 +49,6 @@ class WizardSecond extends Component {
                     <Button
                         type="submit"
                         color="primary"
-                        raised
                         className={classes.button}
                         id="btn"
                     >

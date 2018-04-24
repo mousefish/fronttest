@@ -1,6 +1,5 @@
 import React from "react";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-
 const PageHeader = props => {
   return (
     <div className="wizard-header">

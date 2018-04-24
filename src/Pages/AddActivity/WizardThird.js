@@ -48,7 +48,7 @@ class WizardThird extends Component {
                 <div className={classes.item}>城市: {values.location}</div>
                 <div className={classes.item}>活动费用: {values.budget}</div>
                 <div className={classes.item}>
-                    接收的人数上限: {values.numberOfPeople}
+                    接收的人数: {values.minNumOfPeople} 人 — {values.maxNumOfPeople} 人
                 </div>
                 <div className={classes.item}>活动开始时间: {values.departdate}</div>
                 <div className={classes.item}>活动结束时间: {values.finishdate}</div>
@@ -72,7 +72,6 @@ class WizardThird extends Component {
                     </div>
                     <div className={classes.btnGroup}>
                         <Button
-                            raised
                             className={classes.button}
                             onClick={previousPage}
                         >
@@ -81,7 +80,6 @@ class WizardThird extends Component {
 
                         <Button
                             type="submit"
-                            raised
                             className={classes.button}
                         >
                             提交

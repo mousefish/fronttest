@@ -5,7 +5,6 @@ import { TextField } from "redux-form-material-ui";
 import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { withStyles } from "material-ui/styles";
-import { LinearProgress } from "material-ui/Progress";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import validate from "../../Utility/validate";
@@ -53,11 +52,6 @@ class SignupForm extends Component {
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
         <PageHeader history={this.props.history} title="创建新账户" />
-        <LinearProgress
-          className={classes.progress}
-          mode="determinate"
-          value={this.state.completed}
-        />
         <div className="form-group">
           <Field
             fullWidth

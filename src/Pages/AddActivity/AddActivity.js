@@ -11,13 +11,14 @@ import WizardSecond from "./WizardSecond";
 import WizardThird from "./WizardThird";
 
 class AddActivity extends Component {
+
     constructor(props) {
         super(props);
         this.nextPage = this.nextPage.bind(this);
         this.previousPage = this.previousPage.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            page: 1
+            page: 1,
         };
     }
     nextPage() {

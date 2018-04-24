@@ -21,11 +21,24 @@ import languages from "../../Data/languages";
 import config from "../../config/config";
 import * as actions from "../../Actions";
 
+
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import blue from 'material-ui/colors/blue';
+
+const newtheme = createMuiTheme({
+  palette: {
+     primary: blue,
+  },
+});
+
+
+
 const styles = theme => ({
   progress: {
     width: "95%",
-    margin: "auto"
+    margin: "auto",
   },
+
 
   textField: {
     padding: "8px 0"
@@ -102,15 +115,18 @@ class wizardSecond extends Component {
   render() {
     const { handleSubmit, previousPage } = this.props;
     const { classes, user } = this.props;
+    console.log("newtheme", newtheme)
 
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
         <PageHeader onClick={previousPage} title="完善个人基本资料" />
+        <MuiThemeProvider theme={newtheme}>
         <LinearProgress
           className={classes.progress}
           mode="determinate"
           value={this.state.completed}
         />
+        </MuiThemeProvider>
         <div className="form-group">
           <div className={classes.imageWrapper}>
             <img
@@ -146,33 +162,32 @@ class wizardSecond extends Component {
           <Field name="sex" component={renderError} />
 
           <Field
-            className={classes.textField}
+           fullWidth
+            key="age"
             name="age"
             type="text"
             component={AutocompleteField}
-            placeholder="年龄范围，按提示列表选择"
             props={this.props}
-            label="年龄范围"
+            label="年龄范围，按提示列表选择"
             marker="age"
           />
 
           <Field
-            className={classes.textField}
+           fullWidth
             name="city"
             type="text"
             component={AutocompleteField}
-            placeholder="当前居住的城市，按提示列表选择"
+            label="当前居住的城市，按提示列表选择"
             props={this.props}
             marker="loc"
           />
 
           <Field
-            className={classes.textField}
+            fullWidth
             name="yearOfLiving"
             type="text"
             component={AutocompleteField}
-            label="当前居住城市年限"
-            placeholder="当前居住的城市的年限，按提示列表选择"
+            label="当前居住的城市的年限，按提示列表选择"
             props={this.props}
             marker="year"
           />
@@ -180,7 +195,6 @@ class wizardSecond extends Component {
           <div style={{ marginTop: 10 }}>
             <h4 className="category-title">掌握的语言</h4>
             <Field
-              className={classes.textField}
               key="language"
               name="language"
               component={popupSearchMultiServices}
@@ -208,7 +222,7 @@ class wizardSecond extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.UserReducer);
+  // console.log(state.UserReducer);
   return {
     user: state.UserReducer
   };
@@ -219,4 +233,4 @@ export default reduxForm({
   destroyOnUnmount: true,
   forceUnregisterOnUnmount: true,
   validate
-})(withStyles(styles)(connect(mapStateToProps, actions)(wizardSecond)));
+})(withStyles(styles,{ withTheme: true })(connect(mapStateToProps, actions)(wizardSecond)));

@@ -9,6 +9,15 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { LinearProgress } from "material-ui/Progress";
 import PageHeader from "../../Pages/PageHeader";
 
+import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
+import blue from "material-ui/colors/blue";
+
+const newtheme = createMuiTheme({
+  palette: {
+    primary: blue
+  }
+});
+
 const styles = theme => ({
   progress: {
     width: "95%",
@@ -17,13 +26,12 @@ const styles = theme => ({
   button: {
     width: "95%",
     backgroundColor: "#1976D2"
-  },
-
+  }
 });
 
 class wizardThird extends Component {
   state = {
-    completed: 75
+    completed: 100
   };
 
   render() {
@@ -33,11 +41,13 @@ class wizardThird extends Component {
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
         <PageHeader onClick={previousPage} title="完善个人基本资料" />
-        <LinearProgress
-          className={classes.progress}
-          mode="determinate"
-          value={this.state.completed}
-        />
+        <MuiThemeProvider theme={newtheme}>
+          <LinearProgress
+            className={classes.progress}
+            mode="determinate"
+            value={this.state.completed}
+          />
+        </MuiThemeProvider>
         <div className="form-group">
           <Field
             name="school"

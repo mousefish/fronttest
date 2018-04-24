@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import WizardSecond from "../presenter/WizardSecond";
 import WizardThird from "../presenter/WizardThird";
 
-
 class SignupWizard extends Component {
   constructor(props) {
     super(props);
@@ -14,41 +13,49 @@ class SignupWizard extends Component {
     this.previousPage = this.previousPage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
-      page: 1
+      page: 1,
+      activeStep: 0
     };
   }
   nextPage() {
-    this.setState({ page: this.state.page + 1 });
+    this.setState({
+      page: this.state.page + 1,
+      activeStep: this.state.activeStep + 1
+    });
   }
 
   previousPage() {
-    this.setState({ page: this.state.page - 1 });
+    this.setState({
+      page: this.state.page - 1,
+      activeStep: this.state.activeStep - 1
+    });
   }
 
   handleSubmit(values) {
-    if(Object.keys(values).length === 0){
-        this.props.history.push('/activity');
-        return null;
+    if (Object.keys(values).length === 0) {
+      this.props.history.push("/activity");
+      return null;
     }
-     console.log("submit", values);
+    // console.log("submit", values);
     this.props.completeUserProfile(values, this.props.history);
   }
 
   render() {
     const { onSubmit } = this.props;
-    const { page } = this.state;
+    const { page, activeStep } = this.state;
     return (
       <div>
-
         {page === 1 && (
           <WizardSecond
             previousPage={this.previousPage}
             onSubmit={this.nextPage}
+            activeStep={activeStep}
           />
         )}
         {page === 2 && (
           <WizardThird
             previousPage={this.previousPage}
+            activeStep={activeStep}
             onSubmit={this.handleSubmit}
           />
         )}
@@ -65,9 +72,8 @@ class SignupWizard extends Component {
 //   onSubmit: PropTypes.func.isRequired
 // };
 const mapStateToProps = state => {
-
   return {
-    errorMsg: state.UserAuth.errorSignup,
+    errorMsg: state.UserAuth.errorSignup
   };
 };
 

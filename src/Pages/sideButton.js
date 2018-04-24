@@ -6,14 +6,21 @@ import Button from "material-ui/Button";
 import AddIcon from "material-ui-icons/Add";
 import SearchIcon from "material-ui-icons/Search";
 
+// import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
+// import blue from "material-ui/colors/blue";
+// import green from "material-ui/colors/green";
+
+// const btnTheme = createMuiTheme({
+//   palette: {
+//     primary: blue,
+//     secondary: green
+//   }
+// });
+
 const styles = theme => ({
-  root: {
-    margin: theme.spacing.unit,
-    backgroundColor: "#43A047"
-  },
   button: {
     margin: theme.spacing.unit,
-    backgroundColor:"#1976D2"
+    color: "#fff"
   },
 
   buttonWrapper: {
@@ -26,23 +33,30 @@ const styles = theme => ({
 
 function sideButton(props) {
   const { classes } = props;
+
   return (
     <div className={classes.buttonWrapper}>
       <div>
-      <Link to="/searchPanel">
-        <Button
-          fab
-          color="primary"
-          aria-label="search"
-          className={classes.button}
-        >
-          <SearchIcon />
-        </Button>
-          </Link>
+        <Link to="/searchPanel">
+          <Button
+            fab
+            color="primary"
+            aria-label="search"
+            className={classes.button}
+          >
+            <SearchIcon />
+          </Button>
+        </Link>
       </div>
+
       <div>
         <Link to="/activityWish">
-          <Button fab color="accent" aria-label="add" className={classes.root}>
+          <Button
+            fab
+            color="secondary"
+            aria-label="add"
+            className={classes.button}
+          >
             <AddIcon />
           </Button>
         </Link>

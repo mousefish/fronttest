@@ -14,6 +14,7 @@ import validate from "../../Utility/validate";
 import services from "../../Data/services";
 import PageHeader from "../PageHeader";
 
+
 const styles = theme => ({
     button: {
         width: "95%",
@@ -26,7 +27,7 @@ const styles = theme => ({
     },
 
     textField: {
-        padding: "8px 0"
+        paddingTop: 8
         // border: "1px solid blue"
     },
 
@@ -35,11 +36,16 @@ const styles = theme => ({
         flexFlow: "row nowrap",
         justifyContent: "space-between",
         alignItems: "center",
+        marginTop:8
     },
 });
 
 class WizardFirst extends Component {
+    state={
+        loc:""
+    }
     renderFields(classes) {
+
         return [
             <div className="form-group" key="basic">
                 <h4 className="category-title">基本活动信息</h4>
@@ -49,9 +55,8 @@ class WizardFirst extends Component {
                     name="theme"
                     type="text"
                     component={TextField}
-                    placeholder="活动的主题，字数不多于15个"
-                    label="活动的主题，字数不多于15个"
-                    className={classes.textField}
+                    label="活动的主题，15字以内"
+
                 />
 
                 <Field
@@ -60,7 +65,6 @@ class WizardFirst extends Component {
                     name="location"
                     type="text"
                     component={AutocompleteField}
-                    placeholder="活动所在的城市，按提示列表选择"
                     label="活动所在的城市，按提示列表选择"
                     props={this.props}
                     marker="loc"
@@ -72,9 +76,8 @@ class WizardFirst extends Component {
                     name="budget"
                     type="text"
                     component={TextField}
-                    placeholder="活动费用/人"
                     label="活动费用/人"
-                    className={classes.textField}
+
                 />
                 <div className={classes.rangeContainer}>
                         <Field
@@ -142,7 +145,6 @@ class WizardFirst extends Component {
                         <Button
                             type="submit"
                             color="primary"
-                            raised
                             className={classes.button}
                             id="btn"
                         >
