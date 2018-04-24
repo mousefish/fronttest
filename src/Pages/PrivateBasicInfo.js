@@ -200,8 +200,8 @@ class PrivateBasicInfo extends Component {
                         key="email"
                         name="email"
                         component={TextField}
-                        label="输入邮箱地址"
-                        placeholder="输入邮箱地址"
+                        label="邮箱地址"
+                        placeholder="邮箱地址"
                     />
                     <div
                         className={classes.shortBtn}
@@ -214,7 +214,8 @@ class PrivateBasicInfo extends Component {
                         name="username"
                         type="text"
                         component={TextField}
-                        placeholder="输入用户名"
+                        placeholder="用户名"
+                        label="用户名"
                     />
                 </div>
 
@@ -263,6 +264,7 @@ class PrivateBasicInfo extends Component {
                         type="text"
                         component={AutocompleteField}
                         placeholder="当前居住的城市，按提示列表选择"
+                        label="当前居住的城市，按提示列表选择"
                         props={this.props}
                         marker="loc"
                         defaultValue={user.city}
@@ -320,6 +322,7 @@ class PrivateBasicInfo extends Component {
                         multiline
                         rowsMax="4"
                         placeholder="关于我的个人介绍"
+                        label="关于我的个人介绍"
                         className={classes.textField}
                     />
                 </div>

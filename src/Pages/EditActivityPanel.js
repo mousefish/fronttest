@@ -6,7 +6,6 @@ import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
 import * as actions from "../Actions";
 import PageHeader from "./PageHeader";
-import Button from "material-ui/Button";
 import validate from "../Utility/validate";
 import popupSearchDateField from "../Components/container/popupSearchDateField";
 import SelectRangeField from "../Components/container/SelectRangeField";
@@ -20,20 +19,13 @@ import RegisterDialog from "./RegisterDialog";
 import config from "../config/config";
 import FileInput from "./AddActivity/FileInput";
 import defaultBG from "../Assets/Images/defaultBG.png";
+import Fixedbutton from "./Fixedbutton";
 
 const styles = theme => ({
     root: {
         width: 500
     },
-    button: {
-        // margin: theme.spacing.unit,
-        width: "50%",
-        color: "#fff",
-        lineHeight: 0.6,
-        height: 60,
-        borderRadius: 0,
-        fontSize: "1.5rem"
-    },
+
     btnGroup: {
         position: "fixed",
         bottom: 0,
@@ -41,8 +33,8 @@ const styles = theme => ({
         width: "100%",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
-        // border:"1px solid green"
+        alignItems: "center",
+        // border: "1px solid green"
     },
 
     textField: {
@@ -73,8 +65,8 @@ const styles = theme => ({
     formControl: {
         minWidth: 120,
         // border:'1px solid red',
-        height:60
-    },
+        height: 60
+    }
 });
 
 class EditActivityPanel extends Component {
@@ -101,7 +93,7 @@ class EditActivityPanel extends Component {
     }
 
     submitForm(values) {
-        // console.log("values", values);
+        console.log("values", values);
         const { edit, history } = this.props;
         const { activityId } = this.props.match.params;
 
@@ -336,28 +328,17 @@ class EditActivityPanel extends Component {
                 </div>
                 <div className="input-success">{msg}</div>
                 <div className={classes.btnGroup}>
-                    <Button
-                        type="submit"
-                        color="primary"
-                        style={{ backgroundColor: "#1976D2" }}
-                        raised
-                        className={classes.button}
-                    >
-                        修改
-                    </Button>
-                    <Button
-                        color="primary"
-                        style={{ backgroundColor: "#D32F2F" }}
-                        raised
-                        className={classes.button}
+                    <Fixedbutton text="修改" type="submit" width="50%"/>
+                    <Fixedbutton
+                        width="50%"
+                        text="删除"
+                        color="#D32F2F"
                         onClick={() => {
                             this.setState({
                                 open: true
                             });
                         }}
-                    >
-                        删除
-                    </Button>
+                    />
                 </div>
             </div>
         );

@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
+import { withRouter } from "react-router";
 import validate from "../../Utility/validate";
-import { TextField } from "redux-form-material-ui";
-import { withStyles } from "material-ui/styles";
-import { LinearProgress } from "material-ui/Progress";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { withStyles } from "material-ui/styles";
 import * as actions from "../../Actions";
-import { withRouter } from "react-router";
+import { TextField } from "redux-form-material-ui";
 import PasswordSetVisibility from "../presenter/PasswordSetVisibility";
 import PageHeader from "../../Pages/PageHeader";
 import Bigbutton from "../../Pages/Bigbutton";

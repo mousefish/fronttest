@@ -13,10 +13,6 @@ import PageHeader from "../../Pages/PageHeader";
 import Bigbutton from "../../Pages/Bigbutton";
 
 const styles = theme => ({
-  progress: {
-    width: "95%",
-    margin: "auto"
-  },
 
   legal: {
     margin: "auto",
