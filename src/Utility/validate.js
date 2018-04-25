@@ -1,6 +1,7 @@
 import cities from "../Data/cities";
 
-const validate = values => {
+const validate = (values, props) => {
+  const { match: { params: { version } } } = props;
   const errors = {};
   const names = [
     "theme",
@@ -31,7 +32,13 @@ const validate = values => {
 
   names.forEach(name => {
     if (!values[name]) {
-      errors[name] = "值不能为空！";
+      switch (version) {
+        case "CH":
+          errors[name] = "值不能为空！";
+          break;
+        case "EN":
+          errors[name] = "Value cannot be empty!";
+      }
     }
   });
   if (
@@ -40,14 +47,27 @@ const validate = values => {
       values.email
     )
   ) {
-    errors.email = "请输入有效邮箱";
+    switch (version) {
+      case "CH":
+        errors.email = "请输入有效邮箱";
+        break;
+      case "EN":
+        errors.email = "Please type in a valid email address";
+    }
   }
 
   if (
     values.password &&
     !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,25}$/.test(values.password)
   ) {
-    errors.password = "密码长度必须在8-25位之间，且至少含有1个数字和1个字母";
+    switch (version) {
+      case "CH":
+        errors.password = "密码长度必须在8-25位之间，且至少含有1个数字和1个字母";
+        break;
+      case "EN":
+        errors.password =
+          "Password must be 8 - 25 long, with at least 1 number and 1 letter.";
+    }
   }
 
   if (
@@ -55,17 +75,35 @@ const validate = values => {
     values.password &&
     values.email.indexOf(values.password) !== -1
   ) {
-    errors.password = "密码不能含有邮箱地址";
+    switch (version) {
+      case "CH":
+        errors.password = "密码不能含有邮箱地址";
+        break;
+      case "EN":
+        errors.password = "Password cannot contain email address.";
+    }
   }
   if (values.username && values.username.length > 20) {
-    errors.username = "用户名不能超过20个字";
+    switch (version) {
+      case "CH":
+        errors.username = "用户名不能超过20个字";
+        break;
+      case "EN":
+        errors.username = "Username must be within 20 words.";
+    }
   }
   if (
     values.minNumOfPeople &&
     values.maxNumOfPeople &&
     +values.maxNumOfPeople < +values.minNumOfPeople
   ) {
-    errors.minNumOfPeople = "区间无效";
+    switch (version) {
+      case "CH":
+        errors.minNumOfPeople = "区间无效";
+        break;
+      case "EN":
+        errors.minNumOfPeople = "Invalid range";
+    }
   }
 
   // *******************date validation
@@ -95,29 +133,65 @@ const validate = values => {
   // *******************date validation
 
   if (Number.isNaN(parseInt(values.budget)) || parseInt(values.budget) <= 0) {
-    errors.budget = "请输入有效数字";
+    switch (version) {
+      case "CH":
+        errors.budget = "请输入有效数字";
+        break;
+      case "EN":
+        errors.budget = "Please type in a valid number";
+    }
   }
   if (values.bio && values.bio.length > 100) {
-    errors.bio = "字数不能多于100";
+    switch (version) {
+      case "CH":
+        errors.bio = "字数不能多于100";
+        break;
+      case "EN":
+        errors.bio = "No more than 100 words.";
+    }
   }
 
   if (
     Number.isNaN(parseInt(values.numberOfPeople)) ||
     parseInt(values.numberOfPeople) <= 0
   ) {
-    errors.numberOfPeople = "请输入有效数字";
+    switch (version) {
+      case "CH":
+        errors.numberOfPeople = "请输入有效数字";
+        break;
+      case "EN":
+        errors.numberOfPeople = "Please type in a valid number.";
+    }
   }
 
   if (values.theme && values.theme.length > 15) {
-    errors.theme = "字数不能超过15";
+    switch (version) {
+      case "CH":
+        errors.theme = "字数不能超过15";
+        break;
+      case "EN":
+        errors.theme = "No more than 15 words";
+    }
   }
 
   if (values.note && values.note.length > 300) {
-    errors.note = "字数不能超过300";
+    switch (version) {
+      case "CH":
+        errors.note = "字数不能超过300";
+        break;
+      case "EN":
+        errors.note = "No more than 300 words";
+    }
   }
 
   if (values.story && values.story.length > 300) {
-    errors.story = "字数不能超过300";
+    switch (version) {
+      case "CH":
+        errors.story = "字数不能超过300";
+        break;
+      case "EN":
+        errors.story = "No more than 300 words";
+    }
   }
 
   return errors;

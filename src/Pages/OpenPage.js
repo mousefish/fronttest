@@ -9,6 +9,7 @@ import Tabs, { Tab } from "material-ui/Tabs";
 import logo from "../Assets/Images/logo.jpg";
 import backgroundWall from "../Assets/Images/backgroundWall.png";
 import wechat from "../Assets/Images/wechat.png";
+import switchLan from "../Utility/switchLan";
 
 const styles = {
     container: {
@@ -89,12 +90,23 @@ const styles = {
         color: "#fff",
         fontSize: "1.2rem",
         lineHeight: 1.8,
-        fontWeight:"bold",
-        textAlign:"center",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+
+    version: {
+        color: "#fff",
+        border: "1px solid #fff",
+        padding: "5px 20px",
+
+        borderRadius: 15
+    },
+    chineseVersion: {
+        letterSpacing: 2
     },
 
     image: {
-        width: "50%",
+        width: "50%"
     },
 
     tab: {
@@ -103,21 +115,20 @@ const styles = {
     },
 
     avatar: {
-        margin: 10,
+        margin: 10
     },
 
     bigAvatar: {
         width: 100,
-        height: 100,
-
+        height: 100
     },
 
     logoWrapper: {
-     display:"flex",
-     flexFlow:"column",
-     justifyContent:"center",
-     alignItems:"center",
-    },
+        display: "flex",
+        flexFlow: "column",
+        justifyContent: "center",
+        alignItems: "center"
+    }
 };
 class OpenPage extends Component {
     state = {
@@ -128,8 +139,39 @@ class OpenPage extends Component {
         this.setState({ value });
     };
 
+    renderVersionChoice() {
+        const { match, history, classes } = this.props;
+        if (match.params.version === "CH") {
+            return (
+                <p
+                    className={classes.version}
+                    onClick={() => {
+                        history.push("/openPage/EN");
+                    }}
+                >
+                    English version
+                </p>
+            );
+        }
+        if (match.params.version === "EN") {
+            return (
+                <p
+                    className={classNames(
+                        classes.version,
+                        classes.chineseVersion
+                    )}
+                    onClick={() => {
+                        history.push("/openPage/CH");
+                    }}
+                >
+                    中文版
+                </p>
+            );
+        }
+    }
+
     render() {
-        const { classes } = this.props;
+        const { classes, history, match: { params: { version } } } = this.props;
         const { value } = this.state;
         return (
             <div className={classes.container}>
@@ -142,12 +184,17 @@ class OpenPage extends Component {
                                 src={logo}
                                 className={classNames(
                                     classes.avatar,
-                                    classes.bigAvatar,
+                                    classes.bigAvatar
                                 )}
                             />
-                             <p className={classes.slogan}>你与世界之间，只差一个携U行的距离</p>
+                            <p className={classes.slogan}>
+                                {switchLan(
+                                    version,
+                                    "slogan"
+                                )}
+                            </p>
+                            {this.renderVersionChoice()}
                         </div>
-
                     </div>
                 </div>
                 <div>
@@ -159,8 +206,14 @@ class OpenPage extends Component {
                             indicatorColor="#fff"
                             textColor="#fff"
                         >
-                            <Tab className={classes.tab} label="登陆" />
-                            <Tab className={classes.tab} label="注册" />
+                            <Tab
+                                className={classes.tab}
+                                label={switchLan(version, "login")}
+                            />
+                            <Tab
+                                className={classes.tab}
+                                label={switchLan(version, "signup")}
+                            />
                         </Tabs>
                     </AppBar>
                     {value === 0 && (
@@ -176,17 +229,25 @@ class OpenPage extends Component {
                                         src={wechat}
                                         className={classes.wechatIcon}
                                     />
-                                    <div>用微信登陆</div>
+                                    <div>
+                                        {switchLan(
+                                            version,
+                                           "signupWithWechat"
+                                        )}
+                                    </div>
                                 </div>
                             </Button>
-                            <Link to="/login" className="unlink withEmail">
+                            <Link to={`/login/${version}`} className="unlink withEmail">
                                 <Button
                                     className={classNames(
                                         classes.button,
                                         classes.emailBtn
                                     )}
                                 >
-                                    用邮箱登陆
+                                    {switchLan(
+                                        version,
+                                        "loginWithEmail"
+                                    )}
                                 </Button>
                             </Link>
                         </div>
@@ -200,7 +261,10 @@ class OpenPage extends Component {
                                         classes.emailBtn
                                     )}
                                 >
-                                    创建新账户
+                                    {switchLan(
+                                        version,
+                                        "createNewAccount"
+                                    )}
                                 </Button>
                             </Link>
                         </div>

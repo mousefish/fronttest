@@ -10,6 +10,7 @@ import { TextField } from "redux-form-material-ui";
 import PasswordSetVisibility from "../presenter/PasswordSetVisibility";
 import PageHeader from "../../Pages/PageHeader";
 import Bigbutton from "../../Pages/Bigbutton";
+import switchLan from "../../Utility/switchLan";
 
 const styles = theme => ({
   textField: {
@@ -24,27 +25,38 @@ class LoginForm extends Component {
   };
 
   submitForm(values) {
-    this.props.userLogin(values, this.props.history);
+    const {
+      history,
+      match: { params: { version } }
+    } = this.props;
+    this.props.userLogin(values, history, version);
   }
 
   render() {
-    const { classes, handleSubmit, forOpen } = this.props;
+    const {
+      classes,
+      handleSubmit,
+      match: { params: { version } }
+    } = this.props;
 
     return (
       <form
         className="wrapper"
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
-        <PageHeader history={this.props.history} title="用邮箱登陆" />
+        <PageHeader
+          history={this.props.history}
+          title={switchLan(version, "loginWithEmail")}
+        />
         <div className="form-group">
           <Field
             fullWidth
             name="email"
             component={TextField}
             className="text-field"
-            label="输入邮箱地址"
+            label={switchLan(version, "inputEmailAddress")}
             className={classes.textField}
-            placeholder="输入邮箱地址"
+            placeholder={switchLan(version, "inputEmailAddress")}
           />
 
           <Field
@@ -52,18 +64,24 @@ class LoginForm extends Component {
             type="password"
             component={PasswordSetVisibility}
             className="text-field"
-            label="输入 8 — 25 位密码"
+            label={switchLan(version, "inputPassword")}
             props={this.props}
             className={classes.textField}
           />
         </div>
 
-        <Bigbutton text="点击登录" type="submit" />
+        <Bigbutton text={switchLan(version, "clickToRegister")} type="submit" />
         <div style={{ margin: "auto" }}>
-          <p className="input-error">{this.props.errorMessage}</p>
+          <p className="input-error">
+            {version === "CH" ? (
+              this.props.errorMessage
+            ) : (
+              "Either Email or password is not corrent."
+            )}
+          </p>
           <Link className="unlink" to="/openPage">
             {" "}
-            忘记密码？
+            {switchLan(version, "forgotPassword")}
           </Link>
         </div>
       </form>

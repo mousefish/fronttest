@@ -9,14 +9,14 @@ export default ComposedComponent => {
 
         componentWillMount() {
             if (!this.props.isAuthenticated) {
-                console.log('Authenticated?', this.props.isAuthenticated);
-                this.context.router.history.push("/openPage");
+                // console.log('Authenticated?', this.props.isAuthenticated);
+                this.context.router.history.push("/openPage/CH");
             }
         }
 
         componentWillUpdate(nextProps) {
             if (!nextProps.isAuthenticated) {
-                this.context.router.history.push("/openPage");
+                this.context.router.history.push("/openPage/CH");
             }
         }
         render() {

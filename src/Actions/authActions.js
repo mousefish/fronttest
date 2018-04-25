@@ -17,10 +17,10 @@ const buildURL = searchData => {
   return qs.stringify(searchData);
 };
 
-export const logout = history => dispatch => {
+export const logout = (history, version) => dispatch => {
   localStorage.removeItem("jwtToken");
   dispatch({ type: DEAUTH_USER });
-  history.push("/openPage");
+  history.push(`/openPage/${version}`);
 };
 
 export const userSignupRequest = (userData, history) => async dispatch => {
@@ -61,7 +61,7 @@ export const completeUserProfile = (value, history) => async dispatch => {
   }
 };
 
-export const userLogin = (userData, history) => async dispatch => {
+export const userLogin = (userData, history, version) => async dispatch => {
   try {
     const res = await axios.post(`${ROOT_URL}/api/login`, userData);
 
@@ -70,7 +70,7 @@ export const userLogin = (userData, history) => async dispatch => {
       type: AUTH_USER
     });
 
-    history.push("/recommendation");
+    history.push("/recommendation/"+version);
   } catch (err) {
     // err is an Object - Error: Request failed with status code 401.
     // err.message - string

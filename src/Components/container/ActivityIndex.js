@@ -119,11 +119,11 @@ class ActivityIndex extends Component {
 
   renderItems() {
     const classes = this.props.classes;
-    const { activityData } = this.props;
+    const { activityData, version } = this.props;
 
     return _.map(activityData, item => {
       return (
-        <Link to={`/activity/${item.id}`} className="unlink" key={item.id}>
+        <Link to={`/activity/${item.id}/${version}`} className="unlink" key={item.id}>
           <Card className="card" style={{ borderRadius: 10 }}>
             <CardMedia className={classes.media} image={cardBG} title="travel">
               {" "}

@@ -93,18 +93,19 @@ class MyAccount extends Component {
         let token = localStorage.getItem("jwtToken");
         const { user } = this.props;
         if (token) {
-            return (
-                <MyAccountLoggedinHeader
-                    userName={user.username}
-                />
-            );
+            return <MyAccountLoggedinHeader userName={user.username} />;
         } else {
             return <MyAccountRegisterHeader />;
         }
     }
 
     render() {
-        const { history, classes, fullScreen } = this.props;
+        const {
+            history,
+            classes,
+            fullScreen,
+            match: { params: { version } }
+        } = this.props;
         return (
             <div>
                 <Dialog
@@ -129,9 +130,9 @@ class MyAccount extends Component {
                             marginTop: 30,
                             padding: 20
                         }}
-                        onClick={() => this.props.logout(this.props.history)}
+                        onClick={() => this.props.logout(history, version)}
                     >
-                        退出账户(FOR TESTING PURPOSE. NO NEED IN PRODUCTION)
+                        退出账户(FOR TESTING PURPOSE NOW)
                     </button>
                 </div>
             </div>
