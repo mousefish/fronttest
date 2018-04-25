@@ -140,7 +140,6 @@ class App extends Component {
   }
 
   renderBottomNav(props) {
-    console.log("props",this.props)
     const { main_value, sub_value } = this.state;
     const { classes, history: { location: { pathname } } } = this.props;
     if (
