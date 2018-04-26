@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PageNotFound from "./Pages/404Page";
 import SignupForm from "./Components/container/SignupForm";
 import SignupWizard from "./Components/container/SignupWizard";
@@ -55,12 +56,9 @@ import CardGiftcard from "material-ui-icons/CardGiftcard";
 
 import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+
 import UserFavorite from "material-ui-icons/Favorite";
 import Contacts from "material-ui-icons/Contacts";
-
-// import { connect } from "react-redux";
-// import * as actions from "./Actions";
 
 const styleSheet = {
   root: {
@@ -104,23 +102,32 @@ class App extends Component {
     location: PropTypes.object.isRequired
   };
 
-  constructor() {
-    super();
-    this.state = {
-      main_value: 0,
-      popup: false,
-      sub_value: null,
-      version: "CH"
-    };
+  state = {
+    popup: false,
+    sub_value: null,
+    version: "CH",
+    main_value: this.main_valueSetter(this.props.location.pathname)
+  };
+
+  main_valueSetter(pathname) {
+    if (pathname.includes("/recommendation/")) {
+      return 0;
+    } else if (pathname.includes("/activity/")) {
+      return 1;
+    } else if (pathname.includes("/wish/")) {
+      return 2;
+    } else if (pathname.includes("/my/")) {
+      return 3;
+    }
   }
 
-
   handleMainChange(event, main_value) {
-    const { pathname } = this.props.location;
+    this.setState({
+      main_value
+    });
+    const { location: { pathname } } = this.props;
     let lan = pathname.includes("/EN") ? "/EN" : "/CH";
-    this.setState({ main_value });
     if (main_value === 0) {
-      console.log("REally????????")
       this.props.history.push("/recommendation" + lan);
     } else if (main_value === 1) {
       this.props.history.push("/activity" + lan);
@@ -142,8 +149,8 @@ class App extends Component {
   }
 
   renderBottomNav(props) {
-    const { main_value, sub_value } = this.state;
-    console.log("main value", this.state.main_value)
+    const { sub_value, main_value } = this.state;
+
     const { classes, history: { location: { pathname } } } = this.props;
     if (
       pathname.includes("/editActivity/") ||
@@ -190,7 +197,6 @@ class App extends Component {
         </span>
       );
     }
-
     return (
       <BottomNavigation
         value={main_value}
@@ -229,15 +235,12 @@ class App extends Component {
     const { classes } = this.props;
     let value = this.state.value > 0 ? this.state.value : value;
     let { version } = this.state;
+
     return (
       <div>
         <div>
           <Switch>
-            <Route
-              exact
-              path="/"
-              component={RequireAuth(Recommendation)}
-            />
+            <Route exact path="/" component={RequireAuth(Recommendation)} />
             <Route exact path="/openPage/:version" component={OpenPage} />
             <Route exact path="/login/:version" component={LoginForm} />
             <Route
@@ -261,7 +264,11 @@ class App extends Component {
               path="/activity/:activityId/:version"
               component={RequireAuth(Activity)}
             />
-            <Route exact path="/wish/:wishId/:version" component={RequireAuth(Wish)} />
+            <Route
+              exact
+              path="/wish/:wishId/:version"
+              component={RequireAuth(Wish)}
+            />
             <Route
               exact
               path="/my/:version"

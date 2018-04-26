@@ -99,7 +99,6 @@ class Recommendation extends Component {
 
     render() {
         const { classes } = this.props;
-        console.log(this.props)
         return (
             <div style={{ position: "relative" }}>
                 <div className="wrapper">

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-export default ComposedComponent => {
+export default (ComposedComponent) => {
     class Authentication extends Component {
         static contextTypes = {
             router: React.PropTypes.object
@@ -14,11 +14,13 @@ export default ComposedComponent => {
         }
 
         componentWillUpdate(nextProps) {
+
             if (!nextProps.isAuthenticated) {
                 this.context.router.history.push("/openPage/CH");
             }
         }
         render() {
+
             const {
                 location: { pathname },
                 isAuthenticated,
