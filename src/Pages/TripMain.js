@@ -17,9 +17,7 @@ WebFontLoader.load({
   }
 });
 
-const styles = {
-
-};
+const styles = {};
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -43,10 +41,11 @@ class TripMain extends Component {
   };
 
   renderContent(activityData) {
+    const { version } = this.props.match.params;
     if (!activityData) {
       return <div>Loading..</div>;
     } else {
-      return <ActivityIndex activityData={activityData} />;
+      return <ActivityIndex activityData={activityData} version={version} />;
     }
   }
 
@@ -55,7 +54,7 @@ class TripMain extends Component {
     const { activityData } = this.props;
     return (
       <div style={{ position: "relative" }}>
-        <SideButton/>
+        <SideButton />
         <div className="wrapper">
           <Header />
           <div>{this.renderContent(activityData)}</div>

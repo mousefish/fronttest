@@ -5,12 +5,12 @@ import { withRouter } from "react-router";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
+import Button from "material-ui/Button";
 import Radio from "material-ui/Radio";
 import { RadioGroup, TextField } from "redux-form-material-ui";
 import { FormControlLabel } from "material-ui/Form";
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
-import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import Dialog, {
@@ -29,6 +29,7 @@ import FileInput from "./AddActivity/FileInput";
 import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import config from "../config/config";
 import languages from "../Data/languages";
+import Bigbutton from "./Bigbutton";
 
 const styles = theme => ({
     button: {
@@ -175,11 +176,13 @@ class PrivateBasicInfo extends Component {
             }
         });
         // console.log("result", result);
-        this.props.updateUserBasicInfo(result)
-        this.setState({
-            open:false
-        })
+        if (Object.keys(result).length > 0) {
+            this.props.updateUserBasicInfo(result);
+        }
 
+        this.setState({
+            open: false
+        });
     }
 
     renderEdit() {
@@ -197,8 +200,8 @@ class PrivateBasicInfo extends Component {
                         key="email"
                         name="email"
                         component={TextField}
-                        label="输入邮箱地址"
-                        placeholder="输入邮箱地址"
+                        label="邮箱地址"
+                        placeholder="邮箱地址"
                     />
                     <div
                         className={classes.shortBtn}
@@ -211,7 +214,8 @@ class PrivateBasicInfo extends Component {
                         name="username"
                         type="text"
                         component={TextField}
-                        placeholder="输入用户名"
+                        placeholder="用户名"
+                        label="用户名"
                     />
                 </div>
 
@@ -260,6 +264,7 @@ class PrivateBasicInfo extends Component {
                         type="text"
                         component={AutocompleteField}
                         placeholder="当前居住的城市，按提示列表选择"
+                        label="当前居住的城市，按提示列表选择"
                         props={this.props}
                         marker="loc"
                         defaultValue={user.city}
@@ -317,20 +322,13 @@ class PrivateBasicInfo extends Component {
                         multiline
                         rowsMax="4"
                         placeholder="关于我的个人介绍"
+                        label="关于我的个人介绍"
                         className={classes.textField}
                     />
                 </div>
 
                 <div className="centralize-button">
-                    <Button
-                        type="submit"
-                        color="primary"
-                        raised
-                        id="btn"
-                        className={classes.button}
-                    >
-                        保存修改
-                    </Button>
+                    <Bigbutton type="submit" text="保存修改" />
                     <div className="input-success">{msg}</div>
                 </div>
             </div>
@@ -392,7 +390,7 @@ const mapStateToProps = state => {
     } = state.UserReducer.basicInfo;
     return {
         user: state.UserReducer.basicInfo,
-        msg:state.UserReducer.msg,
+        msg: state.UserReducer.msg,
         imageError: state.ImageReducer.error,
         initialValues: {
             email: mail,

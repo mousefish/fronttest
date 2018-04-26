@@ -1,40 +1,31 @@
 import React, { Component } from "react";
+import { withStyles } from "material-ui/styles";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import validate from "../../Utility/validate";
 import Radio from "material-ui/Radio";
 import { RadioGroup, TextField } from "redux-form-material-ui";
-import { LinearProgress } from "material-ui/Progress";
+
 import { Link } from "react-router-dom";
-import Button from "material-ui/Button";
-import { withStyles } from "material-ui/styles";
+import Bigbutton from "../../Pages/Bigbutton";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { FormControlLabel } from "material-ui/Form";
 import PageHeader from "../../Pages/PageHeader";
-
 import FileInput from "../../Pages/AddActivity/FileInput";
 import defaultAvatar from "../../Assets/Images/defaultAvatar.png";
-
 import AutocompleteField from "../../Components/container/AutocompleteField";
 import popupSearchMultiServices from "../../Components/container/popupSearchMultiServices";
 import languages from "../../Data/languages";
 import config from "../../config/config";
 import * as actions from "../../Actions";
+import ProgressBar from "./ProgressBar";
+
+
 
 const styles = theme => ({
-  progress: {
-    width: "95%",
-    margin: "auto"
-  },
-
   textField: {
     padding: "8px 0"
     // border: "1px solid blue"
-  },
-
-  button: {
-    width: "95%",
-    backgroundColor: "#1976D2"
   },
 
   radioInner: {
@@ -102,15 +93,10 @@ class wizardSecond extends Component {
   render() {
     const { handleSubmit, previousPage } = this.props;
     const { classes, user } = this.props;
-
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
         <PageHeader onClick={previousPage} title="完善个人基本资料" />
-        <LinearProgress
-          className={classes.progress}
-          mode="determinate"
-          value={this.state.completed}
-        />
+        <ProgressBar completed={this.state.completed} />
         <div className="form-group">
           <div className={classes.imageWrapper}>
             <img
@@ -146,33 +132,32 @@ class wizardSecond extends Component {
           <Field name="sex" component={renderError} />
 
           <Field
-            className={classes.textField}
+            fullWidth
+            key="age"
             name="age"
             type="text"
             component={AutocompleteField}
-            placeholder="年龄范围，按提示列表选择"
             props={this.props}
-            label="年龄范围"
+            label="年龄范围，按提示列表选择"
             marker="age"
           />
 
           <Field
-            className={classes.textField}
+            fullWidth
             name="city"
             type="text"
             component={AutocompleteField}
-            placeholder="当前居住的城市，按提示列表选择"
+            label="当前居住的城市，按提示列表选择"
             props={this.props}
             marker="loc"
           />
 
           <Field
-            className={classes.textField}
+            fullWidth
             name="yearOfLiving"
             type="text"
             component={AutocompleteField}
-            label="当前居住城市年限"
-            placeholder="当前居住的城市的年限，按提示列表选择"
+            label="当前居住的城市的年限，按提示列表选择"
             props={this.props}
             marker="year"
           />
@@ -180,7 +165,6 @@ class wizardSecond extends Component {
           <div style={{ marginTop: 10 }}>
             <h4 className="category-title">掌握的语言</h4>
             <Field
-              className={classes.textField}
               key="language"
               name="language"
               component={popupSearchMultiServices}
@@ -190,25 +174,14 @@ class wizardSecond extends Component {
             />
           </div>
         </div>
-
-        <div className="centralize-button">
-          <Button
-            type="submit"
-            color="primary"
-            raised
-            className={classes.button}
-            id="btn"
-          >
-            下一步
-          </Button>
-        </div>
+        <Bigbutton type="submit" text="下一步" />
       </form>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state.UserReducer);
+  // console.log(state.UserReducer);
   return {
     user: state.UserReducer
   };
@@ -219,4 +192,8 @@ export default reduxForm({
   destroyOnUnmount: true,
   forceUnregisterOnUnmount: true,
   validate
-})(withStyles(styles)(connect(mapStateToProps, actions)(wizardSecond)));
+})(
+  withStyles(styles, { withTheme: true })(
+    connect(mapStateToProps, actions)(wizardSecond)
+  )
+);

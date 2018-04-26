@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
-import Button from "material-ui/Button";
 import popupSearchDateField from "../../Components/container/popupSearchDateField";
 import popupSearchMultiServices from "../../Components/container/popupSearchMultiServices";
 import AutocompleteField from "../../Components/container/AutocompleteField";
@@ -13,20 +12,21 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "../../Utility/validate";
 import services from "../../Data/services";
 import PageHeader from "../PageHeader";
+import Bigbutton from "../Bigbutton";
 
 const styles = theme => ({
-    button: {
-        width: "95%",
-        backgroundColor: "#1976D2"
+    root: {
+        flexGrow: 1
     },
+
     formControl: {
         minWidth: 120,
         // border:'1px solid red',
-        height:60
+        height: 60
     },
 
     textField: {
-        padding: "8px 0"
+        paddingTop: 8
         // border: "1px solid blue"
     },
 
@@ -35,7 +35,15 @@ const styles = theme => ({
         flexFlow: "row nowrap",
         justifyContent: "space-between",
         alignItems: "center",
+        marginTop: 8
     },
+    container: {
+        flexGrow: 1,
+        position: "relative"
+    },
+    inputRoot: {
+        flexWrap: "wrap"
+    }
 });
 
 class WizardFirst extends Component {
@@ -49,9 +57,7 @@ class WizardFirst extends Component {
                     name="theme"
                     type="text"
                     component={TextField}
-                    placeholder="活动的主题，字数不多于15个"
-                    label="活动的主题，字数不多于15个"
-                    className={classes.textField}
+                    label="活动的主题，15字以内"
                 />
 
                 <Field
@@ -60,8 +66,7 @@ class WizardFirst extends Component {
                     name="location"
                     type="text"
                     component={AutocompleteField}
-                    placeholder="活动所在的城市，按提示列表选择"
-                    label="活动所在的城市，按提示列表选择"
+                    label="活动所在的城市，从提示列表选择"
                     props={this.props}
                     marker="loc"
                 />
@@ -72,29 +77,26 @@ class WizardFirst extends Component {
                     name="budget"
                     type="text"
                     component={TextField}
-                    placeholder="活动费用/人"
                     label="活动费用/人"
-                    className={classes.textField}
                 />
                 <div className={classes.rangeContainer}>
-                        <Field
-                            key="minNumOfPeople"
-                            name="minNumOfPeople"
-                            type="text"
-                            component={SelectRangeField}
-                            title="最少人数"
-                            props={this.props}
-                        />
+                    <Field
+                        key="minNumOfPeople"
+                        name="minNumOfPeople"
+                        type="text"
+                        component={SelectRangeField}
+                        title="最少人数"
+                        props={this.props}
+                    />
 
-                        <Field
-                            key="maxNumOfPeople"
-                            name="maxNumOfPeople"
-                            type="text"
-                            title="最多人数"
-                            component={SelectRangeField}
-                            props={this.props}
-                        />
-
+                    <Field
+                        key="maxNumOfPeople"
+                        name="maxNumOfPeople"
+                        type="text"
+                        title="最多人数"
+                        component={SelectRangeField}
+                        props={this.props}
+                    />
                 </div>
             </div>,
 
@@ -139,15 +141,7 @@ class WizardFirst extends Component {
                         />
                     </div>
                     <div className="centralize-button">
-                        <Button
-                            type="submit"
-                            color="primary"
-                            raised
-                            className={classes.button}
-                            id="btn"
-                        >
-                            下一步
-                        </Button>
+                        <Bigbutton text="下一步" type="submit" />
                     </div>
                 </form>
             </div>

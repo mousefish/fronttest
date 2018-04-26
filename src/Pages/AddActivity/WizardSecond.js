@@ -1,22 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { withStyles } from "material-ui/styles";
-import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "../../Utility/validate";
 import { TextField } from "redux-form-material-ui";
 import PageHeader from "../PageHeader";
-import { connect } from "react-redux";
-
+import Bigbutton from "../Bigbutton";
 
 const styles = theme => ({
-    button: {
-         width: "100%",
-        backgroundColor: "#1976D2"
-    },
 
     textField: {
-        padding: "8px 0",
+        padding: "8px 0"
         // border: "1px solid blue"
     }
 });
@@ -46,15 +41,7 @@ class WizardSecond extends Component {
                         />
                     </div>
                     <div className="centralize-button">
-                    <Button
-                        type="submit"
-                        color="primary"
-                        raised
-                        className={classes.button}
-                        id="btn"
-                    >
-                        下一步
-                    </Button>
+                        <Bigbutton text="下一步" type="submit" />
                     </div>
                 </form>
             </div>
@@ -62,14 +49,12 @@ class WizardSecond extends Component {
     }
 }
 
-const mapStateToProps = (state)=>{
-    // console.log("reducer??", state.form.wizard.values);
+const mapStateToProps = state => {
+    // console.log("reducer", state.form.wizard.values);
     return {
-
         values: state.form.wizard.values
-
-    }
-}
+    };
+};
 export default reduxForm({
     form: "wizard",
     destroyOnUnmount: false,

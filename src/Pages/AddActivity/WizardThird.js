@@ -3,11 +3,11 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { withStyles } from "material-ui/styles";
 import * as actions from "../../Actions";
-import Button from "material-ui/Button";
 import FileInput from "./FileInput";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "../../Utility/validate";
 import PageHeader from "../PageHeader";
+import Bigbutton from "../Bigbutton";
 
 const styles = theme => ({
     imageWrapper: {
@@ -22,16 +22,7 @@ const styles = theme => ({
         margin: "20px auto",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
-        // border:"1px solid green"
-    },
-    button: {
-        width: "40%",
-        letterSpacing: 2,
-        padding: 12,
-        fontSize: 18,
-        backgroundColor:"#1976D2",
-        color: "#fff"
+        alignItems: "center",
     },
 
     item: {
@@ -48,7 +39,7 @@ class WizardThird extends Component {
                 <div className={classes.item}>城市: {values.location}</div>
                 <div className={classes.item}>活动费用: {values.budget}</div>
                 <div className={classes.item}>
-                    接收的人数上限: {values.numberOfPeople}
+                    接收的人数: {values.minNumOfPeople} 人 — {values.maxNumOfPeople} 人
                 </div>
                 <div className={classes.item}>活动开始时间: {values.departdate}</div>
                 <div className={classes.item}>活动结束时间: {values.finishdate}</div>
@@ -71,21 +62,19 @@ class WizardThird extends Component {
                         {this.renderInputs()}
                     </div>
                     <div className={classes.btnGroup}>
-                        <Button
-                            raised
-                            className={classes.button}
-                            onClick={previousPage}
-                        >
-                            返回修改
-                        </Button>
-
-                        <Button
-                            type="submit"
-                            raised
-                            className={classes.button}
-                        >
-                            提交
-                        </Button>
+                        <div style={{width:"40%"}}>
+                            <Bigbutton
+                                text="返回修改"
+                                color="#43A047"
+                                onClick={previousPage}
+                            />
+                        </div>
+                        <div style={{width:"40%"}}>
+                            <Bigbutton
+                                text="提交"
+                                type="submit"
+                            />
+                        </div>
                     </div>
                 </form>
             </div>

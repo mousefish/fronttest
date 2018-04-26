@@ -14,15 +14,16 @@ const renderInput = inputProps => {
   const { InputProps, classes, ref, ...other } = inputProps;
   return (
     <TextField
-      {...other}
-      inputRef={ref}
       InputProps={{
+        inputRef: ref,
         classes: {
-          input: classes.input
+          root: classes.inputRoot,
         },
-        ...InputProps
+        ...InputProps,
       }}
-      style={{ paddingTop: 8, marginBottom: 8 }}
+      label={InputProps.label}
+      {...other}
+      style={{ marginTop:8}}
     />
   );
 };
@@ -52,7 +53,7 @@ const renderItem = (params, props) => {
           selected={isHighlighted}
           component="div"
           style={{
-            fontWeight: isSelected ? 500 : 400
+            fontWeight: isSelected ? 500 : 400,
           }}
         >
           {item}
@@ -67,7 +68,8 @@ const renderItem = (params, props) => {
         selected={isHighlighted}
         component="div"
         style={{
-          fontWeight: isSelected ? 500 : 400
+          fontWeight: isSelected ? 500 : 400,
+           marginTop:6
         }}
       >
         {item}
@@ -108,7 +110,7 @@ const getAges = inputValue => {
   return result;
 };
 
-const getYears = inputValue=>{
+const getYears = inputValue => {
   let result = [];
   for (let i = 0; i < years.length; i++) {
     if (!inputValue || years.includes(inputValue)) {
@@ -116,22 +118,22 @@ const getYears = inputValue=>{
     }
   }
   return result;
-}
+};
 
-const renderSelectionList = (inputValue, marker )=> {
+const renderSelectionList = (inputValue, marker) => {
   if (marker === "age") {
     return getAges(inputValue);
   }
   if (marker === "loc") {
     return getCitys(inputValue);
   }
-  if(marker === "year"){
-    return getYears(inputValue)
+  if (marker === "year") {
+    return getYears(inputValue);
   }
 };
 
 const autocompleteField = props => {
-  const { classes, placeholder, defaultValue, marker, id, ...rest } = props;
+  const { classes, label, defaultValue, marker, id, ...rest } = props;
 
   return (
     <Downshift defaultSelectedItem={defaultValue}>
@@ -148,7 +150,7 @@ const autocompleteField = props => {
             fullWidth: true,
             classes,
             InputProps: getInputProps({
-              placeholder: placeholder,
+              label:label,
               id: id
             }),
             ...props.input
@@ -167,7 +169,6 @@ const autocompleteField = props => {
                   props
                 )
               )}
-
             </Paper>
           ) : null}
 

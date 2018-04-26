@@ -96,6 +96,7 @@ const styles = theme => ({
     }
 });
 class Recommendation extends Component {
+
     render() {
         const { classes } = this.props;
         return (

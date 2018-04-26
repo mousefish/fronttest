@@ -153,6 +153,7 @@ class SearchPanel extends Component {
               }}
               value={this.state.location}
               props={this.props}
+              marker="loc"
             />
           </div>
         </form>

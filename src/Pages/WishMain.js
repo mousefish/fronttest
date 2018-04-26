@@ -42,11 +42,12 @@ class WishMain extends Component {
   };
 
   renderContent(wishes) {
+    const { version } = this.props.match.params;
     if (!wishes) {
       return <div>loading..</div>;
     }
 
-    return <WishIndex wishes={wishes} />;
+    return <WishIndex wishes={wishes} version={version}/>;
   }
   render() {
     const { classes } = this.props;

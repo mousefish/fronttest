@@ -98,7 +98,7 @@ class WishIndex extends Component {
   }
 
   renderItems() {
-    const { classes, theme } = this.props;
+    const { classes, theme, version } = this.props;
     const { wishes } = this.props;
     if (!wishes) {
       return <div>loading...</div>;
@@ -106,7 +106,7 @@ class WishIndex extends Component {
 
     return wishes.map(wish => {
       return (
-        <Link to={`/wish/${wish.id}`} key={wish.id} className="unlink">
+        <Link to={`/wish/${wish.id}/${version}`} key={wish.id} className="unlink">
           <Card className="card" key={wish.id} style={{position:"relative"}}>
              <div className={classes.leftImg}>
                <img className={classes.wishImg} src={trip} alt="wish card"/>

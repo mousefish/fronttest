@@ -7,16 +7,16 @@ import StarBorder from "material-ui-icons/StarBorder";
 import RatingIndex from "./RatingIndex";
 import TextField from "material-ui/TextField";
 import * as actions from "../Actions";
-import Button from "material-ui/Button";
 import Dialog from "material-ui/Dialog";
 import RegisterDialog from "./RegisterDialog";
+import Bigbutton from "./Bigbutton";
 
 const styles = theme => ({
     textField: {
         // marginLeft: theme.spacing.unit,
         // marginRight: theme.spacing.unit,
         width: "100%",
-        marginBottom:10
+        marginBottom: 10
     },
     container: {
         display: "flex",
@@ -26,7 +26,6 @@ const styles = theme => ({
     button: {
         width: "100%",
         backgroundColor: "#1976D2"
-
     },
     starColor: {
         color: "#BDBDBD"
@@ -89,12 +88,11 @@ class RatingForm extends Component {
             this.setState({
                 open: true
             });
-        }
-        else if (numOfStars === 0) {
+        } else if (numOfStars === 0) {
             this.setState({ message: "请提供星评和评论" });
             return;
-        } else if(feedback && feedback.length > 300){
-            this.setState({ message:"评论长度不能多于300个字"})
+        } else if (feedback && feedback.length > 300) {
+            this.setState({ message: "评论长度不能多于300个字" });
             return;
         }
         const data = { numOfStars, feedback, activityId, creatorId };
@@ -127,7 +125,7 @@ class RatingForm extends Component {
                     </div>
                 </Dialog>
 
-                <form >
+                <form>
                     <div>{this.state.stars}</div>
                     <TextField
                         id="textarea"
@@ -140,16 +138,14 @@ class RatingForm extends Component {
                             this.setState({ feedback: event.target.value });
                         }}
                     />
-                    <Button
-                        className={classes.button}
-                        raised
-                        id="btn"
+
+                    <Bigbutton
+                        text="提交评论"
                         onClick={event => {
                             this.sendRating(event, activityId, creatorId);
                         }}
-                    >
-                        提交评论
-                    </Button>
+                        width="100%"
+                    />
                     <div className="input-error">
                         {this.state.message || message}
                     </div>

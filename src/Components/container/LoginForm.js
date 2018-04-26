@@ -1,24 +1,18 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
+import { withRouter } from "react-router";
 import validate from "../../Utility/validate";
-import { TextField } from "redux-form-material-ui";
-import Button from "material-ui/Button";
-import { withStyles } from "material-ui/styles";
-import { LinearProgress } from "material-ui/Progress";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { withStyles } from "material-ui/styles";
 import * as actions from "../../Actions";
-import { withRouter } from "react-router";
+import { TextField } from "redux-form-material-ui";
 import PasswordSetVisibility from "../presenter/PasswordSetVisibility";
 import PageHeader from "../../Pages/PageHeader";
+import Bigbutton from "../../Pages/Bigbutton";
+import switchLan from "../../Utility/switchLan";
 
 const styles = theme => ({
-
-  button: {
-    width: "95%",
-    backgroundColor: "#1976D2"
-  },
-
   textField: {
     padding: "8px 0"
     // border: "1px solid blue"
@@ -31,27 +25,38 @@ class LoginForm extends Component {
   };
 
   submitForm(values) {
-    this.props.userLogin(values, this.props.history);
+    const {
+      history,
+      match: { params: { version } }
+    } = this.props;
+    this.props.userLogin(values, history, version);
   }
 
   render() {
-    const { classes, handleSubmit, forOpen } = this.props;
+    const {
+      classes,
+      handleSubmit,
+      match: { params: { version } }
+    } = this.props;
 
     return (
       <form
         className="wrapper"
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
-        <PageHeader history={this.props.history} title="用邮箱登陆" />
+        <PageHeader
+          history={this.props.history}
+          title={switchLan(version, "loginWithEmail")}
+        />
         <div className="form-group">
           <Field
             fullWidth
             name="email"
             component={TextField}
             className="text-field"
-            label="输入邮箱地址"
+            label={switchLan(version, "inputEmailAddress")}
             className={classes.textField}
-            placeholder="输入邮箱地址"
+            placeholder={switchLan(version, "inputEmailAddress")}
           />
 
           <Field
@@ -59,35 +64,25 @@ class LoginForm extends Component {
             type="password"
             component={PasswordSetVisibility}
             className="text-field"
-            label="输入 8 — 25 位密码"
+            label={switchLan(version, "inputPassword")}
             props={this.props}
             className={classes.textField}
           />
         </div>
 
-        <div className="centralize-button">
-          <Button
-            type="submit"
-            color="primary"
-            raised
-            className={classes.button}
-            id="btn"
-            style={{ margin: "5px 0" }}
-          >
-            点击登陆
-          </Button>
-          <p
-            className="input-error centralize-button"
-            style={{ textAlign: "center" }}
-          >
-            {this.props.errorMessage}
+        <Bigbutton text={switchLan(version, "clickToRegister")} type="submit" />
+        <div style={{ margin: "auto" }}>
+          <p className="input-error">
+            {version === "CH" ? (
+              this.props.errorMessage
+            ) : (
+              "Either Email or password is not corrent."
+            )}
           </p>
-          <div>
-            <Link className="unlink" to="/openPage">
-              {" "}
-              <span className={classes.forget}>忘记密码？</span>
-            </Link>
-          </div>
+          <Link className="unlink" to="/openPage">
+            {" "}
+            {switchLan(version, "forgotPassword")}
+          </Link>
         </div>
       </form>
     );

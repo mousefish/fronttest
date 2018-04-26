@@ -4,11 +4,13 @@ import config from "../config/config";
 
 const ROOT_URL = config["ROOT_URL"];
 
-axios.defaults.headers.common["authorization"] = localStorage.getItem(
-    "jwtToken"
-);
-
+const setDefault = token => {
+    axios.defaults.headers.common["authorization"] = token;
+};
 export const fetchUserFavorites = () => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.get(`${ROOT_URL}/api/fetchUserFavorites`);
     dispatch({
         type: FETCH_USER_FAVORITES,
@@ -17,6 +19,9 @@ export const fetchUserFavorites = () => async dispatch => {
 };
 
 export const deleteUserFavorite = favId => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.put(`${ROOT_URL}/api/deleteUserFavorite/${favId}`);
 
     dispatch({

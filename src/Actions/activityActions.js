@@ -14,11 +14,14 @@ import config from "../config/config";
 
 const ROOT_URL = config["ROOT_URL"];
 
-axios.defaults.headers.common["authorization"] = localStorage.getItem(
-    "jwtToken"
-);
+const setDefault = token => {
+    axios.defaults.headers.common["authorization"] = token;
+};
 
 export const verifyYourFav = activityId => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.get(`${ROOT_URL}/api/verifyYourFav/${activityId}`);
     dispatch({
         type: IS_YOUR_FAV,
@@ -28,6 +31,9 @@ export const verifyYourFav = activityId => async dispatch => {
 
 export const fetchActivityData = () => async dispatch => {
     try {
+        if (!axios.defaults.headers.common.authorization) {
+            setDefault(localStorage.getItem("jwtToken"));
+        }
         const res = await axios.get(`${ROOT_URL}/api/fetchActivity`);
         dispatch({
             type: FETCH_ACTIVITY_DATA,
@@ -40,6 +46,9 @@ export const fetchActivityData = () => async dispatch => {
 
 export const fetchOneActivity = activityId => async dispatch => {
     try {
+        if (!axios.defaults.headers.common.authorization) {
+            setDefault(localStorage.getItem("jwtToken"));
+        }
         const res = await axios.get(`${ROOT_URL}/api/activity/${activityId}`);
         dispatch({
             type: FETCH_ONE_ACTIVITY,
@@ -51,8 +60,10 @@ export const fetchOneActivity = activityId => async dispatch => {
 };
 
 export const fetchUserActivities = userId => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.get(`${ROOT_URL}/api/activities/${userId}`);
-
     dispatch({
         type: FETCH_USER_ACTIVITIES,
         payload: res.data
@@ -61,6 +72,9 @@ export const fetchUserActivities = userId => async dispatch => {
 
 export const fetchOneUserActivityForEditting = activityId => async dispatch => {
     try {
+        if (!axios.defaults.headers.common.authorization) {
+            setDefault(localStorage.getItem("jwtToken"));
+        }
         const res = await axios.get(
             `${ROOT_URL}/api/editActivity/${activityId}`
         );
@@ -79,6 +93,9 @@ export const updateUserActivity = (
     edittedValues,
     history
 ) => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.post(
         `${ROOT_URL}/api/updateUserActivity/${activityId}`,
         edittedValues
@@ -136,6 +153,9 @@ export const deleteUserActivity = (
 
 export const submitActivityData = (data, history) => async dispatch => {
     try {
+        if (!axios.defaults.headers.common.authorization) {
+            setDefault(localStorage.getItem("jwtToken"));
+        }
         const res = await axios.post(`${ROOT_URL}/api/addActivity`, data);
         if (typeof res.data === "string") {
             dispatch({
@@ -153,6 +173,9 @@ export const submitActivityData = (data, history) => async dispatch => {
 
 export const submitLikes = itemId => async dispatch => {
     try {
+        if (!axios.defaults.headers.common.authorization) {
+            setDefault(localStorage.getItem("jwtToken"));
+        }
         const res = await axios.post(`${ROOT_URL}/api/clickLikes/${itemId}`);
         dispatch({
             type: HANDLE_LIKES,

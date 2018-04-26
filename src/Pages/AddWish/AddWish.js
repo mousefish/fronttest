@@ -3,7 +3,6 @@ import { Field, reduxForm } from "redux-form";
 import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import Button from "material-ui/Button";
 import AutocompleteField from "../../Components/container/AutocompleteField";
 import popupSearchDateField from "../../Components/container/popupSearchDateField";
 
@@ -14,16 +13,13 @@ import validate from "../../Utility/validate";
 import * as actions from "../../Actions";
 import services from "../../Data/services";
 import PageHeader from "../PageHeader";
-
+import Bigbutton from "../Bigbutton";
 const styles = theme => ({
     textField: {
         padding: "8px 0"
         // border: "1px solid blue"
     },
-    button: {
-        width: "95%",
-        backgroundColor: "#1976D2"
-    }
+
 });
 
 class AddWish extends Component {
@@ -141,15 +137,7 @@ class AddWish extends Component {
                     </div>
 
                     <div className="centralize-button">
-                        <Button
-                            type="submit"
-                            color="primary"
-                            raised
-                            className={classes.button}
-                            id="btn"
-                        >
-                            提交
-                        </Button>
+                        <Bigbutton text="提交" type="submit" />
                     </div>
                 </form>
             </div>
