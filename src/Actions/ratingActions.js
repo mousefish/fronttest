@@ -10,13 +10,15 @@ import config from "../config/config";
 
 const ROOT_URL = config["ROOT_URL"];
 
-axios.defaults.headers.common["authorization"] = localStorage.getItem(
-    "jwtToken"
-);
+const setDefault = token => {
+    axios.defaults.headers.common["authorization"] = token;
+};
 
 export const sendRating = ratingData => async dispatch => {
-    // ratingData: // data: {numOfStars: 3, feedback: "ilove", activityId: 1}
     try {
+        if (!axios.defaults.headers.common.authorization) {
+            setDefault(localStorage.getItem("jwtToken"));
+        }
         const res = await axios.post(`${ROOT_URL}/api/addRating`, ratingData);
         dispatch({
             type: ADD_RATING_DATA,
@@ -28,6 +30,9 @@ export const sendRating = ratingData => async dispatch => {
 };
 
 export const fetchRatings = activityId => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.get(`${ROOT_URL}/api/fetchRatings/${activityId}`);
     dispatch({
         type: FETCH_RATING_DATA,
@@ -36,6 +41,9 @@ export const fetchRatings = activityId => async dispatch => {
 };
 
 export const fetchRatingSummary = activityId => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.get(
         `${ROOT_URL}/api/fetchRatingSummary/${activityId}`
     );

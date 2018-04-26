@@ -12,11 +12,14 @@ import {
 import config from "../config/config";
 const ROOT_URL = config["ROOT_URL"];
 
-axios.defaults.headers.common["authorization"] = localStorage.getItem(
-    "jwtToken"
-);
+const setDefault = token => {
+    axios.defaults.headers.common["authorization"] = token;
+};
 
 export const fetchUserWishes = userId => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.get(`${ROOT_URL}/api/wishes/${userId}`);
     dispatch({
         type: FETCH_USER_WISHES,
@@ -25,6 +28,9 @@ export const fetchUserWishes = userId => async dispatch => {
 };
 export const fetchOneUserWishForEditting = wishId => async dispatch => {
     try {
+        if (!axios.defaults.headers.common.authorization) {
+            setDefault(localStorage.getItem("jwtToken"));
+        }
         const res = await axios.get(`${ROOT_URL}/api/editWish/${wishId}`);
         dispatch({
             type: FETCH_WISH_FOR_EDITTING,
@@ -41,6 +47,9 @@ export const updateUserWish = (
     edittedValues,
     history
 ) => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.post(
         `${ROOT_URL}/api/updateUserWish/${wishId}`,
         edittedValues
@@ -57,6 +66,9 @@ export const updateUserWish = (
 };
 
 export const deleteUserWish = (wishId, history, userId) => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.put(`${ROOT_URL}/api/deleteUserWish/${wishId}`);
 
     if (res.data === "成功删除该愿望") {
@@ -71,8 +83,10 @@ export const deleteUserWish = (wishId, history, userId) => async dispatch => {
 };
 
 export const submitWishData = (data, history) => async dispatch => {
-    console.log("wish data", data);
     try {
+        if (!axios.defaults.headers.common.authorization) {
+            setDefault(localStorage.getItem("jwtToken"));
+        }
         const res = await axios.post(`${ROOT_URL}/api/addWish`, data);
         dispatch({
             type: ADD_WISH_DATA,
@@ -85,6 +99,9 @@ export const submitWishData = (data, history) => async dispatch => {
 };
 
 export const fetchWishData = () => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.get(`${ROOT_URL}/api/fetchWish`);
     dispatch({
         type: FETCH_WISH_DATA,
@@ -93,6 +110,9 @@ export const fetchWishData = () => async dispatch => {
 };
 
 export const fetchOneWish = wishId => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.get(`${ROOT_URL}/api/wish/${wishId}`);
     dispatch({
         type: FETCH_ONE_WISH,
@@ -101,6 +121,9 @@ export const fetchOneWish = wishId => async dispatch => {
 };
 
 export const sendWishLike = wishId => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.post(`${ROOT_URL}/api/sendWishLike/${wishId}`);
     dispatch({
         type: HANDLE_WISH_LIKES,

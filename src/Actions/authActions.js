@@ -20,7 +20,7 @@ const buildURL = searchData => {
 export const logout = (history, version) => dispatch => {
   localStorage.removeItem("jwtToken");
   dispatch({ type: DEAUTH_USER });
-  history.push(`/openPage/${version}`);
+  window.location.reload(`/openPage/${version}`)
 };
 
 export const userSignupRequest = (userData, history) => async dispatch => {
@@ -64,7 +64,6 @@ export const completeUserProfile = (value, history) => async dispatch => {
 export const userLogin = (userData, history, version) => async dispatch => {
   try {
     const res = await axios.post(`${ROOT_URL}/api/login`, userData);
-
     localStorage.setItem("jwtToken", res.data.token);
     dispatch({
       type: AUTH_USER

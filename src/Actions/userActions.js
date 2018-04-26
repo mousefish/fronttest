@@ -10,11 +10,14 @@ import config from "../config/config";
 
 const ROOT_URL = config["ROOT_URL"];
 
-axios.defaults.headers.common["authorization"] = localStorage.getItem(
-    "jwtToken"
-);
+const setDefault = token => {
+    axios.defaults.headers.common["authorization"] = token;
+};
 
 export const fetchComments = userId => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.get(`${ROOT_URL}/api/comments/${userId}`);
     dispatch({
         type: "FETCH_COMMENTS",
@@ -23,8 +26,10 @@ export const fetchComments = userId => async dispatch => {
 };
 
 export const fetchUser = userId => async dispatch => {
+    if (!axios.defaults.headers.common.authorization) {
+        setDefault(localStorage.getItem("jwtToken"));
+    }
     const res = await axios.get(`${ROOT_URL}/api/user/${userId}`);
-
     dispatch({
         type: FETCH_PROFILE_DATA,
         payload: res.data
@@ -32,8 +37,10 @@ export const fetchUser = userId => async dispatch => {
 };
 
 export const updateUserBasicInfo = basicInfo => async dispatch => {
-    // console.log("Action", basicInfo);
     try {
+        if (!axios.defaults.headers.common.authorization) {
+            setDefault(localStorage.getItem("jwtToken"));
+        }
         const res = await axios.post(
             `${ROOT_URL}/api/updateBasicInfo`,
             basicInfo

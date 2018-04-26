@@ -34,7 +34,7 @@ class MyAccount extends Component {
         open: false
     };
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.fetchUser(0);
     }
     handleClose = () => {

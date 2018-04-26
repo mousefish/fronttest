@@ -114,11 +114,13 @@ class App extends Component {
     };
   }
 
+
   handleMainChange(event, main_value) {
     const { pathname } = this.props.location;
     let lan = pathname.includes("/EN") ? "/EN" : "/CH";
     this.setState({ main_value });
     if (main_value === 0) {
+      console.log("REally????????")
       this.props.history.push("/recommendation" + lan);
     } else if (main_value === 1) {
       this.props.history.push("/activity" + lan);
@@ -141,6 +143,7 @@ class App extends Component {
 
   renderBottomNav(props) {
     const { main_value, sub_value } = this.state;
+    console.log("main value", this.state.main_value)
     const { classes, history: { location: { pathname } } } = this.props;
     if (
       pathname.includes("/editActivity/") ||
@@ -226,7 +229,6 @@ class App extends Component {
     const { classes } = this.props;
     let value = this.state.value > 0 ? this.state.value : value;
     let { version } = this.state;
-
     return (
       <div>
         <div>
