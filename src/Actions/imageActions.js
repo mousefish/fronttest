@@ -17,6 +17,7 @@ export const replaceWithNewImg = (userId, file) => async dispatch => {
     const maxSize = 100000;
     if (file.size > maxSize) {
         dispatch(imageErr("文件不能超过100KB"));
+        return
     }
     const uploadConfig = await axios.get(
         `${ROOT_URL}/api/replace/image/${userId}`,
@@ -62,6 +63,10 @@ export const cropImageObj = (
         x: x,
         y: y
     };
+    if(!keyforUrl){
+        return dispatch(imageErr("图片无法上传"));
+
+    }
 
     const result = await axios.post(`${ROOT_URL}/api/cropImage`, data, {
         headers: {

@@ -53,7 +53,7 @@ const styles = theme => ({
     // may need to define the max width later!
     imageWrapper: {
         position: "relative",
-        height: 128,
+        height: 128
         // border: "2px solid green"
     },
     image: {
@@ -73,6 +73,10 @@ const styles = theme => ({
     },
     textField: {
         padding: "10px 0"
+    },
+    imageUploadingError: {
+        color: "red",
+        margin: "10px 0"
     }
 });
 
@@ -116,7 +120,6 @@ class PrivateBasicInfo extends Component {
         this.setState({
             open: false
         });
-
     }
 
     renderImg() {
@@ -146,7 +149,6 @@ class PrivateBasicInfo extends Component {
                                 y
                             )}
                     />
-                    {this.props.imageError}
                 </div>
             );
         }
@@ -181,7 +183,12 @@ class PrivateBasicInfo extends Component {
         }
         return (
             <div className="wrapper">
-                <div className="form-group">{this.renderImg()}</div>
+                <div className="form-group">
+                    {this.renderImg()}
+                    <div className={classes.imageUploadingError}>
+                        {this.props.imageError}
+                    </div>
+                </div>
                 <div className="form-group">
                     <Field
                         fullWidth

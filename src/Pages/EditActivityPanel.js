@@ -66,6 +66,11 @@ const styles = theme => ({
         minWidth: 120,
         // border:'1px solid red',
         height: 60
+    },
+    imageUploadingError: {
+        color: "red",
+        textAlign: "center",
+        margin: "10px auto"
     }
 });
 
@@ -194,7 +199,6 @@ class EditActivityPanel extends Component {
                                 y
                             )}
                     />
-                    {this.props.imageError}
                 </div>
             );
         }
@@ -220,6 +224,9 @@ class EditActivityPanel extends Component {
             <div style={{ marginBottom: 60 }}>
                 <div style={{ margin: "0 auto 20px auto" }}>
                     {this.renderImg(edit)}
+                    <div className={classes.imageUploadingError}>
+                        {this.props.imageError}
+                    </div>
                 </div>
 
                 <div className="wrap form-group" key="basic">
