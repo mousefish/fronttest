@@ -13,11 +13,10 @@ const ROOT_URL = config["ROOT_URL"];
 export const replaceWithNewImg = (userId, file) => async dispatch => {
     // 1. first make sure the user has the authority to replace the image
     // a. must be logged in b. must the be the user who created the activity
-
     const maxSize = 100000;
     if (file.size > maxSize) {
         dispatch(imageErr("文件不能超过100KB"));
-        return
+        return "file too big"
     }
     const uploadConfig = await axios.get(
         `${ROOT_URL}/api/replace/image/${userId}`,

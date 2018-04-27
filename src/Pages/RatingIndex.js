@@ -144,6 +144,7 @@ class RatingIndex extends Component {
 
     renderNonParentRatings(nonParentRatings, parentId, whomToReply) {
         const { classes, ratings } = this.props;
+        console.log(nonParentRatings)
         return nonParentRatings.map((item, index) => {
             if (item.parentId === parentId) {
                 return (
