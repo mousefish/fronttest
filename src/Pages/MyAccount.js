@@ -50,7 +50,9 @@ class MyAccount extends Component {
                 case "我的圈子":
                     return this.props.history.push(`/story/0`);
                 case "我的活动":
-                    return this.props.history.push(`/userActivities/0/${version}`);
+                    return this.props.history.push(
+                        `/userActivities/0/${version}`
+                    );
                 case "我的愿望":
                     return this.props.history.push(`/userWishes/0`);
                 case "我的收藏":
@@ -63,7 +65,7 @@ class MyAccount extends Component {
         }
     }
     renderItems() {
-        const { classes, match:{ params: { version }} } = this.props;
+        const { classes, match: { params: { version } } } = this.props;
         const items = [
             "账号信息",
             "我的圈子",
@@ -91,9 +93,14 @@ class MyAccount extends Component {
 
     renderMyHeader() {
         let token = localStorage.getItem("jwtToken");
-        const { user } = this.props;
+        const { user : { username, imageurl }} = this.props;
         if (token) {
-            return <MyAccountLoggedinHeader userName={user.username} />;
+            return (
+                <MyAccountLoggedinHeader
+                    userName={username}
+                    imageurl={imageurl}
+                />
+            );
         } else {
             return <MyAccountRegisterHeader />;
         }
@@ -141,6 +148,7 @@ class MyAccount extends Component {
 }
 
 const mapStateToProps = state => {
+    // console.log(state.UserReducer.basicInfo);
     return {
         user: state.UserReducer.basicInfo
     };
