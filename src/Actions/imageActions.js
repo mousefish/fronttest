@@ -43,6 +43,7 @@ export const replaceWithNewImg = (userId, file) => async dispatch => {
             key: uploadConfig.data.key
         }
     });
+
 };
 
 export const cropImageObj = (

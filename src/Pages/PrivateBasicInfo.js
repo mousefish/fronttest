@@ -100,8 +100,8 @@ class PrivateBasicInfo extends Component {
         this.setState({ open: false });
     };
 
-    onGetImgUrl(file) {
-        this.props.replaceWithNewImg(0, file);
+    async onGetImgUrl(file) {
+        await this.props.replaceWithNewImg(0, file);
     }
 
     async onCropImageObject(keyforUrl, width, height, x, y) {

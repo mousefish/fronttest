@@ -99,7 +99,7 @@ LoginForm = reduxForm({
   form: "loginForm",
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  // validate
+  validate
 })(withStyles(styles)(LoginForm));
 
 export default (LoginForm = connect(mapStateToProps, actions)(

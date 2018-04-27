@@ -9,7 +9,7 @@ import { withStyles } from "material-ui/styles";
 const styles = theme => ({
   avatarDimension: {
     height: 128,
-    width: 128,
+    width: 128
   },
 
   // may need to redefine the max width later!
@@ -25,8 +25,7 @@ const styles = theme => ({
     position: "relative",
     textAlign: "center",
     height: 128,
-    maxWidth: 128,
-
+    maxWidth: 128
   },
 
   containerForBackground: {
@@ -39,12 +38,16 @@ const styles = theme => ({
 });
 
 class FileCrop extends Component {
-  async cropImgObj(e) {
+  async getImgURL(e) {
     e.stopPropagation();
     e.preventDefault();
-    const { keyforUrl } = this.props;
+    const { file } = this.props;
+    await this.props.onGetImgUrl(file);
+  }
+  async cropImgObj(e) {
     const imgData = this.refs.cropper.getData(true);
     const { width, height, x, y } = imgData;
+    const { keyforUrl } = this.props;
     await this.props.onCropImageObject(keyforUrl, width, height, x, y);
   }
 
@@ -98,6 +101,7 @@ class FileCrop extends Component {
 
           <span
             onClick={async e => {
+              await this.getImgURL(e);
               await this.cropImgObj(e);
               this.props.onCancel();
             }}

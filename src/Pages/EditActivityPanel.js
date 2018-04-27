@@ -152,9 +152,9 @@ class EditActivityPanel extends Component {
         this.props.updateUserActivity(activityId, edittedValues, history);
     }
 
-    onGetImgUrl(file) {
+    async onGetImgUrl(file) {
         const { edit } = this.props;
-        this.props.replaceWithNewImg(edit.userId, file);
+        await this.props.replaceWithNewImg(edit.userId, file);
     }
 
     async onCropImageObject(keyforUrl, width, height, x, y) {

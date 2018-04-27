@@ -6,7 +6,7 @@ import AddAPhoto from "material-ui-icons/AddAPhoto";
 import IconButton from "material-ui/IconButton";
 
 class FileInput extends Component {
-  state = { src: "", showIcon: true };
+  state = { src: "", showIcon: true, file:null };
 
   renderIcon() {
     let left = this.props.purpose === "avatar" ? 40 : "calc(50% - 25px)";
@@ -36,7 +36,8 @@ class FileInput extends Component {
   onCancel() {
     this.setState({
       src: "",
-      showIcon: true
+      showIcon: true,
+      file:null
     });
   }
   render() {
@@ -57,11 +58,12 @@ class FileInput extends Component {
             reader.onload = () => {
               this.setState({
                 src: reader.result,
-                showIcon: false
+                showIcon: false,
+                file:imagesToUpload[0]
               });
             };
             reader.readAsDataURL(imagesToUpload[0]);
-            this.props.onGetImgUrl(imagesToUpload[0]);
+
           }}
         >
           {this.state.src ? (
@@ -69,6 +71,8 @@ class FileInput extends Component {
               src={this.state.src}
               purpose={this.props.purpose}
               onCropImageObject={this.props.onCropImageObject}
+              onGetImgUrl={this.props.onGetImgUrl}
+              file={this.state.file}
               onCancel={() => {
                 this.onCancel();
               }}
