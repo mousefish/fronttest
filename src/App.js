@@ -106,7 +106,7 @@ class App extends Component {
     popup: false,
     sub_value: null,
     version: "CH",
-    main_value: this.main_valueSetter(this.props.location.pathname)
+    main_value: this.main_valueSetter(this.props.location.pathname) || 0
   };
 
   main_valueSetter(pathname) {
@@ -308,12 +308,12 @@ class App extends Component {
             <Route exact path="/story/:userId" component={RequireAuth(Story)} />
             <Route
               exact
-              path="/userActivities/:userId"
+              path="/userActivities/:userId/:version"
               component={RequireAuth(UserActivities)}
             />
             <Route
               exact
-              path="/editActivity/:activityId"
+              path="/editActivity/:activityId/:version"
               component={RequireAuth(EditActivityPanel)}
             />
 

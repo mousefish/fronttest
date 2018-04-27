@@ -14,15 +14,12 @@ import config from "../config/config";
 
 const ROOT_URL = config["ROOT_URL"];
 
-const setDefault = token => {
-    axios.defaults.headers.common["authorization"] = token;
-};
-
 export const verifyYourFav = activityId => async dispatch => {
-    if (!axios.defaults.headers.common.authorization) {
-        setDefault(localStorage.getItem("jwtToken"));
-    }
-    const res = await axios.get(`${ROOT_URL}/api/verifyYourFav/${activityId}`);
+    const res = await axios.get(`${ROOT_URL}/api/verifyYourFav/${activityId}`, {
+        headers: {
+            authorization: localStorage.getItem("jwtToken")
+        }
+    });
     dispatch({
         type: IS_YOUR_FAV,
         payload: res.data
@@ -31,10 +28,11 @@ export const verifyYourFav = activityId => async dispatch => {
 
 export const fetchActivityData = () => async dispatch => {
     try {
-        if (!axios.defaults.headers.common.authorization) {
-            setDefault(localStorage.getItem("jwtToken"));
-        }
-        const res = await axios.get(`${ROOT_URL}/api/fetchActivity`);
+        const res = await axios.get(`${ROOT_URL}/api/fetchActivity`, {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
         dispatch({
             type: FETCH_ACTIVITY_DATA,
             payload: res.data
@@ -46,10 +44,11 @@ export const fetchActivityData = () => async dispatch => {
 
 export const fetchOneActivity = activityId => async dispatch => {
     try {
-        if (!axios.defaults.headers.common.authorization) {
-            setDefault(localStorage.getItem("jwtToken"));
-        }
-        const res = await axios.get(`${ROOT_URL}/api/activity/${activityId}`);
+        const res = await axios.get(`${ROOT_URL}/api/activity/${activityId}`, {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
         dispatch({
             type: FETCH_ONE_ACTIVITY,
             payload: res.data
@@ -60,10 +59,11 @@ export const fetchOneActivity = activityId => async dispatch => {
 };
 
 export const fetchUserActivities = userId => async dispatch => {
-    if (!axios.defaults.headers.common.authorization) {
-        setDefault(localStorage.getItem("jwtToken"));
-    }
-    const res = await axios.get(`${ROOT_URL}/api/activities/${userId}`);
+    const res = await axios.get(`${ROOT_URL}/api/activities/${userId}`, {
+        headers: {
+            authorization: localStorage.getItem("jwtToken")
+        }
+    });
     dispatch({
         type: FETCH_USER_ACTIVITIES,
         payload: res.data
@@ -72,12 +72,15 @@ export const fetchUserActivities = userId => async dispatch => {
 
 export const fetchOneUserActivityForEditting = activityId => async dispatch => {
     try {
-        if (!axios.defaults.headers.common.authorization) {
-            setDefault(localStorage.getItem("jwtToken"));
-        }
         const res = await axios.get(
-            `${ROOT_URL}/api/editActivity/${activityId}`
+            `${ROOT_URL}/api/editActivity/${activityId}`,
+            {
+                headers: {
+                    authorization: localStorage.getItem("jwtToken")
+                }
+            }
         );
+
         dispatch({
             type: FETCH_ACTIVITY_FOR_EDITTING,
             payload: res.data
@@ -93,18 +96,19 @@ export const updateUserActivity = (
     edittedValues,
     history
 ) => async dispatch => {
-    if (!axios.defaults.headers.common.authorization) {
-        setDefault(localStorage.getItem("jwtToken"));
-    }
     const res = await axios.post(
         `${ROOT_URL}/api/updateUserActivity/${activityId}`,
-        edittedValues
+        edittedValues,
+        {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        }
     );
 
     if (res.data === "修改成功！") {
         history.goBack();
     }
-
     dispatch({
         // since we only need to receive the success message here
         type: ADD_ACTIVITY_DATA,
@@ -118,7 +122,13 @@ export const deleteUserActivity = (
     userId
 ) => async dispatch => {
     let res = await axios.put(
-        `${ROOT_URL}/api/deleteUserActivity/${activityId}`
+        `${ROOT_URL}/api/deleteUserActivity/${activityId}`,
+        null,
+        {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        }
     );
 
     // 1. if the user is authorized, and if the activity has imgurl.
@@ -153,10 +163,11 @@ export const deleteUserActivity = (
 
 export const submitActivityData = (data, history) => async dispatch => {
     try {
-        if (!axios.defaults.headers.common.authorization) {
-            setDefault(localStorage.getItem("jwtToken"));
-        }
-        const res = await axios.post(`${ROOT_URL}/api/addActivity`, data);
+        const res = await axios.post(`${ROOT_URL}/api/addActivity`, data, {
+            headers: {
+                authorization: localStorage.getItem("jwtToken")
+            }
+        });
         if (typeof res.data === "string") {
             dispatch({
                 type: ADD_ACTIVITY_DATA,
@@ -173,10 +184,15 @@ export const submitActivityData = (data, history) => async dispatch => {
 
 export const submitLikes = itemId => async dispatch => {
     try {
-        if (!axios.defaults.headers.common.authorization) {
-            setDefault(localStorage.getItem("jwtToken"));
-        }
-        const res = await axios.post(`${ROOT_URL}/api/clickLikes/${itemId}`);
+        const res = await axios.post(
+            `${ROOT_URL}/api/clickLikes/${itemId}`,
+            {},
+            {
+                headers: {
+                    authorization: localStorage.getItem("jwtToken")
+                }
+            }
+        );
         dispatch({
             type: HANDLE_LIKES,
             payload: res.data

@@ -38,6 +38,9 @@ const validate = (values, props) => {
           break;
         case "EN":
           errors[name] = "Value cannot be empty!";
+          break
+        default:
+          errors[name] = "值不能为空！";
       }
     }
   });
@@ -53,6 +56,8 @@ const validate = (values, props) => {
         break;
       case "EN":
         errors.email = "Please type in a valid email address";
+        break;
+
     }
   }
 

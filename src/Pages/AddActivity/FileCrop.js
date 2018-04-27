@@ -5,12 +5,18 @@ import "cropperjs/dist/cropper.css"; // see installation section above for versi
 // var Cropper = require('react-cropper').default
 import { connect } from "react-redux";
 import { withStyles } from "material-ui/styles";
+import { CircularProgress } from "material-ui/Progress";
 
 const styles = theme => ({
+  container: {
+    position: "relative"
+  },
+  progress: {
+    margin: theme.spacing.unit * 2
+  },
   avatarDimension: {
     height: 128,
-    width: 128,
-
+    width: 128
   },
 
   // may need to redefine the max width later!
@@ -26,8 +32,7 @@ const styles = theme => ({
     position: "relative",
     textAlign: "center",
     height: 128,
-    maxWidth: 128,
-
+    maxWidth: 128
   },
 
   containerForBackground: {
@@ -35,25 +40,84 @@ const styles = theme => ({
     position: "relative",
     textAlign: "center",
     height: 225,
-    maxWidth: "100%",
-    border: "2px solid blue"
+    maxWidth: "100%"
+  },
+
+  sets: {
+    position: "absolute",
+    bottom: 2,
+    right: 8,
+    fontSize: 16,
+    color: "#fff"
+  },
+  cancel: {
+    right: 60,
+    marginRight: 25
+  },
+  hide: {
+    display: "none"
+  },
+
+  layer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "#000",
+    opacity: 0.3,
+    zIndex: 1000,
+    textAlign:"center",
+
   }
 });
 
 class FileCrop extends Component {
-  cropImgObj(e) {
+  state = {
+    on: true
+  };
+  async getImgURL(e) {
     e.stopPropagation();
     e.preventDefault();
-    const { keyforUrl } = this.props;
+    const { file } = this.props;
+    await this.props.onGetImgUrl(file);
+  }
+  async cropImgObj(e) {
     const imgData = this.refs.cropper.getData(true);
     const { width, height, x, y } = imgData;
-    this.props.onCropImageObject(keyforUrl, width, height, x, y);
+    const { keyforUrl } = this.props;
+    await this.props.onCropImageObject(keyforUrl, width, height, x, y);
+  }
+
+  hideSets() {
+    this.setState({
+      on: false
+    });
+  }
+  renderLayer() {
+    const { classes, purpose } = this.props;
+    let top = purpose === "avatar" ? 10 :"20%"
+    if (!this.state.on) {
+      return (
+        <div
+          className={classes.layer}
+          style={{paddingTop:top}}
+          onClick={e => {
+            e.stopPropagation();
+          }}
+        >
+          <CircularProgress className={classes.progress} size={50} />
+        </div>
+      );
+    }
+    return null;
   }
 
   render() {
     const { classes } = this.props;
-    if (this.props.showCrop) {
-      return (
+    return (
+      <div className={classes.container}>
+        {this.renderLayer()}
         <div
           className={
             this.props.purpose === "avatar" ? (
@@ -76,20 +140,9 @@ class FileCrop extends Component {
               )
             }
           />
-          <span
-            style={{
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              fontSize: 16,
-              color: "#fff"
-            }}
-          >
+          <span className={this.state.on ? classes.sets : classes.hide}>
             <span
-              style={{
-                right: 60,
-                marginRight: 25
-              }}
+              className={classes.cancel}
               onClick={e => {
                 e.stopPropagation();
                 this.props.onCancel();
@@ -99,27 +152,25 @@ class FileCrop extends Component {
             </span>
 
             <span
-              style={{
-                right: 15
-              }}
-              onClick={e => {
-                this.cropImgObj(e);
+              onClick={async e => {
+                this.hideSets();
+                await this.getImgURL(e);
+                await this.cropImgObj(e);
+                this.props.onCancel();
               }}
             >
               保存
             </span>
           </span>
         </div>
-      );
-    } else {
-      return null;
-    }
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    keyforUrl: state.ImageReducer.image.key,
+    keyforUrl: state.ImageReducer.image.key
   };
 };
 

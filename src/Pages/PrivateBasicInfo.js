@@ -53,8 +53,7 @@ const styles = theme => ({
     // may need to define the max width later!
     imageWrapper: {
         position: "relative",
-        height: 128,
-        width: 128
+        height: 128
         // border: "2px solid green"
     },
     image: {
@@ -74,6 +73,10 @@ const styles = theme => ({
     },
     textField: {
         padding: "10px 0"
+    },
+    imageUploadingError: {
+        color: "red",
+        margin: "10px 0"
     }
 });
 
@@ -90,8 +93,6 @@ class PrivateBasicInfo extends Component {
 
     state = {
         open: false,
-        showCrop: true,
-        showIcon: false,
         mailMarker: ""
     };
 
@@ -99,8 +100,8 @@ class PrivateBasicInfo extends Component {
         this.setState({ open: false });
     };
 
-    onGetImgUrl(file) {
-        this.props.replaceWithNewImg(0, file);
+    async onGetImgUrl(file) {
+        await this.props.replaceWithNewImg(0, file);
     }
 
     async onCropImageObject(keyforUrl, width, height, x, y) {
@@ -116,17 +117,9 @@ class PrivateBasicInfo extends Component {
             x,
             y
         );
-        await this.props.fetchUser(0);
         this.setState({
             open: false
         });
-
-        setTimeout(() => {
-            this.setState({
-                showCrop: false,
-                showIcon: true
-            });
-        }, 1000);
     }
 
     renderImg() {
@@ -155,10 +148,7 @@ class PrivateBasicInfo extends Component {
                                 x,
                                 y
                             )}
-                        showCrop={this.state.showCrop}
-                        showIcon={this.state.showIcon}
                     />
-                    {this.props.imageError}
                 </div>
             );
         }
@@ -193,7 +183,12 @@ class PrivateBasicInfo extends Component {
         }
         return (
             <div className="wrapper">
-                <div className="form-group">{this.renderImg()}</div>
+                <div className="form-group">
+                    {this.renderImg()}
+                    <div className={classes.imageUploadingError}>
+                        {this.props.imageError}
+                    </div>
+                </div>
                 <div className="form-group">
                     <Field
                         fullWidth

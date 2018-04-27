@@ -130,7 +130,7 @@ class Story extends Component {
 }
 
 const mapStateToProps = state => {
-    // console.log("user", state.UserReducer.comments)
+    console.log("user", state.UserReducer.comments)
     return {
         user: state.UserReducer
     };

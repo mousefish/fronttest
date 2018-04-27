@@ -41,7 +41,7 @@ class MyAccount extends Component {
         this.setState({ open: false });
     };
 
-    handleClick(item) {
+    handleClick(item, version) {
         let token = localStorage.getItem("jwtToken");
         if (token) {
             switch (item) {
@@ -50,7 +50,7 @@ class MyAccount extends Component {
                 case "我的圈子":
                     return this.props.history.push(`/story/0`);
                 case "我的活动":
-                    return this.props.history.push(`/userActivities/0`);
+                    return this.props.history.push(`/userActivities/0/${version}`);
                 case "我的愿望":
                     return this.props.history.push(`/userWishes/0`);
                 case "我的收藏":
@@ -63,7 +63,7 @@ class MyAccount extends Component {
         }
     }
     renderItems() {
-        const { classes } = this.props;
+        const { classes, match:{ params: { version }} } = this.props;
         const items = [
             "账号信息",
             "我的圈子",
@@ -82,7 +82,7 @@ class MyAccount extends Component {
                     item={item}
                     history={this.props.history}
                     onClick={() => {
-                        this.handleClick(item);
+                        this.handleClick(item, version);
                     }}
                 />
             );
