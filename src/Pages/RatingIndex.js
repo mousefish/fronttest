@@ -13,77 +13,25 @@ import Dialog, {
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
 import classNames from "classnames";
-import config from "../config/config";
-import Star from "material-ui-icons/Star";
 import { withStyles } from "material-ui/styles";
 import PageHeader from "./PageHeader";
-import Avatar from "material-ui/Avatar";
-import Stars from "./Stars";
-import defaultAvatar from "../Assets/Images/defaultAvatar.png";
+import RatingItemNonParent from "./RatingItemNonParent";
+import RatingItemParent from "./RatingItemParent";
 
 const styles = {
-    container: {
-        width: "95vw",
-        maxWidth: 600,
-        margin: "auto"
-    },
-    icon: {
-        width: 15,
-        height: 15,
-        verticalAlign: "-2px"
-    },
-    avatar: {
-        width: 30,
-        height: 30,
-        margin: "10px 5px 5px 0",
-        display: "inline-block"
-    },
-
-    bigAvatar: {
-        width: 40,
-        height: 40,
-        display: "inline-block"
-    },
-
     ratingIndex: {
         padding: 5,
         listStyle: "none"
     },
-    comment: {
-        borderBottom: "1px solid #BDBDBD",
-        padding: "5px 0"
-    },
-    feedback: {
-        // border:"1px solid red",
-        marginBottom: 10,
-        marginLeft: 45
-    },
-    time: {
-        float: "right",
-        fontSize: 12
-    },
-    subtime: {
-        float: "right",
-        fontSize: 10
-    },
-    subComments: {
+
+    foldBtn: {
         fontSize: 12,
         marginLeft: 40,
-        paddingBottom: 10,
-        paddingLeft: 10,
-        paddingRight: 10,
-        backgroundColor: "#EEEEEE",
+        textAlign: "right",
+        padding: 10,
+        backgroundColor: "#E0E0E0",
+        color: "#000",
         borderBottom: "1px solid #E0E0E0"
-    },
-    header: {
-        // border:"1px solid red",
-        display: "flex",
-        flexFlow: "row nowrap",
-        justifyContent: "flex-start",
-        alignItems: "flex-start"
-    },
-    reply: {
-        padding: "15px 0"
     }
 };
 
@@ -95,7 +43,11 @@ class RatingIndex extends Component {
         creatorId: 0,
         activityId: 0,
         parentId: 0,
-        replyToId: 0
+        replyToId: 0,
+        showAll: {
+            id: 0,
+            show: false
+        }
     };
     handleClickOpen = () => {
         this.setState({ open: true });
@@ -103,6 +55,17 @@ class RatingIndex extends Component {
 
     handleClose = () => {
         this.setState({ open: false });
+    };
+
+    handlePopup = (item, parentId) => {
+        this.setState({
+            open: true,
+            to: item.username,
+            creatorId: item.creatorId,
+            activityId: item.activityId,
+            parentId: parentId,
+            replyToId: item.id
+        });
     };
 
     sendReply = () => {
@@ -133,83 +96,79 @@ class RatingIndex extends Component {
         this.props.fetchRatings(activityId);
     }
 
-    renderStars(num) {
-        let result = [];
-        for (let i = 0; i < num; i++) {
-            result.push(<Star key={i} />);
+    renderNonParentRatings(nonParentRatings, whomToReply, index) {
+        const { classes } = this.props;
+        let part = [];
+        let all = [];
+        nonParentRatings.forEach((item, index) => {
+            if (index <= 3) {
+                part.push(
+                    <RatingItemNonParent
+                        key={index}
+                        index={index}
+                        item={item}
+                        onClick={() => this.handlePopup(item, item.parentId)}
+                    />
+                );
+            }
+            all.push(
+                <RatingItemNonParent
+                    key={index}
+                    index={index}
+                    item={item}
+                    onClick={() => this.handlePopup(item, item.parentId)}
+                />
+            );
+        });
+        if (all.length > 4) {
+            all.push(
+                <div
+                    key="fold"
+                    className={classes.foldBtn}
+                    onClick={() => {
+                        this.setState({
+                            showAll: {
+                                id: index,
+                                show: false
+                            }
+                        });
+                    }}
+                >
+                    收起剩余回复
+                </div>
+            );
         }
 
-        return result;
-    }
-
-    renderNonParentRatings(nonParentRatings, parentId, whomToReply) {
-        const { classes, ratings } = this.props;
-        console.log(nonParentRatings)
-        return nonParentRatings.map((item, index) => {
-            if (item.parentId === parentId) {
-                return (
-                    <div className={classes.subComments} key={index}>
-                        <div className={classes.header}>
-                            <Avatar
-                                alt="rater pic"
-                                src={
-                                    item.imageurl ? (
-                                        config.BUCKET_URL + item.imageurl
-                                    ) : (
-                                        defaultAvatar
-                                    )
+        if (part.length === 4) {
+            if (all.length - part.length > 0) {
+                part.push(
+                    <div
+                        key="show"
+                        className={classes.foldBtn}
+                        onClick={() => {
+                            this.setState({
+                                showAll: {
+                                    id: index,
+                                    show: true
                                 }
-                                className={classNames(classes.avatar)}
-                            />
-                            <div className={classes.reply}>
-                                <Link
-                                    to={`/user/${item.userId}`}
-                                    className="unlink"
-                                >
-                                    {item.username}
-                                </Link>
-                                {item.parentId === item.replyToId ? (
-                                    ""
-                                ) : (
-                                    <span>
-                                        回复@{
-                                            <span className="unlink">
-                                                {item.whomToReply}
-                                            </span>
-                                        }
-                                    </span>
-                                )}：{item.feedback}
-                            </div>
-                        </div>
-                        <div className={classes.subtime}>
-                            {moment(item.createdAt).format("LLL")}发布 |{" "}
-                            <span
-                                className="unlink"
-                                onClick={() => {
-                                    this.setState({
-                                        open: true,
-                                        to: item.username,
-                                        creatorId: item.creatorId,
-                                        activityId: item.activityId,
-                                        parentId: parentId,
-                                        replyToId: item.id
-                                    });
-                                }}
-                            >
-                                回复
-                            </span>
-                        </div>
-                        <div style={{ clear: "both" }} />
+                            });
+                        }}
+                    >
+                        查看剩余 {all.length - part.length - 1} 条评论
                     </div>
                 );
             }
-        });
+        }
+
+        return this.state.showAll.id === index && this.state.showAll.show
+            ? all
+            : part;
     }
 
     renderItems(ratings) {
         const { classes } = this.props;
-        let nonParentRatings = ratings.filter(item => {
-            return item.parentId !== 0 && item.replyToId !== 0;
+        let parentRatings = ratings.filter(item => {
+            return item.parentId === 0 && item.replyToId === 0;
         });
 
         if (!ratings || ratings.length == 0) {
@@ -219,76 +178,35 @@ class RatingIndex extends Component {
                 </div>
             );
         } else {
-            return ratings.map((item, index) => {
-                if (item.parentId === 0 || item.replyToId === 0) {
-                    return (
-                        <li className={classes.comment} key={item.id}>
-                            <div>
-                                <Avatar
-                                    alt="rater pic"
-                                    src={
-                                        item.imageurl ? (
-                                            config.BUCKET_URL + item.imageurl
-                                        ) : (
-                                            defaultAvatar
-                                        )
-                                    }
-                                    className={classNames(
-                                        classes.avatar,
-                                        classes.bigAvatar
-                                    )}
-                                />
-                                <span style={{ verticalAlign: 18 }}>
-                                    <Link
-                                        to={`/user/${item.userId}`}
-                                        className="unlink"
-                                    >
-                                        {item.username}
-                                    </Link>：{this.renderStars(item.numOfStars)}
-                                </span>
-                            </div>
-                            <div className={classes.feedback}>
-                                {item.feedback ? item.feedback : "无"}
-                            </div>
-                            <div className={classes.time}>
-                                {moment(item.createdAt).format("LLL")}发布 |{" "}
-                                <span
-                                    className="unlink"
-                                    onClick={() => {
-                                        this.setState({
-                                            open: true,
-                                            to: item.username,
-                                            creatorId: item.creatorId,
-                                            activityId: item.activityId,
-                                            parentId: item.id,
-                                            replyToId: item.id
-                                        });
-                                    }}
-                                >
-                                    回复
-                                </span>
-                            </div>
-                            <div style={{ clear: "both", marginBottom: 10 }} />
-                            <div style={{ marginBottom: 10 }}>
-                                {nonParentRatings.length > 0 ? (
-                                    this.renderNonParentRatings(
-                                        nonParentRatings,
-                                        item.id,
-                                        item.username
-                                    )
-                                ) : (
-                                    ""
-                                )}
-                            </div>
-                        </li>
-                    );
-                }
+            return parentRatings.map((item, index) => {
+                let nonParentRatings = ratings.filter(subItem => {
+                    return subItem.parentId === item.id;
+                });
+                return (
+                    <RatingItemParent
+                        key={index}
+                        item={item}
+                        nonParentRatings={nonParentRatings}
+                        onClick={() => this.handlePopup(item, item.id)}
+                    >
+                        <div style={{ marginBottom: 10 }}>
+                            {nonParentRatings.length > 0 ? (
+                                this.renderNonParentRatings(
+                                    nonParentRatings,
+                                    item.username,
+                                    index
+                                )
+                            ) : (
+                                ""
+                            )}
+                        </div>
+                    </RatingItemParent>
+                );
             });
         }
     }
     render() {
         const { ratings, classes } = this.props;
-
         return (
             <div className="wrapper">
                 <PageHeader history={this.props.history} title="活动评论" />
@@ -332,7 +250,6 @@ class RatingIndex extends Component {
 }
 
 const mapStateToProps = state => {
-    // console.log(state.RatingReducer.ratings);
     return {
         ratings: state.RatingReducer.ratings
     };
