@@ -10,15 +10,12 @@ import config from "../config/config";
 
 const ROOT_URL = config["ROOT_URL"];
 
-const setDefault = token => {
-    axios.defaults.headers.common["authorization"] = token;
-};
-
 export const fetchComments = userId => async dispatch => {
-    if (!axios.defaults.headers.common.authorization) {
-        setDefault(localStorage.getItem("jwtToken"));
-    }
-    const res = await axios.get(`${ROOT_URL}/api/comments/${userId}`);
+    const res = await axios.get(`${ROOT_URL}/api/comments/${userId}`, {
+        headers: {
+            authorization: localStorage.getItem("jwtToken")
+        }
+    });
     dispatch({
         type: "FETCH_COMMENTS",
         payload: res.data
@@ -26,10 +23,11 @@ export const fetchComments = userId => async dispatch => {
 };
 
 export const fetchUser = userId => async dispatch => {
-    if (!axios.defaults.headers.common.authorization) {
-        setDefault(localStorage.getItem("jwtToken"));
-    }
-    const res = await axios.get(`${ROOT_URL}/api/user/${userId}`);
+    const res = await axios.get(`${ROOT_URL}/api/user/${userId}`, {
+        headers: {
+            authorization: localStorage.getItem("jwtToken")
+        }
+    });
     dispatch({
         type: FETCH_PROFILE_DATA,
         payload: res.data
@@ -38,12 +36,14 @@ export const fetchUser = userId => async dispatch => {
 
 export const updateUserBasicInfo = basicInfo => async dispatch => {
     try {
-        if (!axios.defaults.headers.common.authorization) {
-            setDefault(localStorage.getItem("jwtToken"));
-        }
         const res = await axios.post(
             `${ROOT_URL}/api/updateBasicInfo`,
-            basicInfo
+            basicInfo,
+            {
+                headers: {
+                    authorization: localStorage.getItem("jwtToken")
+                }
+            }
         );
 
         // update localStorage to greet user

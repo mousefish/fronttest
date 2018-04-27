@@ -82,8 +82,8 @@ const styles = {
         justifyContent: "flex-start",
         alignItems: "flex-start"
     },
-    reply:{
-       padding:"15px 0"
+    reply: {
+        padding: "15px 0"
     }
 };
 
@@ -121,7 +121,10 @@ class RatingIndex extends Component {
             replyToId
         };
         // console.log(value);
-        this.props.sendRating(value);
+        if (value.feedback.trim().length > 0) {
+            this.props.sendRating(value);
+        }
+
         this.setState({ open: false });
     };
 

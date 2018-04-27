@@ -9,31 +9,16 @@ class FileInput extends Component {
   state = { src: "", showIcon: true };
 
   renderIcon() {
+    let left = this.props.purpose === "avatar" ? 40 : "calc(50% - 25px)";
+    let top = this.props.purpose === "avatar" ? "30%" : "40%";
+
     if (this.state.showIcon) {
       return (
         <span
           style={{
             position: "absolute",
-            top: "40%",
-            left: "calc(50% - 25px)",
-            color: "#fff",
-          }}
-        >
-          <IconButton aria-label="upload image">
-            <AddAPhoto
-              style={{ color: "#fff", width: 50, height: 50 }}
-              aria-label="upload image"
-            />
-          </IconButton>
-        </span>
-      );
-    }else if(this.props.showIcon){
-      return (
-        <span
-          style={{
-            position: "absolute",
-            top: "40%",
-            left: "calc(50% - 25px)",
+            top: top,
+            left: left,
             color: "#fff"
           }}
         >
@@ -51,7 +36,7 @@ class FileInput extends Component {
   onCancel() {
     this.setState({
       src: "",
-      showIcon:true
+      showIcon: true
     });
   }
   render() {
@@ -84,11 +69,9 @@ class FileInput extends Component {
               src={this.state.src}
               purpose={this.props.purpose}
               onCropImageObject={this.props.onCropImageObject}
-              showCrop={this.props.showCrop}
               onCancel={() => {
                 this.onCancel();
               }}
-
             />
           ) : (
             ""

@@ -10,7 +10,6 @@ const styles = theme => ({
   avatarDimension: {
     height: 128,
     width: 128,
-
   },
 
   // may need to redefine the max width later!
@@ -35,91 +34,85 @@ const styles = theme => ({
     position: "relative",
     textAlign: "center",
     height: 225,
-    maxWidth: "100%",
-    border: "2px solid blue"
+    maxWidth: "100%"
   }
 });
 
 class FileCrop extends Component {
-  cropImgObj(e) {
+  async cropImgObj(e) {
     e.stopPropagation();
     e.preventDefault();
     const { keyforUrl } = this.props;
     const imgData = this.refs.cropper.getData(true);
     const { width, height, x, y } = imgData;
-    this.props.onCropImageObject(keyforUrl, width, height, x, y);
+    await this.props.onCropImageObject(keyforUrl, width, height, x, y);
   }
 
   render() {
     const { classes } = this.props;
-    if (this.props.showCrop) {
-      return (
-        <div
+
+    return (
+      <div
+        className={
+          this.props.purpose === "avatar" ? (
+            classes.containerForAvatar
+          ) : (
+            classes.containerForBackground
+          )
+        }
+      >
+        <Cropper
+          ref="cropper"
+          src={this.props.src}
+          aspectRatio={this.props.purpose === "avatar" ? 1 / 1 : 400 / 225}
+          guides={false}
           className={
             this.props.purpose === "avatar" ? (
-              classes.containerForAvatar
+              classes.avatarDimension
             ) : (
-              classes.containerForBackground
+              classes.backgroundDimension
             )
           }
+        />
+        <span
+          style={{
+            position: "absolute",
+            bottom: 2,
+            right: 8,
+            fontSize: 16,
+            color: "#fff"
+          }}
         >
-          <Cropper
-            ref="cropper"
-            src={this.props.src}
-            aspectRatio={this.props.purpose === "avatar" ? 1 / 1 : 400 / 225}
-            guides={false}
-            className={
-              this.props.purpose === "avatar" ? (
-                classes.avatarDimension
-              ) : (
-                classes.backgroundDimension
-              )
-            }
-          />
           <span
             style={{
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              fontSize: 16,
-              color: "#fff"
+              right: 60,
+              marginRight: 25
+            }}
+            onClick={e => {
+              e.stopPropagation();
+              this.props.onCancel();
             }}
           >
-            <span
-              style={{
-                right: 60,
-                marginRight: 25
-              }}
-              onClick={e => {
-                e.stopPropagation();
-                this.props.onCancel();
-              }}
-            >
-              取消
-            </span>
-
-            <span
-              style={{
-                right: 15
-              }}
-              onClick={e => {
-                this.cropImgObj(e);
-              }}
-            >
-              保存
-            </span>
+            取消
           </span>
-        </div>
-      );
-    } else {
-      return null;
-    }
+
+          <span
+            onClick={async e => {
+              await this.cropImgObj(e);
+              this.props.onCancel();
+            }}
+          >
+            保存
+          </span>
+        </span>
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    keyforUrl: state.ImageReducer.image.key,
+    keyforUrl: state.ImageReducer.image.key
   };
 };
 

@@ -190,7 +190,7 @@ class PublicProfile extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log("here", state.UserReducer.basicInfo);
+    // console.log("here", state.UserReducer.basicInfo);
     return {
         user: state.UserReducer.basicInfo
     };

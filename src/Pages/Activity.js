@@ -183,7 +183,7 @@ class Activity extends Component {
 
     renderEditChoice() {
         const { id, isYourActivity } = this.props.activity;
-        const { classes, activity } = this.props;
+        const { classes, activity, match : { params : { version }} } = this.props;
 
         if (isYourActivity) {
             return (
@@ -193,7 +193,7 @@ class Activity extends Component {
                         <div>{activity.username}</div>
                     </div>
                     <div>
-                        <Link className="unlink" to={`/editActivity/${id}`}>
+                        <Link className="unlink" to={`/editActivity/${id}/${version}`}>
                             <div className={classes.editBtn}>修改我的活动</div>
                         </Link>
                     </div>

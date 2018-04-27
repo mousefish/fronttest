@@ -47,11 +47,11 @@ class UserActivities extends Component {
                 <div style={{ textAlign: "center" }}>{userActivities[0]}</div>
             );
         }
-        const { classes } = this.props;
+        const { classes, match : { params : { version }} } = this.props;
         return userActivities.map(item => {
             return (
                 <Link
-                    to={`/activity/${item.id}`}
+                    to={`/activity/${item.id}/${version}`}
                     key={item.id}
                     className="unlink"
                 >

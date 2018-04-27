@@ -33,7 +33,7 @@ const styles = theme => ({
         width: "100%",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: "center"
         // border: "1px solid green"
     },
 
@@ -71,9 +71,7 @@ const styles = theme => ({
 
 class EditActivityPanel extends Component {
     state = {
-        open: false,
-        showCrop: true,
-        showIcon: false
+        open: false
     };
 
     handleClose = () => {
@@ -93,7 +91,7 @@ class EditActivityPanel extends Component {
     }
 
     submitForm(values) {
-        console.log("values", values);
+        // console.log("values", values);
         const { edit, history } = this.props;
         const { activityId } = this.props.match.params;
 
@@ -168,15 +166,6 @@ class EditActivityPanel extends Component {
             x,
             y
         );
-
-        const { activityId } = this.props.match.params;
-        await this.props.fetchOneUserActivityForEditting(activityId);
-        setTimeout(() => {
-            this.setState({
-                showCrop: false,
-                showIcon: true
-            });
-        }, 1000);
     }
 
     renderImg(edit) {
@@ -204,8 +193,6 @@ class EditActivityPanel extends Component {
                                 x,
                                 y
                             )}
-                        showCrop={this.state.showCrop}
-                        showIcon={this.state.showIcon}
                     />
                     {this.props.imageError}
                 </div>
@@ -328,7 +315,7 @@ class EditActivityPanel extends Component {
                 </div>
                 <div className="input-success">{msg}</div>
                 <div className={classes.btnGroup}>
-                    <Fixedbutton text="修改" type="submit" width="50%"/>
+                    <Fixedbutton text="修改" type="submit" width="50%" />
                     <Fixedbutton
                         width="50%"
                         text="删除"
@@ -383,6 +370,7 @@ class EditActivityPanel extends Component {
 }
 
 const mapStateToProps = state => {
+    // console.log("editreducer", state.ActivityReducer.edit);
     const {
         theme,
         location,

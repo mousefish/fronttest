@@ -54,7 +54,6 @@ const styles = theme => ({
     imageWrapper: {
         position: "relative",
         height: 128,
-        width: 128
         // border: "2px solid green"
     },
     image: {
@@ -90,8 +89,6 @@ class PrivateBasicInfo extends Component {
 
     state = {
         open: false,
-        showCrop: true,
-        showIcon: false,
         mailMarker: ""
     };
 
@@ -116,17 +113,10 @@ class PrivateBasicInfo extends Component {
             x,
             y
         );
-        await this.props.fetchUser(0);
         this.setState({
             open: false
         });
 
-        setTimeout(() => {
-            this.setState({
-                showCrop: false,
-                showIcon: true
-            });
-        }, 1000);
     }
 
     renderImg() {
@@ -155,8 +145,6 @@ class PrivateBasicInfo extends Component {
                                 x,
                                 y
                             )}
-                        showCrop={this.state.showCrop}
-                        showIcon={this.state.showIcon}
                     />
                     {this.props.imageError}
                 </div>

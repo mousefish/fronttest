@@ -1,5 +1,10 @@
 import axios from "axios";
-import { UPLOAD_NEW_IMAGE, IMAGE_ERROR } from "./types";
+import {
+    UPLOAD_NEW_IMAGE,
+    IMAGE_ERROR,
+    FETCH_ACTIVITY_FOR_EDITTING,
+    FETCH_PROFILE_DATA
+} from "./types";
 
 import config from "../config/config";
 
@@ -71,6 +76,7 @@ export const cropImageObj = (
     // upload the imgurl in database with targetKey(cropped one)
     if (typeof result.data !== "string") {
         const { srcKey, targetKey } = result.data;
+
         let res;
         if (activityId) {
             res = await axios.post(
@@ -82,7 +88,14 @@ export const cropImageObj = (
                     }
                 }
             );
+            if (typeof res.data === "object") {
+                dispatch({
+                    type: FETCH_ACTIVITY_FOR_EDITTING,
+                    payload: res.data
+                });
+            }
         }
+
         if (userId === 0) {
             res = await axios.post(
                 `${ROOT_URL}/api/updateBasicInfo`,
@@ -93,6 +106,12 @@ export const cropImageObj = (
                     }
                 }
             );
+            if (typeof res.data === "object") {
+                dispatch({
+                    type: FETCH_PROFILE_DATA,
+                    payload: res.data
+                });
+            }
         }
 
         // delete the srcKey(raw, non-cropped image) on AWS
