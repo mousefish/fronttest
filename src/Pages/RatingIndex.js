@@ -15,23 +15,13 @@ import Button from "material-ui/Button";
 import classNames from "classnames";
 import { withStyles } from "material-ui/styles";
 import PageHeader from "./PageHeader";
-import RatingItemNonParent from "./RatingItemNonParent";
+import { FoldItem, RatingItemChild } from "./RatingItemNonParent";
 import RatingItemParent from "./RatingItemParent";
 
 const styles = {
     ratingIndex: {
         padding: 5,
         listStyle: "none"
-    },
-
-    foldBtn: {
-        fontSize: 12,
-        marginLeft: 40,
-        textAlign: "right",
-        padding: 10,
-        backgroundColor: "#E0E0E0",
-        color: "#000",
-        borderBottom: "1px solid #E0E0E0"
     }
 };
 
@@ -103,7 +93,7 @@ class RatingIndex extends Component {
         nonParentRatings.forEach((item, index) => {
             if (index <= 3) {
                 part.push(
-                    <RatingItemNonParent
+                    <RatingItemChild
                         key={index}
                         index={index}
                         item={item}
@@ -112,7 +102,7 @@ class RatingIndex extends Component {
                 );
             }
             all.push(
-                <RatingItemNonParent
+                <RatingItemChild
                     key={index}
                     index={index}
                     item={item}
@@ -122,9 +112,8 @@ class RatingIndex extends Component {
         });
         if (all.length > 4) {
             all.push(
-                <div
+                <FoldItem
                     key="fold"
-                    className={classes.foldBtn}
                     onClick={() => {
                         this.setState({
                             showAll: {
@@ -133,18 +122,16 @@ class RatingIndex extends Component {
                             }
                         });
                     }}
-                >
-                    收起剩余回复
-                </div>
+                    title="收起剩余回复"
+                />
             );
         }
 
         if (part.length === 4) {
             if (all.length - part.length > 0) {
                 part.push(
-                    <div
+                    <FoldItem
                         key="show"
-                        className={classes.foldBtn}
                         onClick={() => {
                             this.setState({
                                 showAll: {
@@ -153,9 +140,8 @@ class RatingIndex extends Component {
                                 }
                             });
                         }}
-                    >
-                        查看剩余 {all.length - part.length - 1} 条评论
-                    </div>
+                        title={`查看剩余 ${all.length - part.length - 1} 条评论`}
+                    />
                 );
             }
         }
@@ -241,6 +227,7 @@ class RatingIndex extends Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
+
                 <ul className={classes.ratingIndex}>
                     {this.renderItems(ratings)}
                 </ul>

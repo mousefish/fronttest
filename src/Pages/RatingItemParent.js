@@ -52,6 +52,7 @@ const renderStars = num => {
     return result;
 };
 
+
 const RatingItemParent = props => {
     const { classes, item, onClick } = props;
     return (

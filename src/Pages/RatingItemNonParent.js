@@ -50,7 +50,29 @@ const styles = {
         padding: "15px 0"
     }
 };
-const RatingItemNonParent = props => {
+
+const foldStyle = {
+    foldBtn: {
+        fontSize: 12,
+        marginLeft: 40,
+        textAlign: "right",
+        padding: 10,
+        backgroundColor: "#E0E0E0",
+        color: "#000",
+        borderBottom: "1px solid #E0E0E0"
+    }
+};
+
+let foldFunc = props => {
+    const { classes, title, onClick } = props;
+    return (
+        <div className={classes.foldBtn} onClick={onClick}>
+            {title}
+        </div>
+    );
+};
+
+let ratingItemFunc = props => {
     const { classes, item, index, onClick } = props;
     return (
         <div className={classes.subComments} key={index}>
@@ -94,4 +116,5 @@ const RatingItemNonParent = props => {
     );
 };
 
-export default withStyles(styles)(RatingItemNonParent);
+export const FoldItem = withStyles(foldStyle)(foldFunc);
+export const RatingItemChild = withStyles(styles)(ratingItemFunc);
