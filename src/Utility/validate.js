@@ -57,6 +57,8 @@ const validate = (values, props) => {
       case "EN":
         errors.email = "Please type in a valid email address";
         break;
+      default:
+        errors.email = "请输入有效邮箱";
 
     }
   }
@@ -72,6 +74,8 @@ const validate = (values, props) => {
       case "EN":
         errors.password =
           "Password must be 8 - 25 long, with at least 1 number and 1 letter.";
+      default:
+        errors.password = "密码长度必须在8-25位之间，且至少含有1个数字和1个字母";
     }
   }
 
@@ -86,6 +90,8 @@ const validate = (values, props) => {
         break;
       case "EN":
         errors.password = "Password cannot contain email address.";
+      default:
+        errors.password = "密码不能含有邮箱地址";
     }
   }
   if (values.username && values.username.length > 20) {
@@ -95,6 +101,8 @@ const validate = (values, props) => {
         break;
       case "EN":
         errors.username = "Username must be within 20 words.";
+      default:
+         errors.username = "用户名不能超过20个字";
     }
   }
   if (
@@ -108,6 +116,8 @@ const validate = (values, props) => {
         break;
       case "EN":
         errors.minNumOfPeople = "Invalid range";
+      default:
+        errors.minNumOfPeople = "区间无效";
     }
   }
 
@@ -144,6 +154,8 @@ const validate = (values, props) => {
         break;
       case "EN":
         errors.budget = "Please type in a valid number";
+      default:
+        errors.budget = "请输入有效数字";
     }
   }
   if (values.bio && values.bio.length > 100) {
@@ -153,6 +165,8 @@ const validate = (values, props) => {
         break;
       case "EN":
         errors.bio = "No more than 100 words.";
+      default:
+        errors.bio = "字数不能多于100";
     }
   }
 
@@ -166,6 +180,8 @@ const validate = (values, props) => {
         break;
       case "EN":
         errors.numberOfPeople = "Please type in a valid number.";
+      default:
+        errors.numberOfPeople = "请输入有效数字";
     }
   }
 
@@ -176,6 +192,8 @@ const validate = (values, props) => {
         break;
       case "EN":
         errors.theme = "No more than 15 words";
+      default:
+        errors.theme = "字数不能超过15";
     }
   }
 
@@ -186,6 +204,8 @@ const validate = (values, props) => {
         break;
       case "EN":
         errors.note = "No more than 300 words";
+      default:
+        errors.note = "字数不能超过300";
     }
   }
 
@@ -196,6 +216,8 @@ const validate = (values, props) => {
         break;
       case "EN":
         errors.story = "No more than 300 words";
+      default:
+       errors.story = "字数不能超过300";
     }
   }
 
