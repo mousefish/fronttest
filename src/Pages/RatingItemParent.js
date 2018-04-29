@@ -6,8 +6,6 @@ import Stars from "./Stars";
 import Star from "material-ui-icons/Star";
 import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import classNames from "classnames";
-import moment from "moment";
-import "moment/locale/zh-cn.js";
 import config from "../config/config";
 
 const styles = {
@@ -79,7 +77,7 @@ const RatingItemParent = props => {
                 {item.feedback ? item.feedback : "无"}
             </div>
             <div className={classes.time}>
-                {moment(item.createdAt).format("LLL")}发布 |{" "}
+                {item.createdAt}发布 |{" "}
                 <span className="unlink" onClick={onClick}>
                     回复
                 </span>

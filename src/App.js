@@ -46,17 +46,13 @@ import AddActivity from "./Pages/AddActivity/AddActivity";
 import AddWish from "./Pages/AddWish/AddWish";
 import Activity from "./Pages/Activity";
 import PublicProfile from "./Pages/PublicProfile";
-
 import RequireAuth from "./HOC/RequireAuth";
 import ActivityWishPanel from "./Pages/ActivityWishPanel";
-
 import LocationSearch from "material-ui-icons/LocationSearching";
 import Favorite from "material-ui-icons/FavoriteBorder";
 import CardGiftcard from "material-ui-icons/CardGiftcard";
-
 import ChatBubbleOutline from "material-ui-icons/ChatBubbleOutline";
 import PropTypes from "prop-types";
-
 import UserFavorite from "material-ui-icons/Favorite";
 import Contacts from "material-ui-icons/Contacts";
 
@@ -243,6 +239,7 @@ class App extends Component {
             <Route exact path="/" component={RequireAuth(Recommendation)} />
             <Route exact path="/openPage/:version" component={OpenPage} />
             <Route exact path="/login/:version" component={LoginForm} />
+            <Route path="/signup/:version" component={SignupForm} />
             <Route
               exact
               path="/recommendation/:version"
@@ -296,12 +293,12 @@ class App extends Component {
 
             <Route
               exact
-              path="/searchPanel"
+              path="/searchPanel/:version"
               component={RequireAuth(SearchPanel)}
             />
             <Route
               exact
-              path="/searchResult"
+              path="/searchResult/:version"
               component={RequireAuth(SearchResult)}
             />
 
@@ -330,7 +327,7 @@ class App extends Component {
 
             <Route
               exact
-              path="/activityWish"
+              path="/activityWish/:version"
               component={RequireAuth(ActivityWishPanel)}
             />
 
@@ -345,9 +342,9 @@ class App extends Component {
               component={RequireAuth(RatingIndex)}
             />
 
-            <Route path="/signup" component={SignupForm} />
+
             <Route
-              path="/completeUserProfile"
+              path="/completeUserProfile/:version"
               component={RequireAuth(SignupWizard)}
             />
 

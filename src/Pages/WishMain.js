@@ -16,9 +16,7 @@ WebFontLoader.load({
   }
 });
 
-const styles = {
-
-};
+const styles = {};
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -41,23 +39,21 @@ class WishMain extends Component {
     this.setState({ open: false });
   };
 
-  renderContent(wishes) {
-    const { version } = this.props.match.params;
+  renderContent(wishes, version) {
     if (!wishes) {
       return <div>loading..</div>;
     }
 
-    return <WishIndex wishes={wishes} version={version}/>;
+    return <WishIndex wishes={wishes} version={version} />;
   }
   render() {
-    const { classes } = this.props;
-    const { wishes } = this.props;
+    const { classes, wishes, match: { params: { version } } } = this.props;
     return (
       <div style={{ position: "relative" }}>
-        <SideButton />
+        <SideButton version={version}/>
         <div className="wrapper">
-          <Header description="这是一个有深度的旅游服务平台" />
-          {this.renderContent(wishes)}
+          <Header version={version} />
+          {this.renderContent(wishes, version)}
         </div>
       </div>
     );

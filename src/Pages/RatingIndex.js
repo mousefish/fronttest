@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import * as actions from "../Actions";
 import { Link } from "react-router-dom";
-import moment from "moment";
-import "moment/locale/zh-cn.js";
 import { connect } from "react-redux";
 import Dialog, {
     DialogActions,
@@ -90,7 +88,19 @@ class RatingIndex extends Component {
         const { classes } = this.props;
         let part = [];
         let all = [];
-        nonParentRatings.forEach((item, index) => {
+        // console.log(nonParentRatings);
+        nonParentRatings.sort(
+            (a, b) =>
+                a.replyToId - b.replyToId ||
+                new Date(a.createdAt).getTime() -
+                    new Date(b.createdAt).getTime()
+        );
+
+        for (let index = 0; index < nonParentRatings.length; index++) {
+            let item = nonParentRatings[index];
+            if (item.replyToId !== item.parentId && !item.whomToReply) {
+                continue;
+            }
             if (index <= 3) {
                 part.push(
                     <RatingItemChild
@@ -109,7 +119,8 @@ class RatingIndex extends Component {
                     onClick={() => this.handlePopup(item, item.parentId)}
                 />
             );
-        });
+        }
+
         if (all.length > 4) {
             all.push(
                 <FoldItem

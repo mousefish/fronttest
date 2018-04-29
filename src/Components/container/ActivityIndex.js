@@ -6,6 +6,7 @@ import classNames from "classnames";
 import { Link } from "react-router-dom";
 import Card, { CardHeader, CardMedia, CardContent } from "material-ui/Card";
 import LocationOn from "material-ui-icons/LocationOn";
+import FavoriteIcon from "material-ui-icons/Favorite";
 import AccessTime from "material-ui-icons/AccessTime";
 import LocalOffer from "material-ui-icons/LocalOffer";
 import Star from "material-ui-icons/Star";
@@ -17,6 +18,7 @@ import Slide from "material-ui/transitions/Slide";
 import Stars from "../../Pages/Stars";
 import cardBG from "../../Assets/Images/cardBG.png";
 import config from "../../config/config";
+import dateConversion from "../../Utility/dateConversion";
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -40,8 +42,8 @@ const styles = theme => ({
     left: 0,
     right: 0,
     backgroundColor: "#2196F3",
-    opacity:0.4,
-    borderRadius: "10px 10px 0 0",
+    opacity: 0.4,
+    borderRadius: "10px 10px 0 0"
     // backgroundImage: "linear-gradient(to bottom right, #F7F7F7, #EAFBFF)"
   },
 
@@ -76,7 +78,7 @@ const styles = theme => ({
     display: "flex",
     flexFlow: "column",
     marginBottom: 10,
-    alignItems: "flex-start",
+    alignItems: "flex-start"
   },
 
   fav: {
@@ -113,7 +115,11 @@ class ActivityIndex extends Component {
   renderFavZone(num) {
     const { classes } = this.props;
     if (num > 0) {
-      return <div className={classes.fav}>{num} 人收藏</div>;
+      return (
+        <div className={classes.fav}>
+          {num} <FavoriteIcon className={classes.icon} aria-label="favorites" />
+        </div>
+      );
     }
   }
 
@@ -123,7 +129,11 @@ class ActivityIndex extends Component {
 
     return _.map(activityData, item => {
       return (
-        <Link to={`/activity/${item.id}/${version}`} className="unlink" key={item.id}>
+        <Link
+          to={`/activity/${item.id}/${version}`}
+          className="unlink"
+          key={item.id}
+        >
           <Card className="card" style={{ borderRadius: 10 }}>
             <CardMedia className={classes.media} image={cardBG} title="travel">
               {" "}
@@ -148,7 +158,7 @@ class ActivityIndex extends Component {
                 </div>
                 <div className={classes.item}>
                   <div>
-                    <AccessTime className={classes.icon} /> {item.departdate} 出发
+                    <AccessTime className={classes.icon} /> {dateConversion(version, item.departdate)} 出发
                   </div>
                 </div>
               </div>

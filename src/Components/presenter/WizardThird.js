@@ -8,6 +8,7 @@ import { TextField } from "redux-form-material-ui";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "../../Pages/PageHeader";
 import ProgressBar from "./ProgressBar";
+import pair from "../../Data/CH_EN_PAIR";
 
 const styles = theme => ({});
 
@@ -17,26 +18,32 @@ class wizardThird extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const { handleSubmit, pristine, previousPage, submitting } = this.props;
+    const {
+      classes,
+      version,
+      handleSubmit,
+      pristine,
+      previousPage,
+      submitting
+    } = this.props;
 
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
-        <PageHeader onClick={previousPage} title="完善个人基本资料" />
+        <PageHeader onClick={previousPage} title={pair.completePersonalFile[version]} />
         <ProgressBar completed={this.state.completed} />
         <div className="form-group">
           <Field
             name="school"
             type="text"
             component={TextField}
-            label="毕业或在读院校"
+            label={pair.school[version]}
           />
 
           <Field
             name="occupation"
             type="text"
             component={TextField}
-            label="职业：学生，公务员，导游，自由职业......"
+            label={pair.job[version]}
           />
 
           <Field
@@ -46,11 +53,11 @@ class wizardThird extends Component {
             id="multiline-flexible"
             multiline
             rowsMax="4"
-            placeholder="关于我的个人介绍"
-            label="100字以内个人介绍：逗逼铲屎官，爱狗子，爱生活"
+            placeholder={pair.selfBio[version]}
+            label={pair.bioContent[version]}
           />
         </div>
-        <Bigbutton type="submit" text="提交" />
+        <Bigbutton type="submit" text={pair.submit[version]} />
       </form>
     );
   }

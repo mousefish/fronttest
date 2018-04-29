@@ -40,8 +40,7 @@ class TripMain extends Component {
     this.setState({ open: false });
   };
 
-  renderContent(activityData) {
-    const { version } = this.props.match.params;
+  renderContent(activityData, version) {
     if (!activityData) {
       return <div>Loading..</div>;
     } else {
@@ -50,14 +49,17 @@ class TripMain extends Component {
   }
 
   render() {
-    const classes = this.props.classes;
-    const { activityData } = this.props;
+    const {
+      activityData,
+      classes,
+      match: { params: { version } }
+    } = this.props;
     return (
       <div style={{ position: "relative" }}>
-        <SideButton />
+        <SideButton version={version}/>
         <div className="wrapper">
-          <Header />
-          <div>{this.renderContent(activityData)}</div>
+          <Header version={version} />
+          <div>{this.renderContent(activityData, version)}</div>
         </div>
       </div>
     );

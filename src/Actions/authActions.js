@@ -23,7 +23,7 @@ export const logout = (history, version) => dispatch => {
   window.location.reload(`/openPage/${version}`)
 };
 
-export const userSignupRequest = (userData, history) => async dispatch => {
+export const userSignupRequest = (userData, history, version) => async dispatch => {
   try {
     const res = await axios.post(`${ROOT_URL}/api/signup`, userData);
     if (res.data.token) {
@@ -32,7 +32,7 @@ export const userSignupRequest = (userData, history) => async dispatch => {
         type: AUTH_USER
       });
 
-      history.push("/completeUserProfile");
+      history.push("/completeUserProfile/"+version);
     } else {
       dispatch(authError(AUTH_ERROR_SIGNUP, res.data));
     }
@@ -41,7 +41,7 @@ export const userSignupRequest = (userData, history) => async dispatch => {
   }
 };
 
-export const completeUserProfile = (value, history) => async dispatch => {
+export const completeUserProfile = (value, history, version) => async dispatch => {
   try {
     const res = await axios.post(`${ROOT_URL}/api/completeUserProfile`, value, {
       headers: {
@@ -52,7 +52,7 @@ export const completeUserProfile = (value, history) => async dispatch => {
       dispatch({
         type: AUTH_USER
       });
-      history.push("/activity");
+      history.push("/activity/"+version);
     } else {
       dispatch(authError(AUTH_ERROR_SIGNUP, res.data));
     }

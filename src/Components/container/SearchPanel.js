@@ -115,8 +115,8 @@ class SearchPanel extends Component {
   }
 
   render() {
-    const { classes, theme } = this.props;
-    const { handleSubmit } = this.props;
+    const { classes, theme, handleSubmit, match:{params:{version}} } = this.props;
+
     return (
       <div className="searchPanelWrapper">
         <PageHeader title="搜索" history={this.props.history} />
@@ -162,7 +162,7 @@ class SearchPanel extends Component {
           <HistorySearch onClick={value => this.submitForm(value)} />
         </div>
         <div>
-          <SearchResult />
+          <SearchResult version={version}/>
         </div>
       </div>
     );
