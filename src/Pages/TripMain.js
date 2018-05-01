@@ -7,29 +7,16 @@ import WebFontLoader from "webfontloader";
 import ActivityIndex from "../Components/container/ActivityIndex";
 import SideButton from "./sideButton";
 import Header from "../Components/presenter/header";
-import Slide from "material-ui/transitions/Slide";
 import IconButton from "material-ui/IconButton";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-
+import { getPageYOffset, getDocumentHeight, getWindowInnerHeight} from "../Utility/scrollHandler";
 // WebFontLoader.load({
 //   google: {
 //     families: ["Roboto:300,400,500,700", "Material Icons"]
 //   }
 // });
 
-// {this.state.show ? (
-//             <div
-//               key="loadMore"
-//               className={classes.loadMore}
-//               onClick={e => {
-//                 this.loadMore(e);
-//               }}
-//             >
-//               {message || "load more"}
-//             </div>
-//           ) : (
-//             ""
-//           )}
+
 const styles = theme => ({
   loadMore: {
     color: "blue"
@@ -45,32 +32,6 @@ const styles = theme => ({
   }
 });
 
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
-
-function getPageYOffset() {
-  return window.pageYOffset || document.documentElement.scrollTop;
-}
-
-function getDocumentHeight() {
-  return Math.max(
-    document.body.scrollHeight,
-    document.documentElement.scrollHeight,
-    document.body.offsetHeight,
-    document.documentElement.offsetHeight,
-    document.body.clientHeight,
-    document.documentElement.clientHeight
-  );
-}
-
-function getWindowInnerHeight() {
-  return (
-    window.innerHeight ||
-    document.documentElement.clientHeight ||
-    document.body.clientHeight
-  );
-}
 
 class TripMain extends Component {
   constructor(props) {
@@ -80,7 +41,7 @@ class TripMain extends Component {
 
   state = {
     open: false,
-    show: false
+    show: false,
   };
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -97,20 +58,21 @@ class TripMain extends Component {
     }
   }
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
+  componentDidMount(){
+     window.addEventListener("scroll", this.handleScroll);
   }
 
   componentWillUnmount() {
-    window.scrollTo(0, Math.round(getPageYOffset()));
+    window.scrollTo(0, Math.round(getPageYOffset()))
     window.removeEventListener("scroll", this.handleScroll);
+
   }
 
   handleScroll(e) {
     let { classes, message } = this.props;
     let pageYOffset = Math.round(getPageYOffset());
     // console.log(pageYOffset, getDocumentHeight() - getWindowInnerHeight());
-    if (pageYOffset === getDocumentHeight() - getWindowInnerHeight()) {
+    if (pageYOffset === (getDocumentHeight() - getWindowInnerHeight())){
       this.setState(prevState => ({
         show: !prevState.show
       }));

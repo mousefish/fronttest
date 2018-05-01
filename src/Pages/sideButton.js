@@ -24,7 +24,6 @@ const styles = theme => ({
 
 function sideButton(props) {
   const { classes, version } = props;
-
   return (
     <div className={classes.buttonWrapper}>
       <div>
