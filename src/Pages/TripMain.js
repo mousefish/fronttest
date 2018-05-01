@@ -80,7 +80,7 @@ class TripMain extends Component {
 
   state = {
     open: false,
-    show: false,
+    show: false
   };
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -91,26 +91,26 @@ class TripMain extends Component {
   };
 
   componentWillMount() {
-
     const { activityData } = this.props;
     if (activityData && activityData.length === 0) {
       this.props.fetchActivityData(0);
     }
   }
 
-  componentDidMount(){
-     window.addEventListener("scroll", this.handleScroll);
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
   }
 
   componentWillUnmount() {
+    window.scrollTo(0, Math.round(getPageYOffset()));
     window.removeEventListener("scroll", this.handleScroll);
   }
 
   handleScroll(e) {
     let { classes, message } = this.props;
     let pageYOffset = Math.round(getPageYOffset());
-    console.log(pageYOffset, getDocumentHeight() - getWindowInnerHeight());
-    if (pageYOffset === (getDocumentHeight() - getWindowInnerHeight())){
+    // console.log(pageYOffset, getDocumentHeight() - getWindowInnerHeight());
+    if (pageYOffset === getDocumentHeight() - getWindowInnerHeight()) {
       this.setState(prevState => ({
         show: !prevState.show
       }));
@@ -118,7 +118,7 @@ class TripMain extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log("prevState and curState", prevState.show, this.state.show);
+    // console.log("prevState and curState", prevState.show, this.state.show);
     if (prevState.show !== this.state.show) {
       const { activityData, message } = this.props;
       if (activityData && activityData.length > 0 && !message) {
@@ -161,7 +161,7 @@ TripMain.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log("activityData reducer", state.ActivityReducer.message);
+  // console.log("activityData reducer", state.ActivityReducer.message);
   return {
     activityData: state.ActivityReducer.all,
     message: state.ActivityReducer.message
