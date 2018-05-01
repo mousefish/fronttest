@@ -97,7 +97,7 @@ const styles = theme => ({
   themeStyle: {
     fontWeight: "bold",
     overflow: "auto"
-  }
+  },
 });
 
 class ActivityIndex extends Component {
@@ -126,7 +126,6 @@ class ActivityIndex extends Component {
   renderItems() {
     const classes = this.props.classes;
     const { activityData, version } = this.props;
-
     return _.map(activityData, item => {
       return (
         <Link
@@ -158,7 +157,7 @@ class ActivityIndex extends Component {
                 </div>
                 <div className={classes.item}>
                   <div>
-                    <AccessTime className={classes.icon} /> {dateConversion(version, item.departdate)} 出发
+                    <AccessTime className={classes.icon} /> {item.departdate} 出发
                   </div>
                 </div>
               </div>

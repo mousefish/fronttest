@@ -59,6 +59,14 @@ export default {
         CH:"忘记密码？",
         EN:"Forgot your password?"
     },
+     hotEventCities: {
+        CH:"热门活动城市",
+        EN: "CITIES WITH HOT EVENTS"
+    },
+    hotEventGuides :{
+        CH:"热门本地向导",
+        EN: "HOT LOCAL TOUR GUIDES"
+    },
     completePersonalFile:{
         CH:"完善个人基本资料",
         EN:"Complete your profile"
@@ -130,14 +138,65 @@ export default {
         EN:"Create a wish"
 
     },
+    basicEventInfo:{
+        CH:"基本活动信息",
+        EN:"Primary event information"
+    },
+    eventTheme:{
+        CH:"活动的主题，15字以内",
+        EN:"Event theme (within 30 words)"
 
-    hotEventCities: {
-        CH:"热门活动城市",
-        EN: "CITIES WITH HOT EVENTS"
     },
-    hotEventGuides :{
-        CH:"热门本地向导",
-        EN: "HOT LOCAL TOUR GUIDES"
+    eventCity:{
+        CH:"活动所在的城市，从提示列表选择",
+        EN:"Select the event location from the list"
     },
+    eventBudget:{
+        CH:"活动费用",
+        EN:"Event budget"
+    },
+    minNumOfPeople:{
+        CH:"最少人数",
+        EN:"Min no of people"
+    },
+    maxNumOfPeople:{
+        CH:"最多人数",
+        EN:"Max no of people"
+    },
+    eventDuration:{
+        CH:"活动时间",
+        EN:"Event time"
+    },
+    departdate:{
+        CH:"出发日期和时间",
+        EN:"Start date and time"
+    },
+    finishdate:{
+        CH:"结束日期和时间",
+        EN:"Finish date and time"
+
+    },
+    providedServices:{
+        CH:"向导服务",
+        EN:"Provided services for tourists"
+    },
+    eventStory:{
+        CH:"我在这里的旅行故事",
+        EN:"My story in this city"
+    },
+    eventStoryExample:{
+        CH:"我在这里生活了10年......",
+        EN:"I have been here for 10 years..."
+    },
+    confirmTypes:{
+        CH:"请确认输入",
+        EN:"Please confirm the information you provided"
+    },
+    gobackToRevise :{
+        CH:"返回修改",
+        EN:"Revise"
+    }
+
+
 
 };

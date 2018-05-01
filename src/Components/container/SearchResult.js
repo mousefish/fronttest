@@ -240,7 +240,7 @@ class SearchResult extends Component {
                 <div className={classes.right}>
                   <h4 className={classes.heading}>{item.username}</h4>
                   <p className={classes.subheading} color="textSecondary">
-                    {item.sex} {item.age} 岁
+                    {item.sex} {item.age}
                   </p>
                   <p className={classes.subheading} color="textSecondary">
                     {item.language}

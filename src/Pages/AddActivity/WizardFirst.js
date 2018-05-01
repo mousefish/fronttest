@@ -13,6 +13,8 @@ import validate from "../../Utility/validate";
 import services from "../../Data/services";
 import PageHeader from "../PageHeader";
 import Bigbutton from "../Bigbutton";
+import pair from "../../Data/CH_EN_PAIR";
+
 
 const styles = theme => ({
     root: {
@@ -47,17 +49,17 @@ const styles = theme => ({
 });
 
 class WizardFirst extends Component {
-    renderFields(classes) {
+    renderFields(classes, version) {
         return [
             <div className="form-group" key="basic">
-                <h4 className="category-title">基本活动信息</h4>
+                <h4 className="category-title">{pair.basicEventInfo[version]}</h4>
                 <Field
                     fullWidth
                     key="theme"
                     name="theme"
                     type="text"
                     component={TextField}
-                    label="活动的主题，15字以内"
+                    label={pair.eventTheme[version]}
                 />
 
                 <Field
@@ -66,7 +68,7 @@ class WizardFirst extends Component {
                     name="location"
                     type="text"
                     component={AutocompleteField}
-                    label="活动所在的城市，从提示列表选择"
+                    label={pair.eventCity[version]}
                     props={this.props}
                     marker="loc"
                 />
@@ -77,7 +79,7 @@ class WizardFirst extends Component {
                     name="budget"
                     type="text"
                     component={TextField}
-                    label="活动费用/人"
+                    label={pair.eventBudget[version]}
                 />
                 <div className={classes.rangeContainer}>
                     <Field
@@ -85,7 +87,7 @@ class WizardFirst extends Component {
                         name="minNumOfPeople"
                         type="text"
                         component={SelectRangeField}
-                        title="最少人数"
+                        title={pair.minNumOfPeople[version]}
                         props={this.props}
                     />
 
@@ -93,7 +95,7 @@ class WizardFirst extends Component {
                         key="maxNumOfPeople"
                         name="maxNumOfPeople"
                         type="text"
-                        title="最多人数"
+                        title={pair.maxNumOfPeople[version]}
                         component={SelectRangeField}
                         props={this.props}
                     />
@@ -101,13 +103,13 @@ class WizardFirst extends Component {
             </div>,
 
             <div className="form-group" key="date">
-                <h4 className="category-title">活动时间</h4>
+                <h4 className="category-title">{pair.eventDuration[version]}</h4>
                 <Field
                     key="dapartdate"
                     name="departdate"
                     type="text"
                     component={popupSearchDateField}
-                    placeholder="出发日期和时间"
+                    placeholder={pair.departdate[version]}
                 />
 
                 <Field
@@ -115,24 +117,23 @@ class WizardFirst extends Component {
                     name="finishdate"
                     type="text"
                     component={popupSearchDateField}
-                    placeholder="结束日期和时间"
+                    placeholder={pair.finishdate[version]}
                 />
             </div>
         ];
     }
 
     render() {
-        const classes = this.props.classes;
-        const { handleSubmit } = this.props;
+        const { classes, handleSubmit, version } = this.props;
 
         return (
             <div className="wrapper">
-                <PageHeader history={this.props.history} title="发布新活动" />
+                <PageHeader history={this.props.history} title={pair.createNewEvent[version]} />
                 <form onSubmit={handleSubmit}>
-                    <div>{this.renderFields(classes)}</div>
+                    <div>{this.renderFields(classes, version)}</div>
 
                     <div className="form-group">
-                        <h4 className="category-title">向导服务</h4>
+                        <h4 className="category-title">{pair.providedServices[version]}</h4>
                         <Field
                             key="services"
                             name="services"
@@ -141,7 +142,7 @@ class WizardFirst extends Component {
                         />
                     </div>
                     <div className="centralize-button">
-                        <Bigbutton text="下一步" type="submit" />
+                        <Bigbutton text={pair.nextStep[version]} type="submit" />
                     </div>
                 </form>
             </div>

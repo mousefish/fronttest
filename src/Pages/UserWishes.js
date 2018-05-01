@@ -25,9 +25,10 @@ class UserWishes extends Component {
         if (userWishes && typeof userWishes[0] === "string") {
             return <div style={{ textAlign: "center" }}>{userWishes[0]}</div>;
         }
+        // TEMP VERSION CH FOR AVOIDING MISTAKE!
         return userWishes.map(item => {
             return (
-                <Link to={`/wish/${item.id}`} className="unlink" key={item.id}>
+                <Link to={`/wish/${item.id}/CH`} className="unlink" key={item.id}>
                     <ListItem>
                         <Avatar>
                             <ImageIcon />

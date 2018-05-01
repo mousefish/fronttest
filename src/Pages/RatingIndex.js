@@ -107,6 +107,7 @@ class RatingIndex extends Component {
                         key={index}
                         index={index}
                         item={item}
+                        version=""
                         onClick={() => this.handlePopup(item, item.parentId)}
                     />
                 );
@@ -116,6 +117,7 @@ class RatingIndex extends Component {
                     key={index}
                     index={index}
                     item={item}
+                    version=""
                     onClick={() => this.handlePopup(item, item.parentId)}
                 />
             );
@@ -183,7 +185,7 @@ class RatingIndex extends Component {
                     <RatingItemParent
                         key={index}
                         item={item}
-                        nonParentRatings={nonParentRatings}
+                        version=""
                         onClick={() => this.handlePopup(item, item.id)}
                     >
                         <div style={{ marginBottom: 10 }}>
@@ -203,10 +205,11 @@ class RatingIndex extends Component {
         }
     }
     render() {
-        const { ratings, classes } = this.props;
+        const { ratings, classes, message } = this.props;
         return (
             <div className="wrapper">
                 <PageHeader history={this.props.history} title="活动评论" />
+                {message}
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -249,6 +252,7 @@ class RatingIndex extends Component {
 
 const mapStateToProps = state => {
     return {
+        message: state.RatingReducer.message,
         ratings: state.RatingReducer.ratings
     };
 };

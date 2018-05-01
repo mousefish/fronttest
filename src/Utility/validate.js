@@ -22,7 +22,6 @@ const validate = (values, props) => {
     "username",
     "minNumOfPeople",
     "maxNumOfPeople",
-    // "sex",
     // "age",
     // "city",
     // "yearOfLiving",

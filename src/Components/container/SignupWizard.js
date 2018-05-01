@@ -32,9 +32,10 @@ class SignupWizard extends Component {
   }
 
   handleSubmit(values) {
+    console.log("values", values)
     const { history, match: { params : { version }} } = this.props;
     if (Object.keys(values).length === 0) {
-      this.props.history.push("/activity/"+version);
+      // this.props.history.push("/activity/"+version);
       return null;
     }
     // console.log("submit", values);

@@ -197,7 +197,7 @@ class Activity extends Component {
                     <div>
                         <Link
                             className="unlink"
-                            to={`/editActivity/${id}/${version}`}
+                            to={`/editActivity/${id}`}
                         >
                             <div className={classes.editBtn}>修改我的活动</div>
                         </Link>
@@ -328,7 +328,7 @@ class Activity extends Component {
                             <div className={classes.detailTitle}>活动开始和结束日期</div>
                             <div className={classes.detailContent}>
                                 {dateConversion(version, activity.departdate)} —{" "}
-                                {dateConversion(version, activity.departdate)}
+                                {dateConversion(version, activity.finishdate)}
                             </div>
                         </li>
 

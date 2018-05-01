@@ -7,6 +7,7 @@ import validate from "../../Utility/validate";
 import { TextField } from "redux-form-material-ui";
 import PageHeader from "../PageHeader";
 import Bigbutton from "../Bigbutton";
+import pair from "../../Data/CH_EN_PAIR";
 
 const styles = theme => ({
 
@@ -18,15 +19,13 @@ const styles = theme => ({
 
 class WizardSecond extends Component {
     render() {
-        const { handleSubmit, previousPage } = this.props;
-        const { classes } = this.props;
-
+        const { handleSubmit, previousPage, classes, version } = this.props;
         return (
             <div className="wrapper">
-                <PageHeader onClick={previousPage} title="发布新活动" />
+                <PageHeader onClick={previousPage} title={pair.createNewEvent[version]}/>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <h4 className="category-title">我在这里的旅行故事</h4>
+                        <h4 className="category-title">{pair.eventStory[version]}</h4>
                         <Field
                             fullWidth
                             key="story"
@@ -35,13 +34,13 @@ class WizardSecond extends Component {
                             id="multiline-flexible"
                             multiline
                             rowsMax="4"
-                            placeholder="我在这里生活了10年......"
-                            label="我在这里的旅行故事"
+                            placeholder={pair.eventStoryExample[version]}
+                            label={pair.eventStory[version]}
                             className={classes.textField}
                         />
                     </div>
                     <div className="centralize-button">
-                        <Bigbutton text="下一步" type="submit" />
+                        <Bigbutton text={pair.nextStep[version]} type="submit" />
                     </div>
                 </form>
             </div>

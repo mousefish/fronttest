@@ -8,6 +8,7 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "../../Utility/validate";
 import PageHeader from "../PageHeader";
 import Bigbutton from "../Bigbutton";
+import pair from "../../Data/CH_EN_PAIR";
 
 const styles = theme => ({
     imageWrapper: {
@@ -22,7 +23,7 @@ const styles = theme => ({
         margin: "20px auto",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: "center"
     },
 
     item: {
@@ -32,46 +33,73 @@ const styles = theme => ({
 
 class WizardThird extends Component {
     renderInputs() {
-        const { values, classes } = this.props;
+        const { values, classes, version } = this.props;
         return (
             <div>
-                <div className={classes.item}>主题: {values.theme}</div>
-                <div className={classes.item}>城市: {values.location}</div>
-                <div className={classes.item}>活动费用: {values.budget}</div>
                 <div className={classes.item}>
-                    接收的人数: {values.minNumOfPeople} 人 — {values.maxNumOfPeople} 人
+                    {pair.eventTheme[version]}: {values.theme}
                 </div>
-                <div className={classes.item}>活动开始时间: {values.departdate}</div>
-                <div className={classes.item}>活动结束时间: {values.finishdate}</div>
-                <div className={classes.item}>向导服务: {values.services}</div>
-                <div className={classes.item}>我的故事: {values.story}</div>
+                <div className={classes.item}>
+                    {pair.eventCity[version]}: {values.location}
+                </div>
+                <div className={classes.item}>
+                    {pair.eventBudget[version]}: {values.budget}
+                </div>
+                <div className={classes.item}>
+                    {pair.minNumOfPeople[version]} — {
+                        pair.maxNumOfPeople[version]}: {values.minNumOfPeople} —{" "}
+                    {values.maxNumOfPeople}
+                </div>
+                <div className={classes.item}>
+                    {pair.departdate[version]}: {values.departdate}
+                </div>
+                <div className={classes.item}>
+                    {pair.finishdate[version]}: {values.finishdate}
+                </div>
+                <div className={classes.item}>
+                    {pair.providedServices[version]}: {values.services}
+                </div>
+                <div className={classes.item}>
+                    {pair.eventStory[version]}: {values.story}
+                </div>
             </div>
         );
     }
 
     render() {
-        const { handleSubmit, pristine, previousPage, submitting } = this.props;
-        const { classes } = this.props;
+        const {
+            handleSubmit,
+            pristine,
+            previousPage,
+            submitting,
+            classes,
+            version
+        } = this.props;
         return (
             <div className="wrapper">
-                <PageHeader onClick={previousPage} title="发布新活动" />
+                <PageHeader
+                    onClick={previousPage}
+                    title={pair.createNewEvent[version]}
+                />
 
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <h4 className="category-title">请确认输入</h4>
+                        <h4 className="category-title">
+                            {pair.confirmTypes[version]}
+                        </h4>
                         {this.renderInputs()}
                     </div>
                     <div className={classes.btnGroup}>
-                        <div style={{width:"40%"}}>
+                        <div style={{ width: "40%" }}>
                             <Bigbutton
-                                text="返回修改"
+                                text={pair.gobackToRevise[version]}
                                 color="#43A047"
                                 onClick={previousPage}
                             />
                         </div>
-                        <div style={{width:"40%"}}>
+                        <div style={{ width: "40%" }}>
                             <Bigbutton
-                                text="提交"
+                                text={pair.submit[version]}
                                 type="submit"
                             />
                         </div>

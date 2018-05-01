@@ -64,7 +64,7 @@ class wizardThird extends Component {
 }
 
 export default reduxForm({
-  form: "wizard",
+  form: "signupwizard",
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate

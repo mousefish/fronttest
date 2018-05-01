@@ -286,7 +286,7 @@ class App extends Component {
             <Route exact path="/message" component={MyMessage} />
             <Route
               exact
-              path="/addActivity"
+              path="/addActivity/:version"
               component={RequireAuth(AddActivity)}
             />
             <Route exact path="/addWish" component={RequireAuth(AddWish)} />
@@ -310,7 +310,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/editActivity/:activityId/:version"
+              path="/editActivity/:activityId/"
               component={RequireAuth(EditActivityPanel)}
             />
 

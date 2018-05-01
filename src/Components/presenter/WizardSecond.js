@@ -60,12 +60,10 @@ const renderError = ({ meta: { touched, error } }) =>
 
 class wizardSecond extends Component {
   state = {
-    completed: 50,
-    showCrop: true,
-    showIcon: false
+    completed: 50
   };
-  onGetImgUrl(file) {
-    this.props.replaceWithNewImg(0, file);
+  async onGetImgUrl(file) {
+    await this.props.replaceWithNewImg(0, file);
   }
 
   async onCropImageObject(keyforUrl, width, height, x, y) {
@@ -81,13 +79,9 @@ class wizardSecond extends Component {
       x,
       y
     );
-    await this.props.fetchUser(0);
-    setTimeout(() => {
-      this.setState({
-        showCrop: false,
-        showIcon: true
-      });
-    }, 1000);
+    this.setState({
+      open: false
+    });
   }
   render() {
     const {
@@ -95,13 +89,12 @@ class wizardSecond extends Component {
       previousPage,
       classes,
       user,
-      version
-
+      version,
+      history
     } = this.props;
-
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
-        <PageHeader onClick={previousPage} title={pair.completePersonalFile[version]} />
+        <PageHeader hide={true} title={pair.completePersonalFile[version]} />
         <ProgressBar completed={this.state.completed} />
         <div className="form-group">
           <div className={classes.imageWrapper}>
@@ -121,8 +114,6 @@ class wizardSecond extends Component {
               onGetImgUrl={file => this.onGetImgUrl(file)}
               onCropImageObject={(keyforUrl, width, height, x, y) =>
                 this.onCropImageObject(keyforUrl, width, height, x, y)}
-              showCrop={this.state.showCrop}
-              showIcon={this.state.showIcon}
             />
             {this.props.errorSignup}
           </div>
@@ -131,8 +122,16 @@ class wizardSecond extends Component {
             component={RadioGroup}
             className={classes.radioInner}
           >
-            <FormControlLabel value="男" control={<Radio />} label={pair.male[version]} />
-            <FormControlLabel value="女" control={<Radio />} label={pair.female[version]} />
+            <FormControlLabel
+              value="男"
+              control={<Radio />}
+              label={pair.male[version]}
+            />
+            <FormControlLabel
+              value="女"
+              control={<Radio />}
+              label={pair.female[version]}
+            />
             <FormControlLabel value="其他" control={<Radio />} label="其他" />
           </Field>
           <Field name="sex" component={renderError} />
@@ -194,8 +193,8 @@ const mapStateToProps = state => {
 };
 
 export default reduxForm({
-  form: "wizard",
-  destroyOnUnmount: true,
+  form: "signupwizard",
+  destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
 })(

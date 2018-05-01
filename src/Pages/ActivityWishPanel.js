@@ -52,7 +52,7 @@ class ActivityWishPanel extends Component {
                         translation later)
                     </p>
                 </div>
-                <Link to="/addActivity" className="unlink centralize-button">
+                <Link to={`/addActivity/${version}`} className="unlink centralize-button">
                     <Bigbutton text={pair.createNewEvent[version]} />
                 </Link>
                 <Link to="/addWish" className="unlink centralize-button">

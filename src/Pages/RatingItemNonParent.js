@@ -4,7 +4,7 @@ import { withStyles } from "material-ui/styles";
 import Avatar from "material-ui/Avatar";
 import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import classNames from "classnames";
-
+import dateConversion from "../Utility/dateConversion";
 import config from "../config/config";
 
 const styles = {
@@ -72,7 +72,7 @@ let foldFunc = props => {
 };
 
 let ratingItemFunc = props => {
-    const { classes, item, index, onClick } = props;
+    const { classes, item, index, onClick, version } = props;
     return (
         <div className={classes.subComments} key={index}>
             <div className={classes.header}>
@@ -105,7 +105,7 @@ let ratingItemFunc = props => {
                 </div>
             </div>
             <div className={classes.subtime}>
-                {item.createdAt}发布 |{" "}
+                {dateConversion(version, item.createdAt)}发布 |{" "}
                 <span className="unlink" onClick={onClick}>
                     回复
                 </span>

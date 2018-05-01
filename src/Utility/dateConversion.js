@@ -1,6 +1,4 @@
 import moment from "moment";
-import "moment/locale/zh-cn.js";
-
 
 export default (version, date) => {
     if(version === "CH"){
@@ -10,7 +8,8 @@ export default (version, date) => {
         moment.locale("en");
         return moment(date).format("lll");
     }else{
-        return date;
+        moment.locale("zh-cn");
+        return moment(date).format("lll");
     }
 
 };

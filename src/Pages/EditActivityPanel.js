@@ -20,6 +20,7 @@ import config from "../config/config";
 import FileInput from "./AddActivity/FileInput";
 import defaultBG from "../Assets/Images/defaultBG.png";
 import Fixedbutton from "./Fixedbutton";
+import dateConversion from "../Utility/dateConversion";
 
 const styles = theme => ({
     root: {
@@ -145,7 +146,8 @@ class EditActivityPanel extends Component {
             Object.keys(edittedValues).length === 0 &&
             !values.hasOwnProperty("images")
         ) {
-            history.push(`/activity/${activityId}`);
+            // TEMP VERSION FOR AVOIDING MISTAKE!!
+            history.push(`/activity/${activityId}/CH`);
             return null;
         }
 
@@ -287,14 +289,14 @@ class EditActivityPanel extends Component {
                         name="departdate"
                         type="text"
                         component={popupSearchDateField}
-                        placeholder={edit.departdate}
+                        placeholder={dateConversion('CH', edit.departdate)}
                     />
                     <Field
                         key="finishdate"
                         name="finishdate"
                         type="text"
                         component={popupSearchDateField}
-                        placeholder={edit.finishdate}
+                        placeholder={dateConversion('CH', edit.finishdate)}
                     />
                 </div>
                 <div className="wrap form-group" key="service">

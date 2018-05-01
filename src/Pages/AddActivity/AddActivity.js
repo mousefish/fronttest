@@ -10,6 +10,7 @@ import WizardFirst from "./WizardFirst";
 import WizardSecond from "./WizardSecond";
 import WizardThird from "./WizardThird";
 
+
 class AddActivity extends Component {
 
     constructor(props) {
@@ -42,21 +43,23 @@ class AddActivity extends Component {
     }
 
     render() {
-        const { onSubmit } = this.props;
+        const { onSubmit, match: { params: { version }} } = this.props;
         const { page } = this.state;
         return (
             <div>
-                {page === 1 && <WizardFirst onSubmit={this.nextPage} />}
+                {page === 1 && <WizardFirst version={version} onSubmit={this.nextPage} />}
                 {page === 2 && (
                     <WizardSecond
                         previousPage={this.previousPage}
                         onSubmit={this.nextPage}
+                        version={version}
                     />
                 )}
                 {page === 3 && (
                     <WizardThird
                         previousPage={this.previousPage}
                         onSubmit={this.handleSubmit}
+                        version={version}
                     />
                 )}
             </div>
