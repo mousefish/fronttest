@@ -20,6 +20,9 @@ const styles = {
     ratingIndex: {
         padding: 5,
         listStyle: "none"
+    },
+    nonParentRatingsWrapper: {
+        marginBottom: 10
     }
 };
 
@@ -188,7 +191,7 @@ class RatingIndex extends Component {
                         version=""
                         onClick={() => this.handlePopup(item, item.id)}
                     >
-                        <div style={{ marginBottom: 10 }}>
+                        <div className={classes.nonParentRatingsWrapper}>
                             {nonParentRatings.length > 0 ? (
                                 this.renderNonParentRatings(
                                     nonParentRatings,

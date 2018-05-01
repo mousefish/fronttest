@@ -9,13 +9,16 @@ import SideButton from "./sideButton";
 import Header from "../Components/presenter/header";
 import IconButton from "material-ui/IconButton";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import { getPageYOffset, getDocumentHeight, getWindowInnerHeight} from "../Utility/scrollHandler";
+import {
+  getPageYOffset,
+  getDocumentHeight,
+  getWindowInnerHeight
+} from "../Utility/scrollHandler";
 // WebFontLoader.load({
 //   google: {
 //     families: ["Roboto:300,400,500,700", "Material Icons"]
 //   }
 // });
-
 
 const styles = theme => ({
   loadMore: {
@@ -32,7 +35,6 @@ const styles = theme => ({
   }
 });
 
-
 class TripMain extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +43,7 @@ class TripMain extends Component {
 
   state = {
     open: false,
-    show: false,
+    show: false
   };
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -51,32 +53,17 @@ class TripMain extends Component {
     this.setState({ open: false });
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { activityData } = this.props;
     if (activityData && activityData.length === 0) {
       this.props.fetchActivityData(0);
     }
-  }
-
-  componentDidMount(){
-     window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   }
 
   componentWillUnmount() {
-    window.scrollTo(0, Math.round(getPageYOffset()))
+    window.scrollTo(0, Math.round(getPageYOffset()));
     window.removeEventListener("scroll", this.handleScroll);
-
-  }
-
-  handleScroll(e) {
-    let { classes, message } = this.props;
-    let pageYOffset = Math.round(getPageYOffset());
-    // console.log(pageYOffset, getDocumentHeight() - getWindowInnerHeight());
-    if (pageYOffset === (getDocumentHeight() - getWindowInnerHeight())){
-      this.setState(prevState => ({
-        show: !prevState.show
-      }));
-    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -87,6 +74,17 @@ class TripMain extends Component {
         let lastId = activityData[activityData.length - 1].id;
         this.props.fetchActivityData(lastId);
       }
+    }
+  }
+
+  handleScroll(e) {
+    let { classes, message } = this.props;
+    let pageYOffset = Math.round(getPageYOffset());
+    // console.log(pageYOffset, getDocumentHeight() - getWindowInnerHeight());
+    if (pageYOffset === getDocumentHeight() - getWindowInnerHeight()) {
+      this.setState(prevState => ({
+        show: !prevState.show
+      }));
     }
   }
 
