@@ -19,18 +19,17 @@ class InputDate extends Component {
 
     render() {
         const { input, placeholder, meta: { error, touched }, version } = this.props;
-        if(version === 'CH'){
-            import("moment/locale/zh-cn.js")
-            moment.locale("zh-cn");
-        }
-        else if(version === "EN"){
+
+        if(version === "EN"){
             moment.locale('en')
         }else {
-            moment.locale('en')
+              import("moment/locale/zh-cn.js")
+              moment.locale('zh-cn')
         }
 
         momentLocalizer();
        // input. value is formatted time string : 2018/05/26 12:26
+       // console.log("input. value", input. value)
 
         return (
             <div>
@@ -43,14 +42,14 @@ class InputDate extends Component {
                     <DateTimePicker
                         {...input}
                         onChange={(newValue) =>{
+                            // console.log("newValue", newValue)
                             // newValue is a time object:Sat May 26 2018 12:26:51 GMT-0700 (PDT)
                             this.handleChange(newValue)}
                         }
                         value={this.state.value}
                         time={true}
                         placeholder={placeholder}
-                        format={"YYYY/MM/DD h:mm"}
-                        culture={version === "CH" ? "zh-cn" :"en"}
+                        culture={version === "EN" ? "en" :"zh-cn"}
                     />
                 </div>
                 <div className="input-error">{touched && error}</div>

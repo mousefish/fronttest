@@ -131,14 +131,22 @@ const validate = (values, props) => {
   // *******************date validation
 
   if (values.departdate) {
-    if (values.departdate && Date.now() >= Date.parse(values.departdate)) {
+    let departdateValue = values.departdate;
+    if (departdateValue.includes("年")) {
+      departdateValue = departdateValue.replace(/年|月|日/g, "/");
+    }
+    if (values.departdate && Date.now() >= Date.parse(departdateValue)) {
       errors.departdate = "出发时间不能早于当前时间";
     }
-  }
 
-  if (values.departdate && values.finishdate) {
-    if (Date.parse(values.finishdate) <= Date.parse(values.departdate)) {
-      errors.finishdate = "结束时间不能早于出发时间";
+    if (values.finishdate) {
+      let finishdateValue = values.finishdate;
+      if (finishdateValue.includes("年")) {
+        finishdateValue = finishdateValue.replace(/年|月|日/g, "/");
+      }
+      if (Date.parse(finishdateValue) <= Date.parse(departdateValue)) {
+        errors.finishdate = "结束时间不能早于出发时间";
+      }
     }
   }
 
