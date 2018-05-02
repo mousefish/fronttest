@@ -177,9 +177,10 @@ class SearchResult extends Component {
         </h4>
       );
       if (searchResult[0].category === "活动") {
+         const { version } = this.props;
         searchResult.forEach(item => {
           result.push(
-            <Link to={`/activity/${item.id}`} key={item.id} className="unlink">
+            <Link to={`/activity/${item.id}/${version}`} key={item.id} className="unlink">
               <Card className={classes.card}>
                 <div className={classes.iconWrapper}>
                   <EventAvailable className={classes.icon} />
@@ -206,9 +207,10 @@ class SearchResult extends Component {
           );
         });
       } else if (searchResult[0].category === "愿望") {
+        const { version } = this.props;
         searchResult.forEach(item => {
           result.push(
-            <Link to={`/wish/${item.id}`} key={item.id} className="unlink">
+            <Link to={`/wish/${item.id}/${version}`} key={item.id} className="unlink">
               <Card className={classes.card}>
                 <div className={classes.iconWrapper}>
                   <LocalPlay className={classes.icon} />
@@ -227,6 +229,7 @@ class SearchResult extends Component {
           );
         });
       } else if (searchResult[0].category === "向导") {
+         const { version } = this.props;
         searchResult.forEach(item => {
           result.push(
             <Link to={`/user/${item.id}`} key={item.id} className="unlink">
@@ -237,7 +240,7 @@ class SearchResult extends Component {
                 <div className={classes.right}>
                   <h4 className={classes.heading}>{item.username}</h4>
                   <p className={classes.subheading} color="textSecondary">
-                    {item.sex} {item.age} 岁
+                    {item.sex} {item.age}
                   </p>
                   <p className={classes.subheading} color="textSecondary">
                     {item.language}

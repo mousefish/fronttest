@@ -1,7 +1,8 @@
 import React from "react";
 import TLogo from "../../Assets/Images/logo.jpg";
-
+import pair from "../../Data/CH_EN_PAIR";
 const header = props => {
+  const { version } = props;
   return (
     <header>
       <div className='title'>
@@ -9,11 +10,11 @@ const header = props => {
         <div
           className='name'
         >
-          携U行
+          {pair.brandName[version]}
         </div>
       </div>
 
-      <h4>我们不打造攻略，我们只创造体验</h4>
+      <h5>{pair.sloganInside[version]}</h5>
     </header>
   );
 };

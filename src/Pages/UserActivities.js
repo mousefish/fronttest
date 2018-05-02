@@ -51,7 +51,7 @@ class UserActivities extends Component {
         return userActivities.map(item => {
             return (
                 <Link
-                    to={`/activity/${item.id}/${version}`}
+                    to={`/activity/${item.id}/CH`}
                     key={item.id}
                     className="unlink"
                 >
@@ -62,14 +62,14 @@ class UserActivities extends Component {
     }
 
     render() {
-        const { userActivities } = this.props;
+        const { userActivities, match : { params : { version }} } = this.props;
         return (
             <div className="wrapper">
                 <PageHeader title="我的活动" history={this.props.history} />
                 <ul className="unlist">
                     {this.renderUserActivities(userActivities)}
                 </ul>
-                <SideButton />
+                <SideButton version={version}/>
             </div>
         );
     }

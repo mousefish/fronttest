@@ -383,6 +383,7 @@ const mapStateToProps = state => {
         language,
         bio
     } = state.UserReducer.basicInfo;
+
     return {
         user: state.UserReducer.basicInfo,
         msg: state.UserReducer.msg,

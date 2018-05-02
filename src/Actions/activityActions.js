@@ -26,13 +26,17 @@ export const verifyYourFav = activityId => async dispatch => {
     });
 };
 
-export const fetchActivityData = () => async dispatch => {
+export const fetchActivityData = lastId => async dispatch => {
+
     try {
-        const res = await axios.get(`${ROOT_URL}/api/fetchActivity`, {
-            headers: {
-                authorization: localStorage.getItem("jwtToken")
+        const res = await axios.get(
+            `${ROOT_URL}/api/fetchActivity/${lastId}`,
+            {
+                headers: {
+                    authorization: localStorage.getItem("jwtToken")
+                }
             }
-        });
+        );
         dispatch({
             type: FETCH_ACTIVITY_DATA,
             payload: res.data
@@ -94,7 +98,8 @@ export const fetchOneUserActivityForEditting = activityId => async dispatch => {
 export const updateUserActivity = (
     activityId,
     edittedValues,
-    history
+    history,
+    version
 ) => async dispatch => {
     const res = await axios.post(
         `${ROOT_URL}/api/updateUserActivity/${activityId}`,
@@ -107,7 +112,8 @@ export const updateUserActivity = (
     );
 
     if (res.data === "修改成功！") {
-        history.goBack();
+        // TEMP VERSION CH TO AVOID MISTAKE!
+        history.push(`/activity/${activityId}/CH`);
     }
     dispatch({
         // since we only need to receive the success message here
@@ -149,8 +155,8 @@ export const deleteUserActivity = (
             type: ADD_ACTIVITY_DATA,
             payload: "活动成功删除"
         });
-
-        history.push("/userActivities/0");
+        // TEMP VERSION CH TO AVOID MISTAKE!
+        history.push("/userActivities/0/CH");
     } else {
         // 2. check if the use has the authority to delete the activty. a:loggedin b. be the person who created the activity
         dispatch({

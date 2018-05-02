@@ -11,9 +11,9 @@ import PasswordSetVisibility from "../presenter/PasswordSetVisibility";
 import * as actions from "../../Actions";
 import PageHeader from "../../Pages/PageHeader";
 import Bigbutton from "../../Pages/Bigbutton";
+import pair from "../../Data/CH_EN_PAIR";
 
 const styles = theme => ({
-
   legal: {
     margin: "auto",
     marginTop: 45,
@@ -31,41 +31,50 @@ class SignupForm extends Component {
   };
 
   submitForm(values) {
-    this.props.userSignupRequest(values, this.props.history);
+    const { history, match: { params: { version } } } = this.props;
+    this.props.userSignupRequest(values, history, version);
   }
 
   render() {
-    const { classes, history, handleSubmit } = this.props;
+    const {
+      classes,
+      history,
+      handleSubmit,
+      match: { params: { version } }
+    } = this.props;
 
     return (
       <form
         className="wrapper"
         onSubmit={handleSubmit(this.submitForm.bind(this))}
       >
-        <PageHeader history={this.props.history} title="创建新账户" />
+        <PageHeader
+          history={this.props.history}
+          title={pair.createNewAccount[version]}
+        />
         <div className="form-group">
           <Field
             fullWidth
             name="email"
             component={TextField}
-            label="输入邮箱地址"
-            placeholder="输入邮箱地址"
+            label={pair.inputEmailAddress[version]}
+            placeholder={pair.inputEmailAddress[version]}
           />
 
           <Field
             name="password"
             type="password"
             component={PasswordSetVisibility}
-            label="输入密码：8—25位数"
-            placeholder="输入密码：8—25位数"
+            label={pair.inputPassword[version]}
+            placeholder={pair.inputPassword[version]}
           />
 
           <Field
             name="username"
             type="text"
             component={TextField}
-            label="输入用户名"
-            placeholder="输入用户名"
+            label={pair.inputUsername[version]}
+            placeholder={pair.inputUsername[version]}
           />
         </div>
         <div className={classes.legal}>
@@ -80,9 +89,10 @@ class SignupForm extends Component {
           </Link>，<Link to="/" className="unlink">
             使用政策须知
           </Link>
+          (Needs EN translation)later
         </div>
 
-        <Bigbutton type="submit" text="点击注册" />
+        <Bigbutton type="submit" text={pair.signup[version]} />
         <p
           className="input-error centralize-button"
           style={{ textAlign: "center" }}

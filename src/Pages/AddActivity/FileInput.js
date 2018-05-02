@@ -71,6 +71,7 @@ class FileInput extends Component {
                 showIcon: false,
                 file: imagesToUpload[0]
               });
+
             };
             reader.readAsDataURL(imagesToUpload[0]);
           }}

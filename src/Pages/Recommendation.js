@@ -20,6 +20,7 @@ import p1 from "../Assets/imgForTest/1.jpg";
 import p2 from "../Assets/imgForTest/2.jpg";
 import p3 from "../Assets/imgForTest/3.jpg";
 import p4 from "../Assets/imgForTest/4.jpg";
+import pair from "../Data/CH_EN_PAIR";
 
 const tileData = [
     {
@@ -44,7 +45,7 @@ const styles = theme => ({
         width: 20,
         height: 20,
         verticalAlign: "-2px",
-        color:"#F44336"
+        color: "#F44336"
     },
     row: {
         display: "flex",
@@ -96,16 +97,16 @@ const styles = theme => ({
     }
 });
 class Recommendation extends Component {
-
     render() {
-        const { classes } = this.props;
+        const { classes, match: { params: { version } } } = this.props;
         return (
             <div style={{ position: "relative" }}>
                 <div className="wrapper">
-                    <Header/>
+                    <Header version={version} />
                     <div className={classes.cities}>
                         <h4 style={{ fontWeight: "bold" }}>
-                            热门活动城市<WhatsHot className={classes.icon} />
+                            {pair.hotEventCities[version]}
+                            <WhatsHot className={classes.icon} />
                         </h4>
                         <div className={classes.root}>
                             <GridList className={classes.gridList} cols={2.5}>
@@ -127,7 +128,8 @@ class Recommendation extends Component {
                     </div>
                     <div>
                         <h4 style={{ fontWeight: "bold" }}>
-                            热门本地向导<WhatsHot className={classes.icon} />
+                            {pair.hotEventGuides[version]}
+                            <WhatsHot className={classes.icon} />
                         </h4>
                         <ul className={classes.peopleContainer}>
                             <li>

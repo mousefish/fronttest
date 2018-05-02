@@ -9,7 +9,7 @@ import Tabs, { Tab } from "material-ui/Tabs";
 import logo from "../Assets/Images/logo.jpg";
 import backgroundWall from "../Assets/Images/backgroundWall.png";
 import wechat from "../Assets/Images/wechat.png";
-import switchLan from "../Utility/switchLan";
+import pair from "../Data/CH_EN_PAIR";
 
 const styles = {
     container: {
@@ -188,10 +188,7 @@ class OpenPage extends Component {
                                 )}
                             />
                             <p className={classes.slogan}>
-                                {switchLan(
-                                    version,
-                                    "slogan"
-                                )}
+                                {pair.slogan[version]}
                             </p>
                             {this.renderVersionChoice()}
                         </div>
@@ -208,11 +205,11 @@ class OpenPage extends Component {
                         >
                             <Tab
                                 className={classes.tab}
-                                label={switchLan(version, "login")}
+                                label={pair.login[version]}
                             />
                             <Tab
                                 className={classes.tab}
-                                label={switchLan(version, "signup")}
+                                label={pair.signup[version]}
                             />
                         </Tabs>
                     </AppBar>
@@ -229,42 +226,34 @@ class OpenPage extends Component {
                                         src={wechat}
                                         className={classes.wechatIcon}
                                     />
-                                    <div>
-                                        {switchLan(
-                                            version,
-                                           "signupWithWechat"
-                                        )}
-                                    </div>
+                                    <div>{pair.signupWithWechat[version]}</div>
                                 </div>
                             </Button>
-                            <Link to={`/login/${version}`} className="unlink withEmail">
+                            <Link
+                                to={`/login/${version}`}
+                                className="unlink withEmail"
+                            >
                                 <Button
                                     className={classNames(
                                         classes.button,
                                         classes.emailBtn
                                     )}
                                 >
-                                    {switchLan(
-                                        version,
-                                        "loginWithEmail"
-                                    )}
+                                    {pair.loginWithEmail[version]}
                                 </Button>
                             </Link>
                         </div>
                     )}
                     {value === 1 && (
                         <div className={classes.loginBtnGroup}>
-                            <Link to="/signup" className="unlink">
+                            <Link to={`/signup/${version}`} className="unlink">
                                 <Button
                                     className={classNames(
                                         classes.button,
                                         classes.emailBtn
                                     )}
                                 >
-                                    {switchLan(
-                                        version,
-                                        "createNewAccount"
-                                    )}
+                                    {pair.createNewAccount[version]}
                                 </Button>
                             </Link>
                         </div>

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
-import moment from "moment";
-import "moment/locale/zh-cn.js";
+
 import classNames from "classnames";
 import config from "../config/config";
 import Button from "material-ui/Button";
@@ -136,9 +135,12 @@ class FriendComments extends Component {
                                 {item.feedback}
                             </div>
                             <div style={{ float: "right", fontSize: 12 }}>
-                                {moment(item.createdAt).format("LLL")}发布{item.activityName ? (
+                                {
+                                    item.createdAt
+                                }发布{item.activityName ? (
+                                    // TEMP VERSION CH TO AVOID MISTAKE
                                     <Link
-                                        to={`/activity/${item.activityId}`}
+                                        to={`/activity/${item.activityId}/CH`}
                                         className="unlink"
                                     >
                                         针对{item.activityName}

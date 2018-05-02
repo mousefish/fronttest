@@ -127,7 +127,7 @@ class WishDetails extends Component {
         this.props.fetchOneWish(wishId);
     }
     render() {
-        const { classes, wish, match } = this.props;
+        const { classes, wish, match: { params: { version } } } = this.props;
         if (Object.keys(wish).length === 0) {
             return null;
         } else if (wish && wish.hasOwnProperty("warning")) {
@@ -185,7 +185,8 @@ class WishDetails extends Component {
                     <li>
                         <div className={classes.detailTitle}>期待愿望开始和结束日期</div>
                         <div className={classes.detailContent}>
-                            {wish.departdate} — {wish.finishdate}
+                            {wish.departdate} —{" "}
+                            {wish.finishdate}
                         </div>
                     </li>
 

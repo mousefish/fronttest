@@ -55,7 +55,8 @@ export const updateUserWish = (
         }
     );
     if (res.data === "修改成功！") {
-        history.goBack();
+        // TEMP VERSION CH FOR AVOIDING MISTAKE!
+         history.push(`/wish/${wishId}/CH`);
     }
 
     dispatch({
@@ -98,7 +99,8 @@ export const submitWishData = (data, history) => async dispatch => {
             type: ADD_WISH_DATA,
             payload: res.data
         });
-        history.push("/wish");
+        // TEMP VERSION CH FOR AVOIDING MISTAKE!
+        history.push("/wish/CH");
     } catch (err) {
         dispatch(wishErr(err));
     }

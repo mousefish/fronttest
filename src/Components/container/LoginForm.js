@@ -10,7 +10,7 @@ import { TextField } from "redux-form-material-ui";
 import PasswordSetVisibility from "../presenter/PasswordSetVisibility";
 import PageHeader from "../../Pages/PageHeader";
 import Bigbutton from "../../Pages/Bigbutton";
-import switchLan from "../../Utility/switchLan";
+import pair from "../../Data/CH_EN_PAIR";
 
 const styles = theme => ({
   textField: {
@@ -25,10 +25,7 @@ class LoginForm extends Component {
   };
 
   submitForm(values) {
-    const {
-      history,
-      match: { params: { version } }
-    } = this.props;
+    const { history, match: { params: { version } } } = this.props;
     this.props.userLogin(values, history, version);
   }
 
@@ -46,7 +43,7 @@ class LoginForm extends Component {
       >
         <PageHeader
           history={this.props.history}
-          title={switchLan(version, "loginWithEmail")}
+          title={pair.loginWithEmail[version]}
         />
         <div className="form-group">
           <Field
@@ -54,9 +51,9 @@ class LoginForm extends Component {
             name="email"
             component={TextField}
             className="text-field"
-            label={switchLan(version, "inputEmailAddress")}
+            label={pair.inputEmailAddress[version]}
             className={classes.textField}
-            placeholder={switchLan(version, "inputEmailAddress")}
+            placeholder={pair.inputEmailAddress[version]}
           />
 
           <Field
@@ -64,13 +61,13 @@ class LoginForm extends Component {
             type="password"
             component={PasswordSetVisibility}
             className="text-field"
-            label={switchLan(version, "inputPassword")}
+            label={pair.inputPassword[version]}
             props={this.props}
             className={classes.textField}
           />
         </div>
 
-        <Bigbutton text={switchLan(version, "clickToRegister")} type="submit" />
+        <Bigbutton text={pair.clickToRegister[version]} type="submit" />
         <div style={{ margin: "auto" }}>
           <p className="input-error">
             {version === "CH" ? (
@@ -81,7 +78,7 @@ class LoginForm extends Component {
           </p>
           <Link className="unlink" to="/openPage">
             {" "}
-            {switchLan(version, "forgotPassword")}
+            {pair.forgotPassword[version]}
           </Link>
         </div>
       </form>

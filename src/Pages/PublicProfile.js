@@ -145,7 +145,7 @@ class PublicProfile extends Component {
                             </span>
                         </Link>
                         <Link
-                            to={`/userActivities/${user.id}`}
+                            to={`/userActivities/${user.id}/CH`}
                             className="unlink"
                             style={{ color: "#fff" }}
                         >

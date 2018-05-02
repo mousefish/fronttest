@@ -67,8 +67,7 @@ const styles = theme => ({
     backgroundColor: "#000",
     opacity: 0.3,
     zIndex: 1000,
-    textAlign:"center",
-
+    textAlign: "center"
   }
 });
 
@@ -96,12 +95,12 @@ class FileCrop extends Component {
   }
   renderLayer() {
     const { classes, purpose } = this.props;
-    let top = purpose === "avatar" ? 10 :"20%"
+    let top = purpose === "avatar" ? 10 : "20%";
     if (!this.state.on) {
       return (
         <div
           className={classes.layer}
-          style={{paddingTop:top}}
+          style={{ paddingTop: top }}
           onClick={e => {
             e.stopPropagation();
           }}
@@ -155,7 +154,9 @@ class FileCrop extends Component {
               onClick={async e => {
                 this.hideSets();
                 await this.getImgURL(e);
-                await this.cropImgObj(e);
+                if (!this.props.uploadError) {
+                  await this.cropImgObj(e);
+                }
                 this.props.onCancel();
               }}
             >
@@ -170,6 +171,7 @@ class FileCrop extends Component {
 
 const mapStateToProps = state => {
   return {
+    uploadError: state.ImageReducer.error,
     keyforUrl: state.ImageReducer.image.key
   };
 };

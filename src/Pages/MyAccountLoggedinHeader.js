@@ -1,12 +1,13 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
+import config from "../config/config";
 import Avatar from "material-ui/Avatar";
-import logo from "../Assets/Images/logo.jpg";
+import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 
 const styles = theme => ({
     avatar: {
         width: 70,
-        height: 70,
+        height: 70
         // boxShadow:"2px 2px 5px #fff"
     },
 
@@ -31,10 +32,14 @@ const styles = theme => ({
 });
 
 const MyAccountLoggedinHeader = props => {
-    const { classes } = props;
+    const { classes, imageurl } = props;
     return (
         <div className={classes.myHeader}>
-            <Avatar alt="logo" src={logo} className={classes.avatar} />
+            <Avatar
+                alt="user"
+                src={imageurl ? config.BUCKET_URL + imageurl : defaultAvatar}
+                className={classes.avatar}
+            />
             <div className={classes.myHeaderRight}>欢迎你！{props.userName}</div>
         </div>
     );

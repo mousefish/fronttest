@@ -18,25 +18,13 @@ const styles = theme => ({
     textField: {
         padding: "8px 0"
         // border: "1px solid blue"
-    },
-
+    }
 });
 
 class AddWish extends Component {
     submitForm(value) {
-        let depart = new Date(value.departdate.replace(/年|月|日/g, "/"));
-        let finish = new Date(value.finishdate.replace(/年|月|日/g, "/"));
-        let departUTC = depart.toUTCString();
-        let finishUTC = finish.toUTCString();
-
-        this.props.submitWishData(
-            {
-                ...value,
-                departdate: departUTC,
-                finishdate: finishUTC
-            },
-            this.props.history
-        );
+        console.log("value", value);
+        this.props.submitWishData(value, this.props.history);
     }
 
     renderErrorMsg() {
@@ -57,8 +45,9 @@ class AddWish extends Component {
                         type="text"
                         component={AutocompleteField}
                         className="text-field"
-                        placeholder="你想去的城市，按提示列表选择"
+                        label="你想去的城市，按提示列表选择"
                         props={this.props}
+                        marker="loc"
                     />
 
                     <Field
@@ -89,6 +78,7 @@ class AddWish extends Component {
                         type="text"
                         component={popupSearchDateField}
                         placeholder="出发日期和时间"
+                        version='CH'
                     />
 
                     <Field
@@ -97,6 +87,7 @@ class AddWish extends Component {
                         type="text"
                         component={popupSearchDateField}
                         placeholder="结束日期和时间"
+                        version='CH'
                     />
                 </div>
             </div>

@@ -19,8 +19,7 @@ import languages from "../../Data/languages";
 import config from "../../config/config";
 import * as actions from "../../Actions";
 import ProgressBar from "./ProgressBar";
-
-
+import pair from "../../Data/CH_EN_PAIR";
 
 const styles = theme => ({
   textField: {
@@ -61,12 +60,10 @@ const renderError = ({ meta: { touched, error } }) =>
 
 class wizardSecond extends Component {
   state = {
-    completed: 50,
-    showCrop: true,
-    showIcon: false
+    completed: 50
   };
-  onGetImgUrl(file) {
-    this.props.replaceWithNewImg(0, file);
+  async onGetImgUrl(file) {
+    await this.props.replaceWithNewImg(0, file);
   }
 
   async onCropImageObject(keyforUrl, width, height, x, y) {
@@ -82,20 +79,22 @@ class wizardSecond extends Component {
       x,
       y
     );
-    await this.props.fetchUser(0);
-    setTimeout(() => {
-      this.setState({
-        showCrop: false,
-        showIcon: true
-      });
-    }, 1000);
+    this.setState({
+      open: false
+    });
   }
   render() {
-    const { handleSubmit, previousPage } = this.props;
-    const { classes, user } = this.props;
+    const {
+      handleSubmit,
+      previousPage,
+      classes,
+      user,
+      version,
+      history
+    } = this.props;
     return (
       <form className="wrapper" onSubmit={handleSubmit}>
-        <PageHeader onClick={previousPage} title="完善个人基本资料" />
+        <PageHeader hide={true} title={pair.completePersonalFile[version]} />
         <ProgressBar completed={this.state.completed} />
         <div className="form-group">
           <div className={classes.imageWrapper}>
@@ -115,8 +114,6 @@ class wizardSecond extends Component {
               onGetImgUrl={file => this.onGetImgUrl(file)}
               onCropImageObject={(keyforUrl, width, height, x, y) =>
                 this.onCropImageObject(keyforUrl, width, height, x, y)}
-              showCrop={this.state.showCrop}
-              showIcon={this.state.showIcon}
             />
             {this.props.errorSignup}
           </div>
@@ -125,8 +122,16 @@ class wizardSecond extends Component {
             component={RadioGroup}
             className={classes.radioInner}
           >
-            <FormControlLabel value="男" control={<Radio />} label="男" />
-            <FormControlLabel value="女" control={<Radio />} label="女" />
+            <FormControlLabel
+              value="男"
+              control={<Radio />}
+              label={pair.male[version]}
+            />
+            <FormControlLabel
+              value="女"
+              control={<Radio />}
+              label={pair.female[version]}
+            />
             <FormControlLabel value="其他" control={<Radio />} label="其他" />
           </Field>
           <Field name="sex" component={renderError} />
@@ -138,7 +143,7 @@ class wizardSecond extends Component {
             type="text"
             component={AutocompleteField}
             props={this.props}
-            label="年龄范围，按提示列表选择"
+            label={pair.ageRange[version]}
             marker="age"
           />
 
@@ -147,7 +152,7 @@ class wizardSecond extends Component {
             name="city"
             type="text"
             component={AutocompleteField}
-            label="当前居住的城市，按提示列表选择"
+            label={pair.currentlyLiveat[version]}
             props={this.props}
             marker="loc"
           />
@@ -157,24 +162,24 @@ class wizardSecond extends Component {
             name="yearOfLiving"
             type="text"
             component={AutocompleteField}
-            label="当前居住的城市的年限，按提示列表选择"
+            label={pair.howlong[version]}
             props={this.props}
             marker="year"
           />
 
           <div style={{ marginTop: 10 }}>
-            <h4 className="category-title">掌握的语言</h4>
+            <h4 className="category-title">{pair.SpeakingLanguage[version]}</h4>
             <Field
               key="language"
               name="language"
               component={popupSearchMultiServices}
               data={languages}
-              label="掌握的语言"
+              label={pair.SpeakingLanguage[version]}
               type="text"
             />
           </div>
         </div>
-        <Bigbutton type="submit" text="下一步" />
+        <Bigbutton type="submit" text={pair.nextStep[version]} />
       </form>
     );
   }
@@ -188,8 +193,8 @@ const mapStateToProps = state => {
 };
 
 export default reduxForm({
-  form: "wizard",
-  destroyOnUnmount: true,
+  form: "signupwizard",
+  destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
 })(

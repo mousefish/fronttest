@@ -11,14 +11,13 @@ import WizardSecond from "./WizardSecond";
 import WizardThird from "./WizardThird";
 
 class AddActivity extends Component {
-
     constructor(props) {
         super(props);
         this.nextPage = this.nextPage.bind(this);
         this.previousPage = this.previousPage.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            page: 1,
+            page: 1
         };
     }
     nextPage() {
@@ -31,32 +30,29 @@ class AddActivity extends Component {
 
     handleSubmit(values) {
         console.log("values", values);
-        let depart = new Date(values.departdate.replace(/年|月|日/g, "/"));
-        let finish = new Date(values.finishdate.replace(/年|月|日/g, "/"));
-        let departUTC = depart.toUTCString();
-        let finishUTC = finish.toUTCString();
-        this.props.submitActivityData(
-            { ...values, departdate: departUTC, finishdate: finishUTC },
-            this.props.history
-        );
+        this.props.submitActivityData(values, this.props.history);
     }
 
     render() {
-        const { onSubmit } = this.props;
+        const { onSubmit, match: { params: { version } } } = this.props;
         const { page } = this.state;
         return (
             <div>
-                {page === 1 && <WizardFirst onSubmit={this.nextPage} />}
+                {page === 1 && (
+                    <WizardFirst version={version} onSubmit={this.nextPage} />
+                )}
                 {page === 2 && (
                     <WizardSecond
                         previousPage={this.previousPage}
                         onSubmit={this.nextPage}
+                        version={version}
                     />
                 )}
                 {page === 3 && (
                     <WizardThird
                         previousPage={this.previousPage}
                         onSubmit={this.handleSubmit}
+                        version={version}
                     />
                 )}
             </div>

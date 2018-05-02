@@ -23,12 +23,11 @@ const styles = theme => ({
 });
 
 function sideButton(props) {
-  const { classes } = props;
-
+  const { classes, version } = props;
   return (
     <div className={classes.buttonWrapper}>
       <div>
-        <Link to="/searchPanel">
+        <Link to={`/searchPanel/${version}`}>
           <Button
             fab
             style={{backgroundColor:"#1976D2"}}
@@ -41,7 +40,7 @@ function sideButton(props) {
       </div>
 
       <div>
-        <Link to="/activityWish">
+        <Link to={`/activityWish/${version}`}>
           <Button
             fab
             style={{backgroundColor:"#43A047"}}

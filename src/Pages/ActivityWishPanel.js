@@ -7,6 +7,8 @@ import AddWish from "./AddWish/AddWish";
 import logo from "../Assets/Images/logo.jpg";
 import PageHeader from "./PageHeader";
 import Bigbutton from "./Bigbutton";
+import pair from "../Data/CH_EN_PAIR";
+
 const styles = theme => ({
     logo: {
         flex: 1,
@@ -30,23 +32,34 @@ const styles = theme => ({
 
 class ActivityWishPanel extends Component {
     render() {
-        const { classes, history } = this.props;
+        const { classes, history, match: { params: { version } } } = this.props;
 
         return (
             <div className="wrapper">
-                <PageHeader history={this.props.history} title="发布活动或者愿望" />
+                <PageHeader
+                    history={this.props.history}
+                    title={pair.publishEventOrWish[version]}
+                />
                 <div className={classes.logoWrapper}>
                     <img src={logo} alt="logo" className={classes.logo} />
                 </div>
                 <div className={classes.instruction}>
-                    <h4 className={classes.title}>发布须知：</h4>
-                    <p>发布活动或者愿望意味着您了解必须承担的责任，并将遵守携U行的所有法律条款。</p>
+                    <h4 className={classes.title}>
+                        {pair.beforeYouPublish[version]}
+                    </h4>
+                    <p>
+                        发布活动或者愿望意味着您了解必须承担的责任，并将遵守携U行的所有法律条款。(Need EN
+                        translation later)
+                    </p>
                 </div>
-                <Link to="/addActivity" className="unlink centralize-button">
-                    <Bigbutton text="发布新活动" />
+                <Link to={`/addActivity/${version}`} className="unlink centralize-button">
+                    <Bigbutton text={pair.createNewEvent[version]} />
                 </Link>
                 <Link to="/addWish" className="unlink centralize-button">
-                    <Bigbutton text="发布新愿望" color="#43A047" />
+                    <Bigbutton
+                        text={pair.createNewWish[version]}
+                        color="#43A047"
+                    />
                 </Link>
             </div>
         );

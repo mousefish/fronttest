@@ -77,37 +77,21 @@ class EditWishPanel extends Component {
         const { edit, history } = this.props;
         const { wishId } = this.props.match.params;
         let edittedValues = {};
-        keys.forEach(item => {
-            if (item === "services") {
-                if (_.isEqual(edit[item], values[item]) === false) {
-                    edittedValues[item] = values[item];
+        keys.forEach(key => {
+            if (key === "services") {
+                if (_.isEqual(edit[key], values[key]) === false) {
+                    edittedValues[key] = values[key];
                 }
             } else {
-                if (edit[item] !== values[item]) {
-                    if (item === "departdate") {
-                        let depart = new Date(
-                            values.departdate.replace(/年|月|日/g, "/")
-                        );
-
-                        let departUTC = depart.toUTCString();
-                        edittedValues[item] = departUTC;
-                    } else if (item === "finishdate") {
-                        let finish = new Date(
-                            values.finishdate.replace(/年|月|日/g, "/")
-                        );
-
-                        let finishUTC = finish.toUTCString();
-                        edittedValues[item] = finishUTC;
-                    } else {
-                        edittedValues[item] = values[item];
-                    }
+                if (edit[key] !== values[key]) {
+                    edittedValues[key] = values[key];
                 }
             }
         });
         // console.log(edittedValues);
-
+       // TEMP VERSION CH FOR AVOIDING MISTAKE!
         if (Object.keys(edittedValues).length === 0) {
-            history.push(`/wish/${wishId}`);
+            history.push(`/wish/${wishId}/CH`);
             return null;
         }
 
@@ -141,8 +125,10 @@ class EditWishPanel extends Component {
                         type="text"
                         component={AutocompleteField}
                         className="text-field"
+                        label="愿望所在的国家和城市"
                         props={this.props}
                         defaultValue={edit.location}
+                        marker="loc"
                     />
 
                     <Field
@@ -170,7 +156,8 @@ class EditWishPanel extends Component {
                         name="departdate"
                         type="text"
                         component={popupSearchDateField}
-                        placeholder={edit.departdate}
+                        placeholder="愿望出发时间"
+                        defaultValue={new Date(edit.departdate)}
                     />
 
                     <Field
@@ -178,7 +165,8 @@ class EditWishPanel extends Component {
                         name="finishdate"
                         type="text"
                         component={popupSearchDateField}
-                        placeholder={edit.finishdate}
+                        placeholder="愿望结束时间"
+                        defaultValue={new Date(edit.finishdate)}
                     />
                 </div>
 

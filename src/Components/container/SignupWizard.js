@@ -32,16 +32,18 @@ class SignupWizard extends Component {
   }
 
   handleSubmit(values) {
+    console.log("values", values)
+    const { history, match: { params : { version }} } = this.props;
     if (Object.keys(values).length === 0) {
-      this.props.history.push("/activity");
+      // this.props.history.push("/activity/"+version);
       return null;
     }
     // console.log("submit", values);
-    this.props.completeUserProfile(values, this.props.history);
+    this.props.completeUserProfile(values, history, version);
   }
 
   render() {
-    const { onSubmit } = this.props;
+    const { onSubmit, match: { params : { version }} } = this.props;
     const { page, activeStep } = this.state;
     return (
       <div>
@@ -50,6 +52,7 @@ class SignupWizard extends Component {
             previousPage={this.previousPage}
             onSubmit={this.nextPage}
             activeStep={activeStep}
+            version={version}
           />
         )}
         {page === 2 && (
@@ -57,6 +60,7 @@ class SignupWizard extends Component {
             previousPage={this.previousPage}
             activeStep={activeStep}
             onSubmit={this.handleSubmit}
+            version={version}
           />
         )}
 

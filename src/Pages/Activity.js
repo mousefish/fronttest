@@ -23,7 +23,6 @@ import RegisterDialog from "./RegisterDialog";
 import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import defaultBG from "../Assets/Images/defaultBG.png";
 
-
 const styles = theme => ({
     editBar: {
         // border:"1px solid red",
@@ -97,7 +96,6 @@ const styles = theme => ({
         padding: 5
     },
 
-
     bg: {
         maxWidth: 600,
         margin: "auto",
@@ -111,7 +109,6 @@ const styles = theme => ({
         maxWidth: "100%",
         maxHeight: 240
     },
-
 
     row: {
         // border:"1px solid red",
@@ -182,8 +179,12 @@ class Activity extends Component {
     }
 
     renderEditChoice() {
-        const { id, isYourActivity } = this.props.activity;
-        const { classes, activity, match : { params : { version }} } = this.props;
+        const {
+            activity: { id, isYourActivity },
+            classes,
+            activity,
+            match: { params: { version } }
+        } = this.props;
 
         if (isYourActivity) {
             return (
@@ -193,7 +194,10 @@ class Activity extends Component {
                         <div>{activity.username}</div>
                     </div>
                     <div>
-                        <Link className="unlink" to={`/editActivity/${id}/${version}`}>
+                        <Link
+                            className="unlink"
+                            to={`/editActivity/${id}`}
+                        >
                             <div className={classes.editBtn}>修改我的活动</div>
                         </Link>
                     </div>
@@ -227,7 +231,7 @@ class Activity extends Component {
     }
 
     render() {
-        const { activityId } = this.props.match.params;
+        const { activityId, version } = this.props.match.params;
         const {
             classes,
             fullScreen,
@@ -322,7 +326,8 @@ class Activity extends Component {
                         <li>
                             <div className={classes.detailTitle}>活动开始和结束日期</div>
                             <div className={classes.detailContent}>
-                                {activity.departdate} — {activity.finishdate}
+                                {activity.departdate} —{" "}
+                                {activity.finishdate}
                             </div>
                         </li>
 
@@ -335,7 +340,8 @@ class Activity extends Component {
                         <li>
                             <div className={classes.detailTitle}>参加人数范围</div>
                             <div className={classes.detailContent}>
-                                {activity.minNumOfPeople} 人 — {activity.maxNumOfPeople} 人
+                                {activity.minNumOfPeople} 人 —{" "}
+                                {activity.maxNumOfPeople} 人
                             </div>
                         </li>
 
