@@ -20,7 +20,6 @@ import config from "../config/config";
 import FileInput from "./AddActivity/FileInput";
 import defaultBG from "../Assets/Images/defaultBG.png";
 import Fixedbutton from "./Fixedbutton";
-import dateConversion from "../Utility/dateConversion";
 
 const styles = theme => ({
     root: {
@@ -114,30 +113,14 @@ class EditActivityPanel extends Component {
         ];
 
         let edittedValues = {};
-        keys.forEach(item => {
-            if (item === "services") {
-                if (_.isEqual(edit[item], values[item]) === false) {
-                    edittedValues[item] = values[item];
+        keys.forEach(key => {
+            if (key === "services") {
+                if (_.isEqual(edit[key], values[key]) === false) {
+                    edittedValues[key] = values[key];
                 }
             } else {
-                if (edit[item] !== values[item]) {
-                    if (item === "departdate") {
-                        let depart = new Date(
-                            values.departdate.replace(/年|月|日/g, "/")
-                        );
-
-                        let departUTC = depart.toUTCString();
-                        edittedValues[item] = departUTC;
-                    } else if (item === "finishdate") {
-                        let finish = new Date(
-                            values.finishdate.replace(/年|月|日/g, "/")
-                        );
-
-                        let finishUTC = finish.toUTCString();
-                        edittedValues[item] = finishUTC;
-                    } else {
-                        edittedValues[item] = values[item];
-                    }
+                if (edit[key] !== values[key]) {
+                    edittedValues[key] = values[key];
                 }
             }
         });
@@ -248,9 +231,10 @@ class EditActivityPanel extends Component {
                         name="location"
                         type="text"
                         component={AutocompleteField}
-                        placeholder="活动所在的国家和城市"
+                        label="活动所在的国家和城市"
                         props={this.props}
                         defaultValue={edit.location}
+                        marker="loc"
                     />
 
                     <Field
@@ -289,14 +273,16 @@ class EditActivityPanel extends Component {
                         name="departdate"
                         type="text"
                         component={popupSearchDateField}
-                        placeholder={dateConversion('CH', edit.departdate)}
+                        placeholder="活动出发时间"
+                        defaultValue={new Date(edit.departdate)}
                     />
                     <Field
                         key="finishdate"
                         name="finishdate"
                         type="text"
                         component={popupSearchDateField}
-                        placeholder={dateConversion('CH', edit.finishdate)}
+                        defaultValue={new Date(edit.finishdate)}
+                        placeholder="活动结束时间"
                     />
                 </div>
                 <div className="wrap form-group" key="service">

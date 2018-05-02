@@ -9,7 +9,6 @@ import Star from "material-ui-icons/Star";
 import Avatar from "material-ui/Avatar";
 import Stars from "./Stars";
 import defaultAvatar from "../Assets/Images/defaultAvatar.png";
-import dateConversion from "../Utility/dateConversion";
 
 const styles = theme => ({
     friendWrapper: {
@@ -136,10 +135,9 @@ class FriendComments extends Component {
                                 {item.feedback}
                             </div>
                             <div style={{ float: "right", fontSize: 12 }}>
-                                {dateConversion(
-                                    "temp version",
+                                {
                                     item.createdAt
-                                )}发布{item.activityName ? (
+                                }发布{item.activityName ? (
                                     // TEMP VERSION CH TO AVOID MISTAKE
                                     <Link
                                         to={`/activity/${item.activityId}/CH`}

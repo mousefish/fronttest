@@ -111,6 +111,7 @@ class WizardThird extends Component {
 }
 
 const mapStateToProps = state => {
+    // console.log(state.form.wizard.values)
     return {
         values: state.form.wizard.values
     };
@@ -119,5 +120,5 @@ export default reduxForm({
     form: "wizard",
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
-    validate
+
 })(withStyles(styles)(connect(mapStateToProps, actions)(WizardThird)));

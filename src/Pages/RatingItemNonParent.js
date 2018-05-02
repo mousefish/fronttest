@@ -4,7 +4,6 @@ import { withStyles } from "material-ui/styles";
 import Avatar from "material-ui/Avatar";
 import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import classNames from "classnames";
-import dateConversion from "../Utility/dateConversion";
 import config from "../config/config";
 
 const styles = {
@@ -75,7 +74,7 @@ const RatingItemNonParent = {
             <div className={classes.subComments} key={item.id}>
                 <div className={classes.header}>
                     <Avatar
-                        alt="rater pic"
+                        alt="rater"
                         src={
                             item.imageurl ? (
                                 config.BUCKET_URL + item.imageurl
@@ -103,7 +102,7 @@ const RatingItemNonParent = {
                     </div>
                 </div>
                 <div className={classes.subtime}>
-                    {dateConversion(version, item.createdAt)}发布 |{" "}
+                    {item.createdAt}发布 |{" "}
                     <span className="unlink" onClick={onClick}>
                         回复
                     </span>

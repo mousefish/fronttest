@@ -28,7 +28,7 @@ import Typography from "material-ui/Typography";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import { Link } from "react-router-dom";
 import trip from "../../Assets/Images/trip.jpg";
-import dateConversion from "../../Utility/dateConversion";
+
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -120,7 +120,7 @@ class WishIndex extends Component {
               </div>
               <div style={{ paddingBottom: 10 }}>
                 <AccessTime className={classes.icon} />{" "}
-                {dateConversion(version, wish.departdate)} 出发
+                { wish.departdate}
               </div>
               <div>{this.renderService(wish.services)}</div>
             </CardContent>

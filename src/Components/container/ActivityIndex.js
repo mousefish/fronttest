@@ -18,7 +18,7 @@ import Slide from "material-ui/transitions/Slide";
 import Stars from "../../Pages/Stars";
 import cardBG from "../../Assets/Images/cardBG.png";
 import config from "../../config/config";
-import dateConversion from "../../Utility/dateConversion";
+
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -157,7 +157,7 @@ class ActivityIndex extends Component {
                 </div>
                 <div className={classes.item}>
                   <div>
-                    <AccessTime className={classes.icon} /> {item.departdate} 出发
+                    <AccessTime className={classes.icon} /> {item.departdate}
                   </div>
                 </div>
               </div>

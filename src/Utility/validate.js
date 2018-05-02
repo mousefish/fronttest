@@ -1,11 +1,11 @@
 import cities from "../Data/cities";
 
 const validate = (values, props) => {
-  let version = ""
-  if(props.match){
-    version = props.match.params.version
-  }else{
-    version = props.version
+  let version = "";
+  if (props.match) {
+    version = props.match.params.version;
+  } else {
+    version = props.version;
   }
   const errors = {};
   const names = [
@@ -42,7 +42,7 @@ const validate = (values, props) => {
           break;
         case "EN":
           errors[name] = "Value cannot be empty!";
-          break
+          break;
         default:
           errors[name] = "值不能为空！";
       }
@@ -63,7 +63,6 @@ const validate = (values, props) => {
         break;
       default:
         errors.email = "请输入有效邮箱";
-
     }
   }
 
@@ -78,7 +77,7 @@ const validate = (values, props) => {
       case "EN":
         errors.password =
           "Password must be 8 - 25 long, with at least 1 number and 1 letter.";
-          break;
+        break;
       default:
         errors.password = "密码长度必须在8-25位之间，且至少含有1个数字和1个字母";
     }
@@ -109,7 +108,7 @@ const validate = (values, props) => {
         errors.username = "Username must be within 20 words.";
         break;
       default:
-         errors.username = "用户名不能超过20个字";
+        errors.username = "用户名不能超过20个字";
     }
   }
   if (
@@ -132,28 +131,18 @@ const validate = (values, props) => {
   // *******************date validation
 
   if (values.departdate) {
-    if (typeof values.departdate !== "string") {
-      errors.departdate = "请在有效区域内选择日期";
-    }
-    let depart = new Date(values.departdate.replace(/年|月|日/g, "/"));
-
-    if (depart && Date.now() >= Date.parse(depart)) {
+    if (values.departdate && Date.now() >= Date.parse(values.departdate)) {
       errors.departdate = "出发时间不能早于当前时间";
     }
   }
 
   if (values.departdate && values.finishdate) {
-    if (typeof values.finishdate !== "string") {
-      errors.finishdate = "请在有效区域内选择日期";
-    }
-    let depart = new Date(values.departdate.replace(/年|月|日/g, "/"));
-    let finish = new Date(values.finishdate.replace(/年|月|日/g, "/"));
-    if (finish && depart && Date.parse(finish) <= Date.parse(depart)) {
+    if (Date.parse(values.finishdate) <= Date.parse(values.departdate)) {
       errors.finishdate = "结束时间不能早于出发时间";
     }
   }
 
-  // *******************date validation
+  // *******************
 
   if (Number.isNaN(parseInt(values.budget)) || parseInt(values.budget) <= 0) {
     switch (version) {
@@ -231,7 +220,7 @@ const validate = (values, props) => {
         errors.story = "No more than 300 words";
         break;
       default:
-       errors.story = "字数不能超过300";
+        errors.story = "字数不能超过300";
     }
   }
 

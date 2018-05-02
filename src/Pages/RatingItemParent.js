@@ -7,7 +7,6 @@ import Star from "material-ui-icons/Star";
 import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import classNames from "classnames";
 import config from "../config/config";
-import dateConversion from "../Utility/dateConversion";
 
 const styles = {
     comment: {
@@ -78,7 +77,7 @@ const RatingItemParent = props => {
                 {item.feedback ? item.feedback : "无"}
             </div>
             <div className={classes.time}>
-                {dateConversion(version, item.createdAt)}发布 |{" "}
+                {item.createdAt}发布 |{" "}
                 <span className="unlink" onClick={onClick}>
                     回复
                 </span>

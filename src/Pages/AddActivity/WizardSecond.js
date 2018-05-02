@@ -49,7 +49,7 @@ class WizardSecond extends Component {
 }
 
 const mapStateToProps = state => {
-    // console.log("reducer", state.form.wizard.values);
+    console.log("reducer", state.form.wizard.values);
     return {
         values: state.form.wizard.values
     };

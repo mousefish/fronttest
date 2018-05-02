@@ -25,7 +25,6 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import PageHeader from "../../Pages/PageHeader";
 import defaultAvatar from "../../Assets/Images/defaultAvatar.png";
 import config from "../../config/config";
-import dateConversion from "../../Utility/dateConversion";
 
 const style = theme => ({
     media: {
@@ -186,8 +185,8 @@ class WishDetails extends Component {
                     <li>
                         <div className={classes.detailTitle}>期待愿望开始和结束日期</div>
                         <div className={classes.detailContent}>
-                            {dateConversion(version, wish.departdate)} —{" "}
-                            {dateConversion(version, wish.finishdate)}
+                            {wish.departdate} —{" "}
+                            {wish.finishdate}
                         </div>
                     </li>
 

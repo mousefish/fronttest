@@ -156,7 +156,7 @@ const autocompleteField = props => {
             ...props.input
           })}
           {isOpen ? (
-            <Paper square style={{ marginTop: -8 }}>
+            <Paper square >
               {renderSelectionList(inputValue, marker).map((item, index) =>
                 renderItem(
                   {

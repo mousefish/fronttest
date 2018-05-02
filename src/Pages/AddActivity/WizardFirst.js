@@ -6,7 +6,6 @@ import popupSearchDateField from "../../Components/container/popupSearchDateFiel
 import popupSearchMultiServices from "../../Components/container/popupSearchMultiServices";
 import AutocompleteField from "../../Components/container/AutocompleteField";
 import SelectRangeField from "../../Components/container/SelectRangeField";
-
 import { TextField } from "redux-form-material-ui";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import validate from "../../Utility/validate";
@@ -110,6 +109,7 @@ class WizardFirst extends Component {
                     type="text"
                     component={popupSearchDateField}
                     placeholder={pair.departdate[version]}
+                    version={version}
                 />
 
                 <Field
@@ -118,6 +118,7 @@ class WizardFirst extends Component {
                     type="text"
                     component={popupSearchDateField}
                     placeholder={pair.finishdate[version]}
+                    version={version}
                 />
             </div>
         ];

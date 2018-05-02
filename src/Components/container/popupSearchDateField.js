@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import DateTimePicker from "react-widgets/lib/DateTimePicker";
 import moment from "moment";
 import momentLocalizer from "react-widgets-moment";
-import "moment/locale/zh-cn.js";
+
 
 class InputDate extends Component {
     state = {
-        value: null,
+        value: this.props.defaultValue,
     };
 
     handleChange = (newValue) => {
@@ -18,13 +18,20 @@ class InputDate extends Component {
 
 
     render() {
-        const { input, placeholder, meta: { error, touched } } = this.props;
-        moment.locale("zh-cn");
+        const { input, placeholder, meta: { error, touched }, version } = this.props;
+        if(version === 'CH'){
+            import("moment/locale/zh-cn.js")
+            moment.locale("zh-cn");
+        }
+        else if(version === "EN"){
+            moment.locale('en')
+        }else {
+            moment.locale('en')
+        }
+
         momentLocalizer();
-        // console.log("input.value", input.value)
-        // 1. before go to next input, the input.value is en string,
-        // 2. after click on the next input, the input.value becomes ch str
-        // we need the value to be en str, otherwise error will come up, so we use state to manage value
+       // input. value is formatted time string : 2018/05/26 12:26
+
         return (
             <div>
                 <div
@@ -35,12 +42,15 @@ class InputDate extends Component {
                 >
                     <DateTimePicker
                         {...input}
-                        onChange={(newValue) =>
+                        onChange={(newValue) =>{
+                            // newValue is a time object:Sat May 26 2018 12:26:51 GMT-0700 (PDT)
                             this.handleChange(newValue)}
+                        }
                         value={this.state.value}
                         time={true}
                         placeholder={placeholder}
-                        culture="zh-cn"
+                        format={"YYYY/MM/DD h:mm"}
+                        culture={version === "CH" ? "zh-cn" :"en"}
                     />
                 </div>
                 <div className="input-error">{touched && error}</div>
@@ -50,3 +60,6 @@ class InputDate extends Component {
 }
 
 export default InputDate;
+
+
+

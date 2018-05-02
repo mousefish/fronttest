@@ -22,7 +22,6 @@ import PageHeader from "./PageHeader";
 import RegisterDialog from "./RegisterDialog";
 import defaultAvatar from "../Assets/Images/defaultAvatar.png";
 import defaultBG from "../Assets/Images/defaultBG.png";
-import dateConversion from "../Utility/dateConversion";
 
 const styles = theme => ({
     editBar: {
@@ -327,8 +326,8 @@ class Activity extends Component {
                         <li>
                             <div className={classes.detailTitle}>活动开始和结束日期</div>
                             <div className={classes.detailContent}>
-                                {dateConversion(version, activity.departdate)} —{" "}
-                                {dateConversion(version, activity.finishdate)}
+                                {activity.departdate} —{" "}
+                                {activity.finishdate}
                             </div>
                         </li>
 
