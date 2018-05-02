@@ -107,8 +107,7 @@ class RatingIndex extends Component {
             if (index <= 3) {
                 part.push(
                     <RatingItem
-                        key={index}
-                        index={index}
+                        key={item.id}
                         item={item}
                         version=""
                         onClick={() => this.handlePopup(item, item.parentId)}
@@ -117,8 +116,7 @@ class RatingIndex extends Component {
             }
             all.push(
                 <RatingItem
-                    key={index}
-                    index={index}
+                    key={item.id}
                     item={item}
                     version=""
                     onClick={() => this.handlePopup(item, item.parentId)}

@@ -105,7 +105,7 @@ class TripMain extends Component {
   render() {
     const { classes, match: { params: { version } } } = this.props;
     return (
-      <div style={{ position: "relative" }} ref="docForCards">
+      <div style={{ position: "relative" }}>
         <SideButton version={version} />
         <div className="wrapper">
           <Header version={version} />

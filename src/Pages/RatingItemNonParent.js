@@ -70,9 +70,9 @@ const RatingItemNonParent = {
     },
 
     RatingItem: props => {
-        const { classes, item, index, onClick, version } = props;
+        const { classes, item, onClick, version } = props;
         return (
-            <div className={classes.subComments} key={index}>
+            <div className={classes.subComments} key={item.id}>
                 <div className={classes.header}>
                     <Avatar
                         alt="rater pic"
