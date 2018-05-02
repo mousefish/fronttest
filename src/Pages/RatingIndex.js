@@ -13,7 +13,7 @@ import Button from "material-ui/Button";
 import classNames from "classnames";
 import { withStyles } from "material-ui/styles";
 import PageHeader from "./PageHeader";
-import { FoldItem, RatingItemChild } from "./RatingItemNonParent";
+import { RatingItem, FoldBtn } from "./RatingItemNonParent";
 import RatingItemParent from "./RatingItemParent";
 
 const styles = {
@@ -106,7 +106,7 @@ class RatingIndex extends Component {
             }
             if (index <= 3) {
                 part.push(
-                    <RatingItemChild
+                    <RatingItem
                         key={index}
                         index={index}
                         item={item}
@@ -116,7 +116,7 @@ class RatingIndex extends Component {
                 );
             }
             all.push(
-                <RatingItemChild
+                <RatingItem
                     key={index}
                     index={index}
                     item={item}
@@ -128,7 +128,7 @@ class RatingIndex extends Component {
 
         if (all.length > 4) {
             all.push(
-                <FoldItem
+                <FoldBtn
                     key="fold"
                     onClick={() => {
                         this.setState({
@@ -146,7 +146,7 @@ class RatingIndex extends Component {
         if (part.length === 4) {
             if (all.length - part.length > 0) {
                 part.push(
-                    <FoldItem
+                    <FoldBtn
                         key="show"
                         onClick={() => {
                             this.setState({

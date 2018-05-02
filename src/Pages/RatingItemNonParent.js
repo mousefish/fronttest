@@ -47,10 +47,7 @@ const styles = {
 
     reply: {
         padding: "15px 0"
-    }
-};
-
-const foldStyle = {
+    },
     foldBtn: {
         fontSize: 12,
         marginLeft: 40,
@@ -62,58 +59,60 @@ const foldStyle = {
     }
 };
 
-let foldFunc = props => {
-    const { classes, title, onClick } = props;
-    return (
-        <div className={classes.foldBtn} onClick={onClick}>
-            {title}
-        </div>
-    );
-};
+const RatingItemNonParent = {
+    FoldBtn: props => {
+        const { classes, title, onClick } = props;
+        return (
+            <div className={classes.foldBtn} onClick={onClick}>
+                {title}
+            </div>
+        );
+    },
 
-let ratingItemFunc = props => {
-    const { classes, item, index, onClick, version } = props;
-    return (
-        <div className={classes.subComments} key={index}>
-            <div className={classes.header}>
-                <Avatar
-                    alt="rater pic"
-                    src={
-                        item.imageurl ? (
-                            config.BUCKET_URL + item.imageurl
+    RatingItem: props => {
+        const { classes, item, index, onClick, version } = props;
+        return (
+            <div className={classes.subComments} key={index}>
+                <div className={classes.header}>
+                    <Avatar
+                        alt="rater pic"
+                        src={
+                            item.imageurl ? (
+                                config.BUCKET_URL + item.imageurl
+                            ) : (
+                                defaultAvatar
+                            )
+                        }
+                        className={classNames(classes.avatar)}
+                    />
+                    <div className={classes.reply}>
+                        <Link to={`/user/${item.userId}`} className="unlink">
+                            {item.username}
+                        </Link>
+                        {item.parentId === item.replyToId ? (
+                            ""
                         ) : (
-                            defaultAvatar
-                        )
-                    }
-                    className={classNames(classes.avatar)}
-                />
-                <div className={classes.reply}>
-                    <Link to={`/user/${item.userId}`} className="unlink">
-                        {item.username}
-                    </Link>
-                    {item.parentId === item.replyToId ? (
-                        ""
-                    ) : (
-                        <span>
-                            回复@{
-                                <span className="unlink">
-                                    {item.whomToReply}
-                                </span>
-                            }
-                        </span>
-                    )}：{item.feedback}
+                            <span>
+                                回复@{
+                                    <span className="unlink">
+                                        {item.whomToReply}
+                                    </span>
+                                }
+                            </span>
+                        )}：{item.feedback}
+                    </div>
                 </div>
+                <div className={classes.subtime}>
+                    {dateConversion(version, item.createdAt)}发布 |{" "}
+                    <span className="unlink" onClick={onClick}>
+                        回复
+                    </span>
+                </div>
+                <div style={{ clear: "both" }} />
             </div>
-            <div className={classes.subtime}>
-                {dateConversion(version, item.createdAt)}发布 |{" "}
-                <span className="unlink" onClick={onClick}>
-                    回复
-                </span>
-            </div>
-            <div style={{ clear: "both" }} />
-        </div>
-    );
+        );
+    }
 };
 
-export const FoldItem = withStyles(foldStyle)(foldFunc);
-export const RatingItemChild = withStyles(styles)(ratingItemFunc);
+export const RatingItem = withStyles(styles)(RatingItemNonParent.RatingItem);
+export const FoldBtn = withStyles(styles)(RatingItemNonParent.FoldBtn);
