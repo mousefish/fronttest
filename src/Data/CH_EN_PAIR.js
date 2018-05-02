@@ -158,8 +158,8 @@ export default {
         EN: "Max no of people"
     },
     eventDuration: {
-        CH: "活动时间 (年/月/日 时间)",
-        EN: "Event time (YYYY/MM/DD TIME)"
+        CH: "活动时间",
+        EN: "Event time"
     },
     departdate: {
         CH: "出发日期和时间",
